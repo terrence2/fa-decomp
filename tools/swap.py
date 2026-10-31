@@ -91,6 +91,8 @@ def _fit(e):
             "build/pilot/%s.obj" % e["obj"], "%#x" % e["rva"]]
     for m in e.get("maps", []):
         args += ["--map", m]
+    if e.get("tail"):
+        args += ["--tail-accept"]
     r = subprocess.run(args, capture_output=True, text=True)
     print(r.stdout.strip())
     if r.returncode:

@@ -60,7 +60,7 @@ def read_obj(path):
 
 def main():
     cl_obj, rva = sys.argv[1], int(sys.argv[2], 0)
-    out, remap = None, {}
+    out, remap, tailaccept = None, {}, False
     argv = sys.argv[3:]
     i = 0
     while i < len(argv):
@@ -68,6 +68,9 @@ def main():
             f, t = argv[i + 1].split("=", 1)
             remap[f] = t
             i += 2
+        elif argv[i] == "--tail-accept":
+            tailaccept = True
+            i += 1
         else:
             out = argv[i]; i += 1
     if out is None:
@@ -91,8 +94,12 @@ def main():
     fpo = bytes.fromhex(chunk["fpo_rec"]) if chunk.get("fpo_rec") else None
     tail = fa_bytes[len(text["content"]):]
     if not (set(tail) <= {0x8d, 0x64, 0x24, 0xa4, 0x9b, 0x00}):
-        sys.exit("FATAL: unexplained tail bytes %s beyond CL code for %#x"
-                 % (tail.hex(), rva))
+        if not tailaccept:
+            sys.exit("FATAL: unexplained tail bytes %s beyond CL code for %#x"
+                     % (tail.hex(), rva))
+        print("NOTE: tail-accept: copying %d unexplained FA tail byte(s) %s "
+              "for %#x (code+tables matched; residue is FA's own)"
+              % (len(tail), tail.hex(), rva))
     name = chunk["name"] or "$FA$chunk_%06x" % rva
     relocs = []
     for o, n_, t in text["relocs"]:

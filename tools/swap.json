@@ -13,5 +13,14 @@
   {"rva": "0x11780",
    "obj": "WordToString",
    "src": "src/WordToString.c",
-   "maps": []}
+   "maps": []},
+  {"rva": "0x87610",
+   "obj": "DlgSel",
+   "src": "src/DialogSelectItem.c",
+   "tail": true,
+   "maps": ["_PushShellAlloc@0=?PushShellAlloc@@YGXXZ",
+            "_SUB87070=$FA$_t_4087070",
+            "_lastDial=?lastDial@@3PAUDIAL@@A",
+            "_DialogDraw@4=?DialogDraw@@YGXPAX@Z",
+            "_PopShellAlloc@0=?PopShellAlloc@@YGXXZ"]}
 ]
