@@ -1,0 +1,3 @@
+[submodule "vendor/MSVC420"]
+	path = vendor/MSVC420
+	url = https://github.com/itsmattkc/MSVC420.git

@@ -1,0 +1,7 @@
+# Keep the build context tiny: only the docker scaffolding and the pinned
+# toolchain. The FA/ game directory (900MB+ of .LIB asset archives) must not
+# go in.
+*
+!/docker/
+!/vendor/MSVC420/
+!/.dockerignore
