@@ -1,4 +1,6 @@
 FA/
+build/
+atf95/Release/
+FA.res
 __pycache__/
 .wine/
-build/

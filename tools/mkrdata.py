@@ -80,4 +80,4 @@ def emit(path="build/idata/rdata.obj", dir_in_stub=True):
     print("wrote %s: 0x%x bytes, %d relocs, %d unresolved" %
           (path, b - a, len(relocs), unres))
 if __name__ == "__main__":
-    emit()
+    emit(dir_in_stub="--with-dir" in sys.argv)

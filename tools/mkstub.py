@@ -40,8 +40,8 @@ from anchors import Anchors
 from peref import IMAGE_BASE
 import coff
 
-STUB_DIR = "build/stubs"
-GROUP_SIZE = 50           # chunk sections per group obj
+STUB_DIR = os.environ.get("STUB_DIR", "build/stubs")
+GROUP_SIZE = int(os.environ.get("GROUP_SIZE", "50"))  # chunk sections per group obj
 BSS_GROUP_SIZE = 200      # bss sections are tiny; batch more per obj
 BSS_FLAGS = 0xC0100080    # READ|WRITE|ALIGN_1|CNT_UNINITIALIZED (cl emits .bss
                           # 0xC0400080; align must be 1 so chunk sizes tile
@@ -64,11 +64,13 @@ def text_parts(name, c, content, relocs, rec, aliases, want_dbg):
 
 
 def fa_fpo_records():
-    """(offStart, cbProcSize) tuples of FA's FPO payload records."""
+    """(offStart, cbProcSize) tuples of FA's FPO payload records. The payload
+    is 2986 plain 16-byte records — there is NO 16-byte header (the first
+    record is the chunk at .text start 0x1000/0x175, which FA's dir entry
+    size 0xbaa0 = 2986*16 confirms)."""
     fa = open("FA/FA.EXE", "rb").read()
     pay = fa[0x131b10:0x13d5b0]      # FPO payload file range
-    n = (len(pay) - 16) // 16
-    return [struct.unpack_from("<II", pay, 16 + 16 * i) for i in range(n)]
+    return [struct.unpack_from("<II", pay, 16 * i) for i in range(len(pay) // 16)]
 
 
 def main():
@@ -131,7 +133,8 @@ def main():
             rva, sz = struct.unpack_from("<II", rec)
             assert (rva, sz) == (c["va"] - IMAGE_BASE, c["size"]), \
                 (hex(rva), hex(sz), hex(c["va"]))
-        want_dbg = (c["va"] - IMAGE_BASE, c["size"]) in fpo_set
+        want_dbg = (c["va"] - IMAGE_BASE, c["size"]) in fpo_set \
+            and os.environ.get("NO_FPO") != "1"
         main, dbg = text_parts(name, c, content, relocs, rec, aliases, want_dbg)
         partlist.append(main)                      # main sections in order
         if dbg is not None:

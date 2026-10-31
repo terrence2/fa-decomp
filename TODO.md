@@ -44,9 +44,10 @@ Full context: `MSVC_VERSION.md` (toolchain evidence), approved plan at
   3753 symbols: 2420 in .text, 7 in .rdata, 1099 in .data (includes CRT symbols).
 - `tools/peref.py` — PE32 parser: sections, debug dir (lives INSIDE .rdata; read data-dir
   entry 6 at `opt+96+6*8`), exports, imports, **FPO**.
-- FPO payload format (empirically verified): 16-byte header + 16-byte records
+- FPO payload format (empirically verified): 16-byte records
   (`<IIIH` + 2 pad = FPO_DATA: offStart, cbProcSize, cdwLocals, cbParams, 2 trailer bytes);
-  ~2985 records. `parse_fpo()` now returns `(dict rva→rec, header16)` — **main() still uses
+  2986 plain records, NO payload header (the 16-byte header I once thought I saw is the
+  first record). `parse_fpo()` returns `(dict rva→rec, header16=b"")` — **main() still uses
   the OLD signature and will crash until fixed** (see TODO 1).
 - `tools/checkpe.py` — PE summary + `--expect-sha256` gate.
 - `build/test/fpotest.obj` — ground-truth VC4.2 obj from cl `/MT /GX /O2 /Gy`, showing
@@ -202,18 +203,57 @@ on them; the stub-only link needs only the 2 export directives in FA.EXE itself.
   (demangle→keep raw SMS name), alignment, lifted FPO record.
 - CRT/data stubs same mechanism (selection=any COMDAT or plain sections as analysis dictates).
 
-### 4. Milestone 0 — stub-only full link (the big gate) — 95% DONE (2026-10-31)
-- DONE: direct `.idata$` group objs; fixup relocs in stubs; .rdata stub (write-bit merge
-  rule, $FA$rdata0 @+0x54); .bss groups (SizeOfRawData rule); .rsrc via mkrsrc.py+CVTRES
-  (byte-identical); /EXPORT:T_HorizonProc,WRFogLayerUpdate; /OUT:FA.exe; frozen clocks.
-- **Remaining: /DEBUG round.** Flip mkrdata to `emit(dir_in_stub=False)` (content starts
-  at .rdata+0x54), add `/DEBUG` (+ /PDB? probe) with Wine drive E: at `atf95\Release`
-  (cwd E:\atf95, /OUT:Release\FA.exe for the MISC "Release/FA.exe" string), stub `.debug$F`
-  FPO records only for chunks whose (rva,size) is in FA's payload (already gated) so the
-  FPO payload regenerates = FA's 2985 records, and NB10 "E:\atf95\Release\FA.pdb" path.
-  Targets: dir[6] rva 0xe5000 size 0x54, .reloc vsz +0x84 (MISC in reloc tail), file
-  extension 0x131a00..0x13e600 with MISC/FPO/NB10 payloads.
-- Iterate until `sha256(build/FA.exe) == sha256(FA/FA.EXE)`.
+### 4. Milestone 0 — stub-only full link (the big gate) — ✅ COMPLETE (2026-10-31)
+`sha256(atf95/Release/FA.exe) == sha256(FA/FA.EXE) ==
+c7d2c1cc9d27a6b364eca4245892cb6ca61ca72afc9a46e5760ee1fe7d75ba9b` — byte-identical
+including the /DEBUG debug payloads, verified on a fresh seed+link cycle. DONE:
+direct `.idata$` group objs; fixup relocs in stubs; .rdata stub; .bss groups; .rsrc via
+mkrsrc.py+CVTRES; /EXPORT:T_HorizonProc,WRFogLayerUpdate; /OUT:Release/FA.exe (cwd
+E:\atf95 for the MISC "Release/FA.exe" string); frozen clocks; /DEBUG with .debug$S
+modules + .debug$F FPO stubs (2986 plain records, no header — the payload header is
+written by the linker).
+
+**/DEBUG round findings (2026-10-31):**
+- **Old-style (4.2-era) import libraries**: each import = full COFF obj member named
+  `DLLNAME.dll/` with per-member sections `.debug$S`, `.text` (6-byte `ff 25` thunk + DIR32
+  → `__imp__X@n`), `.debug$S`, `.idata$5` (IAT slot = hint|0x80000000, flags 0xc0301040),
+  `.idata$4` (INT slot, same), `.idata$6` (u16 hint + name + NUL pad, 0xc0200040); per-DLL
+  descriptor member (`.idata$2` + `__X_IMPORT_DESCRIPTOR`/`\x7fX_NULL_THUNK_DATA`) and an
+  `.idata$3` NULL_IMPORT_DESCRIPTOR member. NOT needed for the build (we use direct
+  `.idata$` objs) but documented for future tooling. Ground truth dumped from
+  `vendor/MSVC420/lib/CTL3D32.LIB`, `KERNEL32.LIB`.
+- **PDB-seed trick (this is how NB10 ts/age come out right)**: FA's CV payload = "NB10" +
+  pdb_ts + pdb_age + path, FA ts=0x33ef9c68 (23:12:40 — PDB creation clock), age=1 but
+  final link at 23:13:32. Sequence: delete `Release/FA.pdb`; run a THROWAWAY link frozen at
+  `FAKETIME="@1997-08-11 23:12:40"` (creates the pdb, ts = link clock); delete the
+  throwaway exe/lib/exp/map; run the REAL link frozen at `@1997-08-11 23:13:32` — LINK 4.20
+  UPDATES the existing pdb preserving its ts and increments age to 1. Exe NB10 == FA's
+  exactly. Reproduces from cold state (proven on 2 fresh cycles regardless of prior pdb age).
+- **`.reloc` VirtualSize reserve delta (Δ=+0x84) — disposition**: LINK 4.20 under wine
+  reserves an all-zero `.reloc` tail (VSZ past the fixup block content; FA extends VSZ over
+  the MISC debug payload in that tail). Wine's reserve lands 0x84 below the 1997 NT build's.
+  Probed exhaustively — option switches (/WS:RAM /WS /OPT:REF /OPT:NOREF /DEFAULTLIB /
+  /SWAPRUN:CD,NET /RELEASE /IMPLIB /WARN), per-import counts and by-ordinal-vs-by-name
+  import members (identical tail contribution), module counts, flavors — ALL zero effect on
+  the delta. The tail bytes are all zeros on both sides and not mapped data, so
+  `tools/fixreloc.py` forces VSZ=0x143d8 (header offset 0x248) post-link → image
+  byte-identical, no load-time effect. Probe tools: `tools/sweeptail.py`, built libs via
+  `tools/coff.py` group objects.
+- Direct `.res` → LINK remains impossible under wine (LNK1104 TEMPFILE even with
+  TMP/TEMP=Wine paths); keep running CVTRES ourselves.
+
+**Canonical Gate-1 pipeline (repo root):**
+1. `python3 tools/mkrdata.py` (emits stub/rdata/idata objs into `atf95/Release/`)
+2. `python3 tools/mkrsrc.py FA.res && cp FA.res build/m0/`
+3. docker CVTRES frozen `@1997-08-11 23:13:31` → `FA.obj` (`.rsrc$01`/`.rsrc$02`)
+4. docker LINK frozen `@1997-08-11 23:12:40`, rsp `build/m0/m0link5.rsp` (SEED — creates
+   `Release/FA.pdb`); `rm -f atf95/Release/FA.exe` + throwaway lib/exp/map
+5. docker LINK frozen `@1997-08-11 23:13:32` same rsp (REAL — pdb ts preserved, age→1)
+6. `python3 tools/fixreloc.py atf95/Release/FA.exe` (.reloc vsz → 0x143d8)
+7. `sha256sum atf95/Release/FA.exe FA/FA.EXE` — must match `c7d2c1cc…ba9b`; then
+   `cp atf95/Release/FA.exe build/FA.exe`
+(Docker invocation quirks — `\\\\` rsp escaping, FAKETIME_DISABLE_SHM=1, no `head` —
+see Phase 0 notes above.)
 
 ### 5. Phase 3 — workflow tooling
 - `tools/gate.py` (gate 1, byte gate w/ symbol-window localization on failure).
