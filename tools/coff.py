@@ -134,19 +134,29 @@ class SymTable:
 
 def build_stub_obj(text_bytes, text_flags, func_name, fpo_rec=None,
                    debugf_assoc=False, main_sec=".text", more_sections=(),
-                   more_syms=(), main_sym_sec=1, main_sym_cls=SYM_EXTERNAL):
+                   more_syms=(), main_sym_sec=1, main_sym_cls=SYM_EXTERNAL,
+                   main_relocs=()):
     """One object with a single .text contribution (original bytes) + optional
     .debug$F section carrying the lifted FPO record with a DIR32NB relocation
     to the function symbol (mirrors cl's per-function objects).
 
       fpo_rec -- 16-byte FPO_DATA record from FA.EXE; offStart dword zeroed,
                  patched to the final RVA by the linker's relocation.
+      main_relocs -- fixup relocations for the MAIN section:
+                 [(offset, target_name | None, type)]; None targets the main
+                 (function) symbol itself; a name either matches func_name
+                 (same symbol, chunk start) or is declared as an undefined
+                 external resolved by the defining chunk obj (link resolves to
+                 that chunk's VA; the stub's content dword is the addend:
+                 FA_val - target_chunk_VA).
       more_sections -- [(name, flags, bytes, relocs)] appended after .text;
                  relocs = [(vaddr, symidx|None, type)] with None = main symbol.
       more_syms -- extra (name, val, sec, cls, typ, auxbytes) symbols, appended
                  after the main symbol.
     Returns whole .obj bytes."""
-    secs = [(main_sec, text_flags, text_bytes, ())] + list(more_sections)
+    secs = [(main_sec, text_flags, text_bytes, tuple(main_relocs))]
+    for s in more_sections:
+        secs.append(tuple(s))
     if fpo_rec is not None:
         dbgflags = S_DEBUGF if debugf_assoc else S_DEBUGF_PLAIN
         secs.append((".debug$F", dbgflags, b"\0\0\0\0" + fpo_rec[4:],
@@ -163,6 +173,22 @@ def build_stub_obj(text_bytes, text_flags, func_name, fpo_rec=None,
                aux=_aux_bytes(flags, content, len(relocs), num, sel))
     # the main function symbol lives in the main section (= 1)
     fidx = st.add(func_name, 0, main_sym_sec, main_sym_cls, typ=TYPE_FUNCTION)
+    # resolve main-reloc target names: None/func_name -> main symbol index,
+    # others become undefined externals resolved from the defining chunk obj
+    # (one externals entry per distinct name keeps the table small)
+    name_idx = {}
+    mrel = []
+    for off, tgt, typ in main_relocs:
+        if tgt is None or tgt == func_name:
+            mrel.append((off, None, typ))
+            continue
+        idx = name_idx.get(tgt)
+        if idx is None:
+            idx = st.add(tgt, 0, 0, SYM_EXTERNAL)
+            name_idx[tgt] = idx
+        mrel.append((off, idx, typ))
+    mrel = tuple(mrel)
+    secs[0] = (secs[0][0], secs[0][1], secs[0][2], mrel)
     for s in more_syms:
         st.add(*s)
     nsym = len(st.recs)
@@ -196,3 +222,94 @@ def _aux_bytes(flags, content, nrel, secnum, sel):
     clen = len(content)  # unpadded, like cl
     return struct.pack("<IIHH", clen, nrel, 0, 0) + \
         struct.pack("<HB2x", secnum, sel) + b"\0"
+
+
+def build_group_obj(parts, extra_externals=()):
+    """One object carrying MULTIPLE same-named sections (a "group" stub).
+
+    parts -- each a dict:
+      secname  section contribution name (".text"/".data"/".debug$F"/...)
+      flags    section flags (align-1 etc.)
+      content  contribution bytes (b"" for uninitialized CNT_*_UNINITIALIZED)
+      relocs   [(off, target|None, type)]; target None = the part's owner
+               symbol; a str names another symbol in this obj (part owner or
+               alias) or, if unknown, an undefined external resolved by the
+               defining obj.
+      owner    anchor symbol defined at this contribution's start (val 0)
+      aliases  [(name, typ)] extra symbols aliased to the same place (exports)
+      assoc    for .debug$F: 1-based index of the associated main section
+    extra_externals -- (name, val, sec, cls, typ, aux) tuples appended after
+    the parts' symbols (defaults: name,0,0,EXTERNAL,0,b"").
+
+    Sections/anchors concatenate in obj order at link time, so group order in
+    the link line preserves FA address order with fewer input files.
+    """
+    st = SymTable()
+    name_idx = {}          # symbol name -> symbol index in this obj
+    sec_relocs = []        # per part: [(off, idx, typ)]
+    # pass 1: section symbols + defined anchors (+ aliases) in section order
+    secnum_by_anchor = {}
+    for i, p in enumerate(parts):
+        num = i + 1
+        plen = p.get("aux_len", len(p.get("content") or b""))
+        st.add(p["secname"], 0, num, SYM_SECTION,
+               aux=_aux_bytes(p["flags"], (b"\0" * plen if p.get("aux_len")
+                                           else p.get("content") or b""),
+                              len(p.get("relocs") or ()),
+                              p.get("assoc") or 0, 5 if p.get("assoc") else 0))
+        if p.get("assoc"):
+            # .debug$F companion: references the associated main part's
+            # owner symbol — don't define it again
+            assert p["owner"] in name_idx, p["owner"]
+            continue
+        idx = st.add(p["owner"], 0, num, SYM_EXTERNAL,
+                     typ=p.get("owner_typ", 0))
+        name_idx[p["owner"]] = idx
+        secnum_by_anchor[p["owner"]] = num
+        for nm, typ in p.get("aliases") or ():
+            aidx = st.add(nm, 0, num, SYM_EXTERNAL, typ=typ)
+            name_idx.setdefault(nm, aidx)
+    # pass 2: resolve reloc targets; unknown names become undefined externals
+    for p in parts:
+        rl = []
+        for off, tgt, typ in p.get("relocs") or ():
+            if tgt is None or tgt == p["owner"]:
+                rl.append((off, name_idx[p["owner"]], typ))
+                continue
+            idx = name_idx.get(tgt)
+            if idx is None:
+                idx = st.add(tgt, 0, 0, SYM_EXTERNAL)
+                name_idx[tgt] = idx
+            rl.append((off, idx, typ))
+        sec_relocs.append(rl)
+    # extra symbols (e.g. additional undefined externals with class/aux)
+    for s in extra_externals:
+        if len(s) == 1:
+            if s[0] in name_idx:
+                continue
+            s = (s[0], 0, 0, SYM_EXTERNAL, 0, b"")
+        st.add(*s)
+    nsym = len(st.recs)
+
+    secs = [(p["secname"], p["flags"], p.get("content") or b"", sec_relocs[i])
+            for i, p in enumerate(parts)]
+    hdr = bytearray(struct.pack("<HHIIIHH", MAGIC, len(secs), 0, 0, nsym, 0, 0))
+    raw = [c[2] for c in secs]                       # no padding, like cl
+    rel = [b"".join(struct.pack("<IIH", va, sym, typ)
+                    for va, sym, typ in c[3]) for c in secs]
+    rawoff = 20 + 40 * len(secs)
+    rawptrs, off = [], rawoff
+    for b in raw:
+        rawptrs.append(off if b else 0)
+        off += len(b)
+    relofs = []
+    for b in rel:
+        relofs.append(off if b else 0)
+        off += len(b)
+    secblk = b""
+    for i, p in enumerate(parts):
+        secblk += p["secname"].encode().ljust(8, b"\0") + struct.pack(
+            "<IIIIIIHHI", p.get("sec_vsz", 0), 0, p.get("sec_rsz", len(raw[i])),
+            rawptrs[i], relofs[i], 0, len(sec_relocs[i]), 0, p["flags"])
+    struct.pack_into("<I", hdr, 8, off)
+    return bytes(hdr) + secblk + b"".join(raw) + b"".join(rel) + st.bytes()
