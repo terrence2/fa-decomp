@@ -1,0 +1,17 @@
+// Gate-1 swap set: one entry per decompiled function.
+// rva = FA chunk RVA, obj = CL object base name, src = source file,
+// flags = cl options, maps = fitobj relocation remaps ["FROM=TO[+addend]"].
+[
+  {"rva": "0xb06c0",
+   "obj": "WRFog",
+   "src": "src/WRFogLayerUpdate.c",
+   "maps": []},
+  {"rva": "0x9b1f0",
+   "obj": "Stall",
+   "src": "src/StallSpeed.c",
+   "maps": ["_Callee@16=$FA$_t_40b0a0+0x90250"]},
+  {"rva": "0x11780",
+   "obj": "WordToString",
+   "src": "src/WordToString.c",
+   "maps": []}
+]

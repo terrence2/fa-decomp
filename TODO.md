@@ -259,7 +259,7 @@ see Phase 0 notes above.)
   decompiled TUs must be address-contiguous runs (unchanged — enforced per-TU at
   Phase-4 pilot time).
 
-### 6. Phase 4 — pilot decompilations — ✅ Pilots 1+2 PASSED (2026-10-31)
+### 6. Phase 4 — pilot decompilations — ✅ Pilots 1–3 PASSED (2026-10-31)
 - **WRFogLayerUpdate @ 0xb06c0 (0x50 B)**: `src/WRFogLayerUpdate.c` — cl 4.2
   `/c /O2 /Gy /G5` reproduced FA codegen on the FIRST attempt (fastcall
   `Rand(51)` = `@Rand@4` resolves to the callee stub anchor).
@@ -269,14 +269,26 @@ see Phase 0 notes above.)
   FROM=TO+delta` bakes the addend for INTERIOR targets: link 4.20 computes
   `final = sym + content − (site+4)`, so needed content = (site+4) − sym +
   FA_rel32.
+- **WordToString @ 0x11780 (0x10 B)**: `src/WordToString.c` — fastcall→stdcall
+  thunk (`push 0x20; push -1; push edx; push ecx; call _DoWordToString@16`);
+  matched first try.
+- **Swap automation — `tools/swap.py` + `tools/swap.json`** (2026-10-31): the
+  whole loop is now ONE command from repo root: `python3 tools/swap.py`
+  [= compile + link + gate]. `swap.json` (version-controlled, in tools/) lists
+  per-function entries `{rva, obj, src, flags?, maps?}`; steps `compile` /
+  `fit` / `link` / `gate` runnable individually. Verified from a COLD
+  Release/ dir (no FA.pdb) — the pdb-seed link cycle is handled internally.
+  LINK rsp form: relative `'@..\\build\\m0\\m0linkD.rsp'` from docker cwd
+  /work/atf95 (the absolute Z:\ form loses backslashes through the
+  python→sh→docker quoting chain).
 - **Swap mechanism** (all in tools/): C in `src/` → CL in docker →
   `fitobj.py <cl.obj> <rva> [--map FROM=TO[+addend]]` (FA tail pad + FA FPO
   record splice, drops `.drectve`) → `mkstub.py SPLIT_AT=<va>` singleton
   group → `mkrsp.py --replace <va>=<fit.obj>` → pdb-seed link cycle →
   `fixreloc.py` → `gate.py`.
 - **Flag baseline for FA**: `/O2 /Gy /G5`.
-- Remaining pilots: throw-site C++ member, data (non-code) decompilation,
-  then scale up to bulk C functions.
+- Remaining pilots: throw-site C++ member, more complex codegen (switches,
+  loops, floats), then scale up to bulk decompilation.
 
 ### 7. Phase 5 — hardening
 - Progress tracker JSON (N/3829 functions), CI gate, update `MSVC_VERSION.md` with the
