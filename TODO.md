@@ -178,30 +178,22 @@ on them; the stub-only link needs only the 2 export directives in FA.EXE itself.
 
 ## TODO (in order)
 
-### 1. Fix `tools/peref.py main()` → emit `build/layout.json`
-- Update to the new `parse_fpo()` tuple signature (`fpo_recs, fpo_header = parse_fpo(pe)`).
-- Build the chunked layout the stub generator needs:
-  - `.text`: one chunk per FPO record (rva, size); assign SMS names by rva; split the
-    residual ~15% gap at SMS symbol starts so gap blobs don't swallow named code.
-  - `.data`: chunks from the 1099 SMS data symbols (extent = to next symbol VA).
-  - Emit per-chunk: `{name|None, va, rva, size, fpo_present, bytes_file_offset}` plus
-    section metadata, exports/imports, debug payload offsets.
-- Sanity gate: chunks must tile .text exactly (sum of sizes + no overlap), same for .data.
+### 1. ✅ Fix `tools/peref.py main()` → emit `build/layout.json` (2026-10-31)
+- Runs clean: FPO 2986 recs (0 overlaps); .text = 3834 chunks tiling 0xe3eec exactly
+  (2986 fpo + 848 gap, 2413 named, 0 swallowed); .data = 1100 chunks covering 0xa2d98
+  (1099 named, BSS tail handled via size_full vs size_file).
+- Emits per-chunk `{name, va, rva, size, fpo, fpo_rec, off}` + section metadata,
+  exports/imports/debug payload offsets into `build/layout.json`.
 
-### 2. Finish obj-format ground truth → `tools/coff.py`
-- Re-dump `build/test/fpotest.obj` symbol table with a **correct 18-byte-record walker**
-  (honor aux counts; read string table only for zeroed name slots). Last attempt walked off
-  the end at sym[13] (aux mishandling) — the obj is fine, the walker was wrong.
-- Capture exact aux-record contents for section symbols (SectionLength, CheckSum,
-  Selection byte for COMDAT assoc./duplicate semantics).
-- Write `tools/coff.py`: COFF I386 obj writer mirroring cl's output byte layout —
-  `.text` COMDAT section + `.debug$F` (16-byte FPO_DATA + DIR32NB reloc) per stub, symbol
-  table + string table + relocations, `.drectve` when needed.
+### 2. ✅ Obj-format ground truth → `tools/coff.py` (2026-10-31)
+- Working COFF I386 obj writer mirroring cl's byte layout: section symbols w/ aux records,
+  COMDAT `.text` + `.debug$F`, group objects (`build_group_obj`), relocation records.
+- Exercised through all Milestone-0 probes (import-member archives, tail sweeps, stubs).
 
-### 3. `tools/mkstub.py` — one obj per chunk
-- Input layout.json; emit stub objs: original bytes as section content, symbol name
-  (demangle→keep raw SMS name), alignment, lifted FPO record.
-- CRT/data stubs same mechanism (selection=any COMDAT or plain sections as analysis dictates).
+### 3. ✅ `tools/mkstub.py` — one obj per chunk (2026-10-31)
+- Working: original bytes as section content, fixup relocations → containing-chunk symbols,
+  `.debug$F` FPO records for fpo chunks, `.bss` groups, `.rdata` stub; mkrdata.py drives
+  the whole stub set.
 
 ### 4. Milestone 0 — stub-only full link (the big gate) — ✅ COMPLETE (2026-10-31)
 `sha256(atf95/Release/FA.exe) == sha256(FA/FA.EXE) ==
@@ -255,11 +247,17 @@ written by the linker).
 (Docker invocation quirks — `\\\\` rsp escaping, FAKETIME_DISABLE_SHM=1, no `head` —
 see Phase 0 notes above.)
 
-### 5. Phase 3 — workflow tooling
-- `tools/gate.py` (gate 1, byte gate w/ symbol-window localization on failure).
-- `tools/compare.py` (gate 2, per-function slice diff, reccmp-style).
-- Build driver: link line = decompiled objs + stub objs, both in original address order;
-  decompiled TUs must be address-contiguous runs.
+### 5. ✅ Phase 3 — workflow tooling (2026-10-31)
+- `tools/gate.py` — Gate 1: sha256 vs FA/FA.EXE; on FAIL, every diff region is
+  localized to section+rva and the symbol window from build/layout.json (tested on a
+  deliberately corrupted copy).
+- `tools/compare.py` — Gate 2: per-chunk (function-sized) match% of any candidate exe
+  vs the original, only mapped file bytes (BSS skipped); first-diff rva per divergent
+  chunk; `--json` for machine output. 3834/3834 text + 550/550 data identical on
+  the Milestone-0 artifact.
+- Link line remains: decompiled objs + stub objs in original address order;
+  decompiled TUs must be address-contiguous runs (unchanged — enforced per-TU at
+  Phase-4 pilot time).
 
 ### 6. Phase 4 — pilot decompilations
 - 1 small C function, then 1 C++ member with throw site. Gate 2 iterates locally, gate 1
