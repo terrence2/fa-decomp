@@ -58,6 +58,38 @@ ADVAPI32.
 (the CRT stays original bytes forever, so libcmt is never linked; stubs carry the original
 bytes with baked-in relative offsets, valid because placement must reproduce original VAs).
 
+### Import synthesis probed (link 4.20) — decision: NO import libraries, direct `.idata$` objs
+Probes live in `tools/probes/` (mkref.py, mkidr.py, idcheck.py, microtest.py; artifacts in
+build/m0/ — gitignored). Facts, all verified against real `LINK.EXE` 4.20 runs:
+
+- Real-section relocs (DIR32 or DIR32NB to `__imp__X@n`) synthesize COMPLETE `.idata`
+  (descriptors + INT + IAT + hint/name + .reloc); relocs inside LNK_INFO/`.debug$F` sections
+  produce descriptor-only entries (empty INT/IAT). `-include:` drectve is accepted but
+  incomplete; command-line `/INCLUDE:"__imp__X@n"` works and is complete.
+- **INT/IAT entry order is hash-driven given the import NAME set** (verified: 109-name
+  KERNEL32 probe reproduced FA's exact order + hints), but multi-DLL sets interleave in ways
+  we don't fully model — SDK libs alone would scramble FA's order.
+- FA's exact 209-entry import set incl. hints: `build/fa_imports.json`
+  (wail32 by-name w/ exact hints, CDRVDL32/CDRVHF32 by-ordinal, rest standard).
+- **RESOLVED — direct `.idata$` group objects**: cut FA's `.idata` bytes at the
+  linker-semantic boundaries and hand them to the linker as plain objects:
+  `$2`=+0x000..0x0a0 (8 descriptors), `$3`=+0x0a0..0x0b4 (null import descriptor),
+  `$4`=+0x0b4..0x42c (INT), `$5`=+0x42c..0x790 (IAT), `$6`=+0x790..0x14dc (hint/name strings).
+  Link 4.20 concatenates in `$2→$6` order, passes content through **byte-for-byte unchanged**
+  (even unmodified baked-in RVAs), emits section flags 0xc0000040 = FA's, and computes the
+  data dirs from the group extents: DD1(imports) = `$2+$3` = 0xb4 ✓, DD12(IAT) = `$5` at
+  +0x42c size 0x364 ✓. Byte-identical `.idata` (incl. the 0x124 pad to rawsz 0x1600);
+  idirect2.exe artifacts confirm. Splitting `$2` at 0xa0 is load-bearing: putting the
+  terminator inside `$2` inflates DD1 by 0x14 (linker adds `$2+$3`).
+- Consequence: **skip crafting import libs entirely** (LIB /DEF can't make by-name entries
+  with nonzero hints anyway); no `/INCLUDE` directives; stub .text carries no symbol refs.
+
+### .reloc requirement (discovered — blocks stub-only link)
+FA `.reloc` = 39,518 fixups (.text 36,340, .rdata 170, .data 3,008, .idata 0). The IAT gets
+no base fixups (importer overwrites). Stub objs must carry REAL DIR32 relocations at FA's
+fixup offsets (targets = containing chunk symbols; linker patches value = chunk VA → identity
+with baked bytes) so the linker regenerates `.reloc` byte-identically.
+
 ### Note on `FA/FA_*.LIB` (resolved — do not chase this)
 The shipped `FA_.LIB`, `FA_1.LIB` … `FA_23.LIB` files (and `WAIL32.DLL`, `CDRV*.DLL`,
 `COMMSC32.DLL`, `IP.EXE`) in `FA/` are **game asset files, not build inputs** — they are
@@ -95,14 +127,18 @@ on them; the stub-only link needs only the 2 export directives in FA.EXE itself.
 - CRT/data stubs same mechanism (selection=any COMDAT or plain sections as analysis dictates).
 
 ### 4. Milestone 0 — stub-only full link (the big gate)
-- link 4.20 `/MACHINE:IX86 /SUBSYSTEM:WINDOWS`, entry `_WinMainCRTStartup`, objs in layout
-  order, export directives for the 2 FA.exe exports, resource `.res` (reconstruct 0x1200
-  bytes of .rsrc via RC), faketime-frozen clock, Wine drive `E:` at `atf95\Release` so NB10
-  PDB + MISC strings match.
+- Imports: direct `.idata$` group objs per the resolved probe above (5 objs, FA bytes).
+- link 4.20 `/MACHINE:IX86 /SUBSYSTEM:WINDOWS`, entry `_WinMainCRTStartup` (stub obj exists:
+  build/m0/stub_entry.obj), objs in layout order, export directives for the 2 FA.exe exports,
+  resource `.res` (reconstruct 0x1200 bytes of .rsrc via RC), faketime-frozen clock, Wine
+  drive `E:` at `atf95\Release` so NB10 PDB + MISC strings match.
+- **Extend mkstub first**: add DIR32 relocs at FA's fixup offsets within each .text/.data
+  chunk (see ".reloc requirement" above); .rdata's 170 fixups + debug dir handled separately.
+- .rsrc raw stub (0x1200 bytes as a `.rsrc` section obj), .rdata stubbing (0x1452: debug dir
+  + 170 fixups), debug payloads (MISC "Release/FA.exe", NB10 "E:\atf95\Release\FA.pdb" —
+  Wine E: drive at `atf95\Release`), FPO payload order, frozen timestamp 0x33ef9c9c,
+  section first-appearance order (.text .rdata .data .idata .rsrc .reloc).
 - Iterate until `sha256(build/FA.exe) == sha256(FA/FA.EXE)`.
-- Expected pain points (resolved once, here): TU/COMDAT ordering & padding, reloc/image
-  layout, debug-dir bytes (fallback: post-link byte-patch of the 3 known debug blobs),
-  .idata/.rdata synthesis by the linker.
 
 ### 5. Phase 3 — workflow tooling
 - `tools/gate.py` (gate 1, byte gate w/ symbol-window localization on failure).
