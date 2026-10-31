@@ -42,6 +42,11 @@ import coff
 
 STUB_DIR = os.environ.get("STUB_DIR", "build/stubs")
 GROUP_SIZE = int(os.environ.get("GROUP_SIZE", "50"))  # chunk sections per group obj
+# Comma-separated absolute VAs whose chunks become singleton group objs
+# (cut the batch before and after) — lets a decompiled object replace one
+# chunk at its exact rsp position (tools/mkrsp.py --replace).
+SPLIT_AT = {int(x, 0) for x in
+            os.environ.get("SPLIT_AT", "").split(",") if x.strip()}
 BSS_GROUP_SIZE = 200      # bss sections are tiny; batch more per obj
 BSS_FLAGS = 0xC0100080    # READ|WRITE|ALIGN_1|CNT_UNINITIALIZED (cl emits .bss
                           # 0xC0400080; align must be 1 so chunk sizes tile
@@ -149,6 +154,10 @@ def main():
                     obj, "textgroup", batch, batch.get("nfixups", 0))
 
     for c in L["text_chunks"]:
+        if c["va"] in SPLIT_AT and batch["n"]:
+            flush_text()
+            batch = {"n": 0, "parts": (partlist := [])}
+            recs = []
         if batch["n"] == 0:
             batch["first_va"] = c["va"]
             batch["nfixups"] = 0
@@ -156,7 +165,7 @@ def main():
         batch["n"] += 1
         batch["nfixups"] += len(partlist[-1]["relocs"])
         batch["last_va"] = c["va"]
-        if batch["n"] == GROUP_SIZE:
+        if batch["n"] == GROUP_SIZE or c["va"] in SPLIT_AT:
             flush_text()
             batch = {"n": 0, "parts": (partlist := [])}
             recs = []
