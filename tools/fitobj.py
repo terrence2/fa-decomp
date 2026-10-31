@@ -60,20 +60,49 @@ def read_obj(path):
 
 def main():
     cl_obj, rva = sys.argv[1], int(sys.argv[2], 0)
-    out = sys.argv[3] if len(sys.argv) > 3 else cl_obj.rsplit(".", 1)[0] + "_fit.obj"
+    out, remap = None, {}
+    argv = sys.argv[3:]
+    i = 0
+    while i < len(argv):
+        if argv[i] == "--map":
+            f, t = argv[i + 1].split("=", 1)
+            remap[f] = t
+            i += 2
+        else:
+            out = argv[i]; i += 1
+    if out is None:
+        out = cl_obj.rsplit(".", 1)[0] + "_fit.obj"
+    # "TO+0xdelta" (or plain decimal) adds an addend into the reloc site's
+    # content dword — used when the target is INSIDE a gap chunk whose stub
+    # symbol only covers the chunk start
+    addend = {k: 0 for k in remap}
+    for k, v in list(remap.items()):
+        if "+" in v:
+            t, d_ = v.rsplit("+", 1)
+            remap[k] = t
+            addend[k] = int(d_, 0)
     secs = read_obj(cl_obj)
     text = next(s for s in secs if s["name"] == ".text")
+    text["content"] = bytearray(text["content"])
     L = json.load(open("build/layout.json"))
     chunk = next(c for c in L["text_chunks"] if c["rva"] == rva)
     exe = open("FA/FA.EXE", "rb").read()
     fa_bytes = exe[chunk["off"]:chunk["off"] + chunk["size"]]
     fpo = bytes.fromhex(chunk["fpo_rec"]) if chunk.get("fpo_rec") else None
     tail = fa_bytes[len(text["content"]):]
-    if not (set(tail) <= {0x8d, 0x64, 0x24, 0xa4, 0x00}):
+    if not (set(tail) <= {0x8d, 0x64, 0x24, 0xa4, 0x9b, 0x00}):
         sys.exit("FATAL: unexplained tail bytes %s beyond CL code for %#x"
                  % (tail.hex(), rva))
     name = chunk["name"] or "$FA$chunk_%06x" % rva
-    relocs = [(o, n_, t) for o, n_, t in text["relocs"]]
+    relocs = []
+    for o, n_, t in text["relocs"]:
+        v = remap.get(n_, n_)
+        d_ = addend.get(n_, 0)
+        if d_:
+            # bake the extra addend into the referenced content dword
+            site = struct.unpack_from("<i", text["content"], o)[0]
+            struct.pack_into("<i", text["content"], o, site + d_)
+        relocs.append((o, v, t))
     print("chunk %s @ %#x: cl code 0x%x + pad 0x%x = 0x%x; %d relocs"
           % (name, rva, len(text["content"]), len(tail), chunk["size"],
              len(relocs)))

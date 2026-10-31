@@ -259,26 +259,24 @@ see Phase 0 notes above.)
   decompiled TUs must be address-contiguous runs (unchanged — enforced per-TU at
   Phase-4 pilot time).
 
-### 6. Phase 4 — pilot decompilations — ✅ Pilot 1 PASSED (2026-10-31)
-- **WRFogLayerUpdate @ rva 0xb06c0 (0x50 bytes) decompiled and GATE-PASSING**:
-  `src/WRFogLayerUpdate.c` — cl 4.2 `/c /O2 /Gy /G5` reproduces FA's codegen
-  byte-for-byte on the first attempt (call to `__fastcall Rand(51)` = `@Rand@4`
-  resolves to the callee chunk's stub anchor symbol).
-- **Swap mechanism** (all in tools/):
-  1. Write C in `src/`, compile with CL in docker → `build/pilot/*.obj`
-  2. `tools/fitobj.py <cl.obj> <rva>` — re-emits the obj with FA's tail pad
-     (FA pads each function to the next 16-byte boundary with `lea esp,[esp+0]`
-     fill; FPO cbProcSize covers the pad — assert-only lea-nop tail bytes) and
-     FA's own FPO record; drops `.drectve`; translates relocs to named externals
-  3. `tools/mkstub.py SPLIT_AT=<va>` cuts the chunk into a singleton stub group
-  4. `tools/mkrsp.py --stubdir … --replace <va>=<fit.obj>` writes the rsp with
-     the decompiled obj in the stub's exact position
-  5. Full seed+link cycle (pdb reseed at :12:40, link :32) → `fixreloc.py` →
-     `tools/gate.py`
-- **Flag baseline for FA**: `/O2 /Gy /G5` (probe more per-function: /Og /Oi /Ot
-  /Ob1 /Oy are inside /O2; test /G3 and /Zp variants when a function mismatches).
-- Remaining pilots: one function with locals (FPO nonzero cdwLocals), throw-site
-  C++ member, then scale up.
+### 6. Phase 4 — pilot decompilations — ✅ Pilots 1+2 PASSED (2026-10-31)
+- **WRFogLayerUpdate @ 0xb06c0 (0x50 B)**: `src/WRFogLayerUpdate.c` — cl 4.2
+  `/c /O2 /Gy /G5` reproduced FA codegen on the FIRST attempt (fastcall
+  `Rand(51)` = `@Rand@4` resolves to the callee stub anchor).
+- **StallSpeed @ 0x9b1f0 (0x30 B, cdwLocals=1, ret 4)**: `src/StallSpeed.c` —
+  one byte of reconstruction: FA's source was `if (r <= 1)` (jg skip), not
+  `<` (jge). Callee is UNNAMED (gap chunk 0xb0a0); fitobj `--map
+  FROM=TO+delta` bakes the addend for INTERIOR targets: link 4.20 computes
+  `final = sym + content − (site+4)`, so needed content = (site+4) − sym +
+  FA_rel32.
+- **Swap mechanism** (all in tools/): C in `src/` → CL in docker →
+  `fitobj.py <cl.obj> <rva> [--map FROM=TO[+addend]]` (FA tail pad + FA FPO
+  record splice, drops `.drectve`) → `mkstub.py SPLIT_AT=<va>` singleton
+  group → `mkrsp.py --replace <va>=<fit.obj>` → pdb-seed link cycle →
+  `fixreloc.py` → `gate.py`.
+- **Flag baseline for FA**: `/O2 /Gy /G5`.
+- Remaining pilots: throw-site C++ member, data (non-code) decompilation,
+  then scale up to bulk C functions.
 
 ### 7. Phase 5 — hardening
 - Progress tracker JSON (N/3829 functions), CI gate, update `MSVC_VERSION.md` with the
