@@ -2051,5 +2051,179 @@
   "obj": "MonoClearScreen",
   "src": "src/MonoClearScreen.c",
   "maps": []
+ },
+ {
+  "rva": "0x530e0",
+  "obj": "HARDNumLoaded",
+  "src": "src/HARDNumLoaded.c",
+  "maps": []
+ },
+ {
+  "rva": "0x617e0",
+  "obj": "RemoveFromChains",
+  "src": "src/RemoveFromChains.c",
+  "maps": [
+   "_chainStart=?chainStart@@3GA",
+   "@chainClear_@4=$FA$_t_461800"
+  ]
+ },
+ {
+  "rva": "0x63800",
+  "obj": "SetScenarioEndTime",
+  "src": "src/SetScenarioEndTime.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64bf0",
+  "obj": "CTDo_exit",
+  "src": "src/CTDo_exit.c",
+  "maps": [
+   "@ctdoQuit_@4=$FA$_t_463e90"
+  ]
+ },
+ {
+  "rva": "0x6b410",
+  "obj": "MPShutdown",
+  "src": "src/MPShutdown.c",
+  "maps": []
+ },
+ {
+  "rva": "0x76be0",
+  "obj": "COMinSpeed",
+  "src": "src/COMinSpeed.c",
+  "maps": []
+ },
+ {
+  "rva": "0x76c00",
+  "obj": "COCornerSpeed",
+  "src": "src/COCornerSpeed.c",
+  "maps": []
+ },
+ {
+  "rva": "0x76d30",
+  "obj": "COAcc",
+  "src": "src/COAcc.c",
+  "maps": []
+ },
+ {
+  "rva": "0x76d50",
+  "obj": "CODacc",
+  "src": "src/CODacc.c",
+  "maps": []
+ },
+ {
+  "rva": "0x7ec80",
+  "obj": "RepairPlane",
+  "src": "src/RepairPlane.c",
+  "maps": [
+   "_hangarName=?hangarName@@3PADA"
+  ]
+ },
+ {
+  "rva": "0x8f480",
+  "obj": "OBJStopAdding",
+  "src": "src/OBJStopAdding.c",
+  "maps": [
+   "_cmStopTop=?COMMENT_TYPE@@3W4__unnamed@@A+0x858",
+   "_wngStopTop=?wingSay@@3PAUSAY@@A+0xe64"
+  ]
+ },
+ {
+  "rva": "0x92cf0",
+  "obj": "MP_DoNothing",
+  "src": "src/MP_DoNothing.c",
+  "maps": []
+ },
+ {
+  "rva": "0x92ea0",
+  "obj": "MP_Dont_care",
+  "src": "src/MP_Dont_care.c",
+  "maps": []
+ },
+ {
+  "rva": "0x965b0",
+  "obj": "G_Flip",
+  "src": "src/G_Flip.c",
+  "maps": []
+ },
+ {
+  "rva": "0x96b20",
+  "obj": "G_StringWidth",
+  "src": "src/G_StringWidth.c",
+  "maps": [
+   "_cFont=?cFont@@3PAUFONT@@A"
+  ]
+ },
+ {
+  "rva": "0x97310",
+  "obj": "G_LoadVesa",
+  "src": "src/G_LoadVesa.c",
+  "maps": []
+ },
+ {
+  "rva": "0x97320",
+  "obj": "G_UnloadVesa",
+  "src": "src/G_UnloadVesa.c",
+  "maps": []
+ },
+ {
+  "rva": "0x9e510",
+  "obj": "PLANETurnOffGunSound",
+  "src": "src/PLANETurnOffGunSound.c",
+  "maps": [
+   "@SoundOff@4=?SoundOff@@YIXF@Z"
+  ]
+ },
+ {
+  "rva": "0xa3b60",
+  "obj": "RMAccessHandle",
+  "src": "src/RMAccessHandle.c",
+  "maps": [
+   "_rmAccess_@8=$FA$_t_4a39d0"
+  ]
+ },
+ {
+  "rva": "0xa4d90",
+  "obj": "T_InitForestProc",
+  "src": "src/T_InitForestProc.c",
+  "maps": [
+   "@farmProc_@4=$FA$_t_4a4db0"
+  ]
+ },
+ {
+  "rva": "0xa5250",
+  "obj": "T_InitForest1Proc",
+  "src": "src/T_InitForest1Proc.c",
+  "maps": [
+   "@farmProc_@4=$FA$_t_4a4db0"
+  ]
+ },
+ {
+  "rva": "0xa5390",
+  "obj": "T_InitForest2Proc",
+  "src": "src/T_InitForest2Proc.c",
+  "maps": [
+   "@farmProc_@4=$FA$_t_4a4db0"
+  ]
+ },
+ {
+  "rva": "0xa55a0",
+  "obj": "T_InitMooseProc",
+  "src": "src/T_InitMooseProc.c",
+  "maps": [
+   "@farmProc_@4=$FA$_t_4a4db0"
+  ]
+ },
+ {
+  "rva": "0xa57c0",
+  "obj": "T_InitVietRicePaddy2Proc",
+  "src": "src/T_InitVietRicePaddy2Proc.c",
+  "maps": []
+ },
+ {
+  "rva": "0xa57e0",
+  "obj": "T_InitVietRicePaddy3Proc",
+  "src": "src/T_InitVietRicePaddy3Proc.c",
+  "maps": []
  }
 ]
