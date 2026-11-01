@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 317,
- "chunks_done": 317,
- "bytes_done": 7903,
+ "done": 345,
+ "chunks_done": 345,
+ "bytes_done": 8782,
  "bytes_total": 933612,
- "bytes_pct": 0.85,
+ "bytes_pct": 0.94,
  "waves": [
   {
    "date": "2026-11-01",
@@ -387,6 +387,40 @@
     "0xe0f0",
     "0xe4040",
     "0xe4600"
+   ]
+  },
+  {
+   "date": "2026-11-01",
+   "note": "wave 11: 28 fns (diff-14..16 band) via 3 parallel sub-agent batches (7 VietPalms/Trees/WaterBuffalo ret-only, WRShutdown/WRSetTint asm-escapes+identity maps, __mtterm TlsFree imp-array asm, __ismbbkana codepage gate, OBJAlloc bump allocator, WPTarget/FindClose/DrawLight320/ButtonSound/CHATEndMission/MSGPop/ShutdownKeyboard, HUDHasFlaps/MouseInBox/Vertical/StringForLanguage asm escapes, PROJChangeBombEq struct copy, ld12tod/ld12tof CRT arg pattern, wcstol/wcstoul _stolQ forward); LINK 4.2 rsp had crossed its ~32KB ceiling (LNK1104 truncated path + LNK1141) \u2014 mkrsp/swap now emit relative obj paths; 343 entries; GATE 1 PASS",
+   "rvas": [
+    "0x112d0",
+    "0x11d80",
+    "0x12820",
+    "0x12850",
+    "0x13980",
+    "0x18490",
+    "0x789f0",
+    "0x8aea0",
+    "0x8f460",
+    "0x97ad0",
+    "0xa5800",
+    "0xa5820",
+    "0xa5840",
+    "0xa5860",
+    "0xa5880",
+    "0xa58a0",
+    "0xa58c0",
+    "0xabc0",
+    "0xaf510",
+    "0xb0a70",
+    "0xc03d0",
+    "0xd500",
+    "0xd9100",
+    "0xdb7e0",
+    "0xdfce0",
+    "0xdfd00",
+    "0xe2330",
+    "0xe2560"
    ]
   }
  ],

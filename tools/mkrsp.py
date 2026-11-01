@@ -49,11 +49,11 @@ def main():
         if m["va"] in repl:
             lines.append(repl[m["va"]])
         else:
-            lines.append("Z:/work/%s/%s" % (stubs, m["file"]))
+            lines.append("../%s/%s" % (stubs, m["file"]))
     for m in man:
         if m["kind"] in ("datagroup", "bssgroup"):
-            lines.append("Z:/work/%s/%s" % (stubs, m["file"]))
-    lines.append("Z:/work/build/m0/FA.obj")
+            lines.append("../%s/%s" % (stubs, m["file"]))
+    lines.append("../build/m0/FA.obj")
     with open(out, "w", newline="") as f:
         f.write("\r\n".join(lines) + "\r\n")
     print("wrote %s (%d objs, %d replaced)" % (out, len(lines) - 1, len(repl)))

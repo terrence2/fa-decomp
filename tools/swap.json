@@ -2225,5 +2225,212 @@
   "obj": "T_InitVietRicePaddy3Proc",
   "src": "src/T_InitVietRicePaddy3Proc.c",
   "maps": []
+ },
+ {
+  "rva": "0xa5800",
+  "obj": "T_InitVietPalms1Proc",
+  "src": "src/T_InitVietPalms1Proc.c",
+  "maps": []
+ },
+ {
+  "rva": "0xa5820",
+  "obj": "T_InitVietPalms2Proc",
+  "src": "src/T_InitVietPalms2Proc.c",
+  "maps": []
+ },
+ {
+  "rva": "0xa5840",
+  "obj": "T_InitVietPalms3Proc",
+  "src": "src/T_InitVietPalms3Proc.c",
+  "maps": []
+ },
+ {
+  "rva": "0xa5860",
+  "obj": "T_InitVietTrees1Proc",
+  "src": "src/T_InitVietTrees1Proc.c",
+  "maps": []
+ },
+ {
+  "rva": "0xa5880",
+  "obj": "T_InitVietTrees2Proc",
+  "src": "src/T_InitVietTrees2Proc.c",
+  "maps": []
+ },
+ {
+  "rva": "0xa58a0",
+  "obj": "T_InitVietTrees3Proc",
+  "src": "src/T_InitVietTrees3Proc.c",
+  "maps": []
+ },
+ {
+  "rva": "0xa58c0",
+  "obj": "T_InitVietWaterBuffaloProc",
+  "src": "src/T_InitVietWaterBuffaloProc.c",
+  "maps": []
+ },
+ {
+  "rva": "0xb0a70",
+  "obj": "WRShutdown",
+  "src": "src/WRShutdown.c",
+  "maps": [
+   "_hdrPtr=?hdrPtr@@3PAULAYER_FILE_HEADER@@A"
+  ]
+ },
+ {
+  "rva": "0xaf510",
+  "obj": "WRSetTint",
+  "src": "src/WRSetTint.c",
+  "maps": []
+ },
+ {
+  "rva": "0xd9100",
+  "obj": "MTterm",
+  "src": "src/_mtterm.c",
+  "maps": [
+   "_impTlsFree=__imp__TlsFree"
+  ]
+ },
+ {
+  "rva": "0xdb7e0",
+  "obj": "ISMbbkana",
+  "src": "src/_ismbbkana.c",
+  "maps": [
+   "_ismbbType=$FA$_t_4db810"
+  ]
+ },
+ {
+  "rva": "0x8f460",
+  "obj": "OBJAlloc",
+  "src": "src/OBJAlloc.c",
+  "maps": [
+   "_objAllocTopR=?COMMENT_TYPE@@3W4__unnamed@@A+0x858"
+  ]
+ },
+ {
+  "rva": "0x97ad0",
+  "obj": "WPTarget",
+  "src": "src/WPTarget.c",
+  "maps": [
+   "_wpRelink_@0=$FA$_t_45dc60"
+  ]
+ },
+ {
+  "rva": "0x789f0",
+  "obj": "FindClose",
+  "src": "src/FindClose.c",
+  "maps": [
+   "_fcAnchor_=$FA$_t_4d4880"
+  ]
+ },
+ {
+  "rva": "0x8aea0",
+  "obj": "DrawLight320",
+  "src": "src/DrawLight320.c",
+  "maps": [
+   "_dlLock_@0=$FA$_t_486290",
+   "_dlSub_@12=$FA$_t_48ae30",
+   "_dlUnlock_@0=$FA$_t_4862a0"
+  ]
+ },
+ {
+  "rva": "0x12820",
+  "obj": "ButtonSound",
+  "src": "src/ButtonSound.c",
+  "maps": [
+   "_btnSndLo=?doReceiveInGetKey@@3DA+0x5c",
+   "_btnSndHi=?doReceiveInGetKey@@3DA+0x6c",
+   "_SingleSoundS@16=?SingleSound@@YGFPADFEF@Z"
+  ]
+ },
+ {
+  "rva": "0x13980",
+  "obj": "CHATEndMission",
+  "src": "src/CHATEndMission.c",
+  "maps": [
+   "_chatEditing=?chatEditing@@3DA",
+   "_MPShellInitMessages@0=?MPShellInitMessages@@YGXXZ"
+  ]
+ },
+ {
+  "rva": "0x18490",
+  "obj": "MSGPop",
+  "src": "src/MSGPop.c",
+  "maps": [
+   "_msgBtnBase=?lastWeaponButton@@3DA"
+  ]
+ },
+ {
+  "rva": "0x112d0",
+  "obj": "ShutdownKeyboard",
+  "src": "src/ShutdownKeyboard.c",
+  "maps": [
+   "_keyboardInitialized=?keyboardInitialized@@3DA",
+   "_keyboardCS=?keyboard_critical_section@@3U_RTL_CRITICAL_SECTION@@A",
+   "__imp__DeleteCriticalSectionX@4=__imp__DeleteCriticalSection"
+  ]
+ },
+ {
+  "rva": "0xabc0",
+  "obj": "HUDHasFlaps",
+  "src": "src/HUDHasFlaps.c",
+  "maps": [
+   "_hudFlagQ=_hud+0x24d"
+  ]
+ },
+ {
+  "rva": "0xd500",
+  "obj": "MouseInBox",
+  "src": "src/MouseInBox.c",
+  "maps": []
+ },
+ {
+  "rva": "0x11d80",
+  "obj": "Vertical",
+  "src": "src/Vertical.c",
+  "maps": []
+ },
+ {
+  "rva": "0x12850",
+  "obj": "StringForLanguage",
+  "src": "src/StringForLanguage.c",
+  "maps": []
+ },
+ {
+  "rva": "0xc03d0",
+  "obj": "PROJChangeBombEq",
+  "src": "src/PROJChangeBombEq.c",
+  "maps": []
+ },
+ {
+  "rva": "0xdfce0",
+  "obj": "ld12tod",
+  "src": "src/ld12tod.c",
+  "maps": [
+   "_ldCvtBufQ=__newmode+0x8"
+  ]
+ },
+ {
+  "rva": "0xdfd00",
+  "obj": "ld12tof",
+  "src": "src/ld12tof.c",
+  "maps": [
+   "_ldCvtBufQ=__newmode+0x20"
+  ]
+ },
+ {
+  "rva": "0xe2330",
+  "obj": "wcstol",
+  "src": "src/wcstol.c",
+  "maps": [
+   "__stolQ=$FA$_t_4e2350"
+  ]
+ },
+ {
+  "rva": "0xe2560",
+  "obj": "wcstoul",
+  "src": "src/wcstoul.c",
+  "maps": [
+   "__stolQ=$FA$_t_4e2350"
+  ]
  }
 ]

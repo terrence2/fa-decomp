@@ -236,7 +236,10 @@ def step_link(es):
         raise SystemExit("mkstub failed: " + r.stderr[-2000:])
     repl = []
     for e in es:
-        repl += ["--replace", "%#x=Z:/work/build/pilot/%s_fit.obj"
+        # relative form: the seed rsp crossed LINK 4.2's ~32KB response-file
+        # ceiling at 343 entries (LNK1104 on a truncated path, LNK1141);
+        # relative obj paths keep it ~28KB from the /work/atf95 CWD
+        repl += ["--replace", "%#x=../build/pilot/%s_fit.obj"
                  % (e["rva"] + IMAGE_BASE, e["obj"])]
     subprocess.run([sys.executable, "tools/mkrsp.py", "--stubdir", STUBS,
                     "--out", RSP] + repl, check=True)
