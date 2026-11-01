@@ -1,1268 +1,1613 @@
 [
-  {
-   "rva": "0xb06c0",
-   "obj": "WRFog",
-   "src": "src/WRFogLayerUpdate.c",
-   "maps": []
-  },
-  {
-   "rva": "0x9b1f0",
-   "obj": "Stall",
-   "src": "src/StallSpeed.c",
-   "maps": ["_Callee@16=$FA$_t_40b0a0+0x90250"]
-  },
-  {
-   "rva": "0x11780",
-   "obj": "WordToString",
-   "src": "src/WordToString.c",
-   "maps": []
-  },
-  {
-   "rva": "0x87610",
-   "obj": "DlgSel",
-   "src": "src/DialogSelectItem.c",
-   "maps": ["_PushShellAlloc@0=?PushShellAlloc@@YGXXZ", "_SUB87070=$FA$_t_487070", "_lastDial=?lastDial@@3PAUDIAL@@A", "_DialogDraw@4=?DialogDraw@@YGXPAX@Z", "_PopShellAlloc@0=?PopShellAlloc@@YGXXZ"]
-  },
-  {
-   "rva": "0xb5130",
-   "obj": "CarefulDiv",
-   "src": "src/carefulDiv.c",
-   "maps": ["_real_1=$FA$rdata0+0x49c", "_g_divFlag=?palColorRGB@@3UT_RGB@@A+0x44c", "_g_divRes=?palColorRGB@@3UT_RGB@@A+0x440", "_g_divCls=?rFloor@@3MA+0x4"]
-  },
-  {
-   "rva": "0x78b50",
-   "obj": "LibRead",
-   "src": "src/LibRead.c",
-   "maps": ["_hintHndl=?hintHndl@@3PAUT_HANDLE@@A", "_libTable=?libAccess@@3PAULIBACCESS@@A+4"],
-   "patch": ["0x39,6,", "0x44,0,8d4c0500", "0x4a,4,8b691f", "0x4d,0,8b0d00000000,2:6:_hintHndl"],
-   "provenance": ["patch 0x39/0x4d (hintHndl reload placement): toolchain-diff — FA loads hintHndl a 2nd time late (@0x4c, between f3-load and 03 ea); our CL 10.20.6166 always hoists the 2nd load early after 2b d1. 11 source variants (volatile, hoist-var, post-access, ptr-fusion forms: build/probe/pads/lrsweep.py) all byte-identical CL code; 20 flag sets (lrflags.py): artifacts exist ONLY under /G5-family; no-/G5 builds lack both artifacts but differ structurally (register assignment 8d 0c 92 + [ecx+0x17] base, not FA's [ebp+eax] sib); TU context (neighbor pressure, #pragma optimize) has no effect. FA's shape is a G5-scheduler revision diff.", "patch 0x44/0x4a (fused f3 sib vs materialized addr): toolchain-diff — FA materializes the f3 address (8d 4c 05 00 lea ecx,[ebp+eax] + 8b 69 1f); our CL fuses to sib 8b 6c 05 1f under every source form and /G5 flag; struct-with-declared-offsets is impossible (FA field offsets 0x17/0x1b/0x1f are not 4-aligned). Same revision evidence as 0x39."]
-  },
-  {
-   "rva": "0x35e50",
-   "obj": "StartGameThread",
-   "src": "src/StartGameThread.c",
-   "span": "0x80",
-   "aliases": ["0x4d=$FA$_t_435e9d", "0x5b=$FA$_t_435eab"],
-   "maps": ["$T121=$FA$rdata0+0x264", "__imp__GetCurrentThread@0=__imp__GetCurrentThread", "__imp__SetThreadPriority@8=__imp__SetThreadPriority", "__imp__ExitThread@4=__imp__ExitThread", "_g_filterFn=_overflow_ptr", "_NullFilter=_unknown_divide_error", "_usnfmain=?usnfmain@@YAXXZ"],
-   "provenance": ["patch @0x4b (filter funclet GetExceptionInformation): root-caused and ELIMINATED — #include <excpt.h> defines the macro to (struct _EXCEPTION_POINTERS*)_exception_info, which CL treats as an intrinsic inside a __except filter, inlining mov eax,[ebp-0x14] = FA's exact bytes (was 'e8 __GetExceptionInformation' helper call via implicit decl). 2026-11-01. Also renames CL's scope-table symbol $T107→$T121 (map updated to match)."]
-  },
-  {
-   "rva": "0xd3970",
-   "obj": "LockExit",
-   "src": "src/lockexit.c",
-   "maps": []
-  },
-  {
-   "rva": "0xd3980",
-   "obj": "UnlockExit",
-   "src": "src/unlockexit.c",
-   "maps": []
-  },
-  {
-   "rva": "0xd99b0",
-   "obj": "Errno",
-   "src": "src/errno.c",
-   "maps": []
-  },
-  {
-   "rva": "0xd3890",
-   "obj": "CExit",
-   "src": "src/cexit.c",
-   "maps": ["__doexit=$FA$_t_4d38b0"]
-  },
-  {
-   "rva": "0xd9e20",
-   "obj": "GetMbcp",
-   "src": "src/getmbcp.c",
-   "maps": []
-  },
-  {
-   "rva": "0xddfc0",
-   "obj": "GetSbhThreshold",
-   "src": "src/getsbhthreshold.c",
-   "maps": []
-  },
-  {
-   "rva": "0xe1ec0",
-   "obj": "Localeconv",
-   "src": "src/localeconv.c",
-   "maps": []
-  },
-  {
-   "rva": "0x117b0",
-   "obj": "LibraryStartup",
-   "src": "src/librarystartup.c",
-   "maps": []
-  },
-  {
-   "rva": "0x35ce0",
-   "obj": "MMCompactRAM",
-   "src": "src/mmcompactram.c",
-   "maps": []
-  },
-  {
-   "rva": "0x35aa0",
-   "obj": "MMAllocPtr",
-   "src": "src/mmallocptr.c",
-   "maps": []
-  },
-  {
-   "rva": "0x35c00",
-   "obj": "MMReallocPtr",
-   "src": "src/mmreallocptr.c",
-   "maps": []
-  },
-  {
-   "rva": "0x35d40",
-   "obj": "MMLock",
-   "src": "src/mmlock.c",
-   "maps": []
-  },
-  {
-   "rva": "0x35d50",
-   "obj": "MMLockW",
-   "src": "src/mmlockw.c",
-   "maps": []
-  },
-  {
-   "rva": "0x35d90",
-   "obj": "MMUnlock",
-   "src": "src/mmunlock.c",
-   "maps": []
-  },
-  {
-   "rva": "0x35da0",
-   "obj": "MMAccessR",
-   "src": "src/mmaccessr.c",
-   "maps": []
-  },
-  {
-   "rva": "0x35db0",
-   "obj": "MMAccessW",
-   "src": "src/mmaccessw.c",
-   "maps": []
-  },
-  {
-   "rva": "0x558f0",
-   "obj": "Rand16",
-   "src": "src/rand16.c",
-   "maps": []
-  },
-  {
-   "rva": "0x55900",
-   "obj": "Rand8",
-   "src": "src/rand8.c",
-   "maps": []
-  },
-  {
-   "rva": "0x55910",
-   "obj": "Rand",
-   "src": "src/rand.c",
-   "maps": []
-  },
-  {
-   "rva": "0x12730",
-   "obj": "PrintShapeName",
-   "src": "src/printshapename.c",
-   "maps": []
-  },
-  {
-   "rva": "0x1e420",
-   "obj": "WriteConfig",
-   "src": "src/writeconfig.c",
-   "maps": ["_UCONFIG_save_EA_CFG@0=?UCONFIG_save_EA_CFG@@YGDXZ"]
-  },
-  {
-   "rva": "0x49730",
-   "obj": "InstallErrorExit",
-   "src": "src/installerrorexit.c",
-   "maps": []
-  },
-  {
-   "rva": "0x5d730",
-   "obj": "GGGetSubmodes",
-   "src": "src/gggetsubmodes.c",
-   "maps": []
-  },
-  {
-   "rva": "0x5d740",
-   "obj": "GGGetSubmodeName",
-   "src": "src/gggetsubmodename.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64600",
-   "obj": "CTEval_maxspeed",
-   "src": "src/cteval_maxspeed.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64640",
-   "obj": "CTEval_twr",
-   "src": "src/cteval_twr.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64590",
-   "obj": "CTEval_minspeed",
-   "src": "src/cteval_minspeed.c",
-   "maps": []
-  },
-  {
-   "rva": "0x645b0",
-   "obj": "CTEval_cornerspeed",
-   "src": "src/cteval_cornerspeed.c",
-   "maps": []
-  },
-  {
-   "rva": "0x645c0",
-   "obj": "CTEval_corner",
-   "src": "src/cteval_corner.c",
-   "maps": []
-  },
-  {
-   "rva": "0x645e0",
-   "obj": "CTEval_maxrudderh",
-   "src": "src/cteval_maxrudderh.c",
-   "maps": []
-  },
-  {
-   "rva": "0x645f0",
-   "obj": "CTEval_maxrudderp",
-   "src": "src/cteval_maxrudderp.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64870",
-   "obj": "CTEval_cloudalt",
-   "src": "src/cteval_cloudalt.c",
-   "maps": []
-  },
-  {
-   "rva": "0x63e40",
-   "obj": "CTShutdown",
-   "src": "src/ctshutdown.c",
-   "maps": []
-  },
-  {
-   "rva": "0x61b90",
-   "obj": "PutCurObj2",
-   "src": "src/putcurobj2.c",
-   "maps": []
-  },
-  {
-   "rva": "0x641b0",
-   "obj": "CTEval_tgtisship",
-   "src": "src/cteval_tgtisship.c",
-   "maps": []
-  },
-  {
-   "rva": "0x641c0",
-   "obj": "CTEval_tgtissam",
-   "src": "src/cteval_tgtissam.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64240",
-   "obj": "CTEval_bestrange",
-   "src": "src/cteval_bestrange.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64680",
-   "obj": "CTEval_turnrate",
-   "src": "src/cteval_turnrate.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64950",
-   "obj": "CTEval_any",
-   "src": "src/cteval_any.c",
-   "maps": []
-  },
-  {
-   "rva": "0x65480",
-   "obj": "CTDo_homepos",
-   "src": "src/ctdo_homepos.c",
-   "maps": ["_CTDo_=$FA$_t_465490"]
-  },
-  {
-   "rva": "0x655a0",
-   "obj": "CTDo_uhomepos",
-   "src": "src/ctdo_uhomepos.c",
-   "maps": ["_CTDo_=$FA$_t_465490"]
-  },
-  {
-   "rva": "0x62e80",
-   "obj": "WriteCmdBufMove",
-   "src": "src/writecmdbufmove.c",
-   "maps": []
-  },
-  {
-   "rva": "0x62e90",
-   "obj": "WriteCmdBufEnd",
-   "src": "src/writecmdbufend.c",
-   "maps": []
-  },
-  {
-   "rva": "0x8b230",
-   "obj": "DisableActionButton",
-   "src": "src/disableactionbutton.c",
-   "maps": [],
-   "patch": ["5,5,6681080080c3"],
-   "provenance": ["patch 0x05/0x0a (or-word -> or-byte): toolchain-diff - CL 10.20.6166 substitutes `or WORD PTR [mem],0x8000` with `or BYTE PTR [mem+1],0x80` under /O2 (alignment-free equality peephole); volatile does not suppress it. FA revision emits the word form, while Enable's `and WORD [eax],0x7fff` is NOT narrowed by our CL - a per-opcode peephole rule in our CL only. Patch rewrites or-byte+c3 -> or-word+c3 (offsets 5..10, +1 byte to census-proven 5-gap pad); no reloc sites inside the span."]
-  },
-  {
-   "rva": "0x8b240",
-   "obj": "EnableActionButton",
-   "src": "src/enableactionbutton.c",
-   "maps": []
-  },
-  {
-   "rva": "0x8b2a0",
-   "obj": "DialogItemIsEnabled",
-   "src": "src/dialogitemisenabled.c",
-   "maps": [],
-   "patch": ["0x0b,1,c1", "0x0d,1,c1"],
-   "provenance": ["patch 0x0b/0x0d (sete cl vs sete dl): toolchain-diff - CL 10.20.6166 allocates the bool-result register as dl (sete dl / mov al,dl) for this pattern under /O2; FA's revision chose cl (sete cl / mov al,cl), 1 byte each, code length identical (15 B). Two 1-byte modrm rewrites (c2->c1 at 0x0b and 0x0d); no relocs. Register-allocation revision diff (same class as LibRead)."]
-  },
-  {
-   "rva": "0x68b20",
-   "obj": "EJECTRemove",
-   "src": "src/ejectremove.c",
-   "maps": []
-  },
-  {
-   "rva": "0x7f5e0",
-   "obj": "KurileRescued",
-   "src": "src/kurilerescued.c",
-   "maps": []
-  },
-  {
-   "rva": "0x7f5f0",
-   "obj": "VietnamRescued",
-   "src": "src/vietnamrescued.c",
-   "maps": []
-  },
-  {
-   "rva": "0x7f6b0",
-   "obj": "UkraineQuit",
-   "src": "src/ukrainequit.c",
-   "maps": ["_UkraineQuit_impl=$FA$_t_47f6c0"]
-  },
-  {
-   "rva": "0x7f780",
-   "obj": "KurileQuit",
-   "src": "src/kurilequit.c",
-   "maps": ["_UkraineQuit_impl=$FA$_t_47f6c0"]
-  },
-  {
-   "rva": "0x7f790",
-   "obj": "VietnamQuit",
-   "src": "src/vietnamquit.c",
-   "maps": ["_UkraineQuit_impl=$FA$_t_47f6c0"]
-  },
-  {
-   "rva": "0x82930",
-   "obj": "VietnamMedals",
-   "src": "src/vietnammedals.c",
-   "maps": []
-  },
-  {
-   "rva": "0x82940",
-   "obj": "VietnamPromotions",
-   "src": "src/vietnampromotions.c",
-   "maps": []
-  },
-  {
-   "rva": "0x7f050",
-   "obj": "MISSIONInit1",
-   "src": "src/missioninit1.c",
-   "maps": ["_MISSIONInit1_@0=?_MISSIONInit1@@YGXXZ"]
-  },
-  {
-   "rva": "0x7f060",
-   "obj": "MISSIONInit2",
-   "src": "src/missioninit2.c",
-   "maps": ["_MISSIONInit2_@0=?_MISSIONInit2@@YGXXZ"]
-  },
-  {
-   "rva": "0x7f070",
-   "obj": "MISSIONInit3",
-   "src": "src/missioninit3.c",
-   "maps": []
-  },
-  {
-   "rva": "0x96550",
-   "obj": "GFlush",
-   "src": "src/gflush.c",
-   "maps": []
-  },
-  {
-   "rva": "0x8b4a0",
-   "obj": "SAYShutdown",
-   "src": "src/sayshutdown.c",
-   "maps": []
-  },
-  {
-   "rva": "0x96b60",
-   "obj": "GLoadDriver",
-   "src": "src/gloaddriver.c",
-   "maps": []
-  },
-  {
-   "rva": "0x96b70",
-   "obj": "GUnloadDriver",
-   "src": "src/gunloaddriver.c",
-   "maps": []
-  },
-  {
-   "rva": "0x97d70",
-   "obj": "MOUSECenter",
-   "src": "src/mousecenter.c",
-   "maps": []
-  },
-  {
-   "rva": "0xa3700",
-   "obj": "RMType",
-   "src": "src/rmtype.c",
-   "maps": []
-  },
-  {
-   "rva": "0x35d60",
-   "obj": "MMLockR",
-   "src": "src/mmlockr.c",
-   "maps": []
-  },
-  {
-   "rva": "0x641d0",
-   "obj": "CTEval_tgtisaaa",
-   "src": "src/cteval_tgtisaaa.c",
-   "maps": []
-  },
-  {
-   "rva": "0x646b0",
-   "obj": "CTEval_turnradius",
-   "src": "src/cteval_turnradius.c",
-   "maps": []
-  },
-  {
-   "rva": "0x7ead0",
-   "obj": "AircraftReference",
-   "src": "src/aircraftreference.c",
-   "maps": []
-  },
-  {
-   "rva": "0x7eae0",
-   "obj": "ViewPilots",
-   "src": "src/viewpilots.c",
-   "maps": []
-  },
-  {
-   "rva": "0xb49c0",
-   "obj": "GColorStringHeight",
-   "src": "src/gcolorstringheight.c",
-   "maps": []
-  },
-  {
-   "rva": "0xc2110",
-   "obj": "TInit",
-   "src": "src/tinit.c",
-   "maps": []
-  },
-  {
-   "rva": "0xd9360",
-   "obj": "setdefaultprecision",
-   "src": "src/setdefaultprecision.c",
-   "maps": []
-  },
-  {
-   "rva": "0x63fe0",
-   "obj": "CTEval_time",
-   "src": "src/cteval_time.c",
-   "maps": [],
-   "patch": ["0,9,66a10000000025ffff0000c3,2:6:_currentTime"],
-   "provenance": ["patch 0x00/0x09 (xor+folded-mask -> moffs+and): toolchain-diff - FA's CL keeps the source's redundant `and eax,0xffff` and skips the zeroing xor (mov ax already zero-extends); ours inverts: xor eax,eax first, mask folded away (8 B vs 12 B). Patch rewrites the 9-B CL code (33 c0 / 66 a1 / disp32 / c3) to FA's mov ax,moffs32 / and eax,0xffff / ret; new DIR32 site @0x02 -> _currentTime, pad recomputes to census 8d642400."]
-  },
-  {
-   "rva": "0x63ff0",
-   "obj": "CTEval_do_nothing",
-   "src": "src/cteval_donotthing.c",
-   "maps": [],
-   "patch": ["8,8,1bc0f7d8"],
-   "provenance": ["patch 0x08/0x10 (mov1/adc-1 -> sbb/neg borrow form): toolchain-diff - unsigned t<1 tail: ours emits mov eax,1 / adc eax,-1 (8 B); FA's revision picks sbb eax,eax / neg eax (4 B) - identical CF-based value. Patch replaces, shortening code to FA's 13 B; pad recomputes to census 8d4900; no reloc sites inside the span."]
-  },
-  {
-   "rva": "0x64000",
-   "obj": "CTEval_do_evade",
-   "src": "src/cteval_doevade.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64010",
-   "obj": "CTEval_do_attack",
-   "src": "src/cteval_doattack.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64020",
-   "obj": "CTEval_do_radar_launch",
-   "src": "src/cteval_doradarlaunch.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64030",
-   "obj": "CTEval_do_ir_launch",
-   "src": "src/cteval_doirlaunch.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64040",
-   "obj": "CTEval_do_hit",
-   "src": "src/cteval_dohit.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64250",
-   "obj": "CTEval_bestrangediff",
-   "src": "src/cteval_bestrangediff.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64260",
-   "obj": "CTEval_radar",
-   "src": "src/cteval_radar.c",
-   "maps": []
-  },
-  {
-   "rva": "0x642a0",
-   "obj": "CTEval_ir",
-   "src": "src/cteval_ir.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64560",
-   "obj": "CTEval_speed",
-   "src": "src/cteval_speed.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64770",
-   "obj": "CTEval_minalt",
-   "src": "src/cteval_minalt.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64880",
-   "obj": "CTEval_skill",
-   "src": "src/cteval_skill.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64bb0",
-   "obj": "CTEval_wm_hspacing_is",
-   "src": "src/cteval_wmhspacing.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64bc0",
-   "obj": "CTEval_wm_vspacing_is",
-   "src": "src/cteval_wmvspacing.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64bd0",
-   "obj": "CTEval_wm_formation_is",
-   "src": "src/cteval_wmform.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64be0",
-   "obj": "CTEval_wm_control_is",
-   "src": "src/cteval_wmcontrol.c",
-   "maps": []
-  },
-  {
-   "rva": "0x645a0",
-   "obj": "CTEval_minspeeddiff",
-   "src": "src/cteval_minspeeddiff.c",
-   "maps": []
-  },
-  {
-   "rva": "0x645d0",
-   "obj": "CTEval_cornerspeeddiff",
-   "src": "src/cteval_cornerspeeddiff.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64610",
-   "obj": "CTEval_maxspeeddiff",
-   "src": "src/cteval_maxspeeddiff.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64650",
-   "obj": "CTEval_twrdiff",
-   "src": "src/cteval_twrdiff.c",
-   "maps": []
-  },
-  {
-   "rva": "0x646c0",
-   "obj": "CTEval_turnradiusdiff",
-   "src": "src/cteval_turnradiusdiff.c",
-   "maps": []
-  },
-  {
-   "rva": "0x11380",
-   "obj": "GetKeyFlags",
-   "src": "src/gkeyflags.c",
-   "maps": []
-  },
-  {
-   "rva": "0x49a40",
-   "obj": "ErrorExitNoMem",
-   "src": "src/errorexitnomem.c",
-   "maps": []
-  },
-  {
-   "rva": "0x51d80",
-   "obj": "FMBayIsOpen",
-   "src": "src/fmbayisopen.c",
-   "maps": []
-  },
-  {
-   "rva": "0x217b0",
-   "obj": "ZONEInit",
-   "src": "src/zoneinit.c",
-   "maps": ["_cobraData_x=?cobraData@@3UGlobalData@@A"]
-  },
-  {
-   "rva": "0x557e0",
-   "obj": "InitRand",
-   "src": "src/initrand.c",
-   "maps": []
-  },
-  {
-   "rva": "0x870e0",
-   "obj": "DialogWhatItem",
-   "src": "src/dialogwhatitem.c",
-   "maps": ["_dialogItemPtr_x=?dialogItemPtr@@3PAEA"]
-  },
-  {
-   "rva": "0x8b2b0",
-   "obj": "LimitEditFieldLength",
-   "src": "src/limiteditfieldlength.c",
-   "maps": ["_dialPos320_x=?dialPos320@@3PAUWORD_POINT@@A"]
-  },
-  {
-   "rva": "0xd3da0",
-   "obj": "tolower",
-   "src": "src/tolower.c",
-   "maps": []
-  },
-  {
-   "rva": "0xd43c0",
-   "obj": "toupper",
-   "src": "src/toupper.c",
-   "maps": []
-  },
-  {
-   "rva": "0xd4b50",
-   "obj": "labs",
-   "src": "src/labs.c",
-   "maps": []
-  },
-  {
-   "rva": "0x8f3a0",
-   "obj": "OBJGet",
-   "src": "src/OBJGet.c",
-   "maps": []
-  },
-  {
-   "rva": "0x95460",
-   "obj": "G_FlipY",
-   "src": "src/G_FlipY.c",
-   "maps": []
-  },
-  {
-   "rva": "0x95610",
-   "obj": "G_SetBitmap",
-   "src": "src/G_SetBitmap.c",
-   "maps": []
-  },
-  {
-   "rva": "0x967d0",
-   "obj": "G_SetFont",
-   "src": "src/G_SetFont.c",
-   "maps": ["_cFont_x=?cFont@@3PAUFONT@@A"]
-  },
-  {
-   "rva": "0x96b50",
-   "obj": "G_StringHeight",
-   "src": "src/G_StringHeight.c",
-   "maps": ["_cFont_x=?cFont@@3PAUFONT@@A"]
-  },
-  {
-   "rva": "0x9b530",
-   "obj": "PLANEInit",
-   "src": "src/PLANEInit.c",
-   "maps": []
-  },
-  {
-   "rva": "0xb0a90",
-   "obj": "WRInt",
-   "src": "src/WRInt.c",
-   "maps": []
-  },
-  {
-   "rva": "0xd3a90",
-   "obj": "atoi",
-   "src": "src/atoi.c",
-   "maps": ["_atol_p=_atol"]
-  },
-  {
-   "rva": "0xd5c20",
-   "obj": "srand",
-   "src": "src/srand.c",
-   "maps": []
-  },
-  {
-   "rva": "0xdfa30",
-   "obj": "FillZeroMan",
-   "src": "src/FillZeroMan.c",
-   "maps": [],
-   "patch": ["1,13,4c240433c08901894104894108"],
-   "provenance": ["patch 0x01/0x0d (register-role swap): toolchain-diff - CL 4.2 allocates this esp-frame pointer param to eax and the constant zero to ecx (probed 4 source variants, build/w4probe); FA's build used the reversed roles for the identical instruction sequence (mov ecx,[esp+4] / xor eax,eax / three [ecx+disp] stores). Patch swaps the register encodings in place, same length, no reloc sites inside the span."]
-  },
-  {
-   "rva": "0xe3d40",
-   "obj": "tzset",
-   "src": "src/tzset.c",
-   "maps": ["_tzsetHelper=$FA$_t_4e3d60"]
-  },
-  {
-   "rva": "0xa54d0",
-   "obj": "T_InitFarmProc",
-   "src": "src/T_InitFarmProc.c",
-   "maps": ["@farmProc_@4=$FA$_t_4a4db0"]
-  },
-  {
-   "rva": "0xa5a00",
-   "obj": "T_InitCloudProc",
-   "src": "src/T_InitCloudProc.c",
-   "maps": ["@farmProc_@4=$FA$_t_4a4db0"]
-  },
-  {
-   "rva": "0x117c0",
-   "obj": "LibraryShutdown",
-   "src": "src/LibraryShutdown.c",
-   "maps": []
-  },
-  {
-   "rva": "0x61b80",
-   "obj": "GetCurObj2",
-   "src": "src/GetCurObj2.c",
-   "maps": []
-  },
-  {
-   "rva": "0x7ea40",
-   "obj": "CreateFortMission",
-   "src": "src/CreateFortMission.c",
-   "maps": []
-  },
-  {
-   "rva": "0x7ea50",
-   "obj": "CreateFortMission2",
-   "src": "src/CreateFortMission2.c",
-   "maps": []
-  },
-  {
-   "rva": "0xa40c0",
-   "obj": "SetupPT",
-   "src": "src/SetupPT.c",
-   "maps": []
-  },
-  {
-   "rva": "0xa40d0",
-   "obj": "SetupJT",
-   "src": "src/SetupJT.c",
-   "maps": []
-  },
-  {
-   "rva": "0xa7ba0",
-   "obj": "T_HorizonProc",
-   "src": "src/T_HorizonProc.c",
-   "maps": []
-  },
-  {
-   "rva": "0xbb200",
-   "obj": "unknown_divide_error",
-   "src": "src/unknown_divide_error.c",
-   "maps": []
-  },
-  {
-   "rva": "0xd3850",
-   "obj": "exit",
-   "src": "src/exit.c",
-   "maps": ["_exitHelper=$FA$_t_4d38b0"]
-  },
-  {
-   "rva": "0xd3870",
-   "obj": "exitcrt",
-   "src": "src/exitcrt.c",
-   "maps": ["_exitHelper=$FA$_t_4d38b0"]
-  },
-  {
-   "rva": "0xdb6a0",
-   "obj": "ismbbkalnum",
-   "src": "src/ismbbkalnum.c",
-   "maps": ["_ismbbType=$FA$_t_4db810"]
-  },
-  {
-   "rva": "0xdb6c0",
-   "obj": "ismbbkprint",
-   "src": "src/ismbbkprint.c",
-   "maps": ["_ismbbType=$FA$_t_4db810"]
-  },
-  {
-   "rva": "0xdb6e0",
-   "obj": "ismbbkpunct",
-   "src": "src/ismbbkpunct.c",
-   "maps": ["_ismbbType=$FA$_t_4db810"]
-  },
-  {
-   "rva": "0xdb700",
-   "obj": "ismbbalnum",
-   "src": "src/ismbbalnum.c",
-   "maps": ["_ismbbType=$FA$_t_4db810"]
-  },
-  {
-   "rva": "0xdb720",
-   "obj": "ismbbalpha",
-   "src": "src/ismbbalpha.c",
-   "maps": ["_ismbbType=$FA$_t_4db810"]
-  },
-  {
-   "rva": "0xdb7c0",
-   "obj": "ismbbtrail",
-   "src": "src/ismbbtrail.c",
-   "maps": ["_ismbbType=$FA$_t_4db810"]
-  },
-  {
-   "rva": "0xe27c0",
-   "obj": "atexit",
-   "src": "src/atexit.c",
-   "maps": ["_onexitFn=__onexit"],
-   "patch": ["13,11,83f8011bc0c3"],
-   "provenance": ["patch 13/11 (mov0/setae/mov -> cmp1/sbb/neg): toolchain-diff - same borrow-form family as CTEval_do_nothing: ours emits xor ecx,ecx / cmp eax,1 / setae cl / mov eax,ecx / ret (11 B); FA's revision picks cmp eax,1 / sbb eax,eax / neg eax / ret (6 B) - identical boolean (eax>=1 as 0/1). Patch replaces, shortening code to FA's 19 B; no reloc sites inside the span."]
-  },
-  {
-   "rva": "0xe2820",
-   "obj": "abort",
-   "src": "src/abort.c",
-   "maps": ["__raise=_raise"]
-  },
-  {
-   "rva": "0x11b70",
-   "obj": "FeetToNM",
-   "src": "src/FeetToNM.c",
-   "maps": []
-  },
-  {
-   "rva": "0x11ee0",
-   "obj": "Strend",
-   "src": "src/Strend.c",
-   "maps": []
-  },
-  {
-   "rva": "0x122e0",
-   "obj": "SampleShutdown",
-   "src": "src/SampleShutdown.c",
-   "maps": []
-  },
-  {
-   "rva": "0x127a0",
-   "obj": "ObjRadius",
-   "src": "src/ObjRadius.c",
-   "maps": []
-  },
-  {
-   "rva": "0x1f370",
-   "obj": "FortMultiButton",
-   "src": "src/FortMultiButton.c",
-   "maps": ["_fortAwacsDamage_x=?fortAwacsDamage@@3DA+0x8", "_fortCount_x=_fortCount+0x80"]
-  },
-  {
-   "rva": "0x4c520",
-   "obj": "FortMultiButton2",
-   "src": "src/FortMultiButton2.c",
-   "maps": ["_inPacketArr_x=?InPacket@@3USERIAL_PACKET_WRAPPER@@A+0x150", "_inPacketArr2_x=?InPacket@@3USERIAL_PACKET_WRAPPER@@A+0x38"]
-  },
-  {
-   "rva": "0x2e1b0",
-   "obj": "QuickMultiButton",
-   "src": "src/QuickMultiButton.c",
-   "maps": ["_qmbA_x=_specials+0xd08", "_qmbB_x=_specials+0xc08"]
-  },
-  {
-   "rva": "0x214f0",
-   "obj": "StopCobraSound",
-   "src": "src/StopCobraSound.c",
-   "maps": ["@SoundAllOff@0=?SoundAllOff@@YIXXZ", "_SoundNoMixer@12=?SoundNoMixer@@YGFPADFF@Z"]
-  },
-  {
-   "rva": "0x2e060",
-   "obj": "COLInit",
-   "src": "src/COLInit.c",
-   "maps": ["_specials_x=_specials"]
-  },
-  {
-   "rva": "0x35b70",
-   "obj": "MMFreePtr",
-   "src": "src/MMFreePtr.c",
-   "maps": []
-  },
-  {
-   "rva": "0x35d20",
-   "obj": "MMHandleLen",
-   "src": "src/MMHandleLen.c",
-   "maps": []
-  },
-  {
-   "rva": "0x3d880",
-   "obj": "CPToggleHistory",
-   "src": "src/CPToggleHistory.c",
-   "maps": []
-  },
-  {
-   "rva": "0x557c0",
-   "obj": "Percent",
-   "src": "src/Percent.c",
-   "maps": []
-  },
-  {
-   "rva": "0x69f80",
-   "obj": "WritePalette",
-   "src": "src/WritePalette.c",
-   "maps": ["_G_SetPalette_x@16=_G_SetPalette@16"]
-  },
-  {
-   "rva": "0x76d20",
-   "obj": "COMaxSpeed",
-   "src": "src/COMaxSpeed.c",
-   "maps": []
-  },
-  {
-   "rva": "0x7eaf0",
-   "obj": "StartCampaign",
-   "src": "src/StartCampaign.c",
-   "maps": ["_CampaignSelect=_CampaignSelect@0", "@PilotScreen_x@4=@PilotScreen@4"]
-  },
-  {
-   "rva": "0x7eb10",
-   "obj": "ContinueCampaign",
-   "src": "src/ContinueCampaign.c",
-   "maps": ["@PilotScreen_x@4=@PilotScreen@4"]
-  },
-  {
-   "rva": "0x84be0",
-   "obj": "TIMERestart",
-   "src": "src/TIMERestart.c",
-   "maps": []
-  },
-  {
-   "rva": "0x87880",
-   "obj": "Info2640Preload",
-   "src": "src/Info2640Preload.c",
-   "maps": ["_PushShellAlloc_x@0=?PushShellAlloc@@YGXXZ", "_PopShellAlloc_x@0=?PopShellAlloc@@YGXXZ", "@h2640@4=$FA$_t_487960"]
-  },
-  {
-   "rva": "0x35e00",
-   "obj": "MMByteAt",
-   "src": "src/MMByteAt.c",
-   "maps": []
-  },
-  {
-   "rva": "0x35e10",
-   "obj": "MMWordAt",
-   "src": "src/MMWordAt.c",
-   "maps": []
-  },
-  {
-   "rva": "0x35e20",
-   "obj": "MMUWordAt",
-   "src": "src/MMUWordAt.c",
-   "maps": []
-  },
-  {
-   "rva": "0x35e30",
-   "obj": "MMLongAt",
-   "src": "src/MMLongAt.c",
-   "maps": []
-  },
-  {
-   "rva": "0x35e40",
-   "obj": "MMULongAt",
-   "src": "src/MMULongAt.c",
-   "maps": []
-  },
-  {
-   "rva": "0xd9130",
-   "obj": "XcptInitPtd",
-   "src": "src/XcptInitPtd.c",
-   "maps": ["_XcptActTab=__XcptActTab"]
-  },
-  {
-   "rva": "0xd94d0",
-   "obj": "StatusPositive",
-   "src": "src/StatusPositive.c",
-   "maps": []
-  },
-  {
-   "rva": "0xdb740",
-   "obj": "ISMBBGraph",
-   "src": "src/ISMBBGraph.c",
-   "maps": ["_ismbbType_x=$FA$_t_4db810"]
-  },
-  {
-   "rva": "0xdb760",
-   "obj": "ISMBBPrint",
-   "src": "src/ISMBBPrint.c",
-   "maps": ["_ismbbType_x=$FA$_t_4db810"]
-  },
-  {
-   "rva": "0xdb780",
-   "obj": "ISMBBPunct",
-   "src": "src/ISMBBPunct.c",
-   "maps": ["_ismbbType_x=$FA$_t_4db810"]
-  },
-  {
-   "rva": "0xdb7a0",
-   "obj": "ISMBBLead",
-   "src": "src/ISMBBLead.c",
-   "maps": ["_ismbbType_x=$FA$_t_4db810"]
-  },
-  {
-   "rva": "0x878a0",
-   "obj": "Info640Preload",
-   "src": "src/Info640Preload.c",
-   "maps": ["_PushShellAlloc_x@0=?PushShellAlloc@@YGXXZ", "_PopShellAlloc_x@0=?PopShellAlloc@@YGXXZ", "@h2640@4=$FA$_t_487960"]
-  },
-  {
-   "rva": "0x878f0",
-   "obj": "SndPrefPreload",
-   "src": "src/SndPrefPreload.c",
-   "maps": ["_PushShellAlloc_x@0=?PushShellAlloc@@YGXXZ", "_PopShellAlloc_x@0=?PopShellAlloc@@YGXXZ", "@h2640@4=$FA$_t_487960"]
-  },
-  {
-   "rva": "0x87910",
-   "obj": "ChoosePreload",
-   "src": "src/ChoosePreload.c",
-   "maps": ["_PushShellAlloc_x@0=?PushShellAlloc@@YGXXZ", "_PopShellAlloc_x@0=?PopShellAlloc@@YGXXZ", "@h2640@4=$FA$_t_487960"]
-  },
-  {
-   "rva": "0xaa240",
-   "obj": "ClearCachedFilenames",
-   "src": "src/ClearCachedFilenames.c",
-   "maps": ["_NamesShutdown=_NamesShutdown@0"]
-  },
-  {
-   "rva": "0x96540",
-   "obj": "G_SetScaleMax",
-   "src": "src/G_SetScaleMax.c",
-   "maps": []
-  },
-  {
-   "rva": "0x96660",
-   "obj": "G_SPolygonFlip",
-   "src": "src/G_SPolygonFlip.c",
-   "maps": []
-  },
-  {
-   "rva": "0x96680",
-   "obj": "G_SUPolygonFlip",
-   "src": "src/G_SUPolygonFlip.c",
-   "maps": ["@G_SUPolygon2@8=@G_SUPolygon@8"]
-  },
-  {
-   "rva": "0x9b1d0",
-   "obj": "TakeoffSpeed",
-   "src": "src/TakeoffSpeed.c",
-   "maps": []
-  },
-  {
-   "rva": "0xc2100",
-   "obj": "T_ShutdownDatabase",
-   "src": "src/T_ShutdownDatabase.c",
-   "maps": []
-  },
-  {
-   "rva": "0xdf610",
-   "obj": "Statusfp",
-   "src": "src/Statusfp.c",
-   "maps": ["_sfpHelper=$FA$_t_4df830"]
-  },
-  {
-   "rva": "0xdf630",
-   "obj": "Clearfp",
-   "src": "src/Clearfp.c",
-   "maps": ["_cfpHelper=$FA$_t_4df830"]
-  },
-  {
-   "rva": "0xe0be0",
-   "obj": "Wcslen",
-   "src": "src/Wcslen.c",
-   "maps": []
-  }
-  ,
-  {
-   "rva": "0x12eb0",
-   "obj": "CHATInit",
-   "src": "src/CHATInit.c",
-   "maps": ["_chatEditing=?chatEditing@@3DA", "_MPShellInitMessages@0=?MPShellInitMessages@@YGXXZ", "_t12ed0=$FA$_t_412ed0"]
-  },
-  {
-   "rva": "0x21e40",
-   "obj": "MAPSetSide",
-   "src": "src/MAPSetSide.c",
-   "maps": []
-  },
-  {
-   "rva": "0x5da40",
-   "obj": "GG_WaitRetrace",
-   "src": "src/GG_WaitRetrace.c",
-   "maps": ["_ddInst=?ddInst@@3PAVCDirDraw@@A", "_CDirDraw_WVB=?WaitForVerticalBlank@CDirDraw@@QAEXK@Z"]
-  },
-  {
-   "rva": "0x5da70",
-   "obj": "GG_VideoModesAvailable",
-   "src": "src/GG_VideoModesAvailable.c",
-   "maps": ["_m_singleton=?m_singleton@CDirDraw@@1PAV1@A", "@CDirDraw_EnumDisplayModes@4=?EnumDisplayModes@CDirDraw@@QAEKXZ"]
-  },
-  {
-   "rva": "0x62ea0",
-   "obj": "FinishCmdBuf",
-   "src": "src/FinishCmdBuf.c",
-   "maps": ["_cmdBufPos=_curThing+0x58"]
-  },
-  {
-   "rva": "0x63060",
-   "obj": "MaskEvents",
-   "src": "src/MaskEvents.c",
-   "maps": ["_cmdBufPos=_curThing+0x58"]
-  },
-  {
-   "rva": "0x64150",
-   "obj": "CTEval_tgtisfighter",
-   "src": "src/CTEval_tgtisfighter.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64170",
-   "obj": "CTEval_tgtisbomber",
-   "src": "src/CTEval_tgtisbomber.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64190",
-   "obj": "CTEval_tgtisplane",
-   "src": "src/CTEval_tgtisplane.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64200",
-   "obj": "CTEval_maxrange",
-   "src": "src/CTEval_maxrange.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64540",
-   "obj": "CTEval_canclimb",
-   "src": "src/CTEval_canclimb.c",
-   "maps": ["_COMinSpeed=_COMinSpeed@0"]
-  },
-  {
-   "rva": "0x64620",
-   "obj": "CTEval_betterspeed",
-   "src": "src/CTEval_betterspeed.c",
-   "maps": ["_COMaxSpeed=_COMaxSpeed@0"]
-  },
-  {
-   "rva": "0x64660",
-   "obj": "CTEval_bettertwr",
-   "src": "src/CTEval_bettertwr.c",
-   "maps": ["_COTwr=_COTwr@0"]
-  },
-  {
-   "rva": "0x64690",
-   "obj": "CTEval_turnratediff",
-   "src": "src/CTEval_turnratediff.c",
-   "maps": ["_COTurnRate=_COTurnRate@0"]
-  },
-  {
-   "rva": "0x648d0",
-   "obj": "CTEval_p",
-   "src": "src/CTEval_p.c",
-   "maps": []
-  },
-  {
-   "rva": "0x648f0",
-   "obj": "CTEval_b",
-   "src": "src/CTEval_b.c",
-   "maps": []
-  },
-  {
-   "rva": "0x64c10",
-   "obj": "CTDo_restart",
-   "src": "src/CTDo_restart.c",
-   "maps": ["@t3e90@4=$FA$_t_463e90"]
-  },
-  {
-   "rva": "0x79540",
-   "obj": "ShutdownGraphicsSystem",
-   "src": "src/ShutdownGraphicsSystem.c",
-   "maps": ["_m_singleton=?m_singleton@CDirDraw@@1PAV1@A", "@CDirDraw_Destroy@4=?Destroy@CDirDraw@@QAEXXZ", "@CDirDraw_DeleteSingleton@0=?DeleteSingleton@CDirDraw@@SAXXZ"]
-  },
-  {
-   "rva": "0x7f300",
-   "obj": "UkraineAddA7",
-   "src": "src/UkraineAddA7.c",
-   "maps": []
-  },
-  {
-   "rva": "0x87400",
-   "obj": "DialogGetPtr",
-   "src": "src/DialogGetPtr.c",
-   "maps": ["_curDialog=?curDialog@@3PAUDIALOG@@A"]
-  },
-  {
-   "rva": "0x95720",
-   "obj": "G_SetFullClipBox",
-   "src": "src/G_SetFullClipBox.c",
-   "maps": []
-  },
-  {
-   "rva": "0x95880",
-   "obj": "G_GetPoint",
-   "src": "src/G_GetPoint.c",
-   "maps": []
-  },
-  {
-   "rva": "0x966a0",
-   "obj": "G_PointFlip",
-   "src": "src/G_PointFlip.c",
-   "maps": []
-  },
-  {
-   "rva": "0x966c0",
-   "obj": "G_UPointFlip",
-   "src": "src/G_UPointFlip.c",
-   "maps": []
-  },
-  {
-   "rva": "0x97b00",
-   "obj": "WPDoingWaypoints",
-   "src": "src/WPDoingWaypoints.c",
-   "maps": []
-  }
+ {
+  "rva": "0xb06c0",
+  "obj": "WRFog",
+  "src": "src/WRFogLayerUpdate.c",
+  "maps": []
+ },
+ {
+  "rva": "0x9b1f0",
+  "obj": "Stall",
+  "src": "src/StallSpeed.c",
+  "maps": [
+   "_Callee@16=$FA$_t_40b0a0+0x90250"
+  ]
+ },
+ {
+  "rva": "0x11780",
+  "obj": "WordToString",
+  "src": "src/WordToString.c",
+  "maps": []
+ },
+ {
+  "rva": "0x87610",
+  "obj": "DlgSel",
+  "src": "src/DialogSelectItem.c",
+  "maps": [
+   "_PushShellAlloc@0=?PushShellAlloc@@YGXXZ",
+   "_SUB87070=$FA$_t_487070",
+   "_lastDial=?lastDial@@3PAUDIAL@@A",
+   "_DialogDraw@4=?DialogDraw@@YGXPAX@Z",
+   "_PopShellAlloc@0=?PopShellAlloc@@YGXXZ"
+  ]
+ },
+ {
+  "rva": "0xb5130",
+  "obj": "CarefulDiv",
+  "src": "src/carefulDiv.c",
+  "maps": [
+   "_real_1=$FA$rdata0+0x49c",
+   "_g_divFlag=?palColorRGB@@3UT_RGB@@A+0x44c",
+   "_g_divRes=?palColorRGB@@3UT_RGB@@A+0x440",
+   "_g_divCls=?rFloor@@3MA+0x4"
+  ]
+ },
+ {
+  "rva": "0x78b50",
+  "obj": "LibRead",
+  "src": "src/LibRead.c",
+  "maps": [
+   "_hintHndl=?hintHndl@@3PAUT_HANDLE@@A",
+   "_libTable=?libAccess@@3PAULIBACCESS@@A+4"
+  ],
+  "patch": [
+   "0x39,6,",
+   "0x44,0,8d4c0500",
+   "0x4a,4,8b691f",
+   "0x4d,0,8b0d00000000,2:6:_hintHndl"
+  ],
+  "provenance": [
+   "patch 0x39/0x4d (hintHndl reload placement): toolchain-diff \u2014 FA loads hintHndl a 2nd time late (@0x4c, between f3-load and 03 ea); our CL 10.20.6166 always hoists the 2nd load early after 2b d1. 11 source variants (volatile, hoist-var, post-access, ptr-fusion forms: build/probe/pads/lrsweep.py) all byte-identical CL code; 20 flag sets (lrflags.py): artifacts exist ONLY under /G5-family; no-/G5 builds lack both artifacts but differ structurally (register assignment 8d 0c 92 + [ecx+0x17] base, not FA's [ebp+eax] sib); TU context (neighbor pressure, #pragma optimize) has no effect. FA's shape is a G5-scheduler revision diff.",
+   "patch 0x44/0x4a (fused f3 sib vs materialized addr): toolchain-diff \u2014 FA materializes the f3 address (8d 4c 05 00 lea ecx,[ebp+eax] + 8b 69 1f); our CL fuses to sib 8b 6c 05 1f under every source form and /G5 flag; struct-with-declared-offsets is impossible (FA field offsets 0x17/0x1b/0x1f are not 4-aligned). Same revision evidence as 0x39."
+  ]
+ },
+ {
+  "rva": "0x35e50",
+  "obj": "StartGameThread",
+  "src": "src/StartGameThread.c",
+  "span": "0x80",
+  "aliases": [
+   "0x4d=$FA$_t_435e9d",
+   "0x5b=$FA$_t_435eab"
+  ],
+  "maps": [
+   "$T121=$FA$rdata0+0x264",
+   "__imp__GetCurrentThread@0=__imp__GetCurrentThread",
+   "__imp__SetThreadPriority@8=__imp__SetThreadPriority",
+   "__imp__ExitThread@4=__imp__ExitThread",
+   "_g_filterFn=_overflow_ptr",
+   "_NullFilter=_unknown_divide_error",
+   "_usnfmain=?usnfmain@@YAXXZ"
+  ],
+  "provenance": [
+   "patch @0x4b (filter funclet GetExceptionInformation): root-caused and ELIMINATED \u2014 #include <excpt.h> defines the macro to (struct _EXCEPTION_POINTERS*)_exception_info, which CL treats as an intrinsic inside a __except filter, inlining mov eax,[ebp-0x14] = FA's exact bytes (was 'e8 __GetExceptionInformation' helper call via implicit decl). 2026-11-01. Also renames CL's scope-table symbol $T107\u2192$T121 (map updated to match)."
+  ]
+ },
+ {
+  "rva": "0xd3970",
+  "obj": "LockExit",
+  "src": "src/lockexit.c",
+  "maps": []
+ },
+ {
+  "rva": "0xd3980",
+  "obj": "UnlockExit",
+  "src": "src/unlockexit.c",
+  "maps": []
+ },
+ {
+  "rva": "0xd99b0",
+  "obj": "Errno",
+  "src": "src/errno.c",
+  "maps": []
+ },
+ {
+  "rva": "0xd3890",
+  "obj": "CExit",
+  "src": "src/cexit.c",
+  "maps": [
+   "__doexit=$FA$_t_4d38b0"
+  ]
+ },
+ {
+  "rva": "0xd9e20",
+  "obj": "GetMbcp",
+  "src": "src/getmbcp.c",
+  "maps": []
+ },
+ {
+  "rva": "0xddfc0",
+  "obj": "GetSbhThreshold",
+  "src": "src/getsbhthreshold.c",
+  "maps": []
+ },
+ {
+  "rva": "0xe1ec0",
+  "obj": "Localeconv",
+  "src": "src/localeconv.c",
+  "maps": []
+ },
+ {
+  "rva": "0x117b0",
+  "obj": "LibraryStartup",
+  "src": "src/librarystartup.c",
+  "maps": []
+ },
+ {
+  "rva": "0x35ce0",
+  "obj": "MMCompactRAM",
+  "src": "src/mmcompactram.c",
+  "maps": []
+ },
+ {
+  "rva": "0x35aa0",
+  "obj": "MMAllocPtr",
+  "src": "src/mmallocptr.c",
+  "maps": []
+ },
+ {
+  "rva": "0x35c00",
+  "obj": "MMReallocPtr",
+  "src": "src/mmreallocptr.c",
+  "maps": []
+ },
+ {
+  "rva": "0x35d40",
+  "obj": "MMLock",
+  "src": "src/mmlock.c",
+  "maps": []
+ },
+ {
+  "rva": "0x35d50",
+  "obj": "MMLockW",
+  "src": "src/mmlockw.c",
+  "maps": []
+ },
+ {
+  "rva": "0x35d90",
+  "obj": "MMUnlock",
+  "src": "src/mmunlock.c",
+  "maps": []
+ },
+ {
+  "rva": "0x35da0",
+  "obj": "MMAccessR",
+  "src": "src/mmaccessr.c",
+  "maps": []
+ },
+ {
+  "rva": "0x35db0",
+  "obj": "MMAccessW",
+  "src": "src/mmaccessw.c",
+  "maps": []
+ },
+ {
+  "rva": "0x558f0",
+  "obj": "Rand16",
+  "src": "src/rand16.c",
+  "maps": []
+ },
+ {
+  "rva": "0x55900",
+  "obj": "Rand8",
+  "src": "src/rand8.c",
+  "maps": []
+ },
+ {
+  "rva": "0x55910",
+  "obj": "Rand",
+  "src": "src/rand.c",
+  "maps": []
+ },
+ {
+  "rva": "0x12730",
+  "obj": "PrintShapeName",
+  "src": "src/printshapename.c",
+  "maps": []
+ },
+ {
+  "rva": "0x1e420",
+  "obj": "WriteConfig",
+  "src": "src/writeconfig.c",
+  "maps": [
+   "_UCONFIG_save_EA_CFG@0=?UCONFIG_save_EA_CFG@@YGDXZ"
+  ]
+ },
+ {
+  "rva": "0x49730",
+  "obj": "InstallErrorExit",
+  "src": "src/installerrorexit.c",
+  "maps": []
+ },
+ {
+  "rva": "0x5d730",
+  "obj": "GGGetSubmodes",
+  "src": "src/gggetsubmodes.c",
+  "maps": []
+ },
+ {
+  "rva": "0x5d740",
+  "obj": "GGGetSubmodeName",
+  "src": "src/gggetsubmodename.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64600",
+  "obj": "CTEval_maxspeed",
+  "src": "src/cteval_maxspeed.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64640",
+  "obj": "CTEval_twr",
+  "src": "src/cteval_twr.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64590",
+  "obj": "CTEval_minspeed",
+  "src": "src/cteval_minspeed.c",
+  "maps": []
+ },
+ {
+  "rva": "0x645b0",
+  "obj": "CTEval_cornerspeed",
+  "src": "src/cteval_cornerspeed.c",
+  "maps": []
+ },
+ {
+  "rva": "0x645c0",
+  "obj": "CTEval_corner",
+  "src": "src/cteval_corner.c",
+  "maps": []
+ },
+ {
+  "rva": "0x645e0",
+  "obj": "CTEval_maxrudderh",
+  "src": "src/cteval_maxrudderh.c",
+  "maps": []
+ },
+ {
+  "rva": "0x645f0",
+  "obj": "CTEval_maxrudderp",
+  "src": "src/cteval_maxrudderp.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64870",
+  "obj": "CTEval_cloudalt",
+  "src": "src/cteval_cloudalt.c",
+  "maps": []
+ },
+ {
+  "rva": "0x63e40",
+  "obj": "CTShutdown",
+  "src": "src/ctshutdown.c",
+  "maps": []
+ },
+ {
+  "rva": "0x61b90",
+  "obj": "PutCurObj2",
+  "src": "src/putcurobj2.c",
+  "maps": []
+ },
+ {
+  "rva": "0x641b0",
+  "obj": "CTEval_tgtisship",
+  "src": "src/cteval_tgtisship.c",
+  "maps": []
+ },
+ {
+  "rva": "0x641c0",
+  "obj": "CTEval_tgtissam",
+  "src": "src/cteval_tgtissam.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64240",
+  "obj": "CTEval_bestrange",
+  "src": "src/cteval_bestrange.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64680",
+  "obj": "CTEval_turnrate",
+  "src": "src/cteval_turnrate.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64950",
+  "obj": "CTEval_any",
+  "src": "src/cteval_any.c",
+  "maps": []
+ },
+ {
+  "rva": "0x65480",
+  "obj": "CTDo_homepos",
+  "src": "src/ctdo_homepos.c",
+  "maps": [
+   "_CTDo_=$FA$_t_465490"
+  ]
+ },
+ {
+  "rva": "0x655a0",
+  "obj": "CTDo_uhomepos",
+  "src": "src/ctdo_uhomepos.c",
+  "maps": [
+   "_CTDo_=$FA$_t_465490"
+  ]
+ },
+ {
+  "rva": "0x62e80",
+  "obj": "WriteCmdBufMove",
+  "src": "src/writecmdbufmove.c",
+  "maps": []
+ },
+ {
+  "rva": "0x62e90",
+  "obj": "WriteCmdBufEnd",
+  "src": "src/writecmdbufend.c",
+  "maps": []
+ },
+ {
+  "rva": "0x8b230",
+  "obj": "DisableActionButton",
+  "src": "src/disableactionbutton.c",
+  "maps": [],
+  "patch": [
+   "5,5,6681080080c3"
+  ],
+  "provenance": [
+   "patch 0x05/0x0a (or-word -> or-byte): toolchain-diff - CL 10.20.6166 substitutes `or WORD PTR [mem],0x8000` with `or BYTE PTR [mem+1],0x80` under /O2 (alignment-free equality peephole); volatile does not suppress it. FA revision emits the word form, while Enable's `and WORD [eax],0x7fff` is NOT narrowed by our CL - a per-opcode peephole rule in our CL only. Patch rewrites or-byte+c3 -> or-word+c3 (offsets 5..10, +1 byte to census-proven 5-gap pad); no reloc sites inside the span."
+  ]
+ },
+ {
+  "rva": "0x8b240",
+  "obj": "EnableActionButton",
+  "src": "src/enableactionbutton.c",
+  "maps": []
+ },
+ {
+  "rva": "0x8b2a0",
+  "obj": "DialogItemIsEnabled",
+  "src": "src/dialogitemisenabled.c",
+  "maps": [],
+  "patch": [
+   "0x0b,1,c1",
+   "0x0d,1,c1"
+  ],
+  "provenance": [
+   "patch 0x0b/0x0d (sete cl vs sete dl): toolchain-diff - CL 10.20.6166 allocates the bool-result register as dl (sete dl / mov al,dl) for this pattern under /O2; FA's revision chose cl (sete cl / mov al,cl), 1 byte each, code length identical (15 B). Two 1-byte modrm rewrites (c2->c1 at 0x0b and 0x0d); no relocs. Register-allocation revision diff (same class as LibRead)."
+  ]
+ },
+ {
+  "rva": "0x68b20",
+  "obj": "EJECTRemove",
+  "src": "src/ejectremove.c",
+  "maps": []
+ },
+ {
+  "rva": "0x7f5e0",
+  "obj": "KurileRescued",
+  "src": "src/kurilerescued.c",
+  "maps": []
+ },
+ {
+  "rva": "0x7f5f0",
+  "obj": "VietnamRescued",
+  "src": "src/vietnamrescued.c",
+  "maps": []
+ },
+ {
+  "rva": "0x7f6b0",
+  "obj": "UkraineQuit",
+  "src": "src/ukrainequit.c",
+  "maps": [
+   "_UkraineQuit_impl=$FA$_t_47f6c0"
+  ]
+ },
+ {
+  "rva": "0x7f780",
+  "obj": "KurileQuit",
+  "src": "src/kurilequit.c",
+  "maps": [
+   "_UkraineQuit_impl=$FA$_t_47f6c0"
+  ]
+ },
+ {
+  "rva": "0x7f790",
+  "obj": "VietnamQuit",
+  "src": "src/vietnamquit.c",
+  "maps": [
+   "_UkraineQuit_impl=$FA$_t_47f6c0"
+  ]
+ },
+ {
+  "rva": "0x82930",
+  "obj": "VietnamMedals",
+  "src": "src/vietnammedals.c",
+  "maps": []
+ },
+ {
+  "rva": "0x82940",
+  "obj": "VietnamPromotions",
+  "src": "src/vietnampromotions.c",
+  "maps": []
+ },
+ {
+  "rva": "0x7f050",
+  "obj": "MISSIONInit1",
+  "src": "src/missioninit1.c",
+  "maps": [
+   "_MISSIONInit1_@0=?_MISSIONInit1@@YGXXZ"
+  ]
+ },
+ {
+  "rva": "0x7f060",
+  "obj": "MISSIONInit2",
+  "src": "src/missioninit2.c",
+  "maps": [
+   "_MISSIONInit2_@0=?_MISSIONInit2@@YGXXZ"
+  ]
+ },
+ {
+  "rva": "0x7f070",
+  "obj": "MISSIONInit3",
+  "src": "src/missioninit3.c",
+  "maps": []
+ },
+ {
+  "rva": "0x96550",
+  "obj": "GFlush",
+  "src": "src/gflush.c",
+  "maps": []
+ },
+ {
+  "rva": "0x8b4a0",
+  "obj": "SAYShutdown",
+  "src": "src/sayshutdown.c",
+  "maps": []
+ },
+ {
+  "rva": "0x96b60",
+  "obj": "GLoadDriver",
+  "src": "src/gloaddriver.c",
+  "maps": []
+ },
+ {
+  "rva": "0x96b70",
+  "obj": "GUnloadDriver",
+  "src": "src/gunloaddriver.c",
+  "maps": []
+ },
+ {
+  "rva": "0x97d70",
+  "obj": "MOUSECenter",
+  "src": "src/mousecenter.c",
+  "maps": []
+ },
+ {
+  "rva": "0xa3700",
+  "obj": "RMType",
+  "src": "src/rmtype.c",
+  "maps": []
+ },
+ {
+  "rva": "0x35d60",
+  "obj": "MMLockR",
+  "src": "src/mmlockr.c",
+  "maps": []
+ },
+ {
+  "rva": "0x641d0",
+  "obj": "CTEval_tgtisaaa",
+  "src": "src/cteval_tgtisaaa.c",
+  "maps": []
+ },
+ {
+  "rva": "0x646b0",
+  "obj": "CTEval_turnradius",
+  "src": "src/cteval_turnradius.c",
+  "maps": []
+ },
+ {
+  "rva": "0x7ead0",
+  "obj": "AircraftReference",
+  "src": "src/aircraftreference.c",
+  "maps": []
+ },
+ {
+  "rva": "0x7eae0",
+  "obj": "ViewPilots",
+  "src": "src/viewpilots.c",
+  "maps": []
+ },
+ {
+  "rva": "0xb49c0",
+  "obj": "GColorStringHeight",
+  "src": "src/gcolorstringheight.c",
+  "maps": []
+ },
+ {
+  "rva": "0xc2110",
+  "obj": "TInit",
+  "src": "src/tinit.c",
+  "maps": []
+ },
+ {
+  "rva": "0xd9360",
+  "obj": "setdefaultprecision",
+  "src": "src/setdefaultprecision.c",
+  "maps": []
+ },
+ {
+  "rva": "0x63fe0",
+  "obj": "CTEval_time",
+  "src": "src/cteval_time.c",
+  "maps": [],
+  "patch": [
+   "0,9,66a10000000025ffff0000c3,2:6:_currentTime"
+  ],
+  "provenance": [
+   "patch 0x00/0x09 (xor+folded-mask -> moffs+and): toolchain-diff - FA's CL keeps the source's redundant `and eax,0xffff` and skips the zeroing xor (mov ax already zero-extends); ours inverts: xor eax,eax first, mask folded away (8 B vs 12 B). Patch rewrites the 9-B CL code (33 c0 / 66 a1 / disp32 / c3) to FA's mov ax,moffs32 / and eax,0xffff / ret; new DIR32 site @0x02 -> _currentTime, pad recomputes to census 8d642400."
+  ]
+ },
+ {
+  "rva": "0x63ff0",
+  "obj": "CTEval_do_nothing",
+  "src": "src/cteval_donotthing.c",
+  "maps": [],
+  "patch": [
+   "8,8,1bc0f7d8"
+  ],
+  "provenance": [
+   "patch 0x08/0x10 (mov1/adc-1 -> sbb/neg borrow form): toolchain-diff - unsigned t<1 tail: ours emits mov eax,1 / adc eax,-1 (8 B); FA's revision picks sbb eax,eax / neg eax (4 B) - identical CF-based value. Patch replaces, shortening code to FA's 13 B; pad recomputes to census 8d4900; no reloc sites inside the span."
+  ]
+ },
+ {
+  "rva": "0x64000",
+  "obj": "CTEval_do_evade",
+  "src": "src/cteval_doevade.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64010",
+  "obj": "CTEval_do_attack",
+  "src": "src/cteval_doattack.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64020",
+  "obj": "CTEval_do_radar_launch",
+  "src": "src/cteval_doradarlaunch.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64030",
+  "obj": "CTEval_do_ir_launch",
+  "src": "src/cteval_doirlaunch.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64040",
+  "obj": "CTEval_do_hit",
+  "src": "src/cteval_dohit.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64250",
+  "obj": "CTEval_bestrangediff",
+  "src": "src/cteval_bestrangediff.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64260",
+  "obj": "CTEval_radar",
+  "src": "src/cteval_radar.c",
+  "maps": []
+ },
+ {
+  "rva": "0x642a0",
+  "obj": "CTEval_ir",
+  "src": "src/cteval_ir.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64560",
+  "obj": "CTEval_speed",
+  "src": "src/cteval_speed.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64770",
+  "obj": "CTEval_minalt",
+  "src": "src/cteval_minalt.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64880",
+  "obj": "CTEval_skill",
+  "src": "src/cteval_skill.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64bb0",
+  "obj": "CTEval_wm_hspacing_is",
+  "src": "src/cteval_wmhspacing.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64bc0",
+  "obj": "CTEval_wm_vspacing_is",
+  "src": "src/cteval_wmvspacing.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64bd0",
+  "obj": "CTEval_wm_formation_is",
+  "src": "src/cteval_wmform.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64be0",
+  "obj": "CTEval_wm_control_is",
+  "src": "src/cteval_wmcontrol.c",
+  "maps": []
+ },
+ {
+  "rva": "0x645a0",
+  "obj": "CTEval_minspeeddiff",
+  "src": "src/cteval_minspeeddiff.c",
+  "maps": []
+ },
+ {
+  "rva": "0x645d0",
+  "obj": "CTEval_cornerspeeddiff",
+  "src": "src/cteval_cornerspeeddiff.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64610",
+  "obj": "CTEval_maxspeeddiff",
+  "src": "src/cteval_maxspeeddiff.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64650",
+  "obj": "CTEval_twrdiff",
+  "src": "src/cteval_twrdiff.c",
+  "maps": []
+ },
+ {
+  "rva": "0x646c0",
+  "obj": "CTEval_turnradiusdiff",
+  "src": "src/cteval_turnradiusdiff.c",
+  "maps": []
+ },
+ {
+  "rva": "0x11380",
+  "obj": "GetKeyFlags",
+  "src": "src/gkeyflags.c",
+  "maps": []
+ },
+ {
+  "rva": "0x49a40",
+  "obj": "ErrorExitNoMem",
+  "src": "src/errorexitnomem.c",
+  "maps": []
+ },
+ {
+  "rva": "0x51d80",
+  "obj": "FMBayIsOpen",
+  "src": "src/fmbayisopen.c",
+  "maps": []
+ },
+ {
+  "rva": "0x217b0",
+  "obj": "ZONEInit",
+  "src": "src/zoneinit.c",
+  "maps": [
+   "_cobraData_x=?cobraData@@3UGlobalData@@A"
+  ]
+ },
+ {
+  "rva": "0x557e0",
+  "obj": "InitRand",
+  "src": "src/initrand.c",
+  "maps": []
+ },
+ {
+  "rva": "0x870e0",
+  "obj": "DialogWhatItem",
+  "src": "src/dialogwhatitem.c",
+  "maps": [
+   "_dialogItemPtr_x=?dialogItemPtr@@3PAEA"
+  ]
+ },
+ {
+  "rva": "0x8b2b0",
+  "obj": "LimitEditFieldLength",
+  "src": "src/limiteditfieldlength.c",
+  "maps": [
+   "_dialPos320_x=?dialPos320@@3PAUWORD_POINT@@A"
+  ]
+ },
+ {
+  "rva": "0xd3da0",
+  "obj": "tolower",
+  "src": "src/tolower.c",
+  "maps": []
+ },
+ {
+  "rva": "0xd43c0",
+  "obj": "toupper",
+  "src": "src/toupper.c",
+  "maps": []
+ },
+ {
+  "rva": "0xd4b50",
+  "obj": "labs",
+  "src": "src/labs.c",
+  "maps": []
+ },
+ {
+  "rva": "0x8f3a0",
+  "obj": "OBJGet",
+  "src": "src/OBJGet.c",
+  "maps": []
+ },
+ {
+  "rva": "0x95460",
+  "obj": "G_FlipY",
+  "src": "src/G_FlipY.c",
+  "maps": []
+ },
+ {
+  "rva": "0x95610",
+  "obj": "G_SetBitmap",
+  "src": "src/G_SetBitmap.c",
+  "maps": []
+ },
+ {
+  "rva": "0x967d0",
+  "obj": "G_SetFont",
+  "src": "src/G_SetFont.c",
+  "maps": [
+   "_cFont_x=?cFont@@3PAUFONT@@A"
+  ]
+ },
+ {
+  "rva": "0x96b50",
+  "obj": "G_StringHeight",
+  "src": "src/G_StringHeight.c",
+  "maps": [
+   "_cFont_x=?cFont@@3PAUFONT@@A"
+  ]
+ },
+ {
+  "rva": "0x9b530",
+  "obj": "PLANEInit",
+  "src": "src/PLANEInit.c",
+  "maps": []
+ },
+ {
+  "rva": "0xb0a90",
+  "obj": "WRInt",
+  "src": "src/WRInt.c",
+  "maps": []
+ },
+ {
+  "rva": "0xd3a90",
+  "obj": "atoi",
+  "src": "src/atoi.c",
+  "maps": [
+   "_atol_p=_atol"
+  ]
+ },
+ {
+  "rva": "0xd5c20",
+  "obj": "srand",
+  "src": "src/srand.c",
+  "maps": []
+ },
+ {
+  "rva": "0xdfa30",
+  "obj": "FillZeroMan",
+  "src": "src/FillZeroMan.c",
+  "maps": [],
+  "patch": [
+   "1,13,4c240433c08901894104894108"
+  ],
+  "provenance": [
+   "patch 0x01/0x0d (register-role swap): toolchain-diff - CL 4.2 allocates this esp-frame pointer param to eax and the constant zero to ecx (probed 4 source variants, build/w4probe); FA's build used the reversed roles for the identical instruction sequence (mov ecx,[esp+4] / xor eax,eax / three [ecx+disp] stores). Patch swaps the register encodings in place, same length, no reloc sites inside the span."
+  ]
+ },
+ {
+  "rva": "0xe3d40",
+  "obj": "tzset",
+  "src": "src/tzset.c",
+  "maps": [
+   "_tzsetHelper=$FA$_t_4e3d60"
+  ]
+ },
+ {
+  "rva": "0xa54d0",
+  "obj": "T_InitFarmProc",
+  "src": "src/T_InitFarmProc.c",
+  "maps": [
+   "@farmProc_@4=$FA$_t_4a4db0"
+  ]
+ },
+ {
+  "rva": "0xa5a00",
+  "obj": "T_InitCloudProc",
+  "src": "src/T_InitCloudProc.c",
+  "maps": [
+   "@farmProc_@4=$FA$_t_4a4db0"
+  ]
+ },
+ {
+  "rva": "0x117c0",
+  "obj": "LibraryShutdown",
+  "src": "src/LibraryShutdown.c",
+  "maps": []
+ },
+ {
+  "rva": "0x61b80",
+  "obj": "GetCurObj2",
+  "src": "src/GetCurObj2.c",
+  "maps": []
+ },
+ {
+  "rva": "0x7ea40",
+  "obj": "CreateFortMission",
+  "src": "src/CreateFortMission.c",
+  "maps": []
+ },
+ {
+  "rva": "0x7ea50",
+  "obj": "CreateFortMission2",
+  "src": "src/CreateFortMission2.c",
+  "maps": []
+ },
+ {
+  "rva": "0xa40c0",
+  "obj": "SetupPT",
+  "src": "src/SetupPT.c",
+  "maps": []
+ },
+ {
+  "rva": "0xa40d0",
+  "obj": "SetupJT",
+  "src": "src/SetupJT.c",
+  "maps": []
+ },
+ {
+  "rva": "0xa7ba0",
+  "obj": "T_HorizonProc",
+  "src": "src/T_HorizonProc.c",
+  "maps": []
+ },
+ {
+  "rva": "0xbb200",
+  "obj": "unknown_divide_error",
+  "src": "src/unknown_divide_error.c",
+  "maps": []
+ },
+ {
+  "rva": "0xd3850",
+  "obj": "exit",
+  "src": "src/exit.c",
+  "maps": [
+   "_exitHelper=$FA$_t_4d38b0"
+  ]
+ },
+ {
+  "rva": "0xd3870",
+  "obj": "exitcrt",
+  "src": "src/exitcrt.c",
+  "maps": [
+   "_exitHelper=$FA$_t_4d38b0"
+  ]
+ },
+ {
+  "rva": "0xdb6a0",
+  "obj": "ismbbkalnum",
+  "src": "src/ismbbkalnum.c",
+  "maps": [
+   "_ismbbType=$FA$_t_4db810"
+  ]
+ },
+ {
+  "rva": "0xdb6c0",
+  "obj": "ismbbkprint",
+  "src": "src/ismbbkprint.c",
+  "maps": [
+   "_ismbbType=$FA$_t_4db810"
+  ]
+ },
+ {
+  "rva": "0xdb6e0",
+  "obj": "ismbbkpunct",
+  "src": "src/ismbbkpunct.c",
+  "maps": [
+   "_ismbbType=$FA$_t_4db810"
+  ]
+ },
+ {
+  "rva": "0xdb700",
+  "obj": "ismbbalnum",
+  "src": "src/ismbbalnum.c",
+  "maps": [
+   "_ismbbType=$FA$_t_4db810"
+  ]
+ },
+ {
+  "rva": "0xdb720",
+  "obj": "ismbbalpha",
+  "src": "src/ismbbalpha.c",
+  "maps": [
+   "_ismbbType=$FA$_t_4db810"
+  ]
+ },
+ {
+  "rva": "0xdb7c0",
+  "obj": "ismbbtrail",
+  "src": "src/ismbbtrail.c",
+  "maps": [
+   "_ismbbType=$FA$_t_4db810"
+  ]
+ },
+ {
+  "rva": "0xe27c0",
+  "obj": "atexit",
+  "src": "src/atexit.c",
+  "maps": [
+   "_onexitFn=__onexit"
+  ],
+  "patch": [
+   "13,11,83f8011bc0c3"
+  ],
+  "provenance": [
+   "patch 13/11 (mov0/setae/mov -> cmp1/sbb/neg): toolchain-diff - same borrow-form family as CTEval_do_nothing: ours emits xor ecx,ecx / cmp eax,1 / setae cl / mov eax,ecx / ret (11 B); FA's revision picks cmp eax,1 / sbb eax,eax / neg eax / ret (6 B) - identical boolean (eax>=1 as 0/1). Patch replaces, shortening code to FA's 19 B; no reloc sites inside the span."
+  ]
+ },
+ {
+  "rva": "0xe2820",
+  "obj": "abort",
+  "src": "src/abort.c",
+  "maps": [
+   "__raise=_raise"
+  ]
+ },
+ {
+  "rva": "0x11b70",
+  "obj": "FeetToNM",
+  "src": "src/FeetToNM.c",
+  "maps": []
+ },
+ {
+  "rva": "0x11ee0",
+  "obj": "Strend",
+  "src": "src/Strend.c",
+  "maps": []
+ },
+ {
+  "rva": "0x122e0",
+  "obj": "SampleShutdown",
+  "src": "src/SampleShutdown.c",
+  "maps": []
+ },
+ {
+  "rva": "0x127a0",
+  "obj": "ObjRadius",
+  "src": "src/ObjRadius.c",
+  "maps": []
+ },
+ {
+  "rva": "0x1f370",
+  "obj": "FortMultiButton",
+  "src": "src/FortMultiButton.c",
+  "maps": [
+   "_fortAwacsDamage_x=?fortAwacsDamage@@3DA+0x8",
+   "_fortCount_x=_fortCount+0x80"
+  ]
+ },
+ {
+  "rva": "0x4c520",
+  "obj": "FortMultiButton2",
+  "src": "src/FortMultiButton2.c",
+  "maps": [
+   "_inPacketArr_x=?InPacket@@3USERIAL_PACKET_WRAPPER@@A+0x150",
+   "_inPacketArr2_x=?InPacket@@3USERIAL_PACKET_WRAPPER@@A+0x38"
+  ]
+ },
+ {
+  "rva": "0x2e1b0",
+  "obj": "QuickMultiButton",
+  "src": "src/QuickMultiButton.c",
+  "maps": [
+   "_qmbA_x=_specials+0xd08",
+   "_qmbB_x=_specials+0xc08"
+  ]
+ },
+ {
+  "rva": "0x214f0",
+  "obj": "StopCobraSound",
+  "src": "src/StopCobraSound.c",
+  "maps": [
+   "@SoundAllOff@0=?SoundAllOff@@YIXXZ",
+   "_SoundNoMixer@12=?SoundNoMixer@@YGFPADFF@Z"
+  ]
+ },
+ {
+  "rva": "0x2e060",
+  "obj": "COLInit",
+  "src": "src/COLInit.c",
+  "maps": [
+   "_specials_x=_specials"
+  ]
+ },
+ {
+  "rva": "0x35b70",
+  "obj": "MMFreePtr",
+  "src": "src/MMFreePtr.c",
+  "maps": []
+ },
+ {
+  "rva": "0x35d20",
+  "obj": "MMHandleLen",
+  "src": "src/MMHandleLen.c",
+  "maps": []
+ },
+ {
+  "rva": "0x3d880",
+  "obj": "CPToggleHistory",
+  "src": "src/CPToggleHistory.c",
+  "maps": []
+ },
+ {
+  "rva": "0x557c0",
+  "obj": "Percent",
+  "src": "src/Percent.c",
+  "maps": []
+ },
+ {
+  "rva": "0x69f80",
+  "obj": "WritePalette",
+  "src": "src/WritePalette.c",
+  "maps": [
+   "_G_SetPalette_x@16=_G_SetPalette@16"
+  ]
+ },
+ {
+  "rva": "0x76d20",
+  "obj": "COMaxSpeed",
+  "src": "src/COMaxSpeed.c",
+  "maps": []
+ },
+ {
+  "rva": "0x7eaf0",
+  "obj": "StartCampaign",
+  "src": "src/StartCampaign.c",
+  "maps": [
+   "_CampaignSelect=_CampaignSelect@0",
+   "@PilotScreen_x@4=@PilotScreen@4"
+  ]
+ },
+ {
+  "rva": "0x7eb10",
+  "obj": "ContinueCampaign",
+  "src": "src/ContinueCampaign.c",
+  "maps": [
+   "@PilotScreen_x@4=@PilotScreen@4"
+  ]
+ },
+ {
+  "rva": "0x84be0",
+  "obj": "TIMERestart",
+  "src": "src/TIMERestart.c",
+  "maps": []
+ },
+ {
+  "rva": "0x87880",
+  "obj": "Info2640Preload",
+  "src": "src/Info2640Preload.c",
+  "maps": [
+   "_PushShellAlloc_x@0=?PushShellAlloc@@YGXXZ",
+   "_PopShellAlloc_x@0=?PopShellAlloc@@YGXXZ",
+   "@h2640@4=$FA$_t_487960"
+  ]
+ },
+ {
+  "rva": "0x35e00",
+  "obj": "MMByteAt",
+  "src": "src/MMByteAt.c",
+  "maps": []
+ },
+ {
+  "rva": "0x35e10",
+  "obj": "MMWordAt",
+  "src": "src/MMWordAt.c",
+  "maps": []
+ },
+ {
+  "rva": "0x35e20",
+  "obj": "MMUWordAt",
+  "src": "src/MMUWordAt.c",
+  "maps": []
+ },
+ {
+  "rva": "0x35e30",
+  "obj": "MMLongAt",
+  "src": "src/MMLongAt.c",
+  "maps": []
+ },
+ {
+  "rva": "0x35e40",
+  "obj": "MMULongAt",
+  "src": "src/MMULongAt.c",
+  "maps": []
+ },
+ {
+  "rva": "0xd9130",
+  "obj": "XcptInitPtd",
+  "src": "src/XcptInitPtd.c",
+  "maps": [
+   "_XcptActTab=__XcptActTab"
+  ]
+ },
+ {
+  "rva": "0xd94d0",
+  "obj": "StatusPositive",
+  "src": "src/StatusPositive.c",
+  "maps": []
+ },
+ {
+  "rva": "0xdb740",
+  "obj": "ISMBBGraph",
+  "src": "src/ISMBBGraph.c",
+  "maps": [
+   "_ismbbType_x=$FA$_t_4db810"
+  ]
+ },
+ {
+  "rva": "0xdb760",
+  "obj": "ISMBBPrint",
+  "src": "src/ISMBBPrint.c",
+  "maps": [
+   "_ismbbType_x=$FA$_t_4db810"
+  ]
+ },
+ {
+  "rva": "0xdb780",
+  "obj": "ISMBBPunct",
+  "src": "src/ISMBBPunct.c",
+  "maps": [
+   "_ismbbType_x=$FA$_t_4db810"
+  ]
+ },
+ {
+  "rva": "0xdb7a0",
+  "obj": "ISMBBLead",
+  "src": "src/ISMBBLead.c",
+  "maps": [
+   "_ismbbType_x=$FA$_t_4db810"
+  ]
+ },
+ {
+  "rva": "0x878a0",
+  "obj": "Info640Preload",
+  "src": "src/Info640Preload.c",
+  "maps": [
+   "_PushShellAlloc_x@0=?PushShellAlloc@@YGXXZ",
+   "_PopShellAlloc_x@0=?PopShellAlloc@@YGXXZ",
+   "@h2640@4=$FA$_t_487960"
+  ]
+ },
+ {
+  "rva": "0x878f0",
+  "obj": "SndPrefPreload",
+  "src": "src/SndPrefPreload.c",
+  "maps": [
+   "_PushShellAlloc_x@0=?PushShellAlloc@@YGXXZ",
+   "_PopShellAlloc_x@0=?PopShellAlloc@@YGXXZ",
+   "@h2640@4=$FA$_t_487960"
+  ]
+ },
+ {
+  "rva": "0x87910",
+  "obj": "ChoosePreload",
+  "src": "src/ChoosePreload.c",
+  "maps": [
+   "_PushShellAlloc_x@0=?PushShellAlloc@@YGXXZ",
+   "_PopShellAlloc_x@0=?PopShellAlloc@@YGXXZ",
+   "@h2640@4=$FA$_t_487960"
+  ]
+ },
+ {
+  "rva": "0xaa240",
+  "obj": "ClearCachedFilenames",
+  "src": "src/ClearCachedFilenames.c",
+  "maps": [
+   "_NamesShutdown=_NamesShutdown@0"
+  ]
+ },
+ {
+  "rva": "0x96540",
+  "obj": "G_SetScaleMax",
+  "src": "src/G_SetScaleMax.c",
+  "maps": []
+ },
+ {
+  "rva": "0x96660",
+  "obj": "G_SPolygonFlip",
+  "src": "src/G_SPolygonFlip.c",
+  "maps": []
+ },
+ {
+  "rva": "0x96680",
+  "obj": "G_SUPolygonFlip",
+  "src": "src/G_SUPolygonFlip.c",
+  "maps": [
+   "@G_SUPolygon2@8=@G_SUPolygon@8"
+  ]
+ },
+ {
+  "rva": "0x9b1d0",
+  "obj": "TakeoffSpeed",
+  "src": "src/TakeoffSpeed.c",
+  "maps": []
+ },
+ {
+  "rva": "0xc2100",
+  "obj": "T_ShutdownDatabase",
+  "src": "src/T_ShutdownDatabase.c",
+  "maps": []
+ },
+ {
+  "rva": "0xdf610",
+  "obj": "Statusfp",
+  "src": "src/Statusfp.c",
+  "maps": [
+   "_sfpHelper=$FA$_t_4df830"
+  ]
+ },
+ {
+  "rva": "0xdf630",
+  "obj": "Clearfp",
+  "src": "src/Clearfp.c",
+  "maps": [
+   "_cfpHelper=$FA$_t_4df830"
+  ]
+ },
+ {
+  "rva": "0xe0be0",
+  "obj": "Wcslen",
+  "src": "src/Wcslen.c",
+  "maps": []
+ },
+ {
+  "rva": "0x12eb0",
+  "obj": "CHATInit",
+  "src": "src/CHATInit.c",
+  "maps": [
+   "_chatEditing=?chatEditing@@3DA",
+   "_MPShellInitMessages@0=?MPShellInitMessages@@YGXXZ",
+   "_t12ed0=$FA$_t_412ed0"
+  ]
+ },
+ {
+  "rva": "0x21e40",
+  "obj": "MAPSetSide",
+  "src": "src/MAPSetSide.c",
+  "maps": []
+ },
+ {
+  "rva": "0x5da40",
+  "obj": "GG_WaitRetrace",
+  "src": "src/GG_WaitRetrace.c",
+  "maps": [
+   "_ddInst=?ddInst@@3PAVCDirDraw@@A",
+   "_CDirDraw_WVB=?WaitForVerticalBlank@CDirDraw@@QAEXK@Z"
+  ]
+ },
+ {
+  "rva": "0x5da70",
+  "obj": "GG_VideoModesAvailable",
+  "src": "src/GG_VideoModesAvailable.c",
+  "maps": [
+   "_m_singleton=?m_singleton@CDirDraw@@1PAV1@A",
+   "@CDirDraw_EnumDisplayModes@4=?EnumDisplayModes@CDirDraw@@QAEKXZ"
+  ]
+ },
+ {
+  "rva": "0x62ea0",
+  "obj": "FinishCmdBuf",
+  "src": "src/FinishCmdBuf.c",
+  "maps": [
+   "_cmdBufPos=_curThing+0x58"
+  ]
+ },
+ {
+  "rva": "0x63060",
+  "obj": "MaskEvents",
+  "src": "src/MaskEvents.c",
+  "maps": [
+   "_cmdBufPos=_curThing+0x58"
+  ]
+ },
+ {
+  "rva": "0x64150",
+  "obj": "CTEval_tgtisfighter",
+  "src": "src/CTEval_tgtisfighter.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64170",
+  "obj": "CTEval_tgtisbomber",
+  "src": "src/CTEval_tgtisbomber.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64190",
+  "obj": "CTEval_tgtisplane",
+  "src": "src/CTEval_tgtisplane.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64200",
+  "obj": "CTEval_maxrange",
+  "src": "src/CTEval_maxrange.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64540",
+  "obj": "CTEval_canclimb",
+  "src": "src/CTEval_canclimb.c",
+  "maps": [
+   "_COMinSpeed=_COMinSpeed@0"
+  ]
+ },
+ {
+  "rva": "0x64620",
+  "obj": "CTEval_betterspeed",
+  "src": "src/CTEval_betterspeed.c",
+  "maps": [
+   "_COMaxSpeed=_COMaxSpeed@0"
+  ]
+ },
+ {
+  "rva": "0x64660",
+  "obj": "CTEval_bettertwr",
+  "src": "src/CTEval_bettertwr.c",
+  "maps": [
+   "_COTwr=_COTwr@0"
+  ]
+ },
+ {
+  "rva": "0x64690",
+  "obj": "CTEval_turnratediff",
+  "src": "src/CTEval_turnratediff.c",
+  "maps": [
+   "_COTurnRate=_COTurnRate@0"
+  ]
+ },
+ {
+  "rva": "0x648d0",
+  "obj": "CTEval_p",
+  "src": "src/CTEval_p.c",
+  "maps": []
+ },
+ {
+  "rva": "0x648f0",
+  "obj": "CTEval_b",
+  "src": "src/CTEval_b.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64c10",
+  "obj": "CTDo_restart",
+  "src": "src/CTDo_restart.c",
+  "maps": [
+   "@t3e90@4=$FA$_t_463e90"
+  ]
+ },
+ {
+  "rva": "0x79540",
+  "obj": "ShutdownGraphicsSystem",
+  "src": "src/ShutdownGraphicsSystem.c",
+  "maps": [
+   "_m_singleton=?m_singleton@CDirDraw@@1PAV1@A",
+   "@CDirDraw_Destroy@4=?Destroy@CDirDraw@@QAEXXZ",
+   "@CDirDraw_DeleteSingleton@0=?DeleteSingleton@CDirDraw@@SAXXZ"
+  ]
+ },
+ {
+  "rva": "0x7f300",
+  "obj": "UkraineAddA7",
+  "src": "src/UkraineAddA7.c",
+  "maps": []
+ },
+ {
+  "rva": "0x87400",
+  "obj": "DialogGetPtr",
+  "src": "src/DialogGetPtr.c",
+  "maps": [
+   "_curDialog=?curDialog@@3PAUDIALOG@@A"
+  ]
+ },
+ {
+  "rva": "0x95720",
+  "obj": "G_SetFullClipBox",
+  "src": "src/G_SetFullClipBox.c",
+  "maps": []
+ },
+ {
+  "rva": "0x95880",
+  "obj": "G_GetPoint",
+  "src": "src/G_GetPoint.c",
+  "maps": []
+ },
+ {
+  "rva": "0x966a0",
+  "obj": "G_PointFlip",
+  "src": "src/G_PointFlip.c",
+  "maps": []
+ },
+ {
+  "rva": "0x966c0",
+  "obj": "G_UPointFlip",
+  "src": "src/G_UPointFlip.c",
+  "maps": []
+ },
+ {
+  "rva": "0x97b00",
+  "obj": "WPDoingWaypoints",
+  "src": "src/WPDoingWaypoints.c",
+  "maps": []
+ },
+ {
+  "rva": "0xaa260",
+  "obj": "GetExecutablePath",
+  "src": "src/GetExecutablePath.c",
+  "maps": [
+   "__imp__GetModuleFileNameA@12=__imp__GetModuleFileNameA"
+  ]
+ },
+ {
+  "rva": "0xaf4f0",
+  "obj": "ChangeTint",
+  "src": "src/ChangeTint.c",
+  "maps": []
+ },
+ {
+  "rva": "0xb0aa0",
+  "obj": "WRForcePaletteUpdate",
+  "src": "src/WRForcePaletteUpdate.c",
+  "maps": []
+ },
+ {
+  "rva": "0xc23d0",
+  "obj": "T_StopAdding",
+  "src": "src/T_StopAdding.c",
+  "maps": []
+ },
+ {
+  "rva": "0xd9290",
+  "obj": "malloc",
+  "src": "src/malloc.c",
+  "maps": [
+   "___newmode=__newmode",
+   "___nh_malloc=__nh_malloc"
+  ]
+ },
+ {
+  "rva": "0xdfa40",
+  "obj": "IsZeroMan",
+  "src": "src/IsZeroMan.c",
+  "maps": []
+ },
+ {
+  "rva": "0xe4600",
+  "obj": "is_wctype",
+  "src": "src/is_wctype.c",
+  "maps": []
+ },
+ {
+  "rva": "0xa40a0",
+  "obj": "SetupNT",
+  "src": "src/SetupNT.c",
+  "maps": [
+   "@t4a39b0@8=$FA$_t_4a39b0"
+  ]
+ },
+ {
+  "rva": "0xd3ff0",
+  "obj": "fopen",
+  "src": "src/fopen.c",
+  "maps": [
+   "_t4d3fb0=$FA$_t_4d3fb0"
+  ]
+ },
+ {
+  "rva": "0xd5c30",
+  "obj": "RandCRT",
+  "src": "src/RandCRT.c",
+  "maps": [
+   "___getptd=__getptd"
+  ]
+ },
+ {
+  "rva": "0xe0f0",
+  "obj": "VIEWImmediateVisibility",
+  "src": "src/VIEWImmediateVisibility.c",
+  "maps": [
+   "_T_ImmediateVisibility4@4=_T_ImmediateVisibility@4"
+  ]
+ },
+ {
+  "rva": "0x11dc0",
+  "obj": "NextString",
+  "src": "src/NextString.c",
+  "maps": []
+ },
+ {
+  "rva": "0x12510",
+  "obj": "SpeedOfSound",
+  "src": "src/SpeedOfSound.c",
+  "maps": []
+ },
+ {
+  "rva": "0x14180",
+  "obj": "SetPlayerContact",
+  "src": "src/SetPlayerContact.c",
+  "maps": []
+ },
+ {
+  "rva": "0x16200",
+  "obj": "ForceAutopilot",
+  "src": "src/ForceAutopilot.c",
+  "maps": []
+ },
+ {
+  "rva": "0x16220",
+  "obj": "RestoreAutopilot",
+  "src": "src/RestoreAutopilot.c",
+  "maps": []
+ },
+ {
+  "rva": "0x1d470",
+  "obj": "FreeNames",
+  "src": "src/FreeNames.c",
+  "maps": [
+   "@MMFreePtrF@4=@MMFreePtr@4"
+  ]
+ },
+ {
+  "rva": "0x330f0",
+  "obj": "BasicSound",
+  "src": "src/BasicSound.c",
+  "maps": [
+   "_SoundOn@60=?SoundOn@@YGFPADFFDGFFDFFGGFEF@Z"
+  ]
+ },
+ {
+  "rva": "0x52e90",
+  "obj": "HARDResourceName",
+  "src": "src/HARDResourceName.c",
+  "maps": [
+   "@t52eb0@4=$FA$_t_452eb0"
+  ]
+ },
+ {
+  "rva": "0x61870",
+  "obj": "ImmediateService",
+  "src": "src/ImmediateService.c",
+  "maps": [
+   "_chainStart=?chainStart@@3GA",
+   "_chainFlag=_curThing+0x68",
+   "@t61890@4=$FA$_t_461890"
+  ]
+ }
 ]

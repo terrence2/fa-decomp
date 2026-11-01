@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 210,
- "chunks_done": 210,
- "bytes_done": 4628,
+ "done": 230,
+ "chunks_done": 230,
+ "bytes_done": 5292,
  "bytes_total": 933612,
- "bytes_pct": 0.5,
+ "bytes_pct": 0.57,
  "waves": [
   {
    "date": "2026-11-01",
