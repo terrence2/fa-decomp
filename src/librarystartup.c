@@ -1,0 +1,11 @@
+// _LibraryStartup @ rva 0x117b0 (16 B incl. 1 B tail pad `90`)
+// FA asm: call _cdpath / push eax / call _LibStartUp / add esp,4 / ret
+//   -> LibStartUp is cdecl (caller cleans its one arg); cdpath() is the
+//      no-arg producer. No tail folding possible (result feeds a push).
+extern int __cdecl cdpath(void);
+extern void __cdecl LibStartUp(int);
+
+void __cdecl LibraryStartup(void)
+{
+    LibStartUp(cdpath());
+}

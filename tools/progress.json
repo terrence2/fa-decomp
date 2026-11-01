@@ -1,8 +1,8 @@
 {
  "functions_total": 3834,
- "done": 9,
- "chunks_done": 9,
- "bytes_done": 704,
+ "done": 17,
+ "chunks_done": 17,
+ "bytes_done": 784,
  "bytes_total": 933612,
  "bytes_pct": 0.08,
  "waves": [
@@ -19,6 +19,20 @@
     "0x9b1f0",
     "0xb06c0",
     "0xb5130"
+   ]
+  },
+  {
+   "date": "2026-11-01",
+   "note": "wave 1: LockExit, UnlockExit, Errno, CExit, GetMbcp, GetSbhThreshold, Localeconv, LibraryStartup (8 leaf CRT/config funcs, 80 B, GATE 1 PASS, all first-try fits except CExit map-key fix)",
+   "rvas": [
+    "0x117b0",
+    "0xd3890",
+    "0xd3970",
+    "0xd3980",
+    "0xd99b0",
+    "0xd9e20",
+    "0xddfc0",
+    "0xe1ec0"
    ]
   }
  ],

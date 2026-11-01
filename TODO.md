@@ -405,6 +405,24 @@ see Phase 0 notes above.)
   `select` and breaks `subprocess`). Known scorer blind spot: scheduler-level
   revision patches (LibRead-style) are invisible statically — check the seh/jt/
   fixup columns and TODO Phase 4 tells before committing to a "cheap" target.
+- DONE 2026-11-01 — WAVE 1 (first selector-driven batch): 8 easiest-first
+  leaf functions swapped (LockExit 0xd3970, UnlockExit 0xd3980, Errno
+  0xd99b0, CExit 0xd3890, GetMbcp 0xd9e20, GetSbhThreshold 0xddfc0,
+  Localeconv 0xe1ec0 — all 6-11 B — and LibraryStartup 0x117b0), 80 B,
+  GATE 1 PASS. New tells:
+  - **Moffs-load form**: FA's `a1 <abs>` loads reproduce from a plain
+    `*(int *)(extern_array + CONST)` — CL bakes the constant disp as the
+    reloc'd content dword (DIR32), symbol = the named data chunk extern,
+    NO map needed. All three getters matched first try.
+  - **Map FROM keys are RAW obj symbol names**: C id `_doexit` emits the
+    obj symbol `__doexit`; a map keyed `_doexit=` silently does not match
+    and the external stays referenced (LNK2001 at link, not at fit). The
+    C-underscore-prepending rule applies to every hand-written map.
+  - Void cdecl tail calls CANNOT fold to jmp (caller cleans), so the
+    push/call/add-ret shape reproduces naturally; no prologue needed for
+    FPO cbProlog=0 leaves.
+  - Next band (diff 4): the 16-B fastcall MM* wrapper family
+    (@MMAllocPtr@8, @MMLock@8, ...) — wave 2 material.
 
 ---
 
