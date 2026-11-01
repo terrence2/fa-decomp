@@ -81,26 +81,34 @@ def step_compile(es):
     os.makedirs("build/pilot", exist_ok=True)
     if not es:
         return
-    # ONE container for the whole batch, serialized CL invocations with
-    # __OK__/__FAIL__ markers: a failing entry can no longer hide later
-    # entries' results (per-entry containers cost ~2s startup each).
+    # Chunked containers, serialized CL invocations with __OK__/__FAIL__
+    # markers: a failing entry can no longer hide later entries' results
+    # (per-entry containers cost ~2s startup each). ONE container for the
+    # whole batch crossed Linux MAX_ARG_STRLEN (128KB per exec string,
+    # E2BIG "Argument list too long") at 735 entries — ~700 was just
+    # under; ~180 entries/chunk keeps each bash -c string far below.
     # Compile needs no clock: obj timestamps don't reach image bytes
     # (coff.build_stub_obj re-packs ts=0; the linker sees only *_fit.obj).
     for e in es:
         p = "build/pilot/%s.obj" % e["obj"]
         if os.path.exists(p):
             os.remove(p)  # so missing-obj after the batch is a true signal
-    parts = []
-    for e in es:
-        cl = ("wine Z:/opt/msvc420/bin/CL.EXE /nologo "
-              + e.get("flags", "/c /O2 /Gy /G5")
-              + " Z:/work/%s /FoZ:/work/build/pilot/%s.obj" % (e["src"], e["obj"]))
-        parts.append('( %s ) && echo __OK__%s || echo __FAIL__%s'
-                     % (cl, e["obj"], e["obj"]))
-    r = subprocess.run(DOCKER_PLAIN % dict(uid=os.getuid(), gid=os.getgid(),
-                                           cmd="; ".join(parts)),
-                       shell=True, capture_output=True, text=True)
-    out = (r.stdout + r.stderr).splitlines()
+    out = ""
+    per = 180
+    for i in range(0, len(es), per):
+        parts = []
+        for e in es[i:i + per]:
+            cl = ("wine Z:/opt/msvc420/bin/CL.EXE /nologo "
+                  + e.get("flags", "/c /O2 /Gy /G5")
+                  + " Z:/work/%s /FoZ:/work/build/pilot/%s.obj"
+                  % (e["src"], e["obj"]))
+            parts.append('( %s ) && echo __OK__%s || echo __FAIL__%s'
+                         % (cl, e["obj"], e["obj"]))
+        r = subprocess.run(DOCKER_PLAIN % dict(
+            uid=os.getuid(), gid=os.getgid(), cmd="; ".join(parts)),
+            shell=True, capture_output=True, text=True)
+        out += r.stdout + r.stderr
+    out = out.splitlines()
     oks = {l[len("__OK__"):].strip() for l in out if l.startswith("__OK__")}
     fails = {l[len("__FAIL__"):].strip() for l in out
              if l.startswith("__FAIL__")}

@@ -5166,5 +5166,299 @@
    "_SerShutdown2=?SER_Shutdown2@@YAXXZ",
    "_SerShutdown3=?SER_Shutdown3@@YAXXZ"
   ]
+ },
+ {
+  "rva": 868816,
+  "obj": "Ispunct",
+  "src": "src/Ispunct.c",
+  "maps": []
+ },
+ {
+  "rva": 865954,
+  "obj": "RegEnumKeyExA",
+  "src": "src/RegEnumKeyExA.c",
+  "maps": [
+   "_impRegEnumKeyExA=__imp__RegEnumKeyExA"
+  ]
+ },
+ {
+  "rva": 869808,
+  "obj": "CallMemberFunction1",
+  "src": "src/CallMemberFunction1.c",
+  "maps": []
+ },
+ {
+  "rva": 855096,
+  "obj": "RestoreClip",
+  "src": "src/RestoreClip.c",
+  "maps": [
+   "_gouraudOn=gouraudOn+0x11d",
+   "_restoreClipCallee=check_flat+0x2d0"
+  ]
+ },
+ {
+  "rva": 848752,
+  "obj": "do_setcolor2",
+  "src": "src/do_setcolor2.c",
+  "maps": []
+ },
+ {
+  "rva": 826192,
+  "obj": "GRACos",
+  "src": "src/GRACos.c",
+  "maps": [
+   "_acosHelper=acos"
+  ]
+ },
+ {
+  "rva": 617648,
+  "obj": "printPoly",
+  "src": "src/printPoly.c",
+  "maps": []
+ },
+ {
+  "rva": 610608,
+  "obj": "spxinit2",
+  "src": "src/spxinit2.c",
+  "maps": []
+ },
+ {
+  "rva": 601344,
+  "obj": "noIO",
+  "src": "src/noIO.c",
+  "maps": []
+ },
+ {
+  "rva": 667968,
+  "obj": "socket_set_state",
+  "src": "src/socket_set_state.c",
+  "maps": [
+   "@socketSetStateTail@0=$FA$_t_4a31e0"
+  ]
+ },
+ {
+  "rva": 667984,
+  "obj": "socket_set_socket",
+  "src": "src/socket_set_socket.c",
+  "maps": [
+   "@socketSetSocketTail@0=$FA$_t_4a31e0"
+  ]
+ },
+ {
+  "rva": 668000,
+  "obj": "socket_set_type",
+  "src": "src/socket_set_type.c",
+  "maps": []
+ },
+ {
+  "rva": 479024,
+  "obj": "jdiv_round_up",
+  "src": "src/jdiv_round_up.c",
+  "maps": []
+ },
+ {
+  "rva": 97792,
+  "obj": "MSGInit",
+  "src": "src/MSGInit.c",
+  "maps": [
+   "_lastWeaponButton=?lastWeaponButton@@3DA"
+  ]
+ },
+ {
+  "rva": 100240,
+  "obj": "MSGRemoveSecondaries",
+  "src": "src/MSGRemoveSecondaries.c",
+  "maps": [
+   "_lastWeaponButton=?lastWeaponButton@@3DA"
+  ]
+ },
+ {
+  "rva": 220528,
+  "obj": "MMLockE",
+  "src": "src/MMLockE.c",
+  "maps": []
+ },
+ {
+  "rva": 254464,
+  "obj": "CPRemoveItemFromScopes",
+  "src": "src/CPRemoveItemFromScopes.c",
+  "maps": [
+   "_targetV=?targetV@@3UVIEW_VARS@@A",
+   "_ifmHandle=?ifmHandle@@3PAUT_HANDLE@@A",
+   "@cpRmItemScopeHelper@12=$FA$_t_43e230"
+  ]
+ },
+ {
+  "rva": 283728,
+  "obj": "SeqEnd",
+  "src": "src/SeqEnd.c",
+  "maps": [
+   "_seqList=?seqList@@3PAUSEQUENCE@@A",
+   "_useMixer=?useMixer@@3DA",
+   "@SoundAllOff@0=?SoundAllOff@@YIXXZ",
+   "@MusicOff@0=?MusicOff@@YIXXZ"
+  ]
+ },
+ {
+  "rva": 383632,
+  "obj": "WNGInit",
+  "src": "src/WNGInit.c",
+  "maps": []
+ },
+ {
+  "rva": 387008,
+  "obj": "GRPInit",
+  "src": "src/GRPInit.c",
+  "maps": []
+ },
+ {
+  "rva": 400352,
+  "obj": "PopCurObj",
+  "src": "src/PopCurObj.c",
+  "maps": [
+   "_curId=_curId",
+   "@PutCurObj@0=@PutCurObj@0",
+   "@GetCurObj@4=@GetCurObj@4",
+   "_correctChainPlacement=?correctChainPlacement@@3DA"
+  ],
+  "patch": [
+   "0xc,1,0c45"
+  ],
+  "provenance": [
+   "patch 0xc (modrm byte): toolchain-diff \u2014 FA loads the chain word with scale-1 sib-45 (66 8b 0c 45 <ccp+6>) indexing the stale ecx from PutCurObj's call contract with no reload; MASM inline asm cannot emit sib-45 from any spelling (5 probes build/w4probe/b17_sib_*.c \u2192 66 8b 89/0d) and no C variable can occupy ecx with no load (FA precedent _ServicePlayer@0 pre-zeroes with 33 c9). We emit CL's 66 8b 89 form; patch replaces the single modrm byte 0x89 with 0c 45, shifting the disp reloc @0xd to @0xe \u2014 fit-verified exact (build/w4probe/b17_popcurobj_v2.obj + fit run)"
+  ]
+ },
+ {
+  "rva": 411344,
+  "obj": "CTEval_alt",
+  "src": "src/CTEval_alt.c",
+  "maps": []
+ },
+ {
+  "rva": 411424,
+  "obj": "CTEval_maxalt",
+  "src": "src/CTEval_maxalt.c",
+  "maps": []
+ },
+ {
+  "rva": 416096,
+  "obj": "CTDo_wm_formation",
+  "src": "src/CTDo_wm_formation.c",
+  "maps": [
+   "_ctTickCheck=$FA$_t_464c90",
+   "@ctWmApply@4=$FA$_t_45e160"
+  ]
+ },
+ {
+  "rva": 416160,
+  "obj": "CTDo_wm_control",
+  "src": "src/CTDo_wm_control.c",
+  "maps": [
+   "_ctTickCheck=$FA$_t_464c90",
+   "@ctWmApply@4=$FA$_t_45e160"
+  ]
+ },
+ {
+  "rva": 522144,
+  "obj": "GetKeySlow",
+  "src": "src/GetKeySlow.c",
+  "maps": []
+ },
+ {
+  "rva": 434080,
+  "obj": "SetTOD",
+  "src": "src/SetTOD.c",
+  "maps": []
+ },
+ {
+  "rva": 434112,
+  "obj": "SetVESATop",
+  "src": "src/SetVESATop.c",
+  "maps": []
+ },
+ {
+  "rva": 487264,
+  "obj": "COBankRate",
+  "src": "src/COBankRate.c",
+  "maps": []
+ },
+ {
+  "rva": 542368,
+  "obj": "MISSIONScore",
+  "src": "src/MISSIONScore.c",
+  "maps": []
+ },
+ {
+  "rva": 542416,
+  "obj": "MISSIONSortPlayers",
+  "src": "src/MISSIONSortPlayers.c",
+  "maps": [
+   "_mcmpPlayers_q=$FA$_t_484700"
+  ]
+ },
+ {
+  "rva": 587248,
+  "obj": "OBJSubtract",
+  "src": "src/OBJSubtract.c",
+  "maps": [
+   "_ctTbl=?COMMENT_TYPE@@3W4__unnamed@@A+0x150",
+   "_ct858=?COMMENT_TYPE@@3W4__unnamed@@A+0x858"
+  ]
+ },
+ {
+  "rva": 611824,
+  "obj": "G_SetPalette",
+  "src": "src/G_SetPalette.c",
+  "maps": []
+ },
+ {
+  "rva": 612224,
+  "obj": "G_PopClipBox",
+  "src": "src/G_PopClipBox.c",
+  "maps": [
+   "_gClipCount=_globalSecondarySurface+0x4",
+   "_popTb=_tempYLR+0x4e20",
+   "_gSetClipBox=@G_SetClipBox@16"
+  ]
+ },
+ {
+  "rva": 612352,
+  "obj": "G_Point",
+  "src": "src/G_Point.c",
+  "maps": [
+   "_gUPoint=@G_UPoint@8"
+  ]
+ },
+ {
+  "rva": 615776,
+  "obj": "G_ReverseVertices",
+  "src": "src/G_ReverseVertices.c",
+  "maps": []
+ },
+ {
+  "rva": 615904,
+  "obj": "G_PolygonFlip",
+  "src": "src/G_PolygonFlip.c",
+  "maps": [
+   "_gFloatFlatFlip=@G_FloatFlatFlip@8",
+   "_gFlip=@G_Flip@8",
+   "_gPolygon=@G_Polygon@8"
+  ]
+ },
+ {
+  "rva": 615968,
+  "obj": "G_UPolygonFlip",
+  "src": "src/G_UPolygonFlip.c",
+  "maps": [
+   "_gFloatFlatFlip=@G_FloatFlatFlip@8",
+   "_gFlip=@G_Flip@8",
+   "_gUPolygon=@G_UPolygon@8"
+  ]
+ },
+ {
+  "rva": 636080,
+  "obj": "MaxGAtAlt",
+  "src": "src/MaxGAtAlt.c",
+  "maps": []
  }
 ]
