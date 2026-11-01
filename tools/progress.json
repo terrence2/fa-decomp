@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 72,
- "chunks_done": 72,
- "bytes_done": 1664,
+ "done": 102,
+ "chunks_done": 102,
+ "bytes_done": 2147,
  "bytes_total": 933612,
- "bytes_pct": 0.18,
+ "bytes_pct": 0.23,
  "waves": [
   {
    "date": "2026-11-01",
@@ -94,6 +94,42 @@
     "0x96b70",
     "0x97d70",
     "0xa3700"
+   ]
+  },
+  {
+   "date": "2026-11-01",
+   "note": "wave 3a: 8 diff-4 leftovers + 22 CTEval evaluator family (100 entries)",
+   "rvas": [
+    "0x35d60",
+    "0x63fe0",
+    "0x63ff0",
+    "0x64000",
+    "0x64010",
+    "0x64020",
+    "0x64030",
+    "0x64040",
+    "0x641d0",
+    "0x64250",
+    "0x64260",
+    "0x642a0",
+    "0x64560",
+    "0x645a0",
+    "0x645d0",
+    "0x64610",
+    "0x64650",
+    "0x646b0",
+    "0x646c0",
+    "0x64770",
+    "0x64880",
+    "0x64bb0",
+    "0x64bc0",
+    "0x64bd0",
+    "0x64be0",
+    "0x7ead0",
+    "0x7eae0",
+    "0xb49c0",
+    "0xc2110",
+    "0xd9360"
    ]
   }
  ],
