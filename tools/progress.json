@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 102,
- "chunks_done": 102,
- "bytes_done": 2147,
+ "done": 112,
+ "chunks_done": 112,
+ "bytes_done": 2285,
  "bytes_total": 933612,
- "bytes_pct": 0.23,
+ "bytes_pct": 0.24,
  "waves": [
   {
    "date": "2026-11-01",
@@ -130,6 +130,22 @@
     "0xb49c0",
     "0xc2110",
     "0xd9360"
+   ]
+  },
+  {
+   "date": "2026-11-01",
+   "note": "wave 3b: wave-3b diff-6 batch (GetKeyFlags, ErrorExitNoMem, FMBayIsOpen, ZONEInit, InitRand, DialogWhatItem, LimitEditFieldLength, tolower, toupper, labs) \u2014 110 entries; tail word moved 10->25 (set swap swept)",
+   "rvas": [
+    "0x11380",
+    "0x217b0",
+    "0x49a40",
+    "0x51d80",
+    "0x557e0",
+    "0x870e0",
+    "0x8b2b0",
+    "0xd3da0",
+    "0xd43c0",
+    "0xd4b50"
    ]
   }
  ],

@@ -449,7 +449,7 @@ see Phase 0 notes above.)
     (wave-1: 0000 @ 50; wave-2: 1bb9 @ 50, 19ba @ 25, b1ab @ 100, 7da0 @ 200,
     **0000 @ 10**). It is linker-internal state (nothing derives it — not in
     FA.pdb/FA.lib/FA.exp). Resolution: `tools/mkstub.py` now defaults
-    GROUP_SIZE=10 (reproduces FA's 00 00). If a future wave flips the word
+    GROUP_SIZE=25 (reproduces FA's 00 00). If a future wave flips the word
     again: sweep GROUP_SIZE (10..200) until it reads 0000 — `tools/bisect_tail.py`
     automates subset linking + word probing (one link ≈ 0.5 s).
   - **fitobj byte-verify (added 2026-11-01)**: fitobj now exits nonzero
