@@ -4,3 +4,5 @@ atf95/Release/
 FA.res
 __pycache__/
 .wine/
+atf95/tmp/
+build/probe2/

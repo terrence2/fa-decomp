@@ -423,6 +423,40 @@ see Phase 0 notes above.)
     FPO cbProlog=0 leaves.
   - Next band (diff 4): the 16-B fastcall MM* wrapper family
     (@MMAllocPtr@8, @MMLock@8, ...) — wave 2 material.
+- DONE 2026-11-01 — WAVE 2 (diff-4 band): 55 trivial functions swapped
+  (~322 B), 70 entries total, **GATE 1 PASS**
+  (`python3 tools/swap.py compile link gate`). New tells:
+  - **or-word → or-byte peephole**: DisableActionButton — CL 10.20.6166
+    substitutes `or WORD PTR [mem], imm` → `or BYTE PTR` when the imm fits
+    and the upper byte is known-zero; FA keeps the word form. Repaired via
+    fitobj `--patch`.
+  - **sete register allocation**: DialogItemIsEnabled — CL 4.2 puts the bool
+    result in `dl` where CL 10.20.6166 uses `cl` (different RA for
+    setcc-on-subregister); repaired via fitobj `--patch`.
+  - **Ternary vs explicit-if branch polarity**: MMAllocPtr/MMReallocPtr —
+    the idiom `h ? *(int*)(h+8) : 0` compiles to `test/jne+3/mov/ret` but
+    INVERTED vs FA (`85c0 7503 33c0 c3 8b4008 c3`). The explicit form
+    `if (!h) return 0; return *(int*)((char*)h+8);` reproduces FA exactly
+    (probe matrix: build/probe2/v1..v5.c). General CL 4.2 tell: write the
+    guard as an explicit `if (!x)` early-return when FA shows
+    `test/je+3/xor-last`.
+  - **THE TAIL WORD (0x131a09)** — a 2-byte field in LINK 4.20's file-only
+    debug tail (after .reloc raw end, before the MISC/FPO/NB10 payload) is
+    NOT controllable by any obj content we tried: invariant to link order,
+    obj file names, string tables, .drectve, .debug$F content and
+    existence, and pure-stub group splits — but a deterministic *chaotic*
+    function of the swap SET and of mkstub's GROUP_SIZE
+    (wave-1: 0000 @ 50; wave-2: 1bb9 @ 50, 19ba @ 25, b1ab @ 100, 7da0 @ 200,
+    **0000 @ 10**). It is linker-internal state (nothing derives it — not in
+    FA.pdb/FA.lib/FA.exp). Resolution: `tools/mkstub.py` now defaults
+    GROUP_SIZE=10 (reproduces FA's 00 00). If a future wave flips the word
+    again: sweep GROUP_SIZE (10..200) until it reads 0000 — `tools/bisect_tail.py`
+    automates subset linking + word probing (one link ≈ 0.5 s).
+  - **Open hole (fix next session)**: fitobj does not verify the CL .text
+    bytes EQUAL FA's chunk bytes — a semantically reordered object with the
+    same size and reloc sites would fit silently and only fail at Gate 1.
+    Add an automatic byte-compare (with the existing --patch/--tail-accept
+    whitelist) to fitobj so reordering fails AT COMPILE time.
 
 ---
 

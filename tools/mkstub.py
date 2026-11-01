@@ -41,7 +41,13 @@ from peref import IMAGE_BASE
 import coff
 
 STUB_DIR = os.environ.get("STUB_DIR", "build/stubs")
-GROUP_SIZE = int(os.environ.get("GROUP_SIZE", "50"))  # chunk sections per group obj
+# 10, not 50: the LINK 4.20 debug tail (file-only, after .reloc; see
+# docs/ARCHITECTURE.md "image tail") carries a 2-byte linker-internal field at
+# 0x131a09 that is a deterministic-but-chaotic function of the stub obj
+# decomposition (invariant to order/names/string tables/.debug$F). FA's byte
+# there is 00; GROUP_SIZE=10 reproduces it for the current swap set. If a
+# future wave flips the word again, sweep GROUP_SIZE until it reads 0000.
+GROUP_SIZE = int(os.environ.get("GROUP_SIZE", "10"))  # chunk sections per group obj
 # Comma-separated absolute VAs whose chunks become singleton group objs
 # (cut the batch before and after) — lets a decompiled object replace one
 # chunk at its exact rsp position (tools/mkrsp.py --replace).

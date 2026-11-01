@@ -48,6 +48,15 @@ original (each layer's rationale lives in `TODO.md` and the `tools/` docstrings)
    and Gate 1 re-verifies. If it passes, real source has provably replaced
    original code.
 
+LINK 4.20 also appends a **file-only debug tail** after the `.reloc` raw
+data (MISC payload → 2990 FPO records → NB10 pdb path; never mapped). One
+2-byte field of its header (@ file offset 0x131a09) is linker-internal
+state that no object content influences, but the stub *decomposition* does:
+`mkstub.py GROUP_SIZE` (default 10 — the value reproducing FA's `00 00`;
+see TODO.md "THE TAIL WORD") shifts it deterministically. If a future wave
+suddenly fails Gate 1 on exactly those 2 bytes, sweep GROUP_SIZE.
+`tools/bisect_tail.py` automates subset re-linking and word probing.
+
 ## 3. Tools
 
 ```
@@ -145,7 +154,9 @@ docker run --rm --user $(id -u):$(id -g) -e HOME=/tmp -e TZ=UTC \
            Z:/work/src/<Name>.c /FoZ:/work/build/pilot/<Name>.obj"
 python3 tools/fitobj.py build/pilot/<Name>.obj 0x<rva> \
         --map '_myGlob=?realSym@@3PAUS@@A+0x4' [--patch ...]
-# fitobj exits nonzero the moment code bytes/size disagree — fix and repeat.
+# fitobj exits nonzero if SIZE or reloc sites disagree (byte content is NOT
+# compared yet — an add to tools/fitobj.py; until then Gate 1 is the final
+# arbiter of reordering) — fix and repeat.
 
 # 6) Register the entry in tools/swap.json (or mapgen --maps output), then:
 python3 tools/swap.py                          # one batch → GATE 1 PASS
