@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 112,
- "chunks_done": 112,
- "bytes_done": 2285,
+ "done": 125,
+ "chunks_done": 125,
+ "bytes_done": 2497,
  "bytes_total": 933612,
- "bytes_pct": 0.24,
+ "bytes_pct": 0.27,
  "waves": [
   {
    "date": "2026-11-01",
@@ -146,6 +146,25 @@
     "0xd3da0",
     "0xd43c0",
     "0xd4b50"
+   ]
+  },
+  {
+   "date": "2026-11-01",
+   "note": "wave 4a: OBJGet + G_FlipY/SetBitmap/SetFont/StringHeight + PLANEInit + WRInt + CRT (atoi,srand,FillZeroMan,tzset) + T_Init* thunks (13 fns)",
+   "rvas": [
+    "0x8f3a0",
+    "0x95460",
+    "0x95610",
+    "0x967d0",
+    "0x96b50",
+    "0x9b530",
+    "0xa54d0",
+    "0xa5a00",
+    "0xb0a90",
+    "0xd3a90",
+    "0xd5c20",
+    "0xdfa30",
+    "0xe3d40"
    ]
   }
  ],
