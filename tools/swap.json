@@ -1609,5 +1609,133 @@
    "_chainFlag=_curThing+0x68",
    "@t61890@4=$FA$_t_461890"
   ]
+ },
+ {
+  "rva": "0x62d80",
+  "obj": "ObjPlusAngleParm",
+  "src": "src/ObjPlusAngleParm.c",
+  "maps": []
+ },
+ {
+  "rva": "0x62e60",
+  "obj": "WriteCmdBufProcptr",
+  "src": "src/WriteCmdBufProcptr.c",
+  "maps": []
+ },
+ {
+  "rva": "0x63e20",
+  "obj": "CTInit",
+  "src": "src/CTInit.c",
+  "maps": []
+ },
+ {
+  "rva": "0x641e0",
+  "obj": "CTEval_tgthumancontrol",
+  "src": "src/CTEval_tgthumancontrol.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64220",
+  "obj": "CTEval_maxrangediff",
+  "src": "src/CTEval_maxrangediff.c",
+  "maps": [
+   "_CTEval_maxrangeFn=_CTEval_maxrange"
+  ]
+ },
+ {
+  "rva": "0x643e0",
+  "obj": "CTEval_disttotgt",
+  "src": "src/CTEval_disttotgt.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64570",
+  "obj": "CTEval_speeddiff",
+  "src": "src/CTEval_speeddiff.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64700",
+  "obj": "CTEval_altdiff",
+  "src": "src/CTEval_altdiff.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64750",
+  "obj": "CTEval_maxaltdiff",
+  "src": "src/CTEval_maxaltdiff.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64780",
+  "obj": "CTEval_minaltdiff",
+  "src": "src/CTEval_minaltdiff.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64910",
+  "obj": "CTEval_hdiff",
+  "src": "src/CTEval_hdiff.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64930",
+  "obj": "CTEval_pdiff",
+  "src": "src/CTEval_pdiff.c",
+  "maps": []
+ },
+ {
+  "rva": "0x69690",
+  "obj": "SMShutdown",
+  "src": "src/SMShutdown.c",
+  "maps": []
+ },
+ {
+  "rva": "0x757c0",
+  "obj": "WrapHB",
+  "src": "src/WrapHB.c",
+  "maps": []
+ },
+ {
+  "rva": "0x757f0",
+  "obj": "WrapP",
+  "src": "src/WrapP.c",
+  "maps": []
+ },
+ {
+  "rva": "0x79ed0",
+  "obj": "FMResetTV",
+  "src": "src/FMResetTV.c",
+  "maps": []
+ },
+ {
+  "rva": "0x7f130",
+  "obj": "LoadCampaignProc",
+  "src": "src/LoadCampaignProc.c",
+  "maps": [
+   "_campProc=?campaignProc@@3P6AFJ@ZA"
+  ]
+ },
+ {
+  "rva": "0x7f280",
+  "obj": "CampaignPlanesLeft",
+  "src": "src/CampaignPlanesLeft.c",
+  "maps": []
+ },
+ {
+  "rva": "0x84db0",
+  "obj": "TIMESetCompression",
+  "src": "src/TIMESetCompression.c",
+  "maps": []
+ },
+ {
+  "rva": "0x84ef0",
+  "obj": "FPSPrint",
+  "src": "src/FPSPrint.c",
+  "maps": [
+   "_fpspT14=_currentT+0x14",
+   "_fpspFmt=?noTimerSleep@@3JA+0x10",
+   "_fpspTail=$FA$_t_484f10"
+  ]
  }
 ]
