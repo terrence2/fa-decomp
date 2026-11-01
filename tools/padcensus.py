@@ -41,6 +41,7 @@ VOCAB = (
     b"\x8d\xa4\x24\x00\x00\x00\x00",  # lea esp,[esp+0] (7-B)
     b"\x8d\xac\x24\x00\x00\x00\x00",
     b"\x05\x00\x00\x00\x00",    # add eax,0 (the mystery 5-B sequence)
+    b"\xcc",                    # int3 pad (FA gap16 census: 0x1175/0x127a/...)
 )
 
 FA = "FA/FA.EXE"

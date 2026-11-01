@@ -2432,5 +2432,310 @@
   "maps": [
    "__stolQ=$FA$_t_4e2350"
   ]
+ },
+ {
+  "rva": "0xa7680",
+  "obj": "T_SortTmapList",
+  "src": "src/T_SortTmapList.c",
+  "maps": [
+   "_T_CompareTlist_q=?T_CompareTlist@@YAJPAX0@Z"
+  ]
+ },
+ {
+  "rva": "0xa9620",
+  "obj": "MVRInvert",
+  "src": "src/MVRInvert.c"
+ },
+ {
+  "rva": "0x2dc30",
+  "obj": "COLGetBox",
+  "src": "src/COLGetBox.c"
+ },
+ {
+  "rva": "0x32aa0",
+  "obj": "ScorePlaying",
+  "src": "src/ScorePlaying.c",
+  "maps": [
+   "_scoreStart=?scoreStart@@3PAXA"
+  ]
+ },
+ {
+  "rva": "0x35750",
+  "obj": "SndGotFocus",
+  "src": "src/SndGotFocus.c",
+  "maps": [
+   "_sndFocusAil=?ailActive@@3DA+0x4"
+  ]
+ },
+ {
+  "rva": "0x35cc0",
+  "obj": "MMPopAllocId",
+  "src": "src/MMPopAllocId.c",
+  "maps": [
+   "_mmUnusedNextQ=?mm_unused_list@@3PAUT_HANDLE@@A+0x4",
+   "_mmaTable=?mmAllocId@@3EA+0x4",
+   "_mmAllocIdQ=?mmAllocId@@3EA"
+  ]
+ },
+ {
+  "rva": "0x42400",
+  "obj": "GRAPHICUpdate",
+  "src": "src/GRAPHICUpdate.c",
+  "maps": [
+   "@gfxUpdObj@4=$FA$_t_442430",
+   "@UpdateLoopSounds_q@0=?UpdateLoopSounds@@YIXXZ",
+   "_noMixLeftArr=?noMixLeft@@3UMODSPEC@@A"
+  ]
+ },
+ {
+  "rva": "0x51470",
+  "obj": "FMFuelConsumption",
+  "src": "src/FMFuelConsumption.c",
+  "maps": [
+   "_fuelLo=_curThingType+0x163",
+   "_fuelHi=_curThingType+0x161"
+  ]
+ },
+ {
+  "rva": "0x52380",
+  "obj": "HARDUnloadAll",
+  "src": "src/HARDUnloadAll.c",
+  "maps": [
+   "_hardUnloadCnt=_curThingType+0xb5"
+  ]
+ },
+ {
+  "rva": "0x5d2e0",
+  "obj": "GG_ShutdownMode",
+  "src": "src/GG_ShutdownMode.c",
+  "maps": [
+   "_ggpSrf=?lpPrimarySurface@@3PAVCDirDrawSurface@@A",
+   "@ggRelease@4=$FA$_t_4779a0",
+   "_ggFree=$FA$_t_4d4880"
+  ]
+ },
+ {
+  "rva": "0x5f250",
+  "obj": "GRPResponseSize",
+  "src": "src/GRPResponseSize.c",
+  "maps": [
+   "_grpPtr=_curThing+0xe8"
+  ]
+ },
+ {
+  "rva": "0x617c0",
+  "obj": "InitChain",
+  "src": "src/InitChain.c",
+  "maps": [
+   "_chainStartArr=?chainStart@@3GA",
+   "_chainCorrectArr=?correctChainPlacement@@3DA",
+   "_chainTicksArr=_serviceTicks"
+  ]
+ },
+ {
+  "rva": "0x636b0",
+  "obj": "PreferredTargetId",
+  "src": "src/PreferredTargetId.c",
+  "maps": [
+   "_prefThingPtr=_curThing+0xf0",
+   "@prefTailFn@4=$FA$_t_45dc60"
+  ]
+ },
+ {
+  "rva": "0x642e0",
+  "obj": "CTEval_tgtoffbeam",
+  "src": "src/CTEval_tgtoffbeam.c",
+  "maps": []
+ },
+ {
+  "rva": "0x64310",
+  "obj": "CTEval_tgtahead",
+  "src": "src/CTEval_tgtahead.c",
+  "maps": []
+ },
+ {
+  "rva": "0x72510",
+  "obj": "MPShellInitMessages",
+  "src": "src/MPShellInitMessages.c",
+  "maps": [
+   "_buffRemapTbl80=?buffRemapTbl@@3PAEA+0x80"
+  ]
+ },
+ {
+  "rva": "0x725d0",
+  "obj": "FlightControlOverMe",
+  "src": "src/FlightControlOverMe.c",
+  "maps": [
+   "@fcoTail@4=$FA$_t_45ded0"
+  ]
+ },
+ {
+  "rva": "0x73710",
+  "obj": "Alive",
+  "src": "src/Alive.c",
+  "maps": []
+ },
+ {
+  "rva": "0x75970",
+  "obj": "GToTurn",
+  "src": "src/GToTurn.c",
+  "maps": []
+ },
+ {
+  "rva": "0x770a0",
+  "obj": "COTwr",
+  "src": "src/COTwr.c",
+  "maps": []
+ },
+ {
+  "rva": "0x84e40",
+  "obj": "FPSInit",
+  "src": "src/FPSInit.c",
+  "maps": []
+ },
+ {
+  "rva": "0x8ca80",
+  "obj": "SAYRearmMessage",
+  "src": "src/SAYRearmMessage.c",
+  "maps": [
+   "@srmInit@0=$FA$_t_48b570",
+   "@srmSay@4=$FA$_t_48b580",
+   "@srmGo@8=$FA$_t_48cab0",
+   "_wingSay5a8=?wingSay@@3PAUSAY@@A+0x5a8"
+  ]
+ },
+ {
+  "rva": "0x8f950",
+  "obj": "OBJTempAlias",
+  "src": "src/OBJTempAlias.c",
+  "maps": [
+   "_ctNext860=?COMMENT_TYPE@@3W4__unnamed@@A+0x860",
+   "_ctBase85c=?COMMENT_TYPE@@3W4__unnamed@@A+0x85c"
+  ]
+ },
+ {
+  "rva": "0x92e00",
+  "obj": "MP_Info",
+  "src": "src/MP_Info.c",
+  "maps": [
+   "_mpInfoArr=?mpInfo@@3UMP_INFO@@C"
+  ]
+ },
+ {
+  "rva": "0x955c0",
+  "obj": "G_InitLineStats",
+  "src": "src/G_InitLineStats.c",
+  "maps": []
+ },
+ {
+  "rva": "0x97e60",
+  "obj": "MOUSEShutdown",
+  "src": "src/MOUSEShutdown.c",
+  "maps": [
+   "_mouseCS=?mouse_critical_section@@3U_RTL_CRITICAL_SECTION@@A",
+   "__imp__DeleteCriticalSectionX@4=__imp__DeleteCriticalSection"
+  ]
+ },
+ {
+  "rva": "0x9b4f0",
+  "obj": "EnvHighest",
+  "src": "src/EnvHighest.c",
+  "maps": []
+ },
+ {
+  "rva": "0x9dd60",
+  "obj": "PLANEUpdateJustLanded",
+  "src": "src/PLANEUpdateJustLanded.c",
+  "maps": [
+   "_curThingFlagQ=_curThing+0x16f"
+  ]
+ },
+ {
+  "rva": "0x9e880",
+  "obj": "MainMenu",
+  "src": "src/MainMenu.c",
+  "maps": [
+   "_MenuUpdateQ=?MenuUpdate@@YGGXZ"
+  ]
+ },
+ {
+  "rva": "0xa24c0",
+  "obj": "EveryoneHasChosenSides",
+  "src": "src/EveryoneHasChosenSides.c",
+  "maps": []
+ },
+ {
+  "rva": "0xa56e0",
+  "obj": "T_InitVietRicePaddy1Proc",
+  "src": "src/T_InitVietRicePaddy1Proc.c",
+  "maps": [
+   "@farmProc_@4=$FA$_t_4a4db0"
+  ]
+ },
+ {
+  "rva": "0xaeb30",
+  "obj": "netgetoftenstate",
+  "src": "src/net_get_often_state.c",
+  "maps": [
+   "_netOftenStateQ=?ws@@3U_winsock_funcs@@A+0x68"
+  ]
+ },
+ {
+  "rva": "0xb4cc0",
+  "obj": "G_HFlipBitmap",
+  "src": "src/G_HFlipBitmap.c",
+  "maps": []
+ },
+ {
+  "rva": "0xbb1d0",
+  "obj": "APObjOnShip",
+  "src": "src/APObjOnShip.c",
+  "maps": [
+   "_apShipBaseQ=_airports+0x3020"
+  ]
+ },
+ {
+  "rva": "0xc20e0",
+  "obj": "T_InitDatabase",
+  "src": "src/T_InitDatabase.c",
+  "maps": [
+   "_dbaseLow=?dbaseLow@@3PAEA"
+  ]
+ },
+ {
+  "rva": "0xd0604",
+  "obj": "do_start",
+  "src": "src/do_start.c",
+  "maps": []
+ },
+ {
+  "rva": "0xd4979",
+  "obj": "NLGDispatch",
+  "src": "src/NLGDispatch.c",
+  "maps": []
+ },
+ {
+  "rva": "0xdf3e0",
+  "obj": "unexpected",
+  "src": "src/unexpected.c",
+  "maps": [
+   "_termX=?terminate@@YAXXZ"
+  ]
+ },
+ {
+  "rva": "0xe1fa0",
+  "obj": "ultoa",
+  "src": "src/ultoa.c",
+  "maps": [
+   "_ultoaHelper=$FA$_t_4e1f10"
+  ]
+ },
+ {
+  "rva": "0x1dd60",
+  "obj": "Unlock",
+  "src": "src/Unlock.c",
+  "maps": [
+   "@dsSurfUnlockQ@4=?Unlock@CDirDrawSurface@@QAEHXZ"
+  ]
  }
 ]

@@ -279,7 +279,7 @@ if __name__ == "__main__":
     steps = sys.argv[1:] or ["compile", "link", "gate"]
     for s in steps:
         {"compile": lambda: step_compile(es),
-         "fit": lambda: [step_compile._fit(e) for e in es],
+         "fit": lambda: [_fit(e) for e in es],
          "audit": lambda: step_audit(es),
          "link": lambda: step_link(es),
          "gate": lambda: step_gate(es)}[s]()
