@@ -1895,5 +1895,161 @@
   "maps": [
    "_enableHelper=$FA$_t_40cb80"
   ]
+ },
+ {
+  "rva": "0xcc00",
+  "obj": "DisableItem",
+  "src": "src/DisableItem.c",
+  "maps": [
+   "_enableHelper=$FA$_t_40cb80"
+  ]
+ },
+ {
+  "rva": "0xcc10",
+  "obj": "IsItemEnabled",
+  "src": "src/IsItemEnabled.c",
+  "maps": [
+   "_enableHelper=$FA$_t_40cb80"
+  ]
+ },
+ {
+  "rva": "0x11620",
+  "obj": "KEYECS",
+  "src": "src/KEYECS.c",
+  "maps": [
+   "_keyboardInitialized=?keyboardInitialized@@3DA",
+   "_keyboardCS=?keyboard_critical_section@@3U_RTL_CRITICAL_SECTION@@A",
+   "__imp__EnterCriticalSectionX@4=__imp__EnterCriticalSection"
+  ]
+ },
+ {
+  "rva": "0x11640",
+  "obj": "KEYLCS",
+  "src": "src/KEYLCS.c",
+  "maps": [
+   "_keyboardInitialized=?keyboardInitialized@@3DA",
+   "_keyboardCS=?keyboard_critical_section@@3U_RTL_CRITICAL_SECTION@@A",
+   "__imp__LeaveCriticalSectionX@4=__imp__LeaveCriticalSection"
+  ]
+ },
+ {
+  "rva": "0x11c90",
+  "obj": "PutFakeKey",
+  "src": "src/PutFakeKey.c",
+  "maps": [
+   "_adCount=?adCount@@3EA"
+  ]
+ },
+ {
+  "rva": "0x13e30",
+  "obj": "SetPlayerTarget",
+  "src": "src/SetPlayerTarget.c",
+  "maps": []
+ },
+ {
+  "rva": "0x1c5a0",
+  "obj": "NamesShutdown",
+  "src": "src/NamesShutdown.c",
+  "maps": []
+ },
+ {
+  "rva": "0x21e60",
+  "obj": "MAPMaybeSetControl",
+  "src": "src/MAPMaybeSetControl.c",
+  "maps": [
+   "_mscTail=$FA$_t_421e90"
+  ]
+ },
+ {
+  "rva": "0x325b0",
+  "obj": "DMusicVolume",
+  "src": "src/DMusicVolume.c",
+  "maps": []
+ },
+ {
+  "rva": "0x32e20",
+  "obj": "ShutDownMixer",
+  "src": "src/ShutDownMixer.c",
+  "maps": []
+ },
+ {
+  "rva": "0x35c70",
+  "obj": "MMPtrToHandle",
+  "src": "src/MMPtrToHandle.c",
+  "maps": [
+   "_mmUsedList=?mm_used_list@@3PAUT_HANDLE@@A"
+  ]
+ },
+ {
+  "rva": "0x35cf0",
+  "obj": "MMFreeAllId",
+  "src": "src/MMFreeAllId.c",
+  "maps": [
+   "_mmUsedList=?mm_used_list@@3PAUT_HANDLE@@A"
+  ]
+ },
+ {
+  "rva": "0x35df0",
+  "obj": "MMAreaFree",
+  "src": "src/MMAreaFree.c",
+  "maps": []
+ },
+ {
+  "rva": "0x380e0",
+  "obj": "CPClearMissile",
+  "src": "src/CPClearMissile.c",
+  "maps": [
+   "_targetV=?targetV@@3UVIEW_VARS@@A"
+  ]
+ },
+ {
+  "rva": "0x3e290",
+  "obj": "CPUpdateRadar",
+  "src": "src/CPUpdateRadar.c",
+  "maps": [
+   "_ifmScale=?ifmScale@@3JA"
+  ]
+ },
+ {
+  "rva": "0x496f0",
+  "obj": "DoNickStuff",
+  "src": "src/DoNickStuff.c",
+  "maps": []
+ },
+ {
+  "rva": "0x49700",
+  "obj": "InitNickStuff",
+  "src": "src/InitNickStuff.c",
+  "maps": []
+ },
+ {
+  "rva": "0x49a50",
+  "obj": "MonoDebuggerInit",
+  "src": "src/MonoDebuggerInit.c",
+  "maps": []
+ },
+ {
+  "rva": "0x49a60",
+  "obj": "MonoDebuggerShutdown",
+  "src": "src/MonoDebuggerShutdown.c",
+  "maps": []
+ },
+ {
+  "rva": "0x49a70",
+  "obj": "MonoUpdateScreen",
+  "src": "src/MonoUpdateScreen.c",
+  "maps": []
+ },
+ {
+  "rva": "0x49a80",
+  "obj": "MonoScrollScreen",
+  "src": "src/MonoScrollScreen.c",
+  "maps": []
+ },
+ {
+  "rva": "0x49a90",
+  "obj": "MonoClearScreen",
+  "src": "src/MonoClearScreen.c",
+  "maps": []
  }
 ]
