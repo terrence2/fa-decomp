@@ -11,8 +11,9 @@ Config: build/swap.json — a list of entries:
 Usage:
   python3 tools/swap.py compile   # CL step only (fast iteration)
   python3 tools/swap.py fit       # fitobj for all entries
+  python3 tools/swap.py audit     # provenance classification of patch/tail sites
   python3 tools/swap.py link      # stub regen + rsp + pdb-seed link cycle
-  python3 tools/swap.py gate      # fixreloc + gate.py
+  python3 tools/swap.py gate      # audit precondition + fixreloc + gate.py
   python3 tools/swap.py           # everything, in order
 
 Artifacts under build/pilot/ (CL + fit objs), build/stubs_d (stub set).
@@ -111,6 +112,75 @@ def _fit(e):
         raise SystemExit("fitobj failed for %s: %s" % (e["obj"], r.stderr[-1500:]))
 
 
+def _sites(e):
+    """(kind, label, directive) for every patch/tail site an entry carries."""
+    s = [("patch", "patch[%d]" % i, e["patch"][i])
+         for i in range(len(e.get("patch", [])))]
+    if e.get("tail"):
+        s.append(("tail", "tail", None))
+    return s
+
+
+def _classify(prov, kind, label, directive):
+    """Pull the state word out of a provenance string for `label`.
+    Provenance strings: 'patch <offs>: <root-caused|toolchain-diff|unexplained>
+    ...' (grouped by directive offset, e.g. 'patch 0x39/0x4d: ...') or
+    'tail: ...'. Returns (state, text) or None if not mentioned."""
+    off = directive.split(",")[0].lower() if directive else None
+    for p in prov:
+        key = p.split(":")[0].strip().lower()
+        hit = (key == "tail" if kind == "tail" else
+               off is not None and key.startswith("patch") and off in key)
+        if not hit:
+            continue
+        low = p.lower()
+        for st in ("root-caused", "toolchain-diff", "unexplained"):
+            if st in low:
+                return st, p
+        return "unclassified", p
+    return None
+
+
+def step_audit(es):
+    """Provenance regression: every entry carrying patch/tail sites must
+    classify each; any 'unexplained' (or unclassified/missing) exits nonzero.
+    Wired as a gate precondition so an unexplained ad-hoc patch can never
+    pass silently (workstream D policy: aggressive)."""
+    bad, n = [], 0
+    print("== audit: patch/tail provenance")
+    for e in es:
+        sites = _sites(e)
+        prov = e.get("provenance", [])
+        # a root-caused-then-eliminated site has "patch": [] but its history
+        # is still recorded; provenance-only entries don't count against.
+        for kind, label, directive in sites:
+            n += 1
+            hit = _classify(prov, kind, label, directive)
+            if hit is None:
+                bad.append("%s %s: NO provenance entry" % (e["obj"], label))
+            elif hit[0] == "root-caused":
+                # keeping a patch whose provenance says root-caused means the
+                # construct now reproduces FA bytes -- directive is stale
+                bad.append("%s %s: root-caused but patch/tail still present"
+                           % (e["obj"], label))
+            elif hit[0] in ("unexplained", "unclassified"):
+                bad.append("%s %s: %s -- %s" % (e["obj"], label, hit[0], hit[1]))
+            else:
+                print("  %-20s %-10s toolchain-diff: %s"
+                      % (e["obj"], label, hit[1][:100]))
+        if not sites and e.get("provenance"):
+            for p in prov:
+                if "root-caused" in p.lower() or "eliminated" in p.lower():
+                    print("  %-20s %-10s (eliminated; %s...)"
+                          % (e["obj"], "patch[]", p[:70]))
+    if bad:
+        for b in bad:
+            print("  FAIL %s" % b)
+        raise SystemExit("audit: %d unexplained/unclassified site(s) of %d"
+                         % (len(bad), n))
+    print("  ok: %d site(s) classified, 0 unexplained" % n)
+
+
 def step_link(es):
     subprocess.run("rm -rf " + STUBS, shell=True, check=True)
     normal = [e for e in es if not e.get("span")]
@@ -157,6 +227,7 @@ def step_link(es):
 
 
 def step_gate(es=None):
+    step_audit(entries())
     subprocess.run([sys.executable, "tools/fixreloc.py"],
                    capture_output=True)
     return subprocess.run([sys.executable, "tools/gate.py"]).returncode
@@ -167,5 +238,7 @@ if __name__ == "__main__":
     steps = sys.argv[1:] or ["compile", "link", "gate"]
     for s in steps:
         {"compile": lambda: step_compile(es),
+         "fit": lambda: [step_compile._fit(e) for e in es],
+         "audit": lambda: step_audit(es),
          "link": lambda: step_link(es),
          "gate": lambda: step_gate(es)}[s]()

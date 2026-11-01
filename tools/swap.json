@@ -2,6 +2,10 @@
 // rva = FA chunk RVA, obj = CL object base name, src = source file,
 // flags = cl options, maps = fitobj relocation remaps ["FROM=TO[+addend]"],
 // patch = fitobj --patch directives, tail = fitobj --tail-accept,
+// provenance = classification of every patch/tail site (see docs/PATCH-FORENSICS.md):
+//   "root-caused: <mechanism>"   construct reproduces FA bytes; patch removed
+//   "toolchain-diff: <evidence>" FA's CL revision differs; patch kept
+//   "unexplained: ..."           counts as FAILING in tools/swap.py audit
 // span = merged multi-chunk span SIZE (mkstub SPLIT_SPAN + fitobj --span),
 // aliases = extra offset symbols the fitted obj must define ["OFF=NAME"]
 // (mkstub re-defines inner gap anchors at their offsets inside the span).
@@ -21,7 +25,6 @@
   {"rva": "0x87610",
    "obj": "DlgSel",
    "src": "src/DialogSelectItem.c",
-   "tail": true,
    "maps": ["_PushShellAlloc@0=?PushShellAlloc@@YGXXZ",
             "_SUB87070=$FA$_t_487070",
             "_lastDial=?lastDial@@3PAUDIAL@@A",
@@ -30,7 +33,6 @@
   {"rva": "0xb5130",
    "obj": "CarefulDiv",
    "src": "src/carefulDiv.c",
-   "tail": true,
    "maps": ["_real_1=$FA$rdata0+0x49c",
             "_g_divFlag=?palColorRGB@@3UT_RGB@@A+0x44c",
             "_g_divRes=?palColorRGB@@3UT_RGB@@A+0x440",
@@ -43,18 +45,22 @@
    "patch": ["0x39,6,",
              "0x44,0,8d4c0500",
              "0x4a,4,8b691f",
-             "0x4d,0,8b0d00000000,2:6:_hintHndl"]},
+             "0x4d,0,8b0d00000000,2:6:_hintHndl"],
+   "provenance": [
+    "patch 0x39/0x4d (hintHndl reload placement): toolchain-diff — FA loads hintHndl a 2nd time late (@0x4c, between f3-load and 03 ea); our CL 10.20.6166 always hoists the 2nd load early after 2b d1. 11 source variants (volatile, hoist-var, post-access, ptr-fusion forms: build/probe/pads/lrsweep.py) all byte-identical CL code; 20 flag sets (lrflags.py): artifacts exist ONLY under /G5-family; no-/G5 builds lack both artifacts but differ structurally (register assignment 8d 0c 92 + [ecx+0x17] base, not FA's [ebp+eax] sib); TU context (neighbor pressure, #pragma optimize) has no effect. FA's shape is a G5-scheduler revision diff.",
+    "patch 0x44/0x4a (fused f3 sib vs materialized addr): toolchain-diff — FA materializes the f3 address (8d 4c 05 00 lea ecx,[ebp+eax] + 8b 69 1f); our CL fuses to sib 8b 6c 05 1f under every source form and /G5 flag; struct-with-declared-offsets is impossible (FA field offsets 0x17/0x1b/0x1f are not 4-aligned). Same revision evidence as 0x39."]},
   {"rva": "0x35e50",
    "obj": "StartGameThread",
    "src": "src/StartGameThread.c",
    "span": "0x80",
    "aliases": ["0x4d=$FA$_t_435e9d", "0x5b=$FA$_t_435eab"],
-   "maps": ["$T107=$FA$rdata0+0x264",
+   "maps": ["$T121=$FA$rdata0+0x264",
             "__imp__GetCurrentThread@0=__imp__GetCurrentThread",
             "__imp__SetThreadPriority@8=__imp__SetThreadPriority",
             "__imp__ExitThread@4=__imp__ExitThread",
             "_g_filterFn=_overflow_ptr",
             "_NullFilter=_unknown_divide_error",
             "_usnfmain=?usnfmain@@YAXXZ"],
-   "patch": ["0x4b,0x37,eb118b45ec50ff150000000083c404c38b65e8c745fcffffffff6a00ff150000000033c08b4df064890d000000005f5e5b8be55dc3,8:6:_g_filterFn,0x1e:6:__imp__ExitThread@4"]}
+   "provenance": ["patch @0x4b (filter funclet GetExceptionInformation): root-caused and ELIMINATED — #include <excpt.h> defines the macro to (struct _EXCEPTION_POINTERS*)_exception_info, which CL treats as an intrinsic inside a __except filter, inlining mov eax,[ebp-0x14] = FA's exact bytes (was 'e8 __GetExceptionInformation' helper call via implicit decl). 2026-11-01. Also renames CL's scope-table symbol $T107→$T121 (map updated to match)."],
+   "patch": []}
 ]

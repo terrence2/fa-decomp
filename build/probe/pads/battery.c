@@ -1,0 +1,255 @@
+/* filler battery (generated; see tools/padcensus.py objs) */
+void f01(void) { __asm {
+} }
+void f02(void) { __asm {
+    _emit 0x90
+} }
+void f03(void) { __asm {
+    _emit 0x90
+    _emit 0x90
+} }
+void f04(void) { __asm {
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+} }
+void f05(void) { __asm {
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+} }
+void f06(void) { __asm {
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+} }
+void f07(void) { __asm {
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+} }
+void f08(void) { __asm {
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+} }
+void f09(void) { __asm {
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+} }
+void f10(void) { __asm {
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+} }
+void f11(void) { __asm {
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+} }
+void f12(void) { __asm {
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+} }
+void f13(void) { __asm {
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+} }
+void f14(void) { __asm {
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+} }
+void f15(void) { __asm {
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+} }
+void f16(void) { __asm {
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+} }
+void f17(void) { __asm {
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+} }
+void g1(void) { long y; __asm { mov y, 1
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+} }
+void g3(void) { long y; __asm { mov y, 2
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+} }
+void g5(void) { long y; __asm { mov y, 3
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+} }
+void g12(void) { long y; __asm { mov y, 4
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+    _emit 0x90
+} }
+
+void (__cdecl *refs[])(void) = {f01,f02,f03,f04,f05,f06,f07,f08,f09,f10,f11,f12,f13,f14,f15,f16,f17,g1,g3,g5,g12};

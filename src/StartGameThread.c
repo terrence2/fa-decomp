@@ -10,11 +10,14 @@
  *   push __except_handler3; push eax; mov fs:[0],esp
  * and always reserves [ebp-0x14] (exception-context slot, filled by
  * __except_handler3 just before the filter runs) + [ebp-0x18] (esp save,
- * restored by the handler path). GetExceptionInformation() compiles as an
- * e8 call to a helper, but FA inlined it as the single `mov eax,[ebp-0x14]`
- * inside the filter funclet -- repaired with a fitobj patch over
- * [0x4b..end), which replaces CL's own filter/handler/tail with FA's bytes
- * verbatim. FA splits the function into 3 compiler units spread over 3
+ * restored by the handler path). GetExceptionInformation() needs the real
+ * declaration from <excpt.h>: its macro expands to (struct
+ * _EXCEPTION_POINTERS *)_exception_info() and VC then treats
+ * _exception_info as an intrinsic inside a __except filter, inlining the
+ * same single `mov eax,[ebp-0x14]` FA has -- no fitobj patch needed
+ * (the excpt.h include changes CL's internal scope-table symbol to $T121,
+ * mapped as before; patch @0x4b eliminated 2026-11-01). FA splits the
+ * function into 3 compiler units spread over 3
  * chunks (0x35e50 main 0x4d, 0x35e9d filter 0xe, 0x35eab handler 0x25):
  * the whole 0x80 span is rebuilt as one object (SPLIT_SPAN); the two inner
  * gap anchors are re-defined as offset aliases.
@@ -23,6 +26,7 @@
  * NullFilter  = _unknown_divide_error @ 0xbb200 = `xor eax,eax; ret`
  * usnfmain    = ?usnfmain@@YAXXZ @ 0x3700
  */
+#include <excpt.h>
 typedef long (__cdecl *filter_fn)(void*);
 extern filter_fn g_filterFn;
 extern void usnfmain(void);

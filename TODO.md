@@ -282,10 +282,12 @@ see Phase 0 notes above.)
   fitobj `--map`. The 5-dword jump table + 8-byte index table sit INSIDE the
   text chunk at CL-identical offsets; CL bakes label-relative DWORDS with
   DIR32 relocs (final = sym+content) — remapping internal `$L*` labels by
-  name works because the link resolves them to the chunk VAs. Chunk has
-  unreferenced FA compiler residue `05 00 00 00 00` beyond the tables —
-  fitobj `--tail-accept` (per-entry `"tail": true` in swap.json) copies it
-  with a printed acknowledgement, staying strict by default.
+  name works because the link resolves them to the chunk VAs. The 12 B
+  beyond the tables (`05 00 00 00 00 8d a4 24 00 00 00 00`) are
+  census-proven FA compiler filler (see docs/PATCH-FORENSICS.md): fitobj
+  validates residue by full composition against the padcensus VOCAB table
+  and copies it without any flag — the old per-case `--tail-accept` is
+  retired.
 - **Swap automation — `tools/swap.py` + `tools/swap.json`** (2026-10-31): the
   whole loop is now ONE command from repo root: `python3 tools/swap.py`
   [= compile + link + gate]. `swap.json` (version-controlled, in tools/) lists
@@ -328,14 +330,14 @@ see Phase 0 notes above.)
   - CL always fuses `*(long*)(p35+rc+0x1f)` into a sib while FA materializes
     `lea ecx,[ebp+eax]` + `[ecx+0x1f]` (+3 B), and CL hoists the MMUnlock
     arg reload (`mov ecx,[hintHndl]`) ~13 insns early vs FA's just-before-
-    the-call — two scheduler choices source order provably cannot switch
-    (volatile/int+ptr/compound/mixed types all retried). New fitobj
-    `--patch OFF,OLDLEN,HEX[,SITE:TYPE:SYMBOL]` (sequential, reloc-shifted,
-    sites inside a deleted span dropped) repairs exactly those 9 bytes:
-    delete our early reload, insert the lea before `add esi,edx`, shrink the
-    fused f3 to `[ecx+0x1f]`, re-insert the reload at FA's slot with its
-    DIR32 site. Also: FA pads some chunks with `mov edi,edi` (8b ff) not
-    just lea-nops — fitobj's no-op set extended.
+    the-call — two scheduler choices our CL 10.20.6166 does not switch via
+    source or flags (hunt 2026-11-01: 11 source variants byte-identical, 20
+    flag sets artifact-/G5-only with FA's shape unmatched, TU context null;
+    see docs/PATCH-FORENSICS.md). Classified **toolchain-diff**
+    (revision-attributed, NOT "provably immovable" — TODO previously
+    overstated this): the 9-byte `--patch` repair stays, with its
+    classification recorded in swap.json `provenance` and enforced by
+    `tools/swap.py audit` (nonzero on unexplained; gate precondition).
 - **StartGameThread @ 0x35e50 (~0x80 B, 3 chunks)**: `src/StartGameThread.c` —
   first SEH pilot AND first pilot whose swap was verified LIVE (the exe
   actually contains compiled decompiled code, not stub bytes). It is a C
@@ -346,9 +348,14 @@ see Phase 0 notes above.)
   __except_handler3 ptr + `mov eax,fs:[__except_list]` + push tryscope +
   push handler3, then `mov [ebx-4],ecx`-style context slot `[ebp-0x14]`
   written by handler3); FA's filter inlines `GetExceptionInformation()` as
-  `mov eax,[ebp-0x14]` while CL emits an `e8` helper call — repaired with a
-  fitobj `--patch` over the whole body tail; CL's static scope table `$T107`
-  maps to FA's `.rdata` copy `$FA$rdata0+0x264`; `_g_filterFn` (the ind-
+  `mov eax,[ebp-0x14]` while our first source emitted an `e8` helper call —
+  ROOT CAUSED and ELIMINATED (2026-11-01, docs/PATCH-FORENSICS.md):
+  `#include <excpt.h>` expands the macro to
+  `(struct _EXCEPTION_POINTERS*)_exception_info`, an intrinsic inside a
+  `__except` filter that CL inlines to FA's exact bytes; the include also
+  renames CL's scope-table symbol `$T107`→`$T121` (same `.rdata` anchor,
+  swap.json map updated). GATE 1 PASS with zero StartGameThread patches.
+  `_g_filterFn` (the ind-
   irection FA's filter reads) is the named data chunk `_overflow_ptr`
   @ 0x586228; FA's own filter is a plain null filter = `_unknown_divide_error`
   @ 0x4bb200.

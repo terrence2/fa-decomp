@@ -37,6 +37,7 @@ sys.path.insert(0, __file__.rsplit("/", 1)[0])
 import coff
 from peref import IMAGE_BASE
 import mkstub
+from padcensus import composition as pad_composition   # filler vocabulary
 
 
 def read_obj(path):
@@ -169,11 +170,18 @@ def main():
     fa_bytes = b"".join(exe[c["off"]:c["off"] + c["size"]] for c in cs)
     fpo = bytes.fromhex(cs[0]["fpo_rec"]) if cs[0].get("fpo_rec") else None
     tail = fa_bytes[len(text["content"]):]
-    if not (set(tail) <= {0x8d, 0x64, 0x24, 0xa4, 0x9b, 0x00,
-                          0x8b, 0xff}):   # lea-nops + mov edi,edi pad
-        if not tailaccept:
-            sys.exit("FATAL: unexplained tail bytes %s beyond CL code for %#x"
-                     % (tail.hex(), rva))
+    # Residue beyond CL code must be FA filler explained by the census table
+    # (tools/padcensus.py VOCAB — full deco of FA/CL-observed pad bytes).
+    # Proven pad compositions copy without a flag; anything else needs
+    # --tail-accept (and a provenance entry in swap.json).
+    comp = pad_composition(tail) if tail else ()
+    if tail and comp is None and not tailaccept:
+        sys.exit("FATAL: unexplained tail bytes %s beyond CL code for %#x "
+                 "(not a census filler composition)" % (tail.hex(), rva))
+    if tail and comp is not None:
+        print("NOTE: tail = census-proven filler %s (%d B) for %#x"
+              % ("+".join(comp), len(tail), rva))
+    elif tail:
         print("NOTE: tail-accept: copying %d unexplained FA tail byte(s) %s "
               "for %#x (code+tables matched; residue is FA's own)"
               % (len(tail), tail.hex(), rva))
