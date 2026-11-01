@@ -5750,5 +5750,308 @@
   "obj": "F24ToPA",
   "src": "src/F24ToPA.c",
   "maps": []
+ },
+ {
+  "rva": 309248,
+  "obj": "SER_Suspend",
+  "src": "src/SER_Suspend.c",
+  "maps": [
+   "_serEnterC=?SER_EnterCriticalCodeForeground@@YAXXZ",
+   "_serLeaveC=?SER_LeaveCriticalCodeForeground@@YAXXZ",
+   "_serSuspLock=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x33c",
+   "_serSuspBase=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x1e4"
+  ]
+ },
+ {
+  "rva": 409168,
+  "obj": "CTRespondToCancelCmdBuf",
+  "src": "src/CTRespondToCancelCmdBuf.c",
+  "maps": [
+   "_ctLoByte=_curThing",
+   "_ctCancelList=_curThing+0x110",
+   "_ctSvcFlag=_serviceTicks+0x104",
+   "_ctRspA=$FA$_t_465ab0",
+   "_ctRspB=$FA$_t_463e90",
+   "_ctRspC=$FA$_t_465ae0"
+  ]
+ },
+ {
+  "rva": 409744,
+  "obj": "CTEval_tgtattackinganyone",
+  "src": "src/CTEval_tgtattackinganyone.c",
+  "maps": []
+ },
+ {
+  "rva": 409872,
+  "obj": "CTEval_tgtclass",
+  "src": "src/CTEval_tgtclass.c",
+  "maps": []
+ },
+ {
+  "rva": 439328,
+  "obj": "MPTimeSync",
+  "src": "src/MPTimeSync.c",
+  "maps": [
+   "_mpSyncFn=?MP_Synchronize@@3P6AXXZA"
+  ]
+ },
+ {
+  "rva": 516656,
+  "obj": "CN_ClearLines",
+  "src": "src/CN_ClearLines.c",
+  "maps": [
+   "_cnLineLo=_buttonBoxes+0x178",
+   "_cnLineHi=_buttonBoxes+0x540"
+  ]
+ },
+ {
+  "rva": 590912,
+  "obj": "SER_RemoteQueueFull",
+  "src": "src/SER_RemoteQueueFull.c",
+  "maps": [
+   "_serQtailG=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x1a4",
+   "_serQheadG=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x190"
+  ]
+ },
+ {
+  "rva": 598080,
+  "obj": "ConnectedStateCallback",
+  "src": "src/ConnectedStateCallback.c",
+  "maps": [
+   "_connStateFlag=?connected_state_flag@@3W4NET_CONNECTED_STATE@@C"
+  ]
+ },
+ {
+  "rva": 670800,
+  "obj": "RMNotify",
+  "src": "src/RMNotify.c",
+  "maps": [
+   "_rmResListLo=?resList@@3PAURES_LIST@@A",
+   "_rmResListEnd=?resList@@3PAURES_LIST@@A+0x67e8",
+   "_rmResEnabled=?resList@@3PAURES_LIST@@A+0x67ec"
+  ]
+ },
+ {
+  "rva": 692432,
+  "obj": "SER_OkToSendPacket",
+  "src": "src/SER_OkToSendPacket.c",
+  "maps": [
+   "_serOkFlag=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x344",
+   "_serQDepth=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x22"
+  ]
+ },
+ {
+  "rva": 695424,
+  "obj": "DiskInit",
+  "src": "src/DiskInit.c",
+  "maps": [
+   "_openHandles0=?openHandles@@3FA",
+   "_handles32G=?handles32@@3PAPAXA"
+  ]
+ },
+ {
+  "rva": 712624,
+  "obj": "NetAllPlayersReady",
+  "src": "src/NetAllPlayersReady.c",
+  "maps": [
+   "_netPlBaseG=?player_list@@3UNET_PLAYER_LIST@@A",
+   "_netPlCntG=?player_list@@3UNET_PLAYER_LIST@@A+0x8"
+  ]
+ },
+ {
+  "rva": 723760,
+  "obj": "InitTmapRemaps",
+  "src": "src/InitTmapRemaps.c",
+  "maps": [
+   "_tmapRemapTbl=?palBlackenDest@@3FA+0x8",
+   "_tmapLayerBase=_currentLayer+0x160"
+  ]
+ },
+ {
+  "rva": 383584,
+  "obj": "GG_QuickBlt",
+  "src": "src/GG_QuickBlt.c",
+  "maps": []
+ },
+ {
+  "rva": 384272,
+  "obj": "WNGWingmen",
+  "src": "src/WNGWingmen.c",
+  "maps": []
+ },
+ {
+  "rva": 387648,
+  "obj": "GRPWingmen",
+  "src": "src/GRPWingmen.c",
+  "maps": []
+ },
+ {
+  "rva": 486768,
+  "obj": "COBv",
+  "src": "src/COBv.c",
+  "maps": [
+   "_packetTicks=?packetTicks@@3PAJA"
+  ]
+ },
+ {
+  "rva": 554656,
+  "obj": "DialogDeselectItem",
+  "src": "src/DialogDeselectItem.c",
+  "maps": [
+   "_DialogDraw@4=?DialogDraw@@YGXPAX@Z",
+   "_PushShellAlloc@0=?PushShellAlloc@@YGXXZ",
+   "_PopShellAlloc@0=?PopShellAlloc@@YGXXZ"
+  ]
+ },
+ {
+  "rva": 739792,
+  "obj": "G_NextTab",
+  "src": "src/G_NextTab.c",
+  "maps": []
+ },
+ {
+  "rva": 759408,
+  "obj": "APFind",
+  "src": "src/APFind.c",
+  "maps": []
+ },
+ {
+  "rva": 71392,
+  "obj": "TurnTowardAngle",
+  "src": "src/TurnTowardAngle.c",
+  "maps": []
+ },
+ {
+  "rva": 187376,
+  "obj": "COLGetInfo",
+  "src": "src/COLGetInfo.c",
+  "maps": [
+   "_mcFlyAll=?mcFlyAll@@3DA"
+  ]
+ },
+ {
+  "rva": 853488,
+  "obj": "do_start_interp",
+  "src": "src/do_start_interp.c",
+  "maps": [
+   "_vector_table=vector_table"
+  ]
+ },
+ {
+  "rva": 854868,
+  "obj": "do_streamer_def",
+  "src": "src/do_streamer_def.c",
+  "maps": [
+   "_vector_table=vector_table"
+  ]
+ },
+ {
+  "rva": 866336,
+  "obj": "Cinit",
+  "src": "src/Cinit.c",
+  "maps": [
+   "_cinitData=$FA$_d_4e7000",
+   "_initterm=$FA$_t_4d3990"
+  ]
+ },
+ {
+  "rva": 901504,
+  "obj": "HeapInit",
+  "src": "src/HeapInit.c",
+  "maps": [
+   "_impHeapCreate=__imp__HeapCreate",
+   "_impHeapDestroy=__imp__HeapDestroy",
+   "_heapHelper=$FA$_t_4ddff0"
+  ]
+ },
+ {
+  "rva": 755168,
+  "obj": "APEndArrestorCatch",
+  "src": "src/APEndArrestorCatch.c",
+  "maps": []
+ },
+ {
+  "rva": 797160,
+  "obj": "PAToF24",
+  "src": "src/PAToF24.c",
+  "maps": []
+ },
+ {
+  "rva": 265184,
+  "obj": "CPGetContact",
+  "src": "src/CPGetContact.c",
+  "maps": []
+ },
+ {
+  "rva": 268672,
+  "obj": "InitMovieContext",
+  "src": "src/InitMovieContext.c",
+  "maps": []
+ },
+ {
+  "rva": 519152,
+  "obj": "BriefMap",
+  "src": "src/BriefMap.c",
+  "maps": [
+   "_briefHelper=$FA$_t_4225b1"
+  ]
+ },
+ {
+  "rva": 520320,
+  "obj": "MyFilterProc",
+  "src": "src/MyFilterProc.c",
+  "maps": []
+ },
+ {
+  "rva": 611328,
+  "obj": "spxfactory",
+  "src": "src/spxfactory.c",
+  "maps": []
+ },
+ {
+  "rva": 616160,
+  "obj": "G_UHlineFlip",
+  "src": "src/G_UHlineFlip.c",
+  "maps": []
+ },
+ {
+  "rva": 624400,
+  "obj": "fnc_toCallDuringAnswer",
+  "src": "src/fnc_toCallDuringAnswer.c",
+  "maps": [
+   "_appIO=?appIO@@3P6AJJPAD@ZA"
+  ]
+ },
+ {
+  "rva": 704256,
+  "obj": "FileSize",
+  "src": "src/FileSize.c",
+  "maps": [
+   "_vdoExitCode=?vdoExitCode@@3FA"
+  ]
+ },
+ {
+  "rva": 704656,
+  "obj": "OpenVDOFile",
+  "src": "src/OpenVDOFile.c",
+  "maps": [
+   "_vdoExitCode=?vdoExitCode@@3FA"
+  ]
+ },
+ {
+  "rva": 869824,
+  "obj": "CallMemberFunction2",
+  "src": "src/CallMemberFunction2.c",
+  "maps": []
+ },
+ {
+  "rva": 902208,
+  "obj": "GET_RTERRMSG",
+  "src": "src/GET_RTERRMSG.c",
+  "maps": [
+   "_rterrtab=__amblksiz+0x4",
+   "_rterrmsg=__amblksiz+0x8",
+   "_adbgmsg=__adbgmsg"
+  ]
  }
 ]
