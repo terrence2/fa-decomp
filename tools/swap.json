@@ -5460,5 +5460,295 @@
   "obj": "MaxGAtAlt",
   "src": "src/MaxGAtAlt.c",
   "maps": []
+ },
+ {
+  "rva": 880848,
+  "obj": "MTinitlocks",
+  "src": "src/MTinitlocks.c",
+  "maps": [
+   "_impInitializeCriticalSection=__imp__InitializeCriticalSection"
+  ]
+ },
+ {
+  "rva": 914896,
+  "obj": "Callnewh",
+  "src": "src/Callnewh.c",
+  "maps": [
+   "__pnhHeap=?_pnhHeap@@3P6AHI@ZA"
+  ]
+ },
+ {
+  "rva": 925552,
+  "obj": "Ltoa",
+  "src": "src/Ltoa.c",
+  "maps": [
+   "_ltoa_helper=$FA$_t_4e1f10"
+  ]
+ },
+ {
+  "rva": 925856,
+  "obj": "Ui64toa",
+  "src": "src/Ui64toa.c",
+  "maps": [
+   "_x64toa_5@20=$FA$_t_4e2000"
+  ]
+ },
+ {
+  "rva": 873120,
+  "obj": "Getdcwd",
+  "src": "src/Getdcwd.c",
+  "maps": []
+ },
+ {
+  "rva": 901632,
+  "obj": "FFMsgBanner",
+  "src": "src/FFMsgBanner.c",
+  "maps": []
+ },
+ {
+  "rva": 914624,
+  "obj": "ValidateExecute",
+  "src": "src/ValidateExecute.c",
+  "maps": [
+   "_impIsBadCodePtr=__imp__IsBadCodePtr"
+  ]
+ },
+ {
+  "rva": 870758,
+  "obj": "NLGNotify",
+  "src": "src/NLGNotify.c",
+  "maps": []
+ },
+ {
+  "rva": 871221,
+  "obj": "SehLongjmpUnwind",
+  "src": "src/SehLongjmpUnwind.c",
+  "maps": []
+ },
+ {
+  "rva": 827480,
+  "obj": "do_nop",
+  "src": "src/do_nop.c",
+  "maps": [
+   "_vector_table=vector_table"
+  ]
+ },
+ {
+  "rva": 853884,
+  "obj": "SetFlatColor",
+  "src": "src/SetFlatColor.c",
+  "maps": [
+   "_gouraudOn=gouraudOn"
+  ]
+ },
+ {
+  "rva": 824209,
+  "obj": "Clampit",
+  "src": "src/Clampit.c",
+  "maps": []
+ },
+ {
+  "rva": 833032,
+  "obj": "CodePnt",
+  "src": "src/CodePnt.c",
+  "maps": [
+   "_code_pnt=code_pnt"
+  ]
+ },
+ {
+  "rva": 6016,
+  "obj": "NetSlaveShutdown",
+  "src": "src/NetSlaveShutdown.c",
+  "maps": [
+   "_socket_close_all=?socket_close_all@@YAXXZ",
+   "_net_free_player_list=?net_free_player_list@@YAXXZ",
+   "_net_set_callback_players=?net_set_callback_players@@YAXPAXP6AX0W4PLAYER_ACTION@@PADPAUNET_ADDRESS@@J@Z@Z",
+   "_net_set_callback_connected=?net_set_callback_connected@@YAXPAXP6AX0W4NET_CONNECTED_STATE@@@Z@Z"
+  ]
+ },
+ {
+  "rva": 72592,
+  "obj": "InBounds",
+  "src": "src/InBounds.c",
+  "maps": []
+ },
+ {
+  "rva": 73568,
+  "obj": "Strncpy",
+  "src": "src/Strncpy.c",
+  "maps": []
+ },
+ {
+  "rva": 74496,
+  "obj": "SampleUpdate",
+  "src": "src/SampleUpdate.c",
+  "maps": []
+ },
+ {
+  "rva": 75504,
+  "obj": "GetKey",
+  "src": "src/GetKey.c",
+  "maps": [
+   "_menuSelecting=?menuSelecting@@3DA",
+   "_dialogOn=?dialogOn@@3DA"
+  ]
+ },
+ {
+  "rva": 95712,
+  "obj": "InputCalibrate",
+  "src": "src/InputCalibrate.c",
+  "maps": [
+   "_deviceProcs=?deviceProcs@@3PAP6AFFF@ZA",
+   "_mouseShown=?mouseShown@@3FA",
+   "_ShellShowMouse@0=?ShellShowMouse@@YGXXZ"
+  ]
+ },
+ {
+  "rva": 99424,
+  "obj": "MSGHide",
+  "src": "src/MSGHide.c",
+  "maps": [
+   "_lastWeaponButton=?lastWeaponButton@@3DA",
+   "_msgRing=?lastWeaponButton@@3DA+0x64c8"
+  ]
+ },
+ {
+  "rva": 209184,
+  "obj": "BasicLinkSound",
+  "src": "src/BasicLinkSound.c",
+  "maps": [
+   "_radioVol=?radioVol@@3GA",
+   "_SoundOn@60=?SoundOn@@YGFPADFFDGFFDFFGGFEF@Z"
+  ]
+ },
+ {
+  "rva": 213776,
+  "obj": "SetupLoopSounds",
+  "src": "src/SetupLoopSounds.c",
+  "maps": [
+   "_loopSnd=?loopSnd@@3PAULOOP_SND@@A",
+   "_mm_page_size=?mm_page_size@@3KA"
+  ]
+ },
+ {
+  "rva": 219248,
+  "obj": "MMShutdown",
+  "src": "src/MMShutdown.c",
+  "maps": [
+   "_mm_initialized=?mm_initialized@@3DA",
+   "_mm_handles=?mm_handles@@3PAUT_HANDLE@@A",
+   "_mmFree=$FA$_t_4d4880"
+  ]
+ },
+ {
+  "rva": 220608,
+  "obj": "MMAccessE",
+  "src": "src/MMAccessE.c",
+  "maps": []
+ },
+ {
+  "rva": 251984,
+  "obj": "CPRadarRange",
+  "src": "src/CPRadarRange.c",
+  "maps": [
+   "_ifmScale=?ifmScale@@3JA"
+  ]
+ },
+ {
+  "rva": 254560,
+  "obj": "CPBombRange",
+  "src": "src/CPBombRange.c",
+  "maps": []
+ },
+ {
+  "rva": 342464,
+  "obj": "RepairTime",
+  "src": "src/RepairTime.c",
+  "maps": []
+ },
+ {
+  "rva": 380272,
+  "obj": "pkt_build_sync",
+  "src": "src/pkt_build_sync.c",
+  "maps": [
+   "_pkt_set_header=?pkt_set_header@@YAXHPAUNET_PKT@@H@Z"
+  ]
+ },
+ {
+  "rva": 380304,
+  "obj": "pkt_build_sync_reply",
+  "src": "src/pkt_build_sync_reply.c",
+  "maps": [
+   "_pkt_set_header=?pkt_set_header@@YAXHPAUNET_PKT@@H@Z"
+  ]
+ },
+ {
+  "rva": 380336,
+  "obj": "pkt_build_play_game",
+  "src": "src/pkt_build_play_game.c",
+  "maps": [
+   "_pkt_set_header=?pkt_set_header@@YAXHPAUNET_PKT@@H@Z"
+  ]
+ },
+ {
+  "rva": 405792,
+  "obj": "CallUtilProc",
+  "src": "src/CallUtilProc.c",
+  "maps": [
+   "_utilProcLookup@8=$FA$_t_4630f0"
+  ]
+ },
+ {
+  "rva": 409504,
+  "obj": "CTVarDiff",
+  "src": "src/CTVarDiff.c",
+  "maps": []
+ },
+ {
+  "rva": 469808,
+  "obj": "OBJProc",
+  "src": "src/OBJProc.c",
+  "maps": [
+   "_OBJDamageProc=?OBJDamageProc@@YAXPAUHIT_OBJ_DATA@@@Z"
+  ]
+ },
+ {
+  "rva": 489648,
+  "obj": "InitSurfaceDesc",
+  "src": "src/InitSurfaceDesc.c",
+  "maps": []
+ },
+ {
+  "rva": 550288,
+  "obj": "DialogDraw",
+  "src": "src/DialogDraw.c",
+  "maps": [
+   "_PushShellAlloc@0=?PushShellAlloc@@YGXXZ",
+   "_PopShellAlloc@0=?PopShellAlloc@@YGXXZ"
+  ]
+ },
+ {
+  "rva": 669712,
+  "obj": "RMUnlocate",
+  "src": "src/RMUnlocate.c",
+  "maps": []
+ },
+ {
+  "rva": 696144,
+  "obj": "Seek",
+  "src": "src/Seek.c",
+  "maps": []
+ },
+ {
+  "rva": 704224,
+  "obj": "FileExists",
+  "src": "src/FileExists.c",
+  "maps": []
+ },
+ {
+  "rva": 797136,
+  "obj": "F24ToPA",
+  "src": "src/F24ToPA.c",
+  "maps": []
  }
 ]
