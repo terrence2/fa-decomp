@@ -259,7 +259,7 @@ see Phase 0 notes above.)
   decompiled TUs must be address-contiguous runs (unchanged — enforced per-TU at
   Phase-4 pilot time).
 
-### 6. Phase 4 — pilot decompilations — ✅ Pilots 1–3 PASSED (2026-10-31)
+### 6. Phase 4 — pilot decompilations — ✅ Pilots 1–5 PASSED (2026-10-31)
 - **WRFogLayerUpdate @ 0xb06c0 (0x50 B)**: `src/WRFogLayerUpdate.c` — cl 4.2
   `/c /O2 /Gy /G5` reproduced FA codegen on the FIRST attempt (fastcall
   `Rand(51)` = `@Rand@4` resolves to the callee stub anchor).
@@ -272,6 +272,20 @@ see Phase 0 notes above.)
 - **WordToString @ 0x11780 (0x10 B)**: `src/WordToString.c` — fastcall→stdcall
   thunk (`push 0x20; push -1; push edx; push ecx; call _DoWordToString@16`);
   matched first try.
+- **DialogSelectItem @ 0x87610 (0x90 B)**: `src/DialogSelectItem.c` — FIRST
+  switch (8 cases) + first .data refs. Key steps to match FA codegen: case
+  values map to 5 dedup'd jump-table slots (1,5→body1; 3→b16=1; 8→b30=1);
+  default `goto`s the SHARED PopShellAlloc epilogue (past the firstDraw/
+  DialogDraw check); callee SUB87070 is CDECL (FA has `add esp,4`) with a
+  16-BIT param (avoids CL's redundant `xor eax,eax`); data refs resolve to
+  real SMS symbol names (`?lastDial@@3PAUDIAL@@A`, `_firstDraw`) via
+  fitobj `--map`. The 5-dword jump table + 8-byte index table sit INSIDE the
+  text chunk at CL-identical offsets; CL bakes label-relative DWORDS with
+  DIR32 relocs (final = sym+content) — remapping internal `$L*` labels by
+  name works because the link resolves them to the chunk VAs. Chunk has
+  unreferenced FA compiler residue `05 00 00 00 00` beyond the tables —
+  fitobj `--tail-accept` (per-entry `"tail": true` in swap.json) copies it
+  with a printed acknowledgement, staying strict by default.
 - **Swap automation — `tools/swap.py` + `tools/swap.json`** (2026-10-31): the
   whole loop is now ONE command from repo root: `python3 tools/swap.py`
   [= compile + link + gate]. `swap.json` (version-controlled, in tools/) lists
@@ -287,8 +301,17 @@ see Phase 0 notes above.)
   group → `mkrsp.py --replace <va>=<fit.obj>` → pdb-seed link cycle →
   `fixreloc.py` → `gate.py`.
 - **Flag baseline for FA**: `/O2 /Gy /G5`.
-- Remaining pilots: throw-site C++ member, more complex codegen (switches,
-  loops, floats), then scale up to bulk decompilation.
+- **carefulDiv @ 0xb5130 (0x80 B)**: `src/carefulDiv.c` — first x87 pilot
+  and first NAKED decompilation. The chunk's prologue splits
+  `mov eax,[esp+0x10]` between `push ebp` and `mov ebp,esp` (unreachable via
+  C statements) and the chunk has NO FPO record ⇒ original is
+  `__declspec(naked)`: whole body replicated verbatim in inline asm
+  (fxam/fstsw classification vs g_divCls[], fld/fdivp, *out store, fild
+  flag return). Const 1.0 maps to `$FA$rdata0+0x49c`; flag/res live inside
+  the `?palColorRGB@@3UT_RGB@@A` BSS chunk (+0x44c/+0x440); the class table
+  follows float `?rFloor@@3MA` (+4).
+- Remaining pilots: throw-site C++ member, loops, then scale up to bulk
+  decompilation.
 
 ### 7. Phase 5 — hardening
 - Progress tracker JSON (N/3829 functions), CI gate, update `MSVC_VERSION.md` with the
