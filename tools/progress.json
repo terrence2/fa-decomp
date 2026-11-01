@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 162,
- "chunks_done": 162,
- "bytes_done": 3321,
+ "done": 185,
+ "chunks_done": 185,
+ "bytes_done": 3828,
  "bytes_total": 933612,
- "bytes_pct": 0.36,
+ "bytes_pct": 0.41,
  "waves": [
   {
    "date": "2026-11-01",
@@ -214,6 +214,35 @@
     "0x7eb10",
     "0x84be0",
     "0x87880"
+   ]
+  },
+  {
+   "date": "2026-11-01",
+   "note": "4d: 23 fns \u2014 MMAt family, __positive/wcslen/statusfp asm, ismbb+preload forwarders, SUPoly interior call; GATE 1 PASS",
+   "rvas": [
+    "0x35e00",
+    "0x35e10",
+    "0x35e20",
+    "0x35e30",
+    "0x35e40",
+    "0x878a0",
+    "0x878f0",
+    "0x87910",
+    "0x96540",
+    "0x96660",
+    "0x96680",
+    "0x9b1d0",
+    "0xaa240",
+    "0xc2100",
+    "0xd9130",
+    "0xd94d0",
+    "0xdb740",
+    "0xdb760",
+    "0xdb780",
+    "0xdb7a0",
+    "0xdf610",
+    "0xdf630",
+    "0xe0be0"
    ]
   }
  ],

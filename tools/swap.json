@@ -975,5 +975,143 @@
    "obj": "Info2640Preload",
    "src": "src/Info2640Preload.c",
    "maps": ["_PushShellAlloc_x@0=?PushShellAlloc@@YGXXZ", "_PopShellAlloc_x@0=?PopShellAlloc@@YGXXZ", "@h2640@4=$FA$_t_487960"]
+  },
+  {
+   "rva": "0x35e00",
+   "obj": "MMByteAt",
+   "src": "src/MMByteAt.c",
+   "maps": []
+  },
+  {
+   "rva": "0x35e10",
+   "obj": "MMWordAt",
+   "src": "src/MMWordAt.c",
+   "maps": []
+  },
+  {
+   "rva": "0x35e20",
+   "obj": "MMUWordAt",
+   "src": "src/MMUWordAt.c",
+   "maps": []
+  },
+  {
+   "rva": "0x35e30",
+   "obj": "MMLongAt",
+   "src": "src/MMLongAt.c",
+   "maps": []
+  },
+  {
+   "rva": "0x35e40",
+   "obj": "MMULongAt",
+   "src": "src/MMULongAt.c",
+   "maps": []
+  },
+  {
+   "rva": "0xd9130",
+   "obj": "XcptInitPtd",
+   "src": "src/XcptInitPtd.c",
+   "maps": ["_XcptActTab=__XcptActTab"]
+  },
+  {
+   "rva": "0xd94d0",
+   "obj": "StatusPositive",
+   "src": "src/StatusPositive.c",
+   "maps": []
+  },
+  {
+   "rva": "0xdb740",
+   "obj": "ISMBBGraph",
+   "src": "src/ISMBBGraph.c",
+   "maps": ["_ismbbType_x=$FA$_t_4db810"]
+  },
+  {
+   "rva": "0xdb760",
+   "obj": "ISMBBPrint",
+   "src": "src/ISMBBPrint.c",
+   "maps": ["_ismbbType_x=$FA$_t_4db810"]
+  },
+  {
+   "rva": "0xdb780",
+   "obj": "ISMBBPunct",
+   "src": "src/ISMBBPunct.c",
+   "maps": ["_ismbbType_x=$FA$_t_4db810"]
+  },
+  {
+   "rva": "0xdb7a0",
+   "obj": "ISMBBLead",
+   "src": "src/ISMBBLead.c",
+   "maps": ["_ismbbType_x=$FA$_t_4db810"]
+  },
+  {
+   "rva": "0x878a0",
+   "obj": "Info640Preload",
+   "src": "src/Info640Preload.c",
+   "maps": ["_PushShellAlloc_x@0=?PushShellAlloc@@YGXXZ", "_PopShellAlloc_x@0=?PopShellAlloc@@YGXXZ", "@h2640@4=$FA$_t_487960"]
+  },
+  {
+   "rva": "0x878f0",
+   "obj": "SndPrefPreload",
+   "src": "src/SndPrefPreload.c",
+   "maps": ["_PushShellAlloc_x@0=?PushShellAlloc@@YGXXZ", "_PopShellAlloc_x@0=?PopShellAlloc@@YGXXZ", "@h2640@4=$FA$_t_487960"]
+  },
+  {
+   "rva": "0x87910",
+   "obj": "ChoosePreload",
+   "src": "src/ChoosePreload.c",
+   "maps": ["_PushShellAlloc_x@0=?PushShellAlloc@@YGXXZ", "_PopShellAlloc_x@0=?PopShellAlloc@@YGXXZ", "@h2640@4=$FA$_t_487960"]
+  },
+  {
+   "rva": "0xaa240",
+   "obj": "ClearCachedFilenames",
+   "src": "src/ClearCachedFilenames.c",
+   "maps": ["_NamesShutdown=_NamesShutdown@0"]
+  },
+  {
+   "rva": "0x96540",
+   "obj": "G_SetScaleMax",
+   "src": "src/G_SetScaleMax.c",
+   "maps": []
+  },
+  {
+   "rva": "0x96660",
+   "obj": "G_SPolygonFlip",
+   "src": "src/G_SPolygonFlip.c",
+   "maps": []
+  },
+  {
+   "rva": "0x96680",
+   "obj": "G_SUPolygonFlip",
+   "src": "src/G_SUPolygonFlip.c",
+   "maps": ["@G_SUPolygon2@8=@G_SUPolygon@8"]
+  },
+  {
+   "rva": "0x9b1d0",
+   "obj": "TakeoffSpeed",
+   "src": "src/TakeoffSpeed.c",
+   "maps": []
+  },
+  {
+   "rva": "0xc2100",
+   "obj": "T_ShutdownDatabase",
+   "src": "src/T_ShutdownDatabase.c",
+   "maps": []
+  },
+  {
+   "rva": "0xdf610",
+   "obj": "Statusfp",
+   "src": "src/Statusfp.c",
+   "maps": ["_sfpHelper=$FA$_t_4df830"]
+  },
+  {
+   "rva": "0xdf630",
+   "obj": "Clearfp",
+   "src": "src/Clearfp.c",
+   "maps": ["_cfpHelper=$FA$_t_4df830"]
+  },
+  {
+   "rva": "0xe0be0",
+   "obj": "Wcslen",
+   "src": "src/Wcslen.c",
+   "maps": []
   }
 ]
