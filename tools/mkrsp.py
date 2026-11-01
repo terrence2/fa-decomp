@@ -16,7 +16,7 @@ import os
 import sys
 
 STUBS = "build/stubs"
-IDATA = "Z:/work/build/m0/../idata"
+IDATA = "../build/idata"
 
 
 def main():

@@ -26,7 +26,9 @@ import sys
 sys.path.insert(0, __file__.rsplit("/", 1)[0])
 from peref import IMAGE_BASE
 
-STUBS = "build/stubs_d"
+# short dirname: the rsp ceiling (~32KB, LNK1104 truncated-path) is crossed
+# at ~423 entries with build/stubs_d; a short name saves ~2.5KB
+STUBS = "build/st"
 RSP = "build/m0/m0linkD.rsp"
 DOCKER = (
     "docker run --rm --user %(uid)d:%(gid)d -e HOME=/tmp -e TZ=UTC "
@@ -223,7 +225,9 @@ def step_link(es):
     subprocess.run("rm -rf " + STUBS, shell=True, check=True)
     normal = [e for e in es if not e.get("span")]
     spanned = [e for e in es if e.get("span")]
-    env = dict(os.environ, STUB_DIR=STUBS,
+    # tail word (exe 0x131a09): deterministic function of the swap set and
+    # GROUP_SIZE; swept at 423 entries — GS=13 reads 00 00 (wave-13).
+    env = dict(os.environ, STUB_DIR=STUBS, GROUP_SIZE="13",
                SPLIT_AT=",".join("%#x" % (e["rva"] + IMAGE_BASE)
                                  for e in normal),
                SPLIT_SPAN=",".join("%#x:%s" % (e["rva"] + IMAGE_BASE,

@@ -2737,5 +2737,311 @@
   "maps": [
    "@dsSurfUnlockQ@4=?Unlock@CDirDrawSurface@@QAEHXZ"
   ]
+ },
+ {
+  "rva": 122784,
+  "obj": "ShowDDError",
+  "src": "src/ShowDDError.c"
+ },
+ {
+  "rva": 301744,
+  "obj": "MonoPuts",
+  "src": "src/MonoPuts.c"
+ },
+ {
+  "rva": 378848,
+  "obj": "pkt_send_sync",
+  "src": "src/pkt_send_sync.c",
+  "maps": [
+   "_pkt_send_type=?pkt_send_type@@YADHH@Z"
+  ]
+ },
+ {
+  "rva": 395744,
+  "obj": "RefCheckCD",
+  "src": "src/RefCheckCD.c"
+ },
+ {
+  "rva": 434096,
+  "obj": "SetVESABank",
+  "src": "src/SetVESABank.c"
+ },
+ {
+  "rva": 435824,
+  "obj": "CleanVideo",
+  "src": "src/CleanVideo.c"
+ },
+ {
+  "rva": 435840,
+  "obj": "InitAudio",
+  "src": "src/InitAudio.c"
+ },
+ {
+  "rva": 435856,
+  "obj": "CleanAudio",
+  "src": "src/CleanAudio.c"
+ },
+ {
+  "rva": 495088,
+  "obj": "G_FindClose",
+  "src": "src/G_FindClose.c",
+  "maps": [
+   "_impFindCloseIAT=__imp__FindClose",
+   "_GFindCloseClean=$FA$_t_4d4880"
+  ]
+ },
+ {
+  "rva": 568640,
+  "obj": "DrawYes320",
+  "src": "src/DrawYes320.c",
+  "maps": [
+   "_PushShellAlloc@0=?PushShellAlloc@@YGXXZ",
+   "_PopShellAlloc@0=?PopShellAlloc@@YGXXZ",
+   "_Do320Button@8=?Do320Button@@YGXPAUT_HANDLE@@PAUACTION@@@Z",
+   "_drawYesRes=_checkRightButton+0x3e8"
+  ]
+ },
+ {
+  "rva": 568688,
+  "obj": "DrawNo320",
+  "src": "src/DrawNo320.c",
+  "maps": [
+   "_PushShellAlloc@0=?PushShellAlloc@@YGXXZ",
+   "_PopShellAlloc@0=?PopShellAlloc@@YGXXZ",
+   "_Do320Button@8=?Do320Button@@YGXPAUT_HANDLE@@PAUACTION@@@Z",
+   "_drawNoRes=_checkRightButton+0x3f4"
+  ]
+ },
+ {
+  "rva": 568736,
+  "obj": "DrawCancel320",
+  "src": "src/DrawCancel320.c",
+  "maps": [
+   "_PushShellAlloc@0=?PushShellAlloc@@YGXXZ",
+   "_PopShellAlloc@0=?PopShellAlloc@@YGXXZ",
+   "_Do320Button@8=?Do320Button@@YGXPAUT_HANDLE@@PAUACTION@@@Z",
+   "_drawCancelRes=_checkRightButton+0x400"
+  ]
+ },
+ {
+  "rva": 568784,
+  "obj": "DrawDone320",
+  "src": "src/DrawDone320.c",
+  "maps": [
+   "_PushShellAlloc@0=?PushShellAlloc@@YGXXZ",
+   "_PopShellAlloc@0=?PopShellAlloc@@YGXXZ",
+   "_Do320Button@8=?Do320Button@@YGXPAUT_HANDLE@@PAUACTION@@@Z",
+   "_drawDoneRes=_checkRightButton+0x410"
+  ]
+ },
+ {
+  "rva": "0x8ae00",
+  "obj": "DrawOK320",
+  "src": "src/DrawOK320.c",
+  "maps": [
+   "_PushShellAlloc_x@0=?PushShellAlloc@@YGXXZ",
+   "_PopShellAlloc_x@0=?PopShellAlloc@@YGXXZ",
+   "_Do320Button@8=?Do320Button@@YGXPAUT_HANDLE@@PAUACTION@@@Z",
+   "_ok320PicName=_checkRightButton+0x41c"
+  ]
+ },
+ {
+  "rva": "0x972e0",
+  "obj": "G_CopyDriverName",
+  "src": "src/G_CopyDriverName.c",
+  "maps": [
+   "_driverNameBuf_=_clipHeight+0x8"
+  ]
+ },
+ {
+  "rva": "0x9f070",
+  "obj": "SingleFilename",
+  "src": "src/SingleFilename.c",
+  "maps": [
+   "_singleFilenameBuf_=?stereoSeparation@@3GA+0x8"
+  ]
+ },
+ {
+  "rva": "0xa2e30",
+  "obj": "socket_flush_close",
+  "src": "src/socket_flush_close.c",
+  "maps": [
+   "_socketCloseX_=$FA$_t_4a2e50"
+  ]
+ },
+ {
+  "rva": "0xa2e40",
+  "obj": "socket_close",
+  "src": "src/socket_close.c",
+  "maps": [
+   "_socketCloseX_=$FA$_t_4a2e50"
+  ]
+ },
+ {
+  "rva": "0xa57d0",
+  "obj": "T_VietRicePaddy2Proc",
+  "src": "src/T_VietRicePaddy2Proc.c",
+  "maps": [
+   "_vietPaddy1X_=?T_VietRicePaddy1Proc@@YAXJ@Z"
+  ]
+ },
+ {
+  "rva": "0xa57f0",
+  "obj": "T_VietRicePaddy3Proc",
+  "src": "src/T_VietRicePaddy3Proc.c",
+  "maps": [
+   "_vietPaddy1X_=?T_VietRicePaddy1Proc@@YAXJ@Z"
+  ]
+ },
+ {
+  "rva": "0xa5810",
+  "obj": "T_VietPalms1Proc",
+  "src": "src/T_VietPalms1Proc.c",
+  "maps": [
+   "_forestProcX_=?T_ForestProc@@YAXJ@Z"
+  ]
+ },
+ {
+  "rva": "0xa5830",
+  "obj": "T_VietPalms2Proc",
+  "src": "src/T_VietPalms2Proc.c",
+  "maps": [
+   "_forestProcX_=?T_ForestProc@@YAXJ@Z"
+  ]
+ },
+ {
+  "rva": "0xa5850",
+  "obj": "T_VietPalms3Proc",
+  "src": "src/T_VietPalms3Proc.c",
+  "maps": [
+   "_forestProcX_=?T_ForestProc@@YAXJ@Z"
+  ]
+ },
+ {
+  "rva": "0xa5870",
+  "obj": "T_VietTrees1Proc",
+  "src": "src/T_VietTrees1Proc.c",
+  "maps": [
+   "_forestProcX_=?T_ForestProc@@YAXJ@Z"
+  ]
+ },
+ {
+  "rva": "0xa5890",
+  "obj": "T_VietTrees2Proc",
+  "src": "src/T_VietTrees2Proc.c",
+  "maps": [
+   "_forestProcX_=?T_ForestProc@@YAXJ@Z"
+  ]
+ },
+ {
+  "rva": "0xa58b0",
+  "obj": "T_VietTrees3Proc",
+  "src": "src/T_VietTrees3Proc.c",
+  "maps": [
+   "_forestProcX_=?T_ForestProc@@YAXJ@Z"
+  ]
+ },
+ {
+  "rva": 678096,
+  "obj": "VietWaterBuffaloProc",
+  "src": "src/VietWaterBuffaloProc.c",
+  "maps": [
+   "_T_MooseProc=?T_MooseProc@@YAXJ@Z"
+  ]
+ },
+ {
+  "rva": 705856,
+  "obj": "VDOAlloc",
+  "src": "src/VDOAlloc.c",
+  "maps": []
+ },
+ {
+  "rva": 705872,
+  "obj": "VDOFree",
+  "src": "src/VDOFree.c",
+  "maps": []
+ },
+ {
+  "rva": 767424,
+  "obj": "SphereOverflow",
+  "src": "src/SphereOverflow.c",
+  "maps": []
+ },
+ {
+  "rva": 767664,
+  "obj": "LineOverflow2",
+  "src": "src/LineOverflow2.c",
+  "maps": []
+ },
+ {
+  "rva": 869792,
+  "obj": "CallMemberFunction0",
+  "src": "src/CallMemberFunction0.c",
+  "maps": []
+ },
+ {
+  "rva": 873072,
+  "obj": "Getcwd",
+  "src": "src/Getcwd.c",
+  "maps": []
+ },
+ {
+  "rva": 876208,
+  "obj": "Fflush",
+  "src": "src/Fflush.c",
+  "maps": [
+   "__allflush=$FA$_t_4d5fb0"
+  ]
+ },
+ {
+  "rva": 877104,
+  "obj": "AmsgExit",
+  "src": "src/AmsgExit.c",
+  "maps": [
+   "_msgFlag=__aexit_rtn+0x4",
+   "_aexit_rtn=__aexit_rtn"
+  ]
+ },
+ {
+  "rva": 912912,
+  "obj": "UnlockFhandle",
+  "src": "src/UnlockFhandle.c",
+  "maps": [
+   "_fhLockBase=__crtheap+0x4",
+   "_impLeaveCS=__imp__LeaveCriticalSection"
+  ]
+ },
+ {
+  "rva": 914256,
+  "obj": "CxxRestoreUnhEF",
+  "src": "src/CxxRestoreUnhEF.c",
+  "maps": [
+   "_oldCxxFilter=?dbaseLow@@3PAEA+0x2874",
+   "_impSetUnhEF=__imp__SetUnhandledExceptionFilter"
+  ]
+ },
+ {
+  "rva": 917952,
+  "obj": "Ungetc",
+  "src": "src/Ungetc.c",
+  "maps": []
+ },
+ {
+  "rva": 52064,
+  "obj": "CheckItem",
+  "src": "src/CheckItem.c",
+  "maps": [
+   "@itemHelper4@4=$FA$_t_40cb80"
+  ]
+ },
+ {
+  "rva": 70480,
+  "obj": "KeyAvail",
+  "src": "src/KeyAvail.c",
+  "maps": [
+   "_kbCount=?kbCount@@3GA",
+   "_kbHeadPtr=?kbHeadPtr@@3GA",
+   "_kbBuffer=?kbBuffer@@3PAGA"
+  ]
  }
 ]
