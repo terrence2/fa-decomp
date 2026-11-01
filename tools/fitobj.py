@@ -199,6 +199,29 @@ def main():
             site = struct.unpack_from("<i", text["content"], o)[0]
             struct.pack_into("<i", text["content"], o, site + d_)
         relocs.append((o, v, t))
+    # Byte-verify (wave-2 lesson): outside the reloc'd dword sites the
+    # patched CL code must equal FA's chunk bytes exactly — the content
+    # dwords a link fixes up are remap/label values (exempt), everything
+    # else is compiler output. Without this, a semantically reordered
+    # object with the right size/reloc sites fits silently and only fails
+    # at Gate 1.
+    mask = bytearray(len(text["content"]))
+    for o, _, _ in relocs:
+        mask[o:o + 4] = b"\x01" * 4
+    diffs = [i for i in range(min(len(text["content"]), len(fa_bytes)))
+             if text["content"][i] != fa_bytes[i] and not mask[i]]
+    if diffs:
+        runs = []
+        for i in diffs:
+            if runs and i == runs[-1][1]:
+                runs[-1][1] = i + 1
+            else:
+                runs.append([i, i + 1])
+        sys.exit("FATAL: CL code != FA bytes at %d non-reloc byte(s) for "
+                 "%#x: %s%s" % (len(diffs), rva, ", ".join(
+                     "%#x-%#x" % (a, b - 1) for a, b in runs[:6]),
+                 "  (add a census-proven tail or --patch if this is an FA "
+                 "codegen delta)" if len(diffs) > 4 else "  (fix the source)"))
     extra = [(an, ao, 1, coff.SYM_EXTERNAL, coff.TYPE_FUNCTION, b"")
              for ao, an in aliases]
     # re-define CL's internally-referenced labels against the fitted .text

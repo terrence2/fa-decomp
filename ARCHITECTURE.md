@@ -154,9 +154,9 @@ docker run --rm --user $(id -u):$(id -g) -e HOME=/tmp -e TZ=UTC \
            Z:/work/src/<Name>.c /FoZ:/work/build/pilot/<Name>.obj"
 python3 tools/fitobj.py build/pilot/<Name>.obj 0x<rva> \
         --map '_myGlob=?realSym@@3PAUS@@A+0x4' [--patch ...]
-# fitobj exits nonzero if SIZE or reloc sites disagree (byte content is NOT
-# compared yet — an add to tools/fitobj.py; until then Gate 1 is the final
-# arbiter of reordering) — fix and repeat.
+# fitobj exits nonzero if size, reloc sites, or CODE BYTES disagree —
+# the fitted code must equal FA's chunk outside the relocated dwords
+# (semantically-reordered objects fail here, not at Gate 1) — fix and repeat.
 
 # 6) Register the entry in tools/swap.json (or mapgen --maps output), then:
 python3 tools/swap.py                          # one batch → GATE 1 PASS

@@ -452,11 +452,13 @@ see Phase 0 notes above.)
     GROUP_SIZE=10 (reproduces FA's 00 00). If a future wave flips the word
     again: sweep GROUP_SIZE (10..200) until it reads 0000 — `tools/bisect_tail.py`
     automates subset linking + word probing (one link ≈ 0.5 s).
-  - **Open hole (fix next session)**: fitobj does not verify the CL .text
-    bytes EQUAL FA's chunk bytes — a semantically reordered object with the
-    same size and reloc sites would fit silently and only fail at Gate 1.
-    Add an automatic byte-compare (with the existing --patch/--tail-accept
-    whitelist) to fitobj so reordering fails AT COMPILE time.
+  - **fitobj byte-verify (added 2026-11-01)**: fitobj now exits nonzero
+    when the patched CL code differs from FA's chunk bytes outside the
+    reloc'd dword sites ("FATAL: CL code != FA bytes at N non-reloc
+    byte(s)"). A semantically-reordered object with the right size/reloc
+    sites can no longer fit silently — it fails at compile time, not at
+    Gate 1. Verified: corrupted-obj negative test fires; all 70 entries
+    pass the strict check (GATE 1 PASS).
 
 ---
 
