@@ -1,14 +1,3 @@
-// Gate-1 swap set: one entry per decompiled function.
-// rva = FA chunk RVA, obj = CL object base name, src = source file,
-// flags = cl options, maps = fitobj relocation remaps ["FROM=TO[+addend]"],
-// patch = fitobj --patch directives, tail = fitobj --tail-accept,
-// provenance = classification of every patch/tail site (see docs/PATCH-FORENSICS.md):
-//   "root-caused: <mechanism>"   construct reproduces FA bytes; patch removed
-//   "toolchain-diff: <evidence>" FA's CL revision differs; patch kept
-//   "unexplained: ..."           counts as FAILING in tools/swap.py audit
-// span = merged multi-chunk span SIZE (mkstub SPLIT_SPAN + fitobj --span),
-// aliases = extra offset symbols the fitted obj must define ["OFF=NAME"]
-// (mkstub re-defines inner gap anchors at their offsets inside the span).
 [
   {
    "rva": "0xb06c0",
@@ -46,7 +35,7 @@
    "src": "src/LibRead.c",
    "maps": ["_hintHndl=?hintHndl@@3PAUT_HANDLE@@A", "_libTable=?libAccess@@3PAULIBACCESS@@A+4"],
    "patch": ["0x39,6,", "0x44,0,8d4c0500", "0x4a,4,8b691f", "0x4d,0,8b0d00000000,2:6:_hintHndl"],
-   "provenance": ["patch 0x39/0x4d (hintHndl reload placement): toolchain-diff \u2014 FA loads hintHndl a 2nd time late (@0x4c, between f3-load and 03 ea); our CL 10.20.6166 always hoists the 2nd load early after 2b d1. 11 source variants (volatile, hoist-var, post-access, ptr-fusion forms: build/probe/pads/lrsweep.py) all byte-identical CL code; 20 flag sets (lrflags.py): artifacts exist ONLY under /G5-family; no-/G5 builds lack both artifacts but differ structurally (register assignment 8d 0c 92 + [ecx+0x17] base, not FA's [ebp+eax] sib); TU context (neighbor pressure, #pragma optimize) has no effect. FA's shape is a G5-scheduler revision diff.", "patch 0x44/0x4a (fused f3 sib vs materialized addr): toolchain-diff \u2014 FA materializes the f3 address (8d 4c 05 00 lea ecx,[ebp+eax] + 8b 69 1f); our CL fuses to sib 8b 6c 05 1f under every source form and /G5 flag; struct-with-declared-offsets is impossible (FA field offsets 0x17/0x1b/0x1f are not 4-aligned). Same revision evidence as 0x39."]
+   "provenance": ["patch 0x39/0x4d (hintHndl reload placement): toolchain-diff — FA loads hintHndl a 2nd time late (@0x4c, between f3-load and 03 ea); our CL 10.20.6166 always hoists the 2nd load early after 2b d1. 11 source variants (volatile, hoist-var, post-access, ptr-fusion forms: build/probe/pads/lrsweep.py) all byte-identical CL code; 20 flag sets (lrflags.py): artifacts exist ONLY under /G5-family; no-/G5 builds lack both artifacts but differ structurally (register assignment 8d 0c 92 + [ecx+0x17] base, not FA's [ebp+eax] sib); TU context (neighbor pressure, #pragma optimize) has no effect. FA's shape is a G5-scheduler revision diff.", "patch 0x44/0x4a (fused f3 sib vs materialized addr): toolchain-diff — FA materializes the f3 address (8d 4c 05 00 lea ecx,[ebp+eax] + 8b 69 1f); our CL fuses to sib 8b 6c 05 1f under every source form and /G5 flag; struct-with-declared-offsets is impossible (FA field offsets 0x17/0x1b/0x1f are not 4-aligned). Same revision evidence as 0x39."]
   },
   {
    "rva": "0x35e50",
@@ -55,7 +44,7 @@
    "span": "0x80",
    "aliases": ["0x4d=$FA$_t_435e9d", "0x5b=$FA$_t_435eab"],
    "maps": ["$T121=$FA$rdata0+0x264", "__imp__GetCurrentThread@0=__imp__GetCurrentThread", "__imp__SetThreadPriority@8=__imp__SetThreadPriority", "__imp__ExitThread@4=__imp__ExitThread", "_g_filterFn=_overflow_ptr", "_NullFilter=_unknown_divide_error", "_usnfmain=?usnfmain@@YAXXZ"],
-   "provenance": ["patch @0x4b (filter funclet GetExceptionInformation): root-caused and ELIMINATED \u2014 #include <excpt.h> defines the macro to (struct _EXCEPTION_POINTERS*)_exception_info, which CL treats as an intrinsic inside a __except filter, inlining mov eax,[ebp-0x14] = FA's exact bytes (was 'e8 __GetExceptionInformation' helper call via implicit decl). 2026-11-01. Also renames CL's scope-table symbol $T107\u2192$T121 (map updated to match)."]
+   "provenance": ["patch @0x4b (filter funclet GetExceptionInformation): root-caused and ELIMINATED — #include <excpt.h> defines the macro to (struct _EXCEPTION_POINTERS*)_exception_info, which CL treats as an intrinsic inside a __except filter, inlining mov eax,[ebp-0x14] = FA's exact bytes (was 'e8 __GetExceptionInformation' helper call via implicit decl). 2026-11-01. Also renames CL's scope-table symbol $T107→$T121 (map updated to match)."]
   },
   {
    "rva": "0xd3970",
@@ -872,5 +861,119 @@
    "obj": "abort",
    "src": "src/abort.c",
    "maps": ["__raise=_raise"]
+  },
+  {
+   "rva": "0x11b70",
+   "obj": "FeetToNM",
+   "src": "src/FeetToNM.c",
+   "maps": []
+  },
+  {
+   "rva": "0x11ee0",
+   "obj": "Strend",
+   "src": "src/Strend.c",
+   "maps": []
+  },
+  {
+   "rva": "0x122e0",
+   "obj": "SampleShutdown",
+   "src": "src/SampleShutdown.c",
+   "maps": []
+  },
+  {
+   "rva": "0x127a0",
+   "obj": "ObjRadius",
+   "src": "src/ObjRadius.c",
+   "maps": []
+  },
+  {
+   "rva": "0x1f370",
+   "obj": "FortMultiButton",
+   "src": "src/FortMultiButton.c",
+   "maps": ["_fortAwacsDamage_x=?fortAwacsDamage@@3DA+0x8", "_fortCount_x=_fortCount+0x80"]
+  },
+  {
+   "rva": "0x4c520",
+   "obj": "FortMultiButton2",
+   "src": "src/FortMultiButton2.c",
+   "maps": ["_inPacketArr_x=?InPacket@@3USERIAL_PACKET_WRAPPER@@A+0x150", "_inPacketArr2_x=?InPacket@@3USERIAL_PACKET_WRAPPER@@A+0x38"]
+  },
+  {
+   "rva": "0x2e1b0",
+   "obj": "QuickMultiButton",
+   "src": "src/QuickMultiButton.c",
+   "maps": ["_qmbA_x=_specials+0xd08", "_qmbB_x=_specials+0xc08"]
+  },
+  {
+   "rva": "0x214f0",
+   "obj": "StopCobraSound",
+   "src": "src/StopCobraSound.c",
+   "maps": ["@SoundAllOff@0=?SoundAllOff@@YIXXZ", "_SoundNoMixer@12=?SoundNoMixer@@YGFPADFF@Z"]
+  },
+  {
+   "rva": "0x2e060",
+   "obj": "COLInit",
+   "src": "src/COLInit.c",
+   "maps": ["_specials_x=_specials"]
+  },
+  {
+   "rva": "0x35b70",
+   "obj": "MMFreePtr",
+   "src": "src/MMFreePtr.c",
+   "maps": []
+  },
+  {
+   "rva": "0x35d20",
+   "obj": "MMHandleLen",
+   "src": "src/MMHandleLen.c",
+   "maps": []
+  },
+  {
+   "rva": "0x3d880",
+   "obj": "CPToggleHistory",
+   "src": "src/CPToggleHistory.c",
+   "maps": []
+  },
+  {
+   "rva": "0x557c0",
+   "obj": "Percent",
+   "src": "src/Percent.c",
+   "maps": []
+  },
+  {
+   "rva": "0x69f80",
+   "obj": "WritePalette",
+   "src": "src/WritePalette.c",
+   "maps": ["_G_SetPalette_x@16=_G_SetPalette@16"]
+  },
+  {
+   "rva": "0x76d20",
+   "obj": "COMaxSpeed",
+   "src": "src/COMaxSpeed.c",
+   "maps": []
+  },
+  {
+   "rva": "0x7eaf0",
+   "obj": "StartCampaign",
+   "src": "src/StartCampaign.c",
+   "maps": ["_CampaignSelect=_CampaignSelect@0", "@PilotScreen_x@4=@PilotScreen@4"]
+  },
+  {
+   "rva": "0x7eb10",
+   "obj": "ContinueCampaign",
+   "src": "src/ContinueCampaign.c",
+   "maps": ["@PilotScreen_x@4=@PilotScreen@4"]
+  },
+  {
+   "rva": "0x84be0",
+   "obj": "TIMERestart",
+   "src": "src/TIMERestart.c",
+   "maps": []
+  },
+  {
+   "rva": "0x87880",
+   "obj": "Info2640Preload",
+   "src": "src/Info2640Preload.c",
+   "maps": ["_PushShellAlloc_x@0=?PushShellAlloc@@YGXXZ", "_PopShellAlloc_x@0=?PopShellAlloc@@YGXXZ", "@h2640@4=$FA$_t_487960"]
   }
 ]

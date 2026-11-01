@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 143,
- "chunks_done": 143,
- "bytes_done": 2825,
+ "done": 162,
+ "chunks_done": 162,
+ "bytes_done": 3321,
  "bytes_total": 933612,
- "bytes_pct": 0.3,
+ "bytes_pct": 0.36,
  "waves": [
   {
    "date": "2026-11-01",
@@ -189,6 +189,31 @@
     "0xdb7c0",
     "0xe27c0",
     "0xe2820"
+   ]
+  },
+  {
+   "date": "2026-11-01",
+   "note": "4c: 19 fns \u2014 FeetToNM/Strend/SampleShutdown/ObjRadius/FortMultiButton(2)/QuickMultiButton/StopCobraSound/COLInit/MMFreePtr/MMHandleLen/CPToggleHistory(inline-asm)/Percent/WritePalette/COMaxSpeed/StartCampaign/ContinueCampaign/TIMERestart/Info2640Preload; GATE 1 PASS",
+   "rvas": [
+    "0x11b70",
+    "0x11ee0",
+    "0x122e0",
+    "0x127a0",
+    "0x1f370",
+    "0x214f0",
+    "0x2e060",
+    "0x2e1b0",
+    "0x35b70",
+    "0x35d20",
+    "0x3d880",
+    "0x4c520",
+    "0x557c0",
+    "0x69f80",
+    "0x76d20",
+    "0x7eaf0",
+    "0x7eb10",
+    "0x84be0",
+    "0x87880"
    ]
   }
  ],
