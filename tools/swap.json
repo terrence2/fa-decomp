@@ -30,5 +30,14 @@
    "maps": ["_real_1=$FA$rdata0+0x49c",
             "_g_divFlag=?palColorRGB@@3UT_RGB@@A+0x44c",
             "_g_divRes=?palColorRGB@@3UT_RGB@@A+0x440",
-            "_g_divCls=?rFloor@@3MA+0x4"]}
+            "_g_divCls=?rFloor@@3MA+0x4"]},
+  {"rva": "0x78b50",
+   "obj": "LibRead",
+   "src": "src/LibRead.c",
+   "maps": ["_hintHndl=?hintHndl@@3PAUT_HANDLE@@A",
+            "_libTable=?libAccess@@3PAULIBACCESS@@A+4"],
+   "patch": ["0x39,6,",
+             "0x44,0,8d4c0500",
+             "0x4a,4,8b691f",
+             "0x4d,0,8b0d00000000,2:6:_hintHndl"]}
 ]

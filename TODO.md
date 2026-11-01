@@ -259,7 +259,7 @@ see Phase 0 notes above.)
   decompiled TUs must be address-contiguous runs (unchanged — enforced per-TU at
   Phase-4 pilot time).
 
-### 6. Phase 4 — pilot decompilations — ✅ Pilots 1–5 PASSED (2026-10-31)
+### 6. Phase 4 — pilot decompilations — ✅ Pilots 1–6 PASSED (2026-10-31)
 - **WRFogLayerUpdate @ 0xb06c0 (0x50 B)**: `src/WRFogLayerUpdate.c` — cl 4.2
   `/c /O2 /Gy /G5` reproduced FA codegen on the FIRST attempt (fastcall
   `Rand(51)` = `@Rand@4` resolves to the callee stub anchor).
@@ -310,8 +310,33 @@ see Phase 0 notes above.)
   flag return). Const 1.0 maps to `$FA$rdata0+0x49c`; flag/res live inside
   the `?palColorRGB@@3UT_RGB@@A` BSS chunk (+0x44c/+0x440); the class table
   follows float `?rFloor@@3MA` (+4).
-- Remaining pilots: throw-site C++ member, loops, then scale up to bulk
-  decompilation.
+- **LibRead @ 0x78b50 (0xa0 B)**: `src/LibRead.c` — first LOOP/rep-movs pilot
+  (loop = `memcpy` inlined by CL 4.2 /O2 as `shr 2/rep movsd/and 3/rep movsb`;
+  the FA copy loop is just a variable-size memcpy call). cdecl
+  `LibRead(short idx, void* dst, long max)`; fastcall MMLock(hintHndl,0) at
+  entry (`xor edx,edx` = zeroed 2nd fastcall arg) + MMUnlock(hintHndl);
+  record table = `?libAccess@@3PAULIBACCESS@@A`+4 (12-byte: start, pos),
+  locked-region fields read at [ebp+eax+0x17/0x1b/0x1f]; final
+  `pos += n` stores via the i3*4 offset kept in ebx. Codegen tells:
+  - sib base order [ebp+eax*1+d] (FA) vs [eax+ebp*1+d] (CL) flips when p35
+    is UNSIGNED and rc signed — mixed signedness blocks CL's commutative
+    normalize;
+  - `.start` needs `libTable[idx*3]` (scale form) while `.pos` needs the
+    INDEPENDENT tree `idx*12` (forces `lea ebx,[edx*4]` + `[ebx+disp]`);
+    naming one i3 variable CSEs both into scale form (3-byte mismatch);
+  - `s * 7 * 5` keeps FA's two-step lea chain (*7 then *5) for *35;
+  - CL always fuses `*(long*)(p35+rc+0x1f)` into a sib while FA materializes
+    `lea ecx,[ebp+eax]` + `[ecx+0x1f]` (+3 B), and CL hoists the MMUnlock
+    arg reload (`mov ecx,[hintHndl]`) ~13 insns early vs FA's just-before-
+    the-call — two scheduler choices source order provably cannot switch
+    (volatile/int+ptr/compound/mixed types all retried). New fitobj
+    `--patch OFF,OLDLEN,HEX[,SITE:TYPE:SYMBOL]` (sequential, reloc-shifted,
+    sites inside a deleted span dropped) repairs exactly those 9 bytes:
+    delete our early reload, insert the lea before `add esi,edx`, shrink the
+    fused f3 to `[ecx+0x1f]`, re-insert the reload at FA's slot with its
+    DIR32 site. Also: FA pads some chunks with `mov edi,edi` (8b ff) not
+    just lea-nops — fitobj's no-op set extended.
+- Remaining pilots: throw-site C++ member, then scale up to bulk decompilation.
 
 ### 7. Phase 5 — hardening
 - Progress tracker JSON (N/3829 functions), CI gate, update `MSVC_VERSION.md` with the

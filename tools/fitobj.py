@@ -58,9 +58,38 @@ def read_obj(path):
     return secs
 
 
+def apply_patches(text, patches):
+    """Rewrite CL code bytes where FA's scheduler chose differently.
+
+    Each patch: "OFF,OLDLEN,HEX" — replace OLDLEN bytes at OFF with HEX
+    (OLDLEN 0 = insert; empty HEX = delete). Reloc sites inside a removed /
+    replaced span are dropped; sites after the span shift by the length
+    delta of every earlier patch. Optional ",SITE:TYPE:SYMBOL" fields attach
+    new relocs at SITE (post-patch span offset) — TYPE 6 = DIR32, 20 = REL32;
+    SYMBOL is a CL-level name resolved later by --map remapping.
+    """
+    txt = text["content"]
+    for spec in patches:
+        parts = spec.split(",")
+        off, oldlen = int(parts[0], 0), int(parts[1], 0)
+        new = bytes.fromhex(parts[2]) if parts[2] else b""
+        newsites = [(int(p.split(":")[0], 0), int(p.split(":")[1], 0),
+                     p.split(":", 2)[2]) for p in parts[3:] if p]
+        rels = [(r[0] + len(new) - oldlen, r[1], r[2])
+                if r[0] >= off + oldlen else r
+                for r in text["relocs"]
+                if not (off <= r[0] < off + oldlen)]
+        text["relocs"] = rels
+        txt[off:off + oldlen] = new
+        for site, t, sym in newsites:
+            text["relocs"].append((off + site, sym, t))
+        print("patch @%#x: %d -> %d bytes (%s)" %
+              (off, oldlen, len(new), new.hex() or "-"))
+
+
 def main():
     cl_obj, rva = sys.argv[1], int(sys.argv[2], 0)
-    out, remap, tailaccept = None, {}, False
+    out, remap, tailaccept, patches = None, {}, False, []
     argv = sys.argv[3:]
     i = 0
     while i < len(argv):
@@ -71,6 +100,9 @@ def main():
         elif argv[i] == "--tail-accept":
             tailaccept = True
             i += 1
+        elif argv[i] == "--patch":
+            patches.append(argv[i + 1])
+            i += 2
         else:
             out = argv[i]; i += 1
     if out is None:
@@ -87,13 +119,16 @@ def main():
     secs = read_obj(cl_obj)
     text = next(s for s in secs if s["name"] == ".text")
     text["content"] = bytearray(text["content"])
+    if patches:
+        apply_patches(text, patches)
     L = json.load(open("build/layout.json"))
     chunk = next(c for c in L["text_chunks"] if c["rva"] == rva)
     exe = open("FA/FA.EXE", "rb").read()
     fa_bytes = exe[chunk["off"]:chunk["off"] + chunk["size"]]
     fpo = bytes.fromhex(chunk["fpo_rec"]) if chunk.get("fpo_rec") else None
     tail = fa_bytes[len(text["content"]):]
-    if not (set(tail) <= {0x8d, 0x64, 0x24, 0xa4, 0x9b, 0x00}):
+    if not (set(tail) <= {0x8d, 0x64, 0x24, 0xa4, 0x9b, 0x00,
+                          0x8b, 0xff}):   # lea-nops + mov edi,edi pad
         if not tailaccept:
             sys.exit("FATAL: unexplained tail bytes %s beyond CL code for %#x"
                      % (tail.hex(), rva))
