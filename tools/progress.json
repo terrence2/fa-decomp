@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 185,
- "chunks_done": 185,
- "bytes_done": 3828,
+ "done": 210,
+ "chunks_done": 210,
+ "bytes_done": 4628,
  "bytes_total": 933612,
- "bytes_pct": 0.41,
+ "bytes_pct": 0.5,
  "waves": [
   {
    "date": "2026-11-01",
@@ -243,6 +243,37 @@
     "0xdf610",
     "0xdf630",
     "0xe0be0"
+   ]
+  },
+  {
+   "date": "2026-11-01",
+   "note": "5: 25 fns (diff-10 band) \u2014 CTEval family 12, thiscall CDirDraw init/shutdown (asm escapes), clip/point flip pair, dialog walk, cmdbuf mask; GATE 1 PASS",
+   "rvas": [
+    "0x12eb0",
+    "0x21e40",
+    "0x5da40",
+    "0x5da70",
+    "0x62ea0",
+    "0x63060",
+    "0x64150",
+    "0x64170",
+    "0x64190",
+    "0x64200",
+    "0x64540",
+    "0x64620",
+    "0x64660",
+    "0x64690",
+    "0x648d0",
+    "0x648f0",
+    "0x64c10",
+    "0x79540",
+    "0x7f300",
+    "0x87400",
+    "0x95720",
+    "0x95880",
+    "0x966a0",
+    "0x966c0",
+    "0x97b00"
    ]
   }
  ],

@@ -1114,4 +1114,155 @@
    "src": "src/Wcslen.c",
    "maps": []
   }
+  ,
+  {
+   "rva": "0x12eb0",
+   "obj": "CHATInit",
+   "src": "src/CHATInit.c",
+   "maps": ["_chatEditing=?chatEditing@@3DA", "_MPShellInitMessages@0=?MPShellInitMessages@@YGXXZ", "_t12ed0=$FA$_t_412ed0"]
+  },
+  {
+   "rva": "0x21e40",
+   "obj": "MAPSetSide",
+   "src": "src/MAPSetSide.c",
+   "maps": []
+  },
+  {
+   "rva": "0x5da40",
+   "obj": "GG_WaitRetrace",
+   "src": "src/GG_WaitRetrace.c",
+   "maps": ["_ddInst=?ddInst@@3PAVCDirDraw@@A", "_CDirDraw_WVB=?WaitForVerticalBlank@CDirDraw@@QAEXK@Z"]
+  },
+  {
+   "rva": "0x5da70",
+   "obj": "GG_VideoModesAvailable",
+   "src": "src/GG_VideoModesAvailable.c",
+   "maps": ["_m_singleton=?m_singleton@CDirDraw@@1PAV1@A", "@CDirDraw_EnumDisplayModes@4=?EnumDisplayModes@CDirDraw@@QAEKXZ"]
+  },
+  {
+   "rva": "0x62ea0",
+   "obj": "FinishCmdBuf",
+   "src": "src/FinishCmdBuf.c",
+   "maps": ["_cmdBufPos=_curThing+0x58"]
+  },
+  {
+   "rva": "0x63060",
+   "obj": "MaskEvents",
+   "src": "src/MaskEvents.c",
+   "maps": ["_cmdBufPos=_curThing+0x58"]
+  },
+  {
+   "rva": "0x64150",
+   "obj": "CTEval_tgtisfighter",
+   "src": "src/CTEval_tgtisfighter.c",
+   "maps": []
+  },
+  {
+   "rva": "0x64170",
+   "obj": "CTEval_tgtisbomber",
+   "src": "src/CTEval_tgtisbomber.c",
+   "maps": []
+  },
+  {
+   "rva": "0x64190",
+   "obj": "CTEval_tgtisplane",
+   "src": "src/CTEval_tgtisplane.c",
+   "maps": []
+  },
+  {
+   "rva": "0x64200",
+   "obj": "CTEval_maxrange",
+   "src": "src/CTEval_maxrange.c",
+   "maps": []
+  },
+  {
+   "rva": "0x64540",
+   "obj": "CTEval_canclimb",
+   "src": "src/CTEval_canclimb.c",
+   "maps": ["_COMinSpeed=_COMinSpeed@0"]
+  },
+  {
+   "rva": "0x64620",
+   "obj": "CTEval_betterspeed",
+   "src": "src/CTEval_betterspeed.c",
+   "maps": ["_COMaxSpeed=_COMaxSpeed@0"]
+  },
+  {
+   "rva": "0x64660",
+   "obj": "CTEval_bettertwr",
+   "src": "src/CTEval_bettertwr.c",
+   "maps": ["_COTwr=_COTwr@0"]
+  },
+  {
+   "rva": "0x64690",
+   "obj": "CTEval_turnratediff",
+   "src": "src/CTEval_turnratediff.c",
+   "maps": ["_COTurnRate=_COTurnRate@0"]
+  },
+  {
+   "rva": "0x648d0",
+   "obj": "CTEval_p",
+   "src": "src/CTEval_p.c",
+   "maps": []
+  },
+  {
+   "rva": "0x648f0",
+   "obj": "CTEval_b",
+   "src": "src/CTEval_b.c",
+   "maps": []
+  },
+  {
+   "rva": "0x64c10",
+   "obj": "CTDo_restart",
+   "src": "src/CTDo_restart.c",
+   "maps": ["@t3e90@4=$FA$_t_463e90"]
+  },
+  {
+   "rva": "0x79540",
+   "obj": "ShutdownGraphicsSystem",
+   "src": "src/ShutdownGraphicsSystem.c",
+   "maps": ["_m_singleton=?m_singleton@CDirDraw@@1PAV1@A", "@CDirDraw_Destroy@4=?Destroy@CDirDraw@@QAEXXZ", "@CDirDraw_DeleteSingleton@0=?DeleteSingleton@CDirDraw@@SAXXZ"]
+  },
+  {
+   "rva": "0x7f300",
+   "obj": "UkraineAddA7",
+   "src": "src/UkraineAddA7.c",
+   "maps": []
+  },
+  {
+   "rva": "0x87400",
+   "obj": "DialogGetPtr",
+   "src": "src/DialogGetPtr.c",
+   "maps": ["_curDialog=?curDialog@@3PAUDIALOG@@A"]
+  },
+  {
+   "rva": "0x95720",
+   "obj": "G_SetFullClipBox",
+   "src": "src/G_SetFullClipBox.c",
+   "maps": []
+  },
+  {
+   "rva": "0x95880",
+   "obj": "G_GetPoint",
+   "src": "src/G_GetPoint.c",
+   "maps": []
+  },
+  {
+   "rva": "0x966a0",
+   "obj": "G_PointFlip",
+   "src": "src/G_PointFlip.c",
+   "maps": []
+  },
+  {
+   "rva": "0x966c0",
+   "obj": "G_UPointFlip",
+   "src": "src/G_UPointFlip.c",
+   "maps": []
+  },
+  {
+   "rva": "0x97b00",
+   "obj": "WPDoingWaypoints",
+   "src": "src/WPDoingWaypoints.c",
+   "maps": []
+  }
 ]
