@@ -1,0 +1,26 @@
+{
+ "functions_total": 3834,
+ "done": 9,
+ "chunks_done": 9,
+ "bytes_done": 704,
+ "bytes_total": 933612,
+ "bytes_pct": 0.08,
+ "waves": [
+  {
+   "date": "2026-11-01",
+   "note": "pilot set: 7 entries, 9 chunks, 704 B",
+   "rvas": [
+    "0x11780",
+    "0x35e50",
+    "0x35e9d",
+    "0x35eab",
+    "0x78b50",
+    "0x87610",
+    "0x9b1f0",
+    "0xb06c0",
+    "0xb5130"
+   ]
+  }
+ ],
+ "generated": "2026-11-01"
+}

@@ -77,20 +77,58 @@ def split_vas(es):
 
 def step_compile(es):
     os.makedirs("build/pilot", exist_ok=True)
+    if not es:
+        return
+    # ONE container for the whole batch, serialized CL invocations with
+    # __OK__/__FAIL__ markers: a failing entry can no longer hide later
+    # entries' results (per-entry containers cost ~2s startup each).
+    # Compile needs no clock: obj timestamps don't reach image bytes
+    # (coff.build_stub_obj re-packs ts=0; the linker sees only *_fit.obj).
     for e in es:
-        cmd = ("wine Z:/opt/msvc420/bin/CL.EXE /nologo "
-               + e.get("flags", "/c /O2 /Gy /G5")
-               + " Z:/work/%s /FoZ:/work/build/pilot/%s.obj" % (e["src"], e["obj"]))
-        # compile needs no clock: obj timestamps don't reach image bytes
-        r = subprocess.run(DOCKER_PLAIN % dict(uid=os.getuid(), gid=os.getgid(),
-                                               cmd=cmd), shell=True,
-                           capture_output=True, text=True)
-        keep = " ".join(l for l in (r.stdout + r.stderr).splitlines()
-                        if "ELFCLASS" not in l)
-        print("cl %-20s %s" % (e["obj"], keep[-160:] if keep else "ok"))
-        if r.returncode:
-            raise SystemExit("CL failed for %s" % e["src"])
+        p = "build/pilot/%s.obj" % e["obj"]
+        if os.path.exists(p):
+            os.remove(p)  # so missing-obj after the batch is a true signal
+    parts = []
+    for e in es:
+        cl = ("wine Z:/opt/msvc420/bin/CL.EXE /nologo "
+              + e.get("flags", "/c /O2 /Gy /G5")
+              + " Z:/work/%s /FoZ:/work/build/pilot/%s.obj" % (e["src"], e["obj"]))
+        parts.append('( %s ) && echo __OK__%s || echo __FAIL__%s'
+                     % (cl, e["obj"], e["obj"]))
+    r = subprocess.run(DOCKER_PLAIN % dict(uid=os.getuid(), gid=os.getgid(),
+                                           cmd="; ".join(parts)),
+                       shell=True, capture_output=True, text=True)
+    out = (r.stdout + r.stderr).splitlines()
+    oks = {l[len("__OK__"):].strip() for l in out if l.startswith("__OK__")}
+    fails = {l[len("__FAIL__"):].strip() for l in out
+             if l.startswith("__FAIL__")}
+    for e in es:
+        if e["obj"] in oks and os.path.exists("build/pilot/%s.obj" % e["obj"]):
+            print("cl %-20s ok" % e["obj"])
+        else:
+            fails.add(e["obj"])  # marker absent == failure (crash, OOM, ...)
+    for e in es:  # fit each successful entry (per-entry diagnostic context)
+        if e["obj"] in fails:
+            continue
         _fit(e)
+    if fails:
+        # re-run each failure alone so its CL diagnostics are attributable
+        for e in es:
+            if e["obj"] not in fails:
+                continue
+            r2 = subprocess.run(
+                DOCKER_PLAIN % dict(
+                    uid=os.getuid(), gid=os.getgid(),
+                    cmd=("wine Z:/opt/msvc420/bin/CL.EXE /nologo "
+                         + e.get("flags", "/c /O2 /Gy /G5")
+                         + " Z:/work/%s /FoZ:/work/build/pilot/%s.obj"
+                         % (e["src"], e["obj"]))),
+                shell=True, capture_output=True, text=True)
+            keep = " ".join(l for l in (r2.stdout + r2.stderr).splitlines()
+                            if "ELFCLASS" not in l)
+            print("cl %-20s FAILED: %s" % (e["obj"], keep[-400:]))
+        raise SystemExit("compile: %d of %d failed: %s"
+                         % (len(fails), len(es), ", ".join(sorted(fails))))
 
 
 def _fit(e):

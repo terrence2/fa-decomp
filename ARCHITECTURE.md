@@ -85,7 +85,11 @@ FA/FA.EXE ──> peref.py ┴───────────────► b
 | `anchors.py` | Resolves reloc targets to stub symbols (chunk symbol / `$FA$_t_…` gap anchor / `$FA$rdata0` / IAT slots). |
 | `mkrsp.py` | Renders the link response file, preserving FA's object order; `--replace VA=obj` swaps in fitted decompiled objects. |
 | `fitobj.py` | Adapts a CL object to FA's chunk: adds the FA tail pad + splices FA's FPO record, remaps relocations (`--map FROM=TO[+addend]`), repairs scheduler-level codegen deltas (`--patch`), optionally accepts FA residue tails (`--tail-accept`). |
-| `swap.py` + `swap.json` | The driver: runs everything below for all entries in the version-controlled swap set. Steps run individually: `python3 tools/swap.py [compile\|link\|gate]`. |
+| `sites.py` | Shared site enumeration behind dis.py/mapgen.py: every reloc a fitted CL object will carry (abs fixups from `reloc_map.json`, REL32 call/jmp from objdump), each resolved to anchor+addend via `anchors.py`. |
+| `dis.py` | One-command "understand" step: annotated disassembly of a chunk (`python3 tools/dis.py <rva\|name> [--span 0xSIZE]`) — FPO decode, tail-pad census, per-line target annotations, site-table preview. |
+| `mapgen.py` | Suggested `maps:`/`aliases:` lines for a chunk's sites, each labelled `[identity]`/`[human confirm]`/`[human-coin]`/`[CL-internal]` — the FROM is always a C-side choice, the target VA is guaranteed. |
+| `rank.py` + `progress.json` | Easiest-first target selector (difficulty score calibrated on the 7 pilots; see docstring) + generated progress tracker (`--update [--wave note]`, idempotent). |
+| `swap.py` + `swap.json` | The driver: runs everything below for all entries in the version-controlled swap set. Steps run individually: `python3 tools/swap.py [compile\|link\|gate]`. `compile` batches all CL invocations into ONE container with `__OK__/__FAIL__` markers (obj timestamps provably cannot reach Gate 1). |
 | `mkrsp.py` | Renders `build/m0/m0linkD.rsp` preserving FA's exact object order; `--replace VA=obj` swaps a fitted decompiled object in. |
 | `fixreloc.py` | Forces the `.reloc` VirtualSize to FA's 0x143d8 (wine-linker bookkeeping delta, proven inert). |
 | `gate.py` | Gate 1: sha256 identity, with symbol-localized diffs on failure. |
@@ -94,10 +98,11 @@ FA/FA.EXE ──> peref.py ┴───────────────► b
 
 ## 4. Workflow toward full decompilation
 
-State of play: milestone 0 (stub-only rebuild) passed Gate 1; six functions
-are swapped so far (`tools/swap.json`), each with its codegen findings recorded
-in `TODO.md` Phase 4. The path from here is a function-at-a-time loop, always
-shipped with a passing Gate 1:
+State of play: milestone 0 (stub-only rebuild) passed Gate 1; seven pilot
+functions are swapped so far (`tools/swap.json`), each with its codegen
+findings recorded in `TODO.md` Phase 4. The per-function loop is now
+tool-assisted (dis.py/mapgen.py/rank.py below); decompilation waves run
+easiest-first from `python3 tools/rank.py`:
 
 1. **Pick** the next target: un-swapped chunk, ideally small/leaf-ish with few
    fixups (Gate 2's JSON ranks them).
@@ -127,33 +132,13 @@ cd /home/terrence/Projects/fa-decomp          # repo root
 # 1) Prove the baseline on a fresh tree (stub-only, milestone 0):
 python3 tools/swap.py link gate               # → GATE 1 PASS
 
-# 2) Pick a target: smallest named chunks not yet in tools/swap.json
-python3 tools/compare.py --json build/compare.json   # per-chunk match %
-python3 - <<'EOF'
-import json
-raw = "".join(l for l in open("tools/swap.json")
-              if not l.lstrip().startswith("//"))
-done = {int(e["rva"], 0) for e in json.loads(raw)}
-L = json.load(open("build/layout.json"))
-cands = sorted((c for c in L["text_chunks"]
-                if c["rva"] not in done and c["name"]),
-               key=lambda c: c["size"])[:10]
-for c in cands:
-    print("%#x  %5d  %s" % (c["rva"], c["size"], c["name"]))
-EOF
+# 2) Pick a target: easiest-first from the selector (excludes swapped set)
+python3 tools/rank.py --top 20          #  --rva 0xNNN previews the top pick
 
-# 3) Disassemble the chosen chunk (rva 0x78b50 shown for LibRead):
-python3 - <<'EOF'
-import json
-L = json.load(open("build/layout.json"))
-c = next(c for c in L["text_chunks"] if c["rva"] == 0x78b50)
-fa = open("FA/FA.EXE", "rb").read()
-open("/tmp/blk.bin", "wb").write(fa[c["off"]:c["off"] + c["size"]])
-print("disasm target: name=%s fpo=%s" % (c["name"], c["fpo_rec"]))
-EOF
-objdump -D -b binary -m i386 -Mintel --adjust-vma=0x478b50 /tmp/blk.bin
-
-# 4) Reconstruct src/<Name>.c, then compile + fit offline and iterate:
+# 3) Understand the chosen chunk (rva 0x78b50 shown for LibRead):
+python3 tools/dis.py 0x78b50          # annotated disasm + FPO + tail census
+python3 tools/mapgen.py 0x78b50       # site table + suggested maps lines
+# 5) Reconstruct src/<Name>.c, then compile + fit offline and iterate:
 docker run --rm --user $(id -u):$(id -g) -e HOME=/tmp -e TZ=UTC \
   -e FAKETIME_DISABLE_SHM=1 -v "$PWD":/work -w /work fa-decomp-env \
   bash -c "wine Z:/opt/msvc420/bin/CL.EXE /nologo /c /O2 /Gy /G5 \
@@ -162,10 +147,10 @@ python3 tools/fitobj.py build/pilot/<Name>.obj 0x<rva> \
         --map '_myGlob=?realSym@@3PAUS@@A+0x4' [--patch ...]
 # fitobj exits nonzero the moment code bytes/size disagree — fix and repeat.
 
-# 5) Register the entry in tools/swap.json, then run the whole loop:
-python3 tools/swap.py                          # → GATE 1 PASS
+# 6) Register the entry in tools/swap.json (or mapgen --maps output), then:
+python3 tools/swap.py                          # one batch → GATE 1 PASS
 
-# 6) Commit source + swap.json entry (+ TODO.md tells):
+# 7) Commit source + swap.json entry (+ TODO.md tells):
 git add src/<Name>.c tools/swap.json TODO.md
 git commit -m "Phase 4 pilot N: <Name> ..."
 ```

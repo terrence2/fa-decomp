@@ -395,6 +395,16 @@ see Phase 0 notes above.)
 ### 7. Phase 5 — hardening
 - Progress tracker JSON (N/3829 functions), CI gate, update `MSVC_VERSION.md` with the
   empirically resolved 4.2 vs 4.2b revision.
+- DONE 2026-11-01: bulk-decompilation tooling — `tools/sites.py` (+ `dis.py`
+  annotated-disassembly, `mapgen.py` map autogen, `rank.py` easiest-first
+  selector + `tools/progress.json` tracker; validated 7/7 pilot site tables,
+  18/18 pilot map lines VA-covered), and `swap.py compile` batching (one
+  container, `__OK__/__FAIL__` markers; CL objs vs per-entry path differ only
+  in the header-timestamp field, fit objs byte-identical, GATE 1 PASS).
+  Note: selector was named `rank.py` — never `select.py` (shadows stdlib
+  `select` and breaks `subprocess`). Known scorer blind spot: scheduler-level
+  revision patches (LibRead-style) are invisible statically — check the seh/jt/
+  fixup columns and TODO Phase 4 tells before committing to a "cheap" target.
 
 ---
 
