@@ -238,15 +238,22 @@ def step_link(es):
     print(r.stdout.strip())
     if r.returncode:
         raise SystemExit("mkstub failed: " + r.stderr[-2000:])
+    # rsp ceiling mitigation #3: LINK runs from atf95/Release, so staged
+    # copies keep every rsp line short ("d/xxx.obj"): 33080 B at 463 entries
+    # re-crossed the ~32KB limit (LNK1181 on a name truncated mid-hex, the
+    # LNK1104 class); relative paths bought 29988 B at 423 (mitig #2).
+    subprocess.run(
+        "mkdir -p atf95/Release/d && rm -f atf95/Release/d/* && "
+        "cp build/st/* build/pilot/*_fit.obj build/idata/* build/m0/FA.obj "
+        "atf95/Release/d/",
+        shell=True, check=True)
     repl = []
     for e in es:
-        # relative form: the seed rsp crossed LINK 4.2's ~32KB response-file
-        # ceiling at 343 entries (LNK1104 on a truncated path, LNK1141);
-        # relative obj paths keep it ~28KB from the /work/atf95 CWD
-        repl += ["--replace", "%#x=../build/pilot/%s_fit.obj"
-                 % (e["rva"] + IMAGE_BASE, e["obj"])]
-    subprocess.run([sys.executable, "tools/mkrsp.py", "--stubdir", STUBS,
-                    "--out", RSP] + repl, check=True)
+        repl.append(["--replace", "%#x=Release/d/%s_fit.obj"
+                     % (e["rva"] + IMAGE_BASE, e["obj"])])
+    r = subprocess.run([sys.executable, "tools/mkrsp.py", "--stubdir", STUBS,
+                        "--out", RSP]
+                       + [x for pair in repl for x in pair], check=True)
     for clock, log in (("@1997-08-11 23:12:40", "logD_seed"),
                        ("@1997-08-11 23:13:32", "logD_link")):
         # seed link: reset the pdb so its ts comes from THIS run's clock;
@@ -282,8 +289,13 @@ if __name__ == "__main__":
     es = entries()
     steps = sys.argv[1:] or ["compile", "link", "gate"]
     for s in steps:
-        {"compile": lambda: step_compile(es),
-         "fit": lambda: [_fit(e) for e in es],
-         "audit": lambda: step_audit(es),
-         "link": lambda: step_link(es),
-         "gate": lambda: step_gate(es)}[s]()
+        rc = {"compile": lambda: step_compile(es) or 0,
+              "fit": lambda: ([_fit(e) for e in es] or 0),
+              "audit": lambda: step_audit(es) or 0,
+              "link": lambda: step_link(es) or 0,
+              # gate: fail the process if gate.py does (the previous form
+              # discarded step_gate's return and exited 0 on GATE 1 FAIL)
+              "gate": lambda: (step_gate(es) or
+                               (_ for _ in ()).throw(SystemExit("gate: GATE 1 FAIL")))}[s]()
+        if rc:
+            raise SystemExit(rc)

@@ -16,7 +16,7 @@ import os
 import sys
 
 STUBS = "build/stubs"
-IDATA = "../build/idata"
+IDATA = "Release/d"  # staged under the link CWD (atf95); rsp-ceiling mitigation #3
 
 
 def main():
@@ -49,11 +49,11 @@ def main():
         if m["va"] in repl:
             lines.append(repl[m["va"]])
         else:
-            lines.append("../%s/%s" % (stubs, m["file"]))
+            lines.append("%s/%s" % (IDATA, m["file"]))
     for m in man:
         if m["kind"] in ("datagroup", "bssgroup"):
-            lines.append("../%s/%s" % (stubs, m["file"]))
-    lines.append("../build/m0/FA.obj")
+            lines.append("%s/%s" % (IDATA, m["file"]))
+    lines.append("%s/FA.obj" % IDATA)
     with open(out, "w", newline="") as f:
         f.write("\r\n".join(lines) + "\r\n")
     print("wrote %s (%d objs, %d replaced)" % (out, len(lines) - 1, len(repl)))

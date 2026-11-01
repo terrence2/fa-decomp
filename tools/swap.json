@@ -2739,17 +2739,17 @@
   ]
  },
  {
-  "rva": 122784,
+  "rva": "0x1dfa0",
   "obj": "ShowDDError",
   "src": "src/ShowDDError.c"
  },
  {
-  "rva": 301744,
+  "rva": "0x49ab0",
   "obj": "MonoPuts",
   "src": "src/MonoPuts.c"
  },
  {
-  "rva": 378848,
+  "rva": "0x5c7e0",
   "obj": "pkt_send_sync",
   "src": "src/pkt_send_sync.c",
   "maps": [
@@ -2757,32 +2757,32 @@
   ]
  },
  {
-  "rva": 395744,
+  "rva": "0x609e0",
   "obj": "RefCheckCD",
   "src": "src/RefCheckCD.c"
  },
  {
-  "rva": 434096,
+  "rva": "0x69fb0",
   "obj": "SetVESABank",
   "src": "src/SetVESABank.c"
  },
  {
-  "rva": 435824,
+  "rva": "0x6a670",
   "obj": "CleanVideo",
   "src": "src/CleanVideo.c"
  },
  {
-  "rva": 435840,
+  "rva": "0x6a680",
   "obj": "InitAudio",
   "src": "src/InitAudio.c"
  },
  {
-  "rva": 435856,
+  "rva": "0x6a690",
   "obj": "CleanAudio",
   "src": "src/CleanAudio.c"
  },
  {
-  "rva": 495088,
+  "rva": "0x78df0",
   "obj": "G_FindClose",
   "src": "src/G_FindClose.c",
   "maps": [
@@ -2791,7 +2791,7 @@
   ]
  },
  {
-  "rva": 568640,
+  "rva": "0x8ad40",
   "obj": "DrawYes320",
   "src": "src/DrawYes320.c",
   "maps": [
@@ -2802,7 +2802,7 @@
   ]
  },
  {
-  "rva": 568688,
+  "rva": "0x8ad70",
   "obj": "DrawNo320",
   "src": "src/DrawNo320.c",
   "maps": [
@@ -2813,7 +2813,7 @@
   ]
  },
  {
-  "rva": 568736,
+  "rva": "0x8ada0",
   "obj": "DrawCancel320",
   "src": "src/DrawCancel320.c",
   "maps": [
@@ -2824,7 +2824,7 @@
   ]
  },
  {
-  "rva": 568784,
+  "rva": "0x8add0",
   "obj": "DrawDone320",
   "src": "src/DrawDone320.c",
   "maps": [
@@ -2942,7 +2942,7 @@
   ]
  },
  {
-  "rva": 678096,
+  "rva": "0xa58d0",
   "obj": "VietWaterBuffaloProc",
   "src": "src/VietWaterBuffaloProc.c",
   "maps": [
@@ -2950,43 +2950,43 @@
   ]
  },
  {
-  "rva": 705856,
+  "rva": "0xac540",
   "obj": "VDOAlloc",
   "src": "src/VDOAlloc.c",
   "maps": []
  },
  {
-  "rva": 705872,
+  "rva": "0xac550",
   "obj": "VDOFree",
   "src": "src/VDOFree.c",
   "maps": []
  },
  {
-  "rva": 767424,
+  "rva": "0xbb5c0",
   "obj": "SphereOverflow",
   "src": "src/SphereOverflow.c",
   "maps": []
  },
  {
-  "rva": 767664,
+  "rva": "0xbb6b0",
   "obj": "LineOverflow2",
   "src": "src/LineOverflow2.c",
   "maps": []
  },
  {
-  "rva": 869792,
+  "rva": "0xd45a0",
   "obj": "CallMemberFunction0",
   "src": "src/CallMemberFunction0.c",
   "maps": []
  },
  {
-  "rva": 873072,
+  "rva": "0xd5270",
   "obj": "Getcwd",
   "src": "src/Getcwd.c",
   "maps": []
  },
  {
-  "rva": 876208,
+  "rva": "0xd5eb0",
   "obj": "Fflush",
   "src": "src/Fflush.c",
   "maps": [
@@ -2994,7 +2994,7 @@
   ]
  },
  {
-  "rva": 877104,
+  "rva": "0xd6230",
   "obj": "AmsgExit",
   "src": "src/AmsgExit.c",
   "maps": [
@@ -3003,7 +3003,7 @@
   ]
  },
  {
-  "rva": 912912,
+  "rva": "0xdee10",
   "obj": "UnlockFhandle",
   "src": "src/UnlockFhandle.c",
   "maps": [
@@ -3012,7 +3012,7 @@
   ]
  },
  {
-  "rva": 914256,
+  "rva": "0xdf350",
   "obj": "CxxRestoreUnhEF",
   "src": "src/CxxRestoreUnhEF.c",
   "maps": [
@@ -3021,13 +3021,13 @@
   ]
  },
  {
-  "rva": 917952,
+  "rva": "0xe01c0",
   "obj": "Ungetc",
   "src": "src/Ungetc.c",
   "maps": []
  },
  {
-  "rva": 52064,
+  "rva": "0xcb60",
   "obj": "CheckItem",
   "src": "src/CheckItem.c",
   "maps": [
@@ -3035,13 +3035,309 @@
   ]
  },
  {
-  "rva": 70480,
+  "rva": "0x11350",
   "obj": "KeyAvail",
   "src": "src/KeyAvail.c",
   "maps": [
    "_kbCount=?kbCount@@3GA",
    "_kbHeadPtr=?kbHeadPtr@@3GA",
    "_kbBuffer=?kbBuffer@@3PAGA"
+  ]
+ },
+ {
+  "rva": "0x11790",
+  "obj": "Wait",
+  "src": "src/Wait.c"
+ },
+ {
+  "rva": "0x11cb0",
+  "obj": "GetFakeKey",
+  "src": "src/GetFakeKey.c",
+  "maps": [
+   "_adCount=?adCount@@3EA"
+  ]
+ },
+ {
+  "rva": "0x126c0",
+  "obj": "WaitKey",
+  "src": "src/WaitKey.c",
+  "maps": [
+   "_impSleepIAT=__imp__Sleep"
+  ]
+ },
+ {
+  "rva": "0x18760",
+  "obj": "MSGRemoveCurObj",
+  "src": "src/MSGRemoveCurObj.c",
+  "maps": [
+   "_msgBtnBase=?lastWeaponButton@@3DA"
+  ]
+ },
+ {
+  "rva": "0x1dd00",
+  "obj": "GetDriverCaps",
+  "src": "src/GetDriverCaps.c"
+ },
+ {
+  "rva": "0x1dd20",
+  "obj": "GetHELCaps",
+  "src": "src/GetHELCaps.c"
+ },
+ {
+  "rva": "0x358b0",
+  "obj": "MMAllocHandle",
+  "src": "src/MMAllocHandle.c",
+  "maps": [
+   "_mmAllocIdQ=?mmAllocId@@3EA",
+   "@MMInternalAlloc_q@4=?MMInternalAlloc@@YIPAXK@Z",
+   "@MMUseHandle_q@16=?MMUseHandle@@YIPAUT_HANDLE@@PAXKGE@Z",
+   "@MMInternalFree_q@8=?MMInternalFree@@YIDPAXK@Z"
+  ]
+ },
+ {
+  "rva": "0x35ca0",
+  "obj": "MMPushAllocId",
+  "src": "src/MMPushAllocId.c",
+  "maps": [
+   "_mmAllocIdQ=?mmAllocId@@3EA",
+   "_mmUnusedNextQ=?mm_unused_list@@3PAUT_HANDLE@@A+0x4",
+   "_mmaSlots=?mmAllocId@@3EA"
+  ]
+ },
+ {
+  "rva": "0x50ca0",
+  "obj": "FMUpdateThrustVector",
+  "src": "src/FMUpdateThrustVector.c"
+ },
+ {
+  "rva": "0x5d9a0",
+  "obj": "flushLineStats",
+  "src": "src/flushLineStats.c",
+  "maps": [
+   "_grModeW=_grMode+0xc"
+  ]
+ },
+ {
+  "rva": "0x636e0",
+  "obj": "PreferredProtectId",
+  "src": "src/PreferredProtectId.c",
+  "maps": [
+   "@PrefHelper_q@4=$FA$_t_45dc60"
+  ]
+ },
+ {
+  "rva": "0x64270",
+  "obj": "CTEval_tgtradar",
+  "src": "src/CTEval_tgtradar.c"
+ },
+ {
+  "rva": "0x642b0",
+  "obj": "CTEval_tgtir",
+  "src": "src/CTEval_tgtir.c"
+ },
+ {
+  "rva": "0x64890",
+  "obj": "CTEval_h",
+  "src": "src/CTEval_h.c",
+  "maps": []
+ },
+ {
+  "rva": "0x65680",
+  "obj": "CTDo_invert",
+  "src": "src/CTDo_invert.c",
+  "maps": []
+ },
+ {
+  "rva": "0x69860",
+  "obj": "G_ShutdownCircles",
+  "src": "src/G_ShutdownCircles.c",
+  "maps": [
+   "_unAvailNames=?unAvailNames@@3PADA"
+  ]
+ },
+ {
+  "rva": "0x77020",
+  "obj": "COTurnRadius",
+  "src": "src/COTurnRadius.c",
+  "maps": [],
+  "patch": [
+   "0x2d,2,3dff7f0000"
+  ],
+  "provenance": [
+   "patch 0x2d (0x7fff clamp cmp): toolchain-diff \u2014 FA's min-clamp is mov ecx,0x7fff / cmp eax,imm32 / jg / mov ecx,eax / mov eax,ecx (pre-init + immediate cmp); our CL 10.20.6166 always CSE-merges the two 0x7fff constants. Probe forms (build/w4probe/w14b3_COTurnRadius*, w14b4_CRa..CRd): pre-init q=0x7fff if(t<=0x7fff) gives b9 imm / 3b c1 / 7f / 8b c8 / 8b c1 (reg-cmp, same CSE); early-return and 0x7fffUL else forms give 3b-imm cmp but 12-byte 7e/mov eax,b8 layout without the pre-init dance. No source form yields the union; expands 3b c1 -> 3d ff7f0000 (no relocs after 0x2d; tail absorbs). Same revision-diff class as LibRead 0x39/0x44."
+  ]
+ },
+ {
+  "rva": "0x7e8f0",
+  "obj": "RunDisconnectScreen",
+  "src": "src/RunDisconnectScreen.c",
+  "maps": [
+   "_CN_SetLines=?CN_SetLines@@YAXJJ@Z",
+   "_MP_Shutdown=?MP_Shutdown@@YAXXZ"
+  ]
+ },
+ {
+  "rva": "0x87520",
+  "obj": "DialogSetRocker",
+  "src": "src/DialogSetRocker.c",
+  "maps": [
+   "_PushShellAlloc@0=?PushShellAlloc@@YGXXZ",
+   "_DialogDraw@4=?DialogDraw@@YGXPAX@Z",
+   "_PopShellAlloc@0=?PopShellAlloc@@YGXXZ"
+  ]
+ },
+ {
+  "rva": "0x97d20",
+  "obj": "MOUSESetLimits",
+  "src": "src/MOUSESetLimits.c",
+  "maps": []
+ },
+ {
+  "rva": "0x9b220",
+  "obj": "GetFlightEnvelope",
+  "src": "src/GetFlightEnvelope.c",
+  "maps": []
+ },
+ {
+  "rva": "0x9dd90",
+  "obj": "FindStreamerDef",
+  "src": "src/FindStreamerDef.c",
+  "maps": []
+ },
+ {
+  "rva": "0x9e630",
+  "obj": "ScreenDirty",
+  "src": "src/ScreenDirty.c",
+  "maps": []
+ },
+ {
+  "rva": "0xa3690",
+  "obj": "RMInit",
+  "src": "src/RMInit.c",
+  "maps": [
+   "_resList=?resList@@3PAURES_LIST@@A",
+   "_vdoColorProcess=?vdoColorProcess@@3FA"
+  ]
+ },
+ {
+  "rva": "0xa3980",
+  "obj": "RMAccess",
+  "src": "src/RMAccess.c",
+  "maps": [
+   "_rmAccess_@8=$FA$_t_4a39d0",
+   "@t4a39b0@8=$FA$_t_4a39b0"
+  ]
+ },
+ {
+  "rva": "0xaa0e0",
+  "obj": "Delete",
+  "src": "src/Delete.c",
+  "maps": [
+   "__imp__DeleteFileA@4=__imp__DeleteFileA"
+  ]
+ },
+ {
+  "rva": "0xbaf00",
+  "obj": "APRemoveFromCarrier",
+  "src": "src/APRemoveFromCarrier.c",
+  "maps": []
+ },
+ {
+  "rva": "0xc299c",
+  "obj": "LMultDiv256",
+  "src": "src/LMultDiv256.c",
+  "maps": []
+ },
+ {
+  "rva": "0xc29a8",
+  "obj": "LFMult",
+  "src": "src/LFMult.c",
+  "maps": []
+ },
+ {
+  "rva": "0xc29c4",
+  "obj": "Abs",
+  "src": "src/Abs.c",
+  "maps": []
+ },
+ {
+  "rva": "0xd330c",
+  "obj": "TimeGetTime",
+  "src": "src/TimeGetTime.c",
+  "maps": [
+   "_impTimeGetTime=__imp__timeGetTime"
+  ]
+ },
+ {
+  "rva": "0xd3312",
+  "obj": "JoyGetPos",
+  "src": "src/JoyGetPos.c",
+  "maps": [
+   "_impJoyGetPos=__imp__joyGetPos"
+  ]
+ },
+ {
+  "rva": "0xd3318",
+  "obj": "JoyGetDevCapsA",
+  "src": "src/JoyGetDevCapsA.c",
+  "maps": [
+   "_impJoyGetDevCapsA=__imp__joyGetDevCapsA"
+  ]
+ },
+ {
+  "rva": "0xd331e",
+  "obj": "JoyGetNumDevs",
+  "src": "src/JoyGetNumDevs.c",
+  "maps": [
+   "_impJoyGetNumDevs=__imp__joyGetNumDevs"
+  ]
+ },
+ {
+  "rva": "0xd3324",
+  "obj": "JoyGetPosEx",
+  "src": "src/JoyGetPosEx.c",
+  "maps": [
+   "_impJoyGetPosEx=__imp__joyGetPosEx"
+  ]
+ },
+ {
+  "rva": "0xd332a",
+  "obj": "Sleep",
+  "src": "src/Sleep.c",
+  "maps": [
+   "_impSleep=__imp__Sleep"
+  ]
+ },
+ {
+  "rva": "0xd3330",
+  "obj": "SetCurrentDirectoryA",
+  "src": "src/SetCurrentDirectoryA.c",
+  "maps": [
+   "_impSetCurrDirA=__imp__SetCurrentDirectoryA"
+  ]
+ },
+ {
+  "rva": "0xd3336",
+  "obj": "InitializeCriticalSection",
+  "src": "src/InitializeCriticalSection.c",
+  "maps": [
+   "_impInitCS=__imp__InitializeCriticalSection"
+  ]
+ },
+ {
+  "rva": "0xd333c",
+  "obj": "DeleteCriticalSection",
+  "src": "src/DeleteCriticalSection.c",
+  "maps": [
+   "_impDeleteCS=__imp__DeleteCriticalSection"
+  ]
+ },
+ {
+  "rva": "0xd3342",
+  "obj": "LeaveCriticalSection",
+  "src": "src/LeaveCriticalSection.c",
+  "maps": [
+   "_impLeaveCS2=__imp__LeaveCriticalSection"
   ]
  }
 ]

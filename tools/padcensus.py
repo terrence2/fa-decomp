@@ -42,6 +42,9 @@ VOCAB = (
     b"\x8d\xac\x24\x00\x00\x00\x00",
     b"\x05\x00\x00\x00\x00",    # add eax,0 (the mystery 5-B sequence)
     b"\xcc",                    # int3 pad (FA gap16 census: 0x1175/0x127a/...)
+    b"\x2e\x8b\xc0",            # cs mov eax,eax (3-B no-op; FA census: 74
+                                # sites — after-ret pads and back-to-back
+                                # 2e8bc0 2e8bc0 runs, e.g. LFMult 0x4c29b1)
 )
 
 FA = "FA/FA.EXE"
