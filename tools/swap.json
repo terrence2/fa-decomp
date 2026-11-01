@@ -22,5 +22,13 @@
             "_SUB87070=$FA$_t_4087070",
             "_lastDial=?lastDial@@3PAUDIAL@@A",
             "_DialogDraw@4=?DialogDraw@@YGXPAX@Z",
-            "_PopShellAlloc@0=?PopShellAlloc@@YGXXZ"]}
+            "_PopShellAlloc@0=?PopShellAlloc@@YGXXZ"]},
+  {"rva": "0xb5130",
+   "obj": "CarefulDiv",
+   "src": "src/carefulDiv.c",
+   "tail": true,
+   "maps": ["_real_1=$FA$rdata0+0x49c",
+            "_g_divFlag=?palColorRGB@@3UT_RGB@@A+0x44c",
+            "_g_divRes=?palColorRGB@@3UT_RGB@@A+0x440",
+            "_g_divCls=?rFloor@@3MA+0x4"]}
 ]
