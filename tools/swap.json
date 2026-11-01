@@ -1737,5 +1737,163 @@
    "_fpspFmt=?noTimerSleep@@3JA+0x10",
    "_fpspTail=$FA$_t_484f10"
   ]
+ },
+ {
+  "rva": "0x878c0",
+  "obj": "GrafPrefPreload",
+  "src": "src/GrafPrefPreload.c",
+  "maps": [
+   "_pushSA@0=?PushShellAlloc@@YGXXZ",
+   "_TopCenterDialogFn@0=_TopCenterDialog",
+   "@pf960@4=$FA$_t_487960",
+   "_pf3e0@0=$FA$_t_4883e0",
+   "_pf440@0=$FA$_t_489440",
+   "_popSA@0=?PopShellAlloc@@YGXXZ"
+  ]
+ },
+ {
+  "rva": "0x87930",
+  "obj": "MultiPreload",
+  "src": "src/MultiPreload.c",
+  "maps": [
+   "_pushSA@0=?PushShellAlloc@@YGXXZ",
+   "@pf960@4=$FA$_t_487960",
+   "_popSA@0=?PopShellAlloc@@YGXXZ"
+  ]
+ },
+ {
+  "rva": "0x8f930",
+  "obj": "OBJNextAliasForMulti",
+  "src": "src/OBJNextAliasForMulti.c",
+  "maps": [
+   "_commentType=?COMMENT_TYPE@@3W4__unnamed@@A"
+  ]
+ },
+ {
+  "rva": "0x96510",
+  "obj": "G_DrawYLR",
+  "src": "src/G_DrawYLR.c",
+  "maps": []
+ },
+ {
+  "rva": "0x9e710",
+  "obj": "DoFadeout",
+  "src": "src/DoFadeout.c",
+  "maps": []
+ },
+ {
+  "rva": "0xa2810",
+  "obj": "CanReplay",
+  "src": "src/CanReplay.c",
+  "maps": []
+ },
+ {
+  "rva": "0xaa110",
+  "obj": "Rename",
+  "src": "src/Rename.c",
+  "maps": [
+   "__imp__MoveFileX@8=__imp__MoveFileA"
+  ]
+ },
+ {
+  "rva": "0xb4990",
+  "obj": "G_ColorStringWidth",
+  "src": "src/G_ColorStringWidth.c",
+  "maps": []
+ },
+ {
+  "rva": "0xb6b80",
+  "obj": "APInit",
+  "src": "src/APInit.c",
+  "maps": []
+ },
+ {
+  "rva": "0xddfd0",
+  "obj": "set_sbh_threshold",
+  "src": "src/set_sbh_threshold.c",
+  "maps": [
+   "_adbgmsg=__adbgmsg"
+  ]
+ },
+ {
+  "rva": "0xdf690",
+  "obj": "controlfp",
+  "src": "src/controlfp.c",
+  "maps": [
+   "_control87Fn=__control87"
+  ]
+ },
+ {
+  "rva": "0x78bf0",
+  "obj": "LibClose",
+  "src": "src/LibClose.c",
+  "maps": [
+   "_libAccess=?libAccess@@3PAULIBACCESS@@A"
+  ]
+ },
+ {
+  "rva": "0xd5de0",
+  "obj": "getenv",
+  "src": "src/getenv.c",
+  "maps": [
+   "_lockFn=__lock",
+   "_getenvLk=__getenv_lk",
+   "_unlockFn=__unlock"
+  ]
+ },
+ {
+  "rva": "0xd72e0",
+  "obj": "lockerr_exit",
+  "src": "src/lockerr_exit.c",
+  "maps": [
+   "_impFAE=__imp__FatalAppExitA",
+   "_impEP=__imp__ExitProcess"
+  ]
+ },
+ {
+  "rva": "0xdf5c0",
+  "obj": "query_new_handler",
+  "src": "src/query_new_handler.c",
+  "maps": [
+   "_newHandlerRef=?_pnhHeap@@3P6AHI@ZA"
+  ]
+ },
+ {
+  "rva": "0xdfa10",
+  "obj": "CopyMan",
+  "src": "src/CopyMan.c",
+  "maps": []
+ },
+ {
+  "rva": "0xe4040",
+  "obj": "isindst",
+  "src": "src/isindst.c",
+  "maps": [
+   "_lockFn=__lock",
+   "_isdLk=$FA$_t_4e4070",
+   "_unlockFn=__unlock"
+  ]
+ },
+ {
+  "rva": "0x2320",
+  "obj": "state_func_slave_connecting",
+  "src": "src/state_func_slave_connecting.c",
+  "maps": [
+   "_sfSlaveConn=$FA$_t_402390"
+  ]
+ },
+ {
+  "rva": "0x5bf0",
+  "obj": "HUDInitMessages",
+  "src": "src/HUDInitMessages.c",
+  "maps": []
+ },
+ {
+  "rva": "0xcbf0",
+  "obj": "EnableItem",
+  "src": "src/EnableItem.c",
+  "maps": [
+   "_enableHelper=$FA$_t_40cb80"
+  ]
  }
 ]
