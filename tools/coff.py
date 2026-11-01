@@ -176,6 +176,11 @@ def build_stub_obj(text_bytes, text_flags, func_name, fpo_rec=None,
     # resolve main-reloc target names: None/func_name -> main symbol index,
     # others become undefined externals resolved from the defining chunk obj
     # (one externals entry per distinct name keeps the table small)
+    # A target that more_syms DEFINES (sec != 0, e.g. a cl-internal $L label
+    # re-defined against the fitted .text) must get its defined record EARLY
+    # and reuse that index for the relocs — otherwise the reloc binds to a
+    # shadow undefined twin and the link reports LNK2001 even though a
+    # defined duplicate exists later in the table (probed: DlgSel_fit).
     name_idx = {}
     mrel = []
     for off, tgt, typ in main_relocs:
@@ -184,21 +189,38 @@ def build_stub_obj(text_bytes, text_flags, func_name, fpo_rec=None,
             continue
         idx = name_idx.get(tgt)
         if idx is None:
-            idx = st.add(tgt, 0, 0, SYM_EXTERNAL)
+            prior = next((s for s in more_syms if s[0] == tgt and s[2]), None)
+            idx = st.add(*prior) if prior else st.add(tgt, 0, 0, SYM_EXTERNAL)
             name_idx[tgt] = idx
         mrel.append((off, idx, typ))
     mrel = tuple(mrel)
     secs[0] = (secs[0][0], secs[0][1], secs[0][2], mrel)
     for s in more_syms:
+        if s[2] and s[0] in name_idx:
+            continue          # already added as the reloc's defined target
         st.add(*s)
     nsym = len(st.recs)
 
     # assemble the file: header, 40-byte section headers (with real offsets),
     # raw payloads, relocation records, symbol table, string table
+    # reloc targets: None = the main (function) symbol; int = symbol index;
+    # str = a name (resolved against name_idx, else a new undefined external)
     hdr = bytearray(struct.pack("<HHIIIHH", MAGIC, len(secs), 0, 0, nsym, 0, 0))
     raw = [(c[2] if c[2] else b"") for c in secs]  # cl does not pad obj payloads
-    rel = [b"".join(struct.pack("<IIH", va, fidx if sym is None else sym, typ)
+    def _ri(sym):
+        if sym is None:
+            return fidx
+        if isinstance(sym, int):
+            return sym
+        idx = name_idx.get(sym)
+        if idx is None:
+            idx = st.add(sym, 0, 0, SYM_EXTERNAL)
+            name_idx[sym] = idx
+        return idx
+    rel = [b"".join(struct.pack("<IIH", va, _ri(sym), typ)
                     for va, sym, typ in c[3]) for c in secs]
+    nsym = len(st.recs)                        # _ri may have added externals
+    struct.pack_into("<I", hdr, 12, nsym)
     rawoff = 20 + 40 * len(secs)
     rawptrs, off = [], rawoff
     for b in raw:
@@ -236,7 +258,9 @@ def build_group_obj(parts, extra_externals=()):
                alias) or, if unknown, an undefined external resolved by the
                defining obj.
       owner    anchor symbol defined at this contribution's start (val 0)
-      aliases  [(name, typ)] extra symbols aliased to the same place (exports)
+      aliases  extra symbols aliased to the same section: (name, typ) at val 0
+               or (name, typ, val) at a section offset (merged-span inner
+               chunk anchors)
       assoc    for .debug$F: 1-based index of the associated main section
     extra_externals -- (name, val, sec, cls, typ, aux) tuples appended after
     the parts' symbols (defaults: name,0,0,EXTERNAL,0,b"").
@@ -266,9 +290,10 @@ def build_group_obj(parts, extra_externals=()):
                      typ=p.get("owner_typ", 0))
         name_idx[p["owner"]] = idx
         secnum_by_anchor[p["owner"]] = num
-        for nm, typ in p.get("aliases") or ():
-            aidx = st.add(nm, 0, num, SYM_EXTERNAL, typ=typ)
-            name_idx.setdefault(nm, aidx)
+        for al in p.get("aliases") or ():
+            val = al[2] if len(al) > 2 else 0
+            aidx = st.add(al[0], val, num, SYM_EXTERNAL, typ=al[1])
+            name_idx.setdefault(al[0], aidx)
     # pass 2: resolve reloc targets; unknown names become undefined externals
     for p in parts:
         rl = []

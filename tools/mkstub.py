@@ -47,6 +47,17 @@ GROUP_SIZE = int(os.environ.get("GROUP_SIZE", "50"))  # chunk sections per group
 # chunk at its exact rsp position (tools/mkrsp.py --replace).
 SPLIT_AT = {int(x, 0) for x in
             os.environ.get("SPLIT_AT", "").split(",") if x.strip()}
+# Comma-separated VA:SIZE entries: the run of chunks [VA, VA+SIZE) becomes
+# ONE singleton group with a single merged .text section (a decompiled
+# function whose compiler split it into several units across chunk
+# boundaries, e.g. SEH filter/handler funclets). The inner chunks' anchors
+# are re-defined as offset aliases into the merged section so fixups
+# pointing into them (FA's .rdata scope-table funclet pointers) resolve.
+SPLIT_SPAN = {}
+for e in os.environ.get("SPLIT_SPAN", "").split(","):
+    if e.strip():
+        va, sz = e.split(":")
+        SPLIT_SPAN[int(va, 0)] = int(sz, 0)
 BSS_GROUP_SIZE = 200      # bss sections are tiny; batch more per obj
 BSS_FLAGS = 0xC0100080    # READ|WRITE|ALIGN_1|CNT_UNINITIALIZED (cl emits .bss
                           # 0xC0400080; align must be 1 so chunk sizes tile
@@ -145,15 +156,82 @@ def main():
         if dbg is not None:
             recs.append((partlist.index(main), dbg))   # fix .debug$F assoc later
 
+    def add_span(cstart, size):
+        """Merged singleton group over the chunk run [va, va+size)."""
+        cs = [c for c in L["text_chunks"]
+              if cstart["va"] <= c["va"] < cstart["va"] + size]
+        assert cs and cs[0]["va"] == cstart["va"], hex(cstart["va"])
+        first = cs[0]
+        name = A.chunk_name(first, "t")
+        exports_alias = first["name"][1:] \
+            if first["name"] and first["name"][1:] in export_names else None
+        # inner anchors at their offsets (3-tuples, coff.build_group_obj)
+        aliases = [(A.chunk_name(c, "t"), coff.TYPE_FUNCTION,
+                    c["va"] - first["va"]) for c in cs[1:]]
+        if exports_alias:
+            aliases = [(exports_alias, coff.TYPE_FUNCTION, 0)] + aliases
+        content, relocs = b"", []
+        for c in cs:
+            cc, rc = fixup_relocs(c, "t", c["off"], c["size"])
+            content += cc
+            relocs += [(o + c["va"] - first["va"], n, t) for o, n, t in rc]
+        batch["first_va"] = first["va"]
+        batch["last_va"] = cs[-1]["va"]
+        batch["n"] = len(cs)
+        batch["nfixups"] = len(relocs)
+        mi = len(partlist)
+        partlist.append(dict(secname=".text", flags=0x00100020,
+                             content=content, relocs=relocs, owner=name,
+                             owner_typ=coff.TYPE_FUNCTION,
+                             aliases=aliases))
+        for c in cs:
+            # per-chunk .debug$F, exactly as add_text would for these chunks
+            # (records live in the PDB's FPO payload under /DEBUG)
+            r = bytes.fromhex(c["fpo_rec"]) if c.get("fpo_rec") else None
+            if r is not None:
+                rv, sz = struct.unpack_from("<II", r)
+                assert (rv, sz) == (c["va"] - IMAGE_BASE, c["size"]), \
+                    (hex(rv), hex(sz), hex(c["va"]))
+            want = ((c["va"] - IMAGE_BASE, c["size"]) in fpo_set
+                    and os.environ.get("NO_FPO") != "1")
+            if want:
+                a = A.chunk_name(c, "t")
+                assert a == name or a in (al[0] for al in aliases), a
+                recs.append((mi, dict(secname=".debug$F",
+                                      flags=coff.S_DEBUGF_PLAIN,
+                                      content=b"\0\0\0\0" + (r or
+                                              struct.pack("<IIIHBB2x",
+                                                          c["va"] - IMAGE_BASE,
+                                                          c["size"], 0, 0, 0,
+                                                          0))[4:],
+                                      relocs=[(0, a, coff.RELOC_DIR32NB)],
+                                      owner=a, assoc=None)))
+
     def flush_text():
         for i, (mi, dbg) in enumerate(recs):
             dbg["assoc"] = mi + 1                  # 1-based main-section num
             partlist.append(dbg)
         obj = coff.build_group_obj(partlist)
         write_group(idx, "g%04d_$%06x.obj" % (idx, batch["first_va"]),
-                    obj, "textgroup", batch, batch.get("nfixups", 0))
+                    obj, "textgroup", batch, batch["nfixups"])
 
+    consumed = set()
     for c in L["text_chunks"]:
+        if c["va"] in SPLIT_SPAN:
+            assert not consumed or c["va"] > max(consumed, default=0)
+            consumed = {k["va"] for k in L["text_chunks"]
+                        if c["va"] <= k["va"] < c["va"] + SPLIT_SPAN[c["va"]]}
+            if batch["n"]:
+                flush_text()
+                batch = {"n": 0, "parts": (partlist := [])}
+                recs = []
+            add_span(c, SPLIT_SPAN[c["va"]])
+            flush_text()
+            batch = {"n": 0, "parts": (partlist := [])}
+            recs = []
+            continue
+        if c["va"] in consumed:
+            continue
         if c["va"] in SPLIT_AT and batch["n"]:
             flush_text()
             batch = {"n": 0, "parts": (partlist := [])}

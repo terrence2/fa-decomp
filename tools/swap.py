@@ -23,6 +23,7 @@ import subprocess
 import sys
 
 sys.path.insert(0, __file__.rsplit("/", 1)[0])
+from peref import IMAGE_BASE
 
 STUBS = "build/stubs_d"
 RSP = "build/m0/m0linkD.rsp"
@@ -65,7 +66,12 @@ def entries():
     return es
 
 def split_vas(es):
-    return ",".join("%#x" % e["rva"] for e in es)
+    # mkstub SPLIT_AT / SPLIT_SPAN compare against chunk["va"] (FULL VA,
+    # layout.json form) and mkrsp --replace keys against manifest m["va"] —
+    # both VA-form; swap.json's rva entries are RVAs. Convert here so the
+    # swap set's RVA keys never diverge from the link-side VA keys.
+    # (Found while pilot 7: as-written, RVA keys silently no-oped the swap.)
+    return ",".join("%#x" % (e["rva"] + IMAGE_BASE) for e in es)
 
 
 def step_compile(es):
@@ -93,6 +99,10 @@ def _fit(e):
         args += ["--map", m]
     for p in e.get("patch", []):
         args += ["--patch", p]
+    if e.get("span"):
+        args += ["--span", str(e["span"])]
+    for a in e.get("aliases", []):
+        args += ["--alias", a]
     if e.get("tail"):
         args += ["--tail-accept"]
     r = subprocess.run(args, capture_output=True, text=True)
@@ -103,7 +113,14 @@ def _fit(e):
 
 def step_link(es):
     subprocess.run("rm -rf " + STUBS, shell=True, check=True)
-    env = dict(os.environ, STUB_DIR=STUBS, SPLIT_AT=split_vas(es))
+    normal = [e for e in es if not e.get("span")]
+    spanned = [e for e in es if e.get("span")]
+    env = dict(os.environ, STUB_DIR=STUBS,
+               SPLIT_AT=",".join("%#x" % (e["rva"] + IMAGE_BASE)
+                                 for e in normal),
+               SPLIT_SPAN=",".join("%#x:%s" % (e["rva"] + IMAGE_BASE,
+                                               e["span"])
+                                   for e in spanned))
     r = subprocess.run([sys.executable, "tools/mkstub.py"], env=env,
                        capture_output=True, text=True)
     print(r.stdout.strip())
@@ -112,7 +129,7 @@ def step_link(es):
     repl = []
     for e in es:
         repl += ["--replace", "%#x=Z:/work/build/pilot/%s_fit.obj"
-                 % (e["rva"], e["obj"])]
+                 % (e["rva"] + IMAGE_BASE, e["obj"])]
     subprocess.run([sys.executable, "tools/mkrsp.py", "--stubdir", STUBS,
                     "--out", RSP] + repl, check=True)
     for clock, log in (("@1997-08-11 23:12:40", "logD_seed"),
@@ -132,7 +149,8 @@ def step_link(es):
                 "> /work/build/m0/%s 2>&1; echo exit=$?" % log)
         r = subprocess.run(docker_link, shell=True, capture_output=True,
                            text=True)
-        if "exit=0" not in r.stdout:
+        # wine does not propagate LNK errors as exit codes (LNK1120 exits 0)
+        if not os.path.exists("atf95/Release/FA.exe"):
             raise SystemExit("%s failed: %s"
                              % (log, (r.stdout + r.stderr)[-2000:]))
         print("%s ok" % log)

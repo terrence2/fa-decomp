@@ -259,7 +259,7 @@ see Phase 0 notes above.)
   decompiled TUs must be address-contiguous runs (unchanged — enforced per-TU at
   Phase-4 pilot time).
 
-### 6. Phase 4 — pilot decompilations — ✅ Pilots 1–6 PASSED (2026-10-31)
+### 6. Phase 4 — pilot decompilations — ✅ Pilots 1–7 PASSED, 7 swaps live (2026-11-01)
 - **WRFogLayerUpdate @ 0xb06c0 (0x50 B)**: `src/WRFogLayerUpdate.c` — cl 4.2
   `/c /O2 /Gy /G5` reproduced FA codegen on the FIRST attempt (fastcall
   `Rand(51)` = `@Rand@4` resolves to the callee stub anchor).
@@ -336,7 +336,54 @@ see Phase 0 notes above.)
     fused f3 to `[ecx+0x1f]`, re-insert the reload at FA's slot with its
     DIR32 site. Also: FA pads some chunks with `mov edi,edi` (8b ff) not
     just lea-nops — fitobj's no-op set extended.
-- Remaining pilots: throw-site C++ member, then scale up to bulk decompilation.
+- **StartGameThread @ 0x35e50 (~0x80 B, 3 chunks)**: `src/StartGameThread.c` —
+  first SEH pilot AND first pilot whose swap was verified LIVE (the exe
+  actually contains compiled decompiled code, not stub bytes). It is a C
+  `__try`/`__except` function — FA has NO C++ throw sites at all (no
+  `RaiseException` import; every try frame pairs with `__except_handler3`),
+  so the "throw-site C++ member" pilot premise is retired. Codegen tells:
+  the SEH prologue is fully INLINED by CL (set frame + `[ebp-4]`
+  __except_handler3 ptr + `mov eax,fs:[__except_list]` + push tryscope +
+  push handler3, then `mov [ebx-4],ecx`-style context slot `[ebp-0x14]`
+  written by handler3); FA's filter inlines `GetExceptionInformation()` as
+  `mov eax,[ebp-0x14]` while CL emits an `e8` helper call — repaired with a
+  fitobj `--patch` over the whole body tail; CL's static scope table `$T107`
+  maps to FA's `.rdata` copy `$FA$rdata0+0x264`; `_g_filterFn` (the ind-
+  irection FA's filter reads) is the named data chunk `_overflow_ptr`
+  @ 0x586228; FA's own filter is a plain null filter = `_unknown_divide_error`
+  @ 0x4bb200.
+- **Span mechanism (multi-chunk functions)**: CL/FA split `__try` functions
+  into units over several chunks (main 0x35e50 + filter 0x35e9d + handler
+  0x35eab). New `SPLIT_SPAN=VA:SIZE` (mkstub: one merged singleton group,
+  inner chunks' anchors re-defined as offset aliases) + fitobj `--span SIZE`
+  (FA bytes concatenated across the run, chunk tiling asserted) +
+  `--alias OFF=NAME` (fitted obj re-defines the inner anchors so .rdata
+  scope-table funclet pointers resolve). swap.json keys: `span`, `aliases`.
+- **Critical pipeline bugs found & fixed (first LIVE link)**:
+  - **Silent-noop RVAs-vs-VAs**: swap.py passed RVAs to SPLIT_AT/--replace
+    (VA-form keys) — since pilot 3 every committed Gate-1 PASS was a no-op
+    (stub code linked, fit objs ignored). Fixed by +IMAGE_BASE everywhere;
+    always confirm a swap is live by a link that FAILS when the fit obj is
+    excluded (the silent-noop era passed trivially).
+  - **COMDAT dedup trap**: fitted `.text` carried cl's COMDAT flags keyed on
+    the generic `.text` symbol — link 4.20 dedups ALL same-keyed COMDAT
+    sections, silently dropping every fitted obj after the first
+    (LNK2001 for later objs' definitions). Fitted `.text` must be PLAIN
+    0x00100020 (microtest: build/mt7).
+  - **Lnk2001 shadow twins**: build_stub_obj created undefined externals for
+    reloc targets even when more_syms re-DEFINED the same name (cl-internal
+    `$L*` labels) — relocs bind to the undefined index. Fixed: defined
+    more_syms that are reloc targets are added early and reused.
+  - **FPO payload conservation**: the stub singleton carried FA's .debug$F
+    for span chunks; the fit obj must re-emit a .debug$F per chunk whose
+    (rva,size) is in FA's payload (fitobj now copies mkstub.fa_fpo_records).
+    One missing record shifted the payload AND the debug-dir SizeOfData/ptr.
+  - **Wine exit-code lie**: LINK reports LNK1120 with exit 0 — success check
+    is `FA.exe` existence, not `echo exit=0`.
+  - **Double-based anchor names**: `$FA$_t_4087070`-style (VA of an already-
+    VA'd base) must be `$FA$_t_487070` (rva 0x87070 + 0x400000) — bit us
+    twice (pilot 4 map + pilot 7 aliases).
+- Remaining pilots: scale up to bulk decompilation.
 
 ### 7. Phase 5 — hardening
 - Progress tracker JSON (N/3829 functions), CI gate, update `MSVC_VERSION.md` with the

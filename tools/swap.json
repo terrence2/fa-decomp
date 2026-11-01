@@ -1,6 +1,10 @@
 // Gate-1 swap set: one entry per decompiled function.
 // rva = FA chunk RVA, obj = CL object base name, src = source file,
-// flags = cl options, maps = fitobj relocation remaps ["FROM=TO[+addend]"].
+// flags = cl options, maps = fitobj relocation remaps ["FROM=TO[+addend]"],
+// patch = fitobj --patch directives, tail = fitobj --tail-accept,
+// span = merged multi-chunk span SIZE (mkstub SPLIT_SPAN + fitobj --span),
+// aliases = extra offset symbols the fitted obj must define ["OFF=NAME"]
+// (mkstub re-defines inner gap anchors at their offsets inside the span).
 [
   {"rva": "0xb06c0",
    "obj": "WRFog",
@@ -19,7 +23,7 @@
    "src": "src/DialogSelectItem.c",
    "tail": true,
    "maps": ["_PushShellAlloc@0=?PushShellAlloc@@YGXXZ",
-            "_SUB87070=$FA$_t_4087070",
+            "_SUB87070=$FA$_t_487070",
             "_lastDial=?lastDial@@3PAUDIAL@@A",
             "_DialogDraw@4=?DialogDraw@@YGXPAX@Z",
             "_PopShellAlloc@0=?PopShellAlloc@@YGXXZ"]},
@@ -39,5 +43,18 @@
    "patch": ["0x39,6,",
              "0x44,0,8d4c0500",
              "0x4a,4,8b691f",
-             "0x4d,0,8b0d00000000,2:6:_hintHndl"]}
+             "0x4d,0,8b0d00000000,2:6:_hintHndl"]},
+  {"rva": "0x35e50",
+   "obj": "StartGameThread",
+   "src": "src/StartGameThread.c",
+   "span": "0x80",
+   "aliases": ["0x4d=$FA$_t_435e9d", "0x5b=$FA$_t_435eab"],
+   "maps": ["$T107=$FA$rdata0+0x264",
+            "__imp__GetCurrentThread@0=__imp__GetCurrentThread",
+            "__imp__SetThreadPriority@8=__imp__SetThreadPriority",
+            "__imp__ExitThread@4=__imp__ExitThread",
+            "_g_filterFn=_overflow_ptr",
+            "_NullFilter=_unknown_divide_error",
+            "_usnfmain=?usnfmain@@YAXXZ"],
+   "patch": ["0x4b,0x37,eb118b45ec50ff150000000083c404c38b65e8c745fcffffffff6a00ff150000000033c08b4df064890d000000005f5e5b8be55dc3,8:6:_g_filterFn,0x1e:6:__imp__ExitThread@4"]}
 ]
