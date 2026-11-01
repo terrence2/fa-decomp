@@ -226,8 +226,10 @@ def step_link(es):
     normal = [e for e in es if not e.get("span")]
     spanned = [e for e in es if e.get("span")]
     # tail word (exe 0x131a09): deterministic function of the swap set and
-    # GROUP_SIZE; swept at 423 entries — GS=13 reads 00 00 (wave-13).
-    env = dict(os.environ, STUB_DIR=STUBS, GROUP_SIZE="13",
+    # GROUP_SIZE; swept via seed-link-only runs (build/w15/gssweep.py): GS=13
+    # at 423 entries (wave-13), GS=7 at 661 entries (wave-15) read 00 00.
+    # Re-sweep whenever the swap set size changes.
+    env = dict(os.environ, STUB_DIR=STUBS, GROUP_SIZE="7",
                SPLIT_AT=",".join("%#x" % (e["rva"] + IMAGE_BASE)
                                  for e in normal),
                SPLIT_SPAN=",".join("%#x:%s" % (e["rva"] + IMAGE_BASE,
@@ -238,18 +240,20 @@ def step_link(es):
     print(r.stdout.strip())
     if r.returncode:
         raise SystemExit("mkstub failed: " + r.stderr[-2000:])
-    # rsp ceiling mitigation #3: LINK runs from atf95/Release, so staged
-    # copies keep every rsp line short ("d/xxx.obj"): 33080 B at 463 entries
-    # re-crossed the ~32KB limit (LNK1181 on a name truncated mid-hex, the
-    # LNK1104 class); relative paths bought 29988 B at 423 (mitig #2).
+    # rsp ceiling mitigations: #1 relative obj paths (343 entries); #2 short
+    # STUBS dir build/st (423); #3+#4 stage ALL link inputs under atf95/d
+    # (LINK cwd is atf95) and use SHORT stub names from mkstub (no va suffix)
+    # -- 661 entries: 36.2KB (LNK1181 "Rel" truncated-path class) down to
+    # ~21KB. Ceiling is LINK 4.2's ~32KB response-file limit (LNK1104/1181
+    # truncated paths + LNK1141).
     subprocess.run(
-        "mkdir -p atf95/Release/d && rm -f atf95/Release/d/* && "
+        "mkdir -p atf95/d && rm -f atf95/d/* && "
         "cp build/st/* build/pilot/*_fit.obj build/idata/* build/m0/FA.obj "
-        "atf95/Release/d/",
+        "atf95/d/",
         shell=True, check=True)
     repl = []
     for e in es:
-        repl.append(["--replace", "%#x=Release/d/%s_fit.obj"
+        repl.append(["--replace", "%#x=d/%s_fit.obj"
                      % (e["rva"] + IMAGE_BASE, e["obj"])])
     r = subprocess.run([sys.executable, "tools/mkrsp.py", "--stubdir", STUBS,
                         "--out", RSP]
@@ -295,7 +299,6 @@ if __name__ == "__main__":
               "link": lambda: step_link(es) or 0,
               # gate: fail the process if gate.py does (the previous form
               # discarded step_gate's return and exited 0 on GATE 1 FAIL)
-              "gate": lambda: (step_gate(es) or
-                               (_ for _ in ()).throw(SystemExit("gate: GATE 1 FAIL")))}[s]()
+              "gate": lambda: step_gate(es)}[s]()
         if rc:
             raise SystemExit(rc)

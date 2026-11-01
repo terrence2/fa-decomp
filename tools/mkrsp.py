@@ -16,7 +16,7 @@ import os
 import sys
 
 STUBS = "build/stubs"
-IDATA = "Release/d"  # staged under the link CWD (atf95); rsp-ceiling mitigation #3
+IDATA = "d"  # staged under the link CWD (atf95/d); rsp-ceiling mitigations #3+#4
 
 
 def main():

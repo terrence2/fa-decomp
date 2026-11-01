@@ -132,9 +132,14 @@ def main():
     idx = 0
 
     def write_group(idx, base, obj, kind, batch, nfixups):
+        # unique short name (rsp-ceiling mitigation #4): the kind letter plus
+        # a monotonically derived number -- idx is NOT monotonic across text
+        # groups, so derive from the manifest count (manifest order IS rsp
+        # order; filenames are opaque to the linker)
+        base = "%s%05x.obj" % (kind[0], len(manifest))
         fn = os.path.join(STUB_DIR, base)
         open(fn, "wb").write(obj)
-        manifest.append(dict(idx=idx, file=os.path.basename(fn), kind=kind,
+        manifest.append(dict(idx=idx, file=base, kind=kind,
                              va=batch["first_va"], vae=batch["last_va"],
                              size=len(obj), chunks=batch["n"],
                              nfixups=nfixups))
@@ -221,7 +226,7 @@ def main():
             dbg["assoc"] = mi + 1                  # 1-based main-section num
             partlist.append(dbg)
         obj = coff.build_group_obj(partlist)
-        write_group(idx, "g%04d_$%06x.obj" % (idx, batch["first_va"]),
+        write_group(idx, "g%04d.obj" % idx,
                     obj, "textgroup", batch, batch["nfixups"])
 
     consumed = set()
@@ -288,7 +293,7 @@ def main():
                               owner=A.chunk_name(c, "d")))
         obj = coff.build_group_obj(parts)
         last = bd[-1] if not (straddler and gi + GROUP_SIZE > len(datas) - 1) else straddler
-        write_group(idx, "d%04d_$%06x.obj" % (idx, bd[0]["va"]),
+        write_group(idx, "d%04d.obj" % idx,
                     obj, "datagroup", {"first_va": bd[0]["va"],
                                        "last_va": last["va"],
                                        "n": len(bd) + (1 if last is straddler else 0)}, nfix)
@@ -318,7 +323,7 @@ def main():
                        owner=A.chunk_name(c, "d"),
                        sec_rsz=c["size_full"]) for c in bd]
         obj = coff.build_group_obj(parts)
-        write_group(idx, "b%04d_$%06x.obj" % (idx, bd[0]["va"]),
+        write_group(idx, "b%04d.obj" % idx,
                     obj, "bssgroup", {"first_va": bd[0]["va"],
                                       "last_va": bd[-1]["va"],
                                       "n": len(bd)}, 0)

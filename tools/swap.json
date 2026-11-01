@@ -3339,5 +3339,1589 @@
   "maps": [
    "_impLeaveCS2=__imp__LeaveCriticalSection"
   ]
+ },
+ {
+  "rva": 865096,
+  "obj": "EnterCriticalSection",
+  "src": "src/EnterCriticalSection.c",
+  "maps": [
+   "_impEnterCriticalSection=__imp__EnterCriticalSection"
+  ]
+ },
+ {
+  "rva": 865102,
+  "obj": "GetDriveTypeA",
+  "src": "src/GetDriveTypeA.c",
+  "maps": [
+   "_impGetDriveTypeA=__imp__GetDriveTypeA"
+  ]
+ },
+ {
+  "rva": 865108,
+  "obj": "GetLogicalDrives",
+  "src": "src/GetLogicalDrives.c",
+  "maps": [
+   "_impGetLogicalDrives=__imp__GetLogicalDrives"
+  ]
+ },
+ {
+  "rva": 865114,
+  "obj": "SetThreadPriority",
+  "src": "src/SetThreadPriority.c",
+  "maps": [
+   "_impSetThreadPriority=__imp__SetThreadPriority"
+  ]
+ },
+ {
+  "rva": 865120,
+  "obj": "GetCurrentThread",
+  "src": "src/GetCurrentThread.c",
+  "maps": [
+   "_impGetCurrentThread=__imp__GetCurrentThread"
+  ]
+ },
+ {
+  "rva": 865126,
+  "obj": "GetThreadPriority",
+  "src": "src/GetThreadPriority.c",
+  "maps": [
+   "_impGetThreadPriority=__imp__GetThreadPriority"
+  ]
+ },
+ {
+  "rva": 865132,
+  "obj": "GetSystemInfo",
+  "src": "src/GetSystemInfo.c",
+  "maps": [
+   "_impGetSystemInfo=__imp__GetSystemInfo"
+  ]
+ },
+ {
+  "rva": 865138,
+  "obj": "MapViewOfFile",
+  "src": "src/MapViewOfFile.c",
+  "maps": [
+   "_impMapViewOfFile=__imp__MapViewOfFile"
+  ]
+ },
+ {
+  "rva": 865144,
+  "obj": "CreateFileMappingA",
+  "src": "src/CreateFileMappingA.c",
+  "maps": [
+   "_impCreateFileMappingA=__imp__CreateFileMappingA"
+  ]
+ },
+ {
+  "rva": 865150,
+  "obj": "GetFileSize",
+  "src": "src/GetFileSize.c",
+  "maps": [
+   "_impGetFileSize=__imp__GetFileSize"
+  ]
+ },
+ {
+  "rva": 865156,
+  "obj": "CreateFileA",
+  "src": "src/CreateFileA.c",
+  "maps": [
+   "_impCreateFileA=__imp__CreateFileA"
+  ]
+ },
+ {
+  "rva": 865162,
+  "obj": "IsBadStringPtrA",
+  "src": "src/IsBadStringPtrA.c",
+  "maps": [
+   "_impIsBadStringPtrA=__imp__IsBadStringPtrA"
+  ]
+ },
+ {
+  "rva": 865168,
+  "obj": "CloseHandle",
+  "src": "src/CloseHandle.c",
+  "maps": [
+   "_impCloseHandle=__imp__CloseHandle"
+  ]
+ },
+ {
+  "rva": 865174,
+  "obj": "UnmapViewOfFile",
+  "src": "src/UnmapViewOfFile.c",
+  "maps": [
+   "_impUnmapViewOfFile=__imp__UnmapViewOfFile"
+  ]
+ },
+ {
+  "rva": 865180,
+  "obj": "GlobalAlloc",
+  "src": "src/GlobalAlloc.c",
+  "maps": [
+   "_impGlobalAlloc=__imp__GlobalAlloc"
+  ]
+ },
+ {
+  "rva": 865186,
+  "obj": "VirtualAlloc",
+  "src": "src/VirtualAlloc.c",
+  "maps": [
+   "_impVirtualAlloc=__imp__VirtualAlloc"
+  ]
+ },
+ {
+  "rva": 865192,
+  "obj": "GlobalFree",
+  "src": "src/GlobalFree.c",
+  "maps": [
+   "_impGlobalFree=__imp__GlobalFree"
+  ]
+ },
+ {
+  "rva": 865198,
+  "obj": "VirtualFree",
+  "src": "src/VirtualFree.c",
+  "maps": [
+   "_impVirtualFree=__imp__VirtualFree"
+  ]
+ },
+ {
+  "rva": 865204,
+  "obj": "ExitThread",
+  "src": "src/ExitThread.c",
+  "maps": [
+   "_impExitThread=__imp__ExitThread"
+  ]
+ },
+ {
+  "rva": 865210,
+  "obj": "ExitProcess",
+  "src": "src/ExitProcess.c",
+  "maps": [
+   "_impExitProcess=__imp__ExitProcess"
+  ]
+ },
+ {
+  "rva": 865216,
+  "obj": "SuspendThread",
+  "src": "src/SuspendThread.c",
+  "maps": [
+   "_impSuspendThread=__imp__SuspendThread"
+  ]
+ },
+ {
+  "rva": 865222,
+  "obj": "GetCurrentThreadId",
+  "src": "src/GetCurrentThreadId.c",
+  "maps": [
+   "_impGetCurrentThreadId=__imp__GetCurrentThreadId"
+  ]
+ },
+ {
+  "rva": 865228,
+  "obj": "CreateThread",
+  "src": "src/CreateThread.c",
+  "maps": [
+   "_impCreateThread=__imp__CreateThread"
+  ]
+ },
+ {
+  "rva": 865234,
+  "obj": "GetExitCodeThread",
+  "src": "src/GetExitCodeThread.c",
+  "maps": [
+   "_impGetExitCodeThread=__imp__GetExitCodeThread"
+  ]
+ },
+ {
+  "rva": 865240,
+  "obj": "QueryPerformanceCounter",
+  "src": "src/QueryPerformanceCounter.c",
+  "maps": [
+   "_impQueryPerformanceCounter=__imp__QueryPerformanceCounter"
+  ]
+ },
+ {
+  "rva": 865246,
+  "obj": "QueryPerformanceFrequency",
+  "src": "src/QueryPerformanceFrequency.c",
+  "maps": [
+   "_impQueryPerformanceFrequency=__imp__QueryPerformanceFrequency"
+  ]
+ },
+ {
+  "rva": 865252,
+  "obj": "ResumeThread",
+  "src": "src/ResumeThread.c",
+  "maps": [
+   "_impResumeThread=__imp__ResumeThread"
+  ]
+ },
+ {
+  "rva": 865258,
+  "obj": "TerminateThread",
+  "src": "src/TerminateThread.c",
+  "maps": [
+   "_impTerminateThread=__imp__TerminateThread"
+  ]
+ },
+ {
+  "rva": 865264,
+  "obj": "thkFindClose",
+  "src": "src/thkFindClose.c",
+  "maps": [
+   "_impFindCloseThunk=__imp__FindClose"
+  ]
+ },
+ {
+  "rva": 865270,
+  "obj": "FindFirstFileA",
+  "src": "src/FindFirstFileA.c",
+  "maps": [
+   "_impFindFirstFileA=__imp__FindFirstFileA"
+  ]
+ },
+ {
+  "rva": 865276,
+  "obj": "GetDiskFreeSpaceA",
+  "src": "src/GetDiskFreeSpaceA.c",
+  "maps": [
+   "_impGetDiskFreeSpaceA=__imp__GetDiskFreeSpaceA"
+  ]
+ },
+ {
+  "rva": 865282,
+  "obj": "FindNextFileA",
+  "src": "src/FindNextFileA.c",
+  "maps": [
+   "_impFindNextFileA=__imp__FindNextFileA"
+  ]
+ },
+ {
+  "rva": 865288,
+  "obj": "FileTimeToDosDateTime",
+  "src": "src/FileTimeToDosDateTime.c",
+  "maps": [
+   "_impFileTimeToDosDateTime=__imp__FileTimeToDosDateTime"
+  ]
+ },
+ {
+  "rva": 865294,
+  "obj": "FileTimeToLocalFileTime",
+  "src": "src/FileTimeToLocalFileTime.c",
+  "maps": [
+   "_impFileTimeToLocalFileTime=__imp__FileTimeToLocalFileTime"
+  ]
+ },
+ {
+  "rva": 865300,
+  "obj": "GetFileTime",
+  "src": "src/GetFileTime.c",
+  "maps": [
+   "_impGetFileTime=__imp__GetFileTime"
+  ]
+ },
+ {
+  "rva": 865306,
+  "obj": "GetLocalTime",
+  "src": "src/GetLocalTime.c",
+  "maps": [
+   "_impGetLocalTime=__imp__GetLocalTime"
+  ]
+ },
+ {
+  "rva": 865312,
+  "obj": "FreeLibrary",
+  "src": "src/FreeLibrary.c",
+  "maps": [
+   "_impFreeLibrary=__imp__FreeLibrary"
+  ]
+ },
+ {
+  "rva": 865318,
+  "obj": "GetProcAddress",
+  "src": "src/GetProcAddress.c",
+  "maps": [
+   "_impGetProcAddress=__imp__GetProcAddress"
+  ]
+ },
+ {
+  "rva": 865324,
+  "obj": "LoadLibraryA",
+  "src": "src/LoadLibraryA.c",
+  "maps": [
+   "_impLoadLibraryA=__imp__LoadLibraryA"
+  ]
+ },
+ {
+  "rva": 865330,
+  "obj": "SetErrorMode",
+  "src": "src/SetErrorMode.c",
+  "maps": [
+   "_impSetErrorMode=__imp__SetErrorMode"
+  ]
+ },
+ {
+  "rva": 865336,
+  "obj": "SetFilePointer",
+  "src": "src/SetFilePointer.c",
+  "maps": [
+   "_impSetFilePointer=__imp__SetFilePointer"
+  ]
+ },
+ {
+  "rva": 865342,
+  "obj": "ReadFile",
+  "src": "src/ReadFile.c",
+  "maps": [
+   "_impReadFile=__imp__ReadFile"
+  ]
+ },
+ {
+  "rva": 865348,
+  "obj": "WriteFile",
+  "src": "src/WriteFile.c",
+  "maps": [
+   "_impWriteFile=__imp__WriteFile"
+  ]
+ },
+ {
+  "rva": 865354,
+  "obj": "DeleteFileA",
+  "src": "src/DeleteFileA.c",
+  "maps": [
+   "_impDeleteFileA=__imp__DeleteFileA"
+  ]
+ },
+ {
+  "rva": 865360,
+  "obj": "MoveFileA",
+  "src": "src/MoveFileA.c",
+  "maps": [
+   "_impMoveFileA=__imp__MoveFileA"
+  ]
+ },
+ {
+  "rva": 865366,
+  "obj": "lstrcpyA",
+  "src": "src/lstrcpyA.c",
+  "maps": [
+   "_implstrcpyA=__imp__lstrcpyA"
+  ]
+ },
+ {
+  "rva": 865372,
+  "obj": "GetCurrentDirectoryA",
+  "src": "src/GetCurrentDirectoryA.c",
+  "maps": [
+   "_impGetCurrentDirectoryA=__imp__GetCurrentDirectoryA"
+  ]
+ },
+ {
+  "rva": 865378,
+  "obj": "GetModuleFileNameA",
+  "src": "src/GetModuleFileNameA.c",
+  "maps": [
+   "_impGetModuleFileNameA=__imp__GetModuleFileNameA"
+  ]
+ },
+ {
+  "rva": 865384,
+  "obj": "GetTickCount",
+  "src": "src/GetTickCount.c",
+  "maps": [
+   "_impGetTickCount=__imp__GetTickCount"
+  ]
+ },
+ {
+  "rva": 865390,
+  "obj": "PostMessageA",
+  "src": "src/PostMessageA.c",
+  "maps": [
+   "_impPostMessageA=__imp__PostMessageA"
+  ]
+ },
+ {
+  "rva": 865396,
+  "obj": "SendMessageA",
+  "src": "src/SendMessageA.c",
+  "maps": [
+   "_impSendMessageA=__imp__SendMessageA"
+  ]
+ },
+ {
+  "rva": 865402,
+  "obj": "GetCursorPos",
+  "src": "src/GetCursorPos.c",
+  "maps": [
+   "_impGetCursorPos=__imp__GetCursorPos"
+  ]
+ },
+ {
+  "rva": 865408,
+  "obj": "ClipCursor",
+  "src": "src/ClipCursor.c",
+  "maps": [
+   "_impClipCursor=__imp__ClipCursor"
+  ]
+ },
+ {
+  "rva": 865414,
+  "obj": "SetRect",
+  "src": "src/SetRect.c",
+  "maps": [
+   "_impSetRect=__imp__SetRect"
+  ]
+ },
+ {
+  "rva": 865420,
+  "obj": "MessageBoxA",
+  "src": "src/MessageBoxA.c",
+  "maps": [
+   "_impMessageBoxA=__imp__MessageBoxA"
+  ]
+ },
+ {
+  "rva": 865426,
+  "obj": "ShowWindow",
+  "src": "src/ShowWindow.c",
+  "maps": [
+   "_impShowWindow=__imp__ShowWindow"
+  ]
+ },
+ {
+  "rva": 865432,
+  "obj": "DispatchMessageA",
+  "src": "src/DispatchMessageA.c",
+  "maps": [
+   "_impDispatchMessageA=__imp__DispatchMessageA"
+  ]
+ },
+ {
+  "rva": 865438,
+  "obj": "GetMessageA",
+  "src": "src/GetMessageA.c",
+  "maps": [
+   "_impGetMessageA=__imp__GetMessageA"
+  ]
+ },
+ {
+  "rva": 865444,
+  "obj": "DestroyWindow",
+  "src": "src/DestroyWindow.c",
+  "maps": [
+   "_impDestroyWindow=__imp__DestroyWindow"
+  ]
+ },
+ {
+  "rva": 865450,
+  "obj": "SetCursor",
+  "src": "src/SetCursor.c",
+  "maps": [
+   "_impSetCursor=__imp__SetCursor"
+  ]
+ },
+ {
+  "rva": 865456,
+  "obj": "SetForegroundWindow",
+  "src": "src/SetForegroundWindow.c",
+  "maps": [
+   "_impSetForegroundWindow=__imp__SetForegroundWindow"
+  ]
+ },
+ {
+  "rva": 865462,
+  "obj": "GetForegroundWindow",
+  "src": "src/GetForegroundWindow.c",
+  "maps": [
+   "_impGetForegroundWindow=__imp__GetForegroundWindow"
+  ]
+ },
+ {
+  "rva": 865468,
+  "obj": "DefWindowProcA",
+  "src": "src/DefWindowProcA.c",
+  "maps": [
+   "_impDefWindowProcA=__imp__DefWindowProcA"
+  ]
+ },
+ {
+  "rva": 865474,
+  "obj": "PostQuitMessage",
+  "src": "src/PostQuitMessage.c",
+  "maps": [
+   "_impPostQuitMessage=__imp__PostQuitMessage"
+  ]
+ },
+ {
+  "rva": 865480,
+  "obj": "ShowCursor",
+  "src": "src/ShowCursor.c",
+  "maps": [
+   "_impShowCursor=__imp__ShowCursor"
+  ]
+ },
+ {
+  "rva": 865486,
+  "obj": "SetFocus",
+  "src": "src/SetFocus.c",
+  "maps": [
+   "_impSetFocus=__imp__SetFocus"
+  ]
+ },
+ {
+  "rva": 865492,
+  "obj": "CreateWindowExA",
+  "src": "src/CreateWindowExA.c",
+  "maps": [
+   "_impCreateWindowExA=__imp__CreateWindowExA"
+  ]
+ },
+ {
+  "rva": 865498,
+  "obj": "GetSystemMetrics",
+  "src": "src/GetSystemMetrics.c",
+  "maps": [
+   "_impGetSystemMetrics=__imp__GetSystemMetrics"
+  ]
+ },
+ {
+  "rva": 865504,
+  "obj": "RegisterClassA",
+  "src": "src/RegisterClassA.c",
+  "maps": [
+   "_impRegisterClassA=__imp__RegisterClassA"
+  ]
+ },
+ {
+  "rva": 865510,
+  "obj": "LoadIconA",
+  "src": "src/LoadIconA.c",
+  "maps": [
+   "_impLoadIconA=__imp__LoadIconA"
+  ]
+ },
+ {
+  "rva": 865516,
+  "obj": "FindWindowA",
+  "src": "src/FindWindowA.c",
+  "maps": [
+   "_impFindWindowA=__imp__FindWindowA"
+  ]
+ },
+ {
+  "rva": 865522,
+  "obj": "SystemParametersInfoA",
+  "src": "src/SystemParametersInfoA.c",
+  "maps": [
+   "_impSystemParametersInfoA=__imp__SystemParametersInfoA"
+  ]
+ },
+ {
+  "rva": 865528,
+  "obj": "SetDlgItemTextA",
+  "src": "src/SetDlgItemTextA.c",
+  "maps": [
+   "_impSetDlgItemTextA=__imp__SetDlgItemTextA"
+  ]
+ },
+ {
+  "rva": 865534,
+  "obj": "CreateDialogParamA",
+  "src": "src/CreateDialogParamA.c",
+  "maps": [
+   "_impCreateDialogParamA=__imp__CreateDialogParamA"
+  ]
+ },
+ {
+  "rva": 865540,
+  "obj": "DirectDrawCreate",
+  "src": "src/DirectDrawCreate.c",
+  "maps": [
+   "_impDirectDrawCreate=__imp__DirectDrawCreate"
+  ]
+ },
+ {
+  "rva": 865546,
+  "obj": "AIL_midiOutOpen",
+  "src": "src/AIL_midiOutOpen.c",
+  "maps": [
+   "_impAIL_midiOutOpen=__imp___AIL_midiOutOpen@12"
+  ]
+ },
+ {
+  "rva": 865552,
+  "obj": "AIL_set_preference",
+  "src": "src/AIL_set_preference.c",
+  "maps": [
+   "_impAIL_set_preference=__imp___AIL_set_preference@8"
+  ]
+ },
+ {
+  "rva": 865558,
+  "obj": "AIL_startup",
+  "src": "src/AIL_startup.c",
+  "maps": [
+   "_impAIL_startup=__imp___AIL_startup@0"
+  ]
+ },
+ {
+  "rva": 865564,
+  "obj": "AIL_shutdown",
+  "src": "src/AIL_shutdown.c",
+  "maps": [
+   "_impAIL_shutdown=__imp___AIL_shutdown@0"
+  ]
+ },
+ {
+  "rva": 865570,
+  "obj": "AIL_stop_timer",
+  "src": "src/AIL_stop_timer.c",
+  "maps": [
+   "_impAIL_stop_timer=__imp___AIL_stop_timer@4"
+  ]
+ },
+ {
+  "rva": 865576,
+  "obj": "AIL_midiOutClose",
+  "src": "src/AIL_midiOutClose.c",
+  "maps": [
+   "_impAIL_midiOutClose=__imp___AIL_midiOutClose@4"
+  ]
+ },
+ {
+  "rva": 865582,
+  "obj": "AIL_start_sequence",
+  "src": "src/AIL_start_sequence.c",
+  "maps": [
+   "_impAIL_start_sequence=__imp___AIL_start_sequence@4"
+  ]
+ },
+ {
+  "rva": 865588,
+  "obj": "AIL_release_sequence_handle",
+  "src": "src/AIL_release_sequence_handle.c",
+  "maps": [
+   "_impAIL_release_sequence_handle=__imp___AIL_release_sequence_handle@4"
+  ]
+ },
+ {
+  "rva": 865594,
+  "obj": "AIL_init_sequence",
+  "src": "src/AIL_init_sequence.c",
+  "maps": [
+   "_impAIL_init_sequence=__imp___AIL_init_sequence@12"
+  ]
+ },
+ {
+  "rva": 865600,
+  "obj": "AIL_allocate_sequence_handle",
+  "src": "src/AIL_allocate_sequence_handle.c",
+  "maps": [
+   "_impAIL_allocate_sequence_handle=__imp___AIL_allocate_sequence_handle@4"
+  ]
+ },
+ {
+  "rva": 865606,
+  "obj": "AIL_unlock",
+  "src": "src/AIL_unlock.c",
+  "maps": [
+   "_impAIL_unlock=__imp___AIL_unlock@0"
+  ]
+ },
+ {
+  "rva": 865612,
+  "obj": "AIL_set_XMIDI_master_volume",
+  "src": "src/AIL_set_XMIDI_master_volume.c",
+  "maps": [
+   "_impAIL_set_XMIDI_master_volume=__imp___AIL_set_XMIDI_master_volume@8"
+  ]
+ },
+ {
+  "rva": 865618,
+  "obj": "AIL_lock",
+  "src": "src/AIL_lock.c",
+  "maps": [
+   "_impAIL_lock=__imp___AIL_lock@0"
+  ]
+ },
+ {
+  "rva": 865624,
+  "obj": "AIL_sequence_status",
+  "src": "src/AIL_sequence_status.c",
+  "maps": [
+   "_impAIL_sequence_status=__imp___AIL_sequence_status@4"
+  ]
+ },
+ {
+  "rva": 865630,
+  "obj": "AIL_allocate_sample_handle",
+  "src": "src/AIL_allocate_sample_handle.c",
+  "maps": [
+   "_impAIL_allocate_sample_handle=__imp___AIL_allocate_sample_handle@4"
+  ]
+ },
+ {
+  "rva": 865636,
+  "obj": "AIL_waveOutOpen",
+  "src": "src/AIL_waveOutOpen.c",
+  "maps": [
+   "_impAIL_waveOutOpen=__imp___AIL_waveOutOpen@16"
+  ]
+ },
+ {
+  "rva": 865642,
+  "obj": "AIL_start_timer",
+  "src": "src/AIL_start_timer.c",
+  "maps": [
+   "_impAIL_start_timer=__imp___AIL_start_timer@4"
+  ]
+ },
+ {
+  "rva": 865648,
+  "obj": "AIL_set_timer_frequency",
+  "src": "src/AIL_set_timer_frequency.c",
+  "maps": [
+   "_impAIL_set_timer_frequency=__imp___AIL_set_timer_frequency@8"
+  ]
+ },
+ {
+  "rva": 865654,
+  "obj": "AIL_register_timer",
+  "src": "src/AIL_register_timer.c",
+  "maps": [
+   "_impAIL_register_timer=__imp___AIL_register_timer@4"
+  ]
+ },
+ {
+  "rva": 865660,
+  "obj": "AIL_waveOutClose",
+  "src": "src/AIL_waveOutClose.c",
+  "maps": [
+   "_impAIL_waveOutClose=__imp___AIL_waveOutClose@4"
+  ]
+ },
+ {
+  "rva": 865666,
+  "obj": "AIL_end_sample",
+  "src": "src/AIL_end_sample.c",
+  "maps": [
+   "_impAIL_end_sample=__imp___AIL_end_sample@4"
+  ]
+ },
+ {
+  "rva": 865672,
+  "obj": "AIL_sample_status",
+  "src": "src/AIL_sample_status.c",
+  "maps": [
+   "_impAIL_sample_status=__imp___AIL_sample_status@4"
+  ]
+ },
+ {
+  "rva": 865678,
+  "obj": "AIL_stop_sequence",
+  "src": "src/AIL_stop_sequence.c",
+  "maps": [
+   "_impAIL_stop_sequence=__imp___AIL_stop_sequence@4"
+  ]
+ },
+ {
+  "rva": 865684,
+  "obj": "AIL_resume_sequence",
+  "src": "src/AIL_resume_sequence.c",
+  "maps": [
+   "_impAIL_resume_sequence=__imp___AIL_resume_sequence@4"
+  ]
+ },
+ {
+  "rva": 865690,
+  "obj": "AIL_start_sample",
+  "src": "src/AIL_start_sample.c",
+  "maps": [
+   "_impAIL_start_sample=__imp___AIL_start_sample@4"
+  ]
+ },
+ {
+  "rva": 865696,
+  "obj": "AIL_set_sample_type",
+  "src": "src/AIL_set_sample_type.c",
+  "maps": [
+   "_impAIL_set_sample_type=__imp___AIL_set_sample_type@12"
+  ]
+ },
+ {
+  "rva": 865702,
+  "obj": "AIL_set_sample_address",
+  "src": "src/AIL_set_sample_address.c",
+  "maps": [
+   "_impAIL_set_sample_address=__imp___AIL_set_sample_address@12"
+  ]
+ },
+ {
+  "rva": 865708,
+  "obj": "AIL_set_sample_loop_count",
+  "src": "src/AIL_set_sample_loop_count.c",
+  "maps": [
+   "_impAIL_set_sample_loop_count=__imp___AIL_set_sample_loop_count@8"
+  ]
+ },
+ {
+  "rva": 865714,
+  "obj": "AIL_init_sample",
+  "src": "src/AIL_init_sample.c",
+  "maps": [
+   "_impAIL_init_sample=__imp___AIL_init_sample@4"
+  ]
+ },
+ {
+  "rva": 865720,
+  "obj": "AIL_set_sample_pan",
+  "src": "src/AIL_set_sample_pan.c",
+  "maps": [
+   "_impAIL_set_sample_pan=__imp___AIL_set_sample_pan@8"
+  ]
+ },
+ {
+  "rva": 865726,
+  "obj": "AIL_set_sample_volume",
+  "src": "src/AIL_set_sample_volume.c",
+  "maps": [
+   "_impAIL_set_sample_volume=__imp___AIL_set_sample_volume@8"
+  ]
+ },
+ {
+  "rva": 865732,
+  "obj": "AIL_set_sample_playback_rate",
+  "src": "src/AIL_set_sample_playback_rate.c",
+  "maps": [
+   "_impAIL_set_sample_playback_rate=__imp___AIL_set_sample_playback_rate@8"
+  ]
+ },
+ {
+  "rva": 865738,
+  "obj": "ser_rs232_getpacket",
+  "src": "src/ser_rs232_getpacket.c",
+  "maps": [
+   "_impser_rs232_getpacket=$FA$imp_s5"
+  ]
+ },
+ {
+  "rva": 865744,
+  "obj": "ser_rs232_block",
+  "src": "src/ser_rs232_block.c",
+  "maps": [
+   "_impser_rs232_block=$FA$imp_s11"
+  ]
+ },
+ {
+  "rva": 865750,
+  "obj": "ser_rs232_flush",
+  "src": "src/ser_rs232_flush.c",
+  "maps": [
+   "_impser_rs232_flush=$FA$imp_s10"
+  ]
+ },
+ {
+  "rva": 865756,
+  "obj": "ser_rs232_getbyte",
+  "src": "src/ser_rs232_getbyte.c",
+  "maps": [
+   "_impser_rs232_getbyte=$FA$imp_s9"
+  ]
+ },
+ {
+  "rva": 865762,
+  "obj": "ser_rs232_putbyte",
+  "src": "src/ser_rs232_putbyte.c",
+  "maps": [
+   "_impser_rs232_putbyte=$FA$imp_s8"
+  ]
+ },
+ {
+  "rva": 865768,
+  "obj": "ser_rs232_getstatus",
+  "src": "src/ser_rs232_getstatus.c",
+  "maps": [
+   "_impser_rs232_getstatus=$FA$imp_s7"
+  ]
+ },
+ {
+  "rva": 865774,
+  "obj": "ser_rs232_putpacket",
+  "src": "src/ser_rs232_putpacket.c",
+  "maps": [
+   "_impser_rs232_putpacket=$FA$imp_s6"
+  ]
+ },
+ {
+  "rva": 865780,
+  "obj": "FlushTransmitBuffer",
+  "src": "src/FlushTransmitBuffer.c",
+  "maps": [
+   "_impFlushTransmitBuffer=$FA$imp_s35"
+  ]
+ },
+ {
+  "rva": 865786,
+  "obj": "FlushReceiveBuffer",
+  "src": "src/FlushReceiveBuffer.c",
+  "maps": [
+   "_impFlushReceiveBuffer=$FA$imp_s16"
+  ]
+ },
+ {
+  "rva": 865792,
+  "obj": "SetFlowControlThreshold",
+  "src": "src/SetFlowControlThreshold.c",
+  "maps": [
+   "_impSetFlowControlThreshold=$FA$imp_s17"
+  ]
+ },
+ {
+  "rva": 865798,
+  "obj": "SetPaceTime",
+  "src": "src/SetPaceTime.c",
+  "maps": [
+   "_impSetPaceTime=$FA$imp_s18"
+  ]
+ },
+ {
+  "rva": 865804,
+  "obj": "SetTimeout",
+  "src": "src/SetTimeout.c",
+  "maps": [
+   "_impSetTimeout=$FA$imp_s19"
+  ]
+ },
+ {
+  "rva": 865810,
+  "obj": "UnInitializePort",
+  "src": "src/UnInitializePort.c",
+  "maps": [
+   "_impUnInitializePort=$FA$imp_s20"
+  ]
+ },
+ {
+  "rva": 865816,
+  "obj": "SetPortCharacteristics",
+  "src": "src/SetPortCharacteristics.c",
+  "maps": [
+   "_impSetPortCharacteristics=$FA$imp_s21"
+  ]
+ },
+ {
+  "rva": 865822,
+  "obj": "InitializePort",
+  "src": "src/InitializePort.c",
+  "maps": [
+   "_impInitializePort=$FA$imp_s22"
+  ]
+ },
+ {
+  "rva": 865828,
+  "obj": "IsPortAvailable",
+  "src": "src/IsPortAvailable.c",
+  "maps": [
+   "_impIsPortAvailable=$FA$imp_s23"
+  ]
+ },
+ {
+  "rva": 865834,
+  "obj": "BytesInReceiveBuffer",
+  "src": "src/BytesInReceiveBuffer.c",
+  "maps": [
+   "_impBytesInReceiveBuffer=$FA$imp_s24"
+  ]
+ },
+ {
+  "rva": 865840,
+  "obj": "BytesInTransmitBuffer",
+  "src": "src/BytesInTransmitBuffer.c",
+  "maps": [
+   "_impBytesInTransmitBuffer=$FA$imp_s25"
+  ]
+ },
+ {
+  "rva": 865846,
+  "obj": "GetByte",
+  "src": "src/GetByte.c",
+  "maps": [
+   "_impGetByte=$FA$imp_s26"
+  ]
+ },
+ {
+  "rva": 865852,
+  "obj": "PeekChar",
+  "src": "src/PeekChar.c",
+  "maps": [
+   "_impPeekChar=$FA$imp_s15"
+  ]
+ },
+ {
+  "rva": 865858,
+  "obj": "CdrvCrc16",
+  "src": "src/CdrvCrc16.c",
+  "maps": [
+   "_impCdrvCrc16=$FA$imp_s27"
+  ]
+ },
+ {
+  "rva": 865864,
+  "obj": "IsCarrierDetect",
+  "src": "src/IsCarrierDetect.c",
+  "maps": [
+   "_impIsCarrierDetect=$FA$imp_s28"
+  ]
+ },
+ {
+  "rva": 865870,
+  "obj": "ModemInit",
+  "src": "src/ModemInit.c",
+  "maps": [
+   "_impModemInit=$FA$imp_s14"
+  ]
+ },
+ {
+  "rva": 865876,
+  "obj": "ModemAttention",
+  "src": "src/ModemAttention.c",
+  "maps": [
+   "_impModemAttention=$FA$imp_s29"
+  ]
+ },
+ {
+  "rva": 865882,
+  "obj": "ModemWaitForCall",
+  "src": "src/ModemWaitForCall.c",
+  "maps": [
+   "_impModemWaitForCall=$FA$imp_s30"
+  ]
+ },
+ {
+  "rva": 865888,
+  "obj": "IsRing",
+  "src": "src/IsRing.c",
+  "maps": [
+   "_impIsRing=$FA$imp_s31"
+  ]
+ },
+ {
+  "rva": 865894,
+  "obj": "GetString",
+  "src": "src/GetString.c",
+  "maps": [
+   "_impGetString=$FA$imp_s32"
+  ]
+ },
+ {
+  "rva": 865900,
+  "obj": "ModemAnswerMode",
+  "src": "src/ModemAnswerMode.c",
+  "maps": [
+   "_impModemAnswerMode=$FA$imp_s33"
+  ]
+ },
+ {
+  "rva": 865906,
+  "obj": "ModemGetCarrierSpeed",
+  "src": "src/ModemGetCarrierSpeed.c",
+  "maps": [
+   "_impModemGetCarrierSpeed=$FA$imp_s34"
+  ]
+ },
+ {
+  "rva": 865912,
+  "obj": "ModemConnect",
+  "src": "src/ModemConnect.c",
+  "maps": [
+   "_impModemConnect=$FA$imp_s13"
+  ]
+ },
+ {
+  "rva": 865918,
+  "obj": "Dial",
+  "src": "src/Dial.c",
+  "maps": [
+   "_impDial=$FA$imp_s36"
+  ]
+ },
+ {
+  "rva": 865924,
+  "obj": "ModemModifyValue",
+  "src": "src/ModemModifyValue.c",
+  "maps": [
+   "_impModemModifyValue=$FA$imp_s37"
+  ]
+ },
+ {
+  "rva": 865930,
+  "obj": "ModemHangup",
+  "src": "src/ModemHangup.c",
+  "maps": [
+   "_impModemHangup=$FA$imp_s38"
+  ]
+ },
+ {
+  "rva": 865936,
+  "obj": "RegCloseKey",
+  "src": "src/RegCloseKey.c",
+  "maps": [
+   "_impRegCloseKey=__imp__RegCloseKey"
+  ]
+ },
+ {
+  "rva": 865942,
+  "obj": "RegQueryValueExA",
+  "src": "src/RegQueryValueExA.c",
+  "maps": [
+   "_impRegQueryValueExA=__imp__RegQueryValueExA"
+  ]
+ },
+ {
+  "rva": 865948,
+  "obj": "RegOpenKeyExA",
+  "src": "src/RegOpenKeyExA.c",
+  "maps": [
+   "_impRegOpenKeyExA=__imp__RegOpenKeyExA"
+  ]
+ },
+ {
+  "rva": 937378,
+  "obj": "TerminateProcess",
+  "src": "src/TerminateProcess.c",
+  "maps": [
+   "_impTerminateProcess=__imp__TerminateProcess"
+  ]
+ },
+ {
+  "rva": 937384,
+  "obj": "GetCurrentProcess",
+  "src": "src/GetCurrentProcess.c",
+  "maps": [
+   "_impGetCurrentProcess=__imp__GetCurrentProcess"
+  ]
+ },
+ {
+  "rva": 937390,
+  "obj": "RtlUnwind",
+  "src": "src/RtlUnwind.c",
+  "maps": [
+   "_impRtlUnwind=__imp__RtlUnwind"
+  ]
+ },
+ {
+  "rva": 937396,
+  "obj": "GetLastError",
+  "src": "src/GetLastError.c",
+  "maps": [
+   "_impGetLastError=__imp__GetLastError"
+  ]
+ },
+ {
+  "rva": 937402,
+  "obj": "SetEnvironmentVariableA",
+  "src": "src/SetEnvironmentVariableA.c",
+  "maps": [
+   "_impSetEnvironmentVariableA=__imp__SetEnvironmentVariableA"
+  ]
+ },
+ {
+  "rva": 937408,
+  "obj": "GetFullPathNameA",
+  "src": "src/GetFullPathNameA.c",
+  "maps": [
+   "_impGetFullPathNameA=__imp__GetFullPathNameA"
+  ]
+ },
+ {
+  "rva": 937414,
+  "obj": "GetModuleHandleA",
+  "src": "src/GetModuleHandleA.c",
+  "maps": [
+   "_impGetModuleHandleA=__imp__GetModuleHandleA"
+  ]
+ },
+ {
+  "rva": 937420,
+  "obj": "GetStartupInfoA",
+  "src": "src/GetStartupInfoA.c",
+  "maps": [
+   "_impGetStartupInfoA=__imp__GetStartupInfoA"
+  ]
+ },
+ {
+  "rva": 937426,
+  "obj": "GetCommandLineA",
+  "src": "src/GetCommandLineA.c",
+  "maps": [
+   "_impGetCommandLineA=__imp__GetCommandLineA"
+  ]
+ },
+ {
+  "rva": 937432,
+  "obj": "GetVersion",
+  "src": "src/GetVersion.c",
+  "maps": [
+   "_impGetVersion=__imp__GetVersion"
+  ]
+ },
+ {
+  "rva": 937438,
+  "obj": "FatalAppExitA",
+  "src": "src/FatalAppExitA.c",
+  "maps": [
+   "_impFatalAppExitA=__imp__FatalAppExitA"
+  ]
+ },
+ {
+  "rva": 937444,
+  "obj": "MultiByteToWideChar",
+  "src": "src/MultiByteToWideChar.c",
+  "maps": [
+   "_impMultiByteToWideChar=__imp__MultiByteToWideChar"
+  ]
+ },
+ {
+  "rva": 937450,
+  "obj": "LCMapStringA",
+  "src": "src/LCMapStringA.c",
+  "maps": [
+   "_impLCMapStringA=__imp__LCMapStringA"
+  ]
+ },
+ {
+  "rva": 937456,
+  "obj": "WideCharToMultiByte",
+  "src": "src/WideCharToMultiByte.c",
+  "maps": [
+   "_impWideCharToMultiByte=__imp__WideCharToMultiByte"
+  ]
+ },
+ {
+  "rva": 937462,
+  "obj": "LCMapStringW",
+  "src": "src/LCMapStringW.c",
+  "maps": [
+   "_impLCMapStringW=__imp__LCMapStringW"
+  ]
+ },
+ {
+  "rva": 937468,
+  "obj": "HeapFree",
+  "src": "src/HeapFree.c",
+  "maps": [
+   "_impHeapFree=__imp__HeapFree"
+  ]
+ },
+ {
+  "rva": 937474,
+  "obj": "TlsSetValue",
+  "src": "src/TlsSetValue.c",
+  "maps": [
+   "_impTlsSetValue=__imp__TlsSetValue"
+  ]
+ },
+ {
+  "rva": 937480,
+  "obj": "TlsAlloc",
+  "src": "src/TlsAlloc.c",
+  "maps": [
+   "_impTlsAlloc=__imp__TlsAlloc"
+  ]
+ },
+ {
+  "rva": 937486,
+  "obj": "TlsFree",
+  "src": "src/TlsFree.c",
+  "maps": [
+   "_impTlsFree=__imp__TlsFree"
+  ]
+ },
+ {
+  "rva": 937492,
+  "obj": "SetLastError",
+  "src": "src/SetLastError.c",
+  "maps": [
+   "_impSetLastError=__imp__SetLastError"
+  ]
+ },
+ {
+  "rva": 937498,
+  "obj": "TlsGetValue",
+  "src": "src/TlsGetValue.c",
+  "maps": [
+   "_impTlsGetValue=__imp__TlsGetValue"
+  ]
+ },
+ {
+  "rva": 937504,
+  "obj": "HeapAlloc",
+  "src": "src/HeapAlloc.c",
+  "maps": [
+   "_impHeapAlloc=__imp__HeapAlloc"
+  ]
+ },
+ {
+  "rva": 937510,
+  "obj": "GetCPInfo",
+  "src": "src/GetCPInfo.c",
+  "maps": [
+   "_impGetCPInfo=__imp__GetCPInfo"
+  ]
+ },
+ {
+  "rva": 937516,
+  "obj": "GetACP",
+  "src": "src/GetACP.c",
+  "maps": [
+   "_impGetACP=__imp__GetACP"
+  ]
+ },
+ {
+  "rva": 937522,
+  "obj": "GetOEMCP",
+  "src": "src/GetOEMCP.c",
+  "maps": [
+   "_impGetOEMCP=__imp__GetOEMCP"
+  ]
+ },
+ {
+  "rva": 937528,
+  "obj": "FlushFileBuffers",
+  "src": "src/FlushFileBuffers.c",
+  "maps": [
+   "_impFlushFileBuffers=__imp__FlushFileBuffers"
+  ]
+ },
+ {
+  "rva": 937534,
+  "obj": "UnhandledExceptionFilter",
+  "src": "src/UnhandledExceptionFilter.c",
+  "maps": [
+   "_impUnhandledExceptionFilter=__imp__UnhandledExceptionFilter"
+  ]
+ },
+ {
+  "rva": 937540,
+  "obj": "FreeEnvironmentStringsA",
+  "src": "src/FreeEnvironmentStringsA.c",
+  "maps": [
+   "_impFreeEnvironmentStringsA=__imp__FreeEnvironmentStringsA"
+  ]
+ },
+ {
+  "rva": 937546,
+  "obj": "GetEnvironmentStrings",
+  "src": "src/GetEnvironmentStrings.c",
+  "maps": [
+   "_impGetEnvironmentStrings=__imp__GetEnvironmentStrings"
+  ]
+ },
+ {
+  "rva": 937552,
+  "obj": "FreeEnvironmentStringsW",
+  "src": "src/FreeEnvironmentStringsW.c",
+  "maps": [
+   "_impFreeEnvironmentStringsW=__imp__FreeEnvironmentStringsW"
+  ]
+ },
+ {
+  "rva": 937558,
+  "obj": "GetEnvironmentStringsW",
+  "src": "src/GetEnvironmentStringsW.c",
+  "maps": [
+   "_impGetEnvironmentStringsW=__imp__GetEnvironmentStringsW"
+  ]
+ },
+ {
+  "rva": 937564,
+  "obj": "SetHandleCount",
+  "src": "src/SetHandleCount.c",
+  "maps": [
+   "_impSetHandleCount=__imp__SetHandleCount"
+  ]
+ },
+ {
+  "rva": 937570,
+  "obj": "GetFileType",
+  "src": "src/GetFileType.c",
+  "maps": [
+   "_impGetFileType=__imp__GetFileType"
+  ]
+ },
+ {
+  "rva": 937576,
+  "obj": "GetStdHandle",
+  "src": "src/GetStdHandle.c",
+  "maps": [
+   "_impGetStdHandle=__imp__GetStdHandle"
+  ]
+ },
+ {
+  "rva": 937582,
+  "obj": "HeapDestroy",
+  "src": "src/HeapDestroy.c",
+  "maps": [
+   "_impHeapDestroy=__imp__HeapDestroy"
+  ]
+ },
+ {
+  "rva": 937588,
+  "obj": "HeapCreate",
+  "src": "src/HeapCreate.c",
+  "maps": [
+   "_impHeapCreate=__imp__HeapCreate"
+  ]
+ },
+ {
+  "rva": 937594,
+  "obj": "GetStringTypeA",
+  "src": "src/GetStringTypeA.c",
+  "maps": [
+   "_impGetStringTypeA=__imp__GetStringTypeA"
+  ]
+ },
+ {
+  "rva": 937600,
+  "obj": "GetStringTypeW",
+  "src": "src/GetStringTypeW.c",
+  "maps": [
+   "_impGetStringTypeW=__imp__GetStringTypeW"
+  ]
+ },
+ {
+  "rva": 937606,
+  "obj": "IsValidLocale",
+  "src": "src/IsValidLocale.c",
+  "maps": [
+   "_impIsValidLocale=__imp__IsValidLocale"
+  ]
+ },
+ {
+  "rva": 937612,
+  "obj": "IsValidCodePage",
+  "src": "src/IsValidCodePage.c",
+  "maps": [
+   "_impIsValidCodePage=__imp__IsValidCodePage"
+  ]
+ },
+ {
+  "rva": 937618,
+  "obj": "GetUserDefaultLCID",
+  "src": "src/GetUserDefaultLCID.c",
+  "maps": [
+   "_impGetUserDefaultLCID=__imp__GetUserDefaultLCID"
+  ]
+ },
+ {
+  "rva": 937624,
+  "obj": "SetStdHandle",
+  "src": "src/SetStdHandle.c",
+  "maps": [
+   "_impSetStdHandle=__imp__SetStdHandle"
+  ]
+ },
+ {
+  "rva": 937630,
+  "obj": "SetUnhandledExceptionFilter",
+  "src": "src/SetUnhandledExceptionFilter.c",
+  "maps": [
+   "_impSetUnhandledExceptionFilter=__imp__SetUnhandledExceptionFilter"
+  ]
+ },
+ {
+  "rva": 937636,
+  "obj": "IsBadReadPtr",
+  "src": "src/IsBadReadPtr.c",
+  "maps": [
+   "_impIsBadReadPtr=__imp__IsBadReadPtr"
+  ]
+ },
+ {
+  "rva": 937642,
+  "obj": "IsBadWritePtr",
+  "src": "src/IsBadWritePtr.c",
+  "maps": [
+   "_impIsBadWritePtr=__imp__IsBadWritePtr"
+  ]
+ },
+ {
+  "rva": 937648,
+  "obj": "IsBadCodePtr",
+  "src": "src/IsBadCodePtr.c",
+  "maps": [
+   "_impIsBadCodePtr=__imp__IsBadCodePtr"
+  ]
+ },
+ {
+  "rva": 937654,
+  "obj": "CompareStringA",
+  "src": "src/CompareStringA.c",
+  "maps": [
+   "_impCompareStringA=__imp__CompareStringA"
+  ]
+ },
+ {
+  "rva": 937660,
+  "obj": "CompareStringW",
+  "src": "src/CompareStringW.c",
+  "maps": [
+   "_impCompareStringW=__imp__CompareStringW"
+  ]
+ },
+ {
+  "rva": 937666,
+  "obj": "GetLocaleInfoA",
+  "src": "src/GetLocaleInfoA.c",
+  "maps": [
+   "_impGetLocaleInfoA=__imp__GetLocaleInfoA"
+  ]
+ },
+ {
+  "rva": 937672,
+  "obj": "GetLocaleInfoW",
+  "src": "src/GetLocaleInfoW.c",
+  "maps": [
+   "_impGetLocaleInfoW=__imp__GetLocaleInfoW"
+  ]
+ },
+ {
+  "rva": 937678,
+  "obj": "SetEndOfFile",
+  "src": "src/SetEndOfFile.c",
+  "maps": [
+   "_impSetEndOfFile=__imp__SetEndOfFile"
+  ]
+ },
+ {
+  "rva": 937684,
+  "obj": "SetConsoleCtrlHandler",
+  "src": "src/SetConsoleCtrlHandler.c",
+  "maps": [
+   "_impSetConsoleCtrlHandler=__imp__SetConsoleCtrlHandler"
+  ]
+ },
+ {
+  "rva": 937690,
+  "obj": "HeapReAlloc",
+  "src": "src/HeapReAlloc.c",
+  "maps": [
+   "_impHeapReAlloc=__imp__HeapReAlloc"
+  ]
+ },
+ {
+  "rva": 937696,
+  "obj": "GetTimeZoneInformation",
+  "src": "src/GetTimeZoneInformation.c",
+  "maps": [
+   "_impGetTimeZoneInformation=__imp__GetTimeZoneInformation"
+  ]
+ },
+ {
+  "rva": 937702,
+  "obj": "HeapSize",
+  "src": "src/HeapSize.c",
+  "maps": [
+   "_impHeapSize=__imp__HeapSize"
+  ]
  }
 ]
