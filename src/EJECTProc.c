@@ -1,0 +1,21 @@
+// _EJECTProc @ rva 0x68490 (48 B, all code) — same dispatcher family as
+// _CATGUYProc/_GVProc: switch on message id 2/3/5, else cdecl-forward to
+// _OBJProc (push eax / add esp,4). Targets are FA.SMS-mangled chunks
+// (?EJECTMoveProc@@YAXD@Z / ?EJECTEventProc@@YADFJ@Z), so the externs map
+// to the mangled names (wave-13 rule), probe w16b_11 exact.
+extern long __cdecl OBJProc(unsigned char m);
+extern long EJECTMoveProc(unsigned long a, char b);
+extern long EJECTEventProc(unsigned long a, long b);
+
+long EJECTProc(unsigned char c)
+{
+    switch (c) {
+    case 2:
+        return (long)EJECTMoveProc;
+    case 3:
+        return (long)EJECTEventProc;
+    case 5:
+        return 0;
+    }
+    return OBJProc(c);
+}

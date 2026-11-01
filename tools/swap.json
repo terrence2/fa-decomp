@@ -4923,5 +4923,248 @@
   "maps": [
    "_impHeapSize=__imp__HeapSize"
   ]
+ },
+ {
+  "rva": 868112,
+  "obj": "Fclose",
+  "src": "src/Fclose.c",
+  "maps": []
+ },
+ {
+  "rva": 868496,
+  "obj": "Isalpha",
+  "src": "src/Isalpha.c",
+  "maps": []
+ },
+ {
+  "rva": 868560,
+  "obj": "Isupper",
+  "src": "src/Isupper.c",
+  "maps": []
+ },
+ {
+  "rva": 868608,
+  "obj": "Islower",
+  "src": "src/Islower.c",
+  "maps": []
+ },
+ {
+  "rva": 868656,
+  "obj": "Isdigit",
+  "src": "src/Isdigit.c",
+  "maps": []
+ },
+ {
+  "rva": 868704,
+  "obj": "Isxdigit",
+  "src": "src/Isxdigit.c",
+  "maps": []
+ },
+ {
+  "rva": 868768,
+  "obj": "Isspace",
+  "src": "src/Isspace.c",
+  "maps": []
+ },
+ {
+  "rva": 868864,
+  "obj": "Isalnum",
+  "src": "src/Isalnum.c",
+  "maps": []
+ },
+ {
+  "rva": 868928,
+  "obj": "Isprint",
+  "src": "src/Isprint.c",
+  "maps": []
+ },
+ {
+  "rva": 868992,
+  "obj": "Isgraph",
+  "src": "src/Isgraph.c",
+  "maps": []
+ },
+ {
+  "rva": 869056,
+  "obj": "Iscntrl",
+  "src": "src/Iscntrl.c",
+  "maps": []
+ },
+ {
+  "rva": 876272,
+  "obj": "FflushLk",
+  "src": "src/FflushLk.c",
+  "maps": [
+   "__flush_lk=$FA$_t_4d5f30"
+  ]
+ },
+ {
+  "rva": 889808,
+  "obj": "MsP5MpTestFdiv",
+  "src": "src/MsP5MpTestFdiv.c",
+  "maps": [
+   "_mpKernel32=$FA$rdata0+0x6b8",
+   "_mpIsPFP=$FA$rdata0+0x69c",
+   "__imp__GetModuleHandleA@4=__imp__GetModuleHandleA",
+   "__imp__GetProcAddress@8=__imp__GetProcAddress"
+  ]
+ },
+ {
+  "rva": 870698,
+  "obj": "NLGReturn2",
+  "src": "src/NLGReturn2.c",
+  "maps": []
+ },
+ {
+  "rva": 870749,
+  "obj": "NLGNotify1",
+  "src": "src/NLGNotify1.c",
+  "maps": []
+ },
+ {
+  "rva": 875312,
+  "obj": "Strcpy",
+  "src": "src/Strcpy.c",
+  "maps": []
+ },
+ {
+  "rva": 902608,
+  "obj": "Isatty",
+  "src": "src/Isatty.c",
+  "maps": [
+   "_fhLockBase=__crtheap+0x4"
+  ]
+ },
+ {
+  "rva": 922080,
+  "obj": "Strftime",
+  "src": "src/Strftime.c",
+  "maps": []
+ },
+ {
+  "rva": 21312,
+  "obj": "MonoPrintfIO",
+  "src": "src/MonoPrintfIO.c",
+  "maps": []
+ },
+ {
+  "rva": 269632,
+  "obj": "CATGUYProc",
+  "src": "src/CATGUYProc.c",
+  "maps": []
+ },
+ {
+  "rva": 427152,
+  "obj": "EJECTProc",
+  "src": "src/EJECTProc.c",
+  "maps": [
+   "_EJECTMoveProc=?EJECTMoveProc@@YAXD@Z",
+   "_EJECTEventProc=?EJECTEventProc@@YADFJ@Z"
+  ]
+ },
+ {
+  "rva": 470272,
+  "obj": "GVProc",
+  "src": "src/GVProc.c",
+  "maps": []
+ },
+ {
+  "rva": 559216,
+  "obj": "DrawLight",
+  "src": "src/DrawLight.c",
+  "maps": [
+   "_tDrawLight1=$FA$_t_486290",
+   "_tDrawLight2=$FA$_t_4888b0",
+   "_tDrawLight3=$FA$_t_488810",
+   "_tDrawLightTail=$FA$_t_4862a0"
+  ]
+ },
+ {
+  "rva": 208032,
+  "obj": "ShellMusic",
+  "src": "src/ShellMusic.c",
+  "maps": [
+   "_shellMusicOn=?shellMusicOn@@3DA"
+  ]
+ },
+ {
+  "rva": 601744,
+  "obj": "MP_SetTransmitTimeout",
+  "src": "src/MP_SetTransmitTimeout.c",
+  "maps": [
+   "_mpInfoArr=?mpInfo@@3UMP_INFO@@C"
+  ]
+ },
+ {
+  "rva": 797108,
+  "obj": "LFDiv",
+  "src": "src/LFDiv.c",
+  "maps": []
+ },
+ {
+  "rva": 59040,
+  "obj": "VIEWInTransition",
+  "src": "src/VIEWInTransition.c",
+  "maps": [
+   "_viewTransEnd=?oldMousePos@@3UWORD_POINT@@A+0xcc",
+   "_viewTransStart=?oldMousePos@@3UWORD_POINT@@A+0xc8"
+  ]
+ },
+ {
+  "rva": 73040,
+  "obj": "DistToObj",
+  "src": "src/DistToObj.c",
+  "maps": []
+ },
+ {
+  "rva": 75712,
+  "obj": "SetHShake",
+  "src": "src/SetHShake.c",
+  "maps": []
+ },
+ {
+  "rva": 75760,
+  "obj": "SetVShake",
+  "src": "src/SetVShake.c",
+  "maps": []
+ },
+ {
+  "rva": 75920,
+  "obj": "StringIsNumber",
+  "src": "src/StringIsNumber.c",
+  "maps": []
+ },
+ {
+  "rva": 123952,
+  "obj": "IsBrentDLL",
+  "src": "src/IsBrentDLL.c",
+  "maps": [
+   "_brentDLLName=?setSoundAndMusic@@3JA+0x6c"
+  ]
+ },
+ {
+  "rva": 301728,
+  "obj": "MonoCursor",
+  "src": "src/MonoCursor.c",
+  "maps": []
+ },
+ {
+  "rva": 311200,
+  "obj": "SER_Initialize3",
+  "src": "src/SER_Initialize3.c",
+  "maps": [
+   "_SerInitLowLevel=?SER_InitializeLowLevel@@YAXXZ"
+  ]
+ },
+ {
+  "rva": 312000,
+  "obj": "SER_Shutdown",
+  "src": "src/SER_Shutdown.c",
+  "maps": [
+   "_mpInfoArr=?mpInfo@@3UMP_INFO@@C",
+   "_SerShutdown1=?SER_Shutdown1@@YAXXZ",
+   "_SerShutdown2=?SER_Shutdown2@@YAXXZ",
+   "_SerShutdown3=?SER_Shutdown3@@YAXXZ"
+  ]
  }
 ]

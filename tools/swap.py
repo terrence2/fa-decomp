@@ -294,7 +294,7 @@ if __name__ == "__main__":
     steps = sys.argv[1:] or ["compile", "link", "gate"]
     for s in steps:
         rc = {"compile": lambda: step_compile(es) or 0,
-              "fit": lambda: ([_fit(e) for e in es] or 0),
+              "fit": lambda: ([_fit(e) for e in es], 0)[1],  # list of _fit Nones is truthy!
               "audit": lambda: step_audit(es) or 0,
               "link": lambda: step_link(es) or 0,
               # gate: fail the process if gate.py does (the previous form

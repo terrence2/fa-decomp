@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 663,
- "chunks_done": 663,
- "bytes_done": 13982,
+ "done": 698,
+ "chunks_done": 698,
+ "bytes_done": 15381,
  "bytes_total": 933612,
- "bytes_pct": 1.5,
+ "bytes_pct": 1.65,
  "waves": [
   {
    "date": "2026-11-01",
@@ -763,6 +763,47 @@
     "0xe4eda",
     "0xe4ee0",
     "0xe4ee6"
+   ]
+  },
+  {
+   "date": "2026-11-01",
+   "note": "wave 16: 35 more (diff-18..21 band) via 3 parallel batches \u2014 CRT ctype band (fclose + 11 is* locale-table lookups, all naked asm: ctype fast-path reg plan is C-unreachable; cmp [__ctype+0x204] >1 direct mem-immediate cmp is MASM-only, extends wave-12 rule to cmp+scalar externs), __fflush_lk (flush_lk anchor, je-skips-whole-exit-block, pop-between-mov0-and-adc borrow tail), CRT misc (ms_p5_mp_test_fdiv stdcall fn-ptr + rdata-string externs, NLG_Return2/Notify1 _emit rel8 cross-chunk short jmps, strcpy via #pragma function intrinsic escape, isatty __crtheap+4 fhLockBase map, strftime 5-arg forward), uchar-dispatcher family (CATGUY/EJECT/GV Procs: xor ecx,ecx/mov al/mov cl,al + stale-upper push eax in plain C switch), game leaves (LFDiv xchg operand-order idiom, VIEWInTransition compare-canonicalization asm escape, SetH/VShake, StringIsNumber shared-incesi loop escape, IsBrentDLL repz cmpsb, SER_Initialize3/Shutdown); found+fixed swap.py dispatch 'fit' lambda returning truthy [None x N] list (SystemExit printed the list \u2014 the wave-15/16 first-run mystery); 696 entries, GATE 1 PASS",
+   "rvas": [
+    "0x11d50",
+    "0x127c0",
+    "0x127f0",
+    "0x12890",
+    "0x1e430",
+    "0x32ca0",
+    "0x41d40",
+    "0x49aa0",
+    "0x4bfa0",
+    "0x4c2c0",
+    "0x5340",
+    "0x68490",
+    "0x72d00",
+    "0x88870",
+    "0x92e90",
+    "0xc29b4",
+    "0xd3f10",
+    "0xd4090",
+    "0xd40d0",
+    "0xd4100",
+    "0xd4130",
+    "0xd4160",
+    "0xd41a0",
+    "0xd4200",
+    "0xd4240",
+    "0xd4280",
+    "0xd42c0",
+    "0xd492a",
+    "0xd495d",
+    "0xd5b30",
+    "0xd5ef0",
+    "0xd93d0",
+    "0xdc5d0",
+    "0xe11e0",
+    "0xe6a0"
    ]
   }
  ],
