@@ -762,5 +762,115 @@
    "obj": "T_InitCloudProc",
    "src": "src/T_InitCloudProc.c",
    "maps": ["@farmProc_@4=$FA$_t_4a4db0"]
+  },
+  {
+   "rva": "0x117c0",
+   "obj": "LibraryShutdown",
+   "src": "src/LibraryShutdown.c",
+   "maps": []
+  },
+  {
+   "rva": "0x61b80",
+   "obj": "GetCurObj2",
+   "src": "src/GetCurObj2.c",
+   "maps": []
+  },
+  {
+   "rva": "0x7ea40",
+   "obj": "CreateFortMission",
+   "src": "src/CreateFortMission.c",
+   "maps": []
+  },
+  {
+   "rva": "0x7ea50",
+   "obj": "CreateFortMission2",
+   "src": "src/CreateFortMission2.c",
+   "maps": []
+  },
+  {
+   "rva": "0xa40c0",
+   "obj": "SetupPT",
+   "src": "src/SetupPT.c",
+   "maps": []
+  },
+  {
+   "rva": "0xa40d0",
+   "obj": "SetupJT",
+   "src": "src/SetupJT.c",
+   "maps": []
+  },
+  {
+   "rva": "0xa7ba0",
+   "obj": "T_HorizonProc",
+   "src": "src/T_HorizonProc.c",
+   "maps": []
+  },
+  {
+   "rva": "0xbb200",
+   "obj": "unknown_divide_error",
+   "src": "src/unknown_divide_error.c",
+   "maps": []
+  },
+  {
+   "rva": "0xd3850",
+   "obj": "exit",
+   "src": "src/exit.c",
+   "maps": ["_exitHelper=$FA$_t_4d38b0"]
+  },
+  {
+   "rva": "0xd3870",
+   "obj": "exitcrt",
+   "src": "src/exitcrt.c",
+   "maps": ["_exitHelper=$FA$_t_4d38b0"]
+  },
+  {
+   "rva": "0xdb6a0",
+   "obj": "ismbbkalnum",
+   "src": "src/ismbbkalnum.c",
+   "maps": ["_ismbbType=$FA$_t_4db810"]
+  },
+  {
+   "rva": "0xdb6c0",
+   "obj": "ismbbkprint",
+   "src": "src/ismbbkprint.c",
+   "maps": ["_ismbbType=$FA$_t_4db810"]
+  },
+  {
+   "rva": "0xdb6e0",
+   "obj": "ismbbkpunct",
+   "src": "src/ismbbkpunct.c",
+   "maps": ["_ismbbType=$FA$_t_4db810"]
+  },
+  {
+   "rva": "0xdb700",
+   "obj": "ismbbalnum",
+   "src": "src/ismbbalnum.c",
+   "maps": ["_ismbbType=$FA$_t_4db810"]
+  },
+  {
+   "rva": "0xdb720",
+   "obj": "ismbbalpha",
+   "src": "src/ismbbalpha.c",
+   "maps": ["_ismbbType=$FA$_t_4db810"]
+  },
+  {
+   "rva": "0xdb7c0",
+   "obj": "ismbbtrail",
+   "src": "src/ismbbtrail.c",
+   "maps": ["_ismbbType=$FA$_t_4db810"]
+  },
+  {
+   "rva": "0xe27c0",
+   "obj": "atexit",
+   "src": "src/atexit.c",
+   "maps": ["_onexitFn=__onexit"],
+   "patch": ["13,11,83f8011bc0c3"],
+   "provenance": ["patch 13/11 (mov0/setae/mov -> cmp1/sbb/neg): toolchain-diff - same borrow-form family as CTEval_do_nothing: ours emits xor ecx,ecx / cmp eax,1 / setae cl / mov eax,ecx / ret (11 B); FA's revision picks cmp eax,1 / sbb eax,eax / neg eax / ret (6 B) - identical boolean (eax>=1 as 0/1). Patch replaces, shortening code to FA's 19 B; no reloc sites inside the span."]
+  },
+  {
+   "rva": "0xe2820",
+   "obj": "abort",
+   "src": "src/abort.c",
+   "maps": ["__raise=_raise"]
   }
 ]

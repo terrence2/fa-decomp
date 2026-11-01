@@ -47,7 +47,10 @@ STUB_DIR = os.environ.get("STUB_DIR", "build/stubs")
 # decomposition (invariant to order/names/string tables/.debug$F). FA's byte
 # there is 00; GROUP_SIZE=10 reproduces it for the current swap set. If a
 # future wave flips the word again, sweep GROUP_SIZE until it reads 0000.
-GROUP_SIZE = int(os.environ.get("GROUP_SIZE", "25"))  # chunk sections per group obj
+# wave 3b set: 25; wave 4a/4b set (141 entries): 15 (85 also passes -- the
+# word is a chaotic function of the batch decomposition, values come in
+# bursts; any passing value is fine as long as Gate 1 stays green).
+GROUP_SIZE = int(os.environ.get("GROUP_SIZE", "15"))  # chunk sections per group obj
 # Comma-separated absolute VAs whose chunks become singleton group objs
 # (cut the batch before and after) — lets a decompiled object replace one
 # chunk at its exact rsp position (tools/mkrsp.py --replace).
