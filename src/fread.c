@@ -1,38 +1,21 @@
-// _fread @ rva 0xd5680 (55 B, FPO fpo/esp params=4) — CRT fread: lock
-// the stream (esi = 4th param, moved down before the call), re-shuffle
-// the remaining (buf,size,count) args onto the stack in FA's esi/eax/ecx/
-// edx order, call __fread_lk, save result in edi, unlock, return edi.
-// Naked asm: the exact lock/unlock + arg-shuffle register plan with esi
-// held across the calls is asm-only.
-extern void lockFileX(void);
-extern void freadLkX(void);
-extern void unlockFileX(void);
+// _fread @ rva 0xd5680 (55 B, FPO fpo/esp params=4) — CRT fread: lock the
+// stream, call __fread_lk, unlock, return the count. EXACT as plain C
+// (wave-23 probe): CL 10.20.6166 compiles the three-call wrapper with the
+// stream held in esi, the result saved in edi and __cdecl ret with no FPO
+// prolog delta; the old "arg-shuffle register plan" was a naked-asm
+// over-conservatism — the plan falls out of the natural C spelling.
+// Maps: _lockFileX=__lock_file, _freadLkX=__fread_lk, _unlockFileX=__unlock_file.
+extern void lockFileX(void *s);
+extern unsigned long freadLkX(void *buf, unsigned long size, unsigned long count,
+                              void *s);
+extern void unlockFileX(void *s);
 
-void __declspec(naked) freadQ(void)
+unsigned long __cdecl freadQ(void *buf, unsigned long size, unsigned long count,
+                             void *stream)
 {
-    __asm {
-        push esi
-        push edi
-        mov  esi, dword ptr [esp+0x18]
-        push esi
-        call lockFileX
-        mov  eax, dword ptr [esp+0x18]
-        mov  ecx, dword ptr [esp+0x14]
-        mov  edx, dword ptr [esp+0x10]
-        add  esp, 4
-        push esi
-        push eax
-        push ecx
-        push edx
-        call freadLkX
-        add  esp, 16
-        mov  edi, eax
-        push esi
-        call unlockFileX
-        add  esp, 4
-        mov  eax, edi
-        pop  edi
-        pop  esi
-        ret
-    }
+    unsigned long r;
+    lockFileX(stream);
+    r = freadLkX(buf, size, count, stream);
+    unlockFileX(stream);
+    return r;
 }

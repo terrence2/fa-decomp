@@ -1,25 +1,17 @@
 // ?get_pkt_err_string@@YAPADJ@Z @ rva 0xadfd0 (32 B) — err>0 && err<7 ->
-//   return char* errFuncTab[err] (sib-85 indexed moffs [eax*4+disp32];
-//   dis.py elided this mov — objdump cross-checked); else return the
-//   default string ptr at 0x508094. Both disp32s carry fixups -> symbol
-//   refs via maps (_pktErrTab=?, _pktErrDflt=?). asm escape: FA's
-//   [eax*4+tab] sib-85 load and the b8 imm return (LEA would be 8d 05)
-//   pinned via MASM.
-extern char pktErrTab[];
+//   return pktErrTab[err] (8b 04 85 sib-85 indexed, dis.py elided this
+//   mov; objdump cross-checked), else return the default string pointer
+//   (b8 imm32 return of the mapped default-string symbol). Both disp32s
+//   carry fixups -> symbol refs via maps (_pktErrTab=?,tcp_proto+0x290;
+//   _pktErrDflt=?,state_funcs_list+0x9c). Plain C: signed err local,
+//   && short-circuit — CL 10.20 emits the sib-85 load and the b8 imm32
+//   return naturally from this spell.
+extern char *pktErrTab[];
 extern char pktErrDflt[];
 
-__declspec(naked) char *get_pkt_err_string(void)
+char *get_pkt_err_string(long err)
 {
-    __asm {
-        mov     eax, dword ptr [esp+4]
-        test    eax, eax
-        jle     Ld
-        cmp     eax, 7
-        jge     Ld
-        mov     eax, dword ptr pktErrTab[eax*4]
-        ret
-Ld:
-        mov     eax, offset pktErrDflt
-        ret
-    }
+    if (err > 0 && err < 7)
+        return pktErrTab[err];
+    return pktErrDflt;
 }

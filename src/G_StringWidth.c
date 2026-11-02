@@ -1,24 +1,25 @@
+/* @G_StringWidth@4 @ rva 0x96b20 — plain C (tier-0 re-read, GATE-clean).
+ * FA: guard char *p!=0 around the do/while, width = cFont[0x404 + ch*4]+1
+ * summed with p++ in the loop bottom; return sum-1.
+ * Survey census called this file bare; the raw chunk had no elision traps —
+ * the whole body reaches plain C with no steering levers (v1 AND v2 both
+ * EXACT; v2 differed only in for/while spelling).
+ *
+ * probes: build/survey/probes/G_StringWidth_v1.c (EXACT), _v2.c (EXACT)
+ *   run: python3 build/survey/hybrid_probe.py build/survey/probes/tier0_r2.json
+ *
+ * maps: _cFont=?cFont@@3PAUFONT@@A (unchanged from the naked stub entry)
+ */
 extern char *cFont;
-__declspec(naked) int __fastcall G_StringWidth(char *p)
+
+int __fastcall G_StringWidth_i(char *p)
 {
-    __asm {
-        push ebx
-        xor eax, eax
-        cmp byte ptr [ecx], al
-        je fin
-    L:  xor ebx, ebx
-        mov edx, dword ptr [cFont]
-        mov bl, byte ptr [ecx]
-        inc ecx
-        mov edx, dword ptr [edx + ebx*4 + 0x404]
-        mov bl, byte ptr [ecx]
-        inc edx
-        add eax, edx
-        test bl, bl
-        jne L
-    fin:
-        dec eax
-        pop ebx
-        ret
+    int sum = 0;
+    if (*p) {
+        do {
+            sum += ((long *)((char *)cFont + 0x404))[(unsigned char)*p] + 1;
+            p++;
+        } while (*p);
     }
+    return sum - 1;
 }

@@ -1,41 +1,35 @@
-// __heap_term @ rva 0xdc1c0 (58 B, FPO fpo/esp) — CRT atexit heap
-// teardown: walk the adbgmsg+0x858 heap-record list (be mov esi,imm32;
-// list nodes are the [esi+0x810] VirtualAlloc'd data regions), VirtualFree
-// each nonzero region with MEM_RELEASE through the IAT pointer held in
-// edi ([__imp__VirtualFree] -> call edi), advance to [esi], loop until
-// back at the list head sentinel (cmp esi,imm32 — the second fixup
-// site), then a1-load the __crtheap handle and call HeapDestroy through
-// ff 15 [__imp__HeapDestroy]. Naked asm: the IAT-in-register call plan
-// (wave-19 extern void *impX[] rule).
+/* heap_term @ rva 901568 — plain C (tier-0 re-read).
+ * FA: walk the hbListBase chain (first link at +0), VirtualFree(,0,0x8000)
+ * any header at h+0x810, until the chain wraps to the base; finish with
+ * HeapDestroy(crtheap). v2's lever: declare h FIRST then the fn-ptr vf — FA
+ * parks esi=h and edi=IAT-vf (first-decl register lever, CopyMan d180 class)
+ * and CL then calls vf with ff d7 (call edi) matching FA.
+ * IAT externs stay the imp* values (map _impVirtualFree=__imp__VirtualFree).
+ *
+ * probes: build/survey/probes/heap_term_v1.c (no), _v2.c (EXACT)
+ *   run: python3 build/survey/hybrid_probe.py build/survey/probes/tier0_r4.json
+ *
+ * maps (unchanged): _hbListBase=__adbgmsg+0x858
+ *                   _impVirtualFree=__imp__VirtualFree
+ *                   _crtheapX=__crtheap
+ *                   _impHeapDestroy=__imp__HeapDestroy
+ */
 extern char hbListBase[];
-extern void *impVirtualFree[];
+extern void *impVirtualFree;
 extern void *crtheapX;
-extern void *impHeapDestroy[];
+extern void *impHeapDestroy;
 
-void __declspec(naked) heap_term_q(void)
+void __cdecl heap_term_d(void)
 {
-    __asm {
-        push esi
-        push edi
-        mov  esi, offset hbListBase
-        mov  edi, dword ptr [impVirtualFree]
-    Lloop:
-        mov  eax, dword ptr [esi+0x810]
-        test eax, eax
-        je   Lstep
-        push 0x8000
-        push 0
-        push eax
-        call edi
-    Lstep:
-        mov  esi, dword ptr [esi]
-        cmp  esi, offset hbListBase
-        jne  Lloop
-        mov  eax, dword ptr [crtheapX]
-        push eax
-        call dword ptr [impHeapDestroy]
-        pop  edi
-        pop  esi
-        ret
-    }
+    char *h;
+    void (__stdcall *vf)(void *, unsigned long, unsigned long);
+
+    h = (char *)hbListBase;
+    vf = (void (__stdcall *)(void *, unsigned long, unsigned long))impVirtualFree;
+    do {
+        if (*(void **)(h + 0x810))
+            vf(*(void **)(h + 0x810), 0, 0x8000);
+        h = *(char **)h;
+    } while (h != hbListBase);
+    ((void (__stdcall *)(void *))impHeapDestroy)(crtheapX);
 }

@@ -1447,7 +1447,13 @@
   "rva": "0x95880",
   "obj": "G_GetPoint",
   "src": "src/G_GetPoint.c",
-  "maps": []
+  "maps": [],
+  "patch": [
+   "0xc,3,8b500a33c003f2"
+  ],
+  "provenance": [
+   "patch 0xc: toolchain-diff \u2014 CL folds mov edx,[eax+0xa]; add esi,edx into the mem-operand add (03 70 0a) when the base reg dies at the use; FA materializes the load (8b 50 0a / 33 c0 / 03 f2). 10 C spellings incl. a named-volatile local all fold or hoist; patch replaces CL[0xc,0x3) with FA's 7 B (net +4 B, tail shifts recheck; no relocs in span). Same load+add-once fold wall as the tier-0 survey class."
+  ]
  },
  {
   "rva": "0x966a0",
@@ -2640,7 +2646,23 @@
   "rva": "0x9b4f0",
   "obj": "EnvHighest",
   "src": "src/EnvHighest.c",
-  "maps": []
+  "maps": [],
+  "patch": [
+   "0x7,17,57beffffffff0fbf51fa8d1c528d7c59fa",
+   "0x18,4,3bf97212",
+   "0x1c,3,8b5702",
+   "0x1f,2,3bf2",
+   "0x21,2,7d04",
+   "0x23,2,8bf2",
+   "0x25,2,8bc7",
+   "0x27,3,83ef06",
+   "0x2a,2,3bf9",
+   "0x2c,2,73ee"
+  ],
+  "provenance": [
+   "patch 0x7: toolchain-diff \u2014 CL's /O2 /G5 plan swaps FA's register roles (FA res=eax/best=esi/cursor=edi/scratch=edx/3n=ebx; CL best=edi/cursor=edx/val=esi) and pushes edi/mov esi,-1/movsx edx,[ecx-6]/lea ebx,[edx+edx*2]/lea edi,[ecx+ebx*2-2-4] shape differences. Region 0x7..0x17 replaced 17 B for FA's 17 B; no relocs in the chunk (FA's be ff ff ff ff is literal mov esi,-1).",
+   "patch 0x18/0x1c/0x1f/0x21/0x23/0x25/0x27/0x2a/0x2c (loop-body compare/role stream): toolchain-diff \u2014 CL normalizes both compare polarities to its canonical direction (val,best)/jle where FA streams cmp best,val / jge (cmp edi,ecx/jb, mov edx,[edi+2], cmp esi,edx/jge, mov esi,edx, mov eax,edi, sub edi,6 83-form, cmp edi,ecx/jae); operand mirroring does not steer CL (v1-v3). All 10 patches same-length (no shift), so branch disps are FA's own."
+  ]
  },
  {
   "rva": "0x9dd60",
@@ -2684,7 +2706,16 @@
   "rva": "0xb4cc0",
   "obj": "G_HFlipBitmap",
   "src": "src/G_HFlipBitmap.c",
-  "maps": []
+  "maps": [],
+  "patch": [
+   "0xf,14,8bf70faff003710a8d4430ff",
+   "0xa,2,7e29",
+   "0x33,2,7fd7"
+  ],
+  "provenance": [
+   "patch 0xf: toolchain-diff \u2014 CL hoists the [ecx+0xa] base load above the row-counter setup and keeps ecx live across the loop, so it never folds the base add into the row index; FA streams mov esi,edi / imul esi,eax / add esi,[ecx+0xa] / lea eax,[eax+esi-1]. Region replace replaces CL 14 B with FA 12 B (net -2 B), which re-points the two jcc disps below.",
+   "patch 0xa/0x33 (jcc disp repairs after the -2 B region patch): toolchain-diff \u2014 skip-target outer jle disp 0x2b->0x29 (7e 29) and post-patch outer-loop jg becomes 7f d7 (target 0x0c); positions follow from patch 0xf, no independent construct."
+  ]
  },
  {
   "rva": "0xbb1d0",
@@ -6885,10 +6916,7 @@
   "rva": 520432,
   "obj": "MISSIONSetCheating",
   "src": "src/MISSIONSetCheating.c",
-  "maps": [],
-  "provenance": [
-   "asm escape: naked asm (a1 load, a9 imm32 tests incl. the eax REUSE across the third test, c6 05 byte stores elided by dis.py, f6 c5 30 = test ch byte-fold of mask 0x3000)"
-  ]
+  "maps": []
  },
  {
   "rva": 524448,
@@ -6897,9 +6925,6 @@
   "maps": [
    "_thing11=_curThing+0x11",
    "_thing15=_curThing+0x15"
-  ],
-  "provenance": [
-   "asm escape: naked asm (xor ecx,ecx + 66 8b 88 word load into cx + sib-85 8b 04 8d objPtrs index, 3d/7f A-forms, a1 thing15)"
   ]
  },
  {
@@ -6945,10 +6970,7 @@
   "rva": 619312,
   "obj": "G_SetHShake",
   "src": "src/G_SetHShake.c",
-  "maps": [],
-  "provenance": [
-   "asm escape: naked asm \u2014 shared epilogue (jl/jle into pop esi), A3 store of t|0x10 AFTER pop esi, amp/4 = cdq/and edx,3/add/sar 2; fastcall @8 gate from wave-16 SetHShake calls this with ecx/ edx raw"
-  ]
+  "maps": []
  },
  {
   "rva": 619376,

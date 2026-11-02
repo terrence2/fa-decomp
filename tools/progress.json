@@ -1081,6 +1081,11 @@
     "0xdf480",
     "0xdf4a0"
    ]
+  },
+  {
+   "date": "2026-11-01",
+   "note": "Survey tier-0: 25 asm escapes re-C'd (9 bare-header/early-wave + 8 CRT reg-plan + 5 elision + 3 patch-hybrids), 13 KEEP-ASM verdicts, 936 entries GATE 1 PASS",
+   "rvas": []
   }
  ],
  "generated": "2026-11-01"

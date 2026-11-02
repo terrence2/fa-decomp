@@ -1,52 +1,33 @@
 // _fprintf @ rva 0xd5ce0 (73 B, FPO fpo/esp params=2) — CRT fprintf:
-// lock the stream (esi = 1st param, [esp+0xc] after the two saves), the
-// odd push edi/push esi pair reserves the stbuf arg slot (popped by the
-// two add esp,4), __stbuf redirects the FILE if it's stdout/stderr
-// (returns the real stream in eax -> edi), builds the in-frame va_list
-// (lea eax,[esp+0x18] = first variadic) and calls the dopr engine
-// (3 args: eax-ptr, ecx=fmt, esi=stream), saves the char count in ebx,
-// flushes (esi,edi) via the flush helper, unlocks, returns ebx. The
-// push edi-before-initialization + slot accounting is FA's own CL output
-// shape — naked asm.
-extern void lockFileX(void);
-extern void stbufX(void);
-extern void doprX(void);
-extern void flushX(void);
-extern void unlockFileX(void);
+// lock the stream (esi = 1st param), __stbuf redirects the FILE if it's
+// stdout/stderr (returns the real stream -> edi), build the in-frame
+// va_list (lea eax,[esp+0x18] = first variadic), call the dopr engine
+// (3 args: stream, fmt, arglist), save the char count in ebx, flush
+// (esi,edi) via the flush helper, unlock, return ebx. EXACT as plain C
+// (wave-23 probe, first spelling): the naked-asm "odd push edi/push esi
+// reserve slot" is just FA's CL deferring the edi callee-save to the
+// arg-push stream; our CL saves edi in the prologue instead and the
+// esp-relative constants ([esp+0xc] esi-load, [esp+0x18] fmt + va_start)
+// come out identical either way.
+// Maps: _lockFileX=__lock_file, _stbufX=__stbuf, _doprX=$FA$_t_4d6610,
+// _flushX=$FA$_t_4da510, _unlockFileX=__unlock_file.
+#include <stdarg.h>
+extern void lockFileX(void *stream);
+extern void *stbufX(void *stream);
+extern int doprX(void *stream, const char *fmt, char *arglist);
+extern void flushX(void *os, void *stream);
+extern void unlockFileX(void *stream);
 
-void __declspec(naked) fprintfQ(void)
+int __cdecl fprintfQ(void *stream, const char *fmt, ...)
 {
-    __asm {
-        push ebx
-        push esi
-        mov  esi, dword ptr [esp+0xc]
-        push edi
-        push esi
-        call lockFileX
-        add  esp, 4
-        push esi
-        call stbufX
-        mov  ecx, dword ptr [esp+0x18]
-        add  esp, 4
-        mov  edi, eax
-        lea  eax, dword ptr [esp+0x18]
-        push eax
-        push ecx
-        push esi
-        call doprX
-        add  esp, 12
-        mov  ebx, eax
-        push esi
-        push edi
-        call flushX
-        add  esp, 8
-        push esi
-        call unlockFileX
-        add  esp, 4
-        mov  eax, ebx
-        pop  edi
-        pop  esi
-        pop  ebx
-        ret
-    }
+    va_list arglist;
+    void *os;
+    int n;
+    lockFileX(stream);
+    os = stbufX(stream);
+    va_start(arglist, fmt);
+    n = doprX(stream, fmt, arglist);
+    flushX(os, stream);
+    unlockFileX(stream);
+    return n;
 }

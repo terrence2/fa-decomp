@@ -1,36 +1,25 @@
-// @GToTurn@8 @ rva 0x75970 (64 B) — param1 (cx) clamped to 0x7d, signed ×2500
-//   via the push-ebx/lea×5 chain (shl 2 + four lea [r+r*4]), idiv by param2
-//   (dx), clamped to [-10000, 10240].  CL 4.2 folds *2500 to its own
-//   shift-add decomposition, never this chain (wave-6 @SpeedOfSound@4
-//   precedent) — naked asm.
-__declspec(naked) int GToTurn_q(void)
+/* @GToTurn@8 @ rva 0x75970 — plain C (tier-0 re-read).
+ * FA: b = max(b,0x7d); r = (short)a*2500/(short)b; clamped to
+ * [-10240,10240] with the LOW clamp as an early pop-ret and the HIGH clamp
+ * falling through to the shared pop-ret. v5's lever: the high clamp must
+ * fall through (if (r > 10240) r = 10240; return r;) — v3's early
+ * `return 10240` and v4's ternary both made CL save r to ecx (8b c8) before
+ * the clamp branch, which FA does not do.
+ *
+ * probes: v1-v4 (no), build/survey/probes/GToTurn_v5.c (EXACT)
+ *   run: python3 build/survey/hybrid_probe.py build/survey/probes/tier0_r6.json
+ *
+ * maps: none
+ */
+int __fastcall GToTurn_m(int a, int b)
 {
-    __asm {
-        push ebx
-        cmp edx, 0x7d
-        jge L1
-        mov edx, 0x7d
-    L1:
-        movsx eax, cx
-        shl eax, 2
-        lea ecx, [eax + eax * 4]
-        lea ebx, [ecx + ecx * 4]
-        lea eax, [ebx + ebx * 4]
-        movsx ecx, dx
-        lea eax, [eax + eax * 4]
-        cdq
-        idiv ecx
-        cmp eax, 0xffffd800
-        jge L2
-        mov eax, 0xffffd800
-        pop ebx
-        ret
-    L2:
-        cmp eax, 0x2800
-        jle L3
-        mov eax, 0x2800
-    L3:
-        pop ebx
-        ret
-    }
+    int r;
+    if (b < 0x7d)
+        b = 0x7d;
+    r = (short)a * 2500 / (short)b;
+    if (r < -10240)
+        return -10240;
+    if (r > 10240)
+        r = 10240;
+    return r;
 }
