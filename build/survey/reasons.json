@@ -41,7 +41,7 @@
   "src": "src/carefulDiv.c",
   "cls": "x87",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": false
  },
  {
@@ -1697,7 +1697,7 @@
   "src": "src/MaskEvents.c",
   "cls": "masm-enc",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": false
  },
  {
@@ -1922,7 +1922,7 @@
   "src": "src/IsZeroMan.c",
   "cls": "reg-plan: param must sit in ecx with cmp [ecx],0 while CL always assigns to eax; structural (n3 refit-verified KEEP)",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": false
  },
  {
@@ -3405,9 +3405,9 @@
   "rva": "0xd0604",
   "obj": "do_start",
   "src": "src/do_start.c",
-  "cls": "bare",
+  "cls": "bare: KEEP-ASM - push esi/ret ABI gadget (4 B); no C form can push+pop-to-self",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": true
  },
  {
@@ -3425,7 +3425,7 @@
   "src": "src/unexpected.c",
   "cls": "bare",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": false
  },
  {
@@ -8033,7 +8033,7 @@
   "src": "src/get_osfhandle.c",
   "cls": "reg-plan",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": false
  },
  {
@@ -8393,7 +8393,7 @@
   "src": "src/FcloseLk.c",
   "cls": "bare",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": false
  },
  {

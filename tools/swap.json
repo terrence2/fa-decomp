@@ -1353,6 +1353,12 @@
   "src": "src/MaskEvents.c",
   "maps": [
    "_cmdBufPos=_curThing+0x58"
+  ],
+  "patch": [
+   "10,4,24fe"
+  ],
+  "provenance": [
+   "patch 10: toolchain-diff \u2014 CL emits and ax,0xfffe (66 25 fe ff) for s &= 0xfffe on a 16-bit reg; FA fused to and al,0xfe (24 fe); partial-byte-written-AX wall (tier-0 family 2, t4_mask_v1 proves mask width irrelevant); patch 4->2 B, moffs DIR32 site shifts 0x0e->0x0c."
   ]
  },
  {
@@ -1530,7 +1536,14 @@
   "rva": "0xdfa40",
   "obj": "IsZeroMan",
   "src": "src/IsZeroMan.c",
-  "maps": []
+  "maps": [],
+  "patch": [
+   "6,4,833900",
+   "18,2,7cf2"
+  ],
+  "provenance": [
+   "patch 6/18: toolchain-diff \u2014 load-folds-to-test wall (tier-0 family 1): CL materializes mov edx,[ecx]/test edx,edx where FA emits cmp [ecx],0; patch 1 4->3 B; patch 2 retargets jl disp (post-patch offset 18). Volatility lever is a no-op here (t4_zero_v1/v2/v3)."
+  ]
  },
  {
   "rva": "0xe4600",
