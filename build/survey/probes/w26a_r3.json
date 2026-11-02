@@ -1,0 +1,27 @@
+[
+ {
+  "rva": 629456,
+  "obj": "vi_s1",
+  "src": "build/survey/probes/w26a_v3.c"
+ },
+ {
+  "rva": 629456,
+  "obj": "vi_s2",
+  "src": "build/survey/probes/w26a_v3.c"
+ },
+ {
+  "rva": 574112,
+  "obj": "vf_s1",
+  "src": "build/survey/probes/w26a_v3.c"
+ },
+ {
+  "rva": 574112,
+  "obj": "vf_s2",
+  "src": "build/survey/probes/w26a_v3.c"
+ },
+ {
+  "rva": 574112,
+  "obj": "vf_s3",
+  "src": "build/survey/probes/w26a_v3.c"
+ }
+]

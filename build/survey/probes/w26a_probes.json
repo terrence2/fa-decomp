@@ -1,0 +1,128 @@
+[
+ {
+  "rva": 416224,
+  "obj": "w26a_659e0",
+  "src": "build/survey/probes/w26a_659e0_final.c",
+  "maps": [
+   "_gap659f0=$FA$_t_4659f0"
+  ]
+ },
+ {
+  "rva": 489888,
+  "obj": "w26a_779a0",
+  "src": "build/survey/probes/w26a_779a0_final.c",
+  "maps": [
+   "_CDirDrawSurface_Destroy=?Destroy@CDirDrawSurface@@QAEXXZ"
+  ],
+  "aliases": [
+   "0=$FA$_t_4779a0"
+  ]
+ },
+ {
+  "rva": 490080,
+  "obj": "w26a_77a60",
+  "src": "build/survey/probes/w26a_77a60_final.c",
+  "maps": [
+   "_gap477a70=$FA$_t_477a70"
+  ]
+ },
+ {
+  "rva": 571232,
+  "obj": "w26a_8b760",
+  "src": "build/survey/probes/w26a_8b760_final.c",
+  "maps": [
+   "_wingSay_t=?wingSay@@3PAUSAY@@A"
+  ]
+ },
+ {
+  "rva": 645200,
+  "obj": "w26a_9d850",
+  "src": "build/survey/probes/w26a_9d850_final.c",
+  "maps": [
+   "_curThing_t=_curThing"
+  ]
+ },
+ {
+  "rva": 759392,
+  "obj": "w26a_b9660",
+  "src": "build/survey/probes/w26a_b9660_final.c",
+  "maps": [
+   "@EnterState_f@4=@EnterState@4"
+  ]
+ },
+ {
+  "rva": 684688,
+  "obj": "w26a_a7290",
+  "src": "build/survey/probes/w26a_a7290_final.c",
+  "maps": []
+ },
+ {
+  "rva": 574112,
+  "obj": "w26a_8c2a0",
+  "src": "build/survey/probes/w26a_8c2a0_final.c",
+  "maps": [],
+  "patch": [
+   "0x0,15,33c08a41013bc20f9cc0c3"
+  ]
+ },
+ {
+  "rva": 140160,
+  "obj": "w26a_22380",
+  "src": "build/survey/probes/w26a_22380_final.c",
+  "maps": [
+   "_specials_t=_specials"
+  ]
+ },
+ {
+  "rva": 869136,
+  "obj": "w26a_d4310",
+  "src": "build/survey/probes/w26a_d4310_final.c",
+  "maps": []
+ },
+ {
+  "rva": 629456,
+  "obj": "w26a_iscomment",
+  "src": "build/survey/probes/w26a_iscomment_final.c",
+  "maps": []
+ },
+ {
+  "rva": 713280,
+  "obj": "w26a_validate",
+  "src": "build/survey/probes/w26a_validate_final.c",
+  "maps": [
+   "_player_list_t=?player_list@@3UNET_PLAYER_LIST@@A"
+  ],
+  "patch": [
+   "0xe,4,3bc87e15"
+  ]
+ },
+ {
+  "rva": 845444,
+  "obj": "w26a_doifdestroyed",
+  "src": "build/survey/probes/w26a_doifdestroyed_final.c",
+  "maps": [
+   "_destroyed_t=_destroyed",
+   "_vector_table_t=vector_table"
+  ]
+ },
+ {
+  "rva": 855543,
+  "obj": "w26a_dobrush",
+  "src": "build/survey/probes/w26a_dobrush_final.c",
+  "maps": [
+   "_svp_t=source_vertex_ptr",
+   "_vbuf2_t=vbuf2",
+   "_vector_table_t=vector_table"
+  ]
+ },
+ {
+  "rva": 859992,
+  "obj": "w26a_grinit3d",
+  "src": "build/survey/probes/w26a_grinit3d_final.c",
+  "maps": [
+   "_bitmap_table_t=_bitmap_table",
+   "_overflow_ptr_t=_overflow_ptr",
+   "_unknown_divide_error=_unknown_divide_error"
+  ]
+ }
+]

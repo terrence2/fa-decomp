@@ -1,0 +1,54 @@
+[
+ {
+  "rva": 881216,
+  "obj": "w26b_lockfile2_v5",
+  "src": "build/survey/probes/w26b_lockfile2_v5.c",
+  "maps": [
+   "_lockX=__lock",
+   "_ecsP=__imp__EnterCriticalSection"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 881328,
+  "obj": "w26b_unlockfile2_v5",
+  "src": "build/survey/probes/w26b_unlockfile2_v5.c",
+  "maps": [
+   "_unlockX=__unlock",
+   "_lcsP=__imp__LeaveCriticalSection"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 889600,
+  "obj": "w26b_heapalloc_v4",
+  "src": "build/survey/probes/w26b_heapalloc_v4.c",
+  "maps": [
+   "_heaplimitA=__adbgmsg+0x1074",
+   "_crtheapG=__crtheap",
+   "_heapAllocSubX=$FA$_t_4de350",
+   "_lockX=__lock",
+   "_unlockX=__unlock",
+   "_heapAllocP=__imp__HeapAlloc"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 889968,
+  "obj": "w26b_cropzeros_v4",
+  "src": "build/survey/probes/w26b_cropzeros_v4.c",
+  "maps": [
+   "_dotByte=__ctype+0x208"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 590944,
+  "obj": "w26b_serupq_v4",
+  "src": "build/survey/probes/w26b_serupq_v4.c",
+  "maps": [
+   "_serQtailG=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x1a4"
+  ],
+  "patch": []
+ }
+]

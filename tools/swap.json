@@ -8513,5 +8513,467 @@
   "obj": "GLine",
   "src": "src/GLine.c",
   "maps": []
+ },
+ {
+  "rva": "0x659e0",
+  "obj": "Chunk_659e0",
+  "src": "src/Chunk_659e0.c",
+  "maps": [
+   "_gap659f0=$FA$_t_4659f0"
+  ]
+ },
+ {
+  "rva": "0x779a0",
+  "obj": "Chunk_779a0",
+  "src": "src/Chunk_779a0.c",
+  "maps": [
+   "_CDirDrawSurface_Destroy=?Destroy@CDirDrawSurface@@QAEXXZ"
+  ],
+  "aliases": [
+   "0=$FA$_t_4779a0"
+  ]
+ },
+ {
+  "rva": "0x77a60",
+  "obj": "Chunk_77a60",
+  "src": "src/Chunk_77a60.c",
+  "maps": [
+   "_gap477a70=$FA$_t_477a70"
+  ],
+  "aliases": [
+   "0=$FA$_t_477a60"
+  ]
+ },
+ {
+  "rva": "0x8b760",
+  "obj": "Chunk_8b760",
+  "src": "src/Chunk_8b760.c",
+  "maps": [
+   "_wingSay_t=?wingSay@@3PAUSAY@@A"
+  ]
+ },
+ {
+  "rva": "0x9d850",
+  "obj": "Chunk_9d850",
+  "src": "src/Chunk_9d850.c",
+  "maps": [
+   "_curThing_t=_curThing"
+  ]
+ },
+ {
+  "rva": "0xb9660",
+  "obj": "Chunk_b9660",
+  "src": "src/Chunk_b9660.c",
+  "maps": [
+   "@EnterState_f@4=@EnterState@4"
+  ],
+  "aliases": [
+   "0=$FA$_t_4b9660"
+  ]
+ },
+ {
+  "rva": "0xa7290",
+  "obj": "Chunk_a7290",
+  "src": "src/Chunk_a7290.c",
+  "maps": []
+ },
+ {
+  "rva": "0x8c2a0",
+  "obj": "Chunk_8c2a0",
+  "src": "src/Chunk_8c2a0.c",
+  "maps": [],
+  "patch": [
+   "0x0,15,33c08a41013bc20f9cc0c3"
+  ],
+  "provenance": [
+   "patch 0x0: toolchain-diff \u2014 fastcall byte-predicate: CL pins the byte temp in ebx; FA computes n&0x7f as move-byte-load (8a41 01), reg cmp (3b c2), setl (0f 9c c0), ret \u2014 same-length 15-B head block; dis.py elision cross-check passed before writing C"
+  ]
+ },
+ {
+  "rva": "0x22380",
+  "obj": "Chunk_22380",
+  "src": "src/Chunk_22380.c",
+  "maps": [
+   "_specials_t=_specials"
+  ]
+ },
+ {
+  "rva": "0xd4310",
+  "obj": "Chunk_d4310",
+  "src": "src/Chunk_d4310.c",
+  "maps": []
+ },
+ {
+  "rva": "0x99ad0",
+  "obj": "IsComment",
+  "src": "src/IsComment.c",
+  "maps": []
+ },
+ {
+  "rva": "0xae240",
+  "obj": "validate_player",
+  "src": "src/validate_player.c",
+  "maps": [
+   "_player_list_t=?player_list@@3UNET_PLAYER_LIST@@A"
+  ],
+  "patch": [
+   "0xe,4,3bc87e15"
+  ],
+  "provenance": [
+   "patch 0xe: toolchain-diff \u2014 cmp mirror reg-left (3b c8) vs CL mem-left; jle keeps polarity (no flip needed). dis.py invented an n==0 test \u2014 raw-byte cross-check overruled it"
+  ]
+ },
+ {
+  "rva": "0xce684",
+  "obj": "do_ifdestroyed",
+  "src": "src/do_ifdestroyed.c",
+  "maps": [
+   "_destroyed_t=_destroyed",
+   "_vector_table_t=vector_table"
+  ]
+ },
+ {
+  "rva": "0xd0df7",
+  "obj": "do_brush_area",
+  "src": "src/do_brush_area.c",
+  "maps": [
+   "_svp_t=source_vertex_ptr",
+   "_vbuf2_t=vbuf2",
+   "_vector_table_t=vector_table"
+  ]
+ },
+ {
+  "rva": "0xd1f58",
+  "obj": "GRInit3d",
+  "src": "src/GRInit3d.c",
+  "maps": [
+   "_bitmap_table_t=_bitmap_table",
+   "_overflow_ptr_t=_overflow_ptr",
+   "_unknown_divide_error=_unknown_divide_error"
+  ]
+ },
+ {
+  "rva": "0xd4990",
+  "obj": "Strncmp",
+  "src": "src/Strncmp.c",
+  "maps": [],
+  "patch": [
+   "54,0,c9"
+  ],
+  "provenance": [
+   "patch 54: toolchain-diff \u2014 CL 4.2 drops 'leave' before the final c3 (wave-21 known); 1-byte insert"
+  ]
+ },
+ {
+  "rva": "0xd7240",
+  "obj": "LockFile2",
+  "src": "src/LockFile2.c",
+  "maps": [
+   "_lockX=__lock",
+   "_ecsP=__imp__EnterCriticalSection"
+  ]
+ },
+ {
+  "rva": "0xd72b0",
+  "obj": "UnlockFile2",
+  "src": "src/UnlockFile2.c",
+  "maps": [
+   "_unlockX=__unlock",
+   "_lcsP=__imp__LeaveCriticalSection"
+  ]
+ },
+ {
+  "rva": "0xd9300",
+  "obj": "HeapAllocX",
+  "src": "src/HeapAllocX.c",
+  "maps": [
+   "_heaplimitA=__adbgmsg+0x1074",
+   "_crtheapG=__crtheap",
+   "_heapAllocSubX=$FA$_t_4de350",
+   "_lockX=__lock",
+   "_unlockX=__unlock",
+   "_heapAllocP=__imp__HeapAlloc"
+  ]
+ },
+ {
+  "rva": "0xd9470",
+  "obj": "CropZeros",
+  "src": "src/CropZeros.c",
+  "maps": [
+   "_dotByte=__ctype+0x208"
+  ]
+ },
+ {
+  "rva": "0xd420",
+  "obj": "ShellHideMouse",
+  "src": "src/ShellHideMouse.c",
+  "maps": [
+   "_mouseShownW=?mouseShown@@3FA",
+   "_lastMX=?lastMousePos@@3UWORD_POINT@@A+0x2",
+   "_lastMY=?lastMousePos@@3UWORD_POINT@@A",
+   "_savePointerG=?savePointer@@3PAUT_HANDLE@@A",
+   "_G_BlitToScreenX@16=_G_BlitToScreen@16"
+  ]
+ },
+ {
+  "rva": "0xdf8f0",
+  "obj": "IncMan",
+  "src": "src/IncMan.c",
+  "maps": [
+   "_t4e2cf0=$FA$_t_4e2cf0"
+  ]
+ },
+ {
+  "rva": "0xc2be8",
+  "obj": "CpymemXRemap",
+  "src": "src/CpymemXRemap.c",
+  "maps": [
+   "_snowHighT=_snowHigh+0x4"
+  ]
+ },
+ {
+  "rva": "0x12b80",
+  "obj": "CompareMemory",
+  "src": "src/CompareMemory.c",
+  "maps": [],
+  "patch": [
+   "13,11,488b4c24088b54240c740b"
+  ],
+  "provenance": [
+   "patch 13: toolchain-diff \u2014 same-length reorder of the [dec-load][arg-load] block so the 48 dec precedes the two arg loads; provenance CL scheduling"
+  ]
+ },
+ {
+  "rva": "0x90460",
+  "obj": "SERUQStatus",
+  "src": "src/SERUQStatus.c",
+  "maps": [
+   "_serQtailG=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x1a4"
+  ]
+ },
+ {
+  "rva": "0x984d0",
+  "obj": "RetrieveFromQueue",
+  "src": "src/RetrieveFromQueue.c",
+  "maps": []
+ },
+ {
+  "rva": "0x63a40",
+  "obj": "DlgListGetSel",
+  "src": "src/DlgListGetSel.c",
+  "maps": [
+   "_dlgselX=?dlg_list_get_selection@@YA?AW4DLG_SELECTION@@PAXPAUNET_ADDRESS@@PAD@Z"
+  ]
+ },
+ {
+  "rva": "0x5cf70",
+  "obj": "PktSockSend",
+  "src": "src/PktSockSend.c",
+  "maps": [
+   "_wsendX=?ws@@3U_winsock_funcs@@A+0x42"
+  ]
+ },
+ {
+  "rva": "0x11f00",
+  "obj": "PointInBox",
+  "src": "src/PointInBox.c",
+  "maps": []
+ },
+ {
+  "rva": "0x11a40",
+  "obj": "Octant",
+  "src": "src/Octant.c",
+  "maps": []
+ },
+ {
+  "rva": "0xa8a0",
+  "obj": "HUDBrightness",
+  "src": "src/HUDBrightness.c",
+  "maps": [
+   "_w26_hudBright=?hudBrightness@@3JA"
+  ]
+ },
+ {
+  "rva": "0x14240",
+  "obj": "GetContactPositions",
+  "src": "src/GetContactPositions.c",
+  "maps": [
+   "_w26_numContactsQ=?numContacts@@3JA",
+   "_w26_objPtrsQ=_objPtrs",
+   "_CPGetContactQ@4=?CPGetContact@@YGGJ@Z",
+   "_GRTo2dQ@8=_GRTo2d@8"
+  ],
+  "patch": [
+   "75,4,3bf87cc1"
+  ],
+  "provenance": [
+   "patch 75: toolchain-diff \u2014 loop-bottom cmp reg-left (cmp edi,eax / jl) vs CL fresh-load-left (cmp eax,edi / jg); spelling-independent (e1-e5), TU-context-sensitive"
+  ]
+ },
+ {
+  "rva": "0x17c60",
+  "obj": "PotRudder",
+  "src": "src/PotRudder.c",
+  "maps": [
+   "_w26_rudder=_rudder",
+   "@NormalizeStickQ@16=@NormalizeStick@16"
+  ]
+ },
+ {
+  "rva": "0x35760",
+  "obj": "SoundName",
+  "src": "src/SoundName.c",
+  "maps": [
+   "_w26_soundOn=_soundOn",
+   "_w26_sndDef=$FA$_d_4e7000+0x548",
+   "_w26_MODp=?MOD@@3PAUMODSPEC@@A",
+   "_w26_specials=_specials+0xb30"
+  ]
+ },
+ {
+  "rva": "0x4b840",
+  "obj": "SERExNamesTimeout",
+  "src": "src/SERExNamesTimeout.c",
+  "maps": [
+   "_w26_mpInfoState6c=?mpInfo@@3UMP_INFO@@C+0x16c",
+   "_MOD_ShutdownQ=?MOD_Shutdown@@YAXXZ",
+   "_serIOQ=?serIO@@YAXJ@Z",
+   "_SER_ShutdownQ=?SER_Shutdown@@YAXXZ"
+  ]
+ },
+ {
+  "rva": "0x4c1f0",
+  "obj": "SERShutdown1",
+  "src": "src/SERShutdown1.c",
+  "maps": [
+   "_w26_mpOn1=?mpInfo@@3UMP_INFO@@C+0x154",
+   "_w26_ctrlB12b=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x12b",
+   "_w26_ctrlD218=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x218",
+   "_SER_ShutdownLowLevelQ=?SER_ShutdownLowLevel@@YAXXZ",
+   "__imp__Sleep@4=__imp__Sleep"
+  ],
+  "provenance": [
+   "map __imp__Sleep@4=__imp__Sleep: width-strip (wave-25 rule) \u2014 mkimp's Sleep IAT anchor is widthless __imp__Sleep; obj extern __imp__Sleep@4 would not bind, triggering LNK4049 + .rdata alias synthesis (+16B, ff 15 operand re-routed to 0xe63f0)"
+  ]
+ },
+ {
+  "rva": "0x5ec00",
+  "obj": "GRPControl",
+  "src": "src/GRPControl.c",
+  "maps": [
+   "_w26_curId=_curId",
+   "_w26_ctBfb=_curThing+0xfb",
+   "_w26_ctBfc=_curThing+0xfc",
+   "_w26_ctWfd=_curThing+0xfd",
+   "_w26_ctWff=_curThing+0xff",
+   "_GRPPartQ@12=_GRPPart@12",
+   "_GRPFormationMoveQ@12=_GRPFormationMove@12"
+  ]
+ },
+ {
+  "rva": "0x64340",
+  "obj": "CTEval_tgtfacing",
+  "src": "src/CTEval_tgtfacing.c",
+  "maps": [
+   "_w26_svcGate=_serviceTicks+0x20",
+   "_w26_svcTick=_serviceTicks+0xf4",
+   "_w26_curThing11=_curThing+0x11",
+   "_AnglesOffNoseQ@16=_AnglesOffNose@16",
+   "@AbsQ@4=@Abs@4"
+  ]
+ },
+ {
+  "rva": "0x64400",
+  "obj": "CTEval_htotgt",
+  "src": "src/CTEval_htotgt.c",
+  "maps": [
+   "_w26_svcGate=_serviceTicks+0x20",
+   "_w26_svcTick=_serviceTicks+0xf4",
+   "_w26_curThing11=_curThing+0x11",
+   "_AnglesQ@16=_Angles@16"
+  ]
+ },
+ {
+  "rva": "0x64450",
+  "obj": "CTEval_ptotgt",
+  "src": "src/CTEval_ptotgt.c",
+  "maps": [
+   "_w26_svcGate=_serviceTicks+0x20",
+   "_w26_svcTick=_serviceTicks+0xf4",
+   "_w26_curThing11=_curThing+0x11",
+   "_AnglesQ@16=_Angles@16"
+  ]
+ },
+ {
+  "rva": "0x7f2a0",
+  "obj": "UkraineCheckMaxPlanes",
+  "src": "src/UkraineCheckMaxPlanes.c",
+  "maps": [
+   "_w26_rankStr=_pilotRanks+0x1ec",
+   "_w26_campArr=_campaignPilot+0xdb0",
+   "_w26_campEnd=_campaignPilot+0x1c60",
+   "_strnicmpQ=_strnicmp"
+  ],
+  "patch": [
+   "74,15,4b33c0b92f00000083fb0bf3ab7fab",
+   "0x3f,4,00000000,0x0:6:_w26_campEnd"
+  ],
+  "provenance": [
+   "patch 74: toolchain-diff \u2014 scheduler reorder: FA schedules the tail dec,count BEFORE the fill-setup (dec/xor/mov ecx,0x2f/cmp ebx,0xb/rep stosd/jg), CL sinks the dec past rep; unsteerable by u3-u9 spelling sweep",
+   "patch 0x3f: toolchain-diff \u2014 literal-VA reloc rescue: FA's cmp esi,0x4f6778 imm32 (VA(_campaignPilot)+0x1c60) carries a HIGHLOW; the C literal compiles byte-exact but reloc-less (wave-20 trap) and any &array/value extern spelling perturbs CL's reg allocation, so the imm32 is zero-filled and the DIR32 synthesized via newsite site:6:_w26_campEnd (map addend +0x1c60 baked at fit; link writes 0x4f6778)"
+  ]
+ },
+ {
+  "rva": "0x7f840",
+  "obj": "CampaignSave",
+  "src": "src/CampaignSave.c",
+  "maps": [
+   "_w26_pilotsUpdated=_pilotsUpdated",
+   "_w26_pilotName=_pilotName",
+   "_w26_campaignPilot=_campaignPilot",
+   "_RMAccessQ@8=_RMAccess@8",
+   "_SaveFileQ=_SaveFile",
+   "_CampaignDiskErrorQ=?CampaignDiskError@@YAXXZ"
+  ]
+ },
+ {
+  "rva": "0x87830",
+  "obj": "TopCenterDialog",
+  "src": "src/TopCenterDialog.c",
+  "maps": [
+   "_w26_curDialogP=?curDialog@@3PAUDIALOG@@A",
+   "_w26_grModeWA=_grMode+0xa",
+   "_w26_grModeWB=_grMode+0xc"
+  ]
+ },
+ {
+  "rva": "0x8b4b0",
+  "obj": "SAYMsg",
+  "src": "src/SAYMsg.c",
+  "maps": [
+   "_w26_curId2=_curId",
+   "_PushCurObjQ@4=_PushCurObj@4",
+   "_CallUtilProcQ=_CallUtilProc",
+   "_SAYDefaultSayProcQ=_SAYDefaultSayProc",
+   "@PopCurObjQ@0=_PopCurObj@0"
+  ],
+  "patch": [
+   "11,1,3b"
+  ],
+  "provenance": [
+   "patch 11: toolchain-diff \u2014 FA 16-bit compare reg-left (66 3b) vs CL mem-left (66 39), spelling-independent (e1-e5); disp32 reloc at 0xc is the masked site"
+  ]
+ },
+ {
+  "rva": "0x8f8e0",
+  "obj": "OBJAliasForMulti",
+  "src": "src/OBJAliasForMulti.c",
+  "maps": [
+   "_w26_numComputers=_numComputers",
+   "_w26_commentW=?COMMENT_TYPE@@3W4__unnamed@@A+0x864",
+   "_w26_aliasCnt=_nextObjId",
+   "_w26_objPtrs2=_objPtrs",
+   "@OBJNextAliasForMultiQ@0=_OBJNextAliasForMulti@0"
+  ]
  }
 ]

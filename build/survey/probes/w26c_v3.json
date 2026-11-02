@@ -1,0 +1,207 @@
+[
+ {
+  "rva": 43168,
+  "obj": "w26c_HUDBrightness_v1",
+  "src": "build/survey/probes/w26c_HUDBrightness_v1.c",
+  "maps": [
+   "_w26_hudBright=?hudBrightness@@3JA"
+  ]
+ },
+ {
+  "rva": 43168,
+  "obj": "w26c_HUDBrightness_v2",
+  "src": "build/survey/probes/w26c_HUDBrightness_v2.c",
+  "maps": [
+   "_w26_hudBright=?hudBrightness@@3JA"
+  ]
+ },
+ {
+  "rva": 43168,
+  "obj": "w26c_HUDBrightness_v3",
+  "src": "build/survey/probes/w26c_HUDBrightness_v3.c",
+  "maps": [
+   "_w26_hudBright=?hudBrightness@@3JA"
+  ]
+ },
+ {
+  "rva": 82496,
+  "obj": "w26c_GetContactPositions_v1",
+  "src": "build/survey/probes/w26c_GetContactPositions_v1.c",
+  "maps": [
+   "_w26_numContactsQ=?numContacts@@3JA",
+   "_w26_objPtrsQ=_objPtrs",
+   "_CPGetContactQ=?CPGetContact@@YGGJ@Z",
+   "_GRTo2dQ@8=_GRTo2d@8"
+  ]
+ },
+ {
+  "rva": 82496,
+  "obj": "w26c_GetContactPositions_v2",
+  "src": "build/survey/probes/w26c_GetContactPositions_v2.c",
+  "maps": [
+   "_w26_numContactsQ=?numContacts@@3JA",
+   "_w26_objPtrsQ=_objPtrs",
+   "_CPGetContactQ=?CPGetContact@@YGGJ@Z",
+   "_GRTo2dQ@8=_GRTo2d@8"
+  ]
+ },
+ {
+  "rva": 82496,
+  "obj": "w26c_GetContactPositions_v3",
+  "src": "build/survey/probes/w26c_GetContactPositions_v3.c",
+  "maps": [
+   "_w26_numContactsQ=?numContacts@@3JA",
+   "_w26_objPtrsQ=_objPtrs",
+   "_CPGetContactQ=?CPGetContact@@YGGJ@Z",
+   "_GRTo2dQ@8=_GRTo2d@8"
+  ]
+ },
+ {
+  "rva": 82496,
+  "obj": "w26c_GetContactPositions_v4",
+  "src": "build/survey/probes/w26c_GetContactPositions_v4.c",
+  "maps": [
+   "_w26_numContactsQ=?numContacts@@3JA",
+   "_w26_objPtrsQ=_objPtrs",
+   "_CPGetContactQ@4=?CPGetContact@@YGGJ@Z",
+   "_GRTo2dQ@8=_GRTo2d@8"
+  ],
+  "patch": [
+   "75,4,3bf87cc1"
+  ]
+ },
+ {
+  "rva": 97376,
+  "obj": "w26c_PotRudder_v1",
+  "src": "build/survey/probes/w26c_PotRudder_v1.c",
+  "maps": [
+   "_w26_rudder=_rudder",
+   "@NormalizeStickQ@16=@NormalizeStick@16"
+  ]
+ },
+ {
+  "rva": 97376,
+  "obj": "w26c_PotRudder_v2",
+  "src": "build/survey/probes/w26c_PotRudder_v2.c",
+  "maps": [
+   "_w26_rudder=_rudder",
+   "@NormalizeStickQ@16=@NormalizeStick@16"
+  ]
+ },
+ {
+  "rva": 97376,
+  "obj": "w26c_PotRudder_v4",
+  "src": "build/survey/probes/w26c_PotRudder_v4.c",
+  "maps": [
+   "_w26_rudder=_rudder",
+   "@NormalizeStickQ@16=@NormalizeStick@16"
+  ]
+ },
+ {
+  "rva": 218976,
+  "obj": "w26c_SoundName_v1",
+  "src": "build/survey/probes/w26c_SoundName_v1.c",
+  "maps": [
+   "_w26_soundOn=_soundOn",
+   "_w26_sndDef=$FA$_d_4e7000+0x548",
+   "_w26_MODp=?MOD@@3PAUMODSPEC@@A",
+   "_w26_specials=_specials+0xb30"
+  ]
+ },
+ {
+  "rva": 218976,
+  "obj": "w26c_SoundName_v2",
+  "src": "build/survey/probes/w26c_SoundName_v2.c",
+  "maps": [
+   "_w26_soundOn=_soundOn",
+   "_w26_sndDef=$FA$_d_4e7000+0x548",
+   "_w26_MODp=?MOD@@3PAUMODSPEC@@A",
+   "_w26_specialsB=_specials+0xb30"
+  ]
+ },
+ {
+  "rva": 218976,
+  "obj": "w26c_SoundName_v3",
+  "src": "build/survey/probes/w26c_SoundName_v3.c",
+  "maps": [
+   "_w26_soundOn=_soundOn",
+   "_w26_sndDef=$FA$_d_4e7000+0x548",
+   "_w26_MODp=?MOD@@3PAUMODSPEC@@A",
+   "_w26_specials=_specials+0xb30"
+  ]
+ },
+ {
+  "rva": 520864,
+  "obj": "w26c_UkraineCheckMaxPlanes_v1",
+  "src": "build/survey/probes/w26c_UkraineCheckMaxPlanes_v1.c",
+  "maps": [
+   "_w26_rankStr=_pilotRanks+0x1ec",
+   "_w26_campArr=_campaignPilot+0xdb0",
+   "_w26_campEnd=_campaignPilot+0x1c60",
+   "_strnicmpQ=_strnicmp",
+   "_memset0=memset"
+  ]
+ },
+ {
+  "rva": 520864,
+  "obj": "w26c_UkraineCheckMaxPlanes_v2",
+  "src": "build/survey/probes/w26c_UkraineCheckMaxPlanes_v2.c",
+  "maps": [
+   "_w26_rankStr=_pilotRanks+0x1ec",
+   "_w26_campArr=_campaignPilot+0xdb0",
+   "_strnicmpQ=_strnicmp"
+  ]
+ },
+ {
+  "rva": 520864,
+  "obj": "w26c_UkraineCheckMaxPlanes_v3",
+  "src": "build/survey/probes/w26c_UkraineCheckMaxPlanes_v3.c",
+  "maps": [
+   "_w26_rankStr=_pilotRanks+0x1ec",
+   "_w26_campArr=_campaignPilot+0xdb0",
+   "_strnicmpQ=_strnicmp"
+  ],
+  "patch": [
+   "74,15,4b33c0b92f00000083fb0bf3ab7fab"
+  ]
+ },
+ {
+  "rva": 570544,
+  "obj": "w26c_SAYMsg_v1",
+  "src": "build/survey/probes/w26c_SAYMsg_v1.c",
+  "maps": [
+   "_w26_curId2=_curId",
+   "_PushCurObjQ@4=_PushCurObj@4",
+   "_CallUtilProcQ=_CallUtilProc",
+   "_SAYDefaultSayProcQ=_SAYDefaultSayProc",
+   "@PopCurObjQ@0=@PopCurObj@0"
+  ]
+ },
+ {
+  "rva": 570544,
+  "obj": "w26c_SAYMsg_v2",
+  "src": "build/survey/probes/w26c_SAYMsg_v2.c",
+  "maps": [
+   "_w26_curId2=_curId",
+   "_PushCurObjQ@4=_PushCurObj@4",
+   "_CallUtilProcQ=_CallUtilProc",
+   "_SAYDefaultSayProcQ=_SAYDefaultSayProc",
+   "@PopCurObjQ@0=@PopCurObj@0"
+  ]
+ },
+ {
+  "rva": 570544,
+  "obj": "w26c_SAYMsg_v3",
+  "src": "build/survey/probes/w26c_SAYMsg_v3.c",
+  "maps": [
+   "_w26_curId2=_curId",
+   "_PushCurObjQ@4=_PushCurObj@4",
+   "_CallUtilProcQ=_CallUtilProc",
+   "_SAYDefaultSayProcQ=_SAYDefaultSayProc",
+   "@PopCurObjQ@0=@PopCurObj@0"
+  ],
+  "patch": [
+   "11,1,3b"
+  ]
+ }
+]

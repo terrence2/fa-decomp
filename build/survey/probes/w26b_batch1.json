@@ -1,0 +1,138 @@
+[
+ {
+  "rva": 881216,
+  "obj": "w26b_lockfile2_v1",
+  "src": "build/survey/probes/w26b_lockfile2_v1.c",
+  "maps": [
+   "_lockX=__lock",
+   "__imp__EnterCriticalSectionX@4=__imp__EnterCriticalSection"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 881328,
+  "obj": "w26b_unlockfile2_v1",
+  "src": "build/survey/probes/w26b_unlockfile2_v1.c",
+  "maps": [
+   "_unlockX=__unlock",
+   "__imp__LeaveCriticalSectionX@4=__imp__LeaveCriticalSection"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 889600,
+  "obj": "w26b_heapalloc_v1",
+  "src": "build/survey/probes/w26b_heapalloc_v1.c",
+  "maps": [
+   "_heapAllocSubX=$FA$_t_4de350",
+   "_lockX=__lock",
+   "_unlockX=__unlock",
+   "_crtheapG=__crtheap",
+   "_heaplimitG=__adbgmsg+0x1074",
+   "__imp__HeapAllocX@12=__imp__HeapAlloc"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 870800,
+  "obj": "w26b_strncmp_v1",
+  "src": "build/survey/probes/w26b_strncmp_v1.c",
+  "maps": [],
+  "patch": []
+ },
+ {
+  "rva": 623824,
+  "obj": "w26b_retrieveq_v1",
+  "src": "build/survey/probes/w26b_retrieveq_v1.c",
+  "maps": [],
+  "patch": []
+ },
+ {
+  "rva": 889968,
+  "obj": "w26b_cropzeros_v1",
+  "src": "build/survey/probes/w26b_cropzeros_v1.c",
+  "maps": [
+   "_deccharG=__ctype+0x208"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 54304,
+  "obj": "w26b_shelhidemouse_v1",
+  "src": "build/survey/probes/w26b_shelhidemouse_v1.c",
+  "maps": [
+   "_mouseShownW=?mouseShown@@3FA",
+   "_lastMX=?lastMousePos@@3UWORD_POINT@@A+0x2",
+   "_lastMY=?lastMousePos@@3UWORD_POINT@@A",
+   "_savePointerG=?savePointer@@3PAUT_HANDLE@@A",
+   "_G_BlitToScreenX@16=_G_BlitToScreen@16"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 797672,
+  "obj": "w26b_cpymemx_v1",
+  "src": "build/survey/probes/w26b_cpymemx_v1.c",
+  "maps": [
+   "_snowHighT=_snowHigh+0x4"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 76672,
+  "obj": "w26b_cmpmem_v1",
+  "src": "build/survey/probes/w26b_cmpmem_v1.c",
+  "maps": [],
+  "patch": []
+ },
+ {
+  "rva": 590944,
+  "obj": "w26b_serupq_v1",
+  "src": "build/survey/probes/w26b_serupq_v1.c",
+  "maps": [
+   "_serQtailGX=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x1a4"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 408128,
+  "obj": "w26b_dlgsel_v1",
+  "src": "build/survey/probes/w26b_dlgsel_v1.c",
+  "maps": [
+   "_dlgselX=?dlg_list_get_selection@@YA?AW4DLG_SELECTION@@PAXPAUNET_ADDRESS@@PAD@Z"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 380784,
+  "obj": "w26b_pktsock_v1",
+  "src": "build/survey/probes/w26b_pktsock_v1.c",
+  "maps": [
+   "_wsendX=?ws@@3U_winsock_funcs@@A+0x42"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 73472,
+  "obj": "w26b_pointinbox_v1",
+  "src": "build/survey/probes/w26b_pointinbox_v1.c",
+  "maps": [],
+  "patch": []
+ },
+ {
+  "rva": 72256,
+  "obj": "w26b_octant_v1",
+  "src": "build/survey/probes/w26b_octant_v1.c",
+  "maps": [],
+  "patch": []
+ },
+ {
+  "rva": 915696,
+  "obj": "w26b_incman_v1",
+  "src": "build/survey/probes/w26b_incman_v1.c",
+  "maps": [
+   "_t4e2cf0=$FA$_t_4e2cf0"
+  ],
+  "patch": []
+ }
+]

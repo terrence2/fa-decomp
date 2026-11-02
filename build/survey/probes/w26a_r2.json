@@ -1,0 +1,22 @@
+[
+ {
+  "rva": 574112,
+  "obj": "w26a_8c2a0",
+  "src": "build/survey/probes/w26a_8c2a0_final.c",
+  "maps": []
+ },
+ {
+  "rva": 629456,
+  "obj": "w26a_iscomment",
+  "src": "build/survey/probes/w26a_iscomment_final.c",
+  "maps": []
+ },
+ {
+  "rva": 713280,
+  "obj": "w26a_validate",
+  "src": "build/survey/probes/w26a_validate_final.c",
+  "maps": [
+   "_player_list_t=?player_list@@3UNET_PLAYER_LIST@@A"
+  ]
+ }
+]

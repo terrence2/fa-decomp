@@ -1,0 +1,35 @@
+[
+ {
+  "rva": 881216,
+  "obj": "w26b_lockfile2_v4",
+  "src": "build/survey/probes/w26b_lockfile2_v4.c",
+  "maps": [
+   "_lockX=__lock",
+   "__imp__EnterCriticalX@4=__imp__EnterCriticalSection"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 881328,
+  "obj": "w26b_unlockfile2_v4",
+  "src": "build/survey/probes/w26b_unlockfile2_v4.c",
+  "maps": [
+   "_unlockX=__unlock",
+   "__imp__LeaveCriticalX@4=__imp__LeaveCriticalSection"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 590944,
+  "obj": "w26b_serupq_v2",
+  "src": "build/survey/probes/w26b_serupq_v2.c",
+  "maps": [
+   "_serQtailG=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x1a4"
+  ],
+  "patch": [
+   "0,9,a1000000008b4c2404,1:6:_serQtailG",
+   "18,6,a10000000040a300000000,1:6:_serQtailG,7:6:_serQtailG",
+   "29,6,"
+  ]
+ }
+]

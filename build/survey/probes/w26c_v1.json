@@ -1,0 +1,171 @@
+[
+ {
+  "rva": 43168,
+  "obj": "w26c_HUDBrightness_v1",
+  "src": "build/survey/probes/w26c_HUDBrightness_v1.c",
+  "maps": [
+   "_w26_hudBright=?hudBrightness@@3JA"
+  ]
+ },
+ {
+  "rva": 82496,
+  "obj": "w26c_GetContactPositions_v1",
+  "src": "build/survey/probes/w26c_GetContactPositions_v1.c",
+  "maps": [
+   "_w26_numContactsQ=?numContacts@@3JA",
+   "_w26_objPtrsQ=_objPtrs",
+   "_CPGetContactQ=?CPGetContact@@YGGJ@Z",
+   "_GRTo2dQ@8=_GRTo2d@8"
+  ]
+ },
+ {
+  "rva": 97376,
+  "obj": "w26c_PotRudder_v1",
+  "src": "build/survey/probes/w26c_PotRudder_v1.c",
+  "maps": [
+   "_w26_rudder=_rudder",
+   "@NormalizeStickQ@16=@NormalizeStick@16"
+  ]
+ },
+ {
+  "rva": 218976,
+  "obj": "w26c_SoundName_v1",
+  "src": "build/survey/probes/w26c_SoundName_v1.c",
+  "maps": [
+   "_w26_soundOn=_soundOn",
+   "_w26_sndDef=$FA$_d_4e7000+0x548",
+   "_w26_MODp=?MOD@@3PAUMODSPEC@@A",
+   "_w26_specials=_specials+0xb30"
+  ]
+ },
+ {
+  "rva": 309312,
+  "obj": "w26c_SER_ExNamesTimeout_v1",
+  "src": "build/survey/probes/w26c_SER_ExNamesTimeout_v1.c",
+  "maps": [
+   "_w26_mpInfoState6c=?mpInfo@@3UMP_INFO@@C+0x16c",
+   "_MOD_ShutdownQ=?MOD_Shutdown@@YAXXZ",
+   "_serIOQ=?serIO@@YAXJ@Z",
+   "_SER_ShutdownQ=?SER_Shutdown@@YAXXZ"
+  ]
+ },
+ {
+  "rva": 311792,
+  "obj": "w26c_SER_Shutdown1_v1",
+  "src": "build/survey/probes/w26c_SER_Shutdown1_v1.c",
+  "maps": [
+   "_w26_mpOn1=?mpInfo@@3UMP_INFO@@C+0x154",
+   "_w26_ctrlB12b=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x12b",
+   "_w26_ctrlD218=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x218",
+   "_SER_ShutdownLowLevelQ=?SER_ShutdownLowLevel@@YAXXZ"
+  ]
+ },
+ {
+  "rva": 388096,
+  "obj": "w26c_GRPControl_v1",
+  "src": "build/survey/probes/w26c_GRPControl_v1.c",
+  "maps": [
+   "_w26_curId=_curId",
+   "_w26_ctBfb=_curThing+0xfb",
+   "_w26_ctBfc=_curThing+0xfc",
+   "_w26_ctWfd=_curThing+0xfd",
+   "_w26_ctWff=_curThing+0xff",
+   "_GRPPartQ@12=_GRPPart@12",
+   "_GRPFormationMoveQ@12=_GRPFormationMove@12"
+  ]
+ },
+ {
+  "rva": 410432,
+  "obj": "w26c_CTEval_tgtfacing_v1",
+  "src": "build/survey/probes/w26c_CTEval_tgtfacing_v1.c",
+  "maps": [
+   "_w26_svcGate=_serviceTicks+0x20",
+   "_w26_svcTick=_serviceTicks+0xf4",
+   "_w26_curThing11=_curThing+0x11",
+   "_AnglesOffNoseQ@16=_AnglesOffNose@16",
+   "@AbsQ@4=@Abs@4"
+  ]
+ },
+ {
+  "rva": 410624,
+  "obj": "w26c_CTEval_htotgt_v1",
+  "src": "build/survey/probes/w26c_CTEval_htotgt_v1.c",
+  "maps": [
+   "_w26_svcGate=_serviceTicks+0x20",
+   "_w26_svcTick=_serviceTicks+0xf4",
+   "_w26_curThing11=_curThing+0x11",
+   "_AnglesQ@16=_Angles@16"
+  ]
+ },
+ {
+  "rva": 410704,
+  "obj": "w26c_CTEval_ptotgt_v1",
+  "src": "build/survey/probes/w26c_CTEval_ptotgt_v1.c",
+  "maps": [
+   "_w26_svcGate=_serviceTicks+0x20",
+   "_w26_svcTick=_serviceTicks+0xf4",
+   "_w26_curThing11=_curThing+0x11",
+   "_AnglesQ@16=_Angles@16"
+  ]
+ },
+ {
+  "rva": 520864,
+  "obj": "w26c_UkraineCheckMaxPlanes_v1",
+  "src": "build/survey/probes/w26c_UkraineCheckMaxPlanes_v1.c",
+  "maps": [
+   "_w26_rankStr=_pilotRanks+0x1ec",
+   "_w26_campArr=_campaignPilot+0xdb0",
+   "_w26_campEnd=_campaignPilot+0x1c60",
+   "_strnicmpQ=_strnicmp",
+   "_memset0=memset"
+  ]
+ },
+ {
+  "rva": 522304,
+  "obj": "w26c_CampaignSave_v1",
+  "src": "build/survey/probes/w26c_CampaignSave_v1.c",
+  "maps": [
+   "_w26_pilotsUpdated=_pilotsUpdated",
+   "_w26_pilotName=_pilotName",
+   "_w26_campaignPilot=_campaignPilot",
+   "_RMAccessQ@8=_RMAccess@8",
+   "_SaveFileQ=_SaveFile",
+   "_CampaignDiskErrorQ=?CampaignDiskError@@YAXXZ",
+   "_memcpy0=memcpy"
+  ]
+ },
+ {
+  "rva": 555056,
+  "obj": "w26c_TopCenterDialog_v1",
+  "src": "build/survey/probes/w26c_TopCenterDialog_v1.c",
+  "maps": [
+   "_w26_curDialogP=?curDialog@@3PAUDIALOG@@A",
+   "_w26_grModeWA=_grMode+0xa",
+   "_w26_grModeWB=_grMode+0xc"
+  ]
+ },
+ {
+  "rva": 570544,
+  "obj": "w26c_SAYMsg_v1",
+  "src": "build/survey/probes/w26c_SAYMsg_v1.c",
+  "maps": [
+   "_w26_curId2=_curId",
+   "_PushCurObjQ@4=_PushCurObj@4",
+   "_CallUtilProcQ=_CallUtilProc",
+   "_SAYDefaultSayProcQ=_SAYDefaultSayProc",
+   "@PopCurObjQ@0=@PopCurObj@0"
+  ]
+ },
+ {
+  "rva": 588000,
+  "obj": "w26c_OBJAliasForMulti_v1",
+  "src": "build/survey/probes/w26c_OBJAliasForMulti_v1.c",
+  "maps": [
+   "_w26_numComputers=_numComputers",
+   "_w26_commentW=?COMMENT_TYPE@@3W4__unnamed@@A+0x864",
+   "_w26_aliasCnt=_nextObjId",
+   "_w26_objPtrs2=_objPtrs",
+   "@OBJNextAliasForMultiQ@0=@OBJNextAliasForMulti@0"
+  ]
+ }
+]
