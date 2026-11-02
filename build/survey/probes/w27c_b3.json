@@ -1,0 +1,50 @@
+[
+ {
+  "rva": 880784,
+  "obj": "w27c_Chunk_d7090_v3",
+  "src": "build/survey/probes/w27c_Chunk_d7090_v3.c",
+  "maps": []
+ },
+ {
+  "rva": 138512,
+  "obj": "w27c_MAPObjAlts_v3",
+  "src": "build/survey/probes/w27c_MAPObjAlts_v3.c",
+  "maps": [
+   "_w27c_malt=_mainV+0x8c",
+   "@w27c_alt2@8=$FA$_t_421d70"
+  ]
+ },
+ {
+  "rva": 915584,
+  "obj": "w27c_ZeroTail_v3",
+  "src": "build/survey/probes/w27c_ZeroTail_v3.c",
+  "maps": []
+ },
+ {
+  "rva": 915584,
+  "obj": "w27c_ZeroTail_v4",
+  "src": "build/survey/probes/w27c_ZeroTail_v3.c",
+  "maps": [],
+  "flags": "/c /O1 /Gy"
+ },
+ {
+  "rva": 915584,
+  "obj": "w27c_ZeroTail_v5",
+  "src": "build/survey/probes/w27c_ZeroTail_v3.c",
+  "maps": [],
+  "flags": "/c /Os /Gy"
+ },
+ {
+  "rva": 860616,
+  "obj": "w27c_TransposeMatrix_v6",
+  "src": "build/survey/probes/w27c_TransposeMatrix_v6.c",
+  "maps": []
+ },
+ {
+  "rva": 860616,
+  "obj": "w27c_TransposeMatrix_v7",
+  "src": "build/survey/probes/w27c_TransposeMatrix_v6.c",
+  "maps": [],
+  "flags": "/c /O1 /Gy"
+ }
+]

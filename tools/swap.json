@@ -8975,5 +8975,545 @@
    "_w26_objPtrs2=_objPtrs",
    "@OBJNextAliasForMultiQ@0=_OBJNextAliasForMulti@0"
   ]
+ },
+ {
+  "rva": "0x12c50",
+  "obj": "w27c_Chunk_12c50_v1",
+  "src": "src/w27c_Chunk_12c50_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_412c50"
+  ]
+ },
+ {
+  "rva": "0x19540",
+  "obj": "w27c_Chunk_19540_v1",
+  "src": "src/w27c_Chunk_19540_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_419540"
+  ]
+ },
+ {
+  "rva": "0x2aa0",
+  "obj": "w27c_Chunk_2aa0_v1",
+  "src": "src/w27c_Chunk_2aa0_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_402aa0"
+  ]
+ },
+ {
+  "rva": "0x2380",
+  "obj": "w27c_Chunk_2380_v2",
+  "src": "src/w27c_Chunk_2380_v2.c",
+  "maps": [],
+  "patch": [],
+  "provenance": []
+ },
+ {
+  "rva": "0xd4880",
+  "obj": "w27c_Chunk_d4880_v1",
+  "src": "src/w27c_Chunk_d4880_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_4d4880"
+  ]
+ },
+ {
+  "rva": "0xd7090",
+  "obj": "w27c_Chunk_d7090_v3",
+  "src": "src/w27c_Chunk_d7090_v3.c",
+  "maps": [],
+  "patch": [
+   "11,1,"
+  ],
+  "provenance": [
+   "patch 11: toolchain-diff \u2014 CL inserts a lone 90 nop between the store (mov [eax],ecx) and the dependent re-read in the *pp += 1 spelling; FA has no filler; no reloc sites in span; patch deletes it"
+  ]
+ },
+ {
+  "rva": "0x32730",
+  "obj": "w27c_MusicOff_v1",
+  "src": "src/w27c_MusicOff_v1.c",
+  "maps": [
+   "_w27c_muOn=$FA$_d_4e7000+0x5f0",
+   "_w27c_musicPlaying=?musicPlaying@@3PAXA",
+   "_w27c_musicSeqHandle=?musicSeqHandle@@3PAU_SEQUENCE@@A",
+   "__imp__w27c_ailrel@4=__imp___AIL_release_sequence_handle@4"
+  ],
+  "patch": [],
+  "provenance": []
+ },
+ {
+  "rva": "0x33870",
+  "obj": "w27c_SoundAllOff_v1",
+  "src": "src/w27c_SoundAllOff_v1.c",
+  "maps": [
+   "_w27c_soundOn=_soundOn",
+   "_w27c_volA=?MOD@@3PAUMODSPEC@@A+0x2e",
+   "_w27c_volEnd=?MOD@@3PAUMODSPEC@@A+0x56e",
+   "@w27c_SoundRelease@4=?SoundRelease@@YIXF@Z",
+   "_w27c_SoundNoMixer@12=?SoundNoMixer@@YGFPADFF@Z"
+  ],
+  "patch": [],
+  "provenance": []
+ },
+ {
+  "rva": "0xd360",
+  "obj": "w27c_PushShellAlloc_v1",
+  "src": "src/w27c_PushShellAlloc_v1.c",
+  "maps": [
+   "_w27c_ctr=?remapDarken320@@3PAEA+0x14",
+   "_w27c_mmId=?mmAllocId@@3EA",
+   "_w27c_shellArr=_shellEvent+0x8"
+  ],
+  "patch": [],
+  "provenance": []
+ },
+ {
+  "rva": "0x17610",
+  "obj": "w27c_GetPlayerControl_v1",
+  "src": "src/w27c_GetPlayerControl_v1.c",
+  "maps": [
+   "@w27c_rsr@0=@ReadSticksRaw@0",
+   "_w27c_stickDev=_stickDevice",
+   "_w27c_rudderDev=_rudderDevice",
+   "_w27c_throttleDev=_throttleDevice",
+   "_w27c_devProcs=?deviceProcs@@3PAP6AFFF@ZA",
+   "_w27c_KeyStick=?KeyStick@@YAGFG@Z"
+  ],
+  "patch": [],
+  "provenance": []
+ },
+ {
+  "rva": "0x21d10",
+  "obj": "w27c_MAPObjAlts_v4",
+  "src": "src/w27c_MAPObjAlts_v4.c",
+  "maps": [
+   "_w27c_malt=_mainV+0x8c",
+   "@w27c_alt2@8=$FA$_t_421d70"
+  ],
+  "patch": [
+   "0,22,53560fbf350000000066c7050000000001008ad984db,5:6:_w27c_malt,12:6:_w27c_malt"
+  ],
+  "provenance": [
+   "patch 0x0: toolchain-diff \u2014 head reg-plan: FA copies the byte param before the branch test (mov bl,cl; test bl,bl at FA 0x12-0x15) and loads the global save as 0f bf 35 movsx; CL hoists test cl,cl to entry in every spelling (v1-v4 incl. comma-guard), unsteerable; the two FA imm32 sites drop with the span and are re-synthesized as DIR32 newsites to _w27c_malt at FA offsets 0x5/0xc"
+  ]
+ },
+ {
+  "rva": "0xdf880",
+  "obj": "w27c_ZeroTail_zt_G4",
+  "src": "src/w27c_ZeroTail_zt_G4.c",
+  "maps": [
+   "_w27c_ZeroTailq7@8=__ZeroTail"
+  ],
+  "patch": [],
+  "provenance": [
+   "flags /G4: with /G5 CL loads [eax] into ecx and tests (mov+test) in the scan loop (v1-v7 under /G2 /O2 /Gy /G5 all identical); FA compares through memory (cmp dword [eax],0) \u2014 a /G5-only scheduler artifact, /G4 reproduces FA byte-exact with the plain do-while-in-if spelling (v7)"
+  ],
+  "flags": "/c /O2 /Gy /G4"
+ },
+ {
+  "rva": "0x61ba0",
+  "obj": "PushCurObj",
+  "src": "src/PushCurObj.c",
+  "maps": [
+   "_w27a_curIdI=_curId",
+   "_w27a_ccp1c=?correctChainPlacement@@3DA+0x1c",
+   "_w27a_chainArr=?correctChainPlacement@@3DA+0x8",
+   "@PutCurObj_f@0=@PutCurObj@0",
+   "@GetCurObj_f@4=@GetCurObj@4"
+  ],
+  "patch": [
+   "0,6,668b0d00000000,3:6:_w27a_curIdI",
+   "7,6,a100000000,1:6:_w27a_ccp1c",
+   "14,2,0c45",
+   "22,1,c9",
+   "24,1,0a",
+   "30,17,a100000000408b4c2404a300000000,1:6:_w27a_ccp1c,11:6:_w27a_ccp1c"
+  ],
+  "provenance": [
+   "patch 0/7/22/24/30 (id load 66 a1 -> 66 8b 0d, idx load generic -> a1, test ax -> cx, je retarget 0b -> 0a, inc-block a1/40/8b4c2404/a3): toolchain-diff - all three pure-C spellings (v1 separate temp, v2 single statement, v3 idx-first) emitted the register-mirrored shape (id in AX via 66 a1, index in ECX, reload/store via 8b 0d / 89 0d modrm); FA loads id into CX via the generic form and the index via 66-free a1 (eax*2 sib), with the a1/40/a3 increment split around the [esp+4] param load. Pure-C reg assignment is not steerable; patches are encoding-level only, no addend semantics.",
+   "patch 14: toolchain-diff \u2014 same group as patch 0/7/22/24/30 (hand-schedule + encoding group, see those strings); test ax -> test cx at 14,2"
+  ]
+ },
+ {
+  "rva": "0x7e910",
+  "obj": "ArmPlane",
+  "src": "src/ArmPlane.c",
+  "maps": [
+   "_w27a_dab=_doArmPlane",
+   "_w27a_pnB=_pilotName",
+   "_w27a_cpP=_campaignPilot",
+   "@ArmPlane_f@4=@ArmPlane@4"
+  ],
+  "patch": [],
+  "provenance": []
+ },
+ {
+  "rva": "0x86290",
+  "obj": "Chunk_86290",
+  "src": "src/Chunk_86290.c",
+  "maps": [
+   "_PushShellAlloc_f@0=?PushShellAlloc@@YGXXZ",
+   "_ShellHideMouse_f@0=?ShellHideMouse@@YGXXZ"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_486290"
+  ]
+ },
+ {
+  "rva": "0x862a0",
+  "obj": "Chunk_862a0",
+  "src": "src/Chunk_862a0.c",
+  "maps": [
+   "_PopShellAlloc_f@0=?PopShellAlloc@@YGXXZ",
+   "_ShellShowMouse_f@0=?ShellShowMouse@@YGXXZ"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_4862a0"
+  ]
+ },
+ {
+  "rva": "0xb8590",
+  "obj": "Chunk_b8590",
+  "src": "src/Chunk_b8590.c",
+  "maps": [
+   "@EnterState_f@4=@EnterState@4"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_4b8590"
+  ]
+ },
+ {
+  "rva": "0xb85a0",
+  "obj": "Chunk_b85a0",
+  "src": "src/Chunk_b85a0.c",
+  "maps": [
+   "@EnterState_f@4=@EnterState@4"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_4b85a0"
+  ]
+ },
+ {
+  "rva": "0xc9be4",
+  "obj": "GRSetLightSource",
+  "src": "src/GRSetLightSource.c",
+  "maps": [
+   "_w27a_wls0=_worldLightSource",
+   "_w27a_wls1=_worldLightSource+0x2",
+   "_w27a_wls2=_worldLightSource+0x4"
+  ],
+  "patch": [
+   "11,1,41",
+   "13,3,66a3",
+   "19,4,668b4108",
+   "23,3,66a3"
+  ],
+  "provenance": [
+   "patch 11/13/19/23 (value-reg rotation mov dx/cx -> mov ax + modrm store -> a3 moffs): toolchain-diff - CL 10.20.6166 rotates the 16-bit value register across the three independent loads (ax, dx, cx) and switches stores to modrm forms; FA reuses ax for all three loads so stores 2/3 use the a3 moffs form (net -2 B, c3 at 0x1e; tail 8bc0 census-proven). Three pure-C spellings (index form src[0..2], struct-with-pads fields, named temp t) all emitted the identical rotation."
+  ]
+ },
+ {
+  "rva": "0x12270",
+  "obj": "SampleInit",
+  "src": "src/SampleInit.c",
+  "maps": [
+   "_w27a_ticks=_currentTicks",
+   "@MMAllocPtr_f@8=@MMAllocPtr@8"
+  ],
+  "patch": [
+   "14,1,22",
+   "56,1,22",
+   "35,12,c1e0048b4f0c03c183e810894710",
+   "59,38,8b3d000000008d590489398b068b6e0483c11089038b4608896b048943083bd173e45d5f5e5bc3,2:6:_w27a_ticks"
+  ],
+  "provenance": [
+   "patch 14: toolchain-diff - guard-je displacement re-aligned to the 2-byte-longer alloc block; encoding-level.",
+   "patch 56: toolchain-diff \u2014 guard-je displacement re-aligned (same class as patch 14); je retarget for the 2-byte-longer alloc block",
+   "patch 35:12->14 (alloc expr): toolchain-diff - FA computes last as (count<<4)+h then sub 0x10 (8b07 c1e004 8b4f0c 03c1 83e810 894710); CL 10.20.6166 folds count<<4-0x10 into a dec (8b07 48 8b4f0c c1e004 03c1 894710) even when the add/sub are split across two statements with a named temp (v1/v2 identical here). Unsteerable.",
+   "patch 59:38->39 (loop head/body): toolchain-diff - FA holds the ticks pointer load in EDI via the generic 8b 3d form with the q lea (8d 59 04) at the loop head, keeps data[1] in EBP, and interleaves the add ecx,0x10 between the data loads and stores; CL spilled ticks via a1 moffs into EAX and rotated the q stores after the cmp (89 01 / 89 1f / 89 6f 04 / 89 47 08). Pure-C spellings with q=p+1 hoisted (v1/v2) kept CL's rotation; EBP/EDI assignment not steerable at /O2. Encoding-level, no addend semantics."
+  ]
+ },
+ {
+  "rva": "0x66480",
+  "obj": "PilotPhoto",
+  "src": "src/PilotPhoto.c",
+  "maps": [
+   "_ShellHideMouse_f@0=?ShellHideMouse@@YGXXZ",
+   "_ShellShowMouse_f@0=?ShellShowMouse@@YGXXZ",
+   "_MenuCreateRemaps_f@0=?MenuCreateRemaps@@YGXXZ",
+   "_G_LoadBitmap_f@20=_G_LoadBitmap@20",
+   "_G_BlitToScreen_f@16=_G_BlitToScreen@16",
+   "@MMFreeHandleQ@4=@MMFreeHandle@4"
+  ],
+  "patch": [
+   "1,6,8bf181c695000000"
+  ],
+  "provenance": [
+   "patch 1,6->8 (lea esi,[ecx+0x95] -> mov esi,ecx; add esi,0x95): toolchain-diff - FA expands the dst+0x95 local as mov esi,ecx; add esi,imm32 (8b f1 81 c6) with the addend in the immediate; CL 10.20.6166 keeps pointer+imm folded as lea [ecx+0x95] (8d b1) even with an explicit temporary. Encoding-level, no addend semantics."
+  ]
+ },
+ {
+  "rva": "0x69810",
+  "obj": "G_InitCircles",
+  "src": "src/G_InitCircles.c",
+  "maps": [
+   "_w27a_unA24=?unAvailNames@@3PADA+0x24",
+   "_w27a_puX=_pilotsUpdated+0x2d8",
+   "_w27a_grX=_grMode+0xa",
+   "_w27a_grY=_grMode+0xc",
+   "_G_Circle_f@16=_G_Circle@16"
+  ],
+  "patch": [],
+  "provenance": []
+ },
+ {
+  "rva": "0x95830",
+  "obj": "G_UPoint",
+  "src": "src/G_UPoint.c",
+  "maps": [
+   "_w27a_cFT=_cFillType",
+   "_w27a_cCol=_cColor",
+   "_w27a_cb=_cb",
+   "_w27a_cb2=_cb",
+   "_w27a_lS=_lineStats",
+   "_G_UHline_f@12=_G_UHline@12"
+  ],
+  "patch": [],
+  "provenance": []
+ },
+ {
+  "rva": "0x97e20",
+  "obj": "MOUSEInit",
+  "src": "src/MOUSEInit.c",
+  "maps": [
+   "_w27a_v60b=_vHzMod+0x60",
+   "_w27a_mkB=_mouseButtons",
+   "_w27a_mcs18w=?mouse_critical_section@@3U_RTL_CRITICAL_SECTION@@A+0x18",
+   "_w27a_press4c=_mouseButtonPresses+0x4c",
+   "_w27a_mcsB=?mouse_critical_section@@3U_RTL_CRITICAL_SECTION@@A",
+   "__imp__InitializeCriticalSectionQ@4=__imp__InitializeCriticalSection"
+  ],
+  "patch": [],
+  "provenance": []
+ },
+ {
+  "rva": "0x9b880",
+  "obj": "PLANEBlow",
+  "src": "src/PLANEBlow.c",
+  "maps": [
+   "_RemoveCurObj_f@0=_RemoveCurObj@0",
+   "_w27a_curIdI=_curId",
+   "_w27a_thisComI=_thisComputer",
+   "_w27a_cThingT55=_curThingType+0x55",
+   "_w27a_cThing11=_curThing+0x11",
+   "_GraphicAddExp_f@28=_GRAPHICAddExp@28"
+  ],
+  "patch": [],
+  "provenance": []
+ },
+ {
+  "rva": "0xa2b50",
+  "obj": "winsock_cleanup",
+  "src": "src/winsock_cleanup.c",
+  "maps": [
+   "_w27a_wsB=?ws@@3U_winsock_funcs@@A",
+   "_w27a_wsA=?ws@@3U_winsock_funcs@@A+0xa",
+   "_w27a_ws2=?ws@@3U_winsock_funcs@@A+0x2",
+   "__imp__FreeLibraryQ@4=__imp__FreeLibrary"
+  ],
+  "patch": [
+   "0,0,53",
+   "42,0,5b"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 FA saves an unused EBX callee-save (53) at entry; CL 10.20.6166's inline-asm escape hatch double-pushes (root-cause known), so the save is a synthetic insert",
+   "patch 42: toolchain-diff \u2014 matching pop ebx (5b) restore before the ret; same insert pair as patch 0"
+  ]
+ },
+ {
+  "rva": "0xac0b0",
+  "obj": "ReadVDOHeader",
+  "src": "src/ReadVDOHeader.c",
+  "maps": [
+   "_LibReadq=_LibRead",
+   "_vdoExitCodeQ=?vdoExitCode@@3FA"
+  ],
+  "patch": [],
+  "provenance": []
+ },
+ {
+  "rva": "0xad7c0",
+  "obj": "NET_MakeAutoConnectAddress",
+  "src": "src/NET_MakeAutoConnectAddress.c",
+  "maps": [
+   "_proto_ptr27=?proto_ptr@@3PAUNET_PROTOCOL@@A"
+  ],
+  "patch": [],
+  "provenance": []
+ },
+ {
+  "rva": "0xae270",
+  "obj": "clear_all_syncs",
+  "src": "src/clear_all_syncs.c",
+  "maps": [
+   "_player_list_t27=?player_list@@3UNET_PLAYER_LIST@@A"
+  ],
+  "patch": [],
+  "provenance": []
+ },
+ {
+  "rva": "0xad6b0",
+  "obj": "NETIsAddrLocal",
+  "src": "src/NETIsAddrLocal.c",
+  "maps": [
+   "_net_addr_equal27=?net_addr_equal@@YADPAUNET_ADDRESS@@0@Z",
+   "_proto_ptr27=?proto_ptr@@3PAUNET_PROTOCOL@@A"
+  ],
+  "patch": [],
+  "provenance": []
+ },
+ {
+  "rva": "0xae2a0",
+  "obj": "clear_all_sync_replies",
+  "src": "src/clear_all_sync_replies.c",
+  "maps": [
+   "_player_list_t27=?player_list@@3UNET_PLAYER_LIST@@A"
+  ],
+  "patch": [],
+  "provenance": []
+ },
+ {
+  "rva": "0xb4300",
+  "obj": "G_BlitToBrush",
+  "src": "src/G_BlitToBrush.c",
+  "maps": [
+   "@MMAccessWq@4=@MMAccessW@4",
+   "_G_BlitQ@36=_G_Blit@36",
+   "_cbW27=_cb"
+  ],
+  "patch": [],
+  "provenance": []
+ },
+ {
+  "rva": "0xb4340",
+  "obj": "G_BlitToScreen",
+  "src": "src/G_BlitToScreen.c",
+  "maps": [
+   "@MMAccessWq@4=@MMAccessW@4",
+   "_G_BlitQ@36=_G_Blit@36",
+   "_cbW27=_cb"
+  ],
+  "patch": [],
+  "provenance": []
+ },
+ {
+  "rva": "0x47060",
+  "obj": "G_TileInit",
+  "src": "src/G_TileInit.c",
+  "maps": [
+   "_bltBuffer27=?bltBuffer@@3PAUT_HANDLE@@A",
+   "_G_AllocBitmap27@12=_G_AllocBitmap@12"
+  ],
+  "patch": [
+   "0x29,0,e900000000"
+  ],
+  "provenance": [
+   "patch 0x29: toolchain-diff \u2014 ILINK empty-else join jmp e9+0 tail; CL jump-threads it away in /O1, /O2 and /Od; pure insert, rel32=0 carries no reloc, no newsite"
+  ],
+  "flags": "/c /Od /Gy /G5"
+ },
+ {
+  "rva": "0x78c10",
+  "obj": "LibFileSize",
+  "src": "src/LibFileSize.c",
+  "maps": [
+   "_SearchLib27=_SearchLib",
+   "@MMLockq@8=@MMLock@8",
+   "@MMUnlockq@4=@MMUnlock@4",
+   "_hintHndl27=?hintHndl@@3PAUT_HANDLE@@A"
+  ],
+  "patch": [],
+  "provenance": []
+ },
+ {
+  "rva": "0x8b520",
+  "obj": "SAYDefaultSayProc",
+  "src": "src/SAYDefaultSayProc.c",
+  "maps": [
+   "_SAYSetupFq=$FA$_t_48b570",
+   "@SAYSetVarq@4=$FA$_t_48b580",
+   "@SAYFinalq@4=$FA$_t_48b5d0"
+  ],
+  "patch": [],
+  "provenance": []
+ },
+ {
+  "rva": "0xa3c00",
+  "obj": "RMFreeAllId",
+  "src": "src/RMFreeAllId.c",
+  "maps": [
+   "_resList27=?resList@@3PAURES_LIST@@A",
+   "_RMFreeX@4=_RMFree@4"
+  ],
+  "patch": [],
+  "provenance": []
+ },
+ {
+  "rva": "0xab2c0",
+  "obj": "PlayVDOFile",
+  "src": "src/PlayVDOFile.c",
+  "maps": [
+   "_PlayVDOString27=?PlayVDOString@@YAFPADFPAUT_HANDLE@@PAEJJD@Z"
+  ],
+  "patch": [],
+  "provenance": []
+ },
+ {
+  "rva": "0xb84b0",
+  "obj": "Chunk_b84b0",
+  "src": "src/Chunk_b84b0.c",
+  "maps": [
+   "_curThingB=_curThing"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_4b84b0"
+  ]
+ },
+ {
+  "rva": "0xc55d4",
+  "obj": "NoHorizon",
+  "src": "src/NoHorizon.c",
+  "maps": [
+   "_NoHzF1=Horizon2d+0x1d9",
+   "_NoHzF2=Horizon2d+0x1a5",
+   "_GSetColorW=@G_SetColor@4",
+   "_ltupT=ltup+0x3",
+   "_wtopT=wtop_data",
+   "_wbotT=wbot_data"
+  ],
+  "patch": [],
+  "provenance": []
  }
 ]

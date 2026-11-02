@@ -1,0 +1,143 @@
+[
+ {
+  "rva": 755088,
+  "obj": "w27a_entb_v1",
+  "src": "build/survey/probes/w27a_entb_v1.c",
+  "maps": [
+   "@EnterState_f@4=@EnterState@4"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 755104,
+  "obj": "w27a_ente_v1",
+  "src": "build/survey/probes/w27a_ente_v1.c",
+  "maps": [
+   "@EnterState_f@4=@EnterState@4"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 549520,
+  "obj": "w27a_sph_v1",
+  "src": "build/survey/probes/w27a_sph_v1.c",
+  "maps": [
+   "_PushShellAlloc_f@0=?PushShellAlloc@@YGXXZ",
+   "_ShellHideMouse_f@0=?ShellHideMouse@@YGXXZ"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 549536,
+  "obj": "w27a_sps_v1",
+  "src": "build/survey/probes/w27a_sps_v1.c",
+  "maps": [
+   "_PopShellAlloc_f@0=?PopShellAlloc@@YGXXZ",
+   "_ShellShowMouse_f@0=?ShellShowMouse@@YGXXZ"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 826340,
+  "obj": "w27a_grls_v1",
+  "src": "build/survey/probes/w27a_grls_v1.c",
+  "maps": [
+   "_w27a_wls0=_worldLightSource",
+   "_w27a_wls1=_worldLightSource+0x2",
+   "_w27a_wls2=_worldLightSource+0x4"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 637056,
+  "obj": "w27a_pblow_v1",
+  "src": "build/survey/probes/w27a_pblow_v1.c",
+  "maps": [
+   "_RemoveCurObj_f=_RemoveCurObj@0",
+   "_w27a_curIdI=_curId",
+   "_w27a_thisComI=_thisComputer",
+   "_w27a_cThingT55=_curThingType+0x55",
+   "_w27a_cThing11=_curThing+0x11",
+   "_GRAPHICAddExp_f=_GRAPHICAddExp@28"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 666448,
+  "obj": "w27a_wsc_v1",
+  "src": "build/survey/probes/w27a_wsc_v1.c",
+  "maps": [
+   "_w27a_wsB=?ws@@3U_winsock_funcs@@A",
+   "_w27a_wsA=?ws@@3U_winsock_funcs@@A+0xa",
+   "_w27a_ws2=?ws@@3U_winsock_funcs@@A+0x2",
+   "__imp__FreeLibraryQ@4=__imp__FreeLibrary"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 400288,
+  "obj": "w27a_pco_v1",
+  "src": "build/survey/probes/w27a_pco_v1.c",
+  "maps": [
+   "_w27a_curIdI=_curId",
+   "_w27a_ccp1c=?correctChainPlacement@@3DA+0x1c",
+   "_w27a_chainArr=?correctChainPlacement@@3DA+0x8",
+   "@PutCurObj_f@0=@PutCurObj@0",
+   "@GetCurObj_f@4=@GetCurObj@4"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 518416,
+  "obj": "w27a_arm_v1",
+  "src": "build/survey/probes/w27a_arm_v1.c",
+  "maps": [
+   "_w27a_dab=_doArmPlane",
+   "_w27a_pnB=_pilotName",
+   "_w27a_cpP=_campaignPilot",
+   "@ArmPlane_f@4=@ArmPlane@4"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 418944,
+  "obj": "w27a_pp_v1",
+  "src": "build/survey/probes/w27a_pp_v1.c",
+  "maps": [
+   "_ShellHideMouse_f@0=?ShellHideMouse@@YGXXZ",
+   "_ShellShowMouse_f@0=?ShellShowMouse@@YGXXZ",
+   "_MenuCreateRemaps_f@0=?MenuCreateRemaps@@YGXXZ",
+   "_G_LoadBitmap_f@20=_G_LoadBitmap@20",
+   "_G_BlitToScreen_f@16=_G_BlitToScreen@16",
+   "@MMFreeHandleQ@4=@MMFreeHandle@4"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 622112,
+  "obj": "w27a_mi_v1",
+  "src": "build/survey/probes/w27a_mi_v1.c",
+  "maps": [
+   "_w27a_v60b=_vHzMod+0x60",
+   "_w27a_mkB=_mouseButtons",
+   "_w27a_mcs18w=?mouse_critical_section@@3U_RTL_CRITICAL_SECTION@@A+0x18",
+   "_w27a_press4c=_mouseButtonPresses+0x4c",
+   "_w27a_mcsB=?mouse_critical_section@@3U_RTL_CRITICAL_SECTION@@A",
+   "__imp__InitializeCriticalSectionQ@4=__imp__InitializeCriticalSection"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 432144,
+  "obj": "w27a_gic_v1",
+  "src": "build/survey/probes/w27a_gic_v1.c",
+  "maps": [
+   "_w27a_unA24=?unAvailNames@@3PADA+0x24",
+   "_w27a_puX=_pilotsUpdated+0x2d8",
+   "_w27a_grX=_grMode+0xa",
+   "_w27a_grY=_grMode+0xc",
+   "_G_Circle_f@16=_G_Circle@16"
+  ],
+  "patch": []
+ }
+]

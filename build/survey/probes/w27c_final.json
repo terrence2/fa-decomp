@@ -1,0 +1,117 @@
+[
+ {
+  "rva": 76880,
+  "obj": "w27c_Chunk_12c50_v1",
+  "src": "build/survey/probes/w27c_Chunk_12c50_v1.c",
+  "maps": []
+ },
+ {
+  "rva": 103744,
+  "obj": "w27c_Chunk_19540_v1",
+  "src": "build/survey/probes/w27c_Chunk_19540_v1.c",
+  "maps": []
+ },
+ {
+  "rva": 10912,
+  "obj": "w27c_Chunk_2aa0_v1",
+  "src": "build/survey/probes/w27c_Chunk_2aa0_v1.c",
+  "maps": []
+ },
+ {
+  "rva": 9088,
+  "obj": "w27c_Chunk_2380_v2",
+  "src": "build/survey/probes/w27c_Chunk_2380_v2.c",
+  "maps": []
+ },
+ {
+  "rva": 870528,
+  "obj": "w27c_Chunk_d4880_v1",
+  "src": "build/survey/probes/w27c_Chunk_d4880_v1.c",
+  "maps": []
+ },
+ {
+  "rva": 880784,
+  "obj": "w27c_Chunk_d7090_v3",
+  "src": "build/survey/probes/w27c_Chunk_d7090_v3.c",
+  "maps": [],
+  "patch": [
+   "11,1,"
+  ],
+  "provenance": [
+   "patch 0xb: toolchain-diff \u2014 CL inserts a 90 nop between the store (mov [eax],ecx) and the dependent load (mov eax,[ecx-4]) with the *pp += 1 + re-read spelling (v3-v8 reproduce FA's mov-load/add/store/load instr set in every other byte); FA's scheduler emitted no filler; empty-HEX patch deletes the 1-byte nop, no reloc sites in the span"
+  ]
+ },
+ {
+  "rva": 206640,
+  "obj": "w27c_MusicOff_v1",
+  "src": "build/survey/probes/w27c_MusicOff_v1.c",
+  "maps": [
+   "_w27c_muOn=$FA$_d_4e7000+0x5f0",
+   "_w27c_musicPlaying=?musicPlaying@@3PAXA",
+   "_w27c_musicSeqHandle=?musicSeqHandle@@3PAU_SEQUENCE@@A",
+   "__imp__w27c_ailrel@4=__imp___AIL_release_sequence_handle@4"
+  ]
+ },
+ {
+  "rva": 211056,
+  "obj": "w27c_SoundAllOff_v1",
+  "src": "build/survey/probes/w27c_SoundAllOff_v1.c",
+  "maps": [
+   "_w27c_soundOn=_soundOn",
+   "_w27c_volA=?MOD@@3PAUMODSPEC@@A+0x2e",
+   "_w27c_volEnd=?MOD@@3PAUMODSPEC@@A+0x56e",
+   "@w27c_SoundRelease@4=?SoundRelease@@YIXF@Z",
+   "_w27c_SoundNoMixer@12=?SoundNoMixer@@YGFPADFF@Z"
+  ]
+ },
+ {
+  "rva": 54112,
+  "obj": "w27c_PushShellAlloc_v1",
+  "src": "build/survey/probes/w27c_PushShellAlloc_v1.c",
+  "maps": [
+   "_w27c_ctr=?remapDarken320@@3PAEA+0x14",
+   "_w27c_mmId=?mmAllocId@@3EA",
+   "_w27c_shellArr=_shellEvent+0x8"
+  ]
+ },
+ {
+  "rva": 95760,
+  "obj": "w27c_GetPlayerControl_v1",
+  "src": "build/survey/probes/w27c_GetPlayerControl_v1.c",
+  "maps": [
+   "@w27c_rsr@0=@ReadSticksRaw@0",
+   "_w27c_stickDev=_stickDevice",
+   "_w27c_rudderDev=_rudderDevice",
+   "_w27c_throttleDev=_throttleDevice",
+   "_w27c_devProcs=?deviceProcs@@3PAP6AFFF@ZA",
+   "_w27c_KeyStick=?KeyStick@@YAGFG@Z"
+  ]
+ },
+ {
+  "rva": 138512,
+  "obj": "w27c_MAPObjAlts_v4",
+  "src": "build/survey/probes/w27c_MAPObjAlts_v2.c",
+  "maps": [
+   "_w27c_malt=_mainV+0x8c",
+   "@w27c_alt2@8=$FA$_t_421d70"
+  ],
+  "patch": [
+   "0,22,53560fbf350000000066c7050000000001008ad984db,5:6:_w27c_malt,12:6:_w27c_malt"
+  ],
+  "provenance": [
+   "patch 0x0: toolchain-diff \u2014 head reg-plan: FA copies the byte param before the branch test (mov bl,cl; test bl,bl at FA 0x12-0x15) and loads the global save as 0f bf 35 movsx; CL hoists test cl,cl to entry in every spelling (v1-v4 incl. comma-guard), unsteerable; the two FA imm32 sites drop with the span and are re-synthesized as DIR32 newsites to _w27c_malt at FA offsets 0x5/0xc"
+  ]
+ },
+ {
+  "rva": 915584,
+  "obj": "w27c_ZeroTail_zt_G4",
+  "src": "build/survey/probes/w27c_ZeroTail_v7.c",
+  "maps": [
+   "_w27c_ZeroTailq7@8=__ZeroTail"
+  ],
+  "flags": "/c /O2 /Gy /G4",
+  "provenance": [
+   "flags /G4: with /G5 CL loads [eax] into ecx and tests (mov+test) in the scan loop (v1-v7 under /G2 /O2 /Gy /G5 all identical); FA compares through memory (cmp dword [eax],0) \u2014 a /G5-only scheduler artifact, /G4 reproduces FA byte-exact with the plain do-while-in-if spelling (v7)"
+  ]
+ }
+]

@@ -1,0 +1,30 @@
+[
+ {
+  "rva": 860616,
+  "obj": "w27c_TransposeMatrix_TM_Os",
+  "src": "build/survey/probes/w27c_TransposeMatrix_v6.c",
+  "maps": [],
+  "flags": "/c /O2 /Gy /G4 /Os"
+ },
+ {
+  "rva": 860616,
+  "obj": "w27c_TransposeMatrix_TM_O1b",
+  "src": "build/survey/probes/w27c_TransposeMatrix_v7.c",
+  "maps": [],
+  "flags": "/c /O1 /G4"
+ },
+ {
+  "rva": 860616,
+  "obj": "w27c_TransposeMatrix_TM_Og",
+  "src": "build/survey/probes/w27c_TransposeMatrix_v6.c",
+  "maps": [],
+  "flags": "/c /O2 /Gy /G4 /Og-"
+ },
+ {
+  "rva": 860616,
+  "obj": "w27c_TransposeMatrix_TM_OyOg",
+  "src": "build/survey/probes/w27c_TransposeMatrix_v9.c",
+  "maps": [],
+  "flags": "/c /O2 /Gy /G4 /Oy- /Og-"
+ }
+]

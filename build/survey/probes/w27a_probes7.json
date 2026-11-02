@@ -1,0 +1,26 @@
+[
+ {
+  "rva": 612400,
+  "obj": "w27a_gup_v2",
+  "src": "build/survey/probes/w27a_gup_v2.c",
+  "maps": [
+   "_w27a_cFT=_cFillType",
+   "_w27a_cCol=_cColor",
+   "_w27a_cb=_cb",
+   "_w27a_cb2=_cb",
+   "_w27a_lS=_lineStats",
+   "_G_UHline_f@12=_G_UHline@12"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 74352,
+  "obj": "w27a_sam_v2",
+  "src": "build/survey/probes/w27a_sam_v2.c",
+  "maps": [
+   "_w27a_ticks=_currentTicks",
+   "@MMAllocPtr_f@8=@MMAllocPtr@8"
+  ],
+  "patch": []
+ }
+]

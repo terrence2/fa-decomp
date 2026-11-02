@@ -1,0 +1,29 @@
+[
+ {
+  "rva": 915584,
+  "src": "build/survey/probes/w27c_ZeroTail_v7.c",
+  "maps": [
+   "_w27c_ZeroTailq7@8=__ZeroTail"
+  ],
+  "obj": "w27c_ZeroTail_zt_G45",
+  "flags": "/c /O2 /Gy /G4"
+ },
+ {
+  "rva": 915584,
+  "src": "build/survey/probes/w27c_ZeroTail_v7.c",
+  "maps": [
+   "_w27c_ZeroTailq7@8=__ZeroTail"
+  ],
+  "obj": "w27c_ZeroTail_zt_G4",
+  "flags": "/c /O2 /Gy"
+ },
+ {
+  "rva": 915584,
+  "src": "build/survey/probes/w27c_ZeroTail_v7.c",
+  "maps": [
+   "_w27c_ZeroTailq7@8=__ZeroTail"
+  ],
+  "obj": "w27c_ZeroTail_zt_noG5Gs",
+  "flags": "/c /O2 /Gy /Gs0"
+ }
+]

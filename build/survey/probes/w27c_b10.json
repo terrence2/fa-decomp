@@ -1,0 +1,23 @@
+[
+ {
+  "rva": 860616,
+  "obj": "w27c_TransposeMatrix_TM_G4",
+  "src": "build/survey/probes/w27c_TransposeMatrix_v6.c",
+  "maps": [],
+  "flags": "/c /O2 /Gy /G4"
+ },
+ {
+  "rva": 860616,
+  "obj": "w27c_TransposeMatrix_TM_O1G4",
+  "src": "build/survey/probes/w27c_TransposeMatrix_v7.c",
+  "maps": [],
+  "flags": "/c /O1 /Gy /G4"
+ },
+ {
+  "rva": 860616,
+  "obj": "w27c_TransposeMatrix_TM_Oy_G4",
+  "src": "build/survey/probes/w27c_TransposeMatrix_v9.c",
+  "maps": [],
+  "flags": "/c /O2 /Gy /G4 /Oy-"
+ }
+]

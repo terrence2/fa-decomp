@@ -1,0 +1,91 @@
+[
+ {
+  "rva": 666448,
+  "obj": "w27a_wsc_v3",
+  "src": "build/survey/probes/w27a_wsc_v1.c",
+  "maps": [
+   "_w27a_wsB=?ws@@3U_winsock_funcs@@A",
+   "_w27a_wsA=?ws@@3U_winsock_funcs@@A+0xa",
+   "_w27a_ws2=?ws@@3U_winsock_funcs@@A+0x2",
+   "__imp__FreeLibraryQ@4=__imp__FreeLibrary"
+  ],
+  "patch": [
+   "0,0,53",
+   "40,2,5f5bc3"
+  ],
+  "provenance": [
+   "patch 0 (insert push ebx) + patch 40:2->3 (5f 5b c3): toolchain-diff - FA saves an unused EBX callee-save (53 / 5b) around CL's identical body; CL 10.20.6166 omits the save for this body shape and the inline-asm escape hatch double-pushes with CL's own asm-clobber save."
+  ]
+ },
+ {
+  "rva": 418944,
+  "obj": "w27a_pp_v4",
+  "src": "build/survey/probes/w27a_pp_v1.c",
+  "maps": [
+   "_ShellHideMouse_f@0=?ShellHideMouse@@YGXXZ",
+   "_ShellShowMouse_f@0=?ShellShowMouse@@YGXXZ",
+   "_MenuCreateRemaps_f@0=?MenuCreateRemaps@@YGXXZ",
+   "_G_LoadBitmap_f@20=_G_LoadBitmap@20",
+   "_G_BlitToScreen_f@16=_G_BlitToScreen@16",
+   "@MMFreeHandleQ@4=@MMFreeHandle@4"
+  ],
+  "patch": [
+   "1,6,8bf181c695000000"
+  ],
+  "provenance": [
+   "patch 1,6->8 (lea esi,[ecx+0x95] -> mov esi,ecx; add esi,0x95): toolchain-diff - FA expands the dst+0x95 local as mov esi,ecx; add esi,imm32 (8b f1 81 c6) with the addend in the immediate; CL 10.20.6166 keeps pointer+imm folded as lea [ecx+0x95] (8d b1) even with an explicit temporary. Encoding-level, no addend semantics."
+  ]
+ },
+ {
+  "rva": 418944,
+  "obj": "w27a_pp_v3",
+  "src": "build/survey/probes/w27a_pp_v3.c",
+  "maps": [
+   "_ShellHideMouse_f@0=?ShellHideMouse@@YGXXZ",
+   "_ShellShowMouse_f@0=?ShellShowMouse@@YGXXZ",
+   "_MenuCreateRemaps_f@0=?MenuCreateRemaps@@YGXXZ",
+   "_G_LoadBitmap_f@20=_G_LoadBitmap@20",
+   "_G_BlitToScreen_f@16=_G_BlitToScreen@16",
+   "@MMFreeHandleQ@4=@MMFreeHandle@4"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 826340,
+  "obj": "w27a_grls_v3",
+  "src": "build/survey/probes/w27a_grls_v3.c",
+  "maps": [
+   "_w27a_wls0=_worldLightSource",
+   "_w27a_wls1=_worldLightSource+0x2",
+   "_w27a_wls2=_worldLightSource+0x4"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 400288,
+  "obj": "w27a_pco_v4",
+  "src": "build/survey/probes/w27a_pco_v4.c",
+  "maps": [
+   "_w27a_curIdI=_curId",
+   "_w27a_ccp1c=?correctChainPlacement@@3DA+0x1c",
+   "_w27a_chainArr=?correctChainPlacement@@3DA+0x8",
+   "@PutCurObj_f@0=@PutCurObj@0",
+   "@GetCurObj_f@4=@GetCurObj@4"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 637056,
+  "obj": "w27a_pblow_v3",
+  "src": "build/survey/probes/w27a_pblow_v3.c",
+  "maps": [
+   "_RemoveCurObj_f=_RemoveCurObj@0",
+   "_w27a_curIdI=_curId",
+   "_w27a_thisComI=_thisComputer",
+   "_w27a_cThingT55=_curThingType+0x55",
+   "_w27a_cThing11=_curThing+0x11",
+   "_GraphicAddExp_f@28=_GRAPHICAddExp@28"
+  ],
+  "patch": []
+ }
+]

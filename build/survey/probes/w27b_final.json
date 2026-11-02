@@ -1,0 +1,136 @@
+[
+ {
+  "rva": 704688,
+  "obj": "w27b_vdo_v1",
+  "src": "build/survey/probes/w27b_vdo_v1.c",
+  "maps": [
+   "_LibReadq=_LibRead",
+   "_vdoExitCodeQ=?vdoExitCode@@3FA"
+  ]
+ },
+ {
+  "rva": 710592,
+  "obj": "w27b_netmac_v2",
+  "src": "build/survey/probes/w27b_netmac_v2.c",
+  "maps": [
+   "_proto_ptr27=?proto_ptr@@3PAUNET_PROTOCOL@@A"
+  ]
+ },
+ {
+  "rva": 713328,
+  "obj": "w27b_synca_v10a",
+  "src": "build/survey/probes/w27b_synca_v10a.c",
+  "maps": [
+   "_player_list_t27=?player_list@@3UNET_PLAYER_LIST@@A"
+  ]
+ },
+ {
+  "rva": 710320,
+  "obj": "w27b_ial_v2",
+  "src": "build/survey/probes/w27b_ial_v2.c",
+  "maps": [
+   "_net_addr_equal27=?net_addr_equal@@YADPAUNET_ADDRESS@@0@Z",
+   "_proto_ptr27=?proto_ptr@@3PAUNET_PROTOCOL@@A"
+  ]
+ },
+ {
+  "rva": 713376,
+  "obj": "w27b_syncb_v10a",
+  "src": "build/survey/probes/w27b_syncb_v10a.c",
+  "maps": [
+   "_player_list_t27=?player_list@@3UNET_PLAYER_LIST@@A"
+  ]
+ },
+ {
+  "rva": 738048,
+  "obj": "w27b_bbrush_v1",
+  "src": "build/survey/probes/w27b_bbrush_v1.c",
+  "maps": [
+   "_MMAccessWq=@MMAccessW@4",
+   "_G_BlitQ@36=_G_Blit@36",
+   "_cbW27=_cb"
+  ]
+ },
+ {
+  "rva": 738112,
+  "obj": "w27b_bscreen_v1",
+  "src": "build/survey/probes/w27b_bscreen_v1.c",
+  "maps": [
+   "_MMAccessWq=@MMAccessW@4",
+   "_G_BlitQ@36=_G_Blit@36",
+   "_cbW27=_cb"
+  ]
+ },
+ {
+  "rva": 290912,
+  "obj": "w27b_tilinit_v3",
+  "src": "build/survey/probes/w27b_tilinit_v3.c",
+  "flags": "/c /Od /Gy /G5",
+  "maps": [
+   "_bltBuffer27=?bltBuffer@@3PAUT_HANDLE@@A",
+   "_G_AllocBitmap27@12=_G_AllocBitmap@12"
+  ],
+  "patch": [
+   "0x29,0,e900000000"
+  ]
+ },
+ {
+  "rva": 494608,
+  "obj": "w27b_libfs_v1",
+  "src": "build/survey/probes/w27b_libfs_v1.c",
+  "maps": [
+   "_SearchLib27=_SearchLib",
+   "_MMLockq=@MMLock@8",
+   "_MMUnlockq=@MMUnlock@4",
+   "_hintHndl27=?hintHndl@@3PAUT_HANDLE@@A"
+  ]
+ },
+ {
+  "rva": 570656,
+  "obj": "w27b_sayd_v2",
+  "src": "build/survey/probes/w27b_sayd_v2.c",
+  "maps": [
+   "_SAYSetupFq=$FA$_t_48b570",
+   "_SAYSetVarq=$FA$_t_48b580",
+   "_SAYFinalq=$FA$_t_48b5d0"
+  ]
+ },
+ {
+  "rva": 670720,
+  "obj": "w27b_rmid_v3",
+  "src": "build/survey/probes/w27b_rmid_v3.c",
+  "maps": [
+   "_resList27=?resList@@3PAURES_LIST@@A",
+   "_RMFreeX=_RMFree@4"
+  ]
+ },
+ {
+  "rva": 701120,
+  "obj": "w27b_pvdo_v2",
+  "src": "build/survey/probes/w27b_pvdo_v2.c",
+  "maps": [
+   "_PlayVDOString27=?PlayVDOString@@YAFPADFPAUT_HANDLE@@PAEJJD@Z"
+  ]
+ },
+ {
+  "rva": 754864,
+  "obj": "w27b_st34_v1",
+  "src": "build/survey/probes/w27b_st34_v1.c",
+  "maps": [
+   "_curThingB=_curThing"
+  ]
+ },
+ {
+  "rva": 808404,
+  "obj": "w27b_nohz_v1",
+  "src": "build/survey/probes/w27b_nohz_v1.c",
+  "maps": [
+   "_ltupT=ltup+0x3",
+   "_wtopT=wtop_data",
+   "_wbotT=wbot_data",
+   "_NoHzF1=$FA$_t_4c555d",
+   "_NoHzF2=$FA$_t_4c5529",
+   "_GSetColorW=@G_SetColor@4"
+  ]
+ }
+]

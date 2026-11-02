@@ -1,0 +1,22 @@
+[
+ {
+  "rva": 74352,
+  "obj": "w27a_sam_v3",
+  "src": "build/survey/probes/w27a_sam_v2.c",
+  "maps": [
+   "_w27a_ticks=_currentTicks",
+   "@MMAllocPtr_f@8=@MMAllocPtr@8"
+  ],
+  "patch": [
+   "14,1,22",
+   "56,1,22",
+   "35,12,c1e0048b4f0c03c183e810894710",
+   "59,38,8b3d000000008d590489398b068b6e0483c11089038b4608896b048943083bd173e45d5f5e5bc3,2:6:_w27a_ticks"
+  ],
+  "provenance": [
+   "patch 14: toolchain-diff - guard-je displacement re-aligned to the 2-byte-longer alloc block; encoding-level.",
+   "patch 35:12->14 (alloc expr): toolchain-diff - FA computes last as (count<<4)+h then sub 0x10 (8b07 c1e004 8b4f0c 03c1 83e810 894710); CL 10.20.6166 folds count<<4-0x10 into a dec (8b07 48 8b4f0c c1e004 03c1 894710) even when the add/sub are split across two statements with a named temp (v1/v2 identical here). Unsteerable.",
+   "patch 59:38->39 (loop head/body): toolchain-diff - FA holds the ticks pointer load in EDI via the generic 8b 3d form with the q lea (8d 59 04) at the loop head, keeps data[1] in EBP, and interleaves the add ecx,0x10 between the data loads and stores; CL spilled ticks via a1 moffs into EAX and rotated the q stores after the cmp (89 01 / 89 1f / 89 6f 04 / 89 47 08). Pure-C spellings with q=p+1 hoisted (v1/v2) kept CL's rotation; EBP/EDI assignment not steerable at /O2. Encoding-level, no addend semantics."
+  ]
+ }
+]

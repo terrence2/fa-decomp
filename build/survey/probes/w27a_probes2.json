@@ -1,0 +1,119 @@
+[
+ {
+  "rva": 622112,
+  "obj": "w27a_mi_v2",
+  "src": "build/survey/probes/w27a_mi_v2.c",
+  "maps": [
+   "_w27a_v60b=_vHzMod+0x60",
+   "_w27a_mkB=_mouseButtons",
+   "_w27a_mcs18w=?mouse_critical_section@@3U_RTL_CRITICAL_SECTION@@A+0x18",
+   "_w27a_press4c=_mouseButtonPresses+0x4c",
+   "_w27a_mcsB=?mouse_critical_section@@3U_RTL_CRITICAL_SECTION@@A",
+   "__imp__InitializeCriticalSectionQ@4=__imp__InitializeCriticalSection"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 622112,
+  "obj": "w27a_mi_v3",
+  "src": "build/survey/probes/w27a_mi_v3.c",
+  "maps": [
+   "_w27a_v60b=_vHzMod+0x60",
+   "_w27a_mkB=_mouseButtons",
+   "_w27a_mcs18w=?mouse_critical_section@@3U_RTL_CRITICAL_SECTION@@A+0x18",
+   "_w27a_press4c=_mouseButtonPresses+0x4c",
+   "_w27a_mcsB=?mouse_critical_section@@3U_RTL_CRITICAL_SECTION@@A",
+   "__imp__InitializeCriticalSectionQ@4=__imp__InitializeCriticalSection"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 518416,
+  "obj": "w27a_arm_v2",
+  "src": "build/survey/probes/w27a_arm_v2.c",
+  "maps": [
+   "_w27a_dab=_doArmPlane",
+   "_w27a_pnB=_pilotName",
+   "_w27a_cpP=_campaignPilot",
+   "@ArmPlane_f@4=@ArmPlane@4"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 418944,
+  "obj": "w27a_pp_v2",
+  "src": "build/survey/probes/w27a_pp_v2.c",
+  "maps": [
+   "_ShellHideMouse_f@0=?ShellHideMouse@@YGXXZ",
+   "_ShellShowMouse_f@0=?ShellShowMouse@@YGXXZ",
+   "_MenuCreateRemaps_f@0=?MenuCreateRemaps@@YGXXZ",
+   "_G_LoadBitmap_f@20=_G_LoadBitmap@20",
+   "_G_BlitToScreen_f@16=_G_BlitToScreen@16",
+   "@MMFreeHandleQ@4=@MMFreeHandle@4"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 826340,
+  "obj": "w27a_grls_v2",
+  "src": "build/survey/probes/w27a_grls_v2.c",
+  "maps": [
+   "_w27a_wls0=_worldLightSource",
+   "_w27a_wls1=_worldLightSource+0x2",
+   "_w27a_wls2=_worldLightSource+0x4"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 637056,
+  "obj": "w27a_pblow_v2",
+  "src": "build/survey/probes/w27a_pblow_v2.c",
+  "maps": [
+   "_RemoveCurObj_f=_RemoveCurObj@0",
+   "_w27a_curIdI=_curId",
+   "_w27a_thisComI=_thisComputer",
+   "_w27a_cThingT55=_curThingType+0x55",
+   "_w27a_cThing11=_curThing+0x11",
+   "_GraphicAddExp_f@28=_GRAPHICAddExp@28"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 400288,
+  "obj": "w27a_pco_v2",
+  "src": "build/survey/probes/w27a_pco_v2.c",
+  "maps": [
+   "_w27a_curIdI=_curId",
+   "_w27a_ccp1c=?correctChainPlacement@@3DA+0x1c",
+   "_w27a_chainArr=?correctChainPlacement@@3DA+0x8",
+   "@PutCurObj_f@0=@PutCurObj@0",
+   "@GetCurObj_f@4=@GetCurObj@4"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 400288,
+  "obj": "w27a_pco_v3",
+  "src": "build/survey/probes/w27a_pco_v3.c",
+  "maps": [
+   "_w27a_curIdI=_curId",
+   "_w27a_ccp1c=?correctChainPlacement@@3DA+0x1c",
+   "_w27a_chainArr=?correctChainPlacement@@3DA+0x8",
+   "@PutCurObj_f@0=@PutCurObj@0",
+   "@GetCurObj_f@4=@GetCurObj@4"
+  ],
+  "patch": []
+ },
+ {
+  "rva": 666448,
+  "obj": "w27a_wsc_v2",
+  "src": "build/survey/probes/w27a_wsc_v2.c",
+  "maps": [
+   "_w27a_wsB=?ws@@3U_winsock_funcs@@A",
+   "_w27a_wsA=?ws@@3U_winsock_funcs@@A+0xa",
+   "_w27a_ws2=?ws@@3U_winsock_funcs@@A+0x2",
+   "__imp__FreeLibraryQ@4=__imp__FreeLibrary"
+  ],
+  "patch": []
+ }
+]

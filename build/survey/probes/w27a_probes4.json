@@ -1,0 +1,62 @@
+[
+ {
+  "rva": 826340,
+  "obj": "w27a_grls_v4",
+  "src": "build/survey/probes/w27a_grls_v1.c",
+  "maps": [
+   "_w27a_wls0=_worldLightSource",
+   "_w27a_wls1=_worldLightSource+0x2",
+   "_w27a_wls2=_worldLightSource+0x4"
+  ],
+  "patch": [
+   "11,1,41",
+   "13,3,66a3",
+   "19,4,668b4108",
+   "23,3,66a3"
+  ],
+  "provenance": [
+   "patch 11/13/19/23 (mov dx/cx -> mov ax value-reg + store2/store3 reg->moffs a3): toolchain-diff - CL 10.20.6166 rotates the 16-bit value register across the three independent loads (ax, dx, cx) even when every spelling keeps a single temp (v1 index form, v2 struct-pads, v3 named temp t all emitted the same bytes); FA reuses ax for all three loads so stores 2/3 use the a3 moffs form instead of modrm stores (net -2 B, c3 0x1f; tail 8bc0 census-proven)."
+  ]
+ },
+ {
+  "rva": 400288,
+  "obj": "w27a_pco_v5",
+  "src": "build/survey/probes/w27a_pco_v1.c",
+  "maps": [
+   "_w27a_curIdI=_curId",
+   "_w27a_ccp1c=?correctChainPlacement@@3DA+0x1c",
+   "_w27a_chainArr=?correctChainPlacement@@3DA+0x8",
+   "@PutCurObj_f@0=@PutCurObj@0",
+   "@GetCurObj_f@4=@GetCurObj@4"
+  ],
+  "patch": [
+   "0,6,668b0d00000000,3:6:_w27a_curIdI",
+   "7,6,a100000000,1:6:_w27a_ccp1c",
+   "14,2,0c45",
+   "22,1,c9",
+   "24,1,0a",
+   "30,17,a100000000408b4c2404a300000000,1:6:_w27a_ccp1c,10:6:_w27a_ccp1c"
+  ],
+  "provenance": [
+   "patch 0/7/22/24/30 (id load 66 a1 -> 66 8b 0d, idx load generic -> a1, test ax -> cx, je retarget 0b -> 0a, inc-block a1/40/8b4c2404/a3): toolchain-diff - all three pure-C spellings (v1 separate temp, v2 single statement, v3 idx-first) emitted the register-mirrored shape (id in AX via 66 a1, index in ECX, reload/store via 8b 0d / 89 0d modrm); FA loads id into CX via the generic form and the index via 66-free a1 (eax*2 sib), with the a1/40/a3 increment split around the [esp+4] param load. Pure-C reg assignment is not steerable; patches are encoding-level only, no addend semantics."
+  ]
+ },
+ {
+  "rva": 666448,
+  "obj": "w27a_wsc_v4",
+  "src": "build/survey/probes/w27a_wsc_v1.c",
+  "maps": [
+   "_w27a_wsB=?ws@@3U_winsock_funcs@@A",
+   "_w27a_wsA=?ws@@3U_winsock_funcs@@A+0xa",
+   "_w27a_ws2=?ws@@3U_winsock_funcs@@A+0x2",
+   "__imp__FreeLibraryQ@4=__imp__FreeLibrary"
+  ],
+  "patch": [
+   "0,0,53",
+   "42,0,5b"
+  ],
+  "provenance": [
+   "patch 0,0 (insert 53) + patch 42,0 (insert 5b): toolchain-diff - FA saves an unused EBX callee-save around ?winsock_cleanup (53 ... 5b) that CL 10.20.6166 omits since the C never assigns ebx. Escape-hatch FAIL root-caused: an inline-asm stub that references ebx makes CL emit its OWN ebx save inside the asm block (53 57 53 ... 5b 5f 5b c3, double push) - wsc_v2. Pure byte inserts, no addend semantics."
+  ]
+ }
+]

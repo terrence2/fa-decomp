@@ -1,0 +1,21 @@
+[
+ {
+  "rva": 826340,
+  "obj": "w27a_grls_v5",
+  "src": "build/survey/probes/w27a_grls_v2.c",
+  "maps": [
+   "_w27a_wls0=_worldLightSource",
+   "_w27a_wls1=_worldLightSource+0x2",
+   "_w27a_wls2=_worldLightSource+0x4"
+  ],
+  "patch": [
+   "11,1,41",
+   "13,3,66a3",
+   "19,4,668b4108",
+   "23,3,66a3"
+  ],
+  "provenance": [
+   "patch 11/13/19/23 (value-reg rotation mov dx/cx -> mov ax + modrm store -> a3 moffs): toolchain-diff - CL 10.20.6166 rotates the 16-bit value register across the three independent loads (ax, dx, cx) and switches stores to modrm forms; FA reuses ax for all three loads so stores 2/3 use the a3 moffs form (net -2 B, c3 at 0x1e; tail 8bc0 census-proven). Three pure-C spellings (index form src[0..2], struct-with-pads fields, named temp t) all emitted the identical rotation."
+  ]
+ }
+]

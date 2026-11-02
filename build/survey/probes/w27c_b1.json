@@ -1,0 +1,111 @@
+[
+ {
+  "rva": 76880,
+  "obj": "w27c_Chunk_12c50_v1",
+  "src": "build/survey/probes/w27c_Chunk_12c50_v1.c",
+  "maps": []
+ },
+ {
+  "rva": 103744,
+  "obj": "w27c_Chunk_19540_v1",
+  "src": "build/survey/probes/w27c_Chunk_19540_v1.c",
+  "maps": []
+ },
+ {
+  "rva": 10912,
+  "obj": "w27c_Chunk_2aa0_v1",
+  "src": "build/survey/probes/w27c_Chunk_2aa0_v1.c",
+  "maps": []
+ },
+ {
+  "rva": 9088,
+  "obj": "w27c_Chunk_2380_v1",
+  "src": "build/survey/probes/w27c_Chunk_2380_v1.c",
+  "maps": []
+ },
+ {
+  "rva": 870528,
+  "obj": "w27c_Chunk_d4880_v1",
+  "src": "build/survey/probes/w27c_Chunk_d4880_v1.c",
+  "maps": []
+ },
+ {
+  "rva": 880784,
+  "obj": "w27c_Chunk_d7090_v1",
+  "src": "build/survey/probes/w27c_Chunk_d7090_v1.c",
+  "maps": []
+ },
+ {
+  "rva": 206640,
+  "obj": "w27c_MusicOff_v1",
+  "src": "build/survey/probes/w27c_MusicOff_v1.c",
+  "maps": [
+   "_w27c_muOn=$FA$_d_4e7000+0x5f0",
+   "_w27c_musicPlaying=?musicPlaying@@3PAXA",
+   "_w27c_musicSeqHandle=?musicSeqHandle@@3PAU_SEQUENCE@@A",
+   "__imp__w27c_ailrel@4=__imp___AIL_release_sequence_handle@4"
+  ]
+ },
+ {
+  "rva": 211056,
+  "obj": "w27c_SoundAllOff_v1",
+  "src": "build/survey/probes/w27c_SoundAllOff_v1.c",
+  "maps": [
+   "_w27c_soundOn=_soundOn",
+   "_w27c_volA=?MOD@@3PAUMODSPEC@@A+0x2e",
+   "_w27c_volEnd=?MOD@@3PAUMODSPEC@@A+0x56e",
+   "@w27c_SoundRelease@4=?SoundRelease@@YIXF@Z",
+   "_w27c_SoundNoMixer@12=?SoundNoMixer@@YGFPADFF@Z"
+  ]
+ },
+ {
+  "rva": 54112,
+  "obj": "w27c_PushShellAlloc_v1",
+  "src": "build/survey/probes/w27c_PushShellAlloc_v1.c",
+  "maps": [
+   "_w27c_ctr=?remapDarken320@@3PAEA+0x14",
+   "_w27c_mmId=?mmAllocId@@3EA",
+   "_w27c_shellArr=_shellEvent+0x8"
+  ]
+ },
+ {
+  "rva": 95760,
+  "obj": "w27c_GetPlayerControl_v1",
+  "src": "build/survey/probes/w27c_GetPlayerControl_v1.c",
+  "maps": [
+   "@w27c_rsr@0=@ReadSticksRaw@0",
+   "_w27c_stickDev=_stickDevice",
+   "_w27c_rudderDev=_rudderDevice",
+   "_w27c_throttleDev=_throttleDevice",
+   "_w27c_devProcs=?deviceProcs@@3PAP6AFFF@ZA",
+   "_w27c_KeyStick=?KeyStick@@YAGFG@Z"
+  ]
+ },
+ {
+  "rva": 138512,
+  "obj": "w27c_MAPObjAlts_v1",
+  "src": "build/survey/probes/w27c_MAPObjAlts_v1.c",
+  "maps": [
+   "_w27c_malt=_mainV+0x8c",
+   "@w27c_alt2@8=$FA$_t_421d70"
+  ]
+ },
+ {
+  "rva": 860616,
+  "obj": "w27c_TransposeMatrix_v1",
+  "src": "build/survey/probes/w27c_TransposeMatrix_v1.c",
+  "maps": []
+ },
+ {
+  "rva": 915584,
+  "obj": "w27c_ZeroTail_v1",
+  "src": "build/survey/probes/w27c_ZeroTail_v1.c",
+  "maps": []
+ },
+ {
+  "rva": 871744,
+  "obj": "w27c_allmul_v1",
+  "src": "build/survey/probes/w27c_allmul_v1.c",
+  "maps": []
+ }
+]

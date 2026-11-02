@@ -1,0 +1,71 @@
+[
+ {
+  "rva": 880784,
+  "obj": "w27c_Chunk_d7090_v4",
+  "src": "build/survey/probes/w27c_Chunk_d7090_v4.c",
+  "maps": []
+ },
+ {
+  "rva": 880784,
+  "obj": "w27c_Chunk_d7090_v5",
+  "src": "build/survey/probes/w27c_Chunk_d7090_v5.c",
+  "maps": []
+ },
+ {
+  "rva": 138512,
+  "obj": "w27c_MAPObjAlts_v4",
+  "src": "build/survey/probes/w27c_MAPObjAlts_v2.c",
+  "maps": [
+   "_w27c_malt=_mainV+0x8c",
+   "@w27c_alt2@8=$FA$_t_421d70"
+  ],
+  "patch": [
+   "0,22,53560fbf350000000066c7050000000001008ad984db,5:6:_w27c_malt,12:6:_w27c_malt"
+  ],
+  "provenance": [
+   "patch 0x0: toolchain-diff \u2014 head reg-plan: FA copies the byte param before the branch test (mov bl,cl; test bl,bl at FA 0x12-0x15) and loads the global save as 0f bf 35 movsx; CL hoists test cl,cl to entry in every spelling (v1-v3 incl. comma-guard), unsteerable; imm32 sites dropped with the span and re-synthesized as DIR32 newsites to _w27c_malt (FA abs @0x5/@0xc)"
+  ]
+ },
+ {
+  "rva": 915584,
+  "obj": "w27c_ZeroTail_fOw",
+  "src": "build/survey/probes/w27c_ZeroTail_v3.c",
+  "maps": [],
+  "flags": "/c /Ow /Gy /G5"
+ },
+ {
+  "rva": 915584,
+  "obj": "w27c_ZeroTail_fGs0",
+  "src": "build/survey/probes/w27c_ZeroTail_v3.c",
+  "maps": [],
+  "flags": "/c /O2 /Gy /G5 /Gs0"
+ },
+ {
+  "rva": 915584,
+  "obj": "w27c_ZeroTail_fO1G5",
+  "src": "build/survey/probes/w27c_ZeroTail_v3.c",
+  "maps": [],
+  "flags": "/c /O1 /Gy /G5"
+ },
+ {
+  "rva": 915584,
+  "obj": "w27c_ZeroTail_fOb2",
+  "src": "build/survey/probes/w27c_ZeroTail_v3.c",
+  "maps": [],
+  "flags": "/c /O2 /Gy /G5 /Ob2"
+ },
+ {
+  "rva": 860616,
+  "obj": "w27c_TransposeMatrix_v9",
+  "src": "build/survey/probes/w27c_TransposeMatrix_v6.c",
+  "maps": [],
+  "flags": "/c /O2 /Gy /G5 /Oy-"
+ },
+ {
+  "rva": 860616,
+  "obj": "w27c_TransposeMatrix_v10",
+  "src": "build/survey/probes/w27c_TransposeMatrix_v8.c",
+  "maps": [],
+  "flags": "/c /O2 /Gy /G5 /Oy-"
+ }
+]

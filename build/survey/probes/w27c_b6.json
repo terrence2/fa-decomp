@@ -1,0 +1,30 @@
+[
+ {
+  "rva": 915584,
+  "obj": "w27c_ZeroTail_v5",
+  "src": "build/survey/probes/w27c_ZeroTail_v5.c",
+  "maps": [
+   "_w27c_ZeroTailq@8=__ZeroTail"
+  ]
+ },
+ {
+  "rva": 915584,
+  "obj": "w27c_ZeroTail_v6",
+  "src": "build/survey/probes/w27c_ZeroTail_v6.c",
+  "maps": [
+   "_w27c_ZeroTailq6@8=__ZeroTail"
+  ]
+ },
+ {
+  "rva": 880784,
+  "obj": "w27c_Chunk_d7090_v3p",
+  "src": "build/survey/probes/w27c_Chunk_d7090_v3.c",
+  "maps": [],
+  "patch": [
+   "12,1,"
+  ],
+  "provenance": [
+   "patch 0xc: toolchain-diff \u2014 CL inserts a 90 nop between the store (mov [eax],ecx) and the dependent load (mov eax,[ecx-4]) with the += / re-read spelling (v4-v8 all reproducing FA's add/store/load instr set otherwise); FA's scheduler emitted no filler; empty-HEX patch deletes the 1-byte nop with no reloc sites in the span"
+  ]
+ }
+]
