@@ -1,0 +1,260 @@
+[
+ {
+  "rva": 868496,
+  "obj": "n1_Isalpha_v1",
+  "src": "build/survey/probes/n1_Isalpha_v1.c",
+  "maps": [
+   "_ctype204=__ctype+0x204"
+  ],
+  "patch": [
+   "0,8,833d0000000001,2:6:_ctype204",
+   "0xa,1,4c",
+   "0x12,1,51",
+   "0x1c,20,8b150000000033c08b4c2404668b044a2503010000c3,2:6:__pctype"
+  ]
+ },
+ {
+  "rva": 868560,
+  "obj": "n1_Isupper_v1",
+  "src": "build/survey/probes/n1_Isupper_v1.c",
+  "maps": [
+   "_ctype204=__ctype+0x204"
+  ],
+  "patch": [
+   "0,8,833d0000000001,2:6:_ctype204",
+   "0xa,1,4c",
+   "0xf,1,51",
+   "0x19,18,8b150000000033c08b4c2404668b044a83e001c3,2:6:__pctype"
+  ]
+ },
+ {
+  "rva": 868608,
+  "obj": "n1_Islower_v1",
+  "src": "build/survey/probes/n1_Islower_v1.c",
+  "maps": [
+   "_ctype204=__ctype+0x204"
+  ],
+  "patch": [
+   "0,8,833d0000000001,2:6:_ctype204",
+   "0xa,1,4c",
+   "0xf,1,51",
+   "0x19,18,8b150000000033c08b4c2404668b044a83e002c3,2:6:__pctype"
+  ]
+ },
+ {
+  "rva": 868656,
+  "obj": "n1_Isdigit_v1",
+  "src": "build/survey/probes/n1_Isdigit_v1.c",
+  "maps": [
+   "_ctype204=__ctype+0x204"
+  ],
+  "patch": [
+   "0,8,833d0000000001,2:6:_ctype204",
+   "0xa,1,4c",
+   "0xf,1,51",
+   "0x19,18,8b150000000033c08b4c2404668b044a83e004c3,2:6:__pctype"
+  ]
+ },
+ {
+  "rva": 868704,
+  "obj": "n1_Isxdigit_v1",
+  "src": "build/survey/probes/n1_Isxdigit_v1.c",
+  "maps": [
+   "_ctype204=__ctype+0x204"
+  ],
+  "patch": [
+   "0,8,833d0000000001,2:6:_ctype204",
+   "0xa,1,4c",
+   "0x12,1,51",
+   "0x1c,20,8b150000000033c08b4c2404668b044a2580000000c3,2:6:__pctype"
+  ]
+ },
+ {
+  "rva": 868768,
+  "obj": "n1_Isspace_v1",
+  "src": "build/survey/probes/n1_Isspace_v1.c",
+  "maps": [
+   "_ctype204=__ctype+0x204"
+  ],
+  "patch": [
+   "0,8,833d0000000001,2:6:_ctype204",
+   "0xa,1,4c",
+   "0xf,1,51",
+   "0x19,18,8b150000000033c08b4c2404668b044a83e008c3,2:6:__pctype"
+  ]
+ },
+ {
+  "rva": 868864,
+  "obj": "n1_Isalnum_v1",
+  "src": "build/survey/probes/n1_Isalnum_v1.c",
+  "maps": [
+   "_ctype204=__ctype+0x204"
+  ],
+  "patch": [
+   "0,8,833d0000000001,2:6:_ctype204",
+   "0xa,1,4c",
+   "0x12,1,51",
+   "0x1c,20,8b150000000033c08b4c2404668b044a2507010000c3,2:6:__pctype"
+  ]
+ },
+ {
+  "rva": 868928,
+  "obj": "n1_Isprint_v1",
+  "src": "build/survey/probes/n1_Isprint_v1.c",
+  "maps": [
+   "_ctype204=__ctype+0x204"
+  ],
+  "patch": [
+   "0,8,833d0000000001,2:6:_ctype204",
+   "0xa,1,4c",
+   "0x12,1,51",
+   "0x1c,20,8b150000000033c08b4c2404668b044a2557010000c3,2:6:__pctype"
+  ]
+ },
+ {
+  "rva": 868992,
+  "obj": "n1_Isgraph_v1",
+  "src": "build/survey/probes/n1_Isgraph_v1.c",
+  "maps": [
+   "_ctype204=__ctype+0x204"
+  ],
+  "patch": [
+   "0,8,833d0000000001,2:6:_ctype204",
+   "0xa,1,4c",
+   "0x12,1,51",
+   "0x1c,20,8b150000000033c08b4c2404668b044a2517010000c3,2:6:__pctype"
+  ]
+ },
+ {
+  "rva": 869056,
+  "obj": "n1_Iscntrl_v1",
+  "src": "build/survey/probes/n1_Iscntrl_v1.c",
+  "maps": [
+   "_ctype204=__ctype+0x204"
+  ],
+  "patch": [
+   "0,8,833d0000000001,2:6:_ctype204",
+   "0xa,1,4c",
+   "0xf,1,51",
+   "0x19,18,8b150000000033c08b4c2404668b044a83e020c3,2:6:__pctype"
+  ]
+ },
+ {
+  "rva": 899040,
+  "obj": "n1_ISMbbkana_v1",
+  "src": "build/survey/probes/n1_ISMbbkana_v1.c",
+  "maps": [
+   "_mbcFlag=__mbctype+0x104",
+   "_ismbbType=$FA$_t_4db810"
+  ],
+  "patch": [
+   "0,10,813d00000000a4030000,2:6:_mbcFlag"
+  ]
+ },
+ {
+  "rva": 877104,
+  "obj": "n1_AmsgExit_v1",
+  "src": "build/survey/probes/n1_AmsgExit_v1.c",
+  "maps": [
+   "_msgFlag=__aexit_rtn+0x4",
+   "_aexit_rtn=__aexit_rtn",
+   "_FF_MSGBANNER=__FF_MSGBANNER",
+   "_NMSG_WRITE=__NMSG_WRITE"
+  ],
+  "patch": [
+   "0,8,833d0000000001,2:6:_msgFlag"
+  ]
+ },
+ {
+  "rva": 914400,
+  "obj": "n1_unexpected_v5",
+  "src": "build/survey/probes/n1_unexpected_v5.c",
+  "maps": [
+   "_termX=?terminate@@YAXXZ",
+   "_getptd=__getptd"
+  ],
+  "patch": [
+   "5,5,83786400"
+  ]
+ },
+ {
+  "rva": 868112,
+  "obj": "n1_Fclose_v2",
+  "src": "build/survey/probes/n1_Fclose_v2.c",
+  "maps": [
+   "_lock_file=__lock_file",
+   "_fclose_lk=__fclose_lk",
+   "_unlock_file=__unlock_file"
+  ],
+  "patch": [
+   "2,0,bfffffffff",
+   "0xb,5,f6460c40",
+   "0x10,1,0c",
+   "0x11,15,c7460c000000008bc75f5ec3"
+  ]
+ },
+ {
+  "rva": 868176,
+  "obj": "n1_FcloseLk_v4",
+  "src": "build/survey/probes/n1_FcloseLk_v4.c",
+  "maps": [
+   "_flush_lk=$FA$_t_4d5f30",
+   "_fcloseUnk2=$FA$_t_4d82a0",
+   "_close=__close"
+  ],
+  "patch": [
+   "0xb,5,f6460c83"
+  ]
+ },
+ {
+  "rva": 876272,
+  "obj": "n1_FflushLk_v1",
+  "src": "build/survey/probes/n1_FflushLk_v1.c",
+  "maps": [
+   "_flush_lk=$FA$_t_4d5f30",
+   "_commit=__commit"
+  ],
+  "patch": [
+   "0x19,5,f6460d40",
+   "0x2e,10,b8000000005e83d0ffc3"
+  ]
+ },
+ {
+  "rva": 902608,
+  "obj": "n1_Isatty_v1",
+  "src": "build/survey/probes/n1_Isatty_v1.c",
+  "maps": [
+   "_nhandle=__nhandle",
+   "_fhLockBase=__crtheap+0x4"
+  ],
+  "patch": [
+   "0,13,8b5424043b15000000007203,6:6:_nhandle",
+   "0x10,1,c2",
+   "0x11,3,83e21f",
+   "0x14,0,c1e202",
+   "0x1d,14,8d14d28b880000000033c08a44110483e040c3,5:6:_fhLockBase"
+  ]
+ },
+ {
+  "rva": 912528,
+  "obj": "n1_get_osfhandle_v9",
+  "src": "build/survey/probes/n1_get_osfhandle_v9.c",
+  "maps": [
+   "_nhandleX=__nhandle",
+   "_pioinfoX=__crtheap+0x4",
+   "_errnoX=__errno",
+   "_setDosErrnoX=$FA$_t_4d99c0"
+  ],
+  "patch": [
+   "4,1,",
+   "0x4,1,3b",
+   "0xa,1,73",
+   "0xb,1,22",
+   "0xc,14,8bc183e11fc1e10283e0e7c1f803",
+   "0x1a,17,8d14c98b800000000003c2f6400401,5:6:_pioinfoX",
+   "0x2a,1,03",
+   "0x2d,1,",
+   "0x3e,1,"
+  ]
+ }
+]

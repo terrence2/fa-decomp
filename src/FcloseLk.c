@@ -1,55 +1,37 @@
-// __fclose_lk @ rva 0xd3f50 (95 B) — int __cdecl _fclose_lk(FILE *f): the
-// locked half of fclose (same family as _fclose/_fflush_lk, waves 16/21).
-// edi = -1 result holder; flags test (0x83 = _IOREAD|_IOWRIT|_IORW) must be
-// the direct mem byte test f6 46 0c (CL emits mov al/test al — w16a
-// _fclose lesson); on open: __flush_lk ($FA$_t_4d5f30, r via edi), the
-// unknown stream helper parked at $FA$_t_4d82a0, _close([f+0x10]) with
-// jge-over mov edi,-1 / jmp exit; free the tmpfname ([f+0x1c]) then clear
-// BOTH dwords ([f+0x1c]=0 with the add esp,4 deferred past the store,
-// [f+0xc]=0), return edi. Naked asm escape (mem byte test + deferred
-// add esp,4 between stores).
-extern int __cdecl _flush_lk(void *f);      /* $FA$_t_4d5f30 */
-extern int __cdecl fcloseUnk2(void *f);     /* $FA$_t_4d82a0 */
+// __fclose_lk @ rva 0xd3f50 (95 B) — the locked half of fclose CONVERTED as
+// a 1-patch hybrid (band N1, 2026-11-02). Old wall (tier0 byte-width):
+// the 0x83 open-mode flag check must be a DIRECT mem byte test f6 46 0c 83;
+// CL emits mov al,[esi+0xc]/cmp al,0x83 (5 B over the same span). C form
+// unchanged from the v3 spelling (r=-1 first-decl, fd/t staged, the
+// tmpfname free + dword clear deferred past the add esp,4 — all natural
+// under /O2). One patch: rewrite 0xb 5 B -> f6 46 0c 83; the following jcc
+// auto-reloc'd.
+// Maps: _flush_lk=$FA$_t_4d5f30, _fcloseUnk2=$FA$_t_4d82a0 (unchanged),
+// _close=__close (new anchor). Probes: p_FcloseLk_v1..v3 KEEP-ASM; v4 EXACT.
+extern int __cdecl _flush_lk(void *f);
+extern int __cdecl fcloseUnk2(void *f);
 extern int __cdecl _close(int fd);
 extern void __cdecl free(void *mem);
 
-int __declspec(naked) __cdecl _fclose_lkQ(void)
+int __cdecl _fclose_lkQ(void *f)
 {
-    __asm {
-        push esi
-        push edi
-        mov  edi, -1
-        mov  esi, dword ptr [esp+0xc]
-        test byte ptr [esi+0xc], 0x83
-        je   common
-        push esi
-        call _flush_lk
-        add  esp, 4
-        mov  edi, eax
-        push esi
-        call fcloseUnk2
-        add  esp, 4
-        mov  eax, dword ptr [esi+0x10]
-        push eax
-        call _close
-        add  esp, 4
-        test eax, eax
-        jge  tempName
-        mov  edi, -1
-        jmp  common
-    tempName:
-        mov  eax, dword ptr [esi+0x1c]
-        test eax, eax
-        je   common
-        push eax
-        call free
-        mov  dword ptr [esi+0x1c], 0
-        add  esp, 4
-    common:
-        mov  dword ptr [esi+0xc], 0
-        mov  eax, edi
-        pop  edi
-        pop  esi
-        ret
+    int r = -1;
+    if (*(unsigned char *)((char *)f + 0xc) & 0x83) {
+        int fd;
+        void *t;
+        r = _flush_lk(f);
+        fcloseUnk2(f);
+        fd = *(int *)((char *)f + 0x10);
+        if (_close(fd) < 0)
+            r = -1;
+        else {
+            t = *(void **)((char *)f + 0x1c);
+            if (t) {
+                free(t);
+                *(int *)((char *)f + 0x1c) = 0;
+            }
+        }
     }
+    *(int *)((char *)f + 0xc) = 0;
+    return r;
 }

@@ -2343,7 +2343,14 @@
   "obj": "ISMbbkana",
   "src": "src/_ismbbkana.c",
   "maps": [
+   "_mbcFlag=__mbctype+0x104",
    "_ismbbType=$FA$_t_4db810"
+  ],
+  "patch": [
+   "0,10,813d00000000a4030000,2:6:_mbcFlag"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 CL materializes the __mbctype+0x104 load-cmp (a1+3d) vs FA 81 3d mem-cmp; DIR32 re-add _mbcFlag at site 2, zero payload dword (addend bakes); the 0x3a4 imm32 is FA literal 000003a4."
   ]
  },
  {
@@ -2500,12 +2507,14 @@
  {
   "rva": "0xa9620",
   "obj": "MVRInvert",
-  "src": "src/MVRInvert.c"
+  "src": "src/MVRInvert.c",
+  "maps": []
  },
  {
   "rva": "0x2dc30",
   "obj": "COLGetBox",
-  "src": "src/COLGetBox.c"
+  "src": "src/COLGetBox.c",
+  "maps": []
  },
  {
   "rva": "0x32aa0",
@@ -2819,6 +2828,12 @@
   "src": "src/unexpected.c",
   "maps": [
    "_termX=?terminate@@YAXXZ"
+  ],
+  "patch": [
+   "5,5,83786400"
+  ],
+  "provenance": [
+   "patch 5: toolchain-diff \u2014 CL load-then-test (8b 48 64/85 c9) at 5 vs FA cmp-mem 83 78 64 00; 5->4 B, following je auto-reloc shifts."
   ]
  },
  {
@@ -2840,12 +2855,14 @@
  {
   "rva": "0x1dfa0",
   "obj": "ShowDDError",
-  "src": "src/ShowDDError.c"
+  "src": "src/ShowDDError.c",
+  "maps": []
  },
  {
   "rva": "0x49ab0",
   "obj": "MonoPuts",
-  "src": "src/MonoPuts.c"
+  "src": "src/MonoPuts.c",
+  "maps": []
  },
  {
   "rva": "0x5c7e0",
@@ -2858,27 +2875,32 @@
  {
   "rva": "0x609e0",
   "obj": "RefCheckCD",
-  "src": "src/RefCheckCD.c"
+  "src": "src/RefCheckCD.c",
+  "maps": []
  },
  {
   "rva": "0x69fb0",
   "obj": "SetVESABank",
-  "src": "src/SetVESABank.c"
+  "src": "src/SetVESABank.c",
+  "maps": []
  },
  {
   "rva": "0x6a670",
   "obj": "CleanVideo",
-  "src": "src/CleanVideo.c"
+  "src": "src/CleanVideo.c",
+  "maps": []
  },
  {
   "rva": "0x6a680",
   "obj": "InitAudio",
-  "src": "src/InitAudio.c"
+  "src": "src/InitAudio.c",
+  "maps": []
  },
  {
   "rva": "0x6a690",
   "obj": "CleanAudio",
-  "src": "src/CleanAudio.c"
+  "src": "src/CleanAudio.c",
+  "maps": []
  },
  {
   "rva": "0x78df0",
@@ -3107,6 +3129,12 @@
   "maps": [
    "_msgFlag=__aexit_rtn+0x4",
    "_aexit_rtn=__aexit_rtn"
+  ],
+  "patch": [
+   "0,8,833d0000000001,2:6:_msgFlag"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 CL materializes the __aexit_rtn+0x4 load-cmp (a1) vs FA mem-immediate 83 3d,1; DIR32 re-add _msgFlag at site 2, zero payload dword. The aexit_rtn fn-pointer extern makes CL emit ff 15 naturally."
   ]
  },
  {
@@ -3161,7 +3189,8 @@
  {
   "rva": "0x11790",
   "obj": "Wait",
-  "src": "src/Wait.c"
+  "src": "src/Wait.c",
+  "maps": []
  },
  {
   "rva": "0x11cb0",
@@ -3190,12 +3219,14 @@
  {
   "rva": "0x1dd00",
   "obj": "GetDriverCaps",
-  "src": "src/GetDriverCaps.c"
+  "src": "src/GetDriverCaps.c",
+  "maps": []
  },
  {
   "rva": "0x1dd20",
   "obj": "GetHELCaps",
-  "src": "src/GetHELCaps.c"
+  "src": "src/GetHELCaps.c",
+  "maps": []
  },
  {
   "rva": "0x358b0",
@@ -3221,7 +3252,8 @@
  {
   "rva": "0x50ca0",
   "obj": "FMUpdateThrustVector",
-  "src": "src/FMUpdateThrustVector.c"
+  "src": "src/FMUpdateThrustVector.c",
+  "maps": []
  },
  {
   "rva": "0x5d9a0",
@@ -3256,12 +3288,14 @@
  {
   "rva": "0x64270",
   "obj": "CTEval_tgtradar",
-  "src": "src/CTEval_tgtradar.c"
+  "src": "src/CTEval_tgtradar.c",
+  "maps": []
  },
  {
   "rva": "0x642b0",
   "obj": "CTEval_tgtir",
-  "src": "src/CTEval_tgtir.c"
+  "src": "src/CTEval_tgtir.c",
+  "maps": []
  },
  {
   "rva": "0x64890",
@@ -5056,74 +5090,201 @@
   "rva": 868112,
   "obj": "Fclose",
   "src": "src/Fclose.c",
-  "maps": []
+  "maps": [],
+  "patch": [
+   "2,0,bfffffffff",
+   "0xb,5,f6460c40",
+   "0x10,1,0c",
+   "0x11,15,c7460c000000008bc75f5ec3"
+  ],
+  "provenance": [
+   "patch 2/0xb/0x10/0x11: toolchain-diff \u2014 insert mov edi,-1 (FA parks rv=-1 in edi at entry, CL computes rv on the success path); mem byte-test f6 46 0c 40 over CL mov al/test al; je disp repair after the -3 B shift; EOF-branch rewrite (FA stores 0 to the flag dword then rv=edi/pop/pop/ret vs CL load-anded flag)."
+  ]
  },
  {
   "rva": 868496,
   "obj": "Isalpha",
   "src": "src/Isalpha.c",
-  "maps": []
+  "maps": [
+   "_ctype204=__ctype+0x204"
+  ],
+  "patch": [
+   "0,8,833d0000000001,2:6:_ctype204",
+   "0xa,1,4c",
+   "0x12,1,51",
+   "0x1c,20,8b150000000033c08b4c2404668b044a2503010000c3,2:6:__pctype"
+  ],
+  "provenance": [
+   "patch 0/0xa/0x12/0x1c: toolchain-diff \u2014 CL 4.2 materializes the __ctype+0x204 MBCS-flag compare (a1 moffs + cmp reg) and picks its own reg plan in the __pctype tail; FA tests mem-immediate (83 3d) and walks the table in its own plan. Patches restore FA folded compare + reg plan + __pctype tail (DIR32 re-adds with zero payload dwords; __pctype IS the FA chunk name; imm32 mask literals little-endian)."
+  ]
  },
  {
   "rva": 868560,
   "obj": "Isupper",
   "src": "src/Isupper.c",
-  "maps": []
+  "maps": [
+   "_ctype204=__ctype+0x204"
+  ],
+  "patch": [
+   "0,8,833d0000000001,2:6:_ctype204",
+   "0xa,1,4c",
+   "0xf,1,51",
+   "0x19,18,8b150000000033c08b4c2404668b044a83e001c3,2:6:__pctype"
+  ],
+  "provenance": [
+   "patch 0/0xa/0xf/0x19: toolchain-diff \u2014 CL 4.2 materializes the __ctype+0x204 MBCS-flag compare (a1 moffs + cmp reg) and picks its own reg plan in the __pctype tail; FA tests mem-immediate (83 3d) and walks the table in its own plan. Patches restore FA folded compare + reg plan + __pctype tail (DIR32 re-adds with zero payload dwords; __pctype IS the FA chunk name; imm32 mask literals little-endian)."
+  ]
  },
  {
   "rva": 868608,
   "obj": "Islower",
   "src": "src/Islower.c",
-  "maps": []
+  "maps": [
+   "_ctype204=__ctype+0x204"
+  ],
+  "patch": [
+   "0,8,833d0000000001,2:6:_ctype204",
+   "0xa,1,4c",
+   "0xf,1,51",
+   "0x19,18,8b150000000033c08b4c2404668b044a83e002c3,2:6:__pctype"
+  ],
+  "provenance": [
+   "patch 0/0xa/0xf/0x19: toolchain-diff \u2014 CL 4.2 materializes the __ctype+0x204 MBCS-flag compare (a1 moffs + cmp reg) and picks its own reg plan in the __pctype tail; FA tests mem-immediate (83 3d) and walks the table in its own plan. Patches restore FA folded compare + reg plan + __pctype tail (DIR32 re-adds with zero payload dwords; __pctype IS the FA chunk name; imm32 mask literals little-endian)."
+  ]
  },
  {
   "rva": 868656,
   "obj": "Isdigit",
   "src": "src/Isdigit.c",
-  "maps": []
+  "maps": [
+   "_ctype204=__ctype+0x204"
+  ],
+  "patch": [
+   "0,8,833d0000000001,2:6:_ctype204",
+   "0xa,1,4c",
+   "0xf,1,51",
+   "0x19,18,8b150000000033c08b4c2404668b044a83e004c3,2:6:__pctype"
+  ],
+  "provenance": [
+   "patch 0/0xa/0xf/0x19: toolchain-diff \u2014 CL 4.2 materializes the __ctype+0x204 MBCS-flag compare (a1 moffs + cmp reg) and picks its own reg plan in the __pctype tail; FA tests mem-immediate (83 3d) and walks the table in its own plan. Patches restore FA folded compare + reg plan + __pctype tail (DIR32 re-adds with zero payload dwords; __pctype IS the FA chunk name; imm32 mask literals little-endian)."
+  ]
  },
  {
   "rva": 868704,
   "obj": "Isxdigit",
   "src": "src/Isxdigit.c",
-  "maps": []
+  "maps": [
+   "_ctype204=__ctype+0x204"
+  ],
+  "patch": [
+   "0,8,833d0000000001,2:6:_ctype204",
+   "0xa,1,4c",
+   "0x12,1,51",
+   "0x1c,20,8b150000000033c08b4c2404668b044a2580000000c3,2:6:__pctype"
+  ],
+  "provenance": [
+   "patch 0/0xa/0x12/0x1c: toolchain-diff \u2014 CL 4.2 materializes the __ctype+0x204 MBCS-flag compare (a1 moffs + cmp reg) and picks its own reg plan in the __pctype tail; FA tests mem-immediate (83 3d) and walks the table in its own plan. Patches restore FA folded compare + reg plan + __pctype tail (DIR32 re-adds with zero payload dwords; __pctype IS the FA chunk name; imm32 mask literals little-endian)."
+  ]
  },
  {
   "rva": 868768,
   "obj": "Isspace",
   "src": "src/Isspace.c",
-  "maps": []
+  "maps": [
+   "_ctype204=__ctype+0x204"
+  ],
+  "patch": [
+   "0,8,833d0000000001,2:6:_ctype204",
+   "0xa,1,4c",
+   "0xf,1,51",
+   "0x19,18,8b150000000033c08b4c2404668b044a83e008c3,2:6:__pctype"
+  ],
+  "provenance": [
+   "patch 0/0xa/0xf/0x19: toolchain-diff \u2014 CL 4.2 materializes the __ctype+0x204 MBCS-flag compare (a1 moffs + cmp reg) and picks its own reg plan in the __pctype tail; FA tests mem-immediate (83 3d) and walks the table in its own plan. Patches restore FA folded compare + reg plan + __pctype tail (DIR32 re-adds with zero payload dwords; __pctype IS the FA chunk name; imm32 mask literals little-endian)."
+  ]
  },
  {
   "rva": 868864,
   "obj": "Isalnum",
   "src": "src/Isalnum.c",
-  "maps": []
+  "maps": [
+   "_ctype204=__ctype+0x204"
+  ],
+  "patch": [
+   "0,8,833d0000000001,2:6:_ctype204",
+   "0xa,1,4c",
+   "0x12,1,51",
+   "0x1c,20,8b150000000033c08b4c2404668b044a2507010000c3,2:6:__pctype"
+  ],
+  "provenance": [
+   "patch 0/0xa/0x12/0x1c: toolchain-diff \u2014 CL 4.2 materializes the __ctype+0x204 MBCS-flag compare (a1 moffs + cmp reg) and picks its own reg plan in the __pctype tail; FA tests mem-immediate (83 3d) and walks the table in its own plan. Patches restore FA folded compare + reg plan + __pctype tail (DIR32 re-adds with zero payload dwords; __pctype IS the FA chunk name; imm32 mask literals little-endian)."
+  ]
  },
  {
   "rva": 868928,
   "obj": "Isprint",
   "src": "src/Isprint.c",
-  "maps": []
+  "maps": [
+   "_ctype204=__ctype+0x204"
+  ],
+  "patch": [
+   "0,8,833d0000000001,2:6:_ctype204",
+   "0xa,1,4c",
+   "0x12,1,51",
+   "0x1c,20,8b150000000033c08b4c2404668b044a2557010000c3,2:6:__pctype"
+  ],
+  "provenance": [
+   "patch 0/0xa/0x12/0x1c: toolchain-diff \u2014 CL 4.2 materializes the __ctype+0x204 MBCS-flag compare (a1 moffs + cmp reg) and picks its own reg plan in the __pctype tail; FA tests mem-immediate (83 3d) and walks the table in its own plan. Patches restore FA folded compare + reg plan + __pctype tail (DIR32 re-adds with zero payload dwords; __pctype IS the FA chunk name; imm32 mask literals little-endian)."
+  ]
  },
  {
   "rva": 868992,
   "obj": "Isgraph",
   "src": "src/Isgraph.c",
-  "maps": []
+  "maps": [
+   "_ctype204=__ctype+0x204"
+  ],
+  "patch": [
+   "0,8,833d0000000001,2:6:_ctype204",
+   "0xa,1,4c",
+   "0x12,1,51",
+   "0x1c,20,8b150000000033c08b4c2404668b044a2517010000c3,2:6:__pctype"
+  ],
+  "provenance": [
+   "patch 0/0xa/0x12/0x1c: toolchain-diff \u2014 CL 4.2 materializes the __ctype+0x204 MBCS-flag compare (a1 moffs + cmp reg) and picks its own reg plan in the __pctype tail; FA tests mem-immediate (83 3d) and walks the table in its own plan. Patches restore FA folded compare + reg plan + __pctype tail (DIR32 re-adds with zero payload dwords; __pctype IS the FA chunk name; imm32 mask literals little-endian)."
+  ]
  },
  {
   "rva": 869056,
   "obj": "Iscntrl",
   "src": "src/Iscntrl.c",
-  "maps": []
+  "maps": [
+   "_ctype204=__ctype+0x204"
+  ],
+  "patch": [
+   "0,8,833d0000000001,2:6:_ctype204",
+   "0xa,1,4c",
+   "0xf,1,51",
+   "0x19,18,8b150000000033c08b4c2404668b044a83e020c3,2:6:__pctype"
+  ],
+  "provenance": [
+   "patch 0/0xa/0xf/0x19: toolchain-diff \u2014 CL 4.2 materializes the __ctype+0x204 MBCS-flag compare (a1 moffs + cmp reg) and picks its own reg plan in the __pctype tail; FA tests mem-immediate (83 3d) and walks the table in its own plan. Patches restore FA folded compare + reg plan + __pctype tail (DIR32 re-adds with zero payload dwords; __pctype IS the FA chunk name; imm32 mask literals little-endian)."
+  ]
  },
  {
   "rva": 876272,
   "obj": "FflushLk",
   "src": "src/FflushLk.c",
   "maps": [
-   "__flush_lk=$FA$_t_4d5f30"
+   "__flush_lk=$FA$_t_4d5f30",
+   "_commit=__commit"
+  ],
+  "patch": [
+   "0x19,5,f6460d40",
+   "0x2e,10,b8000000005e83d0ffc3"
+  ],
+  "provenance": [
+   "patch 0x19/0x2e: toolchain-diff \u2014 mem byte-test f6 46 0d 40 over CL mov al/test al; FA borrow tail pops esi between mov eax,0 and adc eax,-1 while CL keeps esi live past the adc."
   ]
  },
  {
@@ -5160,7 +5321,18 @@
   "obj": "Isatty",
   "src": "src/Isatty.c",
   "maps": [
+   "_nhandle=__nhandle",
    "_fhLockBase=__crtheap+0x4"
+  ],
+  "patch": [
+   "0,13,8b5424043b15000000007203,6:6:_nhandle",
+   "0x10,1,c2",
+   "0x11,3,83e21f",
+   "0x14,0,c1e202",
+   "0x1d,14,8d14d28b880000000033c08a44110483e040c3,5:6:_fhLockBase"
+  ],
+  "provenance": [
+   "patch 0/0x10/0x11/0x14/0x1d: toolchain-diff \u2014 FA loads fh into edx and cmp-tests [mem] (3b 15); idx-word math in edx (and 0x1f/shl 2); tail lea edx,[edx*8]+mov ecx,[fhLockBase]+xor eax+mov al,[ecx+edx+4]+and 0x40 (DIR32 re-adds _nhandle/_fhLockBase, zero payload dwords)."
   ]
  },
  {
@@ -7059,6 +7231,20 @@
    "_pioinfoX=__crtheap+0x4",
    "_errnoX=__errno",
    "_setDosErrnoX=$FA$_t_4d99c0"
+  ],
+  "patch": [
+   "4,1,",
+   "4,1,3b",
+   "0xa,1,73",
+   "0xb,1,22",
+   "0xc,14,8bc183e11fc1e10283e0e7c1f803",
+   "0x1a,17,8d14c98b800000000003c2f6400401,5:6:_pioinfoX",
+   "0x2a,1,03",
+   "0x2d,1,",
+   "0x3e,1,"
+  ],
+  "provenance": [
+   "patch 4/4/0xa/0xb/0xc/0x1a/0x2a/0x2d/0x3e: toolchain-diff \u2014 FA fd->ecx plan: cmp ecx,[mem] 3b 0d operand mirror + jb polarity + and-opcode fix; idx/grp re-plan (and ecx,0x1f / shl 2 / and eax,0xe7 / sar eax,3); direct f6 40 04 01 FOPEN mem bit-test on the loaded row (DIR32 re-add _pioinfoX, zero payload dword); three 1-B dedup deletes."
   ]
  },
  {
@@ -7430,6 +7616,12 @@
   "maps": [
    "__flush_lk=$FA$_t_4d5f30",
    "_fcloseUnk2=$FA$_t_4d82a0"
+  ],
+  "patch": [
+   "0xb,5,f6460c83"
+  ],
+  "provenance": [
+   "patch 0xb: toolchain-diff \u2014 byte-width mem test f6 46 0c 83 over CL mov al/cmp al pair (tier0 byte-width wall)."
   ]
  },
  {

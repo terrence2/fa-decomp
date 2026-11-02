@@ -1371,8 +1371,8 @@
   "rva": "0x3d880",
   "obj": "CPToggleHistory",
   "src": "src/CPToggleHistory.c",
-  "cls": "reg-plan",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": true,
   "game": false
  },
@@ -1587,8 +1587,8 @@
   "rva": "0x96660",
   "obj": "G_SPolygonFlip",
   "src": "src/G_SPolygonFlip.c",
-  "cls": "reg-plan",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": true,
   "game": true
  },
@@ -1659,7 +1659,7 @@
   "rva": "0x21e40",
   "obj": "MAPSetSide",
   "src": "src/MAPSetSide.c",
-  "cls": "masm-enc",
+  "cls": "plain",
   "patch": false,
   "probes": true,
   "game": false
@@ -1667,10 +1667,10 @@
  {
   "rva": "0x5da40",
   "obj": "GG_WaitRetrace",
-  "src": "src/GG_WaitRetrace.c",
-  "cls": "cc-shape",
+  "src": "src/GG_WaitRetrace.cpp",
+  "cls": "plain",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": false
  },
  {
@@ -1740,9 +1740,9 @@
   "rva": "0x64540",
   "obj": "CTEval_canclimb",
   "src": "src/CTEval_canclimb.c",
-  "cls": "const-fold",
+  "cls": "plain",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": true
  },
  {
@@ -1920,7 +1920,7 @@
   "rva": "0xdfa40",
   "obj": "IsZeroMan",
   "src": "src/IsZeroMan.c",
-  "cls": "bare",
+  "cls": "reg-plan: param must sit in ecx with cmp [ecx],0 while CL always assigns to eax; structural (n3 refit-verified KEEP)",
   "patch": false,
   "probes": false,
   "game": false
@@ -2172,8 +2172,8 @@
   "rva": "0x757c0",
   "obj": "WrapHB",
   "src": "src/WrapHB.c",
-  "cls": "reg-plan",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": true,
   "game": false
  },
@@ -2181,8 +2181,8 @@
   "rva": "0x757f0",
   "obj": "WrapP",
   "src": "src/WrapP.c",
-  "cls": "bare",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": true,
   "game": false
  },
@@ -2262,9 +2262,9 @@
   "rva": "0x96510",
   "obj": "G_DrawYLR",
   "src": "src/G_DrawYLR.c",
-  "cls": "reg-plan",
-  "patch": false,
-  "probes": false,
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
   "game": true
  },
  {
@@ -2298,7 +2298,7 @@
   "rva": "0xb4990",
   "obj": "G_ColorStringWidth",
   "src": "src/G_ColorStringWidth.c",
-  "cls": "bare",
+  "cls": "sched: sum pinned in edx + w+0x2a load hoisted pre-loop; bare label stale (n3 refit-verified KEEP)",
   "patch": false,
   "probes": true,
   "game": true
@@ -2352,9 +2352,9 @@
   "rva": "0xd72e0",
   "obj": "lockerr_exit",
   "src": "src/lockerr_exit.c",
-  "cls": "dllimport",
-  "patch": false,
-  "probes": false,
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
   "game": false
  },
  {
@@ -2919,7 +2919,7 @@
   "rva": "0xd9100",
   "obj": "MTterm",
   "src": "src/_mtterm.c",
-  "cls": "dllimport",
+  "cls": "plain",
   "patch": false,
   "probes": true,
   "game": false
@@ -3036,8 +3036,8 @@
   "rva": "0x12850",
   "obj": "StringForLanguage",
   "src": "src/StringForLanguage.c",
-  "cls": "reg-plan",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": true,
   "game": false
  },
@@ -3171,7 +3171,7 @@
   "rva": "0x5d2e0",
   "obj": "GG_ShutdownMode",
   "src": "src/GG_ShutdownMode.c",
-  "cls": "cc-shape",
+  "cls": "plain",
   "patch": false,
   "probes": true,
   "game": false
@@ -3180,7 +3180,7 @@
   "rva": "0x5f250",
   "obj": "GRPResponseSize",
   "src": "src/GRPResponseSize.c",
-  "cls": "reg-plan",
+  "cls": "plain",
   "patch": false,
   "probes": true,
   "game": false
@@ -3243,7 +3243,7 @@
   "rva": "0x73710",
   "obj": "Alive",
   "src": "src/Alive.c",
-  "cls": "cc-shape",
+  "cls": "plain",
   "patch": false,
   "probes": true,
   "game": false
@@ -3288,9 +3288,9 @@
   "rva": "0x8f950",
   "obj": "OBJTempAlias",
   "src": "src/OBJTempAlias.c",
-  "cls": "sched",
-  "patch": false,
-  "probes": true,
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
   "game": false
  },
  {
@@ -3351,9 +3351,9 @@
   "rva": "0xa24c0",
   "obj": "EveryoneHasChosenSides",
   "src": "src/EveryoneHasChosenSides.c",
-  "cls": "bare",
+  "cls": "reg-plan: FA pushes ebx for the elem load + jle to shared mov-al-1 tail; CL emits early-return-1 guard; 8 probes (v8 fresh n3)",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": false
  },
  {
@@ -3387,9 +3387,9 @@
   "rva": "0xbb1d0",
   "obj": "APObjOnShip",
   "src": "src/APObjOnShip.c",
-  "cls": "masm-enc",
+  "cls": "plain",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": false
  },
  {
@@ -3576,8 +3576,8 @@
   "rva": "0x972e0",
   "obj": "G_CopyDriverName",
   "src": "src/G_CopyDriverName.c",
-  "cls": "reg-plan",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": true,
   "game": true
  },
@@ -3774,9 +3774,9 @@
   "rva": "0xdf350",
   "obj": "CxxRestoreUnhEF",
   "src": "src/CxxRestoreUnhEF.c",
-  "cls": "dllimport",
-  "patch": false,
-  "probes": true,
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
   "game": false
  },
  {
@@ -3810,7 +3810,7 @@
   "rva": "0x11790",
   "obj": "Wait",
   "src": "src/Wait.c",
-  "cls": "cc-shape",
+  "cls": "plain",
   "patch": false,
   "probes": true,
   "game": false
@@ -3819,16 +3819,16 @@
   "rva": "0x11cb0",
   "obj": "GetFakeKey",
   "src": "src/GetFakeKey.c",
-  "cls": "masm-enc",
+  "cls": "plain",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": false
  },
  {
   "rva": "0x126c0",
   "obj": "WaitKey",
   "src": "src/WaitKey.c",
-  "cls": "reg-plan",
+  "cls": "plain",
   "patch": false,
   "probes": true,
   "game": false
@@ -3900,9 +3900,9 @@
   "rva": "0x636e0",
   "obj": "PreferredProtectId",
   "src": "src/PreferredProtectId.c",
-  "cls": "masm-enc",
-  "patch": false,
-  "probes": true,
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
   "game": false
  },
  {
@@ -4062,7 +4062,7 @@
   "rva": "0xc29a8",
   "obj": "LFMult",
   "src": "src/LFMult.c",
-  "cls": "reg-plan",
+  "cls": "plain",
   "patch": false,
   "probes": true,
   "game": false
@@ -6204,8 +6204,8 @@
   "rva": 75712,
   "obj": "SetHShake",
   "src": "src/SetHShake.c",
-  "cls": "cc-shape",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": true,
   "game": false
  },
@@ -6213,9 +6213,9 @@
   "rva": 75760,
   "obj": "SetVShake",
   "src": "src/SetVShake.c",
-  "cls": "twin",
-  "patch": false,
-  "probes": false,
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
   "game": false
  },
  {
@@ -6231,9 +6231,9 @@
   "rva": 123952,
   "obj": "IsBrentDLL",
   "src": "src/IsBrentDLL.c",
-  "cls": "masm-enc",
-  "patch": false,
-  "probes": true,
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
   "game": false
  },
  {
@@ -6267,9 +6267,9 @@
   "rva": 868816,
   "obj": "Ispunct",
   "src": "src/Ispunct.c",
-  "cls": "masm-enc",
-  "patch": false,
-  "probes": false,
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
   "game": false
  },
  {
@@ -6287,7 +6287,7 @@
   "src": "src/CallMemberFunction1.c",
   "cls": "cc-shape",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": false
  },
  {
@@ -6348,9 +6348,9 @@
   "rva": 667968,
   "obj": "socket_set_state",
   "src": "src/socket_set_state.c",
-  "cls": "bare",
-  "patch": false,
-  "probes": false,
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
   "game": false
  },
  {
@@ -6429,8 +6429,8 @@
   "rva": 383632,
   "obj": "WNGInit",
   "src": "src/WNGInit.c",
-  "cls": "sched",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": true,
   "game": false
  },
@@ -6438,9 +6438,9 @@
   "rva": 387008,
   "obj": "GRPInit",
   "src": "src/GRPInit.c",
-  "cls": "sched",
-  "patch": false,
-  "probes": true,
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
   "game": false
  },
  {
@@ -6456,17 +6456,17 @@
   "rva": 411344,
   "obj": "CTEval_alt",
   "src": "src/CTEval_alt.c",
-  "cls": "sched",
-  "patch": false,
-  "probes": true,
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
   "game": true
  },
  {
   "rva": 411424,
   "obj": "CTEval_maxalt",
   "src": "src/CTEval_maxalt.c",
-  "cls": "twin",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": true,
   "game": true
  },
@@ -6591,7 +6591,7 @@
   "rva": 615904,
   "obj": "G_PolygonFlip",
   "src": "src/G_PolygonFlip.c",
-  "cls": "cc-shape",
+  "cls": "plain",
   "patch": false,
   "probes": true,
   "game": true
@@ -6600,9 +6600,9 @@
   "rva": 615968,
   "obj": "G_UPolygonFlip",
   "src": "src/G_UPolygonFlip.c",
-  "cls": "cc-shape",
+  "cls": "plain",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": true
  },
  {
@@ -6618,9 +6618,9 @@
   "rva": 880848,
   "obj": "MTinitlocks",
   "src": "src/MTinitlocks.c",
-  "cls": "masm-enc",
+  "cls": "plain",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": false
  },
  {
@@ -6645,9 +6645,9 @@
   "rva": 925856,
   "obj": "Ui64toa",
   "src": "src/Ui64toa.c",
-  "cls": "sched",
-  "patch": false,
-  "probes": false,
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
   "game": false
  },
  {
@@ -6663,18 +6663,18 @@
   "rva": 901632,
   "obj": "FFMsgBanner",
   "src": "src/FFMsgBanner.c",
-  "cls": "elision",
-  "patch": false,
-  "probes": false,
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
   "game": false
  },
  {
   "rva": 914624,
   "obj": "ValidateExecute",
   "src": "src/ValidateExecute.c",
-  "cls": "dllimport",
-  "patch": false,
-  "probes": true,
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
   "game": false
  },
  {
@@ -6762,9 +6762,9 @@
   "rva": 74496,
   "obj": "SampleUpdate",
   "src": "src/SampleUpdate.c",
-  "cls": "sched",
+  "cls": "sched: 5 live dwords across memmove pushes, ebp/ebx/esi/edi pinning; v5-v8 probes existed and fail at whole-body reg-plan",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": false
  },
  {
@@ -6780,9 +6780,9 @@
   "rva": 95712,
   "obj": "InputCalibrate",
   "src": "src/InputCalibrate.c",
-  "cls": "masm-enc",
+  "cls": "plain",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": false
  },
  {
@@ -6798,9 +6798,9 @@
   "rva": 209184,
   "obj": "BasicLinkSound",
   "src": "src/BasicLinkSound.c",
-  "cls": "twin",
+  "cls": "plain",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": false
  },
  {
@@ -6924,8 +6924,8 @@
   "rva": 550288,
   "obj": "DialogDraw",
   "src": "src/DialogDraw.c",
-  "cls": "reg-plan",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": true,
   "game": false
  },
@@ -7059,7 +7059,7 @@
   "rva": 695424,
   "obj": "DiskInit",
   "src": "src/DiskInit.c",
-  "cls": "sched",
+  "cls": "plain",
   "patch": false,
   "probes": true,
   "game": false
@@ -7095,7 +7095,7 @@
   "rva": 384272,
   "obj": "WNGWingmen",
   "src": "src/WNGWingmen.c",
-  "cls": "sched",
+  "cls": "plain",
   "patch": false,
   "probes": true,
   "game": false
@@ -7113,9 +7113,9 @@
   "rva": 486768,
   "obj": "COBv",
   "src": "src/COBv.c",
-  "cls": "sched",
+  "cls": "plain",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": true
  },
  {
@@ -7194,9 +7194,9 @@
   "rva": 901504,
   "obj": "HeapInit",
   "src": "src/HeapInit.c",
-  "cls": "dllimport",
-  "patch": false,
-  "probes": true,
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
   "game": false
  },
  {
@@ -7347,9 +7347,9 @@
   "rva": 71328,
   "obj": "OnTheGround",
   "src": "src/OnTheGround.c",
-  "cls": "reg-plan",
-  "patch": false,
-  "probes": false,
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
   "game": false
  },
  {
@@ -7374,16 +7374,16 @@
   "rva": 409680,
   "obj": "CTEval_tgtattackingme",
   "src": "src/CTEval_tgtattackingme.c",
-  "cls": "twin",
-  "patch": false,
-  "probes": false,
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
   "game": true
  },
  {
   "rva": 409808,
   "obj": "CTEval_tgt",
   "src": "src/CTEval_tgt.c",
-  "cls": "twin",
+  "cls": "plain",
   "patch": false,
   "probes": true,
   "game": true
@@ -7493,7 +7493,7 @@
   "src": "src/MISSIONEnsureLegalName.c",
   "cls": "reg-plan",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": false
  },
  {
@@ -7545,9 +7545,9 @@
   "rva": 775440,
   "obj": "PROJEngineState",
   "src": "src/PROJEngineState.c",
-  "cls": "const-fold",
-  "patch": false,
-  "probes": false,
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
   "game": false
  },
  {
@@ -7599,9 +7599,9 @@
   "rva": 479040,
   "obj": "jround_up",
   "src": "src/jround_up.c",
-  "cls": "masm-enc",
-  "patch": false,
-  "probes": false,
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
   "game": false
  },
  {
@@ -7734,9 +7734,9 @@
   "rva": 407952,
   "obj": "dlg_list_clear",
   "src": "src/dlg_list_clear.c",
-  "cls": "reg-plan",
-  "patch": false,
-  "probes": false,
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
   "game": false
  },
  {
@@ -7772,7 +7772,7 @@
   "src": "src/NPCSetStateTarget.c",
   "cls": "sched",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": false
  },
  {
@@ -7788,9 +7788,9 @@
   "rva": 622704,
   "obj": "verifyPacketCRC",
   "src": "src/verifyPacketCRC.c",
-  "cls": "sched",
-  "patch": false,
-  "probes": true,
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
   "game": false
  },
  {
@@ -7815,18 +7815,18 @@
   "rva": 707488,
   "obj": "NetSetFactoryTCP",
   "src": "src/NetSetFactoryTCP.c",
-  "cls": "masm-enc",
+  "cls": "plain",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": false
  },
  {
   "rva": 712432,
   "obj": "validate_packet",
   "src": "src/validate_packet.c",
-  "cls": "masm-enc",
-  "patch": false,
-  "probes": false,
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
   "game": false
  },
  {
@@ -7842,9 +7842,9 @@
   "rva": 712976,
   "obj": "net_set_ready",
   "src": "src/net_set_ready.c",
-  "cls": "sched",
+  "cls": "plain",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": true
  },
  {
@@ -7979,7 +7979,7 @@
   "src": "src/__strcats.c",
   "cls": "reg-plan",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": false
  },
  {
@@ -8130,9 +8130,9 @@
   "rva": 404288,
   "obj": "MaybeCallEventProc",
   "src": "src/MaybeCallEventProc.c",
-  "cls": "masm-enc",
+  "cls": "reg-plan/stale-upper-arg: FA pushes dx with garbage upper 16 bits as the arg and clears only al on an exit path; C cannot define deliberately-stale-upper values (fresh v1/v2)",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": false
  },
  {
@@ -8141,7 +8141,7 @@
   "src": "src/MaxSpeed.c",
   "cls": "elision",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": false
  },
  {
@@ -8202,9 +8202,9 @@
   "rva": 524528,
   "obj": "ConvertOldPreferredTargetId",
   "src": "src/ConvertOldPreferredTargetId.c",
-  "cls": "cc-shape",
-  "patch": false,
-  "probes": false,
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
   "game": false
  },
  {
@@ -8229,7 +8229,7 @@
   "rva": 616304,
   "obj": "G_CircleFlip",
   "src": "src/G_CircleFlip.c",
-  "cls": "sched",
+  "cls": "plain",
   "patch": false,
   "probes": true,
   "game": true
@@ -8238,7 +8238,7 @@
   "rva": 616352,
   "obj": "G_URectFlip",
   "src": "src/G_URectFlip.c",
-  "cls": "sched",
+  "cls": "plain",
   "patch": false,
   "probes": true,
   "game": true
@@ -8256,16 +8256,16 @@
   "rva": 619376,
   "obj": "G_SetVShake",
   "src": "src/G_SetVShake.c",
-  "cls": "twin",
-  "patch": false,
-  "probes": false,
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
   "game": true
  },
  {
   "rva": 620144,
   "obj": "WPGoalObjEvent",
   "src": "src/WPGoalObjEvent.c",
-  "cls": "masm-enc",
+  "cls": "plain",
   "patch": false,
   "probes": false,
   "game": false
@@ -8283,9 +8283,9 @@
   "rva": 669376,
   "obj": "RMShutdown",
   "src": "src/RMShutdown.c",
-  "cls": "reg-plan",
+  "cls": "plain",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": false
  },
  {
@@ -8294,7 +8294,7 @@
   "src": "src/InsectWingAngle.c",
   "cls": "sched",
   "patch": true,
-  "probes": false,
+  "probes": true,
   "game": false
  },
  {
@@ -8309,10 +8309,10 @@
  {
   "rva": 710640,
   "obj": "NET_Addr2string",
-  "src": "src/NET_Addr2string.c",
-  "cls": "cc-shape",
+  "src": "src/NET_Addr2string.cpp",
+  "cls": "plain",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": true
  },
  {
@@ -8337,9 +8337,9 @@
   "rva": 759664,
   "obj": "APGetPark",
   "src": "src/APGetPark.c",
-  "cls": "sched",
-  "patch": false,
-  "probes": false,
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
   "game": false
  },
  {
@@ -8411,7 +8411,7 @@
   "src": "src/ValidateRead.c",
   "cls": "reg-plan",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": false
  },
  {
@@ -8420,7 +8420,7 @@
   "src": "src/ValidateWrite.c",
   "cls": "twin",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": false
  }
 ]

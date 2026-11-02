@@ -1,32 +1,26 @@
-// _isprint @ rva 0xd4240 (50 B) — MBCS-gated ctype test. FA compares
-// the MBCS flag (dword at _ctype+0x204, __mbcurmax) DIRECTLY in memory
-// (cmp [mem],imm); CL 4.2 loads it into eax first (w16a_isalpha3/4/5 all
-// emit a1+cmp eax), and FA's reg plan also differs from CL's (param in ecx,
-// pctype ptr in edx, result zero-extended via xor eax,eax; CL picks
-// eax/ecx) — naked asm escape (w16a_src_Isprint, byte-exact; [_ctype+disp]
-// baked-addend moffs per _mtterm precedent).
-extern unsigned char _ctype[];
+// _isprint @ rva 0xd4240 (50 B) — MBCS-gated ctype test, tier0 Isctype
+// family (a) CONVERTED (band N1, 2026-11-02). The tier0 wall: FA tests the
+// __ctype+0x204 MBCS max directly in memory (83 3d mem-cmp) and indexes
+// __pctype with an and-mask; CL 4.2 always materializes the load (a1 moffs +
+// cmp eax,imm) and the reg plan diverges. The Ispunct recipe generalized to
+// every mask: plain C `if (*(int *)ctype204 > 1) return _isctype(c, MASK);
+// return _pctype[c] & MASK;` + 4 one-field patches:
+//   patch 0: head 8->7B, CL a1+3d materialized compare -> FA 83 3d mem-cmp
+//     (DIR32 re-add _ctype204 at site 2; payload dword zero — addend bakes).
+//   patch 0xa: modrm reg fix (CL used eax; FA dec-reg 4c).
+//   patch 0x12: push-mask reg fix (FA 51 = ecx).
+//   patch 0x1c: tail rewrite 18->20 B (imm32 mask): CL's mov [regs]/and -> FA
+//     8b 15 __pctype / 33 c0 / 8b 4c 24 04 / 66 8b 04 4a / and eax,0x157 (imm32) / c3
+//     (DIR32 re-add __pctype at site 2; __pctype IS the FA chunk name so the
+//     map bakes nothing; the imm32 masks arrive via 25 57 01 00 00).
+// Probes: p_w23_Isisprint* plain-C failed, n1_Isprint_v1 EXACT.
+extern char ctype204[];
 extern unsigned short *_pctype;
 extern int __cdecl _isctype(int c, int mask);
 
-void __declspec(naked) __cdecl isprint(void)
+int __cdecl isprint(int c)
 {
-    __asm
-    {
-        cmp     dword ptr [_ctype + 0x204], 1
-        jle     short TblPath
-        mov     ecx, dword ptr [esp + 4]
-        push    0x157
-        push    ecx
-        call    _isctype
-        add     esp, 8
-        ret
-    TblPath:
-        mov     edx, dword ptr [_pctype]
-        xor     eax, eax
-        mov     ecx, dword ptr [esp + 4]
-        mov     ax, word ptr [edx + ecx*2]
-        and     eax, 0x157
-        ret
-    }
+    if (*(int *)ctype204 > 1)
+        return _isctype(c, 0x157);
+    return _pctype[c] & 0x157;
 }
