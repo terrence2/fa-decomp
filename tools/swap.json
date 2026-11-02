@@ -6378,5 +6378,374 @@
   "obj": "APLandingType",
   "src": "src/APLandingType.c",
   "maps": []
+ },
+ {
+  "rva": 26272,
+  "obj": "HUDRevive",
+  "src": "src/HUDRevive.c",
+  "maps": [
+   "_lastWasInQC44=?lastWasInQuickCreator@@3DA+0x44",
+   "_lastWasInQC20=?lastWasInQuickCreator@@3DA+0x20"
+  ]
+ },
+ {
+  "rva": 31776,
+  "obj": "HUDSpeedToY",
+  "src": "src/HUDSpeedToY.c",
+  "maps": []
+ },
+ {
+  "rva": 62224,
+  "obj": "VIEWChangeObj",
+  "src": "src/VIEWChangeObj.c",
+  "maps": [
+   "@VCObjCalleeQ@12=$FA$_t_40e1e0"
+  ],
+  "patch": [
+   "9,6,f6411a01"
+  ],
+  "provenance": [
+   "patch 0x9 (6->4 B test dl,[ecx+0x1a];test dl,1 -> test byte[ecx+0x1a],1): toolchain-diff \u2014 CL 4.2 splits a byte mem-test whenever a 16-bit live value (ax) exists at the test site; 8 plain-C spellings probed, direct mem-test and ax-entry-load mutually exclusive under plain C. Post-patch rel8 shifts stay valid (uniform delta). Batch A probe: build/w21 (VIEWChangeObj)."
+  ]
+ },
+ {
+  "rva": 121744,
+  "obj": "DestroySurface",
+  "src": "src/DestroySurface.cpp",
+  "maps": [
+   "@dsurfDestroyQ@4=$FA$_t_4779a0",
+   "_dsurfFreeQ=$FA$_t_4d4880"
+  ]
+ },
+ {
+  "rva": 122224,
+  "obj": "WaitForVerticalBlank",
+  "src": "src/WaitForVerticalBlank.cpp",
+  "maps": []
+ },
+ {
+  "rva": 139711,
+  "obj": "MAPUpdateWPPtrs",
+  "src": "src/MAPUpdateWPPtrs.c",
+  "maps": [
+   "@MAPUpdateWPPtrQ@8=$FA$_t_42220b"
+  ]
+ },
+ {
+  "rva": 300816,
+  "obj": "NickKey",
+  "src": "src/NickKey.c",
+  "maps": [
+   "_jeffKeyOn=?jeffKeyOn@@3DA"
+  ]
+ },
+ {
+  "rva": 407952,
+  "obj": "dlg_list_clear",
+  "src": "src/dlg_list_clear.c",
+  "maps": [
+   "_MMFreePtr@4=@MMFreePtr@4"
+  ]
+ },
+ {
+  "rva": 434864,
+  "obj": "CleanCobra",
+  "src": "src/CleanCobra.c",
+  "maps": [
+   "_MMFreePtr@4=@MMFreePtr@4"
+  ]
+ },
+ {
+  "rva": 435952,
+  "obj": "CleanupCobra",
+  "src": "src/CleanupCobra.c",
+  "maps": [
+   "_CleanAudio=?CleanAudio@@YAGPAUGlobalData@@@Z",
+   "_CleanVideo=?CleanVideo@@YAGPAUGlobalData@@@Z",
+   "_CleanCobra=?CleanCobra@@YAGPAUGlobalData@@@Z"
+  ]
+ },
+ {
+  "rva": 554880,
+  "obj": "DialogUpdateString",
+  "src": "src/DialogUpdateString.c",
+  "maps": [
+   "_DialogDraw@4=?DialogDraw@@YGXPAX@Z"
+  ]
+ },
+ {
+  "rva": 468480,
+  "obj": "NPCSetStateTarget",
+  "src": "src/NPCSetStateTarget.c",
+  "maps": [
+   "_curId=_curId",
+   "_playerId=_playerId",
+   "_npcCtWordRef=_curThing+0xee",
+   "@PROJRetargetMissiles@4=@PROJRetargetMissiles@4",
+   "@npcTailFn@8=$FA$_t_45e220"
+  ]
+ },
+ {
+  "rva": 591088,
+  "obj": "SER_ProcessDataPacket",
+  "src": "src/SER_ProcessDataPacket.c",
+  "maps": [
+   "_serQData=?InQueue@@3USERIAL_QUEUE@@A",
+   "_serCtrlFlagQ=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x128",
+   "_insertQueue=?insertQueue@@YAXAAUSERIAL_QUEUE@@AAUSERIAL_PACKET_WRAPPER@@@Z"
+  ]
+ },
+ {
+  "rva": 622704,
+  "obj": "verifyPacketCRC",
+  "src": "src/verifyPacketCRC.c",
+  "maps": [
+   "_computePacketCRC=?computePacketCRC@@YAKAAUSERIAL_PACKET@@@Z",
+   "_packetCRC=?packetCRC@@YAKAAUSERIAL_PACKET@@@Z"
+  ]
+ },
+ {
+  "rva": 622752,
+  "obj": "assignPacketCRC",
+  "src": "src/assignPacketCRC.c",
+  "maps": [
+   "_computePacketCRC=?computePacketCRC@@YAKAAUSERIAL_PACKET@@@Z"
+  ]
+ },
+ {
+  "rva": 704608,
+  "obj": "FreeVDOLinkNode",
+  "src": "src/FreeVDOLinkNode.c",
+  "maps": [
+   "_VDOFree=?VDOFree@@YAXPAX@Z"
+  ]
+ },
+ {
+  "rva": 707488,
+  "obj": "NetSetFactoryTCP",
+  "src": "src/NetSetFactoryTCP.c",
+  "maps": [
+   "_netFactoryMake=$FA$_t_4ae660"
+  ]
+ },
+ {
+  "rva": 712432,
+  "obj": "validate_packet",
+  "src": "src/validate_packet.c",
+  "maps": []
+ },
+ {
+  "rva": 712656,
+  "obj": "get_pkt_err_string",
+  "src": "src/get_pkt_err_string.c",
+  "maps": [
+   "_pktErrTab=?tcp_proto@@3UNET_PROTOCOL@@A+0x290",
+   "_pktErrDflt=?state_funcs_list@@3PAU__unnamed@@A+0x9c"
+  ]
+ },
+ {
+  "rva": 712976,
+  "obj": "net_set_ready",
+  "src": "src/net_set_ready.c",
+  "maps": [
+   "_netPlayerArr=?player_list@@3UNET_PLAYER_LIST@@A+0x66",
+   "_netReadyCnt=?player_list@@3UNET_PLAYER_LIST@@A+0x8"
+  ]
+ },
+ {
+  "rva": 849044,
+  "obj": "do_short_ijmp",
+  "src": "src/do_short_ijmp.c",
+  "maps": [
+   "_vector_table=vector_table"
+  ]
+ },
+ {
+  "rva": 854844,
+  "obj": "do_force_no_pmap",
+  "src": "src/do_force_no_pmap.c",
+  "maps": [
+   "_forceNoPmap=_force_no_pmap",
+   "_vector_table=vector_table"
+  ]
+ },
+ {
+  "rva": 855076,
+  "obj": "_NeedClip",
+  "src": "src/_NeedClip.c",
+  "maps": [
+   "_needClipSrc=normal_table+0xb0",
+   "_gouraudOn=gouraudOn+0x11d",
+   "_needClipCallee=check_flat+0x2d0"
+  ]
+ },
+ {
+  "rva": 855497,
+  "obj": "do_brush_solid",
+  "src": "src/do_brush_solid.c",
+  "maps": [
+   "_brushTransFlag=_brush_transparent",
+   "_vector_table=vector_table"
+  ]
+ },
+ {
+  "rva": 855520,
+  "obj": "do_brush_trans",
+  "src": "src/do_brush_trans.c",
+  "maps": [
+   "_brushTransFlag=_brush_transparent",
+   "_vector_table=vector_table"
+  ]
+ },
+ {
+  "rva": 767584,
+  "obj": "_line_overflow1",
+  "src": "src/_line_overflow1.c",
+  "maps": [
+   "_lineOverflowHere=_line_overflow_goes_here"
+  ]
+ },
+ {
+  "rva": 860232,
+  "obj": "GRSinCos",
+  "src": "src/GRSinCos.c",
+  "maps": [
+   "_sincosHelper=sincos"
+  ]
+ },
+ {
+  "rva": 870714,
+  "obj": "__abnormal_termination",
+  "src": "src/__abnormal_termination.c",
+  "maps": [
+   "_unwTableVa=__global_unwind2+0x20"
+  ]
+ },
+ {
+  "rva": 870856,
+  "obj": "__ftol",
+  "src": "src/__ftol.c",
+  "maps": []
+ },
+ {
+  "rva": 870928,
+  "obj": "Chunk_d4a10",
+  "src": "src/Chunk_d4a10.c",
+  "maps": [],
+  "aliases": [
+   "0=$FA$_t_4d4a10"
+  ]
+ },
+ {
+  "rva": 874112,
+  "obj": "fread",
+  "src": "src/fread.c",
+  "maps": [
+   "_lockFileX=__lock_file",
+   "_freadLkX=__fread_lk",
+   "_unlockFileX=__unlock_file"
+  ]
+ },
+ {
+  "rva": 874512,
+  "obj": "fwrite",
+  "src": "src/fwrite.c",
+  "maps": [
+   "_lockFileX=__lock_file",
+   "_fwriteLkX=__fwrite_lk",
+   "_unlockFileX=__unlock_file"
+  ]
+ },
+ {
+  "rva": 875744,
+  "obj": "fprintf",
+  "src": "src/fprintf.c",
+  "maps": [
+   "_lockFileX=__lock_file",
+   "_stbufX=__stbuf",
+   "_doprX=$FA$_t_4d6610",
+   "_flushX=$FA$_t_4da510",
+   "_unlockFileX=__unlock_file"
+  ]
+ },
+ {
+  "rva": 883376,
+  "obj": "Chunk_d7ab0",
+  "src": "src/Chunk_d7ab0.c",
+  "maps": [],
+  "aliases": [
+   "0=$FA$_t_4d7ab0"
+  ]
+ },
+ {
+  "rva": 883392,
+  "obj": "__strcats",
+  "src": "src/__strcats.c",
+  "maps": []
+ },
+ {
+  "rva": 888912,
+  "obj": "CallSettingFrame",
+  "src": "src/CallSettingFrame.c",
+  "maps": [
+   "_csfNotify=__NLG_Notify1"
+  ]
+ },
+ {
+  "rva": 888949,
+  "obj": "NLG_Return",
+  "src": "src/NLG_Return.c",
+  "maps": [
+   "_nlgNotify=__NLG_Notify1"
+  ]
+ },
+ {
+  "rva": 889520,
+  "obj": "nh_malloc",
+  "src": "src/nh_malloc.c",
+  "maps": [
+   "_heapAllocX=__heap_alloc",
+   "_callnewhX=__callnewh"
+  ]
+ },
+ {
+  "rva": 901568,
+  "obj": "heap_term",
+  "src": "src/heap_term.c",
+  "maps": [
+   "_hbListBase=__adbgmsg+0x858",
+   "_impVirtualFree=__imp__VirtualFree",
+   "_crtheapX=__crtheap",
+   "_impHeapDestroy=__imp__HeapDestroy"
+  ]
+ },
+ {
+  "rva": 907888,
+  "obj": "Chunk_dda70",
+  "src": "src/Chunk_dda70.c",
+  "maps": [],
+  "aliases": [
+   "0=$FA$_t_4dda70"
+  ]
+ },
+ {
+  "rva": 912528,
+  "obj": "get_osfhandle",
+  "src": "src/get_osfhandle.c",
+  "maps": [
+   "_nhandleX=__nhandle",
+   "_pioinfoX=__crtheap+0x4",
+   "_errnoX=__errno",
+   "_setDosErrnoX=$FA$_t_4d99c0"
+  ]
+ },
+ {
+  "rva": 915024,
+  "obj": "control87",
+  "src": "src/control87.c",
+  "maps": [
+   "_ctrl87fnA=$FA$_t_4df6f0",
+   "_ctrl87fnB=$FA$_t_4df7a0"
+  ]
  }
 ]
