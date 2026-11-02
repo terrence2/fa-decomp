@@ -1,0 +1,79 @@
+[
+ {
+  "rva": 439056,
+  "obj": "w29e_MPSetSlowComm_v1",
+  "src": "build/survey/probes/w29e_MPSetSlowComm_v1.c",
+  "maps": [
+   "_w29e_mpinfo=?MP_Info@@YAPAUMP_INFO@@XZ",
+   "_w29e_ncomp=_numComputers",
+   "_w29e_gdp=_gameDebugPrefs",
+   "_w29e_sc=?slowComm@@3DA"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 454560,
+  "obj": "w29e_MPSendMissionSucceeded_v1",
+  "src": "build/survey/probes/w29e_MPSendMissionSucceeded_v1.c",
+  "maps": [
+   "_w29e_snd@16=$FA$_t_46b260",
+   "_w29e_nc=_numComputers",
+   "_w29e_ms=_missionSucceeded"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 458352,
+  "obj": "w29e_MPGraphicRemove_v1",
+  "src": "build/survey/probes/w29e_MPGraphicRemove_v1.c",
+  "maps": [
+   "@w29e_al@8=@OBJAlias@8",
+   "_w29e_snd@16=$FA$_t_46b260",
+   "_w29e_nc=_numComputers",
+   "_w29e_cid=_curId"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 459872,
+  "obj": "w29e_MPStatusInit_v2",
+  "src": "build/survey/probes/w29e_MPStatusInit_v2.c",
+  "maps": [
+   "_w29e_msdD=?mpStatusToDraw@@3PAJA",
+   "_w29e_msd=?mpStatus@@3PAJA"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 521840,
+  "obj": "w29e_AtFriendlyAP_v1",
+  "src": "build/survey/probes/w29e_AtFriendlyAP_v1.c",
+  "maps": [
+   "_w29e_otg@0=_OnTheGround@0",
+   "_w29e_apn@20=_APNearest@20",
+   "_w29e_ct=_curThing"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 543152,
+  "obj": "w29e_MISSIONCheckSuccess_v2",
+  "src": "build/survey/probes/w29e_MISSIONCheckSuccess_v2.c",
+  "maps": [
+   "_w29e_cmi@8=_CallMissionProc@8",
+   "_w29e_sms@0=?MPSendMissionSucceeded@@YGXXZ",
+   "_w29e_tc=_thisComputer",
+   "_w29e_ct=_currentTime",
+   "_w29e_cf4=_campaignFailed+0x4",
+   "_w29e_ms=_missionSucceeded",
+   "_w29e_mn=_missionName"
+  ],
+  "patch": [
+   "0x3b,1,f0"
+  ],
+  "provenance": [
+   "patch 0x3b: toolchain-diff \u2014 compare-operand mirror (wave-24 3b/39 class): FA compares the saved old missionSucceeded in esi against the fresh call result in eax as 3b f0 (cmp esi,eax); CL 4.20.6166 canonicalizes the != compare to 3b c6 (cmp eax,esi) in BOTH spellings (v1 (ms=cmp())!=old and v2 old!=(ms=cmp()) \u2014 same-typed operand order is CL-canonical, unsteerable from source). je semantics identical (commutative), so the 1-byte modrm flip restores FA's order; no reloc inside the cmp/je span."
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ }
+]

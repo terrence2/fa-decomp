@@ -1,0 +1,17 @@
+// 0x4b4e0 — v5: r = !eq (no !=0 on the eq assignment), eq plain char
+struct W29OQ { long head; long tail; };
+extern struct W29OQ w29a_oq;
+extern char __cdecl w29a_fgCheck(unsigned long, long);
+extern void __cdecl w29a_enterCC(void);
+extern void __cdecl w29a_leaveCC(void);
+
+long __cdecl w29a_SER_Transmitting(long x)
+{
+    char eq;
+    if (w29a_fgCheck(0, -1) != 0)
+        return 0;
+    w29a_enterCC();
+    eq = (w29a_oq.head == w29a_oq.tail);
+    w29a_leaveCC();
+    return !eq;
+}

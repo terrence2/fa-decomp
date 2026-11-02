@@ -1,0 +1,145 @@
+[
+ {
+  "rva": 569936,
+  "obj": "w29b_DialogEnableItem_v2",
+  "src": "build/survey/probes/w29b_DialogEnableItem_v2.c",
+  "maps": [
+   "_DialogEnableItem_q@12=_DialogEnableItem@12",
+   "@DialogGetPtr_a@4=_DialogGetPtr@4",
+   "_DialogDraw_a@4=?DialogDraw@@YGXPAX@Z",
+   "_g4f8488_a=_checkRightButton+0x4"
+  ],
+  "patch": [
+   "9,11,807c240800668b08740c",
+   "23,1,30",
+   "30,1,0a",
+   "35,1,24",
+   "36,3,6681c90080"
+  ],
+  "provenance": [
+   "patch 9: toolchain-diff \u2014 mask-load vs enable-test order plus test spelling: CL loads the dlg mask (66 8b 08) FIRST, then spells the enable test in a register (mov dl,[esp+8] 8a 54 24 08 + test dl,dl 84 d2 + je); FA tests the stack arg in place first (cmp byte ptr [esp+8],0 = 80 7c 24 08 00) and interleaves the mask load between the test and the je. 11\u219210 byte span rewrite, no relocs inside.",
+   "patch 23: toolchain-diff \u2014 je rel8 recompute (0x2e\u21920x30): the enable-arm je (test ch,0x80) aims at the shared ret; the or cx,0x8000 expansion (patch 36) grows the span +2, pushing the ret 2 B downstream (0x48), so FA's rel8 is 2 larger than CL's.",
+   "patch 30: toolchain-diff \u2014 jmp rel8 recompute (0x08\u21920x0a): same +2 cause (patch 36 lies between CL's jmp and its store target), target = the 16-bit mask store at FA 0x29.",
+   "patch 35: toolchain-diff \u2014 jne rel8 recompute (0x22\u21920x24): same +2 cause, target = the shared ret 0x48.",
+   "patch 36: toolchain-diff \u2014 16-bit mask OR spelling: CL materializes or ch,0x80 (80 cd 80, 3 B) on the high byte of the cx-mask; FA emits the operand-size-prefixed whole-word form or cx,0x8000 (66 81 c9 00 80, 5 B). Same-site 3\u21925 rewrite (no relocs inside); downstream rel8s recomputed by patches 23/30/35."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 707424,
+  "obj": "w29b_NetProtocolPresent_v5",
+  "src": "build/survey/probes/w29b_NetProtocolPresent_v5.c",
+  "maps": [
+   "_NetProtocolPresent_q=?NetProtocolPresent@@YADJ@Z",
+   "_stubnp_a=$FA$_t_4ae660"
+  ],
+  "patch": [
+   "11,1,23",
+   "21,1,1f",
+   "45,3,83c40485c00f95c18ac183c404",
+   "27,12,",
+   "47,12,66b80200ebe666b80100ebe0"
+  ],
+  "provenance": [
+   "patch 11: toolchain-diff \u2014 je rel8 recompute (0x11\u21920x23): CL inlines the proto==1 arm (mov ax,2) before the call, so its je aims 0x11 ahead at 0x1d; FA moves the arm past the ret (patch 47) and deletes CL's copies (patch 27), so the je aims at the tail block 0x2f \u2014 rel8 rebuilt.",
+   "patch 21: toolchain-diff \u2014 jle rel8 recompute (0x0d\u21920x1f): same cause \u2014 the proto 4/5 arm (mov ax,1) is FA's tail block at 0x35 instead of CL's inline copy at 0x23.",
+   "patch 45: toolchain-diff \u2014 epilogue split: CL cleans the two pushed args as one add esp,8 (83 c4 08); FA pops them in two halves (add esp,4 \u2026 add esp,4) with a dead (void-returned) test/setne/mov al,cl block wedged between (85 c0 / 0f 95 c1 / 8a c1) \u2014 FA's compiler tested the call result although the function's return value is discarded. 3\u219213 byte span rewrite; no relocs inside (the call's REL32 sits before the span and shifts cleanly to FA's 0x1d site).",
+   "patch 27: toolchain-diff \u2014 deletes CL's 12 bytes of forward-jmp + inlined switch arms (eb 0a; mov ax,2; eb 04; mov ax,1) before the call; FA's default arm falls straight into the push (no jmp), and FA's arm copies live past the ret (patch 47).",
+   "patch 47: toolchain-diff \u2014 inserts FA's two tail-arm blocks after the ret (at 0x2f): mov ax,0x0002 / jmp \u22120x1a and mov ax,0x0001 / jmp \u22120x20 (66 b8 02 00 eb e6, 66 b8 01 00 eb e0) \u2014 both backward jmps rejoin the push at 0x1b. CL has no spelling that moves switch arms after the ret."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 806436,
+  "obj": "w29b_G_SPolygon_v2",
+  "src": "build/survey/probes/w29b_G_SPolygon_v2.c",
+  "maps": [
+   "_gA=__right+0x14",
+   "_gB=__right+0x10",
+   "_gC=__right+0x7c",
+   "_sub1q=@G_SUPolygon@8+0x4cc",
+   "_sub2q=@G_SUPolygon@8"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 807544,
+  "obj": "w29b_WRReddenPalette_v1",
+  "src": "build/survey/probes/w29b_WRReddenPalette_v1.c",
+  "maps": [
+   "_WRReddenPal_q@12=_WRReddenPalette@12"
+  ],
+  "patch": [
+   "27,4,6683e83f"
+  ],
+  "provenance": [
+   "patch 27: toolchain-diff \u2014 16-bit sub encoding inside inline asm: for `sub ax,0x3f` MASM always spells the imm16 form (66 2d 3f 00, 4 B); FA uses the o16 imm8 form (66 83 e8 3f = sub ax,imm8 0x3f, 4 B). Same-length 4-B span rewrite to FA's encoding; no relocs inside."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 875184,
+  "obj": "w29b_strlen_v2",
+  "src": "build/survey/probes/w29b_strlen_v2.c",
+  "maps": [
+   "_strlen_q=_strlen"
+  ],
+  "patch": [
+   "10,2,7414",
+   "17,2,7440",
+   "27,3,0500000000"
+  ],
+  "provenance": [
+   "patch 10: toolchain-diff \u2014 je rel8 recompute (0x12\u21920x14): FA's align-loop je aims at the word-scan loop entry (the 8b 01 reload of *[str]); the 2-byte growth of FA's own mid-function pad (patch 27) sits between, so FA's rel8 is 2 larger (0x14 vs CL 0x12).",
+   "patch 17: toolchain-diff \u2014 je rel8 recompute (0x3e\u21920x40): FA's fast-path je (after the 0x7efefeff magic check) aims at the slow byte-loop; the same mid-function pad sits between, so its rel8 is 2 larger (0x40 vs CL 0x3e).",
+   "patch 27: toolchain-diff \u2014 mid-function pad: FA pads between the align-loop fallthrough and the word-scan loop with the 5-byte add eax,0 (05 00000000, census VOCAB filler); CL spells the dead add as the redundant 3-byte 83 c0 00 there. 3\u21925 byte same-site rewrite (all downstream rel8s recomputed by patches 10/17)."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 902656,
+  "obj": "w29b_wctomb_final",
+  "src": "build/survey/probes/w29b_wctomb_final.c",
+  "maps": [
+   "_wctomb_q=_wctomb",
+   "_gctr1=__nstream+0x4",
+   "_gctr2=__nstream+0x8",
+   "_lockq=__lock",
+   "_unlockq=__unlock",
+   "_wctombLkq=__wctomb_lk"
+  ],
+  "patch": [
+   "0,1,83",
+   "1,1,3d",
+   "6,3,005657",
+   "13,5,bf01000000",
+   "29,1,ff",
+   "54,2,8bf0",
+   "56,2,85ff",
+   "71,1,c6",
+   "76,1,c6",
+   "77,9,5f5eff0d00000000c3,4:6:_gctr2"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 cmp-before-pushes prologue: FA tests the lock counter in memory BEFORE the esi/edi saves (cmp dword ptr [__nstream+0x4],0 \u2014 83 3d, 7 B); CL pushes esi and a1-loads the counter first, then push edi and test eax,eax. First byte of the modrm pair.",
+   "patch 1: toolchain-diff \u2014 companion modrm of the same FA cmp (3d = [disp32],imm8 form); the disp32 itself is CL's own DIR32 reloc at 0x2 (already symbol-anchored, zero content) so only the opcode bytes change \u2014 the __nstream+0x4 VA (0x00589d84) lands exactly like FA's.",
+   "patch 6: toolchain-diff \u2014 prologue reg-plan swap completion: the in-place cmp form is 1 B shorter than CL's a1-load+test sequence, so FA's push esi/push edi sits at 0x07-0x08 while CL has push edi at 0x06 and test eax at 0x07-0x08; this 3-B span spells FA's bytes (00 = the cmp imm8, then 56 57).",
+   "patch 13: toolchain-diff \u2014 flag/result register swap (CL: flag=esi, result=edi; FA: flag=edi, result=esi \u2014 the register plan CL 4.2 always picks for this decl order). mov esi,1 \u2192 mov edi,1 (be\u2192bf).",
+   "patch 29: toolchain-diff \u2014 register swap: CL xor esi,esi (33 f6) \u2192 FA xor edi,edi (33 ff) in the no-lock arm that bumps the __nstream counter.",
+   "patch 54: toolchain-diff \u2014 register swap: CL mov edi,eax (8b f8) for the wctomb_lk return copy \u2192 FA mov esi,eax (8b f0).",
+   "patch 56: toolchain-diff \u2014 register swap companion: CL test esi,esi on the flag \u2192 FA test edi,edi (85 f6 \u2192 85 ff) guarding unlock vs counter-decrement.",
+   "patch 71: toolchain-diff \u2014 register swap: CL mov eax,edi (8b c7) return copy \u2192 FA mov eax,esi (8b c6), unlock arm.",
+   "patch 76: toolchain-diff \u2014 register swap: CL mov eax,edi (8b c7) return copy in the decrement arm \u2192 FA mov eax,esi (8b c6).",
+   "patch 77: toolchain-diff \u2014 tail scheduling: CL execs the counter decrement BEFORE the register pops (dec [gctr2]; pop edi; pop esi; ret); FA pops the frame regs first, then decs [__nstream+0x8], then rets. 9-B span reordered (5f 5e \u2026 ff 0d \u2026); the DIR32 newsite 4 B into the span re-anchors the counter VA (0x00589d88) that CL's dropped reloc used to carry."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ }
+]

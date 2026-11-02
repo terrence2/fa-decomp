@@ -1,0 +1,54 @@
+[
+ {
+  "rva": 611264,
+  "obj": "w29h_spxbuildaddress_v6",
+  "src": "build/survey/probes/w29h_spxbuildaddress_v6.cpp",
+  "maps": [],
+  "patch": [
+   "0,6,8b542408565790",
+   "0xc,1,8a",
+   "0x12,1,82",
+   "0x1b,1,77",
+   "0x23,1,46",
+   "0x25,25,b0018b92c60d000089570466c74702ec8766c70702005f5ec3"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 CL loads the read-base arg (arg2 = CN_INFO*) after its two pushes (mov esi,[esp+0x10]); FA hoists mov edx,[esp+8] into the pre-push prologue window before push esi/push edi, with a 1-byte ILINK nop (90) before mov edi,[esp+0x14]. Rebuilt CL's first 6 B as FA's prologue (bytes copied from FA 0x953c0).",
+   "patch 0xc: toolchain-diff \u2014 reg-plan swap esi\u2192edx: FA materializes the CN_INFO* in edx pre-push, so its [edx+0xdca] reads spell 8b 8a / 8d 82; CL (post-push materialization in esi) spells 8b 8e / 8d 86.",
+   "patch 0x12: toolchain-diff \u2014 lea eax,[edx+0xdca] word-read remat: same esi\u2192edx base as patch 0xc (FA keeps w's copy pointer in eax via lea; CL's was 8d 86).",
+   "patch 0x1b: toolchain-diff \u2014 a+8 copy pointer reg: CL rematerialized it as lea edx,[edi+8] (8d 57); FA as lea esi,[edi+8] (8d 77).",
+   "patch 0x23: toolchain-diff \u2014 word store reg: CL spilled the a+8 pointer into edx and stores [edx+4],ax (66 89 42); FA keeps it in esi (66 89 46, matching its lea esi reg).",
+   "patch 0x25: toolchain-diff \u2014 tail scheduling: CL hoisted the constant store [edi]=2 before mov al,1 and delayed the [edx+0xdc6] load/store pair; FA (with the return value staged mid-body as r=1) sets mov al,1 right after the +0xc word store, keeps the mov edx,[edx+0xdc6]/mov [edi+4],edx pair adjacent, then stores [edi+2]=0x87ec and [edi]=2 as the last stores. Rewritten with FA's bytes/order (no relocs in the span)."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 636672,
+  "obj": "w29h_PLANESetEjectTime_v4",
+  "src": "build/survey/probes/w29h_PLANESetEjectTime_v4.c",
+  "maps": [
+   "_w29h_thm=_curThingType+0xba",
+   "_w29h_curT=_currentT",
+   "_w29h_ejtm=_curThing+0x23c",
+   "@w29h_Rand@4=@Rand@4"
+  ],
+  "patch": [
+   "0x2c,11,6603050000000066050400,3:6:_w29h_curT"
+  ],
+  "provenance": [
+   "patch 0x2c: toolchain-diff \u2014 CL fuses the Rand path's integer promotion into mov cx,[curT] (66 8b 0d) + 32-bit lea eax,[eax+ecx+4] (8d 44 01 04); FA computes the adds 16-bit in ax: add ax,[_currentT] (66 03 05, DIR32 site at span-imm offset 3) + add ax,4 (66 05 04 00). Same 11 B at the same site slots (old curT imm at 0x2f replaced 1:1); all other bytes and the 0x39/0x43 stores already matched CL."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 667840,
+  "obj": "w29h_socket_get_state_ptr_v2",
+  "src": "build/survey/probes/w29h_socket_get_state_ptr_v2.cpp",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ }
+]

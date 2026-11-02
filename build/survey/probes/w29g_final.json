@@ -1,0 +1,99 @@
+[
+ {
+  "rva": 889856,
+  "obj": "w29g_forcdecpt_v6.obj",
+  "src": "build/survey/probes/w29g_forcdecpt_v6.c",
+  "maps": [
+   "_w29g_mbmax=__ctype+0x204",
+   "_w29g_decpt=__ctype+0x208",
+   "_w29g_pct=__pctype",
+   "_w29g_tolower=_tolower",
+   "_w29g_isctype=__isctype"
+  ],
+  "patch": [
+   "22,1,34",
+   "29,7,393d00000000,2:6:_w29g_mbmax",
+   "52,1,12",
+   "68,4,83e00485c075d1",
+   "89,5,88068aca46"
+  ],
+  "provenance": [
+   "patch 22: toolchain-diff \u2014 guard-branch short jmp displacement: the 7->6 byte head lengthening below moves the slow arm so CL's je (74 32) undershoots FA's (74 34) by 2; disp byte fixed",
+   "patch 29: toolchain-diff \u2014 CL materializes the MB_CUR_MAX compare as a1 moffs + 3b c7 (wave-19 two-global compare wall, unsteerable in source); FA tests __ctype+0x204 directly in memory (39 3d mem,edi); 7->6 byte rewrite with DIR32 newsite at span site 2 re-adding _w29g_mbmax, payload dword zero, addend baked by map =__ctype+0x204 (same recipe as src/Isdigit.c tier0 template)",
+   "patch 52: toolchain-diff \u2014 jmp-over-slow-arm displacement: CL eb 0f vs FA eb 12, follows from the fast-arm reshaping below",
+   "patch 68: toolchain-diff \u2014 CL folds the isdigit mask into a8 04 (test al,4); FA computes and eax,4 + test eax,eax (83 e0 04 / 85 c0) and the jne back-edge disp moves 75 03->75 01; 4->7 byte rewrite",
+   "patch 89: toolchain-diff \u2014 FA's rotated insert loop stores through al (88 06) after 8a c1 and places the second inc esi (46) after 8a ca; CL stores cl directly (88 0e) with the inc before 8a ca; reordered to FA spelling"
+  ],
+  "aliases": [],
+  "span": "0x65",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 935568,
+  "obj": "w29g_setmode_lk_v6.obj",
+  "src": "build/survey/probes/w29g_setmode_lk_v6.c",
+  "maps": [
+   "_w29g_pio=__crtheap+0x4",
+   "_w29g_errno=__errno"
+  ],
+  "patch": [
+   "32,14,33d28a198ac324808ad08b44240c",
+   "54,1,e3",
+   "66,1,cb",
+   "69,1,19",
+   "71,1,fa"
+  ],
+  "provenance": [
+   "patch 32: toolchain-diff \u2014 CL hoists the mode load (8b 44 24 0c) before the osfile byte-load and zero-extends ftext with and ebx,0x80 (81 e3, 32-bit imm form); FA order is xor edx,edx (zero-materialized int ftext), mov bl,[ecx], then the byte-widening dance 8a c3 / 24 80 / 8a d0, with the mode load after; 14-byte span rewritten, no length change",
+   "patch 54: toolchain-diff \u2014 register-role swap: CL keeps osfile in dl (and dl,0x7f); FA keeps osfile in bl (and bl,0x7f)",
+   "patch 66: toolchain-diff \u2014 register-role swap: and dl,0x80 (CL) vs and bl,0x80 (FA)",
+   "patch 69: toolchain-diff \u2014 register-role swap: store mov [ecx],dl (CL) vs mov [ecx],bl (FA)",
+   "patch 71: toolchain-diff \u2014 register-role swap: cmp bl,1 (CL) vs cmp edx,1 (FA, ftext whole-register int test)"
+  ],
+  "aliases": [],
+  "span": "0x69",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 219584,
+  "obj": "w29g_MMUnmapFile_v2.obj",
+  "src": "build/survey/probes/w29g_MMUnmapFile_v2.c",
+  "maps": [
+   "@w29g_umf@12=?MMUnmapFile@@YIXPAX00@Z",
+   "__imp__UnmapViewOfFile@4=__imp__UnmapViewOfFile",
+   "__imp__CloseHandle@4=__imp__CloseHandle"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": "0x40",
+  "flags": "/c /O2 /Gy /G5 --tail-accept"
+ },
+ {
+  "rva": 404896,
+  "obj": "w29g_objplusdeltaparm_v1.obj",
+  "src": "build/survey/probes/w29g_objplusdeltaparm_v1.c",
+  "maps": [
+   "@w29g_opdp@12=@ObjPlusDeltaParm@12"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": "0x70",
+  "flags": "/c /O2 /Gy /G5 --tail-accept"
+ },
+ {
+  "rva": 418512,
+  "obj": "w29g_awardmedal_v1.obj",
+  "src": "build/survey/probes/w29g_awardmedal_v1.c",
+  "maps": [
+   "_w29g_medal_q=_AwardMedal",
+   "_w29g_dst=_campaignPilot+0x5af"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": "0x70",
+  "flags": "/c /O2 /Gy /G5 --tail-accept"
+ }
+]

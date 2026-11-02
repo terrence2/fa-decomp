@@ -1,0 +1,134 @@
+[
+ {
+  "rva": 570448,
+  "obj": "w29f_SAYInit2_v1",
+  "src": "build/survey/probes/w29f_SAYInit2_v1.c",
+  "maps": [
+   "_SAYInit2X@0=_SAYInit2@0",
+   "_w29fSayW=?COMMENT_TYPE@@3W4__unnamed@@A+0x18",
+   "_w29fHome=_home",
+   "_w29fCur=?cursorOn@@3DA+0x8",
+   "_w29fCT=?COMMENT_TYPE@@3W4__unnamed@@A+0x10",
+   "_w29fMISS@0=_MISSIONSucceededForThisPlayer@0"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 626944,
+  "obj": "w29f_MOD_Shutdown_v1",
+  "src": "build/survey/probes/w29f_MOD_Shutdown_v1.c",
+  "maps": [
+   "_MOD_ShutdownX=?MOD_Shutdown@@YAXXZ",
+   "_w29fMpiField=?mpInfo@@3UMP_INFO@@C+0x154",
+   "_w29fModemField=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x234",
+   "__imp__Sleep@4=__imp__Sleep",
+   "_w29fSer1=?SER_Shutdown1@@YAXXZ",
+   "_w29fHangup@4=_ModemHangup@4",
+   "_w29fAnswer@8=_ModemAnswerMode@8",
+   "_w29fSer2=?SER_Shutdown2@@YAXXZ",
+   "_w29fSer3=?SER_Shutdown3@@YAXXZ"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 669264,
+  "obj": "w29f_socket_process_doa_v2",
+  "src": "build/survey/probes/w29f_socket_process_doa_v2.c",
+  "maps": [
+   "_socket_process_doaX=?socket_process_doa@@YAXXZ",
+   "_w29fSLCount=?socket_list@@3USOCKET_STATE_LIST@@A+0x314",
+   "_w29fSLArr=?socket_list@@3USOCKET_STATE_LIST@@A+0x318",
+   "_w29fSockCloseX=?socket_close@@YAXI@Z"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 807376,
+  "obj": "w29f_WRBlackenPalette_v4",
+  "src": "build/survey/probes/w29f_WRBlackenPalette_v4.c",
+  "maps": [
+   "_WRBlackenPaletteX=_WRBlackenPalette@12"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 885152,
+  "obj": "w29f_close_v2",
+  "src": "build/survey/probes/w29f_close_v2.c",
+  "maps": [
+   "_closeX_q=__close",
+   "_w29fNhandle=__nhandle",
+   "_w29fPio=__crtheap+0x4",
+   "_w29fLockFH=__lock_fhandle",
+   "_w29fCloseLk=__close_lk",
+   "_w29fUnlockFH=__unlock_fhandle",
+   "_w29fErrno=__errno",
+   "_w29fDosErrno=$FA$_t_4d99c0"
+  ],
+  "patch": [
+   "0,8,56578b74240c",
+   "6,8,3935000000007642,2:6:_w29fNhandle",
+   "0x1e,1,",
+   "0x27,9,f6440204017422",
+   "0x4f,1,",
+   "0x6d,1,"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 CL opens with push ebx + a1-load of __nhandle for the guard; FA frames push esi/edi and compares 39 35 [__nhandle],esi inline, so the prologue 53 a1 dddd 56 becomes 56 57 8b 74 24 0c (no ebx save, direct mem compare)",
+   "patch 6: toolchain-diff \u2014 FA's cmp [__nhandle],esi (39 35, site @0x8 DIR32) re-anchored here because CL's own __nhandle DIR32 sat inside the replaced prologue span",
+   "patch 0x1e: toolchain-diff \u2014 CL emits a 90 nop (obj alignment) after the shl ecx,2; FA has none",
+   "patch 0x27: toolchain-diff \u2014 CL materializes the FOPEN byte test into bl (mov bl,[edx+eax+4]; test bl,1; je rel8 0x23); FA tests memory directly (test [edx+eax*1+4],1 / je rel8 0x22)",
+   "patch 0x4f: toolchain-diff \u2014 CL keeps a pop ebx (5b) in the fail epilogue left over from its push ebx; FA (no ebx in frame) goes straight from pop edi/pop esi to ret",
+   "patch 0x6d: toolchain-diff \u2014 stray pop ebx (5b) at the tail of CL's success-path epilogue; FA ends pop esi / ret / ret0 block"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 888992,
+  "obj": "w29f_mtinit_v2",
+  "src": "build/survey/probes/w29f_mtinit_v2.c",
+  "maps": [
+   "_mtinitX_q=__mtinit",
+   "_w29fMtInitLocks=__mtinitlocks",
+   "_w29fCalloc=_calloc",
+   "_w29fInitPtd=__initptd",
+   "_w29fCtypes=__ctype",
+   "__imp__TlsAlloc@0=__imp__TlsAlloc",
+   "__imp__TlsSetValue@8=__imp__TlsSetValue",
+   "__imp__GetCurrentThreadId@0=__imp__GetCurrentThreadId"
+  ],
+  "patch": [
+   "0,1,",
+   "0x15,1,04",
+   "0x19,1,",
+   "0x2b,1,30",
+   "0x3c,1,1f",
+   "0x5b,1,",
+   "0x5f,1,"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 CL pushes ebx as an unused scratch save at entry; FA's __mtinit pushes esi only",
+   "patch 0x15: toolchain-diff \u2014 first jne (TlsAlloc==-1 fail) disp is 05 in CL (five-byte inline return incl. pop ebx), 04 in FA (four-byte return)",
+   "patch 0x19: toolchain-diff \u2014 pop ebx (5b) in CL's TlsAlloc-fail return; FA returns after pop esi",
+   "patch 0x2b: toolchain-diff \u2014 calloc-fail je disp 31 (CL) -> 30 (FA), ret0 block shifted by the deleted pops",
+   "patch 0x3c: toolchain-diff \u2014 TlsSetValue-fail je disp 20 (CL) -> 1f (FA), same ret0 target shift",
+   "patch 0x5b: toolchain-diff \u2014 pop ebx (5b) after pop esi in CL's success epilogue; FA's ends at c3",
+   "patch 0x5f: toolchain-diff \u2014 pop ebx (5b) at the tail of CL's shared ret0 block; FA's ends pop esi / c3"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ }
+]

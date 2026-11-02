@@ -1,0 +1,98 @@
+[
+ {
+  "rva": 120640,
+  "obj": "bm_w29a_SetDisplayMode_v1",
+  "src": "build/survey/probes/w29a_SetDisplayMode_v1.c",
+  "maps": [
+   "_w29a_SetDisplayMode@12=?SetDisplayMode@CDirDraw@@QAEHKKK@Z",
+   "_w29a_impSendA=__imp__SendMessageA@16"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 308448,
+  "obj": "bm_w29a_SER_Transmitting_v4",
+  "src": "build/survey/probes/w29a_SER_Transmitting_v4.c",
+  "maps": [
+   "_w29a_SER_Transmitting=?SER_Transmitting@@YAJJ@Z",
+   "_w29a_fgCheck=$FA$_t_4b190",
+   "_w29a_enterCC=$FA$_t_4b110",
+   "_w29a_leaveCC=$FA$_t_4b170",
+   "_w29a_oq=?OutQueue@@3USERIAL_QUEUE@@A"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 340784,
+  "obj": "bm_w29a_HARDUsedWeapons_v1",
+  "src": "build/survey/probes/w29a_HARDUsedWeapons_v1.c",
+  "maps": [
+   "_w29a_HUW@12=_HARDUsedWeapons@12",
+   "_w29a_HPtrs@12=_HARDPtrs@12"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 405008,
+  "obj": "bm_w29a_WriteCmdBuf_v1",
+  "src": "build/survey/probes/w29a_WriteCmdBuf_v1.c",
+  "maps": [
+   "_w29a_WriteCmdBuf@12=@WriteCmdBuf@12",
+   "_w29a_ccp=?correctChainPlacement@@3DA+0x20"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 435872,
+  "obj": "bm_w29a_SetupCobra_v2",
+  "src": "build/survey/probes/w29a_SetupCobra_v2.c",
+  "maps": [
+   "_w29a_SetupCobra=?SetupCobra@@YAGPAUGlobalData@@@Z",
+   "_w29a_InitCobra=$FA$_t_469fd0",
+   "_w29a_InitVideo=$FA$_t_46a2e0",
+   "_w29a_InitAudio=$FA$_t_46a680",
+   "_w29a_CleanVideo=$FA$_t_46a670",
+   "_w29a_CleanCobra=$FA$_t_46a2b0"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 519216,
+  "obj": "bm_w29a_SelectPlane_v2",
+  "src": "build/survey/probes/w29a_SelectPlane_v2.c",
+  "maps": [
+   "_w29a_SelectPlane@4=__SelectPlane@4",
+   "_w29a_SRP@16=_SelectRepairPlane@16",
+   "_w29a_hangar=?hangarName@@3PADA",
+   "_w29a_doScreens=_doScreens",
+   "_w29a_doSelectPlane=_doSelectPlane",
+   "_w29a_pilotName=_pilotName",
+   "_w29a_campaignPilot=_campaignPilot"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5"
+ }
+]

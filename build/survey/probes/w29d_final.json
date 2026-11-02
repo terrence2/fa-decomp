@@ -1,0 +1,131 @@
+[
+ {
+  "rva": 218736,
+  "obj": "bm_w29d_GetMixerStatus_v1",
+  "src": "build/survey/probes/w29d_GetMixerStatus_v1.c",
+  "maps": [
+   "_w29d_gms=?GetMixerStatus@@YAFXZ",
+   "__imp__w29d_ailss@4=__imp__AIL_sample_status@4",
+   "_w29d_mixh=?mixChanHandle@@3PAPAU_SAMPLE@@A",
+   "_w29d_nmlB=?noMixLeft@@3UMODSPEC@@A+0x4b",
+   "_w29d_sndOn=_soundOn"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 218800,
+  "obj": "bm_w29d_SoundStatus_v1",
+  "src": "build/survey/probes/w29d_SoundStatus_v1.c",
+  "maps": [
+   "_w29d_ss=?SoundStatus@@YAFXZ",
+   "__imp__w29d_ailss@4=__imp__AIL_sample_status@4",
+   "_w29d_mixh=?mixChanHandle@@3PAPAU_SAMPLE@@A",
+   "_w29d_sndOn=_soundOn"
+  ],
+  "patch": [
+   "20,2,ffbb",
+   "27,1,35",
+   "33,1,03",
+   "36,1,d6",
+   "42,1,47",
+   "44,1,c3",
+   "47,1,fb",
+   "56,1,c7"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 20: toolchain-diff \u2014 CL split FA's 'xor edi,edi / mov ebx,mixh' into 'xor esi,esi / mov edi,mixh': loop-ptr h and counter n got swapped registers (CL h->edi n->esi st->ebx vs FA h->ebx n->edi st->esi); register-role permutation is not steerable from C spelling (all 4 var-order/decl variants compile to the same schedule), so modrm reg bytes are patched",
+   "patch 21: toolchain-diff \u2014 same scheduling diff as 20: FA 'bb mov ebx,imm' is CL 'bf mov edi,imm' (h in edi); one patch call covers bytes 20-21",
+   "patch 27: toolchain-diff \u2014 FA '8b 35 mov esi,[imp]' (st in esi) vs CL '8b 1d mov ebx,[imp]' (st in ebx); modrm reg-field swap",
+   "patch 33: toolchain-diff \u2014 FA '8b 03 mov eax,[ebx]' (h deref via ebx) vs CL '8b 07 mov eax,[edi]'; follows the h-register patch",
+   "patch 36: toolchain-diff \u2014 FA 'ff d6 call esi' (indirect st call) vs CL 'ff d3 call ebx'; follows the st-register patch",
+   "patch 42: toolchain-diff \u2014 FA '47 inc edi' (n++) vs CL '46 inc esi'; follows the n-register patch",
+   "patch 44: toolchain-diff \u2014 FA '83 c3 04 / 81 fb' (h in ebx) vs CL '83 c7 04 / 81 ff' (h in edi); follows the h-register patch",
+   "patch 47: toolchain-diff \u2014 FA '81 fb cmp ebx,imm' vs CL '81 ff cmp edi,imm'; follows the h-register patch",
+   "patch 56: toolchain-diff \u2014 FA '66 8b c7 mov ax,di' (return n from edi) vs CL '66 8b c6 mov ax,si'; follows the n-register patch"
+  ]
+ },
+ {
+  "rva": 405520,
+  "obj": "bm_w29d_CancelCmdBuf_A",
+  "src": "build/survey/probes/w29d_CancelCmdBuf_A.c",
+  "maps": [
+   "_w29d_ccbA@0=_CancelCmdBuf@0",
+   "_w29d_w62=_curThing+0x62",
+   "_w29d_w58=_curThing+0x58",
+   "_w29d_b51=_curThing+0x51",
+   "_w29d_b50=_curThing+0x50",
+   "_w29d_w54=_curThing+0x54",
+   "_w29d_w52=_curThing+0x52",
+   "_w29d_c0=_curThing",
+   "_w29d_crq@0=_CTRespondToCancelCmdBuf@0"
+  ],
+  "patch": [
+   "0,23,66c70562000000ffff66c70558000000ffff,3:6:_w29d_c0,12:6:_w29d_c0",
+   "23,0,8a0d00000000,2:6:_w29d_c0"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 CL CSE'd the two -1 short stores (curThing+0x62, +0x58) into 'b8 ffffffff + 66 a3 x2' even with volatile externs (volatile does not defeat same-const store CSE in CL 4.2); FA materializes each as an immediate store '66 c7 05 <addr> ffff', so the whole 23B CL block (b8/8a-hoist/2x66a3) is rewritten to FA's 18B two-imm-store block; DIR32 newsites at span 3 and 12 carry the target dwords (curThing via _w29d_c0 map, contents 0x62/0x58 baked in the hex)",
+   "patch 23: toolchain-diff \u2014 CL hoisted the _curThing byte load ('8a 0d') above the -1 stores while FA reads it after the 7-chain (between b8 07 and the a2 stores); reinserted at FA's exact position (post-shift offset 23) with a DIR32 newsite for its imm dword"
+  ]
+ },
+ {
+  "rva": 415488,
+  "obj": "bm_w29d_CTDo_splits_A",
+  "src": "build/survey/probes/w29d_CTDo_splits_A.c",
+  "maps": [
+   "_w29d_ctsA=_CTDo_splits",
+   "_w29d_fte=_serviceTicks+0xec",
+   "_w29d_fpfc=_serviceTicks+0xfc",
+   "_w29d_fp100=_serviceTicks+0x100",
+   "_w29d_fpf0=_serviceTicks+0xf0",
+   "_w29d_fpf8=_serviceTicks+0xf8",
+   "_w29d_crf=$FA$_t_464fc0",
+   "@w29d_mvsq@12=@MVRSplitS@12"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 415568,
+  "obj": "bm_w29d_CTDo_immelman_A",
+  "src": "build/survey/probes/w29d_CTDo_immelman_A.c",
+  "maps": [
+   "_w29d_ctiA=_CTDo_immelman",
+   "_w29d_fte=_serviceTicks+0xec",
+   "_w29d_fpfc=_serviceTicks+0xfc",
+   "_w29d_fp100=_serviceTicks+0x100",
+   "_w29d_fpf0=_serviceTicks+0xf0",
+   "_w29d_fpf8=_serviceTicks+0xf8",
+   "_w29d_crf=$FA$_t_464fc0",
+   "@w29d_mviq@12=@MVRImmelman@12"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 433600,
+  "obj": "bm_w29d_ntp_v1",
+  "src": "build/survey/probes/w29d_ntp_v1.c",
+  "maps": [
+   "_w29d_ntp=?net_test_process_pkt@@YAXPAUNET_PKT@@H@Z",
+   "_w29d_pst=?pkt_send_type@@YADHH@Z",
+   "_w29d_plA=?player_list@@3UNET_PLAYER_LIST@@A+0x66",
+   "_w29d_sclose=?socket_close@@YAXI@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ }
+]

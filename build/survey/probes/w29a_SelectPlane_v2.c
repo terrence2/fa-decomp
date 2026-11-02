@@ -1,0 +1,18 @@
+// 0x7ec30 __SelectPlane@4 — v2: zero-arm first (fallthrough), campaign
+// jump target second == FA's 75 0a jne / 6a 00 arm / 68 arm ordering.
+extern char w29a_doScreens, w29a_doSelectPlane;
+extern char w29a_pilotName[];      /* _pilotName */
+extern char w29a_hangar[];         /* ?hangarName@@3PADA */
+extern char w29a_campaignPilot[];  /* _campaignPilot */
+extern long __stdcall w29a_SRP(unsigned long a, char *b, unsigned long c, unsigned long d);
+                                   /* _SelectRepairPlane@16 */
+
+long __stdcall w29a_SelectPlane(char *p)
+{
+    if (!w29a_doScreens || !w29a_doSelectPlane)
+        return (*(unsigned char *)p >= 1) ? 14 : 12;
+    if (w29a_pilotName[0] == 0)
+        return w29a_SRP(0, w29a_hangar, 0, 1);
+    else
+        return w29a_SRP((unsigned long)w29a_campaignPilot, w29a_hangar, 0, 1);
+}

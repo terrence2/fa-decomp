@@ -1,0 +1,120 @@
+[
+ {
+  "rva": 912800,
+  "obj": "w29c_lockfhandle_v2",
+  "src": "build/survey/probes/w29c_lockfhandle_v2.c",
+  "maps": [
+   "_w29c_lockX=__lock",
+   "_w29c_unlockX=__unlock",
+   "_w29c_icsP=__imp__InitializeCriticalSection",
+   "_w29c_ecsP=__imp__EnterCriticalSection",
+   "_w29c_ltab=__crtheap+0x4"
+  ],
+  "patch": [
+   "0x1,1,44",
+   "0x6,2,8bc8",
+   "0x9,31,83e1e7c1f90383e01fc1e0028db9000000008d34c08b1f03de,14:6:_w29c_ltab",
+   "0x22,8,837b080075276a",
+   "0x32,7,837b0800750d"
+  ],
+  "provenance": [
+   "patch 0x1: toolchain-diff \u2014 arg-register choice: CL loads [esp+4] into ecx (8b 4c 24 04); FA loads into eax (8b 44 24 04); same-length 1-byte modrm fix.",
+   "patch 0x6: toolchain-diff \u2014 CL copies the arg ecx->eax (8b c1); FA copies eax->ecx (8b c8); 2-byte operand-role swap.",
+   "patch 0x9: toolchain-diff \u2014 CL scheduled the bit field (and eax,0x1f / shl eax,2) before the index field (and ecx,0xe7 / sar ecx,3) and left nops; FA emits index-first; 31-byte span rewritten to the FA 25-byte sequence including the lea edi,[ecx+__crtheap+0x4] newsite DIR32 (map _w29c_ltab=__crtheap+0x4, disp 0x588c70 verified in FA).",
+   "patch 0x22: toolchain-diff \u2014 CL tested [ebx+8] via mov edx/test (8b 53 08 85 d2); FA compares memory directly (83 7b 08 00); replacement carries jne disp 0x27 and the following push's 6a so the 8-byte span collapses to 7.",
+   "patch 0x32: toolchain-diff \u2014 CL re-tested via mov eax/test (8b 43 08 85 c0); FA uses cmp [ebx+8],0 (83 7b 08 00 jne 0d); 7-byte span replaced by the 6-byte FA pair with jne disp 0x0d preserved."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 44320,
+  "obj": "w29c_NETMasterStartGame_v1",
+  "src": "build/survey/probes/w29c_NETMasterStartGame_v1.c",
+  "maps": [
+   "_w29c_pl=?player_list@@3UNET_PLAYER_LIST@@A",
+   "_w29c_scnpsX=?socket_close_non_player_sockets@@YAXXZ",
+   "_w29c_t40bX=$FA$_t_40b580",
+   "_w29c_pktX=?pkt_send_player_info@@YADHGPAUNET_PLAYER_LIST@@@Z",
+   "_w29c_nsoX=?net_set_often_state@@YAXW4PLAYER_STATE@@@Z",
+   "_w29c_naprX=?net_all_players_ready@@YADXZ",
+   "_w29c_nsgX=?net_start_game@@YAXXZ"
+  ],
+  "patch": [],
+  "provenance": [
+   "no patches: maps only; every FA dword verified (0x577e48 player_list DIR32 x2; six e8 rel32 targets land on the named externs and the swallowed chunk 0x40b580)."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 72736,
+  "obj": "w29c_BoundsAnd_v3",
+  "src": "build/survey/probes/w29c_BoundsAnd_v3.c",
+  "maps": [],
+  "patch": [
+   "0x4b,1,da",
+   "0x4c,1,7c",
+   "0x50,1,f7",
+   "0x51,1,7f"
+  ],
+  "provenance": [
+   "patch 0x4b: toolchain-diff \u2014 CL canonicalizes the reg-reg 16-bit compare operand order (cmp dx,bx at 0x49); the source-operand-order-swap probe (v4) produced a byte-identical obj, confirming the wall; 1-byte modrm fix to FA's cmp bx,dx (0xda).",
+   "patch 0x4c: toolchain-diff \u2014 companion jcc polarity for the 0x4b modrm swap: FA folds the branch as jl (0x7c) where CL emitted jg (0x7f); same-length rel8 disp 0x0d is untouched.",
+   "patch 0x50: toolchain-diff \u2014 second reg-reg compare: CL canonicalized cmp di,si; FA's bytes are cmp si,di (0xf7); 1-byte modrm fix.",
+   "patch 0x51: toolchain-diff \u2014 companion jcc polarity: FA jg (0x7f) vs CL jl (0x7c); same-length rel8 disp 0x08 untouched."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 206032,
+  "obj": "w29c_DMusicOn_v1",
+  "src": "build/survey/probes/w29c_DMusicOn_v1.c",
+  "maps": [
+   "_w29c_dmFl=$FA$_d_4e7000+0x5f0",
+   "_w29c_mId=?musicId@@3FA",
+   "_w29c_volD=?volDMusic@@3FA",
+   "_w29c_DMOX=?DMusicOff@@YIXXZ",
+   "_w29c_SSXq@16=?SingleSound@@YGFPADFEF@Z"
+  ],
+  "patch": [],
+  "provenance": [
+   "no patches: maps only; FA dwords verified (moffs flag byte 0x4e75f0 = _d_4e7000+0x5f0, musicId 0x5338d0 x2, volDMusic 0x4efb64; e8 targets DMusicOff/SingleSound confirmed)."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 208816,
+  "obj": "w29c_SoundPoints_v2",
+  "src": "build/survey/probes/w29c_SoundPoints_v2.c",
+  "maps": [
+   "_w29c_soundOn=_soundOn",
+   "_w29c_MOD=?MOD@@3PAUMODSPEC@@A",
+   "@w29c_SSq@12=?SoundSetup@@YIXPAUMODSPEC@@0D@Z",
+   "@w29c_SVPPq@8=?SetVolPitchPan@@YIXPAUMODSPEC@@G@Z"
+  ],
+  "patch": [],
+  "provenance": [
+   "no patches: maps only; FA dwords verified (_soundOn 0x4e75f4, MOD 0x53c028, e8 targets SoundSetup/SetVolPitchPan confirmed)."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 213712,
+  "obj": "w29c_CheckSndPurge_v1",
+  "src": "build/survey/probes/w29c_CheckSndPurge_v1.c",
+  "maps": [
+   "_w29c_MOD=?MOD@@3PAUMODSPEC@@A",
+   "_w29c_pMOD=?pendMOD@@3PAUMODSPEC@@A"
+  ],
+  "patch": [],
+  "provenance": [
+   "no patches: maps only; FA imm dwords verified against baked array-field deltas: &MOD[0].atE +0xe -> 0x53c036, &MOD[16].atE +0x54e -> 0x53c576, &pendMOD[0].atE +0xe -> 0x532f06, &pendMOD[30].atE +0x9e6 -> 0x5338de."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ }
+]
