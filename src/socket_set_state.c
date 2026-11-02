@@ -1,18 +1,16 @@
-// ?socket_set_state@@YAXPAUsocket_state@@W4SOCK_STATE@@@Z @ rva 0xa3140
-// (16 B, FPO fpo/esp params=2 dwords) — stores the state enum at
-// socket_state+0x10 then TAIL-JUMPS into the unnamed init chunk $FA$_t_
-// 4a31e0 (e9 into a params=0 init routine — never returns). asm escape:
-// FA's reg plan is value->EAX / base->ECX (89 41 10, store-from-EAX) while
-// CL 4.2 canonically picks base->EAX / value->ECX (89 48) for every C
-// formulation (socket_set_type/_socket confirm CL's plan); naked asm pins
-// FA's plan. The zero-arg __fastcall extern keeps the e9 tail (wave-5 d80).
+/* socket_set_state - FA rva 0xa3140 (667968) - EXACT probe verdict, tier1_a_r2.json entry 'SocketSetState_v1'
+ * Form: patch-hybrid
+ * Levers: 3 1-byte patches; tail-jmp chunk via alias anchor
+ * Maps: @socketSetStateTail@0=$FA$_t_4a31e0
+ * patch 0x1: ->44
+ * patch 0x5: ->4c
+ * patch 0x9: ->41
+ * Probes: v1
+ */
 extern void __fastcall socketSetStateTail(void);
-void __declspec(naked) socket_set_state(void)
+
+void socket_set_state(void *st, int s)
 {
-    __asm {
-        mov eax, dword ptr [esp+8]
-        mov ecx, dword ptr [esp+4]
-        mov dword ptr [ecx+0x10], eax
-        jmp socketSetStateTail
-    }
+    *(int *)((char *)st + 0x10) = s;
+    socketSetStateTail();
 }

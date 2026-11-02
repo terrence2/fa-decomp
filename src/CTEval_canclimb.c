@@ -1,19 +1,13 @@
-// _CTEval_canclimb @ rva 0x64540 — COMinSpeed()+0x4b <= *(curThing+0x34)>>8.
-//   C keeps folding r+0x4b into lea ecx and never materializes the res/ebx
-//   setle form (d49/d73) → inline __asm (d78 exact; CL auto-saves ebx).
+/* CTEval_canclimb - FA rva 0x64540 (410944) - EXACT probe verdict, tier1_a_r1.json entry 'CTEval_canclimb_v6'
+ * Form: plain C
+ * Levers: plain C; early-guard return shape
+ * Maps: _COMinSpeed=_COMinSpeed@0
+ * Probes: v1-v6
+ */
 extern char curThing[];
 extern int COMinSpeed(void);
 
-int CTEval_canclimb_q(void)
+long CTEval_canclimb6(void)
 {
-    __asm {
-        call COMinSpeed
-        xor  ebx, ebx
-        add  eax, 0x4b
-        mov  ecx, dword ptr [curThing+0x34]
-        sar  ecx, 8
-        cmp  eax, ecx
-        setle bl
-        mov  eax, ebx
-    }
+    return (*(int *)(curThing + 0x34) >> 8) >= COMinSpeed() + 0x4b;
 }

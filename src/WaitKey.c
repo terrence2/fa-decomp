@@ -1,30 +1,33 @@
-// _WaitKey @ rva 0x126c0 (48 B) — imp-Sleep parked in esi (8b 35 IAT
-// load); loop: call GetKey / test / jne exit / mov eax,[waitCounter] /
-// push 0 / inc eax / moffs store / call esi / jmp loop; pop esi / ret.
-// FA's a1/40/a3 reg-inc dance on a loaded-from-mem counter is asm-only
-// (C foldss to ff 05 mem-inc, w14a_wk2); the IAT pointer in esi then
-// ff d6 call avoids ff 15 too.
-extern char waitCounter[];
+/* _WaitKey @ rva 75456 (0x126c0, 48 B) — plain C.
+ * IAT-loaded fn-ptr parked in esi (8b 35 [__imp__Sleep]) is what unlocks
+ * FA's form: with the pointer local declared FIRST as
+ * `SleepFn sp = impSleepIAT`, CL plans esi/park + ff d6 call instead of
+ * materializing ff 15 (probe w14a_wk2 note about imp-IAT loads). The
+ * counter must NOT be ++ — `waitCounter = waitCounter + 1;` reproduces
+ * FA's a1/40/a3 mov-test-store reg-inc dance (naked version claimed this
+ * was asm-only; the esi park was the missing lever, not the counter).
+ *
+ * probes: build/survey/probes/w23_WaitKey_v1.c (EXACT) and _v2.c (EXACT —
+ *   volatile counter variant; v1 preferred as it adds no volatile)
+ *   run: python3 build/survey/hybrid_probe.py build/survey/probes/w23_r1.json
+ *
+ * maps copied verbatim from tools/swap.json entry WaitKey:
+ *   _impSleepIAT=__imp__Sleep
+ */
+typedef void (__stdcall *SleepFn)(unsigned long);
+extern SleepFn impSleepIAT;
+extern unsigned long waitCounter;
 extern int GetKey(void);
-extern void *impSleepIAT;       // __imp__Sleep
 
-__declspec(naked) int WaitKey_q(void)
+int WaitKey_q(void)
 {
-    __asm {
-        push esi
-        mov esi, dword ptr [impSleepIAT]
-    l1:
-        call GetKey
-        test eax, eax
-        jne fin
-        mov eax, dword ptr [waitCounter]
-        push 0
-        inc eax
-        mov dword ptr [waitCounter], eax
-        call esi
-        jmp l1
-    fin:
-        pop esi
-        ret
+    SleepFn sp = impSleepIAT;
+    int r;
+    for (;;) {
+        r = GetKey();
+        if (r)
+            return r;
+        waitCounter = waitCounter + 1;
+        sp(0);
     }
 }

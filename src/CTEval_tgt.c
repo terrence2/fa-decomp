@@ -1,37 +1,34 @@
-// _CTEval_tgt @ rva 0x640d0 (64 B) — FA asm: 66 83 3d <_serviceTicks+0x20>,
-//   0 (word gate)/74 2e/a1 <+0xf4>/8b 48 01 (mov ecx,[eax+1])/f6 c1 01
-//   (test cl,1)/74 2e/a0 <+0xe8>/84 c0/74 12/a1 <+0xf4> (SECOND load)/
-//   8a 88 <[tgt]+0xe3>/84 c9 (test cl)/75 03/33 c0 c3 (fallthrough ret0)/
-//   b8 01 00 00 00/c3 (exit-1 block)/33 c0 c3 (early ret0 block)/
-//   05 00 00 00 00 (tail pad).  Naked-asm escape: same CTEval twin family
-//   (probe b19 family FAIL in plain C) — moffs loads, cl/ah byte tests and
-//   the three exit blocks with shared targets are C-unreachable steering.
-//   Probe build/w4probe/b20f_CTEval_tgt.obj — exact.
+// _CTEval_tgt @ rva 409808 (0x640d0, 64 B) — plain C.  Decisive lever: a
+//   TWO-LABEL goto structure that defeats CL's identical-tail merge.  FA
+//   has a mid inline ret-0 block (33 c0 c3, target of the 4th gate's ==0
+//   fallthrough) BEFORE the ret-1 block (b8 01 00 00 00 c3), plus a SEPARATE
+//   end ret-0 block the two EARLY gates jump FORWARD to (74 2e / 74 21);
+//   v1-v3 (single ret-0 / return-0 forms) made CL merge the early rets
+//   inline and invert the polarity to jne +3.  With inl0/endfail split,
+//   CL keeps FA's block order and all four gate opcodes/polarities byte-
+//   identical: cmp word [serviceTicks+0x20],0 / je; q=[+0xf4] & 1 / je;
+//   byte [+0xe8] / je ret-1; byte [q+0xe3] / jne ret-1 with inline ret-0;
+//   and the same trailer pad census as FA.
+//   Probe build/survey/probes/p_w23_CTEval_tgt_v4.obj EXACT (w23_r7.json;
+//   ladder w23_CTEval_tgt_v1..v3).  Sibling _CTEval_tgtattackinganyone was
+//   built out-of-band but its chunk belongs to the w19 wave (src untouched).
+//   Maps (swap.json verbatim): [].
 extern char serviceTicks[];
 
-__declspec(naked) long CTEval_tgt_q(void)
+long CTEval_tgt_q(void)
 {
-    __asm {
-        cmp word ptr serviceTicks + 0x20, 0
-        je R0
-        mov eax, dword ptr serviceTicks + 0xf4
-        mov ecx, [eax+1]
-        test cl, 1
-        je R0
-        mov al, byte ptr serviceTicks + 0xe8
-        test al, al
-        je R1
-        mov eax, dword ptr serviceTicks + 0xf4
-        mov cl, [eax+0xe3]
-        test cl, cl
-        jne R1
-        xor eax, eax
-        ret
-    R1:
-        mov eax, 1
-        ret
-    R0:
-        xor eax, eax
-        ret
-    }
+    if (*(unsigned short *)(serviceTicks + 0x20) == 0)
+        goto endfail;
+    if ((*(unsigned long *)(*(unsigned long *)(serviceTicks + 0xf4) + 1) & 1) == 0)
+        goto endfail;
+    if (*(char *)(serviceTicks + 0xe8) == 0)
+        goto retone;
+    if (*(unsigned char *)(*(unsigned long *)(serviceTicks + 0xf4) + 0xe3) != 0)
+        goto retone;
+inl0:
+    return 0;
+retone:
+    return 1;
+endfail:
+    return 0;
 }

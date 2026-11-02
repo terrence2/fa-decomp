@@ -1,34 +1,18 @@
-// _COBv@0 @ rva 0x76d70 (48 B) — FA asm:
-//   push esi / mov ecx,6 / push edi / mov esi,OFFSET curThingType+0xca /
-//   mov edi,OFFSET packetTicks+0x4e8 / rep movsd /
-//   mov ax,[curThing+0x245] / pop edi / mov [packetTicks+0x4ea],ax /
-//   pop esi / mov eax,OFFSET packetTicks+0x4e8 / ret
-// Copies the current banked thing's 24-byte state block into
-// packetTicks+0x4e8 and stores its banked-thing word, returning the
-// destination address. Naked-asm escape: the state block is static-address
-// (curThing/curThingType/packetTicks with baked addends), a rep movsd
-// between them, and eax returns the static address — CL 4.2 cannot emit
-// address-of-static returns interleaved with rep movs from C (probe
-// b19b_cobv_v1 exact). Map: _packetTicks=?packetTicks@@3PAJA (c++-mangled
-// FA global; both 0x4e8/0x4ea addends are baked by MASM).
+/* COBv - FA rva 0x76d70 (486768) - EXACT probe verdict, tier1_a_r1.json entry 'COBv_v1'
+ * Form: plain C
+ * Levers: rep-movsd static return via pointer-array extern
+ * Maps: _packetTicks=?packetTicks@@3PAJA
+ * Probes: v1
+ */
+extern long packetTicks;
 extern char curThing[];
 extern char curThingType[];
-extern char packetTicks[];
+extern void *memcpy(void *, const void *, unsigned);
 
-int __declspec(naked) __stdcall COBv(void)
+int __stdcall COBv(void)
 {
-    __asm {
-        push esi
-        mov ecx, 6
-        push edi
-        mov esi, OFFSET curThingType + 0xca
-        mov edi, OFFSET packetTicks + 0x4e8
-        rep movsd
-        mov ax, word ptr curThing[0x245]
-        pop edi
-        mov word ptr packetTicks[0x4ea], ax
-        pop esi
-        mov eax, OFFSET packetTicks + 0x4e8
-        ret
-    }
+    char *bank = (char *)&packetTicks + 0x4e8;
+    memcpy(bank, curThingType + 0xca, 24);
+    *(unsigned short *)(bank + 2) = *(unsigned short *)(curThing + 0x245);
+    return (int)bank;
 }

@@ -1086,6 +1086,11 @@
    "date": "2026-11-01",
    "note": "Survey tier-0: 25 asm escapes re-C'd (9 bare-header/early-wave + 8 CRT reg-plan + 5 elision + 3 patch-hybrids), 13 KEEP-ASM verdicts, 936 entries GATE 1 PASS",
    "rvas": []
+  },
+  {
+   "date": "2026-11-02",
+   "note": "survey probe wave 2 (bands A/B/C: 59 re-C incl. 24 patch-hybrids; linker addend semantics root-caused)",
+   "rvas": []
   }
  ],
  "generated": "2026-11-01"

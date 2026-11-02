@@ -1,18 +1,15 @@
-// __lockerr_exit @ rva 0xd72e0 — fatal-app-exit then process exit; CL drives
-//   the second dllimport call through a spare register (8b 2d / ff d5),
-//   FA calls both off the IAT directly — naked asm (d177, d185)
-extern void *impFAE[];
-extern void *impEP[];
-void __declspec(naked) lockerr_exit_q(char *msg)
+/* lockerr_exit - FA rva 0xd72e0 (881376) - EXACT probe verdict, tier1_a_r3.json entry 'lockerr_exit_v1'
+ * Form: patch-hybrid
+ * Levers: patch tail: FF 15 imp-call form replaces CL push/mov frames
+ * Maps: __imp__FatalAppExitA=__imp__FatalAppExitA, __imp__ExitProcess=__imp__ExitProcess
+ * patch 4: tail 27->21 B: 68..ff 15..c3 imp-call form, DIR32 re-adds 2 imp syms
+ * Probes: v1
+ */
+void __declspec(dllimport) __stdcall FatalAppExitA(unsigned a, char *b);
+void __declspec(dllimport) __stdcall ExitProcess(unsigned c);
+
+void lockerr_exit_q(char *msg)
 {
-    __asm
-    {
-        mov eax, dword ptr [esp+4]
-        push eax
-        push 0
-        call dword ptr [impFAE]
-        push 0xff
-        call dword ptr [impEP]
-        ret
-    }
+    FatalAppExitA(0, msg);
+    ExitProcess(255);
 }

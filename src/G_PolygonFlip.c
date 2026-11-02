@@ -1,46 +1,27 @@
-// @G_PolygonFlip@8 @ rva 0x965e0 (64 B) — FA asm: push esi / a0 mov al,[cFillType]
-// / push edi / mov esi,ecx / mov edi,edx / 84 c0 test al,al / je pass /
-// a1 [effects] / a9 test eax,0x10000 / je pass / call @G_FloatFlatFlip@8 (the
-// esi/edi spills are its fastcall args: 0-arg decl, ecx/edx left live) /
-// pop edi / pop esi / ret / pass: mov edx,edi / mov ecx,esi / call @G_Flip@8 /
-// mov edx,edi / mov ecx,esi / call @G_Polygon@8 / pop edi / pop esi / ret.
-// asm escape (probe b17c_gpolygonflip byte-exact): the interleave push esi /
-// mov al,[cFillType] / push edi is not schedulable from C, and the 0-arg
-// fastcall escape (params passed straight through in ecx/edx, no spill in the
-// take-path) has no C form. Moffs a0 + a9 imm-test forms are MASM-only.
-// cFillType/effects identity; maps alias the three @-decorated callees.
-extern char cFillType[];
-extern char effects[];
-extern int gFloatFlatFlip(void);  /* map _gFloatFlatFlip=@G_FloatFlatFlip@8 */
-extern int gFlip(void);           /* map _gFlip=@G_Flip@8 */
-extern int gPolygon(void);        /* map _gPolygon=@G_Polygon@8 */
+// @G_PolygonFlip@8 @ rva 615904 (0x965e0, 64 B) — plain C.  Decisive levers:
+//   park locals sa=a/sb=b declared BEFORE the guards (FA: mov esi,ecx FIRST,
+//   mov edi,edx second; both calls take (a,b) in correct (ecx,edx) order —
+//   dis.py 8b d6/8b cf confirms), guards as separate ifs with FloatFlatFlip on
+//   the original ecx/edx.  Wave-3 char-vs-int and GSPolyFlip misparse taught:
+//   FA parks (esi,edi) = (ecx,edx) in decl order.
+//   Probe build/survey/probes/p_w23_GPolyFlip_v2.obj EXACT (w23_r2.json).
+//   Maps (swap.json verbatim): _gFloatFlatFlip=@G_FloatFlatFlip@8,
+//   _gFlip=@G_Flip@8, _gPolygon=@G_Polygon@8.
+extern char cFillType;
+extern long effects;
+extern void __fastcall G_FloatFlatFlip(long a, long b);
+extern void __fastcall G_Flip(long a, long b);
+extern void __fastcall G_Polygon(long a, long b);
 
-__declspec(naked) void __fastcall G_PolygonFlip(void)
+void __fastcall G_PolygonFlip_q(long a, long b)
 {
-    __asm {
-        push esi
-        mov al, byte ptr [cFillType]
-        push edi
-        mov esi, ecx
-        mov edi, edx
-        test al, al
-        je Lpass
-        mov eax, dword ptr [effects]
-        test eax, 10000h
-        je Lpass
-        call gFloatFlatFlip
-        pop edi
-        pop esi
-        ret
-Lpass:
-        mov edx, edi
-        mov ecx, esi
-        call gFlip
-        mov edx, edi
-        mov ecx, esi
-        call gPolygon
-        pop edi
-        pop esi
-        ret
+    long sa = a, sb = b;
+    if (cFillType) {
+        if (effects & 0x10000) {
+            G_FloatFlatFlip(a, b);
+            return;
+        }
     }
+    G_Flip(sa, sb);
+    G_Polygon(sa, sb);
 }

@@ -1839,9 +1839,9 @@
   "rva": "0x95880",
   "obj": "G_GetPoint",
   "src": "src/G_GetPoint.c",
-  "cls": "masm-enc",
-  "patch": false,
-  "probes": false,
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
   "game": true
  },
  {
@@ -2613,7 +2613,7 @@
   "rva": "0x530e0",
   "obj": "HARDNumLoaded",
   "src": "src/HARDNumLoaded.c",
-  "cls": "bare",
+  "cls": "plain",
   "patch": false,
   "probes": false,
   "game": false
@@ -2631,7 +2631,7 @@
   "rva": "0x63800",
   "obj": "SetScenarioEndTime",
   "src": "src/SetScenarioEndTime.c",
-  "cls": "bare",
+  "cls": "plain",
   "patch": false,
   "probes": false,
   "game": false
@@ -2640,7 +2640,7 @@
   "rva": "0x64bf0",
   "obj": "CTDo_exit",
   "src": "src/CTDo_exit.c",
-  "cls": "bare",
+  "cls": "plain",
   "patch": false,
   "probes": false,
   "game": true
@@ -2703,7 +2703,7 @@
   "rva": "0x8f480",
   "obj": "OBJStopAdding",
   "src": "src/OBJStopAdding.c",
-  "cls": "bare",
+  "cls": "plain",
   "patch": false,
   "probes": false,
   "game": false
@@ -2739,7 +2739,7 @@
   "rva": "0x96b20",
   "obj": "G_StringWidth",
   "src": "src/G_StringWidth.c",
-  "cls": "bare",
+  "cls": "plain",
   "patch": false,
   "probes": false,
   "game": true
@@ -3252,7 +3252,7 @@
   "rva": "0x75970",
   "obj": "GToTurn",
   "src": "src/GToTurn.c",
-  "cls": "bare",
+  "cls": "plain",
   "patch": false,
   "probes": false,
   "game": false
@@ -3324,8 +3324,8 @@
   "rva": "0x9b4f0",
   "obj": "EnvHighest",
   "src": "src/EnvHighest.c",
-  "cls": "reg-plan",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": false,
   "game": false
  },
@@ -3333,7 +3333,7 @@
   "rva": "0x9dd60",
   "obj": "PLANEUpdateJustLanded",
   "src": "src/PLANEUpdateJustLanded.c",
-  "cls": "bare",
+  "cls": "plain",
   "patch": false,
   "probes": false,
   "game": false
@@ -3378,9 +3378,9 @@
   "rva": "0xb4cc0",
   "obj": "G_HFlipBitmap",
   "src": "src/G_HFlipBitmap.c",
-  "cls": "reg-plan",
-  "patch": false,
-  "probes": false,
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
   "game": true
  },
  {
@@ -6744,7 +6744,7 @@
   "rva": 72592,
   "obj": "InBounds",
   "src": "src/InBounds.c",
-  "cls": "sched",
+  "cls": "plain",
   "patch": false,
   "probes": false,
   "game": false
@@ -7833,7 +7833,7 @@
   "rva": 712656,
   "obj": "get_pkt_err_string",
   "src": "src/get_pkt_err_string.c",
-  "cls": "elision",
+  "cls": "plain",
   "patch": false,
   "probes": false,
   "game": false
@@ -7896,7 +7896,7 @@
   "rva": 767584,
   "obj": "_line_overflow1",
   "src": "src/_line_overflow1.c",
-  "cls": "elision",
+  "cls": "plain",
   "patch": false,
   "probes": false,
   "game": false
@@ -7941,7 +7941,7 @@
   "rva": 874112,
   "obj": "fread",
   "src": "src/fread.c",
-  "cls": "reg-plan",
+  "cls": "plain",
   "patch": false,
   "probes": false,
   "game": false
@@ -7950,7 +7950,7 @@
   "rva": 874512,
   "obj": "fwrite",
   "src": "src/fwrite.c",
-  "cls": "reg-plan",
+  "cls": "plain",
   "patch": false,
   "probes": false,
   "game": false
@@ -7959,7 +7959,7 @@
   "rva": 875744,
   "obj": "fprintf",
   "src": "src/fprintf.c",
-  "cls": "reg-plan",
+  "cls": "plain",
   "patch": false,
   "probes": false,
   "game": false
@@ -8004,7 +8004,7 @@
   "rva": 889520,
   "obj": "nh_malloc",
   "src": "src/nh_malloc.c",
-  "cls": "reg-plan",
+  "cls": "plain",
   "patch": false,
   "probes": false,
   "game": false
@@ -8013,7 +8013,7 @@
   "rva": 901568,
   "obj": "heap_term",
   "src": "src/heap_term.c",
-  "cls": "bare",
+  "cls": "plain",
   "patch": false,
   "probes": false,
   "game": false
@@ -8085,7 +8085,7 @@
   "rva": 72352,
   "obj": "RotatedOffset",
   "src": "src/RotatedOffset.c",
-  "cls": "reg-plan",
+  "cls": "plain",
   "patch": false,
   "probes": false,
   "game": false
@@ -8118,12 +8118,12 @@
   "game": false
  },
  {
-  "rva": 396096,
+  "rva": 400192,
   "obj": "PutCurObj",
   "src": "src/PutCurObj.c",
-  "cls": "sched",
+  "cls": "plain",
   "patch": false,
-  "probes": false,
+  "probes": true,
   "game": false
  },
  {
@@ -8148,16 +8148,16 @@
   "rva": 487520,
   "obj": "COThrust",
   "src": "src/COThrust.c",
-  "cls": "sched",
+  "cls": "plain",
   "patch": false,
   "probes": false,
   "game": true
  },
  {
-  "rva": 488912,
+  "rva": 489424,
   "obj": "CDirDrawSurfaceUnlock",
   "src": "src/CDirDrawSurfaceUnlock.cpp",
-  "cls": "elision",
+  "cls": "plain",
   "patch": false,
   "probes": false,
   "game": false
@@ -8184,7 +8184,7 @@
   "rva": 520432,
   "obj": "MISSIONSetCheating",
   "src": "src/MISSIONSetCheating.c",
-  "cls": "elision",
+  "cls": "plain",
   "patch": false,
   "probes": false,
   "game": false
@@ -8193,7 +8193,7 @@
   "rva": 524448,
   "obj": "AlmostHome",
   "src": "src/AlmostHome.c",
-  "cls": "elision",
+  "cls": "plain",
   "patch": false,
   "probes": false,
   "game": false
@@ -8247,7 +8247,7 @@
   "rva": 619312,
   "obj": "G_SetHShake",
   "src": "src/G_SetHShake.c",
-  "cls": "bare",
+  "cls": "plain",
   "patch": false,
   "probes": false,
   "game": true

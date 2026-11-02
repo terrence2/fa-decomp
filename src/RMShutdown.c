@@ -1,39 +1,25 @@
-// _RMShutdown@0 @ rva 0xa36c0 (61 B code + 3 B 8d49 pad) — walks a 0x13
-// -stride array from ?resList@@3PAURES_LIST@@A, RMFree()ing each nonempty
-// entry head, then f3 ab-rep stosd zeroes 0x19fa dwords and clears the
-// trailing allocated-flag byte at +0x67e8.  The immediates 0x4ff720 /
-// 0x505f08 carry DIR32 relocs to the resList symbol (human-coin +0x0 /
-// +0x67e8 maps) — MASM offset forms; a0/a2 moffs for the flag byte.
-extern char resListArr[];               /* ?resList@@3PAURES_LIST@@A */
-extern char resEnd;                     /* ?resList@@3PAURES_LIST@@A+0x67e8 */
-extern void __stdcall RMFree(char* p);
+/* RMShutdown - FA rva 0xa36c0 (669376) - EXACT probe verdict, tier1_a_r3.json entry 'RMShutdown_v3'
+ * Form: plain C
+ * Levers: __stdcall RMFree callee (FA _RMFree@4; cdecl emitted 83 c4 04)
+ * Maps: _resListArr=?resList@@3PAURES_LIST@@A, _resEnd=?resList@@3PAURES_LIST@@A+0x67e8, _RMFree@4=_RMFree@4
+ * Probes: v1-v3
+ */
+extern char resListArr[];
+extern char resEnd;
+extern void __stdcall RMFree(void *p);
+extern void *memset(void *, int, unsigned long);
 
-__declspec(naked) void __stdcall RMShutdown_q(void)
+void RMShutdown(void)
 {
-    __asm {
-        push esi
-        mov  al, byte ptr resEnd
-        push edi
-        test al, al
-        je   Ldone
-        mov  esi, offset resListArr
-    Llp:mov  al, byte ptr [esi]
-        test al, al
-        je   Lskip
-        push esi
-        call RMFree
-    Lskip:
-        add  esi, 13h
-        cmp  esi, offset resEnd
-        jb   Llp
-        mov  edi, offset resListArr
-        xor  eax, eax
-        mov  ecx, 019fah
-        rep  stosd
-        mov  resEnd, al
-    Ldone:
-        pop  edi
-        pop  esi
-        ret
+    char *p;
+    if (resEnd) {
+        p = resListArr;
+        do {
+            if (*p)
+                RMFree(p);
+            p += 0x13;
+        } while (p < &resEnd);
+        memset(resListArr, 0, 0x67e8);
+        resEnd = 0;
     }
 }

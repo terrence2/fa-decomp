@@ -1,27 +1,22 @@
-// _G_CircleFlip@16 @ rva 0x96770 (43 B code + 8 B 8d64x2 pad) — asm
-// escape: plain C probe schedules _cb load first (8b 0d into ecx, then
-// [ecx+6], sub from a stack read) while FA loads the d/c params first,
-// pushes d, THEN loads _cb into edx (8b 15) and keeps c/b in stack
-// reloads (8b 44 24 0c).  m = *(int*)((char*)_cb+6).
-extern char* cb;                        /* _cb */
-extern void __stdcall G_Circle(int a, int b, int c, int d);
+// _G_CircleFlip@16 @ rva 0x96770 (616304, 43 B code + 8 B 8d64x2 pad) —
+//   stdcall wrapper: G_Circle(a, *(int*)((char*)cb+6) - b - 1, c, d).
+//   FA loads the d/c params first, pushes d, THEN loads _cb into edx
+//   (8b 15) and keeps c/b as stack reloads.
+//   G_CircleFlip twin family. Naked-asm escape.
+// EXACT as plain C (survey tier-1 probe v1): the PutCurObj lever — inline
+// the subscript into the call argument. v2 separated out a local m and CL
+// scheduled the _cb load first (8b 0d) with the m-add from a stack read.
+//
+// probes: build/survey/probes/t1_flipc_v1.c (EXACT), t1_flipc_v2.c (no) —
+//   run: python3 build/survey/hybrid_probe.py build/survey/probes/tier1_b1.json
+//
+// maps VERBATIM plus one NEW map (probe extern is the call shim):
+//   "_G_CircleQ=_G_Circle@16"
+extern char* cb;                        /* _cb (identity) */
+extern void __stdcall G_CircleQ(int a, int b, int c, int d);
+                                        /* map _G_CircleQ=_G_Circle@16 */
 
-__declspec(naked) void __stdcall G_CircleFlip_q(int a, int b, int c, int d)
+void __stdcall G_CircleFlip_q(int a, int b, int c, int d)
 {
-    __asm {
-        mov  eax, dword ptr [esp+10h]
-        mov  ecx, dword ptr [esp+0Ch]
-        push eax
-        mov  edx, cb
-        mov  eax, dword ptr [esp+0Ch]
-        push ecx
-        mov  ecx, dword ptr [edx+6]
-        sub  ecx, eax
-        mov  eax, dword ptr [esp+0Ch]
-        dec  ecx
-        push ecx
-        push eax
-        call G_Circle
-        ret  10h
-    }
+    G_CircleQ(a, *(int *)((char *)cb + 6) - b - 1, c, d);
 }

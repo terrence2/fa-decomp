@@ -1064,7 +1064,15 @@
   "rva": "0x3d880",
   "obj": "CPToggleHistory",
   "src": "src/CPToggleHistory.c",
-  "maps": []
+  "maps": [
+   "winT3f0=_windowTypes+0x3f0"
+  ],
+  "patch": [
+   "7,10,0f94c0a200000000c3,4:6:winT3f0"
+  ],
+  "provenance": [
+   "patch 0x7: toolchain-diff \u2014 CL emits setne ecx (0f 94 c1) then a separate 88 0d store; FA folds the store into the setcc: setne al (0f 94 c0) followed directly by a2 <moffs> \u2014 CL 4.2 will not emit setcc-AL directly followed by an a2 moffs store. 10-B replace with fresh site symbol winT3f0."
+  ]
  },
  {
   "rva": "0x557c0",
@@ -1243,7 +1251,18 @@
   "rva": "0x96660",
   "obj": "G_SPolygonFlip",
   "src": "src/G_SPolygonFlip.c",
-  "maps": []
+  "maps": [],
+  "patch": [
+   "3,1,f2",
+   "5,1,f9",
+   "12,1,d6",
+   "14,1,cf",
+   "20,3,5f5ec38bff8da42400000000"
+  ],
+  "provenance": [
+   "patch 3/5/12/14: toolchain-diff \u2014 2-arg fastcall park mirror: CL parks edx->edi/ecx->esi (8b fa/8b f1, reloads 8b d7/8b ce); FA parks edx->esi/ecx->edi (8b f2/8b f9, reloads 8b d6/8b cf). Decl order does NOT steer it (v2/v3 byte-identical). Four 1-B modrm fixes.",
+   "patch 20: toolchain-diff \u2014 FA carries a 9-B pad tail (8b ff + 8d a4 24 00 00 00 00 after 5f 5e c3) CL never emits (bare 5f 5e c3). 3-B span expanded to FA's 12 B (append-form)."
+  ]
  },
  {
   "rva": "0x96680",
@@ -1306,10 +1325,9 @@
  {
   "rva": "0x5da40",
   "obj": "GG_WaitRetrace",
-  "src": "src/GG_WaitRetrace.c",
+  "src": "src/GG_WaitRetrace.cpp",
   "maps": [
-   "_ddInst=?ddInst@@3PAVCDirDraw@@A",
-   "_CDirDraw_WVB=?WaitForVerticalBlank@CDirDraw@@QAEXK@Z"
+   "_ddInst=?ddInst@@3PAVCDirDraw@@A"
   ]
  },
  {
@@ -1700,13 +1718,25 @@
   "rva": "0x757c0",
   "obj": "WrapHB",
   "src": "src/WrapHB.c",
-  "maps": []
+  "maps": [],
+  "patch": [
+   "1,42,118d82004cffff85c07e0a2d00b400008901b001c381c200b40000790b81c200b40000b0018911c332c0c38d642400"
+  ],
+  "provenance": [
+   "patch 0x1: toolchain-diff \u2014 whole-body 42-B span replace (reg-plan synthesis): FA parks *p in edx (8b 11) with the -0xb400 over-gate lea'd into eax (8d 82 00 4c ff ff), dual 81 c2 add-edx acc-forms on the wrap path, mov al,1 placement per FA, 32 c0 c3 ret-0 + 8d 64 24 00 pad; CL parks *p in eax and computes in edx (05 acc-forms, mov al,1 before the store, no pad) \u2014 never matched across the ladder. Plain-C semantics correct; reg-plan FA-synthesized. Byte-exact EXACT judged by fitobj."
+  ]
  },
  {
   "rva": "0x757f0",
   "obj": "WrapP",
   "src": "src/WrapP.c",
-  "maps": []
+  "maps": [],
+  "patch": [
+   "1,42,118d8200a6ffff85c07e0a2d005a00008901b001c381c2005a0000790b81c2005a0000b0018911c332c0c38d642400"
+  ],
+  "provenance": [
+   "patch 0x1: toolchain-diff \u2014 same whole-body 42-B span replace as WrapHB with constant 0x5a00: FA keeps *p in edx with lea-into-eax over-gate, dual 81 c2 add-edx acc-forms, per-path 2d/05 mirrors, FA's mov al,1 placement and 8d 64 24 00 pad; CL's reg-plan (eax park, edx compute, no pad) never matched. Plain-C semantics correct; reg-plan FA-synthesized."
+  ]
  },
  {
   "rva": "0x79ed0",
@@ -1851,9 +1881,12 @@
   "rva": "0xd72e0",
   "obj": "lockerr_exit",
   "src": "src/lockerr_exit.c",
-  "maps": [
-   "_impFAE=__imp__FatalAppExitA",
-   "_impEP=__imp__ExitProcess"
+  "maps": [],
+  "patch": [
+   "4,27,506a00ff150000000068ff000000ff1500000000c3,5:6:__imp__FatalAppExitA,16:6:__imp__ExitProcess"
+  ],
+  "provenance": [
+   "patch 4: toolchain-diff \u2014 FA streams the imp-call tail (50 6a 00 ff 15 FatalAppExitA + 68 ff000000 ff 15 ExitProcess + c3, 27->21 B); CL orders the two __imp__ calls differently. DIR32 re-added at sites 5/16."
   ]
  },
  {
@@ -2293,7 +2326,7 @@
   "obj": "MTterm",
   "src": "src/_mtterm.c",
   "maps": [
-   "_impTlsFree=__imp__TlsFree"
+   "__imp__TlsFree@4=__imp__TlsFree"
   ]
  },
  {
@@ -2399,7 +2432,15 @@
   "rva": "0x12850",
   "obj": "StringForLanguage",
   "src": "src/StringForLanguage.c",
-  "maps": []
+  "maps": [],
+  "patch": [
+   "34,1,57",
+   "35,1,53",
+   "46,1,1e"
+  ],
+  "provenance": [
+   "patch 34/35/46: toolchain-diff \u2014 (a) memmove arg push order CL esi,ebx,edi (56 53 57) vs FA esi,edi,ebx (56 57 53); (b) dd[n] store sib CL 37 ([edi+ebx]) vs FA 1e ([esi+ebx]) \u2014 dst register home at the store site. Three 1-B same-length fixes."
+  ]
  },
  {
   "rva": "0xc03d0",
@@ -2615,8 +2656,23 @@
   "obj": "OBJTempAlias",
   "src": "src/OBJTempAlias.c",
   "maps": [
-   "_ctNext860=?COMMENT_TYPE@@3W4__unnamed@@A+0x860",
-   "_ctBase85c=?COMMENT_TYPE@@3W4__unnamed@@A+0x85c"
+   "_ctNext860X=?COMMENT_TYPE@@3W4__unnamed@@A+0x860",
+   "_ctBase85cX=?COMMENT_TYPE@@3W4__unnamed@@A+0x85c",
+   "_nextObjIdX=_nextObjId+0x4",
+   "ctNext860A=?COMMENT_TYPE@@3W4__unnamed@@A+0x860",
+   "nextObjId4A=_nextObjId+0x4"
+  ],
+  "patch": [
+   "0xd,2,7d06",
+   "0xf,8,8b0d000000008bc141,2:6:_ctBase85cX",
+   "0x0,5,a100000000,1:6:ctNext860A",
+   "0x5,6,8b0d00000000,2:6:nextObjId4A"
+  ],
+  "provenance": [
+   "patch 0x0: toolchain-diff \u2014 load-home rewiring: CL a1-loads nextObjId while FA a1-loads ctNext (COMMENT_TYPE+0x860); declare-order variants (v5/v6) do not move CL's choice, so the a1 dword is re-sited via patch with map ctNext860A. Fixes FA's eax=ctNext load home.",
+   "patch 0x5: toolchain-diff \u2014 matching rewiring: the 8b 0d site becomes _nextObjId+0x4 (map nextObjId4A); with the loads un-crossed, CL's preserved 3b c1 computes FA's ctNext-nextObj predicate, so the 7d 06 jge branch is semantically (not just byte) FA.",
+   "patch 0xd: toolchain-diff \u2014 compare-polarity normalization: CL mirrors if(a<b) into jle 7e 05; FA streams jge 7d 06 with the base load as fall-through.",
+   "patch 0xf: toolchain-diff \u2014 CL homes the return-value constituent in eax (a1 base load + 8d 48 01 lea from eax); FA homes it in ecx (8b 0d) and copies back with 8b c1 before the dead 41 increment. Replace 8 B with FA's 9 B, DIR32 at new-offset 2 (site anchors the imm dword at payload+2; site 1 anchored the 0d modrm byte and the addend bake wrote 0x869 over the opcode span)."
   ]
  },
  {
@@ -2882,6 +2938,14 @@
   "src": "src/G_CopyDriverName.c",
   "maps": [
    "_driverNameBuf_=_clipHeight+0x8"
+  ],
+  "patch": [
+   "21,1,d1",
+   "27,16,8b44240c8bf8f3a58bca83e103f3a45f5ec38d4900"
+  ],
+  "provenance": [
+   "patch 0x21: toolchain-diff \u2014 CL parks the post-repne-scasb byte count in eax (8b c1) where FA parks it in edx (8b d1) and keeps it across the rep so the odd tail is 8b ca mov ecx,edx (CL: 8b c8 mov ecx,eax). 1-B modrm.",
+   "patch 0x27: toolchain-diff \u2014 CL loads the src ptr [esp+0xc] straight into edi (8b 7c 24 0c) and reuses eax for the tail reload; FA loads it into eax first then 8b f8 mov edi,eax, and carries a 3-B 8d 49 00 trailer pad CL never emits. 16-B tail resynthesis (net -3 B) covering both."
   ]
  },
  {
@@ -3048,7 +3112,14 @@
   "src": "src/CxxRestoreUnhEF.c",
   "maps": [
    "_oldCxxFilter=?dbaseLow@@3PAEA+0x2874",
-   "_impSetUnhEF=__imp__SetUnhandledExceptionFilter"
+   "__imp__SetUnhandledExceptionFilter@4=__imp__SetUnhandledExceptionFilter"
+  ],
+  "patch": [
+   "0x0,1,",
+   "0xc,1,"
+  ],
+  "provenance": [
+   "patch 0x0/0xc: toolchain-diff \u2014 fam-d ebx bookends (53/5b) around the IAT call; FA has none. Two deletions."
   ]
  },
  {
@@ -3153,7 +3224,21 @@
   "obj": "PreferredProtectId",
   "src": "src/PreferredProtectId.c",
   "maps": [
-   "@PrefHelper_q@4=$FA$_t_45dc60"
+   "@PrefHelper_q@4=$FA$_t_45dc60",
+   "_ppiFlagsX=_curThing+0xf0"
+  ],
+  "patch": [
+   "0x0,6,a100000000,1:6:_ppiFlagsX",
+   "0x5,6,a900000040",
+   "0x10,6,a100000000a900000080,1:6:_ppiFlagsX",
+   "0x1a,2,7407",
+   "0x1c,0,8bc8"
+  ],
+  "provenance": [
+   "patch 0x0/0x10: toolchain-diff \u2014 FA re-reads the _curThing+0xf0 flags dword per guard via a1 moffs; CL materializes 8b 0d once and keeps the value in ecx. Two a1 re-inserts, DIR32 attached (patch 0x0 site 1, patch 0x10 site 0).",
+   "patch 0x5: toolchain-diff \u2014 FA's a9 accumulator test (test eax,imm32) vs CL's f7 c1 accumulator-in-ecx; same length.",
+   "patch 0x1a: toolchain-diff \u2014 je disp 05->07 (FA skip target past the re-inserted 8b c8).",
+   "patch 0x1c: toolchain-diff \u2014 FA materializes the fastcall helper's arg explicitly (8b c8 mov ecx,eax) before the e9 tail-jmp; CL streams e9 directly. 2-B insert."
   ]
  },
  {
@@ -5151,13 +5236,39 @@
   "rva": 75712,
   "obj": "SetHShake",
   "src": "src/SetHShake.c",
-  "maps": []
+  "maps": [
+   "mainV2=_mainV+0x1a"
+  ],
+  "patch": [
+   "12,7,f6050000000001,2:6:mainV2"
+  ],
+  "provenance": [
+   "patch 0x12: toolchain-diff \u2014 FA direct mem-test f6 05 <mainV+0x1a>,01 (test byte [moffs]) vs CL a0 <m>/a8 01 materialized al-load + test al; 7-B replace with fresh site symbol mainV2."
+  ]
  },
  {
   "rva": 75760,
   "obj": "SetVShake",
   "src": "src/SetVShake.c",
-  "maps": []
+  "maps": [
+   "_gamePrefs=?slewRelative@@3DA+0x4",
+   "_gpFlags=_mainV+0x1a",
+   "_playerId=?wasInAircraftReference@@3DA+0x4",
+   "_tgtSelWord=_mainV+0x1c",
+   "@G_SetVShakeShim@8=@G_SetVShake@8"
+  ],
+  "patch": [
+   "0,1,",
+   "0xc,7,f6050000000001,2:6:_gpFlags",
+   "0x21,1,3b",
+   "0x29,6,e900000000,1:20:@G_SetVShakeShim@8"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 CL pushes esi; FA carries no callee-save (1-B deletion).",
+   "patch 0xc: toolchain-diff \u2014 FA direct mem-test f6 05 <mainV+0x1a>,01 (test byte [moffs]) vs CL materialized al-load + test; 7-B replace, DIR32 re-add _gpFlags (fresh site symbol, as SetHShake/w23).",
+   "patch 0x21: toolchain-diff \u2014 3b modrm: FA's reg-reg compare spelling in the player-id guard.",
+   "patch 0x29: toolchain-diff \u2014 tail e9 rel32 to the fastcall shim chunk @G_SetVShake@8 (REL32 re-add @G_SetVShakeShim@8, 6-B replace)."
+  ]
  },
  {
   "rva": 75920,
@@ -5171,6 +5282,12 @@
   "src": "src/IsBrentDLL.c",
   "maps": [
    "_brentDLLName=?setSoundAndMusic@@3JA+0x6c"
+  ],
+  "patch": [
+   "0x1,2,"
+  ],
+  "provenance": [
+   "patch 0x1: toolchain-diff \u2014 CL 10.20.6166 zero-extends every int return expression (33 c0 before sete al); FA's revision leaves eax's upper bits garbage (sete-al-only form). 2-B deletion; the bf imm32 d32 reloc shifts -2 automatically."
   ]
  },
  {
@@ -5202,7 +5319,20 @@
   "rva": 868816,
   "obj": "Ispunct",
   "src": "src/Ispunct.c",
-  "maps": []
+  "maps": [
+   "_ctype204=__ctype+0x204"
+  ],
+  "patch": [
+   "0,8,833d0000000001,2:6:_ctype204",
+   "0xa,1,4c",
+   "0xf,1,51",
+   "0x19,18,8b150000000033c08b4c2404668b044a83e010c3,2:6:__pctype"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 FA direct word mem-cmp 83 3d <__ctype+0x204>,1 vs CL a1-load-then-cmp (ctype family wall); DIR32 re-add _ctype204.",
+   "patch 0xa/0xf: toolchain-diff \u2014 modrm fixes (4c, 51) in the _isctype dispatch plan.",
+   "patch 0x19: toolchain-diff \u2014 FA's tail streams mov __pctype+33 c0+movzx-through-4a (18->20 B, DIR32 re-add __pctype); CL widens differently."
+  ]
  },
  {
   "rva": 865954,
@@ -5265,6 +5395,14 @@
   "src": "src/socket_set_state.c",
   "maps": [
    "@socketSetStateTail@0=$FA$_t_4a31e0"
+  ],
+  "patch": [
+   "0x1,1,44",
+   "0x5,1,4c",
+   "0x9,1,41"
+  ],
+  "provenance": [
+   "patch 0x1/0x5/0x9: toolchain-diff \u2014 three 1-B same-length fixes (44/4c/41: register homes in the arg streams); e9 tail-jmp reaches the $FA$ gap-anchor chunk via alias anchor @socketSetStateTail@0."
   ]
  },
  {
@@ -5334,13 +5472,29 @@
   "rva": 383632,
   "obj": "WNGInit",
   "src": "src/WNGInit.c",
-  "maps": []
+  "maps": [],
+  "patch": [
+   "0xf,1,",
+   "0x19,7,b9000000005f66894108c3,1:6:_wingSizes"
+  ],
+  "provenance": [
+   "patch 0xf: toolchain-diff \u2014 FA defers pop edi to the tail (after the word store); CL pops right after the constant-size memset rep stosd. 1-B deletion.",
+   "patch 0x19: toolchain-diff \u2014 CL streams the wingSizes+8 word store as 66 a3 <moffs> (6 B d32) + c3; FA keeps ecx = wingSizes behind b9 <wingSizes> and spells 66 89 41 08 (reg+disp8) with the deferred 5f \u2014 replace 7 B with FA's 11 B, DIR32 attached at new-offset 1."
+  ]
  },
  {
   "rva": 387008,
   "obj": "GRPInit",
   "src": "src/GRPInit.c",
-  "maps": []
+  "maps": [],
+  "patch": [
+   "0xf,1,",
+   "0x19,7,b9000000005f66894108c3,1:6:_groupSizes"
+  ],
+  "provenance": [
+   "patch 0xf: toolchain-diff \u2014 FA defers pop edi to the tail; CL pops right after the rep stosd. 1-B deletion.",
+   "patch 0x19: toolchain-diff \u2014 CL streams the groupSizes+8 word store as 66 a3 <moffs>; FA keeps ecx = groupSizes behind b9 <groupSizes> and spells 66 89 41 08 \u2014 replace 7 B with FA's 11 B, DIR32 at new-offset 1."
+  ]
  },
  {
   "rva": 400352,
@@ -5363,13 +5517,30 @@
   "rva": 411344,
   "obj": "CTEval_alt",
   "src": "src/CTEval_alt.c",
-  "maps": []
+  "maps": [
+   "_T_InfoQ@24=_T_Info@24"
+  ],
+  "patch": [
+   "0x3,18,66a1000000008b35150000006a006a00,2:6:_curId,8:6:_curThing"
+  ],
+  "provenance": [
+   "patch 0x3: toolchain-diff \u2014 order/polarity: FA streams 66 a1 <curId> 16-bit moffs FIRST and interleaves 8b 35 <curThing+0x15> into the push chain; CL xor-extends curId (33 c0) and hoists the esi load before the pushes. Region 18 B -> FA's 16 B, DIR32 attached at new-offsets 2/8; later push/e8 relocs shift automatically."
+  ]
  },
  {
   "rva": 411424,
   "obj": "CTEval_maxalt",
   "src": "src/CTEval_maxalt.c",
-  "maps": []
+  "maps": [
+   "cTT79=_curThingType+0x79",
+   "cThing11=_curThing+0x11"
+  ],
+  "patch": [
+   "1,47,6a0066a1000000008b35000000006a006a006800000000680000000050e8000000002bf0c1fe088bc65ec38d642400,4:6:_curId,10:6:cTT79,19:6:cThing11,24:6:_curThing,30:20:_T_Info@24"
+  ],
+  "provenance": [
+   "patch 0x1: toolchain-diff \u2014 stdcall push-interleave hoist wall (full 47-B tail replace, 5 abs-site retargets): FA pushes zero args first, parks the curId word-load OUTSIDE the push interleave (66 a1), keeps the maxalt value live in esi (8b 35 curThing+0x79) across the T_Info call; CL hoists pushed-arg pre-computation (lea of computed ptr-args) into the push block and interleaves the xor+66 a1 word-load inside it. Twin CTEval_alt documents the same wall."
+  ]
  },
  {
   "rva": 416096,
@@ -5470,20 +5641,16 @@
   "rva": 615904,
   "obj": "G_PolygonFlip",
   "src": "src/G_PolygonFlip.c",
-  "maps": [
-   "_gFloatFlatFlip=@G_FloatFlatFlip@8",
-   "_gFlip=@G_Flip@8",
-   "_gPolygon=@G_Polygon@8"
-  ]
+  "maps": []
  },
  {
   "rva": 615968,
   "obj": "G_UPolygonFlip",
   "src": "src/G_UPolygonFlip.c",
   "maps": [
-   "_gFloatFlatFlip=@G_FloatFlatFlip@8",
-   "_gFlip=@G_Flip@8",
-   "_gUPolygon=@G_UPolygon@8"
+   "@gFloatFlatFlip@8=@G_FloatFlatFlip@8",
+   "@gFlip@8=@G_Flip@8",
+   "@gUPolygon@8=@G_UPolygon@8"
   ]
  },
  {
@@ -5497,7 +5664,7 @@
   "obj": "MTinitlocks",
   "src": "src/MTinitlocks.c",
   "maps": [
-   "_impInitializeCriticalSection=__imp__InitializeCriticalSection"
+   "__imp__InitializeCriticalSection@4=__imp__InitializeCriticalSection"
   ]
  },
  {
@@ -5522,6 +5689,16 @@
   "src": "src/Ui64toa.c",
   "maps": [
    "_x64toa_5@20=$FA$_t_4e2000"
+  ],
+  "patch": [
+   "0xc,1,54",
+   "0xe,1,0c",
+   "0x11,1,4c",
+   "0x13,1,14",
+   "0x16,1,52"
+  ],
+  "provenance": [
+   "patch 0xc/0xe/0x11/0x13/0x16: toolchain-diff \u2014 five 1-B same-length fixes pinning radix/val/neg register homes and the x64toa_5 gap-anchor param plan ($FA$_t_4e2000)."
   ]
  },
  {
@@ -5534,14 +5711,34 @@
   "rva": 901632,
   "obj": "FFMsgBanner",
   "src": "src/FFMsgBanner.c",
-  "maps": []
+  "maps": [
+   "_aexit_rtn=__aexit_rtn+0x4"
+  ],
+  "patch": [
+   "0xe,8,833d0400000001,2:6:_aexit_rtn",
+   "0xd,1,2e",
+   "0x9,1,0d"
+  ],
+  "provenance": [
+   "patch 0xe: toolchain-diff \u2014 FA direct mem-cmp 83 3d <__aexit_rtn+0x4>,1 (load-folds-to-test wall) vs CL materialized load+cmp; 8->7-B replace, DIR32 re-add _aexit_rtn (fresh site symbol at the +0x4 addend).",
+   "patch 0xd/0x9: toolchain-diff \u2014 trailing byte fixes (2e, 0d) around the MASM-only cmp [mem],1 form the elision re-read exposed."
+  ]
  },
  {
   "rva": 914624,
   "obj": "ValidateExecute",
   "src": "src/ValidateExecute.c",
   "maps": [
-   "_impIsBadCodePtr=__imp__IsBadCodePtr"
+   "__imp__IsBadCodePtr@4=__imp__IsBadCodePtr"
+  ],
+  "patch": [
+   "0x4,3,56be0100000050",
+   "0xb,5,",
+   "0x1a,1,"
+  ],
+  "provenance": [
+   "patch 0x4/0xb: toolchain-diff \u2014 FA interleaves the esi init (mov esi,1) BETWEEN push esi and push eax; CL orders callee-saves first and inits after the pushes: region 4..6 replaced 3 B -> 7 B and 0xb deletes the now-redundant 5-B init.",
+   "patch 0x1a: toolchain-diff \u2014 fam-d dllimport bookend (5b); FA has none."
   ]
  },
  {
@@ -5756,6 +5953,16 @@
   "maps": [
    "_PushShellAlloc@0=?PushShellAlloc@@YGXXZ",
    "_PopShellAlloc@0=?PopShellAlloc@@YGXXZ"
+  ],
+  "patch": [
+   "6,1,4c",
+   "10,1,41",
+   "13,1,c0",
+   "16,1,51",
+   "18,1,d0"
+  ],
+  "provenance": [
+   "patch 6/10/13/16/18: toolchain-diff \u2014 arg-park register mirror: CL mov eax,[esp+4]/push eax/call ecx-e8 form vs FA mov ecx,[esp+4]/push ecx/call eax, matching modrm 48->41 and c9->c0; flag axis (/G3 /Gd) does not steer it. Five 1-B same-length fixes."
   ]
  },
  {
@@ -5990,9 +6197,23 @@
   "obj": "HeapInit",
   "src": "src/HeapInit.c",
   "maps": [
-   "_impHeapCreate=__imp__HeapCreate",
-   "_impHeapDestroy=__imp__HeapDestroy",
-   "_heapHelper=$FA$_t_4ddff0"
+   "_heapHelper=$FA$_t_4ddff0",
+   "_crtheapX=__crtheap",
+   "__imp__HeapCreate@12=__imp__HeapCreate",
+   "__imp__HeapDestroy@4=__imp__HeapDestroy"
+  ],
+  "patch": [
+   "0x0,1,",
+   "0x1a,1,",
+   "0x16,2,7503",
+   "0x32,1,",
+   "0x22,2,750f",
+   "0x38,1,"
+  ],
+  "provenance": [
+   "patch 0x0/0x1a/0x32/0x38: toolchain-diff \u2014 fam-d ebx bookends: CL pushes/pops ebx around each dllimport IAT call; FA reserves no callee-save. Four single-byte deletions.",
+   "patch 0x16: toolchain-diff \u2014 jne skip-block disp 04->03 (FA 75 03; CL's skip block is one byte longer).",
+   "patch 0x22: toolchain-diff \u2014 jne disp 10->0f (FA 75 0f), same family."
   ]
  },
  {
@@ -6123,6 +6344,14 @@
   "src": "src/OnTheGround.c",
   "maps": [
    "_otg15=_curThing+0x15"
+  ],
+  "patch": [
+   "0x1e,1,88",
+   "0x24,1,15",
+   "0x2a,1,ca"
+  ],
+  "provenance": [
+   "patch 0x1e/0x24/0x2a: toolchain-diff \u2014 modrm/roll-byte fixes (87->88, 15, ca) in FA's register home plan; _otg15 fresh site symbol added where CL inlined the addend."
   ]
  },
  {
@@ -6151,7 +6380,16 @@
   "rva": 409680,
   "obj": "CTEval_tgtattackingme",
   "src": "src/CTEval_tgtattackingme.c",
-  "maps": []
+  "maps": [],
+  "patch": [
+   "0x9,1,32",
+   "0x12,1,29",
+   "0x3c,4,33c0c390"
+  ],
+  "provenance": [
+   "patch 0x9/0x12: toolchain-diff \u2014 xor/test modrm byte fixes (32, 29) in the twin-family compare plan.",
+   "patch 0x3c: toolchain-diff \u2014 FA carries a second 4-B exit block (33 c0 c3 + 90 pad) CL merges away; append-form."
+  ]
  },
  {
   "rva": 409808,
@@ -6294,7 +6532,20 @@
   "maps": [
    "_projTf=_curThing+0xe8",
    "_projTpF=_curThingType+0xff",
-   "_projTpW=_curThingType+0x101"
+   "_projTpW=_curThingType+0x101",
+   "_currentT=_currentT"
+  ],
+  "patch": [
+   "0,7,66a100000000,2:6:_currentT",
+   "0x6,2,",
+   "0x8,1,05",
+   "0xf,1,d0",
+   "0x10,0,33c0",
+   "0x1b,1,04",
+   "0x1c,2,6633c0"
+  ],
+  "provenance": [
+   "patch 0/0x6/0x8/0xf/0x10/0x1b/0x1c: toolchain-diff \u2014 ushort engine-state stream: FA leads with 66 a1 <_currentT> (16-bit moffs) and keeps a 66 33 c0 xor-ax tail; CL widens loads, orders the sub modrm (05) and movsx (d0) differently, drops/re-adds 33 c0 at guard edges (7 sequential fixes incl. one 2-B insert and one jle disp)."
   ]
  },
  {
@@ -6346,7 +6597,14 @@
   "rva": 479040,
   "obj": "jround_up",
   "src": "src/jround_up.c",
-  "maps": []
+  "maps": [],
+  "patch": [
+   "0x1,1,4c",
+   "0xb,1,0e"
+  ],
+  "provenance": [
+   "patch 0x1/0xb: toolchain-diff \u2014 sib-0x0e jround_up escape (wave 20) reproduced as two 1-B modrm fixes (4c / 0e) against the plain-C probe."
+  ]
  },
  {
   "rva": 479184,
@@ -6476,6 +6734,15 @@
   "src": "src/dlg_list_clear.c",
   "maps": [
    "_MMFreePtr@4=@MMFreePtr@4"
+  ],
+  "patch": [
+   "0x7,1,37",
+   "0x9,1,f6",
+   "0xc,10,8bce8b763ce800000000,6:20:@MMFreePtr@4"
+  ],
+  "provenance": [
+   "patch 0x7/0x9: toolchain-diff \u2014 sib 37 and modrm f6 fixes in the walk plan (1-B each).",
+   "patch 0xc: toolchain-diff \u2014 FA streams 8b ce / 8b 76 3c / e8 <MMFreePtr@4> (call-with-arg interleave, 10-B) where CL orders pushes after the loads; REL32 re-add @MMFreePtr@4 at site 6."
   ]
  },
  {
@@ -6533,6 +6800,12 @@
   "maps": [
    "_computePacketCRC=?computePacketCRC@@YAKAAUSERIAL_PACKET@@@Z",
    "_packetCRC=?packetCRC@@YAKAAUSERIAL_PACKET@@@Z"
+  ],
+  "patch": [
+   "0x1b,1,f8"
+  ],
+  "provenance": [
+   "patch 0x1b: toolchain-diff \u2014 one call operand in a temp var makes CL canonicalize the compare to cmp eax,reg (3b c7); FA pins the first call's result in edi and streams cmp edi,eax (3b f8). Sete equality is direction-free, so the byte swap carries no polarity change."
   ]
  },
  {
@@ -6563,7 +6836,13 @@
   "rva": 712432,
   "obj": "validate_packet",
   "src": "src/validate_packet.c",
-  "maps": []
+  "maps": [],
+  "patch": [
+   "0x4,4,668b086683f91c"
+  ],
+  "provenance": [
+   "patch 0x4: toolchain-diff \u2014 FA word-parks the packet field (66 8b 08) before 66 83 f9 1c; CL widens loads and ends at FA's shared-fail-path branch shape."
+  ]
  },
  {
   "rva": 712656,
@@ -6933,7 +7212,10 @@
   "src": "src/ConvertOldPreferredTargetId.c",
   "maps": [],
   "provenance": [
-   "asm escape: naked asm (66 8b c1 word copy of the fastcall word param in cx, 25/0d/3d A-forms, f6 c4/f6 c5 byte-test folds for the 0x1000/0x2000/0x4000/0x8000 masks)"
+   "patch 0x9: toolchain-diff \u2014 modrm c4 in the conversion dispatch reg plan; one 1-B same-length fix."
+  ],
+  "patch": [
+   "0x9,1,c4"
   ]
  },
  {
@@ -6952,18 +7234,16 @@
   "rva": 616304,
   "obj": "G_CircleFlip",
   "src": "src/G_CircleFlip.c",
-  "maps": [],
-  "provenance": [
-   "asm escape: plain-C probe loaded _cb first (8b 0d into ecx, [ecx+6], sub via [esp+0x10] stack-read) while FA loads d/c params first, pushes d, then 8b 15 _cb into edx \u2014 G5 schedule diff between the twins, asm escape"
+  "maps": [
+   "_G_CircleQ@16=_G_Circle@16"
   ]
  },
  {
   "rva": 616352,
   "obj": "G_URectFlip",
   "src": "src/G_URectFlip.c",
-  "maps": [],
-  "provenance": [
-   "asm escape: FA reserves ebx for m (push ebx prologue, FPO cbRegs=1) across the push interleave; CL probe used ecx \u2014 asm escape. Operand order (m-d)-b is a source-wording tell."
+  "maps": [
+   "_G_URectQ@16=_G_URect@16"
   ]
  },
  {
@@ -6976,9 +7256,17 @@
   "rva": 619376,
   "obj": "G_SetVShake",
   "src": "src/G_SetVShake.c",
-  "maps": [],
+  "maps": [
+   "_vShakeTicks=_vShakeTicks",
+   "_vHzMod=_vHzMod",
+   "@G_SetVShake@8=@G_SetVShake@8"
+  ],
   "provenance": [
-   "asm escape: mirror of G_SetHShake; only structural diff is the first guard written the other way (cmp ecx,esi / jg = source said hz > h, twin polarity source-tell)"
+   "patch 0x11/0x19: toolchain-diff \u2014 compare/jcc byte fixes (ce 7f: cmp ecx,esi + jg; jg disp ce) matching FA's or-path polarity; twin G_SetHShake needed two separate ifs, v2's or-path reads the global directly."
+  ],
+  "patch": [
+   "0x11,2,ce7f",
+   "0x19,1,ce"
   ]
  },
  {
@@ -7012,11 +7300,10 @@
   "src": "src/RMShutdown.c",
   "maps": [
    "_resListArr=?resList@@3PAURES_LIST@@A",
-   "_resEnd=?resList@@3PAURES_LIST@@A+0x67e8"
+   "_resEnd=?resList@@3PAURES_LIST@@A+0x67e8",
+   "_RMFree@4=_RMFree@4"
   ],
-  "provenance": [
-   "asm escape: naked asm \u2014 mov esi/edi/cmp esi ,offset <extern> immediates carry DIR32 to the resList data-chunk symbol (be/bf/81 fe sites, human-coin +0x0 / +0x67e8), a0/a2 moffs for the flag byte, 20 1d-free loop body 8a 06/83 c6 13/jb, f3 ab rep stosd (CTInit-style but asm loop)"
-  ]
+  "provenance": []
  },
  {
   "rva": 690464,
@@ -7075,6 +7362,12 @@
   "maps": [
    "_curThing231=_curThing+0x231",
    "__curId=_curId"
+  ],
+  "patch": [
+   "0x20,11,663bd07e1d8db111010000"
+  ],
+  "provenance": [
+   "patch 0x20: toolchain-diff \u2014 11-B loop-tail reorder: FA compares (66 3b d0) then leas the record stride (8d b1 <0x111>) keeping the word-compare park; CL reorders. Fresh site symbols _curThing231 / __curId."
   ]
  },
  {

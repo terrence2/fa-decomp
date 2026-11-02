@@ -1,23 +1,21 @@
-// _GetFakeKey@0 @ rva 0x11cb0 (48 B) — word counter at _waitCounter+4:
-// mov ax/test/je, in-reg 16-bit dec (66 48) + moffs store-back, movsx'd
-// index, word table read adCount+8[ecx*2], ret; zero path xor ax,ax/ret.
-// Return value lives in AX (ushort-return shape); 66-regs are asm-only.
+/* GetFakeKey - FA rva 0x11cb0 (72880) - EXACT probe verdict, tier1_a_r2.json entry 'GetFakeKey_v6'
+ * Form: plain C
+ * Levers: zero-path-at-end spelling
+ * Maps: _adCount=?adCount@@3EA
+ * Probes: v5,v6
+ */
 extern char waitCounter[];
-extern char adCount[];          // ?adCount@@3EA
+extern char adCount[];
 
-__declspec(naked) void __stdcall GetFakeKey_q(void)
+unsigned short __stdcall GetFakeKey(void)
 {
-    __asm {
-        mov ax, word ptr [waitCounter+4]
-        test ax, ax
-        je fin
-        dec ax
-        mov word ptr [waitCounter+4], ax
-        movsx ecx, ax
-        mov ax, word ptr [adCount + ecx*2 + 8]
-        ret
-    fin:
-        xor ax, ax
-        ret
+    short k = *(unsigned short *)(waitCounter + 4);
+    unsigned short r;
+    if (k) {
+        --k;
+        *(unsigned short *)(waitCounter + 4) = k;
+        r = *(unsigned short *)(adCount + 8 + k * 2);
+        return r;
     }
+    return 0;
 }

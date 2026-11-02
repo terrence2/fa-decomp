@@ -1,32 +1,26 @@
-// _G_CopyDriverName @ rva 0x972e0 (48 B) — inline strcpy(dst, driverNameBuf).
-// FA backs the length up in EDX (8b d1) and materializes the dst param via EAX
-// (8b 44 24 0c/8b f8); every plain-C strcpy form backs the length up in EAX
-// and loads dst straight into EDI (probe w13b_GCopyDriverName/w13b_GCopyAlias
-// both 43 B, 8b c1 + 8b 7c 24 0c) — register plan is unreachable in C, so
-// naked asm (probe w13b_GCopyAsm byte-exact 45 B vs FA 0x8ae00-equivalent).
+// @G_CopyDriverName @ rva 619232 (0x972e0, 48 B) — patch-hybrid.  The
+//   plain-C body (inline strlen/strcpy expansion with the intrinsic kept
+//   ON: mov edi,imm dst / f2 ae repne scasb / not ecx / sub edi,ecx =
+//   strlen, then the dword rep movsd + odd-byte rep movsb tail) reproduces
+//   27/43 compiled bytes; the remaining walls: (1) CL parks the post-scas
+//   byte-count materialization in eax (`8b c1` mov eax,ecx at 21) where FA
+//   parks it in edx (`8b d1`) and keeps it there across the rep so the odd
+//   tail is `8b ca` mov ecx,edx — CL's counterpart is `8b c8` mov ecx,eax
+//   (1-B modrm fix); (2) CL loads the src ptr [esp+0xc] straight into edi
+//   (`8b 7c 24 0c`) and reuses eax for the tail reload, FA loads it into
+//   eax first then `8b f8` mov edi,eax — 2-B modrm + instruction-order
+//   resynthesis of the whole 16-B tail; (3) FA carries a 3-B `8d 49 00`
+//   trailer pad CL never emits.  Patch-hybrid replaces the 16-B tail and
+//   fixes the 1 modrm byte.
+//   Probe build/survey/probes/p_w23_GCopyDriver_patch2.obj EXACT
+//   (w23_r3.json; ladder w23_GCopyDriver_v1/patch, w23_GCopyDriver_fO1).
+//   Maps (swap.json verbatim + patch site): _driverNameBuf_=_clipHeight+0x8.
+//   Patches: "21,1,d1",
+//            "27,16,8b44240c8bf8f3a58bca83e103f3a45f5ec38d4900".
 extern char driverNameBuf_[];
-__declspec(naked) void G_CopyDriverName(char *dst)
+char *strcpy(char *d, const char *s);
+
+void G_CopyDriverName_q(char *dst)
 {
-    __asm {
-        push esi
-        mov ecx, -1
-        push edi
-        sub eax, eax
-        mov edi, OFFSET driverNameBuf_
-        repnz scasb
-        not ecx
-        sub edi, ecx
-        mov edx, ecx
-        shr ecx, 2
-        mov esi, edi
-        mov eax, [esp+0xc]
-        mov edi, eax
-        rep movsd
-        mov ecx, edx
-        and ecx, 3
-        rep movsb
-        pop edi
-        pop esi
-        ret
-    }
+    strcpy(dst, driverNameBuf_);
 }

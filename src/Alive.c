@@ -1,42 +1,22 @@
-// @Alive@4 @ rva 0x73710 (64 B) — fastcall thunk ptr in ecx: unaligned dword
-//   load [ecx+1] with byte tests a8 01 / f6 c4 20, word field +0xe gate, then
-//   [ecx] type 2/4 dispatch (je over the second cmp into a shared +0xe3
-//   truth block: mov al,[ecx+0xe3] / test / jne -> return 1 / xor al / ret /
-//   b0 01 / ret).  The truth body is CL-unfoldable (every C form folded to
-//   cmp mem,0 + setne in ~3 rounds, w12b_Alive/-2) — naked asm (w12b_Alive3
-//   byte-exact).
-__declspec(naked) char Alive_q(void)
+// @Alive@4 @ rva 472848 (0x73710, 64 B) — plain C.  Decisive levers: field
+//   reads as cast derefs off the ecx pointer; the dword at +1 kept live in a
+//   local so both masks test it in AL/AH (test al,1 reuse then test ah,0x20
+//   shape); word test at +0xe reads as 66 83 79 0e 00 via the ushort-cast
+//   form; uchar tests emit the 3c imm cmp pair.  Guard order matters: dword
+//   bit 0, word at +0xe, dword bit 0x2000, then the ==2/==4 gate at +0xe3.
+//   Probe build/survey/probes/p_w23_Alive_v1.obj EXACT (w23_r2.json).
+char __fastcall Alive_q(char *e)
 {
-    __asm {
-        mov eax, [ecx + 1]
-        test al, 1
-        jne L1
-        xor al, al
-        ret
-    L1:
-        cmp word ptr [ecx + 0xe], 0
-        jne L2
-        xor al, al
-        ret
-    L2:
-        test ah, 0x20
-        je L3
-        xor al, al
-        ret
-    L3:
-        mov al, [ecx]
-        cmp al, 2
-        je L4
-        cmp al, 4
-        jne L5
-    L4:
-        mov al, [ecx + 0xe3]
-        test al, al
-        jne L5
-        xor al, al
-        ret
-    L5:
-        mov al, 1
-        ret
+    unsigned long d = *(unsigned long *)(e + 1);
+    if ((d & 1) == 0)
+        return 0;
+    if (*(unsigned short *)(e + 0xe) == 0)
+        return 0;
+    if (d & 0x2000)
+        return 0;
+    if (*(unsigned char *)e == 2 || *(unsigned char *)e == 4) {
+        if (*(unsigned char *)(e + 0xe3) == 0)
+            return 0;
     }
+    return 1;
 }

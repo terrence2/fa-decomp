@@ -1,26 +1,22 @@
-// ?validate_packet@@YADPAUNET_PKT@@@Z @ rva 0xadef0 (48 B) — type word
-//   [p] < 0x1c && version word [p+2] in [4, 0x404], FA keeps ALL ops
-//   16-bit (mov cx,[eax] load, 66 83 f9 / 66 3d acc cmps) with a shared
-//   fail path (jae/jb/ja -> xor al,al) and b0 01 success. Plain-C probe
-//   failed: CL split per-test early returns with setbe and cmp-mem —
-//   naked asm pins FA's exact stream (cmp ax,4 may fitobj-patch 66 83 f8
-//   -> 66 3d if MASM picks the 83 form; same 4-byte length).
-unsigned char __declspec(naked) validate_packet(void)
+/* validate_packet - FA rva 0xadef0 (712432) - EXACT probe verdict, tier1_a_r4.json entry 'Validate_packet_v3'
+ * Form: patch-hybrid
+ * Levers: 1 patch: dword-load + word-compare spelling (66 8b 08 / 66 83 f9 1c)
+ * Maps: (none)
+ * patch 0x4: 4->7 B 66 8b 08 66 83 f9 1c
+ * Probes: v1-v3
+ */
+unsigned char validate_packet(void *p)
 {
-    __asm {
-        mov     eax, dword ptr [esp+4]
-        mov     cx, word ptr [eax]
-        cmp     cx, 0x1c
-        jae     Lf
-        mov     ax, word ptr [eax+2]
-        cmp     ax, 4
-        jb      Lf
-        cmp     ax, 0x404
-        ja      Lf
-        mov     al, 1
-        ret
+    unsigned short v, w;
+    v = *(unsigned short *)p;
+    if (v >= 0x1c)
+        goto Lf;
+    w = *(unsigned short *)((char *)p + 2);
+    if (w < 4)
+        goto Lf;
+    if (w > 0x404)
+        goto Lf;
+    return 1;
 Lf:
-        xor     al, al
-        ret
-    }
+    return 0;
 }
