@@ -7663,5 +7663,435 @@
   "maps": [
    "_impIsBadWritePtr=__imp__IsBadWritePtr"
   ]
+ },
+ {
+  "rva": 137152,
+  "obj": "ZONEAdd",
+  "src": "src/ZONEAdd.c",
+  "maps": [
+   "_cobraData_x=?cobraData@@3UGlobalData@@A"
+  ]
+ },
+ {
+  "rva": 300736,
+  "obj": "MultDiv32",
+  "src": "src/MultDiv32.c",
+  "maps": []
+ },
+ {
+  "rva": 479152,
+  "obj": "jcopy_block_row",
+  "src": "src/jcopy_block_row.c",
+  "maps": []
+ },
+ {
+  "rva": 547674,
+  "obj": "WaitTicks",
+  "src": "src/WaitTicks.c",
+  "maps": [
+   "@WaitUntil@4=?WaitUntil@@YIXK@Z"
+  ],
+  "patch": [
+   "0,0,558bec",
+   "6,0,535657894df8",
+   "17,2,0345f8",
+   "20,4,8945fc",
+   "23,4,8b4dfc",
+   "31,3,e900000000",
+   "36,1,5f5e5bc9c3"
+  ],
+  "provenance": [
+   "patch 0/6/17/20/23/31/36: toolchain-diff \u2014 inserts FA's ILINK parent frame (push ebp/mov ebp,esp), param spill + register save block, ebp-0x4 volatile slot store/load forms, FA's add eax,[ebp-8] reg plan, the e9+0 self-jmp after the tail call (literal content 0, REL32 no .reloc), and pop edi/esi/ebx+leave+ret epilogue; CL stays FPO with a bare ret."
+  ]
+ },
+ {
+  "rva": 622496,
+  "obj": "setPacketInfo",
+  "src": "src/setPacketInfo.c",
+  "maps": []
+ },
+ {
+  "rva": 668096,
+  "obj": "socket_set_state_func",
+  "src": "src/socket_set_state_func.c",
+  "maps": [
+   "_tailjmp=$FA$_t_4a31e0"
+  ],
+  "patch": [
+   "0x12,1,e900000000,1:20:_tailjmp"
+  ],
+  "provenance": [
+   "patch 0x12: toolchain-diff \u2014 inserted FA's 5 B e9 tail jmp with the REL32 site mapped to gap stub $FA$_t_4a31e0; CL's body is ret-only."
+  ]
+ },
+ {
+  "rva": 670912,
+  "obj": "SetupBitmapAccess",
+  "src": "src/SetupBitmapAccess.c",
+  "maps": [
+   "_brsColorProcess_x=_brsColorProcess",
+   "_averageTest_x=?averageTest@@3_JA"
+  ]
+ },
+ {
+  "rva": 708912,
+  "obj": "NET_Disconnect",
+  "src": "src/NET_Disconnect.c",
+  "maps": [
+   "_player_list_x=?player_list@@3UNET_PLAYER_LIST@@A",
+   "_socket_close=?socket_close@@YAXI@Z"
+  ]
+ },
+ {
+  "rva": 709184,
+  "obj": "NET_WriteAvail",
+  "src": "src/NET_WriteAvail.c",
+  "maps": [
+   "_ws_x=?ws@@3U_winsock_funcs@@A",
+   "_validate_player=?validate_player@@YAPAU_player_info@@J@Z"
+  ],
+  "patch": [
+   "0x1a,16,8b888e2c00008b90922c00002bca8bc1"
+  ],
+  "provenance": [
+   "patch 0x1a: toolchain-diff \u2014 FA computes the avail delta in ecx (mov ecx,[p+0x2c8e]/mov edx,[p+0x2c92]/sub ecx,edx/mov eax,ecx); CL's plan differs only in registers (disps +0x2c8e/+0x2c92 are plain displacements, not relocs)."
+  ]
+ },
+ {
+  "rva": 712576,
+  "obj": "net_handle_fd_write",
+  "src": "src/net_handle_fd_write.c",
+  "maps": [
+   "_player_list_x=?player_list@@3UNET_PLAYER_LIST@@A",
+   "_net_write_output_q=?net_write_output_q@@YAXH@Z",
+   "_socket_build_write_fds=?socket_build_write_fds@@YAXXZ"
+  ]
+ },
+ {
+  "rva": 740192,
+  "obj": "G_Texture",
+  "src": "src/G_Texture.c",
+  "maps": [
+   "_MMAccessW=@MMAccessW@4"
+  ]
+ },
+ {
+  "rva": 740240,
+  "obj": "G_AcTexture",
+  "src": "src/G_AcTexture.c",
+  "maps": [
+   "_MMAccessW=@MMAccessW@4"
+  ]
+ },
+ {
+  "rva": 866736,
+  "obj": "strrchr",
+  "src": "src/strrchr.c",
+  "maps": []
+ },
+ {
+  "rva": 869680,
+  "obj": "chkstk",
+  "src": "src/chkstk.c",
+  "maps": []
+ },
+ {
+  "rva": 72176,
+  "obj": "Checksum",
+  "src": "src/Checksum.c",
+  "maps": []
+ },
+ {
+  "rva": 81680,
+  "obj": "GetTargetPositions",
+  "src": "src/GetTargetPositions.c",
+  "maps": []
+ },
+ {
+  "rva": 206592,
+  "obj": "DMusicOff",
+  "src": "src/DMusicOff.c",
+  "maps": [
+   "_sndEnableQ=$FA$_d_4e7000+0x5f0",
+   "_musicId=?musicId@@3FA",
+   "@SoundOff_q@4=?SoundOff@@YIXF@Z",
+   "_DMusicOff_q=?DMusicOff@@YIXXZ"
+  ]
+ },
+ {
+  "rva": 206752,
+  "obj": "ScoreOff",
+  "src": "src/ScoreOff.c",
+  "maps": [
+   "_sndEnableQ=$FA$_d_4e7000+0x5f0",
+   "_scoreStart=?scoreStart@@3PAXA",
+   "@DMusicOff_q@0=?DMusicOff@@YIXXZ",
+   "@MusicOff_q@0=?MusicOff@@YIXXZ"
+  ]
+ },
+ {
+  "rva": 220048,
+  "obj": "MMReallocHandle",
+  "src": "src/MMReallocHandle.c",
+  "maps": [
+   "@MMAllocHandle_q@8=@MMAllocHandle@8",
+   "@MMInternalFree_q@8=?MMInternalFree@@YIDPAXK@Z",
+   "@MMFreeHandle_q@4=@MMFreeHandle@4"
+  ]
+ },
+ {
+  "rva": 220176,
+  "obj": "MMInternalAlloc",
+  "src": "src/MMInternalAlloc.c",
+  "maps": [
+   "_mm_page_size=?mm_page_size@@3KA",
+   "__imp__VirtualAlloc@16=__imp__VirtualAlloc",
+   "__imp__GlobalAlloc@8=__imp__GlobalAlloc"
+  ],
+  "patch": [
+   "0,1,39",
+   "6,1,77"
+  ],
+  "provenance": [
+   "patch 0/6: toolchain-diff \u2014 CL 3b 0d (reg-first cmp) + 73 (jae) flipped to FA 39 0d (mem-first) + 77 (ja); single-byte, non-reloc, toolchain deltas."
+  ]
+ },
+ {
+  "rva": 220224,
+  "obj": "MMInternalFree",
+  "src": "src/MMInternalFree.c",
+  "maps": [
+   "_mm_page_size=?mm_page_size@@3KA",
+   "__imp__VirtualFree@12=__imp__VirtualFree",
+   "__imp__GlobalFree@4=__imp__GlobalFree"
+  ],
+  "patch": [
+   "0,1,39",
+   "6,1,77"
+  ],
+  "provenance": [
+   "patch 0/6: toolchain-diff \u2014 CL 3b 0d (reg-first cmp) + 73 (jae) flipped to FA 39 0d (mem-first) + 77 (ja); single-byte, non-reloc, toolchain deltas."
+  ]
+ },
+ {
+  "rva": 287360,
+  "obj": "SEQrun",
+  "src": "src/SEQrun.c",
+  "maps": []
+ },
+ {
+  "rva": 307568,
+  "obj": "SERLeaveCCF",
+  "src": "src/SERLeaveCCF.c",
+  "maps": [
+   "__imp__EnterCriticalSection@4=__imp__EnterCriticalSection",
+   "__imp__LeaveCriticalSection@4=__imp__LeaveCriticalSection",
+   "_serCtlQ=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A"
+  ]
+ },
+ {
+  "rva": 335152,
+  "obj": "FMUpdateBay",
+  "src": "src/FMUpdateBay.c",
+  "maps": [
+   "_curThingQ=_curThing",
+   "@TurnTowardAngle_q@12=@TurnTowardAngle@12"
+  ]
+ },
+ {
+  "rva": 336688,
+  "obj": "HARDLoadAll",
+  "src": "src/HARDLoadAll.c",
+  "maps": [
+   "_curThingTypeB5=_curThingType+0xb5",
+   "_HARDPtrs_q@12=_HARDPtrs@12",
+   "_HARDLoad_q@12=_HARDLoad@12"
+  ]
+ },
+ {
+  "rva": 338528,
+  "obj": "HARDGunsOnlyAll",
+  "src": "src/HARDGunsOnlyAll.c",
+  "maps": [
+   "_curThingQ=_curThing",
+   "@GetCurObj_q@4=@GetCurObj@4",
+   "@PutCurObj_q@0=@PutCurObj@0",
+   "_hardgunsQ=_HARDGunsOnly@0"
+  ]
+ },
+ {
+  "rva": 876448,
+  "obj": "Chunk_d5fa0",
+  "src": "src/Chunk_d5fa0.c",
+  "maps": [
+   "_gap235fb0=$FA$_t_4d5fb0"
+  ],
+  "aliases": [
+   "0=$FA$_t_4d5fa0"
+  ]
+ },
+ {
+  "rva": 881120,
+  "obj": "UnlockCrt",
+  "src": "src/UnlockCrt.c",
+  "maps": [
+   "__locktableX=__locktable",
+   "__lcsX=__imp__LeaveCriticalSection"
+  ],
+  "patch": [
+   "7,1,",
+   "21,1,"
+  ],
+  "provenance": [
+   "patch 7/21: toolchain-diff \u2014 deletes CL's dead push ebx/pop ebx (53/5b) around the _lcsX fn-ptr call; FA has no saved ebx (pragma optimize y-off frame otherwise matches)."
+  ]
+ },
+ {
+  "rva": 891328,
+  "obj": "Chunk_d99c0",
+  "src": "src/Chunk_d99c0.c",
+  "maps": [],
+  "aliases": [
+   "0=$FA$_t_4d99c0"
+  ]
+ },
+ {
+  "rva": 892464,
+  "obj": "Chunk_d9e30",
+  "src": "src/Chunk_d9e30.c",
+  "maps": [],
+  "aliases": [
+   "0=$FA$_t_4d9e30"
+  ]
+ },
+ {
+  "rva": 897712,
+  "obj": "Mbsnbcoll",
+  "src": "src/Mbsnbcoll.c",
+  "maps": [
+   "__mbcgA=__mbctype+0x104",
+   "__mbcgB=__mbctype+0x108",
+   "__collw=$FA$_t_4e0500"
+  ],
+  "patch": [
+   "16,18,8b542408505152a100000000518b4c2414516a0150,8:6:__mbcgB"
+  ],
+  "provenance": [
+   "patch 16: toolchain-diff \u2014 CL hoisted the g2 load as an 8b 0d moffs and scheduled the push block differently; replaced span restores FA's push order, with the a1 moffs site re-attached to __mbctype+0x108 via newsite 8:6:__mbcgB (DIR32, zero payload dword, addends baked)."
+  ]
+ },
+ {
+  "rva": 901408,
+  "obj": "Ioterm",
+  "src": "src/Ioterm.c",
+  "maps": [
+   "__qStart=__crtheap+4",
+   "__qEnd=__nhandle",
+   "__dcsIAT=__imp__DeleteCriticalSection",
+   "__frea=_free"
+  ],
+  "patch": [
+   "33,5,396b08",
+   "20,1,30",
+   "30,1,1b",
+   "57,1,e7",
+   "79,1,bf"
+  ],
+  "provenance": [
+   "patch 33/20/30/57/79: toolchain-diff \u2014 zero-check fold fix (CL mov eax,[ebx+8]/test pair -> FA's 3-b cmp [ebx+8],ebp at 33) plus jcc displacement repairs at 20/30/57/79 (displacement bytes are content, recomputed post-patch)."
+  ]
+ },
+ {
+  "rva": 914832,
+  "obj": "Setnvh",
+  "src": "src/Setnvh.c",
+  "maps": [
+   "__lock_a=__lock",
+   "__unlock_a=__unlock",
+   "_pnhH=?_pnhHeap@@3P6AHI@ZA"
+  ],
+  "patch": [
+   "0x15,7,6a09a300000000,3:6:_pnhH"
+  ],
+  "provenance": [
+   "patch 0x15: toolchain-diff \u2014 same-length reorder: CL schedules the store differently; writes FA's push 9 + a3 moffs store to ?_pnhHeap@@3P6AHI@ZA with DIR32 re-add at site 3:6."
+  ]
+ },
+ {
+  "rva": 915568,
+  "obj": "Chunk_df870",
+  "src": "src/Chunk_df870.c",
+  "maps": [],
+  "aliases": [
+   "0=$FA$_t_4df870"
+  ]
+ },
+ {
+  "rva": 925632,
+  "obj": "I64toa",
+  "src": "src/I64toa.c",
+  "maps": [
+   "__i64toa_w@20=$FA$_t_4e2000"
+  ],
+  "patch": [
+   "8,17,7517837c240c007f107c07837c2408007307b901000000eb02"
+  ],
+  "provenance": [
+   "patch 8: toolchain-diff \u2014 replaces CL's 17 B folded __int64<0 diamond with FA's 25 B unsimplified SLT-0 mem-expansion; worker stdcall ret-0x14 with the T64 first param."
+  ]
+ },
+ {
+  "rva": 928976,
+  "obj": "Chunk_e2cd0",
+  "src": "src/Chunk_e2cd0.c",
+  "maps": [],
+  "aliases": [
+   "0=$FA$_t_4e2cd0"
+  ]
+ },
+ {
+  "rva": 928992,
+  "obj": "Chunk_e2ce0",
+  "src": "src/Chunk_e2ce0.c",
+  "maps": [],
+  "aliases": [
+   "0=$FA$_t_4e2ce0"
+  ]
+ },
+ {
+  "rva": 933072,
+  "obj": "Strdup",
+  "src": "src/Strdup.c",
+  "maps": [
+   "__strlen_a=_strlen",
+   "__malloc_a=_malloc",
+   "__strcpy_a=_strcpy"
+  ],
+  "patch": [
+   "3,5,578b7d08",
+   "7,1,57",
+   "13,3,5a",
+   "21,3,5a",
+   "22,6,0bc07409",
+   "26,2,5750",
+   "33,3,5a5a",
+   "35,6,5fc9c3"
+  ],
+  "provenance": [
+   "patch 3/7/13/21/22/26/33/35: toolchain-diff \u2014 cleanup-vs-push codegen delta recipe (CL pushes str before strlen's cleanup vs FA's register plan; full recipe in src header)."
+  ]
+ },
+ {
+  "rva": 71264,
+  "obj": "KEYPause",
+  "src": "src/KEYPause.c",
+  "maps": [
+   "_kbCountX=?kbCount@@3GA",
+   "_kbTailX=?kbTailPtr@@3GA",
+   "_kbHeadX=?kbHeadPtr@@3GA",
+   "_keyarrX=_keyarray",
+   "_qualX=_qualStatus",
+   "_kflagX=_keyFlags"
+  ]
  }
 ]
