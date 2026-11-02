@@ -8093,5 +8093,425 @@
    "_qualX=_qualStatus",
    "_kflagX=_keyFlags"
   ]
+ },
+ {
+  "rva": 866464,
+  "obj": "ExitTrap",
+  "src": "src/ExitTrap.c",
+  "maps": [
+   "_CRTExit3=$FA$_t_4d38b0"
+  ],
+  "aliases": [
+   "0=$FA$_t_4d38a0"
+  ]
+ },
+ {
+  "rva": 873504,
+  "obj": "Validdrive",
+  "src": "src/Validdrive.c",
+  "maps": [
+   "_impGetDriveTypeA=__imp__GetDriveTypeA"
+  ]
+ },
+ {
+  "rva": 889456,
+  "obj": "ThkThreadId",
+  "src": "src/ThkThreadId.c",
+  "maps": [
+   "__imp__CurrentThreadIdApi@0=__imp__GetCurrentThreadId"
+  ],
+  "aliases": [
+   "0=$FA$_t_4d9270"
+  ]
+ },
+ {
+  "rva": 889472,
+  "obj": "ThkCurThread",
+  "src": "src/ThkCurThread.c",
+  "maps": [
+   "__imp__CurrentThreadApi@0=__imp__GetCurrentThread"
+  ],
+  "aliases": [
+   "0=$FA$_t_4d9280"
+  ]
+ },
+ {
+  "rva": 54544,
+  "obj": "VIEWSlew",
+  "src": "src/VIEWSlew.c",
+  "maps": [],
+  "patch": [
+   "22,2,3bd0",
+   "24,1,7c",
+   "29,2,3bd0",
+   "31,1,7e",
+   "55,2,3bd0",
+   "57,1,7d",
+   "69,2,3bd0",
+   "71,1,7e"
+  ],
+  "provenance": [
+   "patch 22/24/29/31/55/57/69/71: toolchain-diff \u2014 cmp operand-order flips (3b c2 -> 3b d0 at 22/29/55/69) paired with jcc polarity flips keeping branch semantics (7c->7e, 7e->7c, 7c->7d, 7e->7e class); word-clamp compare direction, same class as wave-24 MMInternalAlloc cmp mirror."
+  ]
+ },
+ {
+  "rva": 66640,
+  "obj": "Min100",
+  "src": "src/Min100.c",
+  "maps": [],
+  "patch": [
+   "2,1,0a"
+  ],
+  "provenance": [
+   "patch 2: toolchain-diff \u2014 SIB byte of lea a+b: CL canonicalizes to 8d 04 11 (base=ecx) spelling-insensitively; FA keeps 8d 04 0a (base=edx); single SIB byte."
+  ]
+ },
+ {
+  "rva": 76592,
+  "obj": "LimitAngle",
+  "src": "src/LimitAngle.c",
+  "maps": [
+   "@AbsSlewQ@4=@Abs@4"
+  ]
+ },
+ {
+  "rva": 122768,
+  "obj": "FwdDestroy",
+  "src": "src/FwdDestroy.c",
+  "maps": [
+   "_DDDestroyQ@4=?Destroy@CDirDraw@@QAEXXZ"
+  ],
+  "aliases": [
+   "0=$FA$_t_41df90"
+  ]
+ },
+ {
+  "rva": 122864,
+  "obj": "DdECSGet",
+  "src": "src/DdECSGet.c",
+  "maps": [
+   "_DDECS_c=?ddECS@CDirDraw@@SAXXZ"
+  ],
+  "aliases": [
+   "0=$FA$_t_41dff0"
+  ]
+ },
+ {
+  "rva": 122880,
+  "obj": "FwdDDLCS",
+  "src": "src/FwdDDLCS.c",
+  "maps": [
+   "_DDLCS_c=?ddLCS@CDirDraw@@SAXXZ"
+  ],
+  "aliases": [
+   "0=$FA$_t_41e000"
+  ]
+ },
+ {
+  "rva": 127696,
+  "obj": "IsCrNl",
+  "src": "src/IsCrNl.c",
+  "maps": [],
+  "aliases": [
+   "0=$FA$_t_41f2d0"
+  ]
+ },
+ {
+  "rva": 136288,
+  "obj": "Empty21460",
+  "src": "src/Empty21460.c",
+  "maps": [],
+  "aliases": [
+   "0=$FA$_t_421460"
+  ]
+ },
+ {
+  "rva": 146896,
+  "obj": "Alret0",
+  "src": "src/Alret0.c",
+  "maps": [],
+  "aliases": [
+   "0=$FA$_t_423dd0"
+  ]
+ },
+ {
+  "rva": 380992,
+  "obj": "Pktsethdr",
+  "src": "src/Pktsethdr.c",
+  "maps": []
+ },
+ {
+  "rva": 399280,
+  "obj": "Shellclick",
+  "src": "src/Shellclick.c",
+  "maps": [
+   "@ShellClickSndQ@8=@ShellClickSound@8"
+  ],
+  "aliases": [
+   "0=$FA$_t_4617b0"
+  ]
+ },
+ {
+  "rva": 622896,
+  "obj": "SERLeaveBg",
+  "src": "src/SERLeaveBg.c",
+  "maps": [
+   "_Ctrl=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A",
+   "__imp__EnterCriticalSection@4=__imp__EnterCriticalSection",
+   "__imp__LeaveCriticalSection@4=__imp__LeaveCriticalSection"
+  ]
+ },
+ {
+  "rva": 715264,
+  "obj": "NetSetCbHost",
+  "src": "src/NetSetCbHost.c",
+  "maps": [
+   "_callbacks=?callbacks@@3UCALLBACK_FUNC_LIST@@A"
+  ]
+ },
+ {
+  "rva": 715296,
+  "obj": "NetSetCbPlayers",
+  "src": "src/NetSetCbPlayers.c",
+  "maps": [
+   "_callbacks=?callbacks@@3UCALLBACK_FUNC_LIST@@A"
+  ]
+ },
+ {
+  "rva": 715328,
+  "obj": "NetSetCbConnected",
+  "src": "src/NetSetCbConnected.c",
+  "maps": [
+   "_callbacks=?callbacks@@3UCALLBACK_FUNC_LIST@@A"
+  ]
+ },
+ {
+  "rva": 737232,
+  "obj": "RemapAdd",
+  "src": "src/RemapAdd.c",
+  "maps": []
+ },
+ {
+  "rva": 686944,
+  "obj": "TInitHorizon",
+  "src": "src/TInitHorizon.c",
+  "maps": [
+   "_computerFlight=?computerFlight@@3DA"
+  ]
+ },
+ {
+  "rva": 619440,
+  "obj": "WPSetWaypoints",
+  "src": "src/WPSetWaypoints.c",
+  "maps": []
+ },
+ {
+  "rva": 685552,
+  "obj": "TNamedTmaps",
+  "src": "src/TNamedTmaps.c",
+  "maps": []
+ },
+ {
+  "rva": 823288,
+  "obj": "CopySB8",
+  "src": "src/CopySB8.c",
+  "maps": []
+ },
+ {
+  "rva": 824068,
+  "obj": "ExpandDB",
+  "src": "src/ExpandDB.c",
+  "maps": []
+ },
+ {
+  "rva": 797376,
+  "obj": "QuickDist",
+  "src": "src/QuickDist.c",
+  "maps": []
+ },
+ {
+  "rva": 645680,
+  "obj": "PLANECheckEject",
+  "src": "src/PLANECheckEject.c",
+  "maps": [],
+  "patch": [
+   "0x7,1,39",
+   "0xd,1,77"
+  ],
+  "provenance": [
+   "patch 0x7/0xd: toolchain-diff \u2014 FA emits cmp [mem],reg (66 39 05) + ja for the unsigned word guard; CL 10.20.6166 canonicalizes reg-first (66 3b 05) + jb across spellings; two 1-byte non-reloc mirror rewrites (3b->39, 72->77), semantics preserved."
+  ]
+ },
+ {
+  "rva": 773056,
+  "obj": "PROJAccurateHardPos",
+  "src": "src/PROJAccurateHardPos.c",
+  "maps": [],
+  "patch": [
+   "0x1a,1,39",
+   "0x23,1,39"
+  ],
+  "provenance": [
+   "patch 0x1a/0x23: toolchain-diff \u2014 FA emits cmp [mem],cx (66 39 0d) for both word equality guards; CL emits cmp cx,[mem] (66 3b 0d) reg-first in every spelling; two 1-byte mirror rewrites (3b->39), je symmetric so no polarity change."
+  ]
+ },
+ {
+  "rva": 340112,
+  "obj": "HARDTotalFuel",
+  "src": "src/HARDTotalFuel.c",
+  "maps": []
+ },
+ {
+  "rva": 387568,
+  "obj": "GRPWingman",
+  "src": "src/GRPWingman.c",
+  "maps": [
+   "_GRPPart_q@12=_GRPPart@12",
+   "_grpSizesB=_groupSizes",
+   "_grpDwBase=_groupIds+0x2"
+  ],
+  "patch": [
+   "0x38,10,c1e002668b848000000000,7:6:_grpDwBase"
+  ],
+  "provenance": [
+   "patch 0x38: toolchain-diff \u2014 CL folded the x16 index into (shl eax,4; mov ax,[eax+disp32]); FA split it (shl eax,2; mov ax,[eax*4+disp32]) \u2014 multiply-split, same address; DIR32 re-add _grpDwBase at site 7:6."
+  ]
+ },
+ {
+  "rva": 405184,
+  "obj": "AllocCmdBuf",
+  "src": "src/AllocCmdBuf.c",
+  "maps": [
+   "_cmdBufQ=_curThing+0x5e",
+   "_cmdBufW=_curThing+0x62",
+   "_chainPos20=?correctChainPlacement@@3DA+0x20",
+   "_thingTypeQ=_curThingType",
+   "@MMAllocPtr_q@8=@MMAllocPtr@8",
+   "@CancelCmdBuf@0=_CancelCmdBuf@0"
+  ]
+ },
+ {
+  "rva": 415648,
+  "obj": "CTDoWmBreak",
+  "src": "src/CTDoWmBreak.c",
+  "maps": [
+   "_@CTDo_wm_break_q@4=_CTDo_wm_break",
+   "_svcNoMsg=_serviceTicks+0xec",
+   "_CTDoA_q=$FA$_t_464f60",
+   "_CTDoB_q=$FA$_t_464e50"
+  ]
+ },
+ {
+  "rva": 454320,
+  "obj": "MPEndMission",
+  "src": "src/MPEndMission.c",
+  "maps": [
+   "_MPEndMission_q@0=?MPEndMission@@YGXXZ",
+   "_ChatSend_q@16=$FA$_t_46b260"
+  ]
+ },
+ {
+  "rva": 508048,
+  "obj": "FormatInit",
+  "src": "src/FormatInit.c",
+  "maps": [
+   "_fmtZone=_buttonBoxes+0xc8"
+  ]
+ },
+ {
+  "rva": 516688,
+  "obj": "CNSetLines",
+  "src": "src/CNSetLines.c",
+  "maps": [
+   "_cnLineA=_buttonBoxes+0x108",
+   "_cnLineB=_buttonBoxes+0x10c"
+  ]
+ },
+ {
+  "rva": 520528,
+  "obj": "InitCampaignPilot",
+  "src": "src/InitCampaignPilot.c",
+  "maps": [
+   "_campZone=_campaignPilot+0xdae",
+   "_campFlag=_campaignPilot+0xdac",
+   "_campStr=_campaignPilot+0xd7f"
+  ],
+  "patch": [
+   "0x2e,1,c1",
+   "0x3c,1,c8"
+  ],
+  "provenance": [
+   "patch 0x2e/0x3c: toolchain-diff \u2014 1-byte modrm reg-coloring on the strlen+1 copy (8b d1->8b c1, 8b ca->8b c8); CL puts it in edx, FA in eax; semantics identical."
+  ]
+ },
+ {
+  "rva": 522464,
+  "obj": "AbortCampaign",
+  "src": "src/AbortCampaign.c",
+  "maps": [
+   "_playerStateQ=?stats_playerState@@3JA+0x4",
+   "_strAbort=_pilotRanks+0x4c0",
+   "@CampaignOff@0=_CampaignOff"
+  ]
+ },
+ {
+  "rva": 522512,
+  "obj": "CampaignMenu",
+  "src": "src/CampaignMenu.c",
+  "maps": [
+   "_strMenu=_pilotRanks+0x524",
+   "_strLoad=_pilotRanks+0x518",
+   "@AbortCampaign_q@0=?AbortCampaign@@YIDXZ"
+  ]
+ },
+ {
+  "rva": 541520,
+  "obj": "MISSIONLoadCommonRes",
+  "src": "src/MISSIONLoadCommonRes.c",
+  "maps": [
+   "_@MISSIONLoadCommonResources_q@0=_MISSIONLoadCommonResources@0",
+   "_missResA=_pilotRanks+0x18",
+   "_missResB=_pilotRanks+0x158"
+  ]
+ },
+ {
+  "rva": 543072,
+  "obj": "MISSIONPrefsChanged",
+  "src": "src/MISSIONPrefsChanged.c",
+  "maps": [
+   "@GetCurObj_q@4=@GetCurObj@4"
+  ]
+ },
+ {
+  "rva": 554944,
+  "obj": "DialogGetString",
+  "src": "src/DialogGetString.c",
+  "maps": [
+   "@DialogGetPtr_q@4=@DialogGetPtr@4",
+   "@PageText_q@8=?PageText@@YIPADJ@Z"
+  ],
+  "patch": [
+   "0x3d,21,74160fbfc981e6ff7f0000e8000000008d14065e8bc25bc3,0xc:20:@PageText_q@8"
+  ],
+  "provenance": [
+   "patch 0x3d: toolchain-diff \u2014 FA kept the PageText sum in the walk-pointer home (skip-je 74 16; movsx ecx,ax; and esi,0x7fff; call PageText; lea edx,[esi+eax]; return copy mov eax,edx) while CL forward-propagated the sum into eax; reloc site spelling inside the patch is span-relative 0xc."
+  ]
+ },
+ {
+  "rva": 569664,
+  "obj": "ShellButtonSound",
+  "src": "src/ShellButtonSound.c",
+  "maps": [
+   "_@ShellButtonSound_q@4=@ShellButtonSound@4",
+   "_sndStr=_checkRightButton+0x458",
+   "_SoundNoMixer@12=?SoundNoMixer@@YGFPADFF@Z",
+   "_SingleSound@16=?SingleSound@@YGFPADFEF@Z"
+  ]
+ },
+ {
+  "rva": 615056,
+  "obj": "GLine",
+  "src": "src/GLine.c",
+  "maps": []
  }
 ]

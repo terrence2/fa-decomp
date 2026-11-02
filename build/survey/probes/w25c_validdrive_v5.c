@@ -1,0 +1,44 @@
+// __validdrive v5 — naked asm with the two 4-byte [esp+0] forms that MASM
+// collapses (mov/lea BYTE/DWORD [esp] short forms -> _emit 88 44 24 00 /
+// 8d 44 24 00) and the IAT call spelled call DWORD PTR [imp] (MASM emits
+// e8 for a dllimport extern; FA has ff 15 — thkFindClose pattern).
+extern unsigned int impGetDriveTypeA[];   /* map _impGetDriveTypeA=__imp__GetDriveTypeA */
+
+__declspec(naked) int __cdecl w25c_validdrive_q(unsigned int drive)
+{
+    __asm {
+        mov eax, DWORD PTR [esp + 4]
+        sub  esp, 4
+        test eax, eax
+        jne  L_have
+        mov  eax, 1
+        add  esp, 4
+        ret
+    L_have:
+        mov  BYTE PTR [esp + 1], 0x3a
+        mov  BYTE PTR [esp + 2], 0x5c
+        mov  BYTE PTR [esp + 3], 0
+        add  al, 0x40
+        _emit 0x88
+        _emit 0x44
+        _emit 0x24
+        _emit 0x00    ; mov BYTE PTR [esp+0],al
+        _emit 0x8d
+        _emit 0x44
+        _emit 0x24
+        _emit 0x00    ; lea eax,[esp+0]
+        push eax
+        call DWORD PTR [impGetDriveTypeA]
+        test eax, eax
+        je   L_zero
+        cmp  eax, 1
+        je   L_zero
+        mov  eax, 1
+        add  esp, 4
+        ret
+    L_zero:
+        xor  eax, eax
+        add  esp, 4
+        ret
+    }
+}
