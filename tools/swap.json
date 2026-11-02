@@ -6747,5 +6747,388 @@
    "_ctrl87fnA=$FA$_t_4df6f0",
    "_ctrl87fnB=$FA$_t_4df7a0"
   ]
+ },
+ {
+  "rva": 33136,
+  "obj": "HUDAltToY",
+  "src": "src/HUDAltToY.c",
+  "maps": [
+   "_qwc=?lastWasInQuickCreator@@3DA+0x1c"
+  ]
+ },
+ {
+  "rva": 43248,
+  "obj": "HUDSetDisrupt",
+  "src": "src/HUDSetDisrupt.c",
+  "maps": [
+   "_lastWasInQC20=?lastWasInQuickCreator@@3DA+0x20",
+   "_lastWasInQC44=?lastWasInQuickCreator@@3DA+0x44",
+   "_disruptStr=?hudslewLimitHdg@@3UWORD_POINT@@A+0x428",
+   "_CPResetRWRQ@0=_CPResetRWR@0",
+   "_SingleSoundS@16=?SingleSound@@YGFPADFEF@Z"
+  ]
+ },
+ {
+  "rva": 54160,
+  "obj": "PopShellAlloc",
+  "src": "src/PopShellAlloc.c",
+  "maps": [
+   "_darkenIdx=?remapDarken320@@3PAEA+0x14",
+   "_shellTab=_shellEvent+0x8",
+   "_mmAllocId=?mmAllocId@@3EA"
+  ]
+ },
+ {
+  "rva": 48928,
+  "obj": "MenuRemoveItem",
+  "src": "src/MenuRemoveItem.c",
+  "maps": [
+   "_firstMenu=?firstMenu@@3PAUMENU@@A"
+  ]
+ },
+ {
+  "rva": 72352,
+  "obj": "RotatedOffset",
+  "src": "src/RotatedOffset.c",
+  "maps": [
+   "_RotatedOffsetF24Q@20=_RotatedOffsetF24@20"
+  ]
+ },
+ {
+  "rva": 72656,
+  "obj": "InBounds3",
+  "src": "src/InBounds3.c",
+  "maps": []
+ },
+ {
+  "rva": 122176,
+  "obj": "CDirDrawLock",
+  "src": "src/CDirDrawLock.cpp",
+  "maps": []
+ },
+ {
+  "rva": 217008,
+  "obj": "StopGameSounds",
+  "src": "src/StopGameSounds.c",
+  "maps": [
+   "_mixStart=?musicVolume@@3GA+0x8",
+   "_mixEnd=?mixChanHandle@@3PAPAU_SAMPLE@@A",
+   "@SetupLoopSoundsQ@0=?SetupLoopSounds@@YIXXZ",
+   "@UpdateLoopSoundsQ@0=?UpdateLoopSounds@@YIXXZ",
+   "@SoundAllOffQ@0=?SoundAllOff@@YIXXZ"
+  ]
+ },
+ {
+  "rva": 400192,
+  "obj": "PutCurObj",
+  "src": "src/PutCurObj.c",
+  "maps": [
+   "_objSizeW=?chainStart@@3GA+0x4",
+   "_curThingB=_curThing",
+   "_curIdW=_curId",
+   "_objPtrsA=_objPtrs"
+  ]
+ },
+ {
+  "rva": 404288,
+  "obj": "MaybeCallEventProc",
+  "src": "src/MaybeCallEventProc.c",
+  "maps": [
+   "_curFlagQ=_curThing+0x1",
+   "_curEventW=_curThing+0x58",
+   "_CallEventProcQ@8=_CallEventProc@8"
+  ]
+ },
+ {
+  "rva": 486432,
+  "obj": "MaxSpeed",
+  "src": "src/MaxSpeed.c",
+  "maps": [
+   "_tMaxSpeedTailQ@12=$FA$_t_476c70"
+  ]
+ },
+ {
+  "rva": 487520,
+  "obj": "COThrust",
+  "src": "src/COThrust.c",
+  "maps": [
+   "_ctA=_curThingType+0x14f",
+   "_ctB=_curThingType+0x153",
+   "_ctFlags10=_curThing+0x10"
+  ]
+ },
+ {
+  "rva": 489424,
+  "obj": "CDirDrawSurfaceUnlock",
+  "src": "src/CDirDrawSurfaceUnlock.cpp",
+  "maps": []
+ },
+ {
+  "rva": 517264,
+  "obj": "CN_GetString",
+  "src": "src/CN_GetString.c",
+  "maps": [
+   "_cnStr=_fmtReduceButtonH+0x19c",
+   "_GetStringQ=?_GetString@@YAJPAD00JJJ@Z"
+  ]
+ },
+ {
+  "rva": 517296,
+  "obj": "CN_GetBigString",
+  "src": "src/CN_GetBigString.cpp",
+  "maps": [],
+  "provenance": [
+   "maps: fmt-string push (68 58 43 4f 00) is a DIR32 to _fmtReduceButtonH+0x1a4 \u2014 reached identity via extern 'C' char fmtReduceButtonH[] plus fmtReduceButtonH+0x1a4 (CL bakes addend 0x1a4 into the imm dword). Call extern is a .cpp mangled ?_GetString@@YAJPAD00JJJ@Z (declare long = J, int mangles H \u2014 CL mangling tell)."
+  ]
+ },
+ {
+  "rva": 520432,
+  "obj": "MISSIONSetCheating",
+  "src": "src/MISSIONSetCheating.c",
+  "maps": [],
+  "provenance": [
+   "asm escape: naked asm (a1 load, a9 imm32 tests incl. the eax REUSE across the third test, c6 05 byte stores elided by dis.py, f6 c5 30 = test ch byte-fold of mask 0x3000)"
+  ]
+ },
+ {
+  "rva": 524448,
+  "obj": "AlmostHome",
+  "src": "src/AlmostHome.c",
+  "maps": [
+   "_thing11=_curThing+0x11",
+   "_thing15=_curThing+0x15"
+  ],
+  "provenance": [
+   "asm escape: naked asm (xor ecx,ecx + 66 8b 88 word load into cx + sib-85 8b 04 8d objPtrs index, 3d/7f A-forms, a1 thing15)"
+  ]
+ },
+ {
+  "rva": 524528,
+  "obj": "ConvertOldPreferredTargetId",
+  "src": "src/ConvertOldPreferredTargetId.c",
+  "maps": [],
+  "provenance": [
+   "asm escape: naked asm (66 8b c1 word copy of the fastcall word param in cx, 25/0d/3d A-forms, f6 c4/f6 c5 byte-test folds for the 0x1000/0x2000/0x4000/0x8000 masks)"
+  ]
+ },
+ {
+  "rva": 616208,
+  "obj": "G_ULineFlip",
+  "src": "src/G_ULineFlip.c",
+  "maps": []
+ },
+ {
+  "rva": 616256,
+  "obj": "G_LineFlip",
+  "src": "src/G_LineFlip.c",
+  "maps": []
+ },
+ {
+  "rva": 616304,
+  "obj": "G_CircleFlip",
+  "src": "src/G_CircleFlip.c",
+  "maps": [],
+  "provenance": [
+   "asm escape: plain-C probe loaded _cb first (8b 0d into ecx, [ecx+6], sub via [esp+0x10] stack-read) while FA loads d/c params first, pushes d, then 8b 15 _cb into edx \u2014 G5 schedule diff between the twins, asm escape"
+  ]
+ },
+ {
+  "rva": 616352,
+  "obj": "G_URectFlip",
+  "src": "src/G_URectFlip.c",
+  "maps": [],
+  "provenance": [
+   "asm escape: FA reserves ebx for m (push ebx prologue, FPO cbRegs=1) across the push interleave; CL probe used ecx \u2014 asm escape. Operand order (m-d)-b is a source-wording tell."
+  ]
+ },
+ {
+  "rva": 619312,
+  "obj": "G_SetHShake",
+  "src": "src/G_SetHShake.c",
+  "maps": [],
+  "provenance": [
+   "asm escape: naked asm \u2014 shared epilogue (jl/jle into pop esi), A3 store of t|0x10 AFTER pop esi, amp/4 = cdq/and edx,3/add/sar 2; fastcall @8 gate from wave-16 SetHShake calls this with ecx/ edx raw"
+  ]
+ },
+ {
+  "rva": 619376,
+  "obj": "G_SetVShake",
+  "src": "src/G_SetVShake.c",
+  "maps": [],
+  "provenance": [
+   "asm escape: mirror of G_SetHShake; only structural diff is the first guard written the other way (cmp ecx,esi / jg = source said hz > h, twin polarity source-tell)"
+  ]
+ },
+ {
+  "rva": 620144,
+  "obj": "WPGoalObjEvent",
+  "src": "src/WPGoalObjEvent.c",
+  "maps": [
+   "_wpTgtSrc=_curThing+0xe8",
+   "_wpFlag=_curThing+0xec"
+  ],
+  "provenance": [
+   "asm escape: naked asm \u2014 a1 load of _curThing+0xe8 (map +0xe8), WPTarget@4 ret 4 cleans the arg push so [esp+8] at cmp = p1 word; not bl + 20 1d and byte ds:[_curThing+0xec],bl mask; p1 (entry+4) vs p2 (entry+8) word fetches with ebx save"
+  ]
+ },
+ {
+  "rva": 621888,
+  "obj": "MOUSESetPos",
+  "src": "src/MOUSESetPos.c",
+  "maps": [
+   "_grModeW=_grMode",
+   "_mousePosQ0=_mousePos",
+   "_mousePosQ1=_mousePos+0x2"
+  ],
+  "provenance": [
+   "plain C reached everything: 0f bf 05 movsx moffs loads (CL bakes +0xa/+0xc addends) and \u2014 NEW idiom \u2014 CL emits 66 a3 word-moffs stores for short globals (no patch needed; MSGHide needed asm for its 88 15 byte store, word A3 is native)"
+  ]
+ },
+ {
+  "rva": 669376,
+  "obj": "RMShutdown",
+  "src": "src/RMShutdown.c",
+  "maps": [
+   "_resListArr=?resList@@3PAURES_LIST@@A",
+   "_resEnd=?resList@@3PAURES_LIST@@A+0x67e8"
+  ],
+  "provenance": [
+   "asm escape: naked asm \u2014 mov esi/edi/cmp esi ,offset <extern> immediates carry DIR32 to the resList data-chunk symbol (be/bf/81 fe sites, human-coin +0x0 / +0x67e8), a0/a2 moffs for the flag byte, 20 1d-free loop body 8a 06/83 c6 13/jb, f3 ab rep stosd (CTInit-style but asm loop)"
+  ]
+ },
+ {
+  "rva": 690464,
+  "obj": "InsectWingAngle",
+  "src": "src/InsectWingAngle.c",
+  "maps": [],
+  "patch": [
+   "3,3,8d442400"
+  ],
+  "provenance": [
+   "patch 0x3: toolchain-diff - MASM always collapses lea eax,[esp] to the disp-less 8d 04 24; FA keeps the disp8 00 form 8d 44 24 00 (no MASM spelling found, build/w4probe). Naked-asm escape (provenance preamble): plain C probe (w22) used ecx for the 255 divisor AND the /256 sign magic (and edx,ecx), and pushed the &loc arg before the shift chain; FA reserves ebx=255 across idiv AND and edx,ebx (23 d3) and finishes the value before the pointer-arg leas."
+  ]
+ },
+ {
+  "rva": 710384,
+  "obj": "NET_GetLastError",
+  "src": "src/NET_GetLastError.c",
+  "maps": [
+   "_winsock_error_buf=?winsock_error_buf@@3PADA"
+  ]
+ },
+ {
+  "rva": 710640,
+  "obj": "NET_Addr2string",
+  "src": "src/NET_Addr2string.c",
+  "maps": [
+   "_proto_ptr=?proto_ptr@@3PAUNET_PROTOCOL@@A"
+  ]
+ },
+ {
+  "rva": 715168,
+  "obj": "net_start_game",
+  "src": "src/net_start_game.c",
+  "maps": [
+   "_playerListFirst=?player_list@@3UNET_PLAYER_LIST@@A",
+   "_gameEventHandlerQ=?game_event_handler@@YADIJHPAUsocket_state@@@Z",
+   "_ssapfQ=?socket_set_all_players_state_funcs@@YAXP6ADIJHPAUsocket_state@@@ZW4SOCK_STATE@@H@Z",
+   "_nsghQ=$FA$_t_4ae9d0",
+   "_nsofQ=?net_set_often_state@@YAXW4PLAYER_STATE@@@Z"
+  ]
+ },
+ {
+  "rva": 755120,
+  "obj": "APStartFinalApproach",
+  "src": "src/APStartFinalApproach.c",
+  "maps": [
+   "_curThing231=_curThing+0x231",
+   "@APLandingTypeQ@8=@APLandingType@8",
+   "@EnterStateQ@4=@EnterState@4"
+  ]
+ },
+ {
+  "rva": 759664,
+  "obj": "APGetPark",
+  "src": "src/APGetPark.c",
+  "maps": [
+   "_curThing231=_curThing+0x231",
+   "__curId=_curId"
+  ]
+ },
+ {
+  "rva": 775360,
+  "obj": "PROJSpeed",
+  "src": "src/PROJSpeed.c",
+  "maps": []
+ },
+ {
+  "rva": 826091,
+  "obj": "fast_asin",
+  "src": "src/fast_asin.c",
+  "maps": [
+   "_fastAsinTab=cos_table+0x202"
+  ]
+ },
+ {
+  "rva": 853624,
+  "obj": "do_setlight",
+  "src": "src/do_setlight.c",
+  "maps": [
+   "_doSetLgtCore=do_collision_info+0x14",
+   "_setVT=vector_table"
+  ]
+ },
+ {
+  "rva": 853660,
+  "obj": "do_setcoarse",
+  "src": "src/do_setcoarse.c",
+  "maps": [
+   "_coarseG=_coarse",
+   "_setVT=vector_table"
+  ]
+ },
+ {
+  "rva": 861900,
+  "obj": "MultPointByMatrix",
+  "src": "src/MultPointByMatrix.c",
+  "maps": [
+   "_mpbmCore=ecode_pnt+0x84"
+  ]
+ },
+ {
+  "rva": 868176,
+  "obj": "FcloseLk",
+  "src": "src/FcloseLk.c",
+  "maps": [
+   "__flush_lk=$FA$_t_4d5f30",
+   "_fcloseUnk2=$FA$_t_4d82a0"
+  ]
+ },
+ {
+  "rva": 914112,
+  "obj": "Chunk_df2c0",
+  "src": "src/Chunk_df2c0.c",
+  "maps": [
+   "_df2c0T=$FA$_t_4df2d0"
+  ],
+  "aliases": [
+   "0=$FA$_t_4df2c0"
+  ]
+ },
+ {
+  "rva": 914560,
+  "obj": "ValidateRead",
+  "src": "src/ValidateRead.c",
+  "maps": [
+   "_impIsBadReadPtr=__imp__IsBadReadPtr"
+  ]
+ },
+ {
+  "rva": 914592,
+  "obj": "ValidateWrite",
+  "src": "src/ValidateWrite.c",
+  "maps": [
+   "_impIsBadWritePtr=__imp__IsBadWritePtr"
+  ]
  }
 ]

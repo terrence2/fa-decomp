@@ -1,0 +1,42 @@
+// _InsectWingAngle@0 @ rva 0xa8920 (73 B code + 7 B 8da424 pad) — asm
+// escape: plain C probe (w22 probe) schedules differently — CL used ecx
+// for the 255 divisor+and (and edx,ecx) and pushed the &loc arg before
+// sar, while FA reserves ebx=255 across BOTH idiv and the /256 sign magic
+// (and edx,ebx) and finishes the value before lea/push of the pointer
+// args.  4-byte local: &loc lea eax BEFORE push ebx, &loc+1 lea ecx AFTER.
+extern long currentTicks;               /* _currentTicks */
+extern void __stdcall GRSinCos(int v, short* a, short* b);
+
+__declspec(naked) long __stdcall InsectWingAngle_q(void)
+{
+    __asm {
+        sub  esp, 4
+        lea  eax, dword ptr [esp]          /* FA keeps the disp8 00 form (8d 44 24 00) */
+        push ebx
+        lea  ecx, [esp+6]
+        push eax
+        push ecx
+        mov  ebx, 0ffh
+        mov  eax, currentTicks
+        cdq
+        idiv ebx
+        mov  eax, edx
+        shl  eax, 0ch
+        sub  eax, edx
+        shl  eax, 4
+        cdq
+        and  edx, ebx
+        add  eax, edx
+        sar  eax, 8
+        push eax
+        call GRSinCos
+        mov  cx, 6
+        mov  ax, word ptr [esp+6]
+        pop  ebx
+        cwd
+        idiv cx
+        movsx eax, ax
+        add  esp, 4
+        ret
+    }
+}

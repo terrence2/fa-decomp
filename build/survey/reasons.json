@@ -1,0 +1,8426 @@
+[
+ {
+  "rva": "0xb06c0",
+  "obj": "WRFog",
+  "src": "src/WRFogLayerUpdate.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x9b1f0",
+  "obj": "Stall",
+  "src": "src/StallSpeed.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x11780",
+  "obj": "WordToString",
+  "src": "src/WordToString.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x87610",
+  "obj": "DlgSel",
+  "src": "src/DialogSelectItem.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xb5130",
+  "obj": "CarefulDiv",
+  "src": "src/carefulDiv.c",
+  "cls": "x87",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x78b50",
+  "obj": "LibRead",
+  "src": "src/LibRead.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x35e50",
+  "obj": "StartGameThread",
+  "src": "src/StartGameThread.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd3970",
+  "obj": "LockExit",
+  "src": "src/lockexit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd3980",
+  "obj": "UnlockExit",
+  "src": "src/unlockexit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd99b0",
+  "obj": "Errno",
+  "src": "src/errno.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd3890",
+  "obj": "CExit",
+  "src": "src/cexit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd9e20",
+  "obj": "GetMbcp",
+  "src": "src/getmbcp.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xddfc0",
+  "obj": "GetSbhThreshold",
+  "src": "src/getsbhthreshold.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xe1ec0",
+  "obj": "Localeconv",
+  "src": "src/localeconv.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x117b0",
+  "obj": "LibraryStartup",
+  "src": "src/librarystartup.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x35ce0",
+  "obj": "MMCompactRAM",
+  "src": "src/mmcompactram.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x35aa0",
+  "obj": "MMAllocPtr",
+  "src": "src/mmallocptr.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x35c00",
+  "obj": "MMReallocPtr",
+  "src": "src/mmreallocptr.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x35d40",
+  "obj": "MMLock",
+  "src": "src/mmlock.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x35d50",
+  "obj": "MMLockW",
+  "src": "src/mmlockw.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x35d90",
+  "obj": "MMUnlock",
+  "src": "src/mmunlock.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x35da0",
+  "obj": "MMAccessR",
+  "src": "src/mmaccessr.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x35db0",
+  "obj": "MMAccessW",
+  "src": "src/mmaccessw.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x558f0",
+  "obj": "Rand16",
+  "src": "src/rand16.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x55900",
+  "obj": "Rand8",
+  "src": "src/rand8.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x55910",
+  "obj": "Rand",
+  "src": "src/rand.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x12730",
+  "obj": "PrintShapeName",
+  "src": "src/printshapename.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x1e420",
+  "obj": "WriteConfig",
+  "src": "src/writeconfig.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x49730",
+  "obj": "InstallErrorExit",
+  "src": "src/installerrorexit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x5d730",
+  "obj": "GGGetSubmodes",
+  "src": "src/gggetsubmodes.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x5d740",
+  "obj": "GGGetSubmodeName",
+  "src": "src/gggetsubmodename.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x64600",
+  "obj": "CTEval_maxspeed",
+  "src": "src/cteval_maxspeed.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x64640",
+  "obj": "CTEval_twr",
+  "src": "src/cteval_twr.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x64590",
+  "obj": "CTEval_minspeed",
+  "src": "src/cteval_minspeed.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x645b0",
+  "obj": "CTEval_cornerspeed",
+  "src": "src/cteval_cornerspeed.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x645c0",
+  "obj": "CTEval_corner",
+  "src": "src/cteval_corner.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x645e0",
+  "obj": "CTEval_maxrudderh",
+  "src": "src/cteval_maxrudderh.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x645f0",
+  "obj": "CTEval_maxrudderp",
+  "src": "src/cteval_maxrudderp.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x64870",
+  "obj": "CTEval_cloudalt",
+  "src": "src/cteval_cloudalt.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x63e40",
+  "obj": "CTShutdown",
+  "src": "src/ctshutdown.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x61b90",
+  "obj": "PutCurObj2",
+  "src": "src/putcurobj2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x641b0",
+  "obj": "CTEval_tgtisship",
+  "src": "src/cteval_tgtisship.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x641c0",
+  "obj": "CTEval_tgtissam",
+  "src": "src/cteval_tgtissam.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x64240",
+  "obj": "CTEval_bestrange",
+  "src": "src/cteval_bestrange.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x64680",
+  "obj": "CTEval_turnrate",
+  "src": "src/cteval_turnrate.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x64950",
+  "obj": "CTEval_any",
+  "src": "src/cteval_any.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x65480",
+  "obj": "CTDo_homepos",
+  "src": "src/ctdo_homepos.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x655a0",
+  "obj": "CTDo_uhomepos",
+  "src": "src/ctdo_uhomepos.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x62e80",
+  "obj": "WriteCmdBufMove",
+  "src": "src/writecmdbufmove.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x62e90",
+  "obj": "WriteCmdBufEnd",
+  "src": "src/writecmdbufend.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x8b230",
+  "obj": "DisableActionButton",
+  "src": "src/disableactionbutton.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x8b240",
+  "obj": "EnableActionButton",
+  "src": "src/enableactionbutton.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x8b2a0",
+  "obj": "DialogItemIsEnabled",
+  "src": "src/dialogitemisenabled.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x68b20",
+  "obj": "EJECTRemove",
+  "src": "src/ejectremove.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x7f5e0",
+  "obj": "KurileRescued",
+  "src": "src/kurilerescued.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x7f5f0",
+  "obj": "VietnamRescued",
+  "src": "src/vietnamrescued.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x7f6b0",
+  "obj": "UkraineQuit",
+  "src": "src/ukrainequit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x7f780",
+  "obj": "KurileQuit",
+  "src": "src/kurilequit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x7f790",
+  "obj": "VietnamQuit",
+  "src": "src/vietnamquit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x82930",
+  "obj": "VietnamMedals",
+  "src": "src/vietnammedals.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x82940",
+  "obj": "VietnamPromotions",
+  "src": "src/vietnampromotions.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x7f050",
+  "obj": "MISSIONInit1",
+  "src": "src/missioninit1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x7f060",
+  "obj": "MISSIONInit2",
+  "src": "src/missioninit2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x7f070",
+  "obj": "MISSIONInit3",
+  "src": "src/missioninit3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x96550",
+  "obj": "GFlush",
+  "src": "src/gflush.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x8b4a0",
+  "obj": "SAYShutdown",
+  "src": "src/sayshutdown.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x96b60",
+  "obj": "GLoadDriver",
+  "src": "src/gloaddriver.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x96b70",
+  "obj": "GUnloadDriver",
+  "src": "src/gunloaddriver.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x97d70",
+  "obj": "MOUSECenter",
+  "src": "src/mousecenter.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa3700",
+  "obj": "RMType",
+  "src": "src/rmtype.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x35d60",
+  "obj": "MMLockR",
+  "src": "src/mmlockr.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x641d0",
+  "obj": "CTEval_tgtisaaa",
+  "src": "src/cteval_tgtisaaa.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x646b0",
+  "obj": "CTEval_turnradius",
+  "src": "src/cteval_turnradius.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x7ead0",
+  "obj": "AircraftReference",
+  "src": "src/aircraftreference.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x7eae0",
+  "obj": "ViewPilots",
+  "src": "src/viewpilots.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xb49c0",
+  "obj": "GColorStringHeight",
+  "src": "src/gcolorstringheight.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xc2110",
+  "obj": "TInit",
+  "src": "src/tinit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd9360",
+  "obj": "setdefaultprecision",
+  "src": "src/setdefaultprecision.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x63fe0",
+  "obj": "CTEval_time",
+  "src": "src/cteval_time.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x63ff0",
+  "obj": "CTEval_do_nothing",
+  "src": "src/cteval_donotthing.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x64000",
+  "obj": "CTEval_do_evade",
+  "src": "src/cteval_doevade.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x64010",
+  "obj": "CTEval_do_attack",
+  "src": "src/cteval_doattack.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x64020",
+  "obj": "CTEval_do_radar_launch",
+  "src": "src/cteval_doradarlaunch.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x64030",
+  "obj": "CTEval_do_ir_launch",
+  "src": "src/cteval_doirlaunch.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x64040",
+  "obj": "CTEval_do_hit",
+  "src": "src/cteval_dohit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x64250",
+  "obj": "CTEval_bestrangediff",
+  "src": "src/cteval_bestrangediff.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x64260",
+  "obj": "CTEval_radar",
+  "src": "src/cteval_radar.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x642a0",
+  "obj": "CTEval_ir",
+  "src": "src/cteval_ir.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x64560",
+  "obj": "CTEval_speed",
+  "src": "src/cteval_speed.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x64770",
+  "obj": "CTEval_minalt",
+  "src": "src/cteval_minalt.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x64880",
+  "obj": "CTEval_skill",
+  "src": "src/cteval_skill.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x64bb0",
+  "obj": "CTEval_wm_hspacing_is",
+  "src": "src/cteval_wmhspacing.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x64bc0",
+  "obj": "CTEval_wm_vspacing_is",
+  "src": "src/cteval_wmvspacing.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x64bd0",
+  "obj": "CTEval_wm_formation_is",
+  "src": "src/cteval_wmform.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x64be0",
+  "obj": "CTEval_wm_control_is",
+  "src": "src/cteval_wmcontrol.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x645a0",
+  "obj": "CTEval_minspeeddiff",
+  "src": "src/cteval_minspeeddiff.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x645d0",
+  "obj": "CTEval_cornerspeeddiff",
+  "src": "src/cteval_cornerspeeddiff.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x64610",
+  "obj": "CTEval_maxspeeddiff",
+  "src": "src/cteval_maxspeeddiff.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x64650",
+  "obj": "CTEval_twrdiff",
+  "src": "src/cteval_twrdiff.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x646c0",
+  "obj": "CTEval_turnradiusdiff",
+  "src": "src/cteval_turnradiusdiff.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x11380",
+  "obj": "GetKeyFlags",
+  "src": "src/gkeyflags.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x49a40",
+  "obj": "ErrorExitNoMem",
+  "src": "src/errorexitnomem.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x51d80",
+  "obj": "FMBayIsOpen",
+  "src": "src/fmbayisopen.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x217b0",
+  "obj": "ZONEInit",
+  "src": "src/zoneinit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x557e0",
+  "obj": "InitRand",
+  "src": "src/initrand.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x870e0",
+  "obj": "DialogWhatItem",
+  "src": "src/dialogwhatitem.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x8b2b0",
+  "obj": "LimitEditFieldLength",
+  "src": "src/limiteditfieldlength.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd3da0",
+  "obj": "tolower",
+  "src": "src/tolower.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd43c0",
+  "obj": "toupper",
+  "src": "src/toupper.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd4b50",
+  "obj": "labs",
+  "src": "src/labs.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x8f3a0",
+  "obj": "OBJGet",
+  "src": "src/OBJGet.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x95460",
+  "obj": "G_FlipY",
+  "src": "src/G_FlipY.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x95610",
+  "obj": "G_SetBitmap",
+  "src": "src/G_SetBitmap.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x967d0",
+  "obj": "G_SetFont",
+  "src": "src/G_SetFont.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x96b50",
+  "obj": "G_StringHeight",
+  "src": "src/G_StringHeight.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x9b530",
+  "obj": "PLANEInit",
+  "src": "src/PLANEInit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xb0a90",
+  "obj": "WRInt",
+  "src": "src/WRInt.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd3a90",
+  "obj": "atoi",
+  "src": "src/atoi.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd5c20",
+  "obj": "srand",
+  "src": "src/srand.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xdfa30",
+  "obj": "FillZeroMan",
+  "src": "src/FillZeroMan.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xe3d40",
+  "obj": "tzset",
+  "src": "src/tzset.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa54d0",
+  "obj": "T_InitFarmProc",
+  "src": "src/T_InitFarmProc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa5a00",
+  "obj": "T_InitCloudProc",
+  "src": "src/T_InitCloudProc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x117c0",
+  "obj": "LibraryShutdown",
+  "src": "src/LibraryShutdown.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x61b80",
+  "obj": "GetCurObj2",
+  "src": "src/GetCurObj2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x7ea40",
+  "obj": "CreateFortMission",
+  "src": "src/CreateFortMission.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x7ea50",
+  "obj": "CreateFortMission2",
+  "src": "src/CreateFortMission2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa40c0",
+  "obj": "SetupPT",
+  "src": "src/SetupPT.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa40d0",
+  "obj": "SetupJT",
+  "src": "src/SetupJT.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa7ba0",
+  "obj": "T_HorizonProc",
+  "src": "src/T_HorizonProc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xbb200",
+  "obj": "unknown_divide_error",
+  "src": "src/unknown_divide_error.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd3850",
+  "obj": "exit",
+  "src": "src/exit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd3870",
+  "obj": "exitcrt",
+  "src": "src/exitcrt.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xdb6a0",
+  "obj": "ismbbkalnum",
+  "src": "src/ismbbkalnum.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xdb6c0",
+  "obj": "ismbbkprint",
+  "src": "src/ismbbkprint.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xdb6e0",
+  "obj": "ismbbkpunct",
+  "src": "src/ismbbkpunct.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xdb700",
+  "obj": "ismbbalnum",
+  "src": "src/ismbbalnum.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xdb720",
+  "obj": "ismbbalpha",
+  "src": "src/ismbbalpha.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xdb7c0",
+  "obj": "ismbbtrail",
+  "src": "src/ismbbtrail.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xe27c0",
+  "obj": "atexit",
+  "src": "src/atexit.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xe2820",
+  "obj": "abort",
+  "src": "src/abort.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x11b70",
+  "obj": "FeetToNM",
+  "src": "src/FeetToNM.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x11ee0",
+  "obj": "Strend",
+  "src": "src/Strend.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x122e0",
+  "obj": "SampleShutdown",
+  "src": "src/SampleShutdown.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x127a0",
+  "obj": "ObjRadius",
+  "src": "src/ObjRadius.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x1f370",
+  "obj": "FortMultiButton",
+  "src": "src/FortMultiButton.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x4c520",
+  "obj": "FortMultiButton2",
+  "src": "src/FortMultiButton2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x2e1b0",
+  "obj": "QuickMultiButton",
+  "src": "src/QuickMultiButton.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x214f0",
+  "obj": "StopCobraSound",
+  "src": "src/StopCobraSound.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x2e060",
+  "obj": "COLInit",
+  "src": "src/COLInit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x35b70",
+  "obj": "MMFreePtr",
+  "src": "src/MMFreePtr.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x35d20",
+  "obj": "MMHandleLen",
+  "src": "src/MMHandleLen.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x3d880",
+  "obj": "CPToggleHistory",
+  "src": "src/CPToggleHistory.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x557c0",
+  "obj": "Percent",
+  "src": "src/Percent.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x69f80",
+  "obj": "WritePalette",
+  "src": "src/WritePalette.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x76d20",
+  "obj": "COMaxSpeed",
+  "src": "src/COMaxSpeed.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x7eaf0",
+  "obj": "StartCampaign",
+  "src": "src/StartCampaign.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x7eb10",
+  "obj": "ContinueCampaign",
+  "src": "src/ContinueCampaign.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x84be0",
+  "obj": "TIMERestart",
+  "src": "src/TIMERestart.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x87880",
+  "obj": "Info2640Preload",
+  "src": "src/Info2640Preload.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x35e00",
+  "obj": "MMByteAt",
+  "src": "src/MMByteAt.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x35e10",
+  "obj": "MMWordAt",
+  "src": "src/MMWordAt.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x35e20",
+  "obj": "MMUWordAt",
+  "src": "src/MMUWordAt.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x35e30",
+  "obj": "MMLongAt",
+  "src": "src/MMLongAt.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x35e40",
+  "obj": "MMULongAt",
+  "src": "src/MMULongAt.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd9130",
+  "obj": "XcptInitPtd",
+  "src": "src/XcptInitPtd.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd94d0",
+  "obj": "StatusPositive",
+  "src": "src/StatusPositive.c",
+  "cls": "x87",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xdb740",
+  "obj": "ISMBBGraph",
+  "src": "src/ISMBBGraph.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xdb760",
+  "obj": "ISMBBPrint",
+  "src": "src/ISMBBPrint.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xdb780",
+  "obj": "ISMBBPunct",
+  "src": "src/ISMBBPunct.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xdb7a0",
+  "obj": "ISMBBLead",
+  "src": "src/ISMBBLead.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x878a0",
+  "obj": "Info640Preload",
+  "src": "src/Info640Preload.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x878f0",
+  "obj": "SndPrefPreload",
+  "src": "src/SndPrefPreload.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x87910",
+  "obj": "ChoosePreload",
+  "src": "src/ChoosePreload.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xaa240",
+  "obj": "ClearCachedFilenames",
+  "src": "src/ClearCachedFilenames.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x96540",
+  "obj": "G_SetScaleMax",
+  "src": "src/G_SetScaleMax.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x96660",
+  "obj": "G_SPolygonFlip",
+  "src": "src/G_SPolygonFlip.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x96680",
+  "obj": "G_SUPolygonFlip",
+  "src": "src/G_SUPolygonFlip.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x9b1d0",
+  "obj": "TakeoffSpeed",
+  "src": "src/TakeoffSpeed.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xc2100",
+  "obj": "T_ShutdownDatabase",
+  "src": "src/T_ShutdownDatabase.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xdf610",
+  "obj": "Statusfp",
+  "src": "src/Statusfp.c",
+  "cls": "x87",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xdf630",
+  "obj": "Clearfp",
+  "src": "src/Clearfp.c",
+  "cls": "x87",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xe0be0",
+  "obj": "Wcslen",
+  "src": "src/Wcslen.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x12eb0",
+  "obj": "CHATInit",
+  "src": "src/CHATInit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x21e40",
+  "obj": "MAPSetSide",
+  "src": "src/MAPSetSide.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x5da40",
+  "obj": "GG_WaitRetrace",
+  "src": "src/GG_WaitRetrace.c",
+  "cls": "cc-shape",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x5da70",
+  "obj": "GG_VideoModesAvailable",
+  "src": "src/GG_VideoModesAvailable.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x62ea0",
+  "obj": "FinishCmdBuf",
+  "src": "src/FinishCmdBuf.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x63060",
+  "obj": "MaskEvents",
+  "src": "src/MaskEvents.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x64150",
+  "obj": "CTEval_tgtisfighter",
+  "src": "src/CTEval_tgtisfighter.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x64170",
+  "obj": "CTEval_tgtisbomber",
+  "src": "src/CTEval_tgtisbomber.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x64190",
+  "obj": "CTEval_tgtisplane",
+  "src": "src/CTEval_tgtisplane.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x64200",
+  "obj": "CTEval_maxrange",
+  "src": "src/CTEval_maxrange.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x64540",
+  "obj": "CTEval_canclimb",
+  "src": "src/CTEval_canclimb.c",
+  "cls": "const-fold",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x64620",
+  "obj": "CTEval_betterspeed",
+  "src": "src/CTEval_betterspeed.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x64660",
+  "obj": "CTEval_bettertwr",
+  "src": "src/CTEval_bettertwr.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x64690",
+  "obj": "CTEval_turnratediff",
+  "src": "src/CTEval_turnratediff.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x648d0",
+  "obj": "CTEval_p",
+  "src": "src/CTEval_p.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x648f0",
+  "obj": "CTEval_b",
+  "src": "src/CTEval_b.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x64c10",
+  "obj": "CTDo_restart",
+  "src": "src/CTDo_restart.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x79540",
+  "obj": "ShutdownGraphicsSystem",
+  "src": "src/ShutdownGraphicsSystem.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x7f300",
+  "obj": "UkraineAddA7",
+  "src": "src/UkraineAddA7.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x87400",
+  "obj": "DialogGetPtr",
+  "src": "src/DialogGetPtr.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x95720",
+  "obj": "G_SetFullClipBox",
+  "src": "src/G_SetFullClipBox.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x95880",
+  "obj": "G_GetPoint",
+  "src": "src/G_GetPoint.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x966a0",
+  "obj": "G_PointFlip",
+  "src": "src/G_PointFlip.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x966c0",
+  "obj": "G_UPointFlip",
+  "src": "src/G_UPointFlip.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x97b00",
+  "obj": "WPDoingWaypoints",
+  "src": "src/WPDoingWaypoints.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xaa260",
+  "obj": "GetExecutablePath",
+  "src": "src/GetExecutablePath.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xaf4f0",
+  "obj": "ChangeTint",
+  "src": "src/ChangeTint.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xb0aa0",
+  "obj": "WRForcePaletteUpdate",
+  "src": "src/WRForcePaletteUpdate.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xc23d0",
+  "obj": "T_StopAdding",
+  "src": "src/T_StopAdding.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xd9290",
+  "obj": "malloc",
+  "src": "src/malloc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xdfa40",
+  "obj": "IsZeroMan",
+  "src": "src/IsZeroMan.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xe4600",
+  "obj": "is_wctype",
+  "src": "src/is_wctype.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa40a0",
+  "obj": "SetupNT",
+  "src": "src/SetupNT.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xd3ff0",
+  "obj": "fopen",
+  "src": "src/fopen.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xd5c30",
+  "obj": "RandCRT",
+  "src": "src/RandCRT.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xe0f0",
+  "obj": "VIEWImmediateVisibility",
+  "src": "src/VIEWImmediateVisibility.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x11dc0",
+  "obj": "NextString",
+  "src": "src/NextString.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x12510",
+  "obj": "SpeedOfSound",
+  "src": "src/SpeedOfSound.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x14180",
+  "obj": "SetPlayerContact",
+  "src": "src/SetPlayerContact.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x16200",
+  "obj": "ForceAutopilot",
+  "src": "src/ForceAutopilot.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x16220",
+  "obj": "RestoreAutopilot",
+  "src": "src/RestoreAutopilot.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x1d470",
+  "obj": "FreeNames",
+  "src": "src/FreeNames.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x330f0",
+  "obj": "BasicSound",
+  "src": "src/BasicSound.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x52e90",
+  "obj": "HARDResourceName",
+  "src": "src/HARDResourceName.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x61870",
+  "obj": "ImmediateService",
+  "src": "src/ImmediateService.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x62d80",
+  "obj": "ObjPlusAngleParm",
+  "src": "src/ObjPlusAngleParm.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x62e60",
+  "obj": "WriteCmdBufProcptr",
+  "src": "src/WriteCmdBufProcptr.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x63e20",
+  "obj": "CTInit",
+  "src": "src/CTInit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x641e0",
+  "obj": "CTEval_tgthumancontrol",
+  "src": "src/CTEval_tgthumancontrol.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x64220",
+  "obj": "CTEval_maxrangediff",
+  "src": "src/CTEval_maxrangediff.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x643e0",
+  "obj": "CTEval_disttotgt",
+  "src": "src/CTEval_disttotgt.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x64570",
+  "obj": "CTEval_speeddiff",
+  "src": "src/CTEval_speeddiff.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x64700",
+  "obj": "CTEval_altdiff",
+  "src": "src/CTEval_altdiff.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x64750",
+  "obj": "CTEval_maxaltdiff",
+  "src": "src/CTEval_maxaltdiff.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x64780",
+  "obj": "CTEval_minaltdiff",
+  "src": "src/CTEval_minaltdiff.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x64910",
+  "obj": "CTEval_hdiff",
+  "src": "src/CTEval_hdiff.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x64930",
+  "obj": "CTEval_pdiff",
+  "src": "src/CTEval_pdiff.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x69690",
+  "obj": "SMShutdown",
+  "src": "src/SMShutdown.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x757c0",
+  "obj": "WrapHB",
+  "src": "src/WrapHB.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x757f0",
+  "obj": "WrapP",
+  "src": "src/WrapP.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x79ed0",
+  "obj": "FMResetTV",
+  "src": "src/FMResetTV.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x7f130",
+  "obj": "LoadCampaignProc",
+  "src": "src/LoadCampaignProc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x7f280",
+  "obj": "CampaignPlanesLeft",
+  "src": "src/CampaignPlanesLeft.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x84db0",
+  "obj": "TIMESetCompression",
+  "src": "src/TIMESetCompression.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x84ef0",
+  "obj": "FPSPrint",
+  "src": "src/FPSPrint.c",
+  "cls": "cc-shape",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x878c0",
+  "obj": "GrafPrefPreload",
+  "src": "src/GrafPrefPreload.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x87930",
+  "obj": "MultiPreload",
+  "src": "src/MultiPreload.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x8f930",
+  "obj": "OBJNextAliasForMulti",
+  "src": "src/OBJNextAliasForMulti.c",
+  "cls": "const-fold",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x96510",
+  "obj": "G_DrawYLR",
+  "src": "src/G_DrawYLR.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x9e710",
+  "obj": "DoFadeout",
+  "src": "src/DoFadeout.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa2810",
+  "obj": "CanReplay",
+  "src": "src/CanReplay.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xaa110",
+  "obj": "Rename",
+  "src": "src/Rename.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xb4990",
+  "obj": "G_ColorStringWidth",
+  "src": "src/G_ColorStringWidth.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0xb6b80",
+  "obj": "APInit",
+  "src": "src/APInit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xddfd0",
+  "obj": "set_sbh_threshold",
+  "src": "src/set_sbh_threshold.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xdf690",
+  "obj": "controlfp",
+  "src": "src/controlfp.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x78bf0",
+  "obj": "LibClose",
+  "src": "src/LibClose.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd5de0",
+  "obj": "getenv",
+  "src": "src/getenv.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd72e0",
+  "obj": "lockerr_exit",
+  "src": "src/lockerr_exit.c",
+  "cls": "dllimport",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xdf5c0",
+  "obj": "query_new_handler",
+  "src": "src/query_new_handler.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xdfa10",
+  "obj": "CopyMan",
+  "src": "src/CopyMan.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xe4040",
+  "obj": "isindst",
+  "src": "src/isindst.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x2320",
+  "obj": "state_func_slave_connecting",
+  "src": "src/state_func_slave_connecting.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x5bf0",
+  "obj": "HUDInitMessages",
+  "src": "src/HUDInitMessages.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0xcbf0",
+  "obj": "EnableItem",
+  "src": "src/EnableItem.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xcc00",
+  "obj": "DisableItem",
+  "src": "src/DisableItem.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xcc10",
+  "obj": "IsItemEnabled",
+  "src": "src/IsItemEnabled.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x11620",
+  "obj": "KEYECS",
+  "src": "src/KEYECS.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x11640",
+  "obj": "KEYLCS",
+  "src": "src/KEYLCS.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x11c90",
+  "obj": "PutFakeKey",
+  "src": "src/PutFakeKey.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x13e30",
+  "obj": "SetPlayerTarget",
+  "src": "src/SetPlayerTarget.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x1c5a0",
+  "obj": "NamesShutdown",
+  "src": "src/NamesShutdown.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x21e60",
+  "obj": "MAPMaybeSetControl",
+  "src": "src/MAPMaybeSetControl.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x325b0",
+  "obj": "DMusicVolume",
+  "src": "src/DMusicVolume.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x32e20",
+  "obj": "ShutDownMixer",
+  "src": "src/ShutDownMixer.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x35c70",
+  "obj": "MMPtrToHandle",
+  "src": "src/MMPtrToHandle.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x35cf0",
+  "obj": "MMFreeAllId",
+  "src": "src/MMFreeAllId.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x35df0",
+  "obj": "MMAreaFree",
+  "src": "src/MMAreaFree.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x380e0",
+  "obj": "CPClearMissile",
+  "src": "src/CPClearMissile.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x3e290",
+  "obj": "CPUpdateRadar",
+  "src": "src/CPUpdateRadar.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x496f0",
+  "obj": "DoNickStuff",
+  "src": "src/DoNickStuff.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x49700",
+  "obj": "InitNickStuff",
+  "src": "src/InitNickStuff.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x49a50",
+  "obj": "MonoDebuggerInit",
+  "src": "src/MonoDebuggerInit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x49a60",
+  "obj": "MonoDebuggerShutdown",
+  "src": "src/MonoDebuggerShutdown.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x49a70",
+  "obj": "MonoUpdateScreen",
+  "src": "src/MonoUpdateScreen.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x49a80",
+  "obj": "MonoScrollScreen",
+  "src": "src/MonoScrollScreen.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x49a90",
+  "obj": "MonoClearScreen",
+  "src": "src/MonoClearScreen.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x530e0",
+  "obj": "HARDNumLoaded",
+  "src": "src/HARDNumLoaded.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x617e0",
+  "obj": "RemoveFromChains",
+  "src": "src/RemoveFromChains.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x63800",
+  "obj": "SetScenarioEndTime",
+  "src": "src/SetScenarioEndTime.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x64bf0",
+  "obj": "CTDo_exit",
+  "src": "src/CTDo_exit.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x6b410",
+  "obj": "MPShutdown",
+  "src": "src/MPShutdown.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x76be0",
+  "obj": "COMinSpeed",
+  "src": "src/COMinSpeed.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x76c00",
+  "obj": "COCornerSpeed",
+  "src": "src/COCornerSpeed.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x76d30",
+  "obj": "COAcc",
+  "src": "src/COAcc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x76d50",
+  "obj": "CODacc",
+  "src": "src/CODacc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x7ec80",
+  "obj": "RepairPlane",
+  "src": "src/RepairPlane.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x8f480",
+  "obj": "OBJStopAdding",
+  "src": "src/OBJStopAdding.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x92cf0",
+  "obj": "MP_DoNothing",
+  "src": "src/MP_DoNothing.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x92ea0",
+  "obj": "MP_Dont_care",
+  "src": "src/MP_Dont_care.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x965b0",
+  "obj": "G_Flip",
+  "src": "src/G_Flip.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x96b20",
+  "obj": "G_StringWidth",
+  "src": "src/G_StringWidth.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x97310",
+  "obj": "G_LoadVesa",
+  "src": "src/G_LoadVesa.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x97320",
+  "obj": "G_UnloadVesa",
+  "src": "src/G_UnloadVesa.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x9e510",
+  "obj": "PLANETurnOffGunSound",
+  "src": "src/PLANETurnOffGunSound.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa3b60",
+  "obj": "RMAccessHandle",
+  "src": "src/RMAccessHandle.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa4d90",
+  "obj": "T_InitForestProc",
+  "src": "src/T_InitForestProc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa5250",
+  "obj": "T_InitForest1Proc",
+  "src": "src/T_InitForest1Proc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa5390",
+  "obj": "T_InitForest2Proc",
+  "src": "src/T_InitForest2Proc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa55a0",
+  "obj": "T_InitMooseProc",
+  "src": "src/T_InitMooseProc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa57c0",
+  "obj": "T_InitVietRicePaddy2Proc",
+  "src": "src/T_InitVietRicePaddy2Proc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa57e0",
+  "obj": "T_InitVietRicePaddy3Proc",
+  "src": "src/T_InitVietRicePaddy3Proc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa5800",
+  "obj": "T_InitVietPalms1Proc",
+  "src": "src/T_InitVietPalms1Proc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa5820",
+  "obj": "T_InitVietPalms2Proc",
+  "src": "src/T_InitVietPalms2Proc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa5840",
+  "obj": "T_InitVietPalms3Proc",
+  "src": "src/T_InitVietPalms3Proc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa5860",
+  "obj": "T_InitVietTrees1Proc",
+  "src": "src/T_InitVietTrees1Proc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa5880",
+  "obj": "T_InitVietTrees2Proc",
+  "src": "src/T_InitVietTrees2Proc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa58a0",
+  "obj": "T_InitVietTrees3Proc",
+  "src": "src/T_InitVietTrees3Proc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa58c0",
+  "obj": "T_InitVietWaterBuffaloProc",
+  "src": "src/T_InitVietWaterBuffaloProc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xb0a70",
+  "obj": "WRShutdown",
+  "src": "src/WRShutdown.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xaf510",
+  "obj": "WRSetTint",
+  "src": "src/WRSetTint.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xd9100",
+  "obj": "MTterm",
+  "src": "src/_mtterm.c",
+  "cls": "dllimport",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xdb7e0",
+  "obj": "ISMbbkana",
+  "src": "src/_ismbbkana.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x8f460",
+  "obj": "OBJAlloc",
+  "src": "src/OBJAlloc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x97ad0",
+  "obj": "WPTarget",
+  "src": "src/WPTarget.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x789f0",
+  "obj": "FindClose",
+  "src": "src/FindClose.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x8aea0",
+  "obj": "DrawLight320",
+  "src": "src/DrawLight320.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x12820",
+  "obj": "ButtonSound",
+  "src": "src/ButtonSound.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x13980",
+  "obj": "CHATEndMission",
+  "src": "src/CHATEndMission.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x18490",
+  "obj": "MSGPop",
+  "src": "src/MSGPop.c",
+  "cls": "const-fold",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x112d0",
+  "obj": "ShutdownKeyboard",
+  "src": "src/ShutdownKeyboard.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xabc0",
+  "obj": "HUDHasFlaps",
+  "src": "src/HUDHasFlaps.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0xd500",
+  "obj": "MouseInBox",
+  "src": "src/MouseInBox.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x11d80",
+  "obj": "Vertical",
+  "src": "src/Vertical.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x12850",
+  "obj": "StringForLanguage",
+  "src": "src/StringForLanguage.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xc03d0",
+  "obj": "PROJChangeBombEq",
+  "src": "src/PROJChangeBombEq.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xdfce0",
+  "obj": "ld12tod",
+  "src": "src/ld12tod.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xdfd00",
+  "obj": "ld12tof",
+  "src": "src/ld12tof.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xe2330",
+  "obj": "wcstol",
+  "src": "src/wcstol.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xe2560",
+  "obj": "wcstoul",
+  "src": "src/wcstoul.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa7680",
+  "obj": "T_SortTmapList",
+  "src": "src/T_SortTmapList.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xa9620",
+  "obj": "MVRInvert",
+  "src": "src/MVRInvert.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x2dc30",
+  "obj": "COLGetBox",
+  "src": "src/COLGetBox.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x32aa0",
+  "obj": "ScorePlaying",
+  "src": "src/ScorePlaying.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x35750",
+  "obj": "SndGotFocus",
+  "src": "src/SndGotFocus.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x35cc0",
+  "obj": "MMPopAllocId",
+  "src": "src/MMPopAllocId.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x42400",
+  "obj": "GRAPHICUpdate",
+  "src": "src/GRAPHICUpdate.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x51470",
+  "obj": "FMFuelConsumption",
+  "src": "src/FMFuelConsumption.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x52380",
+  "obj": "HARDUnloadAll",
+  "src": "src/HARDUnloadAll.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x5d2e0",
+  "obj": "GG_ShutdownMode",
+  "src": "src/GG_ShutdownMode.c",
+  "cls": "cc-shape",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x5f250",
+  "obj": "GRPResponseSize",
+  "src": "src/GRPResponseSize.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x617c0",
+  "obj": "InitChain",
+  "src": "src/InitChain.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x636b0",
+  "obj": "PreferredTargetId",
+  "src": "src/PreferredTargetId.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x642e0",
+  "obj": "CTEval_tgtoffbeam",
+  "src": "src/CTEval_tgtoffbeam.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x64310",
+  "obj": "CTEval_tgtahead",
+  "src": "src/CTEval_tgtahead.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x72510",
+  "obj": "MPShellInitMessages",
+  "src": "src/MPShellInitMessages.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x725d0",
+  "obj": "FlightControlOverMe",
+  "src": "src/FlightControlOverMe.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x73710",
+  "obj": "Alive",
+  "src": "src/Alive.c",
+  "cls": "cc-shape",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x75970",
+  "obj": "GToTurn",
+  "src": "src/GToTurn.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x770a0",
+  "obj": "COTwr",
+  "src": "src/COTwr.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x84e40",
+  "obj": "FPSInit",
+  "src": "src/FPSInit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x8ca80",
+  "obj": "SAYRearmMessage",
+  "src": "src/SAYRearmMessage.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x8f950",
+  "obj": "OBJTempAlias",
+  "src": "src/OBJTempAlias.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x92e00",
+  "obj": "MP_Info",
+  "src": "src/MP_Info.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x955c0",
+  "obj": "G_InitLineStats",
+  "src": "src/G_InitLineStats.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x97e60",
+  "obj": "MOUSEShutdown",
+  "src": "src/MOUSEShutdown.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x9b4f0",
+  "obj": "EnvHighest",
+  "src": "src/EnvHighest.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x9dd60",
+  "obj": "PLANEUpdateJustLanded",
+  "src": "src/PLANEUpdateJustLanded.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x9e880",
+  "obj": "MainMenu",
+  "src": "src/MainMenu.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa24c0",
+  "obj": "EveryoneHasChosenSides",
+  "src": "src/EveryoneHasChosenSides.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa56e0",
+  "obj": "T_InitVietRicePaddy1Proc",
+  "src": "src/T_InitVietRicePaddy1Proc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xaeb30",
+  "obj": "netgetoftenstate",
+  "src": "src/net_get_often_state.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0xb4cc0",
+  "obj": "G_HFlipBitmap",
+  "src": "src/G_HFlipBitmap.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0xbb1d0",
+  "obj": "APObjOnShip",
+  "src": "src/APObjOnShip.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xc20e0",
+  "obj": "T_InitDatabase",
+  "src": "src/T_InitDatabase.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd0604",
+  "obj": "do_start",
+  "src": "src/do_start.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0xd4979",
+  "obj": "NLGDispatch",
+  "src": "src/NLGDispatch.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xdf3e0",
+  "obj": "unexpected",
+  "src": "src/unexpected.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xe1fa0",
+  "obj": "ultoa",
+  "src": "src/ultoa.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x1dd60",
+  "obj": "Unlock",
+  "src": "src/Unlock.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x1dfa0",
+  "obj": "ShowDDError",
+  "src": "src/ShowDDError.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x49ab0",
+  "obj": "MonoPuts",
+  "src": "src/MonoPuts.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x5c7e0",
+  "obj": "pkt_send_sync",
+  "src": "src/pkt_send_sync.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x609e0",
+  "obj": "RefCheckCD",
+  "src": "src/RefCheckCD.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x69fb0",
+  "obj": "SetVESABank",
+  "src": "src/SetVESABank.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x6a670",
+  "obj": "CleanVideo",
+  "src": "src/CleanVideo.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x6a680",
+  "obj": "InitAudio",
+  "src": "src/InitAudio.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x6a690",
+  "obj": "CleanAudio",
+  "src": "src/CleanAudio.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x78df0",
+  "obj": "G_FindClose",
+  "src": "src/G_FindClose.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x8ad40",
+  "obj": "DrawYes320",
+  "src": "src/DrawYes320.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x8ad70",
+  "obj": "DrawNo320",
+  "src": "src/DrawNo320.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x8ada0",
+  "obj": "DrawCancel320",
+  "src": "src/DrawCancel320.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x8add0",
+  "obj": "DrawDone320",
+  "src": "src/DrawDone320.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x8ae00",
+  "obj": "DrawOK320",
+  "src": "src/DrawOK320.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x972e0",
+  "obj": "G_CopyDriverName",
+  "src": "src/G_CopyDriverName.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x9f070",
+  "obj": "SingleFilename",
+  "src": "src/SingleFilename.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xa2e30",
+  "obj": "socket_flush_close",
+  "src": "src/socket_flush_close.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xa2e40",
+  "obj": "socket_close",
+  "src": "src/socket_close.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xa57d0",
+  "obj": "T_VietRicePaddy2Proc",
+  "src": "src/T_VietRicePaddy2Proc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xa57f0",
+  "obj": "T_VietRicePaddy3Proc",
+  "src": "src/T_VietRicePaddy3Proc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xa5810",
+  "obj": "T_VietPalms1Proc",
+  "src": "src/T_VietPalms1Proc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xa5830",
+  "obj": "T_VietPalms2Proc",
+  "src": "src/T_VietPalms2Proc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xa5850",
+  "obj": "T_VietPalms3Proc",
+  "src": "src/T_VietPalms3Proc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xa5870",
+  "obj": "T_VietTrees1Proc",
+  "src": "src/T_VietTrees1Proc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xa5890",
+  "obj": "T_VietTrees2Proc",
+  "src": "src/T_VietTrees2Proc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xa58b0",
+  "obj": "T_VietTrees3Proc",
+  "src": "src/T_VietTrees3Proc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xa58d0",
+  "obj": "VietWaterBuffaloProc",
+  "src": "src/VietWaterBuffaloProc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xac540",
+  "obj": "VDOAlloc",
+  "src": "src/VDOAlloc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xac550",
+  "obj": "VDOFree",
+  "src": "src/VDOFree.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xbb5c0",
+  "obj": "SphereOverflow",
+  "src": "src/SphereOverflow.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xbb6b0",
+  "obj": "LineOverflow2",
+  "src": "src/LineOverflow2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xd45a0",
+  "obj": "CallMemberFunction0",
+  "src": "src/CallMemberFunction0.c",
+  "cls": "cc-shape",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xd5270",
+  "obj": "Getcwd",
+  "src": "src/Getcwd.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xd5eb0",
+  "obj": "Fflush",
+  "src": "src/Fflush.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xd6230",
+  "obj": "AmsgExit",
+  "src": "src/AmsgExit.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xdee10",
+  "obj": "UnlockFhandle",
+  "src": "src/UnlockFhandle.c",
+  "cls": "dllimport",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xdf350",
+  "obj": "CxxRestoreUnhEF",
+  "src": "src/CxxRestoreUnhEF.c",
+  "cls": "dllimport",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xe01c0",
+  "obj": "Ungetc",
+  "src": "src/Ungetc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xcb60",
+  "obj": "CheckItem",
+  "src": "src/CheckItem.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x11350",
+  "obj": "KeyAvail",
+  "src": "src/KeyAvail.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x11790",
+  "obj": "Wait",
+  "src": "src/Wait.c",
+  "cls": "cc-shape",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x11cb0",
+  "obj": "GetFakeKey",
+  "src": "src/GetFakeKey.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x126c0",
+  "obj": "WaitKey",
+  "src": "src/WaitKey.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x18760",
+  "obj": "MSGRemoveCurObj",
+  "src": "src/MSGRemoveCurObj.c",
+  "cls": "elision",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x1dd00",
+  "obj": "GetDriverCaps",
+  "src": "src/GetDriverCaps.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x1dd20",
+  "obj": "GetHELCaps",
+  "src": "src/GetHELCaps.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x358b0",
+  "obj": "MMAllocHandle",
+  "src": "src/MMAllocHandle.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x35ca0",
+  "obj": "MMPushAllocId",
+  "src": "src/MMPushAllocId.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x50ca0",
+  "obj": "FMUpdateThrustVector",
+  "src": "src/FMUpdateThrustVector.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x5d9a0",
+  "obj": "flushLineStats",
+  "src": "src/flushLineStats.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x636e0",
+  "obj": "PreferredProtectId",
+  "src": "src/PreferredProtectId.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x64270",
+  "obj": "CTEval_tgtradar",
+  "src": "src/CTEval_tgtradar.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x642b0",
+  "obj": "CTEval_tgtir",
+  "src": "src/CTEval_tgtir.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x64890",
+  "obj": "CTEval_h",
+  "src": "src/CTEval_h.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x65680",
+  "obj": "CTDo_invert",
+  "src": "src/CTDo_invert.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x69860",
+  "obj": "G_ShutdownCircles",
+  "src": "src/G_ShutdownCircles.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x77020",
+  "obj": "COTurnRadius",
+  "src": "src/COTurnRadius.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x7e8f0",
+  "obj": "RunDisconnectScreen",
+  "src": "src/RunDisconnectScreen.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x87520",
+  "obj": "DialogSetRocker",
+  "src": "src/DialogSetRocker.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x97d20",
+  "obj": "MOUSESetLimits",
+  "src": "src/MOUSESetLimits.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x9b220",
+  "obj": "GetFlightEnvelope",
+  "src": "src/GetFlightEnvelope.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x9dd90",
+  "obj": "FindStreamerDef",
+  "src": "src/FindStreamerDef.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x9e630",
+  "obj": "ScreenDirty",
+  "src": "src/ScreenDirty.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa3690",
+  "obj": "RMInit",
+  "src": "src/RMInit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xa3980",
+  "obj": "RMAccess",
+  "src": "src/RMAccess.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xaa0e0",
+  "obj": "Delete",
+  "src": "src/Delete.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xbaf00",
+  "obj": "APRemoveFromCarrier",
+  "src": "src/APRemoveFromCarrier.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xc299c",
+  "obj": "LMultDiv256",
+  "src": "src/LMultDiv256.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xc29a8",
+  "obj": "LFMult",
+  "src": "src/LFMult.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xc29c4",
+  "obj": "Abs",
+  "src": "src/Abs.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xd330c",
+  "obj": "TimeGetTime",
+  "src": "src/TimeGetTime.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xd3312",
+  "obj": "JoyGetPos",
+  "src": "src/JoyGetPos.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd3318",
+  "obj": "JoyGetDevCapsA",
+  "src": "src/JoyGetDevCapsA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd331e",
+  "obj": "JoyGetNumDevs",
+  "src": "src/JoyGetNumDevs.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd3324",
+  "obj": "JoyGetPosEx",
+  "src": "src/JoyGetPosEx.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd332a",
+  "obj": "Sleep",
+  "src": "src/Sleep.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd3330",
+  "obj": "SetCurrentDirectoryA",
+  "src": "src/SetCurrentDirectoryA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd3336",
+  "obj": "InitializeCriticalSection",
+  "src": "src/InitializeCriticalSection.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd333c",
+  "obj": "DeleteCriticalSection",
+  "src": "src/DeleteCriticalSection.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd3342",
+  "obj": "LeaveCriticalSection",
+  "src": "src/LeaveCriticalSection.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865096,
+  "obj": "EnterCriticalSection",
+  "src": "src/EnterCriticalSection.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865102,
+  "obj": "GetDriveTypeA",
+  "src": "src/GetDriveTypeA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865108,
+  "obj": "GetLogicalDrives",
+  "src": "src/GetLogicalDrives.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865114,
+  "obj": "SetThreadPriority",
+  "src": "src/SetThreadPriority.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865120,
+  "obj": "GetCurrentThread",
+  "src": "src/GetCurrentThread.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865126,
+  "obj": "GetThreadPriority",
+  "src": "src/GetThreadPriority.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865132,
+  "obj": "GetSystemInfo",
+  "src": "src/GetSystemInfo.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865138,
+  "obj": "MapViewOfFile",
+  "src": "src/MapViewOfFile.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865144,
+  "obj": "CreateFileMappingA",
+  "src": "src/CreateFileMappingA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865150,
+  "obj": "GetFileSize",
+  "src": "src/GetFileSize.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865156,
+  "obj": "CreateFileA",
+  "src": "src/CreateFileA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865162,
+  "obj": "IsBadStringPtrA",
+  "src": "src/IsBadStringPtrA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865168,
+  "obj": "CloseHandle",
+  "src": "src/CloseHandle.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865174,
+  "obj": "UnmapViewOfFile",
+  "src": "src/UnmapViewOfFile.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865180,
+  "obj": "GlobalAlloc",
+  "src": "src/GlobalAlloc.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865186,
+  "obj": "VirtualAlloc",
+  "src": "src/VirtualAlloc.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865192,
+  "obj": "GlobalFree",
+  "src": "src/GlobalFree.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865198,
+  "obj": "VirtualFree",
+  "src": "src/VirtualFree.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865204,
+  "obj": "ExitThread",
+  "src": "src/ExitThread.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865210,
+  "obj": "ExitProcess",
+  "src": "src/ExitProcess.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865216,
+  "obj": "SuspendThread",
+  "src": "src/SuspendThread.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865222,
+  "obj": "GetCurrentThreadId",
+  "src": "src/GetCurrentThreadId.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865228,
+  "obj": "CreateThread",
+  "src": "src/CreateThread.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865234,
+  "obj": "GetExitCodeThread",
+  "src": "src/GetExitCodeThread.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865240,
+  "obj": "QueryPerformanceCounter",
+  "src": "src/QueryPerformanceCounter.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865246,
+  "obj": "QueryPerformanceFrequency",
+  "src": "src/QueryPerformanceFrequency.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865252,
+  "obj": "ResumeThread",
+  "src": "src/ResumeThread.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865258,
+  "obj": "TerminateThread",
+  "src": "src/TerminateThread.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865264,
+  "obj": "thkFindClose",
+  "src": "src/thkFindClose.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865270,
+  "obj": "FindFirstFileA",
+  "src": "src/FindFirstFileA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865276,
+  "obj": "GetDiskFreeSpaceA",
+  "src": "src/GetDiskFreeSpaceA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865282,
+  "obj": "FindNextFileA",
+  "src": "src/FindNextFileA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865288,
+  "obj": "FileTimeToDosDateTime",
+  "src": "src/FileTimeToDosDateTime.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865294,
+  "obj": "FileTimeToLocalFileTime",
+  "src": "src/FileTimeToLocalFileTime.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865300,
+  "obj": "GetFileTime",
+  "src": "src/GetFileTime.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865306,
+  "obj": "GetLocalTime",
+  "src": "src/GetLocalTime.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865312,
+  "obj": "FreeLibrary",
+  "src": "src/FreeLibrary.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865318,
+  "obj": "GetProcAddress",
+  "src": "src/GetProcAddress.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865324,
+  "obj": "LoadLibraryA",
+  "src": "src/LoadLibraryA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865330,
+  "obj": "SetErrorMode",
+  "src": "src/SetErrorMode.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865336,
+  "obj": "SetFilePointer",
+  "src": "src/SetFilePointer.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865342,
+  "obj": "ReadFile",
+  "src": "src/ReadFile.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865348,
+  "obj": "WriteFile",
+  "src": "src/WriteFile.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865354,
+  "obj": "DeleteFileA",
+  "src": "src/DeleteFileA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865360,
+  "obj": "MoveFileA",
+  "src": "src/MoveFileA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865366,
+  "obj": "lstrcpyA",
+  "src": "src/lstrcpyA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865372,
+  "obj": "GetCurrentDirectoryA",
+  "src": "src/GetCurrentDirectoryA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865378,
+  "obj": "GetModuleFileNameA",
+  "src": "src/GetModuleFileNameA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865384,
+  "obj": "GetTickCount",
+  "src": "src/GetTickCount.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865390,
+  "obj": "PostMessageA",
+  "src": "src/PostMessageA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865396,
+  "obj": "SendMessageA",
+  "src": "src/SendMessageA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865402,
+  "obj": "GetCursorPos",
+  "src": "src/GetCursorPos.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865408,
+  "obj": "ClipCursor",
+  "src": "src/ClipCursor.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865414,
+  "obj": "SetRect",
+  "src": "src/SetRect.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865420,
+  "obj": "MessageBoxA",
+  "src": "src/MessageBoxA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865426,
+  "obj": "ShowWindow",
+  "src": "src/ShowWindow.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865432,
+  "obj": "DispatchMessageA",
+  "src": "src/DispatchMessageA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865438,
+  "obj": "GetMessageA",
+  "src": "src/GetMessageA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865444,
+  "obj": "DestroyWindow",
+  "src": "src/DestroyWindow.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865450,
+  "obj": "SetCursor",
+  "src": "src/SetCursor.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865456,
+  "obj": "SetForegroundWindow",
+  "src": "src/SetForegroundWindow.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865462,
+  "obj": "GetForegroundWindow",
+  "src": "src/GetForegroundWindow.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865468,
+  "obj": "DefWindowProcA",
+  "src": "src/DefWindowProcA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865474,
+  "obj": "PostQuitMessage",
+  "src": "src/PostQuitMessage.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865480,
+  "obj": "ShowCursor",
+  "src": "src/ShowCursor.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865486,
+  "obj": "SetFocus",
+  "src": "src/SetFocus.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865492,
+  "obj": "CreateWindowExA",
+  "src": "src/CreateWindowExA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865498,
+  "obj": "GetSystemMetrics",
+  "src": "src/GetSystemMetrics.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865504,
+  "obj": "RegisterClassA",
+  "src": "src/RegisterClassA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865510,
+  "obj": "LoadIconA",
+  "src": "src/LoadIconA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865516,
+  "obj": "FindWindowA",
+  "src": "src/FindWindowA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865522,
+  "obj": "SystemParametersInfoA",
+  "src": "src/SystemParametersInfoA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865528,
+  "obj": "SetDlgItemTextA",
+  "src": "src/SetDlgItemTextA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865534,
+  "obj": "CreateDialogParamA",
+  "src": "src/CreateDialogParamA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865540,
+  "obj": "DirectDrawCreate",
+  "src": "src/DirectDrawCreate.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865546,
+  "obj": "AIL_midiOutOpen",
+  "src": "src/AIL_midiOutOpen.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865552,
+  "obj": "AIL_set_preference",
+  "src": "src/AIL_set_preference.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865558,
+  "obj": "AIL_startup",
+  "src": "src/AIL_startup.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865564,
+  "obj": "AIL_shutdown",
+  "src": "src/AIL_shutdown.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865570,
+  "obj": "AIL_stop_timer",
+  "src": "src/AIL_stop_timer.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865576,
+  "obj": "AIL_midiOutClose",
+  "src": "src/AIL_midiOutClose.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865582,
+  "obj": "AIL_start_sequence",
+  "src": "src/AIL_start_sequence.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865588,
+  "obj": "AIL_release_sequence_handle",
+  "src": "src/AIL_release_sequence_handle.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865594,
+  "obj": "AIL_init_sequence",
+  "src": "src/AIL_init_sequence.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865600,
+  "obj": "AIL_allocate_sequence_handle",
+  "src": "src/AIL_allocate_sequence_handle.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865606,
+  "obj": "AIL_unlock",
+  "src": "src/AIL_unlock.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865612,
+  "obj": "AIL_set_XMIDI_master_volume",
+  "src": "src/AIL_set_XMIDI_master_volume.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865618,
+  "obj": "AIL_lock",
+  "src": "src/AIL_lock.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865624,
+  "obj": "AIL_sequence_status",
+  "src": "src/AIL_sequence_status.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865630,
+  "obj": "AIL_allocate_sample_handle",
+  "src": "src/AIL_allocate_sample_handle.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865636,
+  "obj": "AIL_waveOutOpen",
+  "src": "src/AIL_waveOutOpen.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865642,
+  "obj": "AIL_start_timer",
+  "src": "src/AIL_start_timer.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865648,
+  "obj": "AIL_set_timer_frequency",
+  "src": "src/AIL_set_timer_frequency.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865654,
+  "obj": "AIL_register_timer",
+  "src": "src/AIL_register_timer.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865660,
+  "obj": "AIL_waveOutClose",
+  "src": "src/AIL_waveOutClose.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865666,
+  "obj": "AIL_end_sample",
+  "src": "src/AIL_end_sample.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865672,
+  "obj": "AIL_sample_status",
+  "src": "src/AIL_sample_status.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865678,
+  "obj": "AIL_stop_sequence",
+  "src": "src/AIL_stop_sequence.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865684,
+  "obj": "AIL_resume_sequence",
+  "src": "src/AIL_resume_sequence.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865690,
+  "obj": "AIL_start_sample",
+  "src": "src/AIL_start_sample.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865696,
+  "obj": "AIL_set_sample_type",
+  "src": "src/AIL_set_sample_type.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865702,
+  "obj": "AIL_set_sample_address",
+  "src": "src/AIL_set_sample_address.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865708,
+  "obj": "AIL_set_sample_loop_count",
+  "src": "src/AIL_set_sample_loop_count.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865714,
+  "obj": "AIL_init_sample",
+  "src": "src/AIL_init_sample.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865720,
+  "obj": "AIL_set_sample_pan",
+  "src": "src/AIL_set_sample_pan.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865726,
+  "obj": "AIL_set_sample_volume",
+  "src": "src/AIL_set_sample_volume.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865732,
+  "obj": "AIL_set_sample_playback_rate",
+  "src": "src/AIL_set_sample_playback_rate.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865738,
+  "obj": "ser_rs232_getpacket",
+  "src": "src/ser_rs232_getpacket.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 865744,
+  "obj": "ser_rs232_block",
+  "src": "src/ser_rs232_block.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 865750,
+  "obj": "ser_rs232_flush",
+  "src": "src/ser_rs232_flush.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 865756,
+  "obj": "ser_rs232_getbyte",
+  "src": "src/ser_rs232_getbyte.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 865762,
+  "obj": "ser_rs232_putbyte",
+  "src": "src/ser_rs232_putbyte.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 865768,
+  "obj": "ser_rs232_getstatus",
+  "src": "src/ser_rs232_getstatus.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 865774,
+  "obj": "ser_rs232_putpacket",
+  "src": "src/ser_rs232_putpacket.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 865780,
+  "obj": "FlushTransmitBuffer",
+  "src": "src/FlushTransmitBuffer.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865786,
+  "obj": "FlushReceiveBuffer",
+  "src": "src/FlushReceiveBuffer.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865792,
+  "obj": "SetFlowControlThreshold",
+  "src": "src/SetFlowControlThreshold.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865798,
+  "obj": "SetPaceTime",
+  "src": "src/SetPaceTime.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865804,
+  "obj": "SetTimeout",
+  "src": "src/SetTimeout.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865810,
+  "obj": "UnInitializePort",
+  "src": "src/UnInitializePort.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865816,
+  "obj": "SetPortCharacteristics",
+  "src": "src/SetPortCharacteristics.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865822,
+  "obj": "InitializePort",
+  "src": "src/InitializePort.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865828,
+  "obj": "IsPortAvailable",
+  "src": "src/IsPortAvailable.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865834,
+  "obj": "BytesInReceiveBuffer",
+  "src": "src/BytesInReceiveBuffer.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865840,
+  "obj": "BytesInTransmitBuffer",
+  "src": "src/BytesInTransmitBuffer.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865846,
+  "obj": "GetByte",
+  "src": "src/GetByte.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865852,
+  "obj": "PeekChar",
+  "src": "src/PeekChar.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865858,
+  "obj": "CdrvCrc16",
+  "src": "src/CdrvCrc16.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865864,
+  "obj": "IsCarrierDetect",
+  "src": "src/IsCarrierDetect.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865870,
+  "obj": "ModemInit",
+  "src": "src/ModemInit.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865876,
+  "obj": "ModemAttention",
+  "src": "src/ModemAttention.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865882,
+  "obj": "ModemWaitForCall",
+  "src": "src/ModemWaitForCall.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865888,
+  "obj": "IsRing",
+  "src": "src/IsRing.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865894,
+  "obj": "GetString",
+  "src": "src/GetString.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865900,
+  "obj": "ModemAnswerMode",
+  "src": "src/ModemAnswerMode.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865906,
+  "obj": "ModemGetCarrierSpeed",
+  "src": "src/ModemGetCarrierSpeed.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865912,
+  "obj": "ModemConnect",
+  "src": "src/ModemConnect.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865918,
+  "obj": "Dial",
+  "src": "src/Dial.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865924,
+  "obj": "ModemModifyValue",
+  "src": "src/ModemModifyValue.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865930,
+  "obj": "ModemHangup",
+  "src": "src/ModemHangup.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865936,
+  "obj": "RegCloseKey",
+  "src": "src/RegCloseKey.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865942,
+  "obj": "RegQueryValueExA",
+  "src": "src/RegQueryValueExA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865948,
+  "obj": "RegOpenKeyExA",
+  "src": "src/RegOpenKeyExA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937378,
+  "obj": "TerminateProcess",
+  "src": "src/TerminateProcess.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937384,
+  "obj": "GetCurrentProcess",
+  "src": "src/GetCurrentProcess.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937390,
+  "obj": "RtlUnwind",
+  "src": "src/RtlUnwind.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937396,
+  "obj": "GetLastError",
+  "src": "src/GetLastError.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937402,
+  "obj": "SetEnvironmentVariableA",
+  "src": "src/SetEnvironmentVariableA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937408,
+  "obj": "GetFullPathNameA",
+  "src": "src/GetFullPathNameA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937414,
+  "obj": "GetModuleHandleA",
+  "src": "src/GetModuleHandleA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937420,
+  "obj": "GetStartupInfoA",
+  "src": "src/GetStartupInfoA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937426,
+  "obj": "GetCommandLineA",
+  "src": "src/GetCommandLineA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937432,
+  "obj": "GetVersion",
+  "src": "src/GetVersion.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937438,
+  "obj": "FatalAppExitA",
+  "src": "src/FatalAppExitA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937444,
+  "obj": "MultiByteToWideChar",
+  "src": "src/MultiByteToWideChar.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937450,
+  "obj": "LCMapStringA",
+  "src": "src/LCMapStringA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937456,
+  "obj": "WideCharToMultiByte",
+  "src": "src/WideCharToMultiByte.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937462,
+  "obj": "LCMapStringW",
+  "src": "src/LCMapStringW.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937468,
+  "obj": "HeapFree",
+  "src": "src/HeapFree.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937474,
+  "obj": "TlsSetValue",
+  "src": "src/TlsSetValue.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937480,
+  "obj": "TlsAlloc",
+  "src": "src/TlsAlloc.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937486,
+  "obj": "TlsFree",
+  "src": "src/TlsFree.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937492,
+  "obj": "SetLastError",
+  "src": "src/SetLastError.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937498,
+  "obj": "TlsGetValue",
+  "src": "src/TlsGetValue.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937504,
+  "obj": "HeapAlloc",
+  "src": "src/HeapAlloc.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937510,
+  "obj": "GetCPInfo",
+  "src": "src/GetCPInfo.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937516,
+  "obj": "GetACP",
+  "src": "src/GetACP.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937522,
+  "obj": "GetOEMCP",
+  "src": "src/GetOEMCP.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937528,
+  "obj": "FlushFileBuffers",
+  "src": "src/FlushFileBuffers.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937534,
+  "obj": "UnhandledExceptionFilter",
+  "src": "src/UnhandledExceptionFilter.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937540,
+  "obj": "FreeEnvironmentStringsA",
+  "src": "src/FreeEnvironmentStringsA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937546,
+  "obj": "GetEnvironmentStrings",
+  "src": "src/GetEnvironmentStrings.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937552,
+  "obj": "FreeEnvironmentStringsW",
+  "src": "src/FreeEnvironmentStringsW.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937558,
+  "obj": "GetEnvironmentStringsW",
+  "src": "src/GetEnvironmentStringsW.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937564,
+  "obj": "SetHandleCount",
+  "src": "src/SetHandleCount.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937570,
+  "obj": "GetFileType",
+  "src": "src/GetFileType.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937576,
+  "obj": "GetStdHandle",
+  "src": "src/GetStdHandle.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937582,
+  "obj": "HeapDestroy",
+  "src": "src/HeapDestroy.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937588,
+  "obj": "HeapCreate",
+  "src": "src/HeapCreate.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937594,
+  "obj": "GetStringTypeA",
+  "src": "src/GetStringTypeA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937600,
+  "obj": "GetStringTypeW",
+  "src": "src/GetStringTypeW.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937606,
+  "obj": "IsValidLocale",
+  "src": "src/IsValidLocale.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937612,
+  "obj": "IsValidCodePage",
+  "src": "src/IsValidCodePage.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937618,
+  "obj": "GetUserDefaultLCID",
+  "src": "src/GetUserDefaultLCID.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937624,
+  "obj": "SetStdHandle",
+  "src": "src/SetStdHandle.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937630,
+  "obj": "SetUnhandledExceptionFilter",
+  "src": "src/SetUnhandledExceptionFilter.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937636,
+  "obj": "IsBadReadPtr",
+  "src": "src/IsBadReadPtr.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937642,
+  "obj": "IsBadWritePtr",
+  "src": "src/IsBadWritePtr.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937648,
+  "obj": "IsBadCodePtr",
+  "src": "src/IsBadCodePtr.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937654,
+  "obj": "CompareStringA",
+  "src": "src/CompareStringA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937660,
+  "obj": "CompareStringW",
+  "src": "src/CompareStringW.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937666,
+  "obj": "GetLocaleInfoA",
+  "src": "src/GetLocaleInfoA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937672,
+  "obj": "GetLocaleInfoW",
+  "src": "src/GetLocaleInfoW.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937678,
+  "obj": "SetEndOfFile",
+  "src": "src/SetEndOfFile.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937684,
+  "obj": "SetConsoleCtrlHandler",
+  "src": "src/SetConsoleCtrlHandler.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937690,
+  "obj": "HeapReAlloc",
+  "src": "src/HeapReAlloc.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937696,
+  "obj": "GetTimeZoneInformation",
+  "src": "src/GetTimeZoneInformation.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 937702,
+  "obj": "HeapSize",
+  "src": "src/HeapSize.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 868112,
+  "obj": "Fclose",
+  "src": "src/Fclose.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 868496,
+  "obj": "Isalpha",
+  "src": "src/Isalpha.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 868560,
+  "obj": "Isupper",
+  "src": "src/Isupper.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 868608,
+  "obj": "Islower",
+  "src": "src/Islower.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 868656,
+  "obj": "Isdigit",
+  "src": "src/Isdigit.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 868704,
+  "obj": "Isxdigit",
+  "src": "src/Isxdigit.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 868768,
+  "obj": "Isspace",
+  "src": "src/Isspace.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 868864,
+  "obj": "Isalnum",
+  "src": "src/Isalnum.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 868928,
+  "obj": "Isprint",
+  "src": "src/Isprint.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 868992,
+  "obj": "Isgraph",
+  "src": "src/Isgraph.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 869056,
+  "obj": "Iscntrl",
+  "src": "src/Iscntrl.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 876272,
+  "obj": "FflushLk",
+  "src": "src/FflushLk.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 889808,
+  "obj": "MsP5MpTestFdiv",
+  "src": "src/MsP5MpTestFdiv.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 870698,
+  "obj": "NLGReturn2",
+  "src": "src/NLGReturn2.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 870749,
+  "obj": "NLGNotify1",
+  "src": "src/NLGNotify1.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 875312,
+  "obj": "Strcpy",
+  "src": "src/Strcpy.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 902608,
+  "obj": "Isatty",
+  "src": "src/Isatty.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 922080,
+  "obj": "Strftime",
+  "src": "src/Strftime.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 21312,
+  "obj": "MonoPrintfIO",
+  "src": "src/MonoPrintfIO.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 269632,
+  "obj": "CATGUYProc",
+  "src": "src/CATGUYProc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 427152,
+  "obj": "EJECTProc",
+  "src": "src/EJECTProc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 470272,
+  "obj": "GVProc",
+  "src": "src/GVProc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 559216,
+  "obj": "DrawLight",
+  "src": "src/DrawLight.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 208032,
+  "obj": "ShellMusic",
+  "src": "src/ShellMusic.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 601744,
+  "obj": "MP_SetTransmitTimeout",
+  "src": "src/MP_SetTransmitTimeout.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 797108,
+  "obj": "LFDiv",
+  "src": "src/LFDiv.c",
+  "cls": "cc-shape",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 59040,
+  "obj": "VIEWInTransition",
+  "src": "src/VIEWInTransition.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 73040,
+  "obj": "DistToObj",
+  "src": "src/DistToObj.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 75712,
+  "obj": "SetHShake",
+  "src": "src/SetHShake.c",
+  "cls": "cc-shape",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 75760,
+  "obj": "SetVShake",
+  "src": "src/SetVShake.c",
+  "cls": "twin",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 75920,
+  "obj": "StringIsNumber",
+  "src": "src/StringIsNumber.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 123952,
+  "obj": "IsBrentDLL",
+  "src": "src/IsBrentDLL.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 301728,
+  "obj": "MonoCursor",
+  "src": "src/MonoCursor.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 311200,
+  "obj": "SER_Initialize3",
+  "src": "src/SER_Initialize3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 312000,
+  "obj": "SER_Shutdown",
+  "src": "src/SER_Shutdown.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 868816,
+  "obj": "Ispunct",
+  "src": "src/Ispunct.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 865954,
+  "obj": "RegEnumKeyExA",
+  "src": "src/RegEnumKeyExA.c",
+  "cls": "thunk",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 869808,
+  "obj": "CallMemberFunction1",
+  "src": "src/CallMemberFunction1.c",
+  "cls": "cc-shape",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 855096,
+  "obj": "RestoreClip",
+  "src": "src/RestoreClip.c",
+  "cls": "gap-anchor",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 848752,
+  "obj": "do_setcolor2",
+  "src": "src/do_setcolor2.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 826192,
+  "obj": "GRACos",
+  "src": "src/GRACos.c",
+  "cls": "cc-shape",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 617648,
+  "obj": "printPoly",
+  "src": "src/printPoly.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 610608,
+  "obj": "spxinit2",
+  "src": "src/spxinit2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 601344,
+  "obj": "noIO",
+  "src": "src/noIO.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 667968,
+  "obj": "socket_set_state",
+  "src": "src/socket_set_state.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 667984,
+  "obj": "socket_set_socket",
+  "src": "src/socket_set_socket.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 668000,
+  "obj": "socket_set_type",
+  "src": "src/socket_set_type.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 479024,
+  "obj": "jdiv_round_up",
+  "src": "src/jdiv_round_up.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 97792,
+  "obj": "MSGInit",
+  "src": "src/MSGInit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 100240,
+  "obj": "MSGRemoveSecondaries",
+  "src": "src/MSGRemoveSecondaries.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 220528,
+  "obj": "MMLockE",
+  "src": "src/MMLockE.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 254464,
+  "obj": "CPRemoveItemFromScopes",
+  "src": "src/CPRemoveItemFromScopes.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 283728,
+  "obj": "SeqEnd",
+  "src": "src/SeqEnd.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 383632,
+  "obj": "WNGInit",
+  "src": "src/WNGInit.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 387008,
+  "obj": "GRPInit",
+  "src": "src/GRPInit.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 400352,
+  "obj": "PopCurObj",
+  "src": "src/PopCurObj.c",
+  "cls": "masm-enc",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 411344,
+  "obj": "CTEval_alt",
+  "src": "src/CTEval_alt.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 411424,
+  "obj": "CTEval_maxalt",
+  "src": "src/CTEval_maxalt.c",
+  "cls": "twin",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 416096,
+  "obj": "CTDo_wm_formation",
+  "src": "src/CTDo_wm_formation.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 416160,
+  "obj": "CTDo_wm_control",
+  "src": "src/CTDo_wm_control.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 522144,
+  "obj": "GetKeySlow",
+  "src": "src/GetKeySlow.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 434080,
+  "obj": "SetTOD",
+  "src": "src/SetTOD.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 434112,
+  "obj": "SetVESATop",
+  "src": "src/SetVESATop.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 487264,
+  "obj": "COBankRate",
+  "src": "src/COBankRate.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 542368,
+  "obj": "MISSIONScore",
+  "src": "src/MISSIONScore.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 542416,
+  "obj": "MISSIONSortPlayers",
+  "src": "src/MISSIONSortPlayers.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 587248,
+  "obj": "OBJSubtract",
+  "src": "src/OBJSubtract.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 611824,
+  "obj": "G_SetPalette",
+  "src": "src/G_SetPalette.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 612224,
+  "obj": "G_PopClipBox",
+  "src": "src/G_PopClipBox.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 612352,
+  "obj": "G_Point",
+  "src": "src/G_Point.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 615776,
+  "obj": "G_ReverseVertices",
+  "src": "src/G_ReverseVertices.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 615904,
+  "obj": "G_PolygonFlip",
+  "src": "src/G_PolygonFlip.c",
+  "cls": "cc-shape",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 615968,
+  "obj": "G_UPolygonFlip",
+  "src": "src/G_UPolygonFlip.c",
+  "cls": "cc-shape",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 636080,
+  "obj": "MaxGAtAlt",
+  "src": "src/MaxGAtAlt.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 880848,
+  "obj": "MTinitlocks",
+  "src": "src/MTinitlocks.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 914896,
+  "obj": "Callnewh",
+  "src": "src/Callnewh.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 925552,
+  "obj": "Ltoa",
+  "src": "src/Ltoa.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 925856,
+  "obj": "Ui64toa",
+  "src": "src/Ui64toa.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 873120,
+  "obj": "Getdcwd",
+  "src": "src/Getdcwd.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 901632,
+  "obj": "FFMsgBanner",
+  "src": "src/FFMsgBanner.c",
+  "cls": "elision",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 914624,
+  "obj": "ValidateExecute",
+  "src": "src/ValidateExecute.c",
+  "cls": "dllimport",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 870758,
+  "obj": "NLGNotify",
+  "src": "src/NLGNotify.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 871221,
+  "obj": "SehLongjmpUnwind",
+  "src": "src/SehLongjmpUnwind.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 827480,
+  "obj": "do_nop",
+  "src": "src/do_nop.c",
+  "cls": "gap-anchor",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 853884,
+  "obj": "SetFlatColor",
+  "src": "src/SetFlatColor.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 824209,
+  "obj": "Clampit",
+  "src": "src/Clampit.c",
+  "cls": "gap-anchor",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 833032,
+  "obj": "CodePnt",
+  "src": "src/CodePnt.c",
+  "cls": "gap-anchor",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 6016,
+  "obj": "NetSlaveShutdown",
+  "src": "src/NetSlaveShutdown.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 72592,
+  "obj": "InBounds",
+  "src": "src/InBounds.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 73568,
+  "obj": "Strncpy",
+  "src": "src/Strncpy.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 74496,
+  "obj": "SampleUpdate",
+  "src": "src/SampleUpdate.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 75504,
+  "obj": "GetKey",
+  "src": "src/GetKey.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 95712,
+  "obj": "InputCalibrate",
+  "src": "src/InputCalibrate.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 99424,
+  "obj": "MSGHide",
+  "src": "src/MSGHide.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 209184,
+  "obj": "BasicLinkSound",
+  "src": "src/BasicLinkSound.c",
+  "cls": "twin",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 213776,
+  "obj": "SetupLoopSounds",
+  "src": "src/SetupLoopSounds.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 219248,
+  "obj": "MMShutdown",
+  "src": "src/MMShutdown.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 220608,
+  "obj": "MMAccessE",
+  "src": "src/MMAccessE.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 251984,
+  "obj": "CPRadarRange",
+  "src": "src/CPRadarRange.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 254560,
+  "obj": "CPBombRange",
+  "src": "src/CPBombRange.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 342464,
+  "obj": "RepairTime",
+  "src": "src/RepairTime.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 380272,
+  "obj": "pkt_build_sync",
+  "src": "src/pkt_build_sync.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 380304,
+  "obj": "pkt_build_sync_reply",
+  "src": "src/pkt_build_sync_reply.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 380336,
+  "obj": "pkt_build_play_game",
+  "src": "src/pkt_build_play_game.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 405792,
+  "obj": "CallUtilProc",
+  "src": "src/CallUtilProc.c",
+  "cls": "gap-anchor",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 409504,
+  "obj": "CTVarDiff",
+  "src": "src/CTVarDiff.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 469808,
+  "obj": "OBJProc",
+  "src": "src/OBJProc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 489648,
+  "obj": "InitSurfaceDesc",
+  "src": "src/InitSurfaceDesc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 550288,
+  "obj": "DialogDraw",
+  "src": "src/DialogDraw.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 669712,
+  "obj": "RMUnlocate",
+  "src": "src/RMUnlocate.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 696144,
+  "obj": "Seek",
+  "src": "src/Seek.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 704224,
+  "obj": "FileExists",
+  "src": "src/FileExists.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 797136,
+  "obj": "F24ToPA",
+  "src": "src/F24ToPA.c",
+  "cls": "gap-anchor",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 309248,
+  "obj": "SER_Suspend",
+  "src": "src/SER_Suspend.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 409168,
+  "obj": "CTRespondToCancelCmdBuf",
+  "src": "src/CTRespondToCancelCmdBuf.c",
+  "cls": "gap-anchor",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 409744,
+  "obj": "CTEval_tgtattackinganyone",
+  "src": "src/CTEval_tgtattackinganyone.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 409872,
+  "obj": "CTEval_tgtclass",
+  "src": "src/CTEval_tgtclass.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 439328,
+  "obj": "MPTimeSync",
+  "src": "src/MPTimeSync.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 516656,
+  "obj": "CN_ClearLines",
+  "src": "src/CN_ClearLines.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 590912,
+  "obj": "SER_RemoteQueueFull",
+  "src": "src/SER_RemoteQueueFull.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 598080,
+  "obj": "ConnectedStateCallback",
+  "src": "src/ConnectedStateCallback.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 670800,
+  "obj": "RMNotify",
+  "src": "src/RMNotify.c",
+  "cls": "cc-shape",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 692432,
+  "obj": "SER_OkToSendPacket",
+  "src": "src/SER_OkToSendPacket.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 695424,
+  "obj": "DiskInit",
+  "src": "src/DiskInit.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 712624,
+  "obj": "NetAllPlayersReady",
+  "src": "src/NetAllPlayersReady.c",
+  "cls": "twin",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 723760,
+  "obj": "InitTmapRemaps",
+  "src": "src/InitTmapRemaps.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 383584,
+  "obj": "GG_QuickBlt",
+  "src": "src/GG_QuickBlt.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 384272,
+  "obj": "WNGWingmen",
+  "src": "src/WNGWingmen.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 387648,
+  "obj": "GRPWingmen",
+  "src": "src/GRPWingmen.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 486768,
+  "obj": "COBv",
+  "src": "src/COBv.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 554656,
+  "obj": "DialogDeselectItem",
+  "src": "src/DialogDeselectItem.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 739792,
+  "obj": "G_NextTab",
+  "src": "src/G_NextTab.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 759408,
+  "obj": "APFind",
+  "src": "src/APFind.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 71392,
+  "obj": "TurnTowardAngle",
+  "src": "src/TurnTowardAngle.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 187376,
+  "obj": "COLGetInfo",
+  "src": "src/COLGetInfo.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 853488,
+  "obj": "do_start_interp",
+  "src": "src/do_start_interp.c",
+  "cls": "cc-shape",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 854868,
+  "obj": "do_streamer_def",
+  "src": "src/do_streamer_def.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 866336,
+  "obj": "Cinit",
+  "src": "src/Cinit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 901504,
+  "obj": "HeapInit",
+  "src": "src/HeapInit.c",
+  "cls": "dllimport",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 755168,
+  "obj": "APEndArrestorCatch",
+  "src": "src/APEndArrestorCatch.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 797160,
+  "obj": "PAToF24",
+  "src": "src/PAToF24.c",
+  "cls": "cc-shape",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 265184,
+  "obj": "CPGetContact",
+  "src": "src/CPGetContact.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 268672,
+  "obj": "InitMovieContext",
+  "src": "src/InitMovieContext.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 519152,
+  "obj": "BriefMap",
+  "src": "src/BriefMap.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 520320,
+  "obj": "MyFilterProc",
+  "src": "src/MyFilterProc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 611328,
+  "obj": "spxfactory",
+  "src": "src/spxfactory.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 616160,
+  "obj": "G_UHlineFlip",
+  "src": "src/G_UHlineFlip.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 624400,
+  "obj": "fnc_toCallDuringAnswer",
+  "src": "src/fnc_toCallDuringAnswer.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 704256,
+  "obj": "FileSize",
+  "src": "src/FileSize.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 704656,
+  "obj": "OpenVDOFile",
+  "src": "src/OpenVDOFile.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 869824,
+  "obj": "CallMemberFunction2",
+  "src": "src/CallMemberFunction2.c",
+  "cls": "cc-shape",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 902208,
+  "obj": "GET_RTERRMSG",
+  "src": "src/GET_RTERRMSG.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 6224,
+  "obj": "NET_CancelPlayerList",
+  "src": "src/NET_CancelPlayerList.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 21072,
+  "obj": "VDOInit",
+  "src": "src/VDOInit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 24016,
+  "obj": "HUDReprintMessages",
+  "src": "src/HUDReprintMessages.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 71328,
+  "obj": "OnTheGround",
+  "src": "src/OnTheGround.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 266880,
+  "obj": "ChooseScoreInit",
+  "src": "src/ChooseScoreInit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 309280,
+  "obj": "SER_Resume",
+  "src": "src/SER_Resume.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 409680,
+  "obj": "CTEval_tgtattackingme",
+  "src": "src/CTEval_tgtattackingme.c",
+  "cls": "twin",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 409808,
+  "obj": "CTEval_tgt",
+  "src": "src/CTEval_tgt.c",
+  "cls": "twin",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 415936,
+  "obj": "CTDo_wm_hspacing",
+  "src": "src/CTDo_wm_hspacing.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 416016,
+  "obj": "CTDo_wm_vspacing",
+  "src": "src/CTDo_wm_vspacing.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 598848,
+  "obj": "PlayersBoxConnectedCb",
+  "src": "src/PlayersBoxConnectedCb.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 623632,
+  "obj": "updateQueueHead",
+  "src": "src/updateQueueHead.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 708400,
+  "obj": "NET_ShutdownQuery",
+  "src": "src/NET_ShutdownQuery.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 335712,
+  "obj": "HARDStoreWeight",
+  "src": "src/HARDStoreWeight.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 388752,
+  "obj": "GRPSetType",
+  "src": "src/GRPSetType.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 388816,
+  "obj": "GRPSetSpacingH",
+  "src": "src/GRPSetSpacingH.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 388880,
+  "obj": "GRPSetSpacingV",
+  "src": "src/GRPSetSpacingV.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 613904,
+  "obj": "G_Rect2",
+  "src": "src/G_Rect2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 613952,
+  "obj": "G_URect2",
+  "src": "src/G_URect2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 543328,
+  "obj": "MISSIONEnsureLegalName",
+  "src": "src/MISSIONEnsureLegalName.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 586784,
+  "obj": "OBJShutdown",
+  "src": "src/OBJShutdown.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 493408,
+  "obj": "CompareHintPtrs",
+  "src": "src/CompareHintPtrs.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 629392,
+  "obj": "CompareDBEntry",
+  "src": "src/CompareDBEntry.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 629424,
+  "obj": "SortModemDB",
+  "src": "src/SortModemDB.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 795408,
+  "obj": "T_Init2",
+  "src": "src/T_Init2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 775440,
+  "obj": "PROJEngineState",
+  "src": "src/PROJEngineState.c",
+  "cls": "const-fold",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 122800,
+  "obj": "ddECS",
+  "src": "src/ddECS.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 122832,
+  "obj": "ddLCS",
+  "src": "src/ddLCS.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 271296,
+  "obj": "GRAPHICRemove",
+  "src": "src/GRAPHICRemove.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 420688,
+  "obj": "RemapInsignia",
+  "src": "src/RemapInsignia.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 440000,
+  "obj": "MPMissionShutdown",
+  "src": "src/MPMissionShutdown.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 479040,
+  "obj": "jround_up",
+  "src": "src/jround_up.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 479184,
+  "obj": "jzero_far",
+  "src": "src/jzero_far.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 569840,
+  "obj": "ShellDisabledSound",
+  "src": "src/ShellDisabledSound.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 647920,
+  "obj": "StreamersShutdown",
+  "src": "src/StreamersShutdown.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 678112,
+  "obj": "T_InitWaterProc",
+  "src": "src/T_InitWaterProc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 691200,
+  "obj": "tcpinit2",
+  "src": "src/tcpinit2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 737168,
+  "obj": "G_FreeSurfaceBitmap",
+  "src": "src/G_FreeSurfaceBitmap.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 749152,
+  "obj": "APLandingType",
+  "src": "src/APLandingType.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 26272,
+  "obj": "HUDRevive",
+  "src": "src/HUDRevive.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 31776,
+  "obj": "HUDSpeedToY",
+  "src": "src/HUDSpeedToY.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 62224,
+  "obj": "VIEWChangeObj",
+  "src": "src/VIEWChangeObj.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 121744,
+  "obj": "DestroySurface",
+  "src": "src/DestroySurface.cpp",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 122224,
+  "obj": "WaitForVerticalBlank",
+  "src": "src/WaitForVerticalBlank.cpp",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 139711,
+  "obj": "MAPUpdateWPPtrs",
+  "src": "src/MAPUpdateWPPtrs.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 300816,
+  "obj": "NickKey",
+  "src": "src/NickKey.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 407952,
+  "obj": "dlg_list_clear",
+  "src": "src/dlg_list_clear.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 434864,
+  "obj": "CleanCobra",
+  "src": "src/CleanCobra.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 435952,
+  "obj": "CleanupCobra",
+  "src": "src/CleanupCobra.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 554880,
+  "obj": "DialogUpdateString",
+  "src": "src/DialogUpdateString.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 468480,
+  "obj": "NPCSetStateTarget",
+  "src": "src/NPCSetStateTarget.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 591088,
+  "obj": "SER_ProcessDataPacket",
+  "src": "src/SER_ProcessDataPacket.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 622704,
+  "obj": "verifyPacketCRC",
+  "src": "src/verifyPacketCRC.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 622752,
+  "obj": "assignPacketCRC",
+  "src": "src/assignPacketCRC.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 704608,
+  "obj": "FreeVDOLinkNode",
+  "src": "src/FreeVDOLinkNode.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 707488,
+  "obj": "NetSetFactoryTCP",
+  "src": "src/NetSetFactoryTCP.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 712432,
+  "obj": "validate_packet",
+  "src": "src/validate_packet.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 712656,
+  "obj": "get_pkt_err_string",
+  "src": "src/get_pkt_err_string.c",
+  "cls": "elision",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 712976,
+  "obj": "net_set_ready",
+  "src": "src/net_set_ready.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 849044,
+  "obj": "do_short_ijmp",
+  "src": "src/do_short_ijmp.c",
+  "cls": "gap-anchor",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 854844,
+  "obj": "do_force_no_pmap",
+  "src": "src/do_force_no_pmap.c",
+  "cls": "gap-anchor",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 855076,
+  "obj": "_NeedClip",
+  "src": "src/_NeedClip.c",
+  "cls": "gap-anchor",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 855497,
+  "obj": "do_brush_solid",
+  "src": "src/do_brush_solid.c",
+  "cls": "gap-anchor",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 855520,
+  "obj": "do_brush_trans",
+  "src": "src/do_brush_trans.c",
+  "cls": "gap-anchor",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 767584,
+  "obj": "_line_overflow1",
+  "src": "src/_line_overflow1.c",
+  "cls": "elision",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 860232,
+  "obj": "GRSinCos",
+  "src": "src/GRSinCos.c",
+  "cls": "gap-anchor",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 870714,
+  "obj": "__abnormal_termination",
+  "src": "src/__abnormal_termination.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 870856,
+  "obj": "__ftol",
+  "src": "src/__ftol.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 870928,
+  "obj": "Chunk_d4a10",
+  "src": "src/Chunk_d4a10.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 874112,
+  "obj": "fread",
+  "src": "src/fread.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 874512,
+  "obj": "fwrite",
+  "src": "src/fwrite.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 875744,
+  "obj": "fprintf",
+  "src": "src/fprintf.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 883376,
+  "obj": "Chunk_d7ab0",
+  "src": "src/Chunk_d7ab0.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 883392,
+  "obj": "__strcats",
+  "src": "src/__strcats.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 888912,
+  "obj": "CallSettingFrame",
+  "src": "src/CallSettingFrame.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 888949,
+  "obj": "NLG_Return",
+  "src": "src/NLG_Return.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 889520,
+  "obj": "nh_malloc",
+  "src": "src/nh_malloc.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 901568,
+  "obj": "heap_term",
+  "src": "src/heap_term.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 907888,
+  "obj": "Chunk_dda70",
+  "src": "src/Chunk_dda70.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 912528,
+  "obj": "get_osfhandle",
+  "src": "src/get_osfhandle.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 915024,
+  "obj": "control87",
+  "src": "src/control87.c",
+  "cls": "x87",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 33136,
+  "obj": "HUDAltToY",
+  "src": "src/HUDAltToY.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 43248,
+  "obj": "HUDSetDisrupt",
+  "src": "src/HUDSetDisrupt.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 54160,
+  "obj": "PopShellAlloc",
+  "src": "src/PopShellAlloc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 48928,
+  "obj": "MenuRemoveItem",
+  "src": "src/MenuRemoveItem.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 72352,
+  "obj": "RotatedOffset",
+  "src": "src/RotatedOffset.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 72656,
+  "obj": "InBounds3",
+  "src": "src/InBounds3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 122176,
+  "obj": "CDirDrawLock",
+  "src": "src/CDirDrawLock.cpp",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 217008,
+  "obj": "StopGameSounds",
+  "src": "src/StopGameSounds.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 396096,
+  "obj": "PutCurObj",
+  "src": "src/PutCurObj.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 404288,
+  "obj": "MaybeCallEventProc",
+  "src": "src/MaybeCallEventProc.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 486432,
+  "obj": "MaxSpeed",
+  "src": "src/MaxSpeed.c",
+  "cls": "elision",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 487520,
+  "obj": "COThrust",
+  "src": "src/COThrust.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 488912,
+  "obj": "CDirDrawSurfaceUnlock",
+  "src": "src/CDirDrawSurfaceUnlock.cpp",
+  "cls": "elision",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 517264,
+  "obj": "CN_GetString",
+  "src": "src/CN_GetString.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 517296,
+  "obj": "CN_GetBigString",
+  "src": "src/CN_GetBigString.cpp",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 520432,
+  "obj": "MISSIONSetCheating",
+  "src": "src/MISSIONSetCheating.c",
+  "cls": "elision",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 524448,
+  "obj": "AlmostHome",
+  "src": "src/AlmostHome.c",
+  "cls": "elision",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 524528,
+  "obj": "ConvertOldPreferredTargetId",
+  "src": "src/ConvertOldPreferredTargetId.c",
+  "cls": "cc-shape",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 616208,
+  "obj": "G_ULineFlip",
+  "src": "src/G_ULineFlip.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 616256,
+  "obj": "G_LineFlip",
+  "src": "src/G_LineFlip.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 616304,
+  "obj": "G_CircleFlip",
+  "src": "src/G_CircleFlip.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 616352,
+  "obj": "G_URectFlip",
+  "src": "src/G_URectFlip.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 619312,
+  "obj": "G_SetHShake",
+  "src": "src/G_SetHShake.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 619376,
+  "obj": "G_SetVShake",
+  "src": "src/G_SetVShake.c",
+  "cls": "twin",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 620144,
+  "obj": "WPGoalObjEvent",
+  "src": "src/WPGoalObjEvent.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 621888,
+  "obj": "MOUSESetPos",
+  "src": "src/MOUSESetPos.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 669376,
+  "obj": "RMShutdown",
+  "src": "src/RMShutdown.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 690464,
+  "obj": "InsectWingAngle",
+  "src": "src/InsectWingAngle.c",
+  "cls": "sched",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 710384,
+  "obj": "NET_GetLastError",
+  "src": "src/NET_GetLastError.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 710640,
+  "obj": "NET_Addr2string",
+  "src": "src/NET_Addr2string.c",
+  "cls": "cc-shape",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 715168,
+  "obj": "net_start_game",
+  "src": "src/net_start_game.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 755120,
+  "obj": "APStartFinalApproach",
+  "src": "src/APStartFinalApproach.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 759664,
+  "obj": "APGetPark",
+  "src": "src/APGetPark.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 775360,
+  "obj": "PROJSpeed",
+  "src": "src/PROJSpeed.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 826091,
+  "obj": "fast_asin",
+  "src": "src/fast_asin.c",
+  "cls": "gap-anchor",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 853624,
+  "obj": "do_setlight",
+  "src": "src/do_setlight.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 853660,
+  "obj": "do_setcoarse",
+  "src": "src/do_setcoarse.c",
+  "cls": "gap-anchor",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 861900,
+  "obj": "MultPointByMatrix",
+  "src": "src/MultPointByMatrix.c",
+  "cls": "gap-anchor",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 868176,
+  "obj": "FcloseLk",
+  "src": "src/FcloseLk.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 914112,
+  "obj": "Chunk_df2c0",
+  "src": "src/Chunk_df2c0.c",
+  "cls": "gap-anchor",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 914560,
+  "obj": "ValidateRead",
+  "src": "src/ValidateRead.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 914592,
+  "obj": "ValidateWrite",
+  "src": "src/ValidateWrite.c",
+  "cls": "twin",
+  "patch": false,
+  "probes": false,
+  "game": false
+ }
+]
