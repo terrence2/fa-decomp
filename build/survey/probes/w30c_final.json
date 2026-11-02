@@ -1,0 +1,83 @@
+[
+ {"rva": 71472,
+  "obj": "w30c_final_11730_v1",
+  "src": "build/survey/probes/w30c_MatchF24_v5.c",
+  "maps": [
+   "_w30c_MatchF24@12=_MatchF24@12",
+   "_w30c_service=_serviceTicks"
+  ],
+  "patch": [
+   "0,0x1f,56578b74240c8b7c24108b063bf874328b4c241485c9742a0fbf1500000000,27:6:_w30c_service",
+   "0x21,0x26,d1c1fa083bf87e0f03c289063bf87d11893e5f5ec20c002bc289063bf87e02893e5f5ec20c00"
+  ],
+  "provenance": [
+   "recipe: void __stdcall w30c_MatchF24(int *p, int target, int delta) — fixed-point match-toward-target: cur=*p; if (target==cur) return; if (delta==0) return; step=((int)_serviceTicks*delta)>>8; target>cur ? (cur+=step, *p=cur, clamp cur>target ? *p=target) : (cur-=step, *p=cur, clamp cur<target ? *p=target); ends. stdcall ret 0xc, FPO 2 regs (push esi/edi), 0 locals dwords — the helper FA's wave-14 recipes inline-expand.",
+   "map verified: site 0x1b dword = 005423c8 = _serviceTicks RAW FA bytes (0f bf 15 c8 23 54 00 movsx edx, WORD ds:_serviceTicks identity).",
+   "patch 0: toolchain-diff — CL 4.2 RA keeps the two long-lived stack args in volatile regs (p materialized into eax BEFORE the pushes, 8b 44 24 04, then target into ecx) and parks the locals cur/step in esi/edi; FA batch-fills the prolog (56 57, then esi=[esp+0xc] p, edi=[esp+0x10] target, cur=[esi] into eax) and leaves delta/cur/step in ecx/eax/edx. 31 B rewrite of CL's prolog+cur-load+both entry-je's+delta-load to FA's bytes at equal length (jcc displacements already equal FA); the movsx operand dword is carried ZERO (reloc'd DIR32), newsite 27:6:_w30c_service re-adds the _serviceTicks fixup at 0x1b.",
+   "patch 0x21: toolchain-diff reg-plan completion — 38 B covering imul/sar (0f af d1 imul edx,ecx / c1 fa 08 sar edx,8), the two clamp compare+epilogue halves (add eax,edx = 03 c2, stores through [esi] = 89 06, clamps mov [esi],edi = 89 3e, shared pop edi/pop esi/ret 0xc epilogues): same instruction shapes as CL, only FA's reg plan (cur=eax, delta=ecx, step=edx) copied. 0f af (imul) opcode span 0x1f-0x20 already matched and was left untouched.",
+   "RA wall note: 10 source steerings (fastcall probe, merged/split early-return conditions, operand swaps, long/unsigned-ish types, init-decls, explicit-return clamps, decl-order flips, step split statements) plus flag probes /Ox, /G2/3/4/5, /Os, /Ob2, /Og all kept CL's inverted arg-vs-local callee-saved policy — FA parks args 1-2 in esi/edi, CL parks locals there. Only reg-plan patching converges; structure/jump layout was already identical pre-patch (CL code len 0x47 == FA code len 0x47, je/jle/jge displacements 0x32/0x2a/0x0f/0x11/0x02 byte-equal)."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {"rva": 127776,
+  "obj": "w30c_final_1f320_v1",
+  "src": "build/survey/probes/w30c_isspace1_v3.c",
+  "maps": [
+   "_w30c_iscrlf@4=$FA$_t_41f2d0",
+   "_w30c_isspace1@4=$FA$_t_41f320"
+  ],
+  "provenance": [
+   "recipe: char __fastcall w30c_isspace1(char c) — merged || chain: if (c==' '||c=='\\t'||w30c_iscrlf(c)) return 1; return 0. The merged chain is load-bearing: separate ifs (v1/v2) made CL fold the third condition into test+setne (0f 95 c0), while FA branches test al,al/jne to the shared mov al,1;ret tail (84 c0 75 03 32 c0 c3 b0 01 c3); the || chain routes all three true-paths through the same tail and CL emits FA's exact branch form.",
+   "map TO note for parent: call at site 0xa targets chunk 0x1f2d0 (16 B, unnamed, itself a CR/LF tester: cmp cl,0xd / cmp cl,0xa / xor al,al / b0 01 ret) — TO $FA$_t_41f2d0 must exist at link (gap-chunk stub name $FA$_t_<FA VA hex>, same convention w28c used for cross-chunk refs). $FA$_t_41f320 is this chunk itself and the map is inert (no fixups reference the probe symbol); drop either if merge naming differs.",
+   "fastcall @4: single char arg in ecx; FA FPO params=0 cbProlog=0."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {"rva": 420384,
+  "obj": "w30c_final_66a20_v1",
+  "src": "build/survey/probes/w30c_untab_v1.c",
+  "maps": [],
+  "provenance": [
+   "recipe: void __fastcall w30c_untab(unsigned char **dst, unsigned char **src) — EXACT with no maps/patches/aliases; fastcall (dst=ecx, src=edx): s=*src; d=*dst; while (*s > 1) { b=*s; s++; *d=b; d++; } (latch i++/pointer advance BEFORE the store — wave cookbook); exit path s++; then *src=s; *dst=d in that order (89 02 [edx]=eax first, 89 31 [ecx]=esi second — arg order in C: *src assignment before *dst).",
+   "unsigned char + > 1 gives the unsigned jbe-exit shape (80 38 01 cmp byte [eax],1 / 77 f5 ja); the loop's byte reload 80 38 after the store falls out of CL's no-aliasing model for free since d and s may alias.",
+   "no sites: pure code chunk, 32 B incl. 2 B 8bff ILINK pad."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {"rva": 795376,
+  "obj": "w30c_final_c22f0_v1",
+  "src": "build/survey/probes/w30c_strsqueez_v1.c",
+  "maps": [],
+  "provenance": [
+   "recipe: void __fastcall w30c_strsqueez(char *s) — EXACT no maps/patches; in-place squeeze of '~' chars: d=s; do { c=*s; if (c!='~') *d++=c; } while (*s != 0 && (s++, 1)); — the comma-spelling is load-bearing: it re-reads *s for the loop condition (84 d2 test dl — aliasing reload, since d may clobber s) and puts the inc ecx AFTER the test (FA: test dl,dl / 74 03 / 41 inc ecx / eb ed jmp); the plain while(*s++) spelling hoists inc before the test and mismatches.",
+   "self jmp eb ed targets chunk offset 0x2 = the body head (8b 10 mov dl,[ecx]) — CL emits the same back-edge with the same displacement; entry falls through mov eax,ecx.",
+   "fastcall single pointer arg in ecx; FPO params=0 cbProlog=0."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {"rva": 132592,
+  "obj": "w30c_final_205f0_v1",
+  "src": "build/survey/probes/w30c_fortclear_v1.c",
+  "maps": [],
+  "provenance": [
+   "recipe: void __cdecl w30c_fortclear(void) — EXACT with no maps/patches; const-bound fill of the 8-dword global _fortPlayers (0x5258d8) with 0xffffffff: long *p=_fortPlayers; for (i=0;i<8;i++) *p++ = -1L; — CL rep stosd recipe (push edi / mov eax,-1 / mov edi,offset / mov ecx,8 / f3 ab / pop edi / ret), FPO cbProlog=6 cbRegs=1.",
+   "map-free by name: CL's DIR32 site references the extern _fortPlayers — the same name FA's globals carry — so no --map is required; the imm dword (005258d8) is reloc-exempt in the byte check and matches FA's mov edi,0x5258d8 (bf d8 58 52 00)."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {"rva": 692272,
+  "obj": "w30c_final_a9030_v1",
+  "src": "build/survey/probes/w30c_negor_v2.c",
+  "maps": [],
+  "provenance": [
+   "recipe: int __cdecl w30c_negor(int x, int y) — EXACT no maps/patches, bare cdecl (no ret imm, no prolog/pops): return (~y) | x; — the operand ORDER is the tell: FA does mov eax,[esp+8] (arg2!) then not eax then or eax,ecx (arg1), i.e. the C evaluated ~second|first (v1 with ~x|y flipped the loads). Emit order: eax load, ecx load, not, or, ret; 16 B incl. 3 B 8d4900 pad."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ }
+]

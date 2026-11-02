@@ -1,0 +1,39 @@
+/* _TransposeMatrix @ rva 0xd21c8 (860616, 64 B) — naked-asm escape.
+ *
+ * FA body swaps 16-bit pairs f1<->f3, f2<->f6, f5<->f7 of a short[8]
+ * (leading pad word), both loads before both stores, temps in ax/bx,
+ * ebp frame with push eax/ebx/esi and eax restored (vol reg in the
+ * save list — the register-canonicalization shape 10 C spellings in
+ * wave-27 could not hit; asm-shape wall verdict there, asm alt here).
+ * Naked asm carries FA's own instruction list verbatim; C name
+ * TransposeMatrix decorates to _TransposeMatrix = FA's chunk name
+ * (identity, no map).  Tail pad 8b c0 (2 B) census filler.
+ */
+void __declspec(naked) TransposeMatrix(void)
+{
+    __asm {
+        push ebp
+        mov ebp, esp
+        push eax
+        push ebx
+        push esi
+        mov esi, [ebp+8]
+        mov ax, word ptr [esi+6]
+        mov bx, word ptr [esi+2]
+        mov word ptr [esi+2], ax
+        mov word ptr [esi+6], bx
+        mov ax, word ptr [esi+0xc]
+        mov bx, word ptr [esi+4]
+        mov word ptr [esi+4], ax
+        mov word ptr [esi+0xc], bx
+        mov ax, word ptr [esi+0xe]
+        mov bx, word ptr [esi+0xa]
+        mov word ptr [esi+0xa], ax
+        mov word ptr [esi+0xe], bx
+        pop esi
+        pop ebx
+        pop eax
+        pop ebp
+        ret
+    }
+}

@@ -1,0 +1,12 @@
+[
+ { "rva": 907968, "obj": "w30h_strpbrk_v1", "src": "build/survey/probes/w30h_strpbrk_v1.c",
+   "maps": [], "patch": [], "aliases": [], "span": "", "flags": "/c /O2 /Gy /G5" },
+ { "rva": 330256, "obj": "w30h_50a10_v1", "src": "build/survey/probes/w30h_50a10_v1.c",
+   "maps": [], "patch": [], "aliases": [], "span": "", "flags": "/c /O2 /Gy /G5" },
+ { "rva": 670128, "obj": "w30h_a39b0_v1", "src": "build/survey/probes/w30h_a39b0_v1.c",
+   "maps": ["_MMAccessE@12=_MMAccessE@12"], "patch": [], "aliases": ["0=$FA$_t_4a39b0"], "span": "", "flags": "/c /O2 /Gy /G5" },
+ { "rva": 48976, "obj": "w30h_bf50_v1", "src": "build/survey/probes/w30h_bf50_v1.c",
+   "maps": ["_w30h_firstMenu=?firstMenu@@3PAUMENU@@A"], "patch": [], "aliases": ["0=$FA$_t_40bf50"], "span": "", "flags": "/c /O2 /Gy /G5" },
+ { "rva": 571200, "obj": "w30h_8b740_v1", "src": "build/survey/probes/w30h_8b740_v1.c",
+   "maps": ["_w30h_timeCompression=_timeCompression"], "patch": [], "aliases": ["0=$FA$_t_48b740"], "span": "", "flags": "/c /O2 /Gy /G5" }
+]

@@ -1,0 +1,20 @@
+[
+ {"rva": 845400, "obj": "bm_w30b_do_sfcal_long_v1", "src": "build/survey/probes/w30b_do_sfcal_long_v1.c",
+  "maps": ["_w30b_sfl=do_sfcal_long", "_w30b_vt=vector_table"],
+  "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 57792, "obj": "bm_w30b_fq_v1", "src": "build/survey/probes/w30b_fq_v1.c",
+  "maps": ["_w30b_fq=$FA$_t_40e1c0", "_MMFreePtr@4=@MMFreePtr@4"],
+  "patch": [], "aliases": ["0=$FA$_t_40e1c0"], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 413632, "obj": "bm_w30b_spdclamp_v1", "src": "build/survey/probes/w30b_spdclamp_v1.c",
+  "maps": ["_w30b_spdclamp=$FA$_t_464fc0", "_w30b_t40=$FA$_t_464c90", "_COMinSpeed=_COMinSpeed@0", "_COMaxSpeed=_COMaxSpeed@0"],
+  "patch": [], "aliases": ["0=$FA$_t_464fc0"], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 784128, "obj": "bm_w30b_selchk_v1", "src": "build/survey/probes/w30b_selchk_v1.c",
+  "maps": ["_w30b_selchk=$FA$_t_4bf700"],
+  "patch": [], "aliases": ["0=$FA$_t_4bf700"], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 76896, "obj": "bm_w30b_r16_v1", "src": "build/survey/probes/w30b_r16_v1.c",
+  "maps": ["_w30b_r16=$FA$_t_412c60"],
+  "patch": [], "aliases": ["0=$FA$_t_412c60"], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 692032, "obj": "bm_w30b_tpf_v1", "src": "build/survey/probes/w30b_tpf_v1.c",
+  "maps": ["_w30b_tpf=?tcpfactory@@YAXPAUNET_PROTOCOL@@PADH@Z", "_w30b_pfA=$FA$_t_4a8fe0", "_w30b_pfB=$FA$_t_4a9030"],
+  "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"}
+]

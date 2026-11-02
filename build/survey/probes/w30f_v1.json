@@ -1,0 +1,17 @@
+[
+ {"rva": 139787, "obj": "w30f_pair_v1", "src": "build/survey/probes/w30f_pair_v1.c",
+  "maps": [], "patch": [], "aliases": [], "span": "0x25", "flags": "/c /O2 /Gy /G5"},
+ {"rva": 557488, "obj": "w30f_mou_v1", "src": "build/survey/probes/w30f_mou_v1.c",
+  "maps": ["_ShellShowMouse=?ShellShowMouse@@YGXXZ", "_G_Flush=@G_Flush@4",
+           "_ShellHideMouse=?ShellHideMouse@@YGXXZ"],
+  "patch": [], "aliases": [], "span": "0x20", "flags": "/c /O2 /Gy /G5"},
+ {"rva": 449776, "obj": "w30f_addt_v1", "src": "build/survey/probes/w30f_addt_v1.c",
+  "maps": ["_currentT=_currentT"], "patch": [], "aliases": [], "span": "0x20",
+  "flags": "/c /O2 /Gy /G5"},
+ {"rva": 290963, "obj": "w30f_tile_v1", "src": "build/survey/probes/w30f_tile_v1.c",
+  "maps": ["@MMFreeHandle@4=@MMFreeHandle@4", "_bltBuffer=?bltBuffer@@3PAUT_HANDLE@@A"],
+  "patch": [], "aliases": [], "span": "0x32", "flags": "/c /O2 /Gy /G5"},
+ {"rva": 871744, "obj": "w30f_allmul_v1", "src": "build/survey/probes/w30f_allmul_v1.c",
+  "maps": ["___allmul=__allmul"], "patch": [], "aliases": [], "span": "0x40",
+  "flags": "/c /O2 /Gy /G5"}
+]

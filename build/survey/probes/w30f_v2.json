@@ -1,0 +1,6 @@
+[
+ {"rva": 290963, "obj": "w30f_tile_v2", "src": "build/survey/probes/w30f_tile_v2.c",
+  "maps": ["_bltBuffer=?bltBuffer@@3PAUT_HANDLE@@A"],
+  "patch": ["0x28,0,e900000000"], "aliases": [], "span": "0x32",
+  "flags": "/c /Od /Gy /G5"}
+]

@@ -1,0 +1,50 @@
+[
+ {
+  "rva": 543424,
+  "obj": "w30a_84ac0_v1",
+  "src": "build/survey/probes/w30a_84ac0_v1.c",
+  "maps": ["_w30a_fwdad0=$FA$_t_484ad0"],
+  "aliases": ["0=$FA$_t_484ac0"],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 54624,
+  "obj": "w30a_d560_v1",
+  "src": "build/survey/probes/w30a_d560_v1.c",
+  "maps": ["_w30a_e930=$FA$_t_40e930"],
+  "aliases": ["0=$FA$_t_40d560"],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 413600,
+  "obj": "w30a_64fa0_v1",
+  "src": "build/survey/probes/w30a_64fa0_v1.c",
+  "maps": ["_w30a_c90=$FA$_t_464c90"],
+  "aliases": ["0=$FA$_t_464fa0"],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 684480,
+  "obj": "w30a_a71c0_v1",
+  "src": "build/survey/probes/w30a_a71c0_v1.c",
+  "maps": [],
+  "aliases": ["0=$FA$_t_4a71c0"],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 69936,
+  "obj": "w30a_11130_v1",
+  "src": "build/survey/probes/w30a_11130_v1.c",
+  "maps": ["_structuralFail2String=?structuralFail2String@@3PADA"],
+  "aliases": ["0=$FA$_t_411130"],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 645168,
+  "obj": "w30a_9d830_v1",
+  "src": "build/survey/probes/w30a_9d830_v1.c",
+  "maps": [],
+  "aliases": ["0=$FA$_t_49d830"],
+  "flags": "/c /O2 /Gy /G5"
+ }
+]

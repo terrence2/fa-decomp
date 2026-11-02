@@ -1,0 +1,38 @@
+[
+ {"rva": 845400, "obj": "bm_w30b_do_sfcal_long_v1", "src": "build/survey/probes/w30b_do_sfcal_long_v1.c",
+  "maps": ["_w30b_sfl=do_sfcal_long", "_w30b_vt=vector_table"],
+  "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "6/6 EXACT wave 30b. do_sfcal_long (gap chunk @0xce658, 44 B): VM-dispatch twin of wave-28 do_ijmp_long; naked asm (__declspec(naked), __asm) — mov eax,[esi]/lea esi,[esi+4]/push esi/add esi,eax/mov ax,[esi]/lea esi,[esi+2]/movzx ebx,al/call [vt+ebx*2]/pop esi/mov ax,[esi]/lea esi,[esi+2]/movzx ebx,al/jmp [vt+ebx*2]; MASM emits the same ff 14 5d / ff 24 5d [disp32+ebx*2] call/jmp encodings as FA. def name = chunk layout name 'do_sfcal_long' (auto); abs dispos 0x513c58 == vector_table VA (layout syms) so _w30b_vt=vector_table TO verified. tail 3 B '2e 8b c0' census-proven, no patch."},
+
+ {"rva": 57792, "obj": "bm_w30b_fq_v1", "src": "build/survey/probes/w30b_fq_v1.c",
+  "maps": ["_w30b_fq=$FA$_t_40e1c0", "_MMFreePtr@4=@MMFreePtr@4"],
+  "patch": [], "aliases": ["0=$FA$_t_40e1c0"], "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "unnamed gap chunk @0xe1c0 (32 B), alias 0=$FA$_t_40e1c0 defines the anchor. Plain C: __fastcall w30b_fq(void *t) { MMFreePtr(*(void**)((char*)t+0x60)); then zero stores 0x60,0x54,0x58,0x5c in that C order } — CL reproduced push esi/mov esi,ecx/mov ecx,[ecx+0x60]/call/xor eax,eax/4x mov [esi+N],eax/pop esi/ret verbatim. imp-slot map _MMFreePtr@4=@MMFreePtr@4 (@MMFreePtr@4 is FA-internal, no DLL). Call target VA 0x435b70 == FA symbol @MMFreePtr@4 verified in layout syms. tail 5 B '05 00 00 00 00' census-proven."},
+
+ {"rva": 413632, "obj": "bm_w30b_spdclamp_v1", "src": "build/survey/probes/w30b_spdclamp_v1.c",
+  "maps": ["_w30b_spdclamp=$FA$_t_464fc0", "_w30b_t40=$FA$_t_464c90", "_COMinSpeed=_COMinSpeed@0", "_COMaxSpeed=_COMaxSpeed@0"],
+  "patch": [], "aliases": ["0=$FA$_t_464fc0"], "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "unnamed gap chunk @0x64fc0 (32 B), alias 0=$FA$_t_464fc0 MANDATORY: committed wave-29 entries (_w29d_crf TO $FA$_t_464fc0) still reference this stub name — without the alias converting it would break their links. Plain C clamp: lim=w30b_t40() (=stub $FA$_t_464c90) in esi, if (COMinSpeed() > lim) return lo (eax already holds it -> short jg 7f 0b), hi=COMaxSpeed(), if (hi < lim) return hi, return lim -> mov eax,esi. CL reproduced FA shape verbatim at v1. TOs verified: 0x464c90=$FA$_t_464c90, 0x476be0=_COMinSpeed@0, 0x476d20=_COMaxSpeed@0. tail 2 B '8b ff'."},
+
+ {"rva": 784128, "obj": "bm_w30b_selchk_v3", "src": "build/survey/probes/w30b_selchk_v3.c",
+  "maps": ["_w30b_selchk=$FA$_t_4bf700"],
+  "patch": [], "aliases": ["0=$FA$_t_4bf700"], "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "unnamed gap chunk @0xbf700 (32 B), alias 0=$FA$_t_4bf700 defines the anchor (chunk in the 0xbf6f0 region calls $FA$_t_4bf700 in FA). v1/v2 plain C FAILED: CL 4.2 /O2 /G5 folds the [ecx+0x34] load into 'cmp mem,imm32' (even *(volatile long*) does not defeat it) and setg-fuses the two 1/0 returns — 19 B vs FA's naive 21 B (mov eax,[ecx+0x34]/3d cmp eax,imm/jle/mov al,1/ret/xor al,al/ret). v3 = naked asm (cmp byte ptr [ecx],4/jne/mov eax,[ecx+0x34]/cmp eax,0x3a00/jle/mov al,1/ret/L2: xor al,al/ret) — MASM keeps both rets and the 3d form; EXACT v3. No relocs in chunk; tail 11 B '8d 64 24 00 + 8d a4 24 00 00 00 00' census-proven."},
+
+ {"rva": 76896, "obj": "bm_w30b_r16_v1", "src": "build/survey/probes/w30b_r16_v1.c",
+  "maps": ["_w30b_r16=$FA$_t_412c60"],
+  "patch": [], "aliases": ["0=$FA$_t_412c60"], "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "unnamed gap chunk @0x12c60 (16 B): bare c3 + 15 B pad. v1 (wave-28 stub recipe shape): void __fastcall w30b_r16(void *a, void *b) {} compiles to a lone c3; alias 0=$FA$_t_412c60 defines the anchor. EXACT v1. No code relocs; tail census-proven."},
+
+ {"rva": 692032, "obj": "bm_w30b_tpf_v3", "src": "build/survey/probes/w30b_tpf_v1.c",
+  "maps": ["_w30b_tpf=?tcpfactory@@YAXPAUNET_PROTOCOL@@PADH@Z", "_w30b_pfA=$FA$_t_4a8fe0", "_w30b_pfB=$FA$_t_4a9030"],
+  "patch": ["12,12,88470a66c74708ff06894704"],
+  "aliases": [], "flags": "/c /O2 /Gy /G5",
+  "provenance": ["patch 12: toolchain-diff — CL /G5 scheduler hoisted the independent imm WORD store (mov word ptr [edi+8],0x6ff) above the eax/al-dependent BYTE store (mov byte ptr [edi+0xa],al). Volatile on the byte store did NOT stop the hoist; the two instructions have identical total size (3 B + 6 B), so the 12-byte block at span 12 is rewritten to FA's byte/word order. No relocs inside the block."],
+  "notes": "?tcpfactory@@YAXPAUNET_PROTOCOL@@PADH@Z (named chunk, def name auto — no alias needed). Plain C (src w30b_tpf_v1.c): ul z=0; host[10]=(char)z; *(u16*)(host+8)=0x6ff; *(ul*)(host+4)=z; h=*(ul*)((char*)proto+0x14); t=pfaA(h); *(ul*)host=pB(h,t);. CL emitted everything right except this store reorder (prologue push esi/xor eax,eax/mov ecx,[esp+8]/push edi/mov edi,[esp+0x10] and call site push esi/call/add esp,4/push eax/push esi/call/add esp,8/mov [edi],eax/popx2/ret all v1-exact). Call TOs verified: 0x4a8fe0=$FA$_t_4a8fe0, 0x4a9030=$FA$_t_4a9030 (both still-stub gap chunks, unnamed in layout). Tail 13 B census-proven."}
+]

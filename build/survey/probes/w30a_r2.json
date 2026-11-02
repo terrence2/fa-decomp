@@ -1,0 +1,18 @@
+[
+ {
+  "rva": 413600,
+  "obj": "w30a_64fa0_v2",
+  "src": "build/survey/probes/w30a_64fa0_v2.c",
+  "maps": ["_w30a_c90=$FA$_t_464c90"],
+  "aliases": ["0=$FA$_t_464fa0"],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 684480,
+  "obj": "w30a_a71c0_v2",
+  "src": "build/survey/probes/w30a_a71c0_v2.c",
+  "maps": [],
+  "aliases": ["0=$FA$_t_4a71c0"],
+  "flags": "/c /O2 /Gy /G5"
+ }
+]

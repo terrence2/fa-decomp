@@ -1,0 +1,8 @@
+[
+ { "rva": 48976, "obj": "w30h_bf50_v1", "src": "build/survey/probes/w30h_bf50_v1.c",
+   "maps": ["_w30h_firstMenu=?firstMenu@@3PAUMENU@@A"], "patch": [], "aliases": ["0=$FA$_t_40bf50"], "span": "", "flags": "/c /O2 /Gy /G5" },
+ { "rva": 907968, "obj": "w30h_strpbrk_v2", "src": "build/survey/probes/w30h_strpbrk_v2.c",
+   "maps": [], "patch": [], "aliases": [], "span": "", "flags": "/c /O2 /Gy /G5" },
+ { "rva": 907968, "obj": "w30h_strpbrk_v3", "src": "build/survey/probes/w30h_strpbrk_v3.c",
+   "maps": [], "patch": [], "aliases": [], "span": "", "flags": "/c /O2 /Gy /G5" }
+]

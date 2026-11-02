@@ -1,0 +1,56 @@
+[
+ {
+  "rva": 543424,
+  "obj": "w30a_84ac0_v1",
+  "src": "build/survey/probes/w30a_84ac0_v1.c",
+  "maps": ["_w30a_fwdad0=$FA$_t_484ad0"],
+  "aliases": ["0=$FA$_t_484ac0"],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Pure tail-jmp thunk (e9 -> $FA$_t_484ad0, the x87 timer-reset helper that fld/fdiv/fstps _timerTicks+4). Chunk is dead (0 rel32 refs, 0 abs refs scan). 1 patch. Recipe: naked-asm escape — void __declspec(naked) f(void) { __asm { jmp w30a_fwdad0 } } with extern void w30a_fwdad0(void); mapped _w30a_fwdad0=$FA$_t_484ad0 (dis.py site rel @0x0). CL emits 5 B e9 only; fitobj appends FA's 11 B census pad (8d642400+8da42400000000). Alias 0=$FA$_t_484ac0 re-defines the chunk anchor for any future referrer."
+ },
+ {
+  "rva": 54624,
+  "obj": "w30a_d560_v1",
+  "src": "build/survey/probes/w30a_d560_v1.c",
+  "maps": ["_w30a_e930=$FA$_t_40e930"],
+  "aliases": ["0=$FA$_t_40d560"],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "1 patch. mov dx,[ecx+0xb4]; test dx,dx; je; tail-jmp $FA$_t_40e930 (2368 B VIEW-ish proc whose prologue is mov esi,ecx / mov bp,dx) else ret. dx is BOTH the guard value and the forwarded 16-bit arg (target reads bp=dx) -> 16-bit register-ABI forwarding = WALL class; naked-asm escape verbatim (mov dx, word ptr [ecx+0xb4]). Map TO $FA$_t_40e930 checked against dis.py site rel @0xc (fa disp 0x13bf -> 0x40e930). Plain ret = chunk is a hand-off thunk, no ret-imm. Caller rel32 ref at FA 0x404b58 (1 ref)."
+ },
+ {
+  "rva": 413600,
+  "obj": "w30a_64fa0_v2",
+  "src": "build/survey/probes/w30a_64fa0_v2.c",
+  "maps": ["_w30a_c90=$FA$_t_464c90"],
+  "aliases": ["0=$FA$_t_464fa0"],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Clamp g() to [0,15]; plain ret -> cdecl(void) decl (ECX passes through the call untouched, callee $FA$_t_464c90 inherited it). v1 ternary spelling failed: CL chose branchy test/jg/xor; v2 spell the mask trick manually: if (v > 15) return 15; then m = (v < 0); m = m - 1; m = m & v; return m; -> exactly FA's xor ecx,ecx/test/setl cl/dec/and ecx,eax/mov eax,ecx/ret. Extern call emits bare e8 rel32 at offset 0 (no arg setup). 0 patches. Recipe recipe-keyword: manual mask-trick staging for -(x<0)?0:x ternary (new cookbook entry: CL-4.2 emits the xor/setl/dec/and form only when the C says m=(v<0); m--; m&=v; explicit 3-statement staging, NOT from plain ?: )."
+ },
+ {
+  "rva": 684480,
+  "obj": "w30a_a71c0_v2",
+  "src": "build/survey/probes/w30a_a71c0_v2.c",
+  "maps": [],
+  "aliases": ["0=$FA$_t_4a71c0"],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "3-way unsigned uword compare via function pointer (abs ref at FA 0x4a694b inside T_Make@12; 0 rel32 refs). int __fastcall f(unsigned short *p1, unsigned short *p2); p1=ecx, p2=edx. v1 failed: CL loaded p1's value first and allocated it to bx; v2 loads p2 FIRST (declare b = p2[0] before a = p1[0]) so p2 lands in dx and p1 in ax, matching mov dx,[edx] / mov ax,[ecx] / cmp ax,dx. Tail mov eax,1 / adc eax,-1 / ret = CL's own folded codegen for if (a < b) return 1; return 0; (1 + CF - 1). Branchy ifs generate the branchless adc pair naturally — no mask staging needed. 0 patches."
+ },
+ {
+  "rva": 69936,
+  "obj": "w30a_11130_v1",
+  "src": "build/survey/probes/w30a_11130_v1.c",
+  "maps": ["_structuralFail2String=?structuralFail2String@@3PADA"],
+  "aliases": ["0=$FA$_t_411130"],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "1 patch. cl comes in from the entry context (18 rel32 refs from FA 0x4101e0..0x410b08, 0x414f4b — chunk-fragment hand-off), plain ret -> no C decl can own cl without a ret-imm mismatch: naked-asm escape. xor eax,eax; mov al,cl; mov eax, structuralFail2String[eax*4 + 0x18] (inline-asm MASM indexed-with-disp spelling emits 8b 04 85 with DIR32 +0x18 = FA's 0x4e8a28 site, checked); test eax,eax; je; push eax; call HUDMessage (stdcall _HUDMessage@4 identity, no map needed); ret. structuralFail2String[ ] is C++-decorated (PADA far char* array) -> map FROM _structuralFail2String TO ?structuralFail2String@@3PADA with 0x18 addend baked in the asm expression; TO name verified in layout syms at 0x4e8a10."
+ },
+ {
+  "rva": 645168,
+  "obj": "w30a_9d830_v1",
+  "src": "build/survey/probes/w30a_9d830_v1.c",
+  "maps": [],
+  "aliases": ["0=$FA$_t_49d830"],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "State dispatcher: unsigned char c = curThing[0xe3]; if (c >= 0x13 && c <= 0x1e) EnterState(0x1f); void __fastcall f(void) (fastcall@0 -> plain ret, matches FA c3). CL emits mov al,ds:moffs (a0, addend 0xe3 to _curThing 0x508738 via extern unsigned char curThing[...] identity, checked vs raw a0 1b 88 50 00), cmp al,0x13/jb then cmp al,0x1e/ja (natural left-to-right && ), mov ecx,0x1f and TAIL-JMPS (e9) to @EnterState@4 (fastcall int param; identity spelling, no map — enterstate layout sym at 0x4634c0; NOTE for parent: TO assumes @EnterState@4 chunk stays FA-named; if converted later its obj must keep that name). 8 rel32 refs. 0 patches."
+ }
+]

@@ -1,0 +1,49 @@
+[
+ {
+  "rva": 860616,
+  "obj": "w30e_TransposeMatrix_na",
+  "src": "build/survey/probes/w30e_TransposeMatrix_na.c",
+  "maps": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 205488,
+  "obj": "w30e_white_a_v1",
+  "src": "build/survey/probes/w30e_white_v1.c",
+  "maps": [],
+  "aliases": ["0=$FA$_t_4322b0"],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 205488,
+  "obj": "w30e_white_a_v2",
+  "src": "build/survey/probes/w30e_white_v2.c",
+  "maps": [],
+  "aliases": ["0=$FA$_t_4322b0"],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 533040,
+  "obj": "w30e_white_b_v1",
+  "src": "build/survey/probes/w30e_white_v1.c",
+  "maps": [],
+  "aliases": ["0=$FA$_t_482230"],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 887696,
+  "obj": "w30e_cxxfilter_v1",
+  "src": "build/survey/probes/w30e_cxxfilter_v1.c",
+  "maps": ["_w30e_terminate=?terminate@@YAXXZ"],
+  "aliases": ["0=$FA$_t_4d8b90"],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 278432,
+  "obj": "w30e_mmthunk_v1",
+  "src": "build/survey/probes/w30e_mmthunk_v1.c",
+  "maps": ["@w30e_mmal@8=@MMAllocPtr@8"],
+  "aliases": ["0=$FA$_t_443fa0"],
+  "flags": "/c /O2 /Gy /G5"
+ }
+]

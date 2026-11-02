@@ -1,0 +1,8 @@
+[
+ {"rva": 907904, "obj": "w30g_strcspn_v1", "src": "build/survey/probes/w30g_strcspn_v1.c", "maps": ["_strcspnZ=_strcspn"], "patch": [], "aliases": [], "span": null, "flags": "/c /O2 /Gy /G5"},
+ {"rva": 330096, "obj": "w30g_randrange_v1", "src": "build/survey/probes/w30g_randrange_v1.c", "maps": [], "patch": [], "aliases": ["0=$FA$_t_450970"], "span": null, "flags": "/c /O2 /Gy /G5"},
+ {"rva": 330096, "obj": "w30g_randrange_v2", "src": "build/survey/probes/w30g_randrange_v2.c", "maps": [], "patch": [], "aliases": ["0=$FA$_t_450970"], "span": null, "flags": "/c /O2 /Gy /G5"},
+ {"rva": 570736, "obj": "w30g_ctclear_v1", "src": "build/survey/probes/w30g_ctclear_v1.c", "maps": ["_w30gCT1=?COMMENT_TYPE@@3W4__unnamed@@A+0x20", "_w30gCT2=?COMMENT_TYPE@@3W4__unnamed@@A+0x80"], "patch": [], "aliases": ["0=$FA$_t_48b570"], "span": null, "flags": "/c /O2 /Gy /G5"},
+ {"rva": 909072, "obj": "w30g_lang354_v1", "src": "build/survey/probes/w30g_lang354_v1.c", "maps": [], "patch": [], "aliases": ["0=$FA$_t_4ddf10"], "span": null, "flags": "/c /O2 /Gy /G5"},
+ {"rva": 453360, "obj": "w30g_ctsub_v1", "src": "build/survey/probes/w30g_ctsub_v1.c", "maps": ["_w30gCurT=_currentT"], "patch": [], "aliases": ["0=$FA$_t_46eaf0"], "span": null, "flags": "/c /O2 /Gy /G5"}
+]

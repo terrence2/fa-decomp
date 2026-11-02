@@ -1,0 +1,8 @@
+[
+ {"rva": 784128, "obj": "bm_w30b_selchk_v2", "src": "build/survey/probes/w30b_selchk_v2.c",
+  "maps": ["_w30b_selchk=$FA$_t_4bf700"],
+  "patch": [], "aliases": ["0=$FA$_t_4bf700"], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 692032, "obj": "bm_w30b_tpf_v2", "src": "build/survey/probes/w30b_tpf_v2.c",
+  "maps": ["_w30b_tpf=?tcpfactory@@YAXPAUNET_PROTOCOL@@PADH@Z", "_w30b_pfA=$FA$_t_4a8fe0", "_w30b_pfB=$FA$_t_4a9030"],
+  "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"}
+]

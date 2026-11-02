@@ -1,0 +1,50 @@
+[
+{
+"rva": 330096,
+"obj": "w30g_randrange_v4",
+"src": "build/survey/probes/w30g_randrange_v4.c",
+"maps": [],
+"patch": [],
+"aliases": [
+"0=$FA$_t_450970"
+],
+"span": null,
+"flags": "/c /O2 /Gy /G5"
+},
+{
+"rva": 330096,
+"obj": "w30g_randrange_v5",
+"src": "build/survey/probes/w30g_randrange_v5.c",
+"maps": [],
+"patch": [],
+"aliases": [
+"0=$FA$_t_450970"
+],
+"span": null,
+"flags": "/c /O2 /Gy /G5"
+},
+{
+"rva": 909072,
+"obj": "w30g_lang354_v3",
+"src": "build/survey/probes/w30g_lang354_v3.c",
+"maps": [],
+"patch": [],
+"aliases": [
+"0=$FA$_t_4ddf10"
+],
+"span": null,
+"flags": "/c /O2 /Gy /G5"
+},
+{
+"rva": 909072,
+"obj": "w30g_lang354_v4",
+"src": "build/survey/probes/w30g_lang354_v4.c",
+"maps": [],
+"patch": [],
+"aliases": [
+"0=$FA$_t_4ddf10"
+],
+"span": null,
+"flags": "/c /O2 /Gy /G5"
+}
+]

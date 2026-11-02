@@ -1,0 +1,4 @@
+[
+ { "rva": 907968, "obj": "w30h_strpbrk_v4", "src": "build/survey/probes/w30h_strpbrk_v4.c",
+   "maps": [], "patch": [], "aliases": [], "span": "", "flags": "/c /O2 /Gy /G5" }
+]

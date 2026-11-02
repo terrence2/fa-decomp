@@ -1,0 +1,8 @@
+[
+ {"rva": 71472, "obj": "w30c_MatchF24_v3", "src": "build/survey/probes/w30c_MatchF24_v3.c",
+  "maps": ["_w30c_MatchF24@12=_MatchF24@12", "_serviceTicks=_serviceTicks"], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 71472, "obj": "w30c_MatchF24_v4", "src": "build/survey/probes/w30c_MatchF24_v4.c",
+  "maps": ["_w30c_MatchF24@12=_MatchF24@12", "_serviceTicks=_serviceTicks"], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 71472, "obj": "w30c_MatchF24_v5", "src": "build/survey/probes/w30c_MatchF24_v5.c",
+  "maps": ["_w30c_MatchF24@12=_MatchF24@12", "_serviceTicks=_serviceTicks"], "flags": "/c /O2 /Gy /G5"}
+]

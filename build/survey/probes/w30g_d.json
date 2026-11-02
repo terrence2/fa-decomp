@@ -1,0 +1,19 @@
+[
+{
+"rva": 909072,
+"obj": "w30g_lang354_v5",
+"src": "build/survey/probes/w30g_lang354_v5.c",
+"maps": [],
+"aliases": [
+"0=$FA$_t_4ddf10"
+],
+"span": null,
+"patch": [
+"9,15,3d5403000074046633c0c366b8040cc3"
+],
+"provenance": [
+"patch 9: toolchain-diff \u2014 CL 4.2 folds the constant-arm select ((x&0xffff)==0x354 ? 0xc04 : 0) into and/cmp1/sbb/and (sub 2d, cmp 1, sbb eax,eax, and ax,0xc04; tried 4 spellings incl if/else, goto-tail, ternary \u2014 all identical). FA's original emitted the branchy form: cmp eax,0x354 / je +4 / xor ax,ax / ret / mov ax,0xc04 / ret. 15->16 byte rewrite at offsets 9..0x17, no relocs inside."
+],
+"flags": "/c /O2 /Gy /G5"
+}
+]

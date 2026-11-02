@@ -1,0 +1,16 @@
+[
+ {"rva": 71472, "obj": "w30c_MatchF24_v1", "src": "build/survey/probes/w30c_MatchF24_v1.c",
+  "maps": ["_w30c_MatchF24@12=_MatchF24@12", "_serviceTicks"],
+  "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 127776, "obj": "w30c_isspace1_v1", "src": "build/survey/probes/w30c_isspace1_v1.c",
+  "maps": ["_w30c_isspace1@4=$FA$_t_1f320", "_w30c_iscrlf@4=$FA$_t_1f2d0"],
+  "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 420384, "obj": "w30c_untab_v1", "src": "build/survey/probes/w30c_untab_v1.c",
+  "maps": [], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 795376, "obj": "w30c_strsqueez_v1", "src": "build/survey/probes/w30c_strsqueez_v1.c",
+  "maps": [], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 132592, "obj": "w30c_fortclear_v1", "src": "build/survey/probes/w30c_fortclear_v1.c",
+  "maps": ["_w30c_fortclear=_fortclear"], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 692272, "obj": "w30c_negor_v1", "src": "build/survey/probes/w30c_negor_v1.c",
+  "maps": [], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"}
+]

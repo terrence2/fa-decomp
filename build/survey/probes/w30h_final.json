@@ -1,0 +1,17 @@
+[
+ { "rva": 907968, "obj": "w30h_strpbrk_v4", "src": "build/survey/probes/w30h_strpbrk_v4.c",
+   "maps": [], "patch": [], "aliases": [], "span": "", "flags": "/c /O2 /Gy /G5",
+   "notes": "naked inline-asm transcript (v1-v3 plain C spellings all rep-stosd/shl: CL 4.2 never folds 1<<(c&7) to bts/bt, never push-fills the map). Inline-asm traps: `leave` is eaten by CL -- use _emit 0c9h; FA's mid-chunk loop pad 2e 8b c0 after mov edx,[ebp+0ch] spelled as three _emits. strcspn twin (0xdda80) should reuse this shape" },
+ { "rva": 330256, "obj": "w30h_50a10_v1", "src": "build/survey/probes/w30h_50a10_v1.c",
+   "maps": [], "patch": [], "aliases": ["0=$FA$_t_450a10"], "span": "", "flags": "/c /O2 /Gy /G5",
+   "notes": "plain C: char __fastcall(char){ return c==' '||c=='\\t'||c=='\\r'||c=='\\n'; } -- single || chain gives FA's shared true-ret layout; EXACT v1" },
+ { "rva": 670128, "obj": "w30h_a39b0_v1", "src": "build/survey/probes/w30h_a39b0_v1.c",
+   "maps": ["_MMAccessE@12=_MMAccessE@12"], "patch": [], "aliases": ["0=$FA$_t_4a39b0"], "span": "", "flags": "/c /O2 /Gy /G5",
+   "notes": "fastcall (void *p, long v) with duplicated return loads (no local CSE); call is MMAccessE(*(long*)((char*)p+0xf), 0, v); EXACT v1" },
+ { "rva": 48976, "obj": "w30h_bf50_v1", "src": "build/survey/probes/w30h_bf50_v1.c",
+   "maps": ["_w30h_firstMenu=?firstMenu@@3PAUMENU@@A"], "patch": [], "aliases": ["0=$FA$_t_40bf50"], "span": "", "flags": "/c /O2 /Gy /G5",
+   "notes": "plain C: typedef struct W30H_MENU { struct W30H_MENU *next; } W30H_MENU; extern W30H_MENU *w30h_firstMenu; while (p->next->next) p = p->next; p->next = 0; -- FA's dead push ebx comes out of plain C for free; EXACT v1 (after fixing self-referential struct pointer decl)" },
+ { "rva": 571200, "obj": "w30h_8b740_v1", "src": "build/survey/probes/w30h_8b740_v1.c",
+   "maps": ["_w30h_timeCompression=_timeCompression"], "patch": [], "aliases": ["0=$FA$_t_48b740"], "span": "", "flags": "/c /O2 /Gy /G5",
+   "notes": "plain C: short __fastcall f(short a){ short t = w30h_timeCompression; if (t > 0) a = (short)(a << t); return a; } -- short locals keep the 66 8b c1/66 8b 0d/66 d3 e0 16-bit forms; EXACT v1" }
+]

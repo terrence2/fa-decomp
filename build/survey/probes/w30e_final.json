@@ -1,0 +1,46 @@
+[
+ {
+  "rva": 860616,
+  "obj": "w30e_TransposeMatrix_na",
+  "src": "build/survey/probes/w30e_TransposeMatrix_na.c",
+  "maps": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT naked-asm escape. Wave-27 (w27c, 10 C spellings v1-v9 + /Oy-, /G4 flag variants) named _TransposeMatrix an asm-shape wall: FA's word-swap body (swap f1<->f3, f2<->f6, f5<->f7 of short[8] leading-pad-word, both loads ax/bx before both stores) needs push eax in the reg-save list + eax restored -- a CL-4.2 register-plan its C forms never reproduced (all 10 CL objs ended 5-61 short/mismatched). Naked-asm carrying FA's own instruction list verbatim: C name TransposeMatrix (cdecl) decorates to _TransposeMatrix = FA chunk name from layout, identity, no map; 0 relocs; tail pad 8bc0 (2 B) census-proven."
+ },
+ {
+  "rva": 205488,
+  "obj": "w30e_white_a_v1",
+  "src": "build/survey/probes/w30e_white_v1.c",
+  "maps": [],
+  "aliases": ["0=$FA$_t_4322b0"],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT first shot. Unnamed gap chunk (FPO offStart=0x322b0, locals=0, params=0) = fastcall char delimiter test: param in cl, char return in al, short-circuit || chain compare order c==' '||c=='\\t'||c=='\\r'||c=='\\n' (space, tab, CR, LF) -> cmp cl,imm / je true-label shared, xor al,al / mov al,1. The int-return spelling (w30e_white_a_v2) FAILS (CL emits 33 c0/b8 01 + 3-B zero tail pad != FA) -- char return is the recipe. No FA rel32 fixups target this rva anywhere in .text; alias '0=$FA$_t_4322b0' (VA hex, lowercase) defines the anchor in this entry; tail pad 8d9b00000000 (6 B) census-proven."
+ },
+ {
+  "rva": 533040,
+  "obj": "w30e_white_b_v1",
+  "src": "build/survey/probes/w30e_white_v1.c",
+  "maps": [],
+  "aliases": ["0=$FA$_t_482230"],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT first shot. Byte-identical duplicate of the 0x322b0 delimiter helper compiled from the SAME probe source (w30e_white_v1.c) into its own COMDAT; alias '0=$FA$_t_482230' defines this chunk's anchor. No FA rel32 fixups target this rva; tail pad 8d9b00000000 (6 B) census-proven."
+ },
+ {
+  "rva": 887696,
+  "obj": "w30e_cxxfilter_v1",
+  "src": "build/survey/probes/w30e_cxxfilter_v1.c",
+  "maps": ["_w30e_terminate=?terminate@@YAXXZ"],
+  "aliases": ["0=$FA$_t_4d8b90"],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT first shot. Unnamed gap chunk (FPO params=1, cbProlog=0, esp frame) = C++-exception filter: int __cdecl fn(long **p) { long *r = *p; long code = *r; if (code == 0xE06D7363) terminate(); return 0; } -- the two declared intermediates force FA's two-step deref (8b 44 24 04 / 8b 08) and the cmp [ecx],imm32 (81 39 63736de0, 0xe06d7363 MS C++ exc code). Map TO verified against layout syms: ?terminate@@YAXXZ @ 0x4df360; FA rel32 imm bd 67 00 00 = 0x4df360 - 0x4d8ba3 (site 0xf) -- delta matches FA imm bytes. Return-0 tail xor eax,eax (33 c0) c3, exactly 22 B, no pad."
+ },
+ {
+  "rva": 278432,
+  "obj": "w30e_mmthunk_v1",
+  "src": "build/survey/probes/w30e_mmthunk_v1.c",
+  "maps": ["@w30e_mmal@8=@MMAllocPtr@8"],
+  "aliases": ["0=$FA$_t_443fa0"],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT first shot. Unnamed gap chunk (FPO params=2, cbProlog=0) = tail-jump allocator thunk: cdecl 2-param wrapper forwarding param 2 with edx=0 -> void * __cdecl fn(void *pa, void *pb) { return w30e_mmal(pb, 0); } with the callee declared __fastcall; CL right-to-left arg eval emits xor edx,edx (33 d2) then mov ecx,[esp+8] (8b 4c 24 08) then jmp rel32. Map FROM @name@8 (fastcall @-decoration spelling) TO verified FA symbol @MMAllocPtr@8 @ 0x435aa0 (layout syms); FA rel32 imm f5 1a ff ff = 0x435aa0 - 0x443fab (site 0x7) -- delta matches FA imm bytes. Tail pad 0500000000 (5 B) census-proven."
+ }
+]

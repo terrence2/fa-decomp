@@ -1,0 +1,69 @@
+[
+ {
+  "rva": 139787,
+  "obj": "w30f_pair_v1",
+  "src": "build/survey/probes/w30f_pair_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "span": "0x25",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT v1 first try. thiscall-shaped fastcall pair updater: struct {int pad[57];int a;int b;} (a=+0xe4,b=+0xe8); void __fastcall f(S* s, S* h): if(h){s->a=(int)h; s->b=(int)h+0x44;} else {s->b=0; s->a=0;} \u2014 (int)h + 0x44 emitted as add edx,0x44 (83 c2 44), else-branch store order b-then-a preserved in source order. 0 relocs; chunk includes in-span 8b ff hot-patch pad (census filler, auto-copied). No map needed (0 relocs; chunk start has no FA symbol)."
+ },
+ {
+  "rva": 557488,
+  "obj": "w30f_mou_v1",
+  "src": "build/survey/probes/w30f_mou_v1.c",
+  "maps": [
+   "_ShellShowMouse@0=?ShellShowMouse@@YGXXZ",
+   "@G_Flush@4=@G_Flush@4",
+   "_ShellHideMouse@0=?ShellHideMouse@@YGXXZ"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "0x20",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT v1 first try. Void stdcall call-chain w/ void tail call: ShellShowMouse(); G_Flush(1); ShellHideMouse(); \u2014 CL 4.2 /O2 emits the last call as tail-jmp e9 (no patch needed). MAP GOTCHA: stdcall void(void) in .c decorates with @0 (_ShellShowMouse@0), NOT bare _ShellShowMouse \u2014 first map spelling was wrong and silently unresolved; correct: _ShellShowMouse@0=?ShellShowMouse@@YGXXZ, @G_Flush@4=@G_Flush@4 (identity), _ShellHideMouse@0=?ShellHideMouse@@YGXXZ. Deltas hand-verified vs FA: e8 0xfff851fb -> 0x40d3b0, e8 0xe391 -> 0x496550, e9 0xfff8525c -> 0x40d420."
+ },
+ {
+  "rva": 449776,
+  "obj": "w30f_addt_v1",
+  "src": "build/survey/probes/w30f_addt_v1.c",
+  "maps": [
+   "__currentT=_currentT"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "0x20",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT v1 first try. 16-bit fastcall: extern short _currentT; short __fastcall f(short t){ if(t==0x7fff||t==0) return t; return t+_currentT; } \u2014 CL emits cmp cx,0x7fff / test cx,cx / 66 a1 moffs / add ax,cx / ret + shared mov ax,cx ret tail. MAP GOTCHA: `extern short _currentT` decorates __currentT (double underscore) \u2014 map __currentT=_currentT. DIR32 imm verified vs FA bytes: 0x549e18 (_currentT va, base-included)."
+ },
+ {
+  "rva": 290963,
+  "obj": "w30f_tile_v2",
+  "src": "build/survey/probes/w30f_tile_v2.c",
+  "maps": [
+   "_bltBuffer=?bltBuffer@@3PAUT_HANDLE@@A"
+  ],
+  "patch": [
+   "0x28,0,e900000000"
+  ],
+  "aliases": [],
+  "span": "0x32",
+  "flags": "/c /Od /Gy /G5",
+  "notes": "EXACT v2. v1 (/O2) was frameless and unmatchable. Twin _G_TileInit recipe: flags /c /Od /Gy /G5 + patch \"0x28,0,e900000000\" insert of the empty-else join jmp e9+0 that CL jump-threads away in every opt level. /Od reproduces the frame (55 8b ec 53 56 57), 0f 84 long-form je, c9 leave and 5f 5e 5b pops; the je disp stays 0x15 = FA (patch insert at 0x28 keeps label; je has no reloc \u2014 disp baked). Maps: _bltBuffer=?bltBuffer@@3PAUT_HANDLE@@A; @MMFreeHandle@4 is a C __fastcall identity (no map). DIR32 imms all = 0x4f0ee4 (bltBuffer va) and call rel 0xfffee9ff -> @MMFreeHandle@4, verified vs FA bytes."
+ },
+ {
+  "rva": 871744,
+  "obj": "w30f_allmul_v1",
+  "src": "build/survey/probes/w30f_allmul_v1.c",
+  "maps": [
+   "_allmul=__allmul"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "0x40",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT v1 first try, naked-asm escape. FA's __allmul is canonical CRT hand asm (mul + ret 0x10 callee-pops); CL only emits __allmul as an intrinsic CALL SITE, so C cannot form the body \u2014 __declspec(naked) void allmul(void){__asm{...}} carrying FA's own sequence (mov eax,[esp+8] / mov ecx,[esp+0x10] / or ecx,eax / mov ecx,[esp+0xc] / jne / mov eax,[esp+4] / mul ecx / ret 16 / push ebx / mul / mov ebx,eax / mul dword ptr [esp+0x14] / add ebx,eax / mul ecx / add edx,ebx / pop ebx / ret 16). 0 relocs, 12 B cc tail census filler. Link map: _allmul=__allmul (C 'allmul' -> _allmul; inert here since 0 relocs, stub carries FA name __allmul)."
+ }
+]
