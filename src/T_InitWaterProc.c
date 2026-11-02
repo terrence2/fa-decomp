@@ -1,0 +1,26 @@
+// _T_InitWaterProc @ rva 0xa58e0 (64 B) — FA asm: push esi / mov ecx,-1 / push
+//   edi / sub eax,eax / mov edi,[currentLayer+0x153] / repnz scasb / not ecx /
+//   sub edi,ecx / mov eax,ecx / shr ecx,2 / mov esi,edi / mov edi,[PLrightStabl+8]
+//   / rep movsd / mov ecx,eax / and ecx,3 / rep movsb / a0 [dst] / test al,al /
+//   je L / mov ecx,0x507a70 / call $FA$_t_4a4db0 / L: pop edi/esi / ret.
+//   CL 4.2's INLINE strcpy expansion (scasb strlen incl. nul + movsd/movsb) —
+//   plain C strcpy(d,s) with extern[] base symbols via TO-addend maps; the
+//   dest[0] guard is the a0/test/je read; ctx = _makeTargetList+0x1ab8
+//   (0x507a70, the makeTargetList walker ctx) passed as the fastcall walker's
+//   ecx (T_InitFarmProc family) via a symbol extern -- NOT a literal: FA's
+//   mov ecx,imm carries a HIGHLOW fixup, and a literal bakes the value with no
+//   reloc (gate 0xa5913 miss, wave 20). The real call keeps esi/edi saved so
+//   no e9 tail appears.
+extern unsigned char waterDestQ[];   // -> _PLrightStabilizer+0x8
+extern unsigned char waterSrcQ[];    // -> _currentLayer+0x153
+extern unsigned char farmCtx_[];     // -> _makeTargetList+0x1ab8
+extern void __fastcall farmProc_(int ctx);
+
+char *strcpy(char *d, const char *s);
+
+void T_InitWaterProc(void)
+{
+    strcpy((char *)waterDestQ, (const char *)waterSrcQ);
+    if (waterDestQ[0])
+        farmProc_((int)farmCtx_);
+}

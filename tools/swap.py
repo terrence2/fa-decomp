@@ -251,23 +251,35 @@ def step_link(es):
     # rsp ceiling mitigations: #1 relative obj paths (343 entries); #2 short
     # STUBS dir build/st (423); #3+#4 stage ALL link inputs under atf95/d
     # (LINK cwd is atf95) and use SHORT stub names from mkstub (no va suffix)
-    # -- 661 entries: 36.2KB (LNK1181 "Rel" truncated-path class) down to
-    # ~21KB. Ceiling is LINK 4.2's ~32KB response-file limit (LNK1104/1181
-    # truncated paths + LNK1141).
+    # -- 661 entries: 36.2KB down to ~21KB. #5 (852 entries): stage the FIT
+    # objs under short names d/f%05x.obj too -- 852 long "<Base>_fit.obj"
+    # paths inflate both the rsp (31.5KB at the ~32KB LNK1104/LNK1141
+    # truncated-path ceiling: "cannot open Z:\opt\msvc420\lib\", "failure
+    # during build of exports file") and the /EXPORT LINK /lib spawn's argv;
+    # short names save ~15KB of each.
     subprocess.run(
         "mkdir -p atf95/d && rm -f atf95/d/* && "
-        "cp build/st/* build/pilot/*_fit.obj build/idata/* build/m0/FA.obj "
-        "atf95/d/",
+        "cp build/st/* build/idata/* build/m0/FA.obj atf95/d/",
         shell=True, check=True)
+    import shutil
+    for i, e in enumerate(es):
+        shutil.copyfile("build/pilot/%s_fit.obj" % e["obj"],
+                        "atf95/d/f%05x.obj" % i)
     repl = []
-    for e in es:
-        repl.append(["--replace", "%#x=d/%s_fit.obj"
-                     % (e["rva"] + IMAGE_BASE, e["obj"])])
+    for i, e in enumerate(es):
+        repl.append(["--replace", "%#x=d/f%05x.obj"
+                     % (e["rva"] + IMAGE_BASE, i)])
     r = subprocess.run([sys.executable, "tools/mkrsp.py", "--stubdir", STUBS,
                         "--out", RSP]
                        + [x for pair in repl for x in pair], check=True)
-    for clock, log in (("@1997-08-11 23:12:40", "logD_seed"),
-                       ("@1997-08-11 23:13:32", "logD_link")):
+    # CLOCKS MUST BE FROZEN (no "@" prefix): with FAKETIME="@..." libfaketime
+    # ADVANCES from that moment, so the seed's pdb NB10 sig (0x33ef9c68) raced
+    # :40/:41 depending on when LINK wrote the pdb (~50/50 across runs —
+    # wave-20 "pdb ts :41 flake"). Frozen clocks make every read return the
+    # exact time; seed fixes NB10 sig :40, real link rewrites the header ts
+    # :32 and preserves the pdb sig. Verified sha-identical 2/2 runs.
+    for clock, log in (("1997-08-11 23:12:40", "logD_seed"),
+                       ("1997-08-11 23:13:32", "logD_link")):
         # seed link: reset the pdb so its ts comes from THIS run's clock;
         # real link: keep the pdb (updates it, preserving ts, age -> 1)
         stale = "FA.pdb FA.exe FA.lib FA.exp FA.map" \

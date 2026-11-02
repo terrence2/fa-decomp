@@ -6053,5 +6053,330 @@
    "_rterrmsg=__amblksiz+0x8",
    "_adbgmsg=__adbgmsg"
   ]
+ },
+ {
+  "rva": 6224,
+  "obj": "NET_CancelPlayerList",
+  "src": "src/NET_CancelPlayerList.c",
+  "maps": [
+   "_ncSocket=?socket_list@@3USOCKET_STATE_LIST@@A+0x420",
+   "_socket_close=?socket_close@@YAXI@Z",
+   "_netSetCbPlayers=?net_set_callback_players@@YAXPAXP6AX0W4PLAYER_ACTION@@PADPAUNET_ADDRESS@@J@Z@Z",
+   "_netSetCbConnected=?net_set_callback_connected@@YAXPAXP6AX0W4NET_CONNECTED_STATE@@@Z@Z"
+  ]
+ },
+ {
+  "rva": 21072,
+  "obj": "VDOInit",
+  "src": "src/VDOInit.c",
+  "maps": [
+   "_vdoColorProcess=?vdoColorProcess@@3FA",
+   "_videoInitialized=?videoInitialized@@3DA"
+  ]
+ },
+ {
+  "rva": 24016,
+  "obj": "HUDReprintMessages",
+  "src": "src/HUDReprintMessages.c",
+  "maps": [
+   "_hrMsgSrc=?lastWasInQuickCreator@@3DA+0x4c",
+   "_hrMsgDst=_hud+0x348",
+   "_hrTop=_hud+0xa18",
+   "_hrR0=_unitRight+0x10",
+   "_hrU10=_unitUp+0x10"
+  ]
+ },
+ {
+  "rva": 71328,
+  "obj": "OnTheGround",
+  "src": "src/OnTheGround.c",
+  "maps": [
+   "_otg15=_curThing+0x15"
+  ]
+ },
+ {
+  "rva": 266880,
+  "obj": "ChooseScoreInit",
+  "src": "src/ChooseScoreInit.c",
+  "maps": [
+   "_tvA=?targetV@@3UVIEW_VARS@@A+0x1c48",
+   "_tvC=?targetV@@3UVIEW_VARS@@A+0x1c4c",
+   "_tvW=?targetV@@3UVIEW_VARS@@A+0x1c44",
+   "_csi4=_combatScoreTime+0x4",
+   "_csiW=_combatScoreTime"
+  ]
+ },
+ {
+  "rva": 309280,
+  "obj": "SER_Resume",
+  "src": "src/SER_Resume.c",
+  "maps": [
+   "_serCtl=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A",
+   "_serEnterC=?SER_EnterCriticalCodeForeground@@YAXXZ",
+   "_serLeaveC=?SER_LeaveCriticalCodeForeground@@YAXXZ"
+  ]
+ },
+ {
+  "rva": 409680,
+  "obj": "CTEval_tgtattackingme",
+  "src": "src/CTEval_tgtattackingme.c",
+  "maps": []
+ },
+ {
+  "rva": 409808,
+  "obj": "CTEval_tgt",
+  "src": "src/CTEval_tgt.c",
+  "maps": []
+ },
+ {
+  "rva": 415936,
+  "obj": "CTDo_wm_hspacing",
+  "src": "src/CTDo_wm_hspacing.c",
+  "maps": [
+   "_ctTickCheck@0=$FA$_t_464c90",
+   "@ctHsSp@4=$FA$_t_45e1a0"
+  ]
+ },
+ {
+  "rva": 416016,
+  "obj": "CTDo_wm_vspacing",
+  "src": "src/CTDo_wm_vspacing.c",
+  "maps": [
+   "_ctTickCheck@0=$FA$_t_464c90",
+   "@ctVsSp@4=$FA$_t_45e1e0"
+  ]
+ },
+ {
+  "rva": 598848,
+  "obj": "PlayersBoxConnectedCb",
+  "src": "src/PlayersBoxConnectedCb.c",
+  "maps": [
+   "_pbcConnAct=$FA$_t_492360"
+  ]
+ },
+ {
+  "rva": 623632,
+  "obj": "updateQueueHead",
+  "src": "src/updateQueueHead.c",
+  "maps": []
+ },
+ {
+  "rva": 708400,
+  "obj": "NET_ShutdownQuery",
+  "src": "src/NET_ShutdownQuery.c",
+  "maps": [
+   "_sqSocket=?socket_list@@3USOCKET_STATE_LIST@@A+0x418",
+   "_socket_close=?socket_close@@YAXI@Z",
+   "_netSetCbHost=?net_set_callback_host@@YAXPAXP6AX0W4PLAYER_ACTION@@PADPAUNET_ADDRESS@@J@Z@Z",
+   "_netSetOftenState=?net_set_often_state@@YAXW4PLAYER_STATE@@@Z"
+  ]
+ },
+ {
+  "rva": 335712,
+  "obj": "HARDStoreWeight",
+  "src": "src/HARDStoreWeight.c",
+  "maps": []
+ },
+ {
+  "rva": 388752,
+  "obj": "GRPSetType",
+  "src": "src/GRPSetType.c",
+  "maps": []
+ },
+ {
+  "rva": 388816,
+  "obj": "GRPSetSpacingH",
+  "src": "src/GRPSetSpacingH.c",
+  "maps": []
+ },
+ {
+  "rva": 388880,
+  "obj": "GRPSetSpacingV",
+  "src": "src/GRPSetSpacingV.c",
+  "maps": []
+ },
+ {
+  "rva": 613904,
+  "obj": "G_Rect2",
+  "src": "src/G_Rect2.c",
+  "maps": []
+ },
+ {
+  "rva": 613952,
+  "obj": "G_URect2",
+  "src": "src/G_URect2.c",
+  "maps": []
+ },
+ {
+  "rva": 543328,
+  "obj": "MISSIONEnsureLegalName",
+  "src": "src/MISSIONEnsureLegalName.c",
+  "maps": []
+ },
+ {
+  "rva": 586784,
+  "obj": "OBJShutdown",
+  "src": "src/OBJShutdown.c",
+  "maps": [
+   "_wSayThing=?wingSay@@3PAUSAY@@A+0xe64",
+   "_cmtZero=?COMMENT_TYPE@@3W4__unnamed@@A+0x150"
+  ]
+ },
+ {
+  "rva": 493408,
+  "obj": "CompareHintPtrs",
+  "src": "src/CompareHintPtrs.c",
+  "maps": [
+   "_CompareHintPtrs=?CompareHintPtrs@@YAJPAX0@Z"
+  ]
+ },
+ {
+  "rva": 629392,
+  "obj": "CompareDBEntry",
+  "src": "src/CompareDBEntry.c",
+  "maps": [
+   "_CompareDBEntry=?CompareDBEntry@@YAHPBX0@Z"
+  ]
+ },
+ {
+  "rva": 629424,
+  "obj": "SortModemDB",
+  "src": "src/SortModemDB.c",
+  "maps": [
+   "_SortModemDB=?SortModemDB@@YAXXZ",
+   "_modemCtrl=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A",
+   "_CompareDBEntry=?CompareDBEntry@@YAHPBX0@Z"
+  ]
+ },
+ {
+  "rva": 795408,
+  "obj": "T_Init2",
+  "src": "src/T_Init2.c",
+  "maps": [
+   "_T_CloudProc=?T_CloudProc@@YAXJ@Z"
+  ]
+ },
+ {
+  "rva": 775440,
+  "obj": "PROJEngineState",
+  "src": "src/PROJEngineState.c",
+  "maps": [
+   "_projTf=_curThing+0xe8",
+   "_projTpF=_curThingType+0xff",
+   "_projTpW=_curThingType+0x101"
+  ]
+ },
+ {
+  "rva": 122800,
+  "obj": "ddECS",
+  "src": "src/ddECS.c",
+  "maps": [
+   "_ddCsAliveArr=?criticalSectionAlive@@3DA",
+   "_ddCsArr=?m_criticalSection@@3U_RTL_CRITICAL_SECTION@@A",
+   "__imp__EnterCriticalSectionX@4=__imp__EnterCriticalSection"
+  ]
+ },
+ {
+  "rva": 122832,
+  "obj": "ddLCS",
+  "src": "src/ddLCS.c",
+  "maps": [
+   "_ddCsAliveArr=?criticalSectionAlive@@3DA",
+   "_ddCsArr=?m_criticalSection@@3U_RTL_CRITICAL_SECTION@@A",
+   "__imp__LeaveCriticalSectionX@4=__imp__LeaveCriticalSection"
+  ]
+ },
+ {
+  "rva": 271296,
+  "obj": "GRAPHICRemove",
+  "src": "src/GRAPHICRemove.c",
+  "maps": [
+   "_noMixLeftArr=?noMixLeft@@3UMODSPEC@@A",
+   "_MPGraphicRemoveX@0=?MPGraphicRemove@@YGXXZ"
+  ]
+ },
+ {
+  "rva": 420688,
+  "obj": "RemapInsignia",
+  "src": "src/RemapInsignia.c",
+  "maps": [
+   "_insigniaRemapP=?insigniaRemap@@3PAEA"
+  ]
+ },
+ {
+  "rva": 440000,
+  "obj": "MPMissionShutdown",
+  "src": "src/MPMissionShutdown.c",
+  "maps": [
+   "_packetTicks8=?packetTicksAdjust@@3PAJA+0x20"
+  ]
+ },
+ {
+  "rva": 479040,
+  "obj": "jround_up",
+  "src": "src/jround_up.c",
+  "maps": []
+ },
+ {
+  "rva": 479184,
+  "obj": "jzero_far",
+  "src": "src/jzero_far.c",
+  "maps": []
+ },
+ {
+  "rva": 569840,
+  "obj": "ShellDisabledSound",
+  "src": "src/ShellDisabledSound.c",
+  "maps": [
+   "_noMixerStr_=_checkRightButton+0x470",
+   "_offStr_=_checkRightButton+0x480",
+   "_SoundNoMixer@12=?SoundNoMixer@@YGFPADFF@Z",
+   "_SingleSoundS@16=?SingleSound@@YGFPADFEF@Z"
+  ]
+ },
+ {
+  "rva": 647920,
+  "obj": "StreamersShutdown",
+  "src": "src/StreamersShutdown.c",
+  "maps": [
+   "_strmPlanesA=_planes+0x80",
+   "_strmCtrlB=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x34c"
+  ]
+ },
+ {
+  "rva": 678112,
+  "obj": "T_InitWaterProc",
+  "src": "src/T_InitWaterProc.c",
+  "maps": [
+   "_waterDestQ=_PLrightStabilizer+0x8",
+   "_waterSrcQ=_currentLayer+0x153",
+   "_farmCtx_=_makeTargetList+0x1ab8",
+   "@farmProc_@4=$FA$_t_4a4db0"
+  ]
+ },
+ {
+  "rva": 691200,
+  "obj": "tcpinit2",
+  "src": "src/tcpinit2.c",
+  "maps": [
+   "_tcpSaveSettingsX=?tcp_save_settings@@YAXPAUNET_PROTOCOL@@PAUCN_INFO@@@Z"
+  ]
+ },
+ {
+  "rva": 737168,
+  "obj": "G_FreeSurfaceBitmap",
+  "src": "src/G_FreeSurfaceBitmap.c",
+  "maps": [
+   "_surfaceBitmap_g=?surfaceBitmap@@3PAEA",
+   "_DDsurfaceBitmap_g=?DDsurfaceBitmap@@3PAVCDirDrawSurface@@A",
+   "@gDdsFreeQ@4=$FA$_t_4779a0",
+   "_gFreeFwdQ=$FA$_t_4d4880"
+  ]
+ },
+ {
+  "rva": 749152,
+  "obj": "APLandingType",
+  "src": "src/APLandingType.c",
+  "maps": []
  }
 ]
