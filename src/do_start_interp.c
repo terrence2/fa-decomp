@@ -7,7 +7,7 @@
 // pop esi (the cdecl return-addr slot IS the stream pointer — no C can
 // pop its own return address) + sib 0x5d jmp dword (scale-2 ebx index,
 // base-less) — `jmp dword ptr vector_table[ebx*2]` (probe
-// b19b_sinterp_v1 exact). Map: _vector_table=vector_table (FA chunk name
+// t2_sinterp_v1 exact (re-established 2026-11-02)). Map: _vector_table=vector_table (FA chunk name
 // is the bare spelling).
 extern void *vector_table[];
 

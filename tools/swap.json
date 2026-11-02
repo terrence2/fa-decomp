@@ -36,7 +36,7 @@
   "obj": "CarefulDiv",
   "src": "src/carefulDiv.c",
   "maps": [
-   "_real_1=$FA$rdata0+0x49c",
+   "$T95=$FA$rdata0+0x49c",
    "_g_divFlag=?palColorRGB@@3UT_RGB@@A+0x44c",
    "_g_divRes=?palColorRGB@@3UT_RGB@@A+0x440",
    "_g_divCls=?rFloor@@3MA+0x4"
@@ -1809,7 +1809,16 @@
   "rva": "0x96510",
   "obj": "G_DrawYLR",
   "src": "src/G_DrawYLR.c",
-  "maps": []
+  "maps": [],
+  "patch": [
+   "0,16,568bf1f6410180751c",
+   "31,3,f6460180",
+   "35,2,74e4",
+   "37,3,5ec3"
+  ],
+  "provenance": [
+   "patch 0/31/35/37: toolchain-diff \u2014 CL CSE caches the 0x80 mask constant in ebx across both test sites (unsteerable: while form, split head/loop bases, and volatile loads all identical) \u2014 patches remove the ebx machinery and restore FA's mem-immediate tests (f6 46 01 80), repairing the three jcc displacements; patch payloads carry no VA dwords and the lone _G_UHline rel32 call site has content 0."
+  ]
  },
  {
   "rva": "0x9e710",
@@ -2779,6 +2788,9 @@
   "src": "src/APObjOnShip.c",
   "maps": [
    "_apShipBaseQ=_airports+0x3020"
+  ],
+  "provenance": [
+   "pure C \u2014 do-while (no head test) with the obj field read TWICE through distinct typed expressions: the test reads *(void**)(s+2) into ebx and the return re-derives *(unsigned long*)(s+2) into the cursor register eax (FA's reload `mov eax,[eax+2]`); staging the bound in a register or reading the field once gives a wrong rotation and reg homes."
   ]
  },
  {
@@ -7278,7 +7290,7 @@
    "_wpFlag=_curThing+0xec"
   ],
   "provenance": [
-   "asm escape: naked asm \u2014 a1 load of _curThing+0xe8 (map +0xe8), WPTarget@4 ret 4 cleans the arg push so [esp+8] at cmp = p1 word; not bl + 20 1d and byte ds:[_curThing+0xec],bl mask; p1 (entry+4) vs p2 (entry+8) word fetches with ebx save"
+   "pure C \u2014 pointer-local staging (`unsigned char *pf = &wpFlag;`) triggers CL's RMW fold to FA's `and byte [wpFlag],bl` (20 1d) where the direct assignment spellings emit the 57-B a0/22c3/a2 sequence; the 16-bit stack-slot loads (mov bx,[esp+0xc] / cmp ax,[esp+8]) arrive free from the word-typed params once WPTarget@4's ret-4 cleanse is honored."
   ]
  },
  {
@@ -7328,9 +7340,10 @@
  {
   "rva": 710640,
   "obj": "NET_Addr2string",
-  "src": "src/NET_Addr2string.c",
-  "maps": [
-   "_proto_ptr=?proto_ptr@@3PAUNET_PROTOCOL@@A"
+  "src": "src/NET_Addr2string.cpp",
+  "maps": [],
+  "provenance": [
+   "pure C++ (.cpp): struct NET_ADDRESS/NET_PROTOCOL tags emit PAU mangles directly (old _proto_ptr map is vestigial \u2014 dropped), char-return fn-ptr typedef gives the YAD mangle, arg locals staged before the call expression give the eax/ecx/ebx reg plan."
   ]
  },
  {

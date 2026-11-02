@@ -5,7 +5,7 @@
 // esi (already the stream pointer this time, from the shared prolog) is
 // advanced 0x26, the opcode byte read and dispatched through the vector
 // table. Naked-asm escape: sib 0x5d scale-2 jmp dword (probe
-// b19b_sdef_v1 exact). Map: _vector_table=vector_table.
+// t2_sdef_v1 exact (re-established 2026-11-02)). Map: _vector_table=vector_table.
 extern void *vector_table[];
 
 void __declspec(naked) do_streamer_def(void)

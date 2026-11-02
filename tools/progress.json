@@ -1091,6 +1091,11 @@
    "date": "2026-11-02",
    "note": "survey probe wave 2 (bands A/B/C: 59 re-C incl. 24 patch-hybrids; linker addend semantics root-caused)",
    "rvas": []
+  },
+  {
+   "date": "2026-11-02",
+   "note": "survey carry-over band: 5 re-C (CarefulDiv/WPGoalObjEvent/G_DrawYLR/NET_Addr2string/APObjOnShip), 6 KEEP-ASM verdicts (VM-dispatch, ABI-surgery, custom-BX-convention, SEH/fs walls)",
+   "rvas": []
   }
  ],
  "generated": "2026-11-01"
