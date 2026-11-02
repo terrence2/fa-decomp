@@ -1,0 +1,82 @@
+[
+ {
+  "rva": 623760,
+  "obj": "bm_w28c_overwriteQ_v2",
+  "src": "build/survey/probes/w28c_overwriteQ_v2.c",
+  "maps": [
+   "_w28c_overwriteQ=?overwriteQueue@@YAXAAUSERIAL_QUEUE@@AAUSERIAL_PACKET_WRAPPER@@@Z",
+   "_memcpyZ=_memcpy"
+  ]
+ },
+ {
+  "rva": 696448,
+  "obj": "bm_w28c_UGetFileSize_v2",
+  "src": "build/survey/probes/w28c_UGetFileSize_v2.c",
+  "maps": [
+   "@w28c_uGetFileSize@4=@UGetFileSize@4",
+   "_w28c_hndT=?handles32@@3PAPAXA",
+   "@w28c_uOpen@8=@Open@8",
+   "@w28c_uClose@4=@Close@4",
+   "__imp__w28c_gfs@8=__imp__GetFileSize",
+   "_w28c_dosErrT=_dosError"
+  ]
+ },
+ {
+  "rva": 636224,
+  "obj": "bm_w28c_PLANERemove_v2",
+  "src": "build/survey/probes/w28c_PLANERemove_v2.c",
+  "maps": [
+   "@w28c_PLANERemove@4=@PLANERemove@4",
+   "_w28c_numPlanesT=_numPlanes",
+   "_w28c_planesArr=_planes"
+  ]
+ },
+ {
+  "rva": 849072,
+  "obj": "bm_w28c_ijmpLong_v1",
+  "src": "build/survey/probes/w28c_ijmpLong_v1.c",
+  "maps": [
+   "_w28c_ijmpLong=$FA$_t_4cf4b0",
+   "_w28c_vTable=vector_table"
+  ],
+  "aliases": [
+   "0=$FA$_t_4cf4b0"
+  ]
+ },
+ {
+  "rva": 624352,
+  "obj": "bm_w28c_serShutLL_v5",
+  "src": "build/survey/probes/w28c_serShutLL_v5.c",
+  "maps": [
+   "_w28c_serShutLL=?SER_ShutdownLowLevel@@YAXXZ",
+   "_w28c_mpArr=?mpInfo@@3UMP_INFO@@C",
+   "_w28c_ctrlArr=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A"
+  ]
+ },
+ {
+  "rva": 718128,
+  "obj": "bm_w28c_WRGetLayer_v5",
+  "src": "build/survey/probes/w28c_WRGetLayer_v5.c",
+  "maps": [
+   "_w28c_WRGetLayer@8=_WRGetLayer@8",
+   "_w28c_clArr=?curLayers@@3PAULAYER@@A"
+  ]
+ },
+ {
+  "rva": 797308,
+  "obj": "bm_w28c_dist_v3",
+  "src": "build/survey/probes/w28c_dist_v3.c",
+  "maps": [
+   "_w28c_dist@8=_Dist@8"
+  ],
+  "flags": "/c /O2 /Gy /G5 /Oy-"
+ },
+ {
+  "rva": 685632,
+  "obj": "bm_w28c_tcmp_v3",
+  "src": "build/survey/probes/w28c_tcmp_v3.c",
+  "maps": [
+   "_w28c_tcmp=?T_CompareTlist@@YAJPAX0@Z"
+  ]
+ }
+]

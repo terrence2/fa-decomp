@@ -1,0 +1,86 @@
+[
+ {
+  "rva": 311952,
+  "obj": "w28a_SER_Shutdown3_v8",
+  "src": "build/survey/probes/w28a_SER_Shutdown3_v8.c",
+  "maps": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 311952,
+  "obj": "w28a_SER_Shutdown3_v9",
+  "src": "build/survey/probes/w28a_SER_Shutdown3_v9.c",
+  "maps": [],
+  "flags": "/c /O1 /Gy /G5"
+ },
+ {
+  "rva": 311952,
+  "obj": "w28a_SER_Shutdown3_v10",
+  "src": "build/survey/probes/w28a_SER_Shutdown3_v10.c",
+  "maps": [],
+  "flags": "/c /Os /Gy /G5"
+ },
+ {
+  "rva": 337200,
+  "obj": "w28a_HARDFindECMForObj_v5",
+  "src": "build/survey/probes/w28a_HARDFindECMForObj_v5.c",
+  "maps": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 337200,
+  "obj": "w28a_HARDFindECMForObj_v6",
+  "src": "build/survey/probes/w28a_HARDFindECMForObj_v6.c",
+  "maps": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 337200,
+  "obj": "w28a_HARDFindECMForObj_v7",
+  "src": "build/survey/probes/w28a_HARDFindECMForObj_v7.c",
+  "maps": [],
+  "flags": "/c /O2 /Gy /G4"
+ },
+ {
+  "rva": 384640,
+  "obj": "w28a_WNGSetWaypoints_v5",
+  "src": "build/survey/probes/w28a_WNGSetWaypoints_v5.c",
+  "maps": [],
+  "flags": "/c /O1"
+ },
+ {
+  "rva": 384640,
+  "obj": "w28a_WNGSetWaypoints_v6",
+  "src": "build/survey/probes/w28a_WNGSetWaypoints_v6.c",
+  "maps": [],
+  "flags": "/c /O1 /Gy /G5"
+ },
+ {
+  "rva": 388016,
+  "obj": "w28a_GRPSetWaypoints_v5",
+  "src": "build/survey/probes/w28a_GRPSetWaypoints_v5.c",
+  "maps": [],
+  "flags": "/c /O1"
+ },
+ {
+  "rva": 388016,
+  "obj": "w28a_GRPSetWaypoints_v6",
+  "src": "build/survey/probes/w28a_GRPSetWaypoints_v6.c",
+  "maps": [],
+  "flags": "/c /O1 /Gy /G5"
+ },
+ {
+  "rva": 387472,
+  "obj": "w28a_GRPLeader_v5",
+  "src": "build/survey/probes/w28a_GRPLeader_v5.c",
+  "maps": [],
+  "flags": "/c /O1"
+ },
+ {
+  "rva": 387472,
+  "obj": "w28a_GRPLeader_v6",
+  "src": "build/survey/probes/w28a_GRPLeader_v6.c",
+  "maps": [],
+  "flags": "/c /O1 /Gy /G5"
+ }
+]

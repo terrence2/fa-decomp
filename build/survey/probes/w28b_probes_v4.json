@@ -1,0 +1,50 @@
+[
+ {
+  "rva": 507984,
+  "obj": "w28b_pgt_v4",
+  "src": "build/survey/probes/w28b_pgt_v4.c",
+  "maps": [
+   "_w28b_fmtP=_fmtText+0x10",
+   "_w28b_fmtA=_fmtText"
+  ]
+ },
+ {
+  "rva": 611136,
+  "obj": "w28b_u2ipx_v4",
+  "src": "build/survey/probes/w28b_u2ipx_v4.c",
+  "maps": []
+ },
+ {
+  "rva": 611136,
+  "obj": "w28b_u2ipx_v5",
+  "src": "build/survey/probes/w28b_u2ipx_v5.c",
+  "maps": []
+ },
+ {
+  "rva": 612160,
+  "obj": "w28b_gpcb_v4",
+  "src": "build/survey/probes/w28b_gpcb_v4.c",
+  "maps": [
+   "_w28b_surfCnt=_globalSecondarySurface",
+   "_w28b_clipL=_clipLeft",
+   "_w28b_clipT=_clipTop",
+   "_w28b_clipW=_clipWidth",
+   "_w28b_clipH=_clipHeight",
+   "_w28b_boxT=_tempYLR+0x4b78"
+  ]
+ },
+ {
+  "rva": 612160,
+  "obj": "w28b_gpcb_v5",
+  "src": "build/survey/probes/w28b_gpcb_v5.c",
+  "maps": [
+   "_w28b_surfCnt=_globalSecondarySurface",
+   "_w28b_clipL=_clipLeft",
+   "_w28b_clipT=_clipTop",
+   "_w28b_clipW=_clipWidth",
+   "_w28b_clipH=_clipHeight",
+   "_w28b_boxT=_tempYLR+0x4b78"
+  ],
+  "flags": "/c /O2 /Gy /G4"
+ }
+]

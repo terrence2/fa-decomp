@@ -1,0 +1,29 @@
+[
+ {
+  "rva": 696448,
+  "obj": "bm_w28c_UGetFileSize_v5",
+  "src": "build/survey/probes/w28c_UGetFileSize_v3.c",
+  "maps": [
+   "@w28c_uGetFileSize@4=@UGetFileSize@4",
+   "_w28c_hndT=?handles32@@3PAPAXA",
+   "@w28c_uOpen@8=@Open@8",
+   "@w28c_uClose@4=@Close@4",
+   "__imp__w28c_gfs@8=__imp__GetFileSize",
+   "_w28c_dosErrT=_dosError"
+  ],
+  "patch": [
+   "0,4,5333d25657",
+   "16,1,f0",
+   "18,1,09",
+   "26,0,5b",
+   "41,5,ff1500000000,2:6:__imp__w28c_gfs@8",
+   "30,1,c6",
+   "48,1,f8",
+   "50,1,ce",
+   "57,1,ff",
+   "60,1,12",
+   "77,0,5b",
+   "79,14,66c7050000000000008bc75f5e5bc3,3:6:_w28c_dosErrT"
+  ]
+ }
+]

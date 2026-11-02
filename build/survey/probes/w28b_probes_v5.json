@@ -1,0 +1,25 @@
+[
+ {
+  "rva": 507984,
+  "obj": "w28b_pgt_v5",
+  "src": "build/survey/probes/w28b_pgt_v5.c",
+  "maps": [
+   "_w28b_fmtP=_fmtText+0x10",
+   "_w28b_fmtA=_fmtText"
+  ],
+  "flags": "/c /O2 /Gy /G4"
+ },
+ {
+  "rva": 612160,
+  "obj": "w28b_gpcb_v6",
+  "src": "build/survey/probes/w28b_gpcb_v6.c",
+  "maps": [
+   "_w28b_surfCnt=_globalSecondarySurface",
+   "_w28b_clipL=_clipLeft",
+   "_w28b_clipT=_clipTop",
+   "_w28b_clipW=_clipWidth",
+   "_w28b_clipH=_clipHeight",
+   "_w28b_boxT=_tempYLR+0x4b78"
+  ]
+ }
+]

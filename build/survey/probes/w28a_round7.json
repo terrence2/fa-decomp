@@ -1,0 +1,73 @@
+[
+ {
+  "rva": 337200,
+  "obj": "w28a_HARDFindECMForObj_v8",
+  "src": "build/survey/probes/w28a_HARDFindECMForObj_v8.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w28a_pushCur@4=_PushCurObj@4",
+   "@w28a_findJammer@4=@HARDFindJammer@4",
+   "_w28a_popCur@0=_PopCurObj@0",
+   "_w28a_hardPtrs@12=_HARDPtrs@12",
+   "_w28a_flags=_curThing+0xde"
+  ],
+  "patch": [
+   "0x15,1,0c",
+   "0x16,7,33f6e8000000008bc6,3:20:_w28a_popCur@0",
+   "0x42,7,33f6e8000000008bc6,3:20:_w28a_popCur@0",
+   "0x41,1,0c",
+   "0x36,1,17"
+  ]
+ },
+ {
+  "rva": 384640,
+  "obj": "w28a_WNGSetWaypoints_v3",
+  "src": "build/survey/probes/w28a_WNGSetWaypoints_v3.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w28a_wids=_wingIds",
+   "_w28a_wsizes=_wingSizes",
+   "_w28a_wps@8=_WPSetWaypoints@8"
+  ],
+  "patch": [
+   "0x15,16,8d04b5000000008b6c24188dbc8000000000,0xe:6:_w28a_wids",
+   "0x14,1,2c"
+  ]
+ },
+ {
+  "rva": 388016,
+  "obj": "w28a_GRPSetWaypoints_v7",
+  "src": "build/survey/probes/w28a_GRPSetWaypoints_v7.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w28a_gids=_groupIds",
+   "_w28a_gsizes=_groupSizes",
+   "_w28a_wps@8=_WPSetWaypoints@8"
+  ],
+  "patch": [
+   "0x2,9,5733f60fbf7c241055",
+   "0xc,1,87",
+   "0x14,1,2c",
+   "0x15,15,8d04bd000000008b6c24188d9c8000000000,0xe:6:_w28a_gids",
+   "0x2f,1,46",
+   "0x38,1,87",
+   "0x3e,1,c6"
+  ]
+ },
+ {
+  "rva": 387472,
+  "obj": "w28a_GRPLeader_v2",
+  "src": "build/survey/probes/w28a_GRPLeader_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w28a_gids=_groupIds",
+   "_w28a_gsizes=_groupSizes",
+   "_w28a_ops=_objPtrs"
+  ],
+  "patch": [
+   "0x15,1,2c",
+   "0x16,16,8d04bd00000000bb010000008db48000000000,0xf:6:_w28a_gids",
+   "0x3e,4,3bd17ce7"
+  ]
+ }
+]

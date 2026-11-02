@@ -1,0 +1,221 @@
+[
+ {
+  "rva": 621184,
+  "obj": "w28a_WPObj_v1",
+  "src": "build/survey/probes/w28a_WPObj_v1.c",
+  "maps": [
+   "@w28a_wpSync@4=$FA$_t_45dc60"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 278512,
+  "obj": "w28a_stub43ff0_v1",
+  "src": "build/survey/probes/w28a_stub43ff0_v1.c",
+  "maps": [],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_443ff0"
+  ]
+ },
+ {
+  "rva": 278528,
+  "obj": "w28a_stub44000_v1",
+  "src": "build/survey/probes/w28a_stub44000_v1.c",
+  "maps": [],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_444000"
+  ]
+ },
+ {
+  "rva": 278752,
+  "obj": "w28a_fwd440e0_v1",
+  "src": "build/survey/probes/w28a_fwd440e0_v1.c",
+  "maps": [
+   "_w28a_fwd60=$FA$_t_4b3c60"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_4440e0"
+  ]
+ },
+ {
+  "rva": 278768,
+  "obj": "w28a_fwd440f0_v1",
+  "src": "build/survey/probes/w28a_fwd440f0_v1.c",
+  "maps": [
+   "_w28a_fwd30=$FA$_t_4b3c30"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_4440f0"
+  ]
+ },
+ {
+  "rva": 307120,
+  "obj": "w28a_stub4afb0_v1",
+  "src": "build/survey/probes/w28a_stub4afb0_v1.c",
+  "maps": [],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_44afb0"
+  ]
+ },
+ {
+  "rva": 307136,
+  "obj": "w28a_ROSetFlag_v1",
+  "src": "build/survey/probes/w28a_ROSetFlag_v1.c",
+  "maps": [],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_44afc0"
+  ]
+ },
+ {
+  "rva": 307392,
+  "obj": "w28a_RORemoveCurObj_v1",
+  "src": "build/survey/probes/w28a_RORemoveCurObj_v1.c",
+  "maps": [
+   "_w28a_ro=_ro",
+   "_w28a_roEnd=_ro+0x6d6",
+   "_w28a_curId=_curId",
+   "_w28a_curW=_currentTime",
+   "_w28a_pid=_playerId"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 309200,
+  "obj": "w28a_SER_Often_v2",
+  "src": "build/survey/probes/w28a_SER_Often_v2.c",
+  "maps": [
+   "_w28a_gp@12=_ser_rs232_getpacket@12",
+   "_w28a_mstate=?mpInfo@@3UMP_INFO@@C+0x16c",
+   "_w28a_ctlG=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x234"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 311952,
+  "obj": "w28a_SER_Shutdown3_v8",
+  "src": "build/survey/probes/w28a_SER_Shutdown3_v8.c",
+  "maps": [
+   "_w28a_unin@4=_UnInitializePort@4",
+   "_w28a_conn=?mpInfo@@3UMP_INFO@@C+0x154",
+   "_w28a_conn2=?mpInfo@@3UMP_INFO@@C+0x160",
+   "_w28a_state=?mpInfo@@3UMP_INFO@@C+0x16c",
+   "_w28a_cp=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x234"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 330656,
+  "obj": "w28a_FMUpdateGear_v1",
+  "src": "build/survey/probes/w28a_FMUpdateGear_v1.c",
+  "maps": [
+   "_w28a_svc=_serviceTicks",
+   "_w28a_gearF=_curThing+0x16f",
+   "_w28a_gearAng=_curThing+0x238",
+   "@w28a_tta@12=@TurnTowardAngle@12"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 337200,
+  "obj": "w28a_HARDFindECMForObj_v8",
+  "src": "build/survey/probes/w28a_HARDFindECMForObj_v8.c",
+  "maps": [
+   "_w28a_pushCur@4=_PushCurObj@4",
+   "@w28a_findJammer@4=@HARDFindJammer@4",
+   "_w28a_popCur@0=_PopCurObj@0",
+   "_w28a_hardPtrs@12=_HARDPtrs@12",
+   "_w28a_flags=_curThing+0xde"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [
+   "0x15,1,0c",
+   "0x16,7,33f6e8000000008bc6,3:20:_w28a_popCur@0",
+   "0x42,7,33f6e8000000008bc6,3:20:_w28a_popCur@0",
+   "0x41,1,0c",
+   "0x36,1,17"
+  ],
+  "provenance": [
+   "patch 0x15/0x41/0x36 (arm jcc disp recompute): toolchain-diff \u2014 the two inserted res-materialization spans (7 B each) shift the arms' targets; a jcc and its target inside one shift region keep their disp, but these jccs' targets cross an insert boundary, so their rel8 disps are rewritten (0c/0c/17), recomputed against the post-patch layout (wave-24 ioterm/strdup rule).",
+   "patch 0x16/0x42 (res=0 esi materialization + pop-call insert): toolchain-diff \u2014 FA materializes the res=0 result in esi before each pop-call tail (33 f6 / e8 rel / 8b c6 = res=0; pop; return res); CL 4.20.6166 const-folds `res=0; f(); return res;` to xor eax,eax after the call under /O2, deleting the 33 f6 / 8b c6 pair (7 B/instance). 8 source spellings tried (inline arms, goto-join bail, volatile flag, c/z locals; /G4 /G5 /O1 /Os) all fold. Patch inserts FA's materialization pair + call; new REL32 newsites (type 20) at site=3 carry the pop-call imm."
+  ]
+ },
+ {
+  "rva": 384640,
+  "obj": "w28a_WNGSetWaypoints_v3",
+  "src": "build/survey/probes/w28a_WNGSetWaypoints_v3.c",
+  "maps": [
+   "_w28a_wids=_wingIds",
+   "_w28a_wsizes=_wingSizes",
+   "_w28a_wps@8=_WPSetWaypoints@8"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [
+   "0x15,15,8d04b5000000008b6c24188dbc8000000000,0xe:6:_w28a_wids",
+   "0x14,1,2c"
+  ],
+  "provenance": [
+   "patch 0x14/0x15 (je disp + two-lea insert): toolchain-diff \u2014 FA computes the per-element pointer with TWO scale-only SIB leas across two statements (x4=grp*4: 8d 04 b5/bd <imm0>; pw=&ids[x4*2]: 8d bc/b4/b0 80 <imm32>, 18 B); CL 4.20.6166 algebraically folds x4*4 into mov+shl (8b c6 / c1 e0 04 / 8d b8 imm) \u2014 15 B, shorter \u2014 under /O2, /O1, /Os, /G4, /G5 and every decl/assignment order tried. Patch replaces CL's folded sequence with FA's two-lea form; DIR32 newsite (type 6, site=0xe/0xf = first imm byte) carries the ids base imm. Patch 0x14 rewrites the loop-entry je's rel8 (2c) whose target crosses the insert boundary."
+  ]
+ },
+ {
+  "rva": 387472,
+  "obj": "w28a_GRPLeader_v2",
+  "src": "build/survey/probes/w28a_GRPLeader_v2.c",
+  "maps": [
+   "_w28a_gids=_groupIds",
+   "_w28a_gsizes=_groupSizes",
+   "_w28a_ops=_objPtrs"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [
+   "0x15,1,2c",
+   "0x16,16,8d04bd00000000bb010000008db48000000000,0xf:6:_w28a_gids",
+   "0x3e,4,3bd17ce7"
+  ],
+  "provenance": [
+   "patch 0x15/0x3e (jle disp + cmp/jcc mirror): toolchain-diff \u2014 (a) 0x15 je rel8 recompute (2c) for the inserted span; (b) FA's loop-guard compare is reg-order 3b d1 + 7c (cmp ecx,edx; jl) where CL emits the mirrored operand order + polarity 3b ca + 7f \u2014 4-byte non-reloc mirror patch 3b ca 7f e7 -> 3b d1 7c e7 (wave-24 3b/39 mirror class, 2-byte order + polarity flip).",
+   "patch 0x16 (two-lea + m=1 init insert): toolchain-diff \u2014 FA computes the per-element pointer with TWO scale-only SIB leas across two statements (x4=grp*4: 8d 04 b5/bd <imm0>; pw=&ids[x4*2]: 8d bc/b4/b0 80 <imm32>, 18 B); CL 4.20.6166 algebraically folds x4*4 into mov+shl (8b c6 / c1 e0 04 / 8d b8 imm) \u2014 15 B, shorter \u2014 under /O2, /O1, /Os, /G4, /G5 and every decl/assignment order tried. Patch replaces CL's folded sequence with FA's two-lea form; DIR32 newsite (type 6, site=0xe/0xf = first imm byte) carries the ids base imm. FA also initializes m=1 (bb 01000000) inside the --n guard at this spot."
+  ]
+ },
+ {
+  "rva": 388016,
+  "obj": "w28a_GRPSetWaypoints_v7",
+  "src": "build/survey/probes/w28a_GRPSetWaypoints_v7.c",
+  "maps": [
+   "_w28a_gids=_groupIds",
+   "_w28a_gsizes=_groupSizes",
+   "_w28a_wps@8=_WPSetWaypoints@8"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [
+   "0x2,9,5733f60fbf7c241055",
+   "0xc,1,87",
+   "0x14,1,2c",
+   "0x15,15,8d04bd000000008b6c24188d9c8000000000,0xe:6:_w28a_gids",
+   "0x2f,1,46",
+   "0x38,1,87",
+   "0x3e,1,c6"
+  ],
+  "provenance": [
+   "patch 0x2/0xc/0x2f/0x38/0x3e (register assignment): toolchain-diff \u2014 FA's register plan is grp=edi, i=esi, pw=ebx; CL's decl-order coloring fixes grp=esi, i=ebx, pw=edi across 4 decl/assignment permutations (v5-v9: pb-first, i-first, bare-entry). Byte patches swap reg fields; no relocs under any patched byte.",
+   "patch 0x14/0x15 (je disp + two-lea insert): toolchain-diff \u2014 FA computes the per-element pointer with TWO scale-only SIB leas across two statements (x4=grp*4: 8d 04 b5/bd <imm0>; pw=&ids[x4*2]: 8d bc/b4/b0 80 <imm32>, 18 B); CL 4.20.6166 algebraically folds x4*4 into mov+shl (8b c6 / c1 e0 04 / 8d b8 imm) \u2014 15 B, shorter \u2014 under /O2, /O1, /Os, /G4, /G5 and every decl/assignment order tried. Patch replaces CL's folded sequence with FA's two-lea form; DIR32 newsite (type 6, site=0xe/0xf = first imm byte) carries the ids base imm."
+  ]
+ },
+ {
+  "rva": 458480,
+  "obj": "w28a_MPPlayerChoseSide_v1",
+  "src": "build/survey/probes/w28a_MPPlayerChoseSide_v1.c",
+  "maps": [
+   "_w28a_ncomp=_numComputers",
+   "_w28a_snd@16=$FA$_t_46b260",
+   "@w28a_flush@4=?MPFlushAll@@YIXD@Z"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ }
+]

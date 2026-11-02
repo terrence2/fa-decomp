@@ -1,0 +1,13 @@
+[
+ {
+  "rva": 797308,
+  "obj": "bm_w28c_dist_v4",
+  "src": "build/survey/probes/w28c_dist_v4.c",
+  "maps": [
+   "_w28c_dist@8=_Dist@8"
+  ],
+  "patch": [
+   "44,1,ca"
+  ]
+ }
+]

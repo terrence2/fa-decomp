@@ -1,0 +1,78 @@
+[
+ {
+  "rva": 685632,
+  "obj": "bm_w28c_tcmp_v4",
+  "src": "build/survey/probes/w28c_tcmp_v3.c",
+  "maps": [
+   "_w28c_tcmp=?T_CompareTlist@@YAJPAX0@Z"
+  ],
+  "patch": [
+   "33,2,3bd1",
+   "46,1,d1",
+   "48,1,9f"
+  ]
+ },
+ {
+  "rva": 696448,
+  "obj": "bm_w28c_UGetFileSize_v3",
+  "src": "build/survey/probes/w28c_UGetFileSize_v3.c",
+  "maps": [
+   "@w28c_uGetFileSize@4=@UGetFileSize@4",
+   "_w28c_hndT=?handles32@@3PAPAXA",
+   "@w28c_uOpen@8=@Open@8",
+   "@w28c_uClose@4=@Close@4",
+   "__imp__w28c_gfs@8=__imp__GetFileSize",
+   "_w28c_dosErrT=_dosError"
+  ]
+ },
+ {
+  "rva": 696448,
+  "obj": "bm_w28c_UGetFileSize_v4",
+  "src": "build/survey/probes/w28c_UGetFileSize_v4.c",
+  "maps": [
+   "@w28c_uGetFileSize@4=@UGetFileSize@4",
+   "_w28c_hndT=?handles32@@3PAPAXA",
+   "@w28c_uOpen@8=@Open@8",
+   "@w28c_uClose@4=@Close@4",
+   "__imp__w28c_gfs@8=__imp__GetFileSize",
+   "_w28c_dosErrT=_dosError"
+  ]
+ },
+ {
+  "rva": 636224,
+  "obj": "bm_w28c_PLANERemove_v3",
+  "src": "build/survey/probes/w28c_PLANERemove_v3.c",
+  "maps": [
+   "@w28c_PLANERemove@4=@PLANERemove@4",
+   "_w28c_numPlanesT=_numPlanes",
+   "_w28c_planesArr=_planes"
+  ]
+ },
+ {
+  "rva": 718128,
+  "obj": "bm_w28c_WRGetLayer_v6",
+  "src": "build/survey/probes/w28c_WRGetLayer_v6.c",
+  "maps": [
+   "_w28c_WRGetLayer@8=_WRGetLayer@8",
+   "_w28c_clArr=?curLayers@@3PAULAYER@@A"
+  ]
+ },
+ {
+  "rva": 624352,
+  "obj": "bm_w28c_serShutLL_v6",
+  "src": "build/survey/probes/w28c_serShutLL_v6.c",
+  "maps": [
+   "_w28c_serShutLL=?SER_ShutdownLowLevel@@YAXXZ",
+   "_w28c_mpArr=?mpInfo@@3UMP_INFO@@C",
+   "_w28c_ctrlArr=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A"
+  ]
+ },
+ {
+  "rva": 736464,
+  "obj": "bm_w28c_GRelocBitmap_v1",
+  "src": "build/survey/probes/w28c_GRelocBitmap_v1.c",
+  "maps": [
+   "_w28c_GRelocBitmapQ=@G_RelocBitmap@8"
+  ]
+ }
+]

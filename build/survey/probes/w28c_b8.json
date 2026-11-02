@@ -1,0 +1,47 @@
+[
+ {
+  "rva": 636224,
+  "obj": "bm_w28c_PLANERemove_v4",
+  "src": "build/survey/probes/w28c_PLANERemove_v4.c",
+  "maps": [
+   "@w28c_PLANERemove@4=@PLANERemove@4",
+   "_w28c_numPlanesT=_numPlanes",
+   "_w28c_planesArr=_planes"
+  ],
+  "patch": [
+   "31,7,0fbfc6",
+   "42,7,0fbfde",
+   "16,1,45",
+   "17,1,ba",
+   "24,1,0a",
+   "26,1,0f",
+   "28,1,c2",
+   "35,1,f8",
+   "37,1,f0",
+   "49,1,f8",
+   "50,1,7d",
+   "52,9,8d0c7d000000002bdf,3:6:_w28c_planesArr"
+  ]
+ },
+ {
+  "rva": 718128,
+  "obj": "bm_w28c_WRGetLayer_v7b",
+  "src": "build/survey/probes/w28c_WRGetLayer_v7.c",
+  "maps": [
+   "_w28c_WRGetLayer@8=_WRGetLayer@8",
+   "_w28c_clArr=?curLayers@@3PAULAYER@@A"
+  ]
+ },
+ {
+  "rva": 624352,
+  "obj": "bm_w28c_serShutLL_v7b",
+  "src": "build/survey/probes/w28c_serShutLL_v7.c",
+  "maps": [
+   "_w28c_m154=?mpInfo@@3UMP_INFO@@C+0x154",
+   "_w28c_m164=?mpInfo@@3UMP_INFO@@C+0x164",
+   "_w28c_c12d=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x12d",
+   "_w28c_m158=?mpInfo@@3UMP_INFO@@C+0x158",
+   "_w28c_m160=?mpInfo@@3UMP_INFO@@C+0x160"
+  ]
+ }
+]

@@ -1,0 +1,16 @@
+[
+ {
+  "rva": 685632,
+  "obj": "bm_w28c_tcmp_v8",
+  "src": "build/survey/probes/w28c_tcmp_v3.c",
+  "maps": [
+   "_w28c_tcmp=?T_CompareTlist@@YAJPAX0@Z"
+  ],
+  "patch": [
+   "34,1,d1",
+   "35,1,7d",
+   "46,1,d1",
+   "48,1,9f"
+  ]
+ }
+]

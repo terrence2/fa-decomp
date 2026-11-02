@@ -1,0 +1,49 @@
+[
+ {
+  "rva": 507984,
+  "obj": "w28b_pgt_v3",
+  "src": "build/survey/probes/w28b_pgt_v3.c",
+  "maps": [
+   "_w28b_fmtP=_fmtText+0x10",
+   "_w28b_fmtA=_fmtText"
+  ]
+ },
+ {
+  "rva": 601248,
+  "obj": "w28b_rjb_v3",
+  "src": "build/survey/probes/w28b_rjb_v3.c",
+  "maps": [
+   "_w28b_joyFunc=_joystickFunctions",
+   "_w28b_joyXDev=?joystickXDevice@@3KA",
+   "_w28b_joyInfo=?joystickInfo@@3PAUjoyinfo_tag@@A",
+   "_w28b_joyEx=?joystickInfoEx@@3PAUjoyinfoex_tag@@A",
+   "_w28b_ReadDev=?ReadDevice@@YA?AW4JOYRESULT@@K@Z",
+   "_w28b_GetJoyTyp=?GetJoystickType@@YA?AW4JOYRESULT@@K@Z"
+  ]
+ },
+ {
+  "rva": 611072,
+  "obj": "w28b_ipx2u_v3",
+  "src": "build/survey/probes/w28b_ipx2u_v3.c",
+  "maps": []
+ },
+ {
+  "rva": 611136,
+  "obj": "w28b_u2ipx_v3",
+  "src": "build/survey/probes/w28b_u2ipx_v3.c",
+  "maps": []
+ },
+ {
+  "rva": 612160,
+  "obj": "w28b_gpcb_v3",
+  "src": "build/survey/probes/w28b_gpcb_v3.c",
+  "maps": [
+   "_w28b_surfCnt=_globalSecondarySurface",
+   "_w28b_clipL=_clipLeft",
+   "_w28b_clipT=_clipTop",
+   "_w28b_clipW=_clipWidth",
+   "_w28b_clipH=_clipHeight",
+   "_w28b_boxT=_tempYLR+0x4b78"
+  ]
+ }
+]

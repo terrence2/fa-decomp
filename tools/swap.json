@@ -9515,5 +9515,718 @@
   ],
   "patch": [],
   "provenance": []
+ },
+ {
+  "rva": 458656,
+  "obj": "MPPlayerChoseFort",
+  "src": "src/MPPlayerChoseFort.c",
+  "maps": [
+   "_w28b_send@16=$FA$_t_46b260",
+   "@w28b_flush@4=?MPFlushAll@@YIXD@Z",
+   "_w28b_numComp=_numComputers"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 488304,
+  "obj": "COGPullDrag",
+  "src": "src/COGPullDrag.c",
+  "maps": [
+   "_w28b_cw=_curThing+0x25d",
+   "_w28b_t1=_curThingType+0x17b",
+   "_w28b_t2=_curThingType+0x16b",
+   "_w28b_fl=_curThing+0x10",
+   "_w28b_dm=_dam+0x7d"
+  ],
+  "patch": [
+   "3,4,00000000,0:6:_w28b_cw",
+   "10,4,02000000,0:6:_w28b_cw"
+  ],
+  "provenance": [
+   "patch 3/10 (movzx operand content swap): toolchain-diff \u2014 FA loads cw[0] (sym+0) into eax FIRST (0f bf 05 <base>) then cw[1] (sym+2) into ecx (0f bf 0d <base+2>); CL 4.20.6166 hard-loads the sym+2 element FIRST into eax in every spelling tried (source-order flip of the sum, v2 separate int a/int b statements, v3 q=cw[0]; q+=cw[1] accumulate form) \u2014 obj bytes identical in all four spellings. Both sites share the extern symbol, so patches swap the DIR32 contents (0 / 2) instead of the symbols."
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 496864,
+  "obj": "InitGraphicsSystem",
+  "src": "src/InitGraphicsSystem.cpp",
+  "maps": [
+   "?m_singleton@CDirDraw@@2PAV1@A=?m_singleton@CDirDraw@@1PAV1@A"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 554016,
+  "obj": "DialogGetValue",
+  "src": "src/DialogGetValue.c",
+  "maps": [
+   "@w28b_DialogGetPtr@4=@DialogGetPtr@4"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 569744,
+  "obj": "ShellClickSound",
+  "src": "src/ShellClickSound.c",
+  "maps": [
+   "_w28b_scr=_curScreen",
+   "_w28b_tcmp=_timeCompression",
+   "_w28b_click=_checkRightButton+0x464",
+   "_w28b_SNM@12=?SoundNoMixer@@YGFPADFF@Z",
+   "_w28b_SS@16=?SingleSound@@YGFPADFEF@Z"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 570160,
+  "obj": "w28b_Chunk_8b330_v1",
+  "src": "src/w28b_Chunk_8b330_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_48b330"
+  ]
+ },
+ {
+  "rva": 570368,
+  "obj": "w28b_Chunk_8b400_v1",
+  "src": "src/w28b_Chunk_8b400_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_48b400"
+  ]
+ },
+ {
+  "rva": 570384,
+  "obj": "SAYInit",
+  "src": "src/SAYInit.c",
+  "maps": [
+   "_sayF1=?COMMENT_TYPE@@3W4__unnamed@@A+0xc",
+   "_sayF2=?COMMENT_TYPE@@3W4__unnamed@@A+0x7c",
+   "_sayF3=?COMMENT_TYPE@@3W4__unnamed@@A+0x8",
+   "_sayF4=?COMMENT_TYPE@@3W4__unnamed@@A+0x14",
+   "_sayF5=?COMMENT_TYPE@@3W4__unnamed@@A+0x4",
+   "_sayF6=_checkRightButton+0x2480",
+   "_sayF7=_checkRightButton+0x247c",
+   "_sayF8=?COMMENT_TYPE@@3W4__unnamed@@A+0xfc"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 601248,
+  "obj": "ReadJoystickButtons",
+  "src": "src/ReadJoystickButtons.c",
+  "maps": [
+   "_w28b_joyFunc=_joystickFunctions",
+   "_w28b_joyXDev=?joystickXDevice@@3KA",
+   "_w28b_joyInfo=?joystickInfo@@3PAUjoyinfo_tag@@A+0xc",
+   "_w28b_joyEx=?joystickInfoEx@@3PAUjoyinfoex_tag@@A+0x20",
+   "_w28b_ReadDev=?ReadDevice@@YA?AW4JOYRESULT@@K@Z",
+   "_w28b_GetJoyTyp=?GetJoystickType@@YA?AW4JOYRESULT@@K@Z"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 611072,
+  "obj": "convert_addr_ipx2usnf",
+  "src": "src/convert_addr_ipx2usnf.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 611136,
+  "obj": "convert_addr_usnf2ipx",
+  "src": "src/convert_addr_usnf2ipx.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 611200,
+  "obj": "spxaddr2str",
+  "src": "src/spxaddr2str.c",
+  "maps": [
+   "_w28b_hbtoa=?hbtoa@@YAPADPAEFPAD@Z"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 614000,
+  "obj": "G_UBox",
+  "src": "src/G_UBox.c",
+  "maps": [
+   "_w28b_UH@12=_G_UHline@12",
+   "_w28b_UV@12=_G_UVline@12"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 614080,
+  "obj": "G_Box",
+  "src": "src/G_Box.c",
+  "maps": [
+   "_w28b_HL@12=_G_Hline@12",
+   "_w28b_VL@12=_G_Vline@12"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 623760,
+  "obj": "overwriteQueue",
+  "src": "src/overwriteQueue.c",
+  "maps": [
+   "_w28c_overwriteQ=?overwriteQueue@@YAXAAUSERIAL_QUEUE@@AAUSERIAL_PACKET_WRAPPER@@@Z",
+   "_memcpyZ=_memcpy"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 624352,
+  "obj": "SER_ShutdownLowLevel",
+  "src": "src/SER_ShutdownLowLevel.c",
+  "maps": [
+   "_w28c_m154=?mpInfo@@3UMP_INFO@@C+0x154",
+   "_w28c_m164=?mpInfo@@3UMP_INFO@@C+0x164",
+   "_w28c_c12d=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x12d",
+   "_w28c_m158=?mpInfo@@3UMP_INFO@@C+0x158",
+   "_w28c_m160=?mpInfo@@3UMP_INFO@@C+0x160"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 636224,
+  "obj": "PLANERemove",
+  "src": "src/PLANERemove.c",
+  "maps": [
+   "@w28c_PLANERemove@4=@PLANERemove@4",
+   "_w28c_numPlanesT=_numPlanes",
+   "_w28c_planesArr=_planes"
+  ],
+  "patch": [
+   "31,7,0fbfc6",
+   "42,7,0fbfde",
+   "16,1,45",
+   "17,1,ba",
+   "24,1,0a",
+   "26,1,0f",
+   "28,1,c2",
+   "35,1,f8",
+   "37,1,f0",
+   "49,1,f8",
+   "50,1,7d",
+   "52,9,8d0c7d000000002bdf,3:6:_w28c_planesArr"
+  ],
+  "provenance": [
+   "patch 31: toolchain-diff \u2014 PLANERemove span group: 31/42 movsx-reload deletions; 16/17/24/26/28 entry-jle shared-pops retarget + found-path-only dec/store (FA's entry jle targets the shared pops; dec+store belongs to the FOUND path only); 35/37/49/50 exit-block displacements; 52 lea-reorder with DIR32 newsite on _w28c_planesArr. Offsets are post-shift of earlier deletions; encoding-level, FA-byte-verified per fitobj sim.",
+   "patch 42: toolchain-diff \u2014 PLANERemove span group: 31/42 movsx-reload deletions; 16/17/24/26/28 entry-jle shared-pops retarget + found-path-only dec/store (FA's entry jle targets the shared pops; dec+store belongs to the FOUND path only); 35/37/49/50 exit-block displacements; 52 lea-reorder with DIR32 newsite on _w28c_planesArr. Offsets are post-shift of earlier deletions; encoding-level, FA-byte-verified per fitobj sim.",
+   "patch 16: toolchain-diff \u2014 PLANERemove span group: 31/42 movsx-reload deletions; 16/17/24/26/28 entry-jle shared-pops retarget + found-path-only dec/store (FA's entry jle targets the shared pops; dec+store belongs to the FOUND path only); 35/37/49/50 exit-block displacements; 52 lea-reorder with DIR32 newsite on _w28c_planesArr. Offsets are post-shift of earlier deletions; encoding-level, FA-byte-verified per fitobj sim.",
+   "patch 17: toolchain-diff \u2014 PLANERemove span group: 31/42 movsx-reload deletions; 16/17/24/26/28 entry-jle shared-pops retarget + found-path-only dec/store (FA's entry jle targets the shared pops; dec+store belongs to the FOUND path only); 35/37/49/50 exit-block displacements; 52 lea-reorder with DIR32 newsite on _w28c_planesArr. Offsets are post-shift of earlier deletions; encoding-level, FA-byte-verified per fitobj sim.",
+   "patch 24: toolchain-diff \u2014 PLANERemove span group: 31/42 movsx-reload deletions; 16/17/24/26/28 entry-jle shared-pops retarget + found-path-only dec/store (FA's entry jle targets the shared pops; dec+store belongs to the FOUND path only); 35/37/49/50 exit-block displacements; 52 lea-reorder with DIR32 newsite on _w28c_planesArr. Offsets are post-shift of earlier deletions; encoding-level, FA-byte-verified per fitobj sim.",
+   "patch 26: toolchain-diff \u2014 PLANERemove span group: 31/42 movsx-reload deletions; 16/17/24/26/28 entry-jle shared-pops retarget + found-path-only dec/store (FA's entry jle targets the shared pops; dec+store belongs to the FOUND path only); 35/37/49/50 exit-block displacements; 52 lea-reorder with DIR32 newsite on _w28c_planesArr. Offsets are post-shift of earlier deletions; encoding-level, FA-byte-verified per fitobj sim.",
+   "patch 28: toolchain-diff \u2014 PLANERemove span group: 31/42 movsx-reload deletions; 16/17/24/26/28 entry-jle shared-pops retarget + found-path-only dec/store (FA's entry jle targets the shared pops; dec+store belongs to the FOUND path only); 35/37/49/50 exit-block displacements; 52 lea-reorder with DIR32 newsite on _w28c_planesArr. Offsets are post-shift of earlier deletions; encoding-level, FA-byte-verified per fitobj sim.",
+   "patch 35: toolchain-diff \u2014 PLANERemove span group: 31/42 movsx-reload deletions; 16/17/24/26/28 entry-jle shared-pops retarget + found-path-only dec/store (FA's entry jle targets the shared pops; dec+store belongs to the FOUND path only); 35/37/49/50 exit-block displacements; 52 lea-reorder with DIR32 newsite on _w28c_planesArr. Offsets are post-shift of earlier deletions; encoding-level, FA-byte-verified per fitobj sim.",
+   "patch 37: toolchain-diff \u2014 PLANERemove span group: 31/42 movsx-reload deletions; 16/17/24/26/28 entry-jle shared-pops retarget + found-path-only dec/store (FA's entry jle targets the shared pops; dec+store belongs to the FOUND path only); 35/37/49/50 exit-block displacements; 52 lea-reorder with DIR32 newsite on _w28c_planesArr. Offsets are post-shift of earlier deletions; encoding-level, FA-byte-verified per fitobj sim.",
+   "patch 49: toolchain-diff \u2014 PLANERemove span group: 31/42 movsx-reload deletions; 16/17/24/26/28 entry-jle shared-pops retarget + found-path-only dec/store (FA's entry jle targets the shared pops; dec+store belongs to the FOUND path only); 35/37/49/50 exit-block displacements; 52 lea-reorder with DIR32 newsite on _w28c_planesArr. Offsets are post-shift of earlier deletions; encoding-level, FA-byte-verified per fitobj sim.",
+   "patch 50: toolchain-diff \u2014 PLANERemove span group: 31/42 movsx-reload deletions; 16/17/24/26/28 entry-jle shared-pops retarget + found-path-only dec/store (FA's entry jle targets the shared pops; dec+store belongs to the FOUND path only); 35/37/49/50 exit-block displacements; 52 lea-reorder with DIR32 newsite on _w28c_planesArr. Offsets are post-shift of earlier deletions; encoding-level, FA-byte-verified per fitobj sim.",
+   "patch 52: toolchain-diff \u2014 PLANERemove span group: 31/42 movsx-reload deletions; 16/17/24/26/28 entry-jle shared-pops retarget + found-path-only dec/store (FA's entry jle targets the shared pops; dec+store belongs to the FOUND path only); 35/37/49/50 exit-block displacements; 52 lea-reorder with DIR32 newsite on _w28c_planesArr. Offsets are post-shift of earlier deletions; encoding-level, FA-byte-verified per fitobj sim."
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 667568,
+  "obj": "socket_close_non_player_sockets",
+  "src": "src/socket_close_non_player_sockets.c",
+  "maps": [
+   "_w28c_sockCloseNPS=?socket_close_non_player_sockets@@YAXXZ",
+   "_w28c_sockArr=?socket_list@@3USOCKET_STATE_LIST@@A",
+   "_w28c_sockCloseX=?socket_close@@YAXI@Z"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 685632,
+  "obj": "T_CompareTlist",
+  "src": "src/T_CompareTlist.c",
+  "maps": [
+   "_w28c_tcmp=?T_CompareTlist@@YAJPAX0@Z"
+  ],
+  "patch": [
+   "34,1,d1",
+   "35,1,7d",
+   "46,1,d1",
+   "48,1,9f"
+  ],
+  "provenance": [
+   "patch 34: toolchain-diff \u2014 CL cmp-mirror: CL emits cmp rhs,lhs + jle/setl; FA emitted the direct lhs<rhs form; both the cmp modrm and the mirrored jcc opcode are patched (overlapping 2-byte sites split into 1-byte patches).",
+   "patch 35: toolchain-diff \u2014 CL cmp-mirror: CL emits cmp rhs,lhs + jle/setl; FA emitted the direct lhs<rhs form; both the cmp modrm and the mirrored jcc opcode are patched (overlapping 2-byte sites split into 1-byte patches).",
+   "patch 46: toolchain-diff \u2014 CL cmp-mirror: CL emits cmp rhs,lhs + jle/setl; FA emitted the direct lhs<rhs form; both the cmp modrm and the mirrored jcc opcode are patched (overlapping 2-byte sites split into 1-byte patches).",
+   "patch 48: toolchain-diff \u2014 CL cmp-mirror: CL emits cmp rhs,lhs + jle/setl; FA emitted the direct lhs<rhs form; both the cmp modrm and the mirrored jcc opcode are patched (overlapping 2-byte sites split into 1-byte patches)."
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 696448,
+  "obj": "UGetFileSize",
+  "src": "src/UGetFileSize.c",
+  "maps": [
+   "@w28c_uGetFileSize@4=@UGetFileSize@4",
+   "_w28c_hndT=?handles32@@3PAPAXA",
+   "@w28c_uOpen@8=@Open@8",
+   "@w28c_uClose@4=@Close@4",
+   "__imp__w28c_gfs@8=__imp__GetFileSize",
+   "_w28c_dosErrT=_dosError"
+  ],
+  "patch": [
+   "0,4,5333d25657",
+   "16,1,f0",
+   "18,1,09",
+   "26,0,5b",
+   "41,5,ff1500000000,2:6:__imp__w28c_gfs@8",
+   "30,1,c6",
+   "48,1,f8",
+   "50,1,ce",
+   "57,1,ff",
+   "60,1,12",
+   "77,0,5b",
+   "79,14,66c7050000000000008bc75f5e5bc3,3:6:_w28c_dosErrT"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 verified at byte level vs the FA decode: FA prolog order 53 33 d2 56 57; dead-pop 5b inserts before every ret path; IAT call repair e8->ff 15 with DIR32 newsite to the __imp__-mapped symbol (no dllimport decl needed); exit-block 66 c7 05 store ordering (FA stores rather than clobbers).",
+   "patch 16: toolchain-diff \u2014 verified at byte level vs the FA decode: FA prolog order 53 33 d2 56 57; dead-pop 5b inserts before every ret path; IAT call repair e8->ff 15 with DIR32 newsite to the __imp__-mapped symbol (no dllimport decl needed); exit-block 66 c7 05 store ordering (FA stores rather than clobbers).",
+   "patch 18: toolchain-diff \u2014 verified at byte level vs the FA decode: FA prolog order 53 33 d2 56 57; dead-pop 5b inserts before every ret path; IAT call repair e8->ff 15 with DIR32 newsite to the __imp__-mapped symbol (no dllimport decl needed); exit-block 66 c7 05 store ordering (FA stores rather than clobbers).",
+   "patch 26: toolchain-diff \u2014 verified at byte level vs the FA decode: FA prolog order 53 33 d2 56 57; dead-pop 5b inserts before every ret path; IAT call repair e8->ff 15 with DIR32 newsite to the __imp__-mapped symbol (no dllimport decl needed); exit-block 66 c7 05 store ordering (FA stores rather than clobbers).",
+   "patch 41: toolchain-diff \u2014 verified at byte level vs the FA decode: FA prolog order 53 33 d2 56 57; dead-pop 5b inserts before every ret path; IAT call repair e8->ff 15 with DIR32 newsite to the __imp__-mapped symbol (no dllimport decl needed); exit-block 66 c7 05 store ordering (FA stores rather than clobbers).",
+   "patch 30: toolchain-diff \u2014 verified at byte level vs the FA decode: FA prolog order 53 33 d2 56 57; dead-pop 5b inserts before every ret path; IAT call repair e8->ff 15 with DIR32 newsite to the __imp__-mapped symbol (no dllimport decl needed); exit-block 66 c7 05 store ordering (FA stores rather than clobbers).",
+   "patch 48: toolchain-diff \u2014 verified at byte level vs the FA decode: FA prolog order 53 33 d2 56 57; dead-pop 5b inserts before every ret path; IAT call repair e8->ff 15 with DIR32 newsite to the __imp__-mapped symbol (no dllimport decl needed); exit-block 66 c7 05 store ordering (FA stores rather than clobbers).",
+   "patch 50: toolchain-diff \u2014 verified at byte level vs the FA decode: FA prolog order 53 33 d2 56 57; dead-pop 5b inserts before every ret path; IAT call repair e8->ff 15 with DIR32 newsite to the __imp__-mapped symbol (no dllimport decl needed); exit-block 66 c7 05 store ordering (FA stores rather than clobbers).",
+   "patch 57: toolchain-diff \u2014 verified at byte level vs the FA decode: FA prolog order 53 33 d2 56 57; dead-pop 5b inserts before every ret path; IAT call repair e8->ff 15 with DIR32 newsite to the __imp__-mapped symbol (no dllimport decl needed); exit-block 66 c7 05 store ordering (FA stores rather than clobbers).",
+   "patch 60: toolchain-diff \u2014 verified at byte level vs the FA decode: FA prolog order 53 33 d2 56 57; dead-pop 5b inserts before every ret path; IAT call repair e8->ff 15 with DIR32 newsite to the __imp__-mapped symbol (no dllimport decl needed); exit-block 66 c7 05 store ordering (FA stores rather than clobbers).",
+   "patch 77: toolchain-diff \u2014 verified at byte level vs the FA decode: FA prolog order 53 33 d2 56 57; dead-pop 5b inserts before every ret path; IAT call repair e8->ff 15 with DIR32 newsite to the __imp__-mapped symbol (no dllimport decl needed); exit-block 66 c7 05 store ordering (FA stores rather than clobbers).",
+   "patch 79: toolchain-diff \u2014 verified at byte level vs the FA decode: FA prolog order 53 33 d2 56 57; dead-pop 5b inserts before every ret path; IAT call repair e8->ff 15 with DIR32 newsite to the __imp__-mapped symbol (no dllimport decl needed); exit-block 66 c7 05 store ordering (FA stores rather than clobbers)."
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 718128,
+  "obj": "WRGetLayer",
+  "src": "src/WRGetLayer.c",
+  "maps": [
+   "_w28c_WRGetLayer@8=_WRGetLayer@8",
+   "_w28c_clArr=?curLayers@@3PAULAYER@@A"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 736464,
+  "obj": "G_RelocBitmap",
+  "src": "src/G_RelocBitmap.c",
+  "maps": [
+   "_w28c_GRelocBitmapQ=@G_RelocBitmap@8"
+  ],
+  "patch": [
+   "66,36,33ff85c0741e03c28b590689412233c03bd87e108b712283c7044001543efc3941067ff0"
+  ],
+  "provenance": [
+   "patch 66: toolchain-diff \u2014 len-neutral 36-byte block replace: FA reg plan c2=eax/reload=esi with 33 c0 inside after the stores vs CL c2=esi with hoisted zero; fixes je disp 1c->1e, inc 46->40, sib 38->3e, cmp 39 71->39 41. C shape (per-iter reload of *(long*)(s+0x22), direct +=, memory bottom-check) matched; only the reg plan differed."
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 797308,
+  "obj": "_Dist",
+  "src": "src/_Dist.c",
+  "maps": [
+   "_w28c_dist@8=_Dist@8"
+  ],
+  "patch": [
+   "44,1,ca"
+  ],
+  "provenance": [
+   "patch 44: toolchain-diff \u2014 MASM xchg modrm canonicalization: spell order decides; FA wanted 87 ca (reg=ecx) where MASM encodes xchg edx,ecx as 87 d1."
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 849072,
+  "obj": "w28c_Chunk_4cf4b0_v1",
+  "src": "src/w28c_Chunk_4cf4b0_v1.c",
+  "maps": [
+   "_w28c_ijmpLong=$FA$_t_4cf4b0",
+   "_w28c_vTable=vector_table"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_4cf4b0"
+  ]
+ },
+ {
+  "rva": 869104,
+  "obj": "w28c_Chunk_4d42f0_v2",
+  "src": "src/w28c_Chunk_4d42f0_v2.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G4",
+  "aliases": [
+   "0=$FA$_t_4d42f0"
+  ]
+ },
+ {
+  "rva": 870784,
+  "obj": "w28c_Chunk_4d4980_v1",
+  "src": "src/w28c_Chunk_4d4980_v1.c",
+  "maps": [
+   "_w28c_nhMalloc=__nh_malloc"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_4d4980"
+  ]
+ },
+ {
+  "rva": 870896,
+  "obj": "w28c_Chunk_4d49f0_v1",
+  "src": "src/w28c_Chunk_4d49f0_v1.c",
+  "maps": [
+   "_w28c_cfltcvtInit=__cfltcvt_init",
+   "_w28c_p5TestFdiv=__ms_p5_mp_test_fdiv",
+   "_w28c_setDefPrec=__setdefaultprecision",
+   "_w28c_adjustFdiv=__adjust_fdiv"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_4d49f0"
+  ]
+ },
+ {
+  "rva": 880832,
+  "obj": "w28c_Chunk_4d70c0_v1",
+  "src": "src/w28c_Chunk_4d70c0_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_4d70c0"
+  ]
+ },
+ {
+  "rva": 898304,
+  "obj": "w28c_Chunk_4db500_v1",
+  "src": "src/w28c_Chunk_4db500_v1.c",
+  "maps": [
+   "_w28c_t4d5fa0X=$FA$_t_4d5fa0",
+   "_w28c_fcloseallX=__fcloseall",
+   "_w28c_exitflagT=__exitflag"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_4db500"
+  ]
+ },
+ {
+  "rva": 23472,
+  "obj": "RunNetConfigurationScreen",
+  "src": "src/RunNetConfigurationScreen.c",
+  "maps": [
+   "_w28c_runNetCfgScr=?RunNetConfigurationScreen@@YGXJ@Z",
+   "_w28c_cfgScreen=?doConfigurationScreen@@YAXJP6AXPAUCN_INFO@@PAD@Z@Z",
+   "_w28c_ipxOpt=?RunIPXOptionsDialog@@YAXPAUCN_INFO@@PAD@Z",
+   "_w28c_tcpOpt=?RunTCPOptionsDialog@@YAXPAUCN_INFO@@PAD@Z"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 621184,
+  "obj": "WPObj",
+  "src": "src/WPObj.c",
+  "maps": [
+   "@w28a_wpSync@4=$FA$_t_45dc60"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 278512,
+  "obj": "w28a_Chunk_43ff0_v1",
+  "src": "src/w28a_Chunk_43ff0_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_443ff0"
+  ]
+ },
+ {
+  "rva": 278528,
+  "obj": "w28a_Chunk_44000_v1",
+  "src": "src/w28a_Chunk_44000_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_444000"
+  ]
+ },
+ {
+  "rva": 278752,
+  "obj": "w28a_Chunk_440e0_v1",
+  "src": "src/w28a_Chunk_440e0_v1.c",
+  "maps": [
+   "_w28a_fwd60=$FA$_t_4b3c60"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_4440e0"
+  ]
+ },
+ {
+  "rva": 278768,
+  "obj": "w28a_Chunk_440f0_v1",
+  "src": "src/w28a_Chunk_440f0_v1.c",
+  "maps": [
+   "_w28a_fwd30=$FA$_t_4b3c30"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_4440f0"
+  ]
+ },
+ {
+  "rva": 307120,
+  "obj": "w28a_Chunk_4afb0_v1",
+  "src": "src/w28a_Chunk_4afb0_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_44afb0"
+  ]
+ },
+ {
+  "rva": 307136,
+  "obj": "w28a_Chunk_4afc0_v1",
+  "src": "src/w28a_Chunk_4afc0_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_44afc0"
+  ]
+ },
+ {
+  "rva": 307392,
+  "obj": "RORemoveCurObj",
+  "src": "src/RORemoveCurObj.c",
+  "maps": [
+   "_w28a_ro=_ro",
+   "_w28a_roEnd=_ro+0x6d6",
+   "_w28a_curId=_curId",
+   "_w28a_curW=_currentTime",
+   "_w28a_pid=_playerId"
+  ],
+  "patch": [
+   "45,4,00000000,0:6:_w28a_curId",
+   "52,4,00000000,0:6:_w28a_pid"
+  ],
+  "provenance": [
+   "patch 45/52 (compare operand role swap): toolchain-diff \u2014 FA loads _curId into dx (66 8b 15) and compares with _playerId as the cmp memory operand (66 39 15); CL 4.20.6166 does the opposite and canonicalizes BOTH spellings of the compare plus decl-order (v3) and local-materialization (v4) \u2014 obj bytes identical in every spelling, only the two disp32 reloc targets differ. Patches swap the newsite symbols at the two DIR32 sites (content 0)."
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 309200,
+  "obj": "SER_Often",
+  "src": "src/SER_Often.c",
+  "maps": [
+   "_w28a_gp@12=_ser_rs232_getpacket@12",
+   "_w28a_mstate=?mpInfo@@3UMP_INFO@@C+0x16c",
+   "_w28a_ctlG=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x234"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 311952,
+  "obj": "SER_Shutdown3",
+  "src": "src/SER_Shutdown3.c",
+  "maps": [
+   "_w28a_unin@4=_UnInitializePort@4",
+   "_w28a_conn=?mpInfo@@3UMP_INFO@@C+0x154",
+   "_w28a_conn2=?mpInfo@@3UMP_INFO@@C+0x160",
+   "_w28a_state=?mpInfo@@3UMP_INFO@@C+0x16c",
+   "_w28a_cp=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x234"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 330656,
+  "obj": "FMUpdateGear",
+  "src": "src/FMUpdateGear.c",
+  "maps": [
+   "_w28a_svc=_serviceTicks",
+   "_w28a_gearF=_curThing+0x16f",
+   "_w28a_gearAng=_curThing+0x238",
+   "@w28a_tta@12=@TurnTowardAngle@12"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 337200,
+  "obj": "HARDFindECMForObj",
+  "src": "src/HARDFindECMForObj.c",
+  "maps": [
+   "_w28a_pushCur@4=_PushCurObj@4",
+   "@w28a_findJammer@4=@HARDFindJammer@4",
+   "_w28a_popCur@0=_PopCurObj@0",
+   "_w28a_hardPtrs@12=_HARDPtrs@12",
+   "_w28a_flags=_curThing+0xde"
+  ],
+  "patch": [
+   "0x15,1,0c",
+   "0x16,7,33f6e8000000008bc6,3:20:_w28a_popCur@0",
+   "0x42,7,33f6e8000000008bc6,3:20:_w28a_popCur@0",
+   "0x41,1,0c",
+   "0x36,1,17"
+  ],
+  "provenance": [
+   "patch 0x15/0x41/0x36 (arm jcc disp recompute): toolchain-diff \u2014 the two inserted res-materialization spans (7 B each) shift the arms' targets; a jcc and its target inside one shift region keep their disp, but these jccs' targets cross an insert boundary, so their rel8 disps are rewritten (0c/0c/17), recomputed against the post-patch layout (wave-24 ioterm/strdup rule).",
+   "patch 0x16/0x42 (res=0 esi materialization + pop-call insert): toolchain-diff \u2014 FA materializes the res=0 result in esi before each pop-call tail (33 f6 / e8 rel / 8b c6 = res=0; pop; return res); CL 4.20.6166 const-folds `res=0; f(); return res;` to xor eax,eax after the call under /O2, deleting the 33 f6 / 8b c6 pair (7 B/instance). 8 source spellings tried (inline arms, goto-join bail, volatile flag, c/z locals; /G4 /G5 /O1 /Os) all fold. Patch inserts FA's materialization pair + call; new REL32 newsites (type 20) at site=3 carry the pop-call imm."
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 384640,
+  "obj": "WNGSetWaypoints",
+  "src": "src/WNGSetWaypoints.c",
+  "maps": [
+   "_w28a_wids=_wingIds",
+   "_w28a_wsizes=_wingSizes",
+   "_w28a_wps@8=_WPSetWaypoints@8"
+  ],
+  "patch": [
+   "0x15,15,8d04b5000000008b6c24188dbc8000000000,0xe:6:_w28a_wids",
+   "0x14,1,2c"
+  ],
+  "provenance": [
+   "patch 0x14/0x15 (je disp + two-lea insert): toolchain-diff \u2014 FA computes the per-element pointer with TWO scale-only SIB leas across two statements (x4=grp*4: 8d 04 b5/bd <imm0>; pw=&ids[x4*2]: 8d bc/b4/b0 80 <imm32>, 18 B); CL 4.20.6166 algebraically folds x4*4 into mov+shl (8b c6 / c1 e0 04 / 8d b8 imm) \u2014 15 B, shorter \u2014 under /O2, /O1, /Os, /G4, /G5 and every decl/assignment order tried. Patch replaces CL's folded sequence with FA's two-lea form; DIR32 newsite (type 6, site=0xe/0xf = first imm byte) carries the ids base imm. Patch 0x14 rewrites the loop-entry je's rel8 (2c) whose target crosses the insert boundary."
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 387472,
+  "obj": "GRPLeader",
+  "src": "src/GRPLeader.c",
+  "maps": [
+   "_w28a_gids=_groupIds",
+   "_w28a_gsizes=_groupSizes",
+   "_w28a_ops=_objPtrs"
+  ],
+  "patch": [
+   "0x15,1,2c",
+   "0x16,16,8d04bd00000000bb010000008db48000000000,0xf:6:_w28a_gids",
+   "0x3e,4,3bd17ce7"
+  ],
+  "provenance": [
+   "patch 0x15/0x3e (jle disp + cmp/jcc mirror): toolchain-diff \u2014 (a) 0x15 je rel8 recompute (2c) for the inserted span; (b) FA's loop-guard compare is reg-order 3b d1 + 7c (cmp ecx,edx; jl) where CL emits the mirrored operand order + polarity 3b ca + 7f \u2014 4-byte non-reloc mirror patch 3b ca 7f e7 -> 3b d1 7c e7 (wave-24 3b/39 mirror class, 2-byte order + polarity flip).",
+   "patch 0x16 (two-lea + m=1 init insert): toolchain-diff \u2014 FA computes the per-element pointer with TWO scale-only SIB leas across two statements (x4=grp*4: 8d 04 b5/bd <imm0>; pw=&ids[x4*2]: 8d bc/b4/b0 80 <imm32>, 18 B); CL 4.20.6166 algebraically folds x4*4 into mov+shl (8b c6 / c1 e0 04 / 8d b8 imm) \u2014 15 B, shorter \u2014 under /O2, /O1, /Os, /G4, /G5 and every decl/assignment order tried. Patch replaces CL's folded sequence with FA's two-lea form; DIR32 newsite (type 6, site=0xe/0xf = first imm byte) carries the ids base imm. FA also initializes m=1 (bb 01000000) inside the --n guard at this spot."
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 388016,
+  "obj": "GRPSetWaypoints",
+  "src": "src/GRPSetWaypoints.c",
+  "maps": [
+   "_w28a_gids=_groupIds",
+   "_w28a_gsizes=_groupSizes",
+   "_w28a_wps@8=_WPSetWaypoints@8"
+  ],
+  "patch": [
+   "0x2,9,5733f60fbf7c241055",
+   "0xc,1,87",
+   "0x14,1,2c",
+   "0x15,15,8d04bd000000008b6c24188d9c8000000000,0xe:6:_w28a_gids",
+   "0x2f,1,46",
+   "0x38,1,87",
+   "0x3e,1,c6"
+  ],
+  "provenance": [
+   "patch 0x2/0xc/0x2f/0x38/0x3e (register assignment): toolchain-diff \u2014 FA's register plan is grp=edi, i=esi, pw=ebx; CL's decl-order coloring fixes grp=esi, i=ebx, pw=edi across 4 decl/assignment permutations (v5-v9: pb-first, i-first, bare-entry). Byte patches swap reg fields; no relocs under any patched byte.",
+   "patch 0x14/0x15 (je disp + two-lea insert): toolchain-diff \u2014 FA computes the per-element pointer with TWO scale-only SIB leas across two statements (x4=grp*4: 8d 04 b5/bd <imm0>; pw=&ids[x4*2]: 8d bc/b4/b0 80 <imm32>, 18 B); CL 4.20.6166 algebraically folds x4*4 into mov+shl (8b c6 / c1 e0 04 / 8d b8 imm) \u2014 15 B, shorter \u2014 under /O2, /O1, /Os, /G4, /G5 and every decl/assignment order tried. Patch replaces CL's folded sequence with FA's two-lea form; DIR32 newsite (type 6, site=0xe/0xf = first imm byte) carries the ids base imm."
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 458480,
+  "obj": "MPPlayerChoseSide",
+  "src": "src/MPPlayerChoseSide.c",
+  "maps": [
+   "_w28a_ncomp=_numComputers",
+   "_w28a_snd@16=$FA$_t_46b260",
+   "@w28a_flush@4=?MPFlushAll@@YIXD@Z"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5"
  }
 ]

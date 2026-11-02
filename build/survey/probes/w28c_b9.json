@@ -1,0 +1,9 @@
+[
+ {
+  "rva": 736464,
+  "obj": "bm_w28c_GRelocBitmap_v9",
+  "src": "build/survey/probes/w28c_GRelocBitmap_v2.c",
+  "maps": ["_w28c_GRelocBitmapQ=@G_RelocBitmap@8"],
+  "patch": ["66,36,33ff85c0741e03c28b590689412233c03bd87e108b712283c7044001543efc3941067ff0"]
+ }
+]

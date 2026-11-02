@@ -1,0 +1,150 @@
+[
+ {
+  "rva": 458656,
+  "obj": "w28b_mpf_v1",
+  "src": "build/survey/probes/w28b_mpf_v1.c",
+  "maps": [
+   "_w28b_send@16=$FA$_t_46b260",
+   "@w28b_flush@4=?MPFlushAll@@YIXD@Z"
+  ]
+ },
+ {
+  "rva": 488304,
+  "obj": "w28b_cog_v1",
+  "src": "build/survey/probes/w28b_cog_v1.c",
+  "maps": [
+   "_w28b_cw=_curThing+0x25d",
+   "_w28b_t1=_curThingType+0x17b",
+   "_w28b_t2=_curThingType+0x16b",
+   "_w28b_fl=_curThing+0x10",
+   "_w28b_dm=_dam+0x7d"
+  ]
+ },
+ {
+  "rva": 496864,
+  "obj": "w28b_igs_v1",
+  "src": "build/survey/probes/w28b_igs_v1.cpp"
+ },
+ {
+  "rva": 507984,
+  "obj": "w28b_pgt_v1",
+  "src": "build/survey/probes/w28b_pgt_v1.c",
+  "maps": [
+   "_w28b_fmtP=_fmtText+0x10",
+   "_w28b_fmtA=_fmtText"
+  ]
+ },
+ {
+  "rva": 554016,
+  "obj": "w28b_dgv_v1",
+  "src": "build/survey/probes/w28b_dgv_v1.c",
+  "maps": [
+   "@w28b_DialogGetPtr@4=@DialogGetPtr@4"
+  ]
+ },
+ {
+  "rva": 569744,
+  "obj": "w28b_scs_v1",
+  "src": "build/survey/probes/w28b_scs_v1.c",
+  "maps": [
+   "_w28b_scr=_curScreen",
+   "_w28b_tcmp=_timeCompression",
+   "_w28b_click=_checkRightButton+0x464",
+   "_w28b_SNM@12=?SoundNoMixer@@YGFPADFF@Z",
+   "_w28b_SS@16=?SingleSound@@YGFPADFEF@Z"
+  ]
+ },
+ {
+  "rva": 570160,
+  "obj": "w28b_gap160_v1",
+  "src": "build/survey/probes/w28b_gap160_v1.c",
+  "aliases": [
+   "0=$FA$_t_48b330"
+  ]
+ },
+ {
+  "rva": 570368,
+  "obj": "w28b_gap368_v1",
+  "src": "build/survey/probes/w28b_gap368_v1.c",
+  "aliases": [
+   "0=$FA$_t_48b400"
+  ]
+ },
+ {
+  "rva": 570384,
+  "obj": "w28b_say_v1",
+  "src": "build/survey/probes/w28b_say_v1.c",
+  "maps": [
+   "_w28b_s1=?COMMENT_TYPE@@3W4__unnamed@@A+0xc",
+   "_w28b_s2=?COMMENT_TYPE@@3W4__unnamed@@A+0x7c",
+   "_w28b_s3=?COMMENT_TYPE@@3W4__unnamed@@A+0x8",
+   "_w28b_s4=?COMMENT_TYPE@@3W4__unnamed@@A+0x14",
+   "_w28b_s5=?COMMENT_TYPE@@3W4__unnamed@@A+0x4",
+   "_w28b_s6=_checkRightButton+0x2480",
+   "_w28b_s7=_checkRightButton+0x247c",
+   "_w28b_s8=?COMMENT_TYPE@@3W4__unnamed@@A+0xfc"
+  ]
+ },
+ {
+  "rva": 601248,
+  "obj": "w28b_rjb_v1",
+  "src": "build/survey/probes/w28b_rjb_v1.c",
+  "maps": [
+   "_w28b_joyFunc=_joystickFunctions",
+   "_w28b_joyXDev=?joystickXDevice@@3KA",
+   "_w28b_joyInfo=?joystickInfo@@3PAUjoyinfo_tag@@A+0xc",
+   "_w28b_joyEx=?joystickInfoEx@@3PAUjoyinfoex_tag@@A+0x20",
+   "_w28b_ReadDev=?ReadDevice@@YA?AW4JOYRESULT@@K@Z",
+   "_w28b_GetJoyTyp=?GetJoystickType@@YA?AW4JOYRESULT@@K@Z"
+  ]
+ },
+ {
+  "rva": 611072,
+  "obj": "w28b_ipx2u_v1",
+  "src": "build/survey/probes/w28b_ipx2u_v1.c"
+ },
+ {
+  "rva": 611136,
+  "obj": "w28b_u2ipx_v1",
+  "src": "build/survey/probes/w28b_u2ipx_v1.c"
+ },
+ {
+  "rva": 611200,
+  "obj": "w28b_spx_v1",
+  "src": "build/survey/probes/w28b_spx_v1.c",
+  "maps": [
+   "_w28b_hbtoa=?hbtoa@@YAPADPAEFPAD@Z"
+  ]
+ },
+ {
+  "rva": 612160,
+  "obj": "w28b_gpcb_v1",
+  "src": "build/survey/probes/w28b_gpcb_v1.c",
+  "maps": [
+   "_w28b_surfCnt=_globalSecondarySurface+0x4",
+   "_w28b_clipL=_clipLeft",
+   "_w28b_clipT=_clipTop",
+   "_w28b_clipW=_clipWidth",
+   "_w28b_clipH=_clipHeight",
+   "_w28b_boxT=_tempYLR+0x4e18"
+  ]
+ },
+ {
+  "rva": 614000,
+  "obj": "w28b_gub_v1",
+  "src": "build/survey/probes/w28b_gub_v1.c",
+  "maps": [
+   "_w28b_UH@12=_G_UHline@12",
+   "_w28b_UV@12=_G_UVline@12"
+  ]
+ },
+ {
+  "rva": 614080,
+  "obj": "w28b_gbx_v1",
+  "src": "build/survey/probes/w28b_gbx_v1.c",
+  "maps": [
+   "_w28b_HL@12=_G_Hline@12",
+   "_w28b_VL@12=_G_Vline@12"
+  ]
+ }
+]

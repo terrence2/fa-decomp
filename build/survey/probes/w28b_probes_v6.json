@@ -1,0 +1,11 @@
+[
+ {
+  "rva": 507984,
+  "obj": "w28b_pgt_v6",
+  "src": "build/survey/probes/w28b_pgt_v6.c",
+  "maps": [
+   "_w28b_fmtP=_fmtText+0x10",
+   "_w28b_fmtA=_fmtText"
+  ]
+ }
+]

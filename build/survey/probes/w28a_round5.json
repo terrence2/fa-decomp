@@ -1,0 +1,48 @@
+[
+ {
+  "rva": 337200,
+  "obj": "w28a_HARDFindECMForObj_v8",
+  "src": "build/survey/probes/w28a_HARDFindECMForObj_v8.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w28a_pushCur@4=_PushCurObj@4",
+   "@w28a_findJammer@4=@HARDFindJammer@4",
+   "_w28a_popCur@0=_PopCurObj@0",
+   "_w28a_hardPtrs@12=_HARDPtrs@12",
+   "_w28a_flags=_curThing+0xde"
+  ]
+ },
+ {
+  "rva": 388016,
+  "obj": "w28a_GRPSetWaypoints_v5",
+  "src": "build/survey/probes/w28a_GRPSetWaypoints_v5.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w28a_gids=_groupIds",
+   "_w28a_gsizes=_groupSizes",
+   "_w28a_wps@8=_WPSetWaypoints@8"
+  ]
+ },
+ {
+  "rva": 388016,
+  "obj": "w28a_GRPSetWaypoints_v6",
+  "src": "build/survey/probes/w28a_GRPSetWaypoints_v6.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w28a_gids=_groupIds",
+   "_w28a_gsizes=_groupSizes",
+   "_w28a_wps@8=_WPSetWaypoints@8"
+  ]
+ },
+ {
+  "rva": 388016,
+  "obj": "w28a_GRPSetWaypoints_v7",
+  "src": "build/survey/probes/w28a_GRPSetWaypoints_v7.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w28a_gids=_groupIds",
+   "_w28a_gsizes=_groupSizes",
+   "_w28a_wps@8=_WPSetWaypoints@8"
+  ]
+ }
+]

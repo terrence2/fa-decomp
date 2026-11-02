@@ -1,0 +1,24 @@
+[
+ {
+  "rva": 388016,
+  "obj": "w28a_GRPSetWaypoints_v8",
+  "src": "build/survey/probes/w28a_GRPSetWaypoints_v8.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w28a_gids=_groupIds",
+   "_w28a_gsizes=_groupSizes",
+   "_w28a_wps@8=_WPSetWaypoints@8"
+  ]
+ },
+ {
+  "rva": 388016,
+  "obj": "w28a_GRPSetWaypoints_v9",
+  "src": "build/survey/probes/w28a_GRPSetWaypoints_v9.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w28a_gids=_groupIds",
+   "_w28a_gsizes=_groupSizes",
+   "_w28a_wps@8=_WPSetWaypoints@8"
+  ]
+ }
+]

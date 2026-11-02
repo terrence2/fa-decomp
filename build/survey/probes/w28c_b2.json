@@ -1,0 +1,77 @@
+[
+ {
+  "rva": 624352,
+  "obj": "bm_w28c_serShutLL_v3",
+  "src": "build/survey/probes/w28c_serShutLL_v3.c",
+  "maps": [
+   "_w28c_mpArr=?mpInfo@@3UMP_INFO@@C",
+   "_w28c_ctrlArr=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A"
+  ]
+ },
+ {
+  "rva": 624352,
+  "obj": "bm_w28c_serShutLL_v4",
+  "src": "build/survey/probes/w28c_serShutLL_v4.c",
+  "maps": [
+   "_w28c_mpArr=?mpInfo@@3UMP_INFO@@C",
+   "_w28c_ctrlArr=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A"
+  ]
+ },
+ {
+  "rva": 23472,
+  "obj": "bm_w28c_runNetCfg_v2",
+  "src": "build/survey/probes/w28c_runNetCfg_v2.c",
+  "maps": [
+   "_w28c_runNetCfgScr=?RunNetConfigurationScreen@@YGXJ@Z",
+   "_w28c_cfgScreen=?doConfigurationScreen@@YAXJP6AXPAUCN_INFO@@PAD@Z@Z",
+   "_w28c_ipxOpt=?RunIPXOptionsDialog@@YAXPAUCN_INFO@@PAD@Z",
+   "_w28c_tcpOpt=?RunTCPOptionsDialog@@YAXPAUCN_INFO@@PAD@Z"
+  ]
+ },
+ {
+  "rva": 869104,
+  "obj": "bm_w28c_t4d42f0_v2",
+  "src": "build/survey/probes/w28c_t4d42f0_v2.c",
+  "maps": [],
+  "aliases": [
+   "0=$FA$_t_4d42f0"
+  ],
+  "flags": "/c /O2 /Gy /G4"
+ },
+ {
+  "rva": 869104,
+  "obj": "bm_w28c_t4d42f0_v3",
+  "src": "build/survey/probes/w28c_t4d42f0_v3.c",
+  "maps": [],
+  "aliases": [
+   "0=$FA$_t_4d42f0"
+  ]
+ },
+ {
+  "rva": 718128,
+  "obj": "bm_w28c_WRGetLayer_v3",
+  "src": "build/survey/probes/w28c_WRGetLayer_v3.c",
+  "maps": [
+   "_w28c_WRGetLayer@8=_WRGetLayer@8",
+   "_w28c_clArr=?curLayers@@3PAULAYER@@A"
+  ]
+ },
+ {
+  "rva": 718128,
+  "obj": "bm_w28c_WRGetLayer_v4",
+  "src": "build/survey/probes/w28c_WRGetLayer_v4.c",
+  "maps": [
+   "_w28c_WRGetLayer@8=_WRGetLayer@8",
+   "_w28c_clArr=?curLayers@@3PAULAYER@@A"
+  ]
+ },
+ {
+  "rva": 797308,
+  "obj": "bm_w28c_dist_v2",
+  "src": "build/survey/probes/w28c_dist_v2.c",
+  "flags": "/c /O2 /Gy /G5 /Oy-",
+  "maps": [
+   "_w28c_dist@8=_Dist@8"
+  ]
+ }
+]
