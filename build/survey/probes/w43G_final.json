@@ -1,0 +1,228 @@
+[
+ {
+  "verdict": "EXACT",
+  "rva": 597696,
+  "obj": "w43G_91ec0_v1",
+  "src": "build/survey/probes/w43G_91ec0_v1.c",
+  "maps": [
+   "_w43G_curDlg=?curDialog@@3PAUDIALOG@@A"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_491ec0"
+  ],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "no patch offsets; body byte-identical as compiled",
+   "maps: _w43G_curDlg -> FA global ?curDialog@@3PAUDIALOG@@A (DIR32 a1 loads at FA relocs 11/24/37/50 fit-clean)"
+  ],
+  "notes": "Pure C r1 EXACT: void w43G_91ec0_q(void){G_SetColor(0x5e); G_Box((long)curDlg->f8+0x14, fA+0x14, fC-0x28, fE-0x28);} with extern void __fastcall G_SetColor(long) (->@G_SetColor@4) and extern void __stdcall G_Box(long,long,long,long) (->_G_Box@16); W43G_DLG = {char pad[8]; short f8; short fA; short fC; short fE}, curDlg volatile. CL matched FA prologue/epilogue and arg pushes verbatim with zero patches."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 684224,
+  "obj": "w43G_a70c0_v3",
+  "src": "build/survey/probes/w43G_a70c0_v2.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4a70c0"
+  ],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "no patch offsets; body byte-identical as compiled (v3 = inline-expressions src; the struct-copy spelling w43G_a70c0_v1.c/w43G_a70c0_v2-obj was FATAL over-length 0x52>0x50)"
+  ],
+  "notes": "Pure C r2 EXACT: long __fastcall w43G_a70c0_q(void *s, void *x); unsigned-short pair math a2/aA/a7, B[0..3] computed inline in FA order (b0=a2<<5, b2=(us)(a2+aA)<<5, b4=a7<<5, b6=(us)(a7+aA)<<5), return (long)BoundsAnd(B, x) with extern long __stdcall BoundsAnd(void*,void*) -> _BoundsAnd@8, whose FA public is chunk 0x11c20 (verified = FA call target)."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 768576,
+  "obj": "w43G_bba40_v1",
+  "src": "build/survey/probes/w43G_bba40_v1.c",
+  "maps": [
+   "_w43G_jt0=$FA$_t_4bba80",
+   "_w43G_jt1=$FA$_t_4bbab0",
+   "_w43G_jt2=$FA$_t_4bbb00"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4bba40"
+  ],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "no patch offsets; body byte-identical as compiled",
+   "maps: 3 jump-table DIR32s at FA relocs 39/46/53 resolved via chunk-start $FA$ anchor publics (delta 0, FA baked VAs 0x4bba80/0x4bbab0/0x4bbb00)"
+  ],
+  "notes": "Pure C r1 EXACT: switch dispatch over three adjacent stub jump tables, extern unsigned short w43G_jt0/jt1/jt2[] mapped to the $FA$_t_4bba{80,b0,c0} anchor publics."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 823340,
+  "obj": "w43G_c902c_v1",
+  "src": "build/survey/probes/w43G_c902c_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "no patch offsets; body byte-identical as compiled (152 B incl. FA tail pad 2e 8b c0 before c3, transcribed in-body)"
+  ],
+  "notes": "Naked transcription r1 EXACT: void __declspec(naked) w43G_CopyDB8(void) with real asm mnemonics + _emit for pad/tail bytes; zero fixups (all calls baked internal rel32, correct since chunk lands at FA VA). CopyDB15-family recipe."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 867216,
+  "obj": "w43G_d3b90_v2",
+  "src": "build/survey/probes/w43G_d3b90_v2.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "no patch offsets; body byte-identical as compiled, zero fixups"
+  ],
+  "notes": "Naked transcription r2 EXACT: void __declspec(naked) strchr(const char*,char) whole-body one-_emit-per-line, public _strchr at FA VA 0x4d3b90; +6 = push ebx preserved for the wave-42F _strstr map TO _strchr+0x6."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 876336,
+  "obj": "w43G_d5f30_v2",
+  "src": "build/survey/probes/w43G_d5f30_v1.c",
+  "maps": [
+   "_w43G_write=__write"
+  ],
+  "patch": [
+   "2,7,5733f68b7c2410",
+   "10,1,47",
+   "21,1,3c",
+   "28,1,35",
+   "30,1,47",
+   "33,1,1f",
+   "39,1,2a",
+   "43,1,47",
+   "56,50,750f8b470ca880741183e0fd89470ceb09834f0c20beffffffff8b470889078bc6c74704000000005f5e5bc3"
+  ],
+  "aliases": [
+   "0=$FA$_t_4d5f30"
+  ],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 2: toolchain-diff \u2014 CL spilled fs:[0x18] TEB load as mov eax,fs:[0x18]/mov [esp+8],eax; FA uses push 0x57/... prologue band; 7-B prologue transplant 57 33 f6 8b 7c 24 10 (push edi/xor esi,esi/mov edi,[esp+0x10)]",
+   "patch 10: toolchain-diff \u2014 CL reg-color: byte 47 (edi) replacing CL's 4f-era register choice",
+   "patch 21: toolchain-diff \u2014 CL byte 3c vs CL-emitted byte (rm/imm spelling)",
+   "patch 28: toolchain-diff \u2014 CL byte 35 vs CL-emitted byte",
+   "patch 30: toolchain-diff \u2014 CL byte 47 vs CL-emitted byte",
+   "patch 33: toolchain-diff \u2014 CL byte 1f vs CL-emitted byte",
+   "patch 39: toolchain-diff \u2014 CL byte 2a vs CL-emitted byte",
+   "patch 43: toolchain-diff \u2014 CL byte 47 vs CL-emitted byte",
+   "patch 56: toolchain-diff \u2014 50->44-B tail transplant: FA epilogue+jcc band 75 0f 8b 47 0c a8 80 74 11 83 e0 fd 89 47 0c eb 09 83 4f 0c 20 be ff ff ff ff 8b 47 08 89 07 8b c6 c7 47 04 00 00 00 00 5f 5e 5b c3 replaces CL's trailing block (removes CL's hoisted [f+4]=0-before-[f] store-order artifact); body then ends exactly at FA c3, no tail bytes"
+  ],
+  "notes": "C body + 9-patch transplant r2 EXACT: long w43G_flushlk_q(char *f) with extern long w43G_write(long fd, void *ptr, long cnt) mapped _w43G_write=__write (FA public chunk 0xda1f0, converted w37A_da1f0_v1; e8 disp 0x428d verified to rva 0xda1f0). MANDATED alias 0=$FA$_t_4d5f30 included."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 889280,
+  "obj": "w43G_d91c0_v3",
+  "src": "build/survey/probes/w43G_d91c0_v3.c",
+  "maps": [],
+  "patch": [
+   "2,4,b0030000,0:6:__ctype",
+   "23,4,b0030000,0:6:__ctype",
+   "30,4,00000000,0:6:__imp__TlsGetValue",
+   "148,4,b0030000,0:6:__ctype",
+   "155,4,00000000,0:6:__imp__TlsSetValue"
+  ],
+  "aliases": [],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 2: toolchain-diff \u2014 abs disp dword (FA baked __ctype+0x3b0 = 0x51a520) -> delta payload b0 03 00 00 + DIR32 newsite sym __ctype (0x51a170 + 0x3b0 = FA)",
+   "patch 23: toolchain-diff \u2014 abs disp dword -> delta payload + DIR32 __ctype (same resolve)",
+   "patch 30: toolchain-diff \u2014 abs disp dword (FA baked 0x58a684) -> zero payload + DIR32 __imp__TlsGetValue (bare idata IAT symbol, delta 0)",
+   "patch 148: toolchain-diff \u2014 abs disp dword -> delta payload + DIR32 __ctype",
+   "patch 155: toolchain-diff \u2014 abs disp dword (FA baked 0x58a670) -> zero payload + DIR32 __imp__TlsSetValue"
+  ],
+  "notes": "Naked transcription + DIR32-newsites r3 EXACT: void __declspec(naked) _freeptd(void), one-_emit-per-line whole-body; the 5 FA abs data refs (fa tls flag x2, TlsGetValue/TlsSetValue IAT x2 at FA relocs 2/23/30/148/155) carried as delta-payload DIR32 newsites to real publics __ctype/__imp__TlsGetValue/__imp__TlsSetValue (w42E-proven pattern, payload=delta)."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 891488,
+  "obj": "w43G_d9a60_v2",
+  "src": "build/survey/probes/w43G_d9a60_v2.c",
+  "maps": [],
+  "patch": [
+   "2,4,04010000,0:6:__mbctype",
+   "79,4,01000000,0:6:__mbctype"
+  ],
+  "aliases": [],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 2: toolchain-diff \u2014 abs disp dword (FA baked __mbctype+0x104 = 0x51a7ac) -> delta payload 04 01 00 00 + DIR32 newsite sym __mbctype (0x51a6a8 + 0x104 = FA)",
+   "patch 79: toolchain-diff \u2014 abs disp dword (FA baked __mbctype+1 = 0x51a6a9) -> delta payload 01 00 00 00 + DIR32 __mbctype"
+  ],
+  "notes": "Naked transcription + DIR32-newsites r3 EXACT: void __declspec(naked) _mbsnbcpy(void) whole-body one-_emit-per-line; both FA abs data refs (FA relocs 2/79) as delta-payload DIR32 newsites to __mbctype; internal _strncpy/__lock/__unlock e8 calls stay baked rel32 (resolve inside CRT band at FA VAs)."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 908800,
+  "obj": "w43G_dde00_v3",
+  "src": "build/survey/probes/w43G_dde00_v1.c",
+  "maps": [
+   "_W43G_stricmp=_stricmp",
+   "_w43G_tab=__adbgmsg+0x60"
+  ],
+  "patch": [
+   "21,2,c1f801",
+   "47,1,7d",
+   "50,1,dd",
+   "54,1,fd",
+   "63,1,cf"
+  ],
+  "aliases": [],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 21: toolchain-diff \u2014 CL emitted d1 f8 (sar eax,1 -> shr via d1-form); FA uses c1 f8 01 (sar eax,1 imm8 form); 2->3-B replace inserting one byte (subsequent got fixups shift 28->29/35->36/75->76 into FA positions)",
+   "patch 47: toolchain-diff \u2014 branch opcode: CL jle 7e vs FA jge 7d polarity (if/else block placement)",
+   "patch 50: toolchain-diff \u2014 CL reg-color rm-byte 3b-era vs FA dd (8b fd <-> 8b dd mirrored ebp/edi spelling)",
+   "patch 54: toolchain-diff \u2014 CL reg-color rm-byte vs FA fd (second mirrored spelling)",
+   "patch 63: toolchain-diff \u2014 CL byte vs FA cf (rm-byte/immediate spelling in tail compare)"
+  ],
+  "notes": "Pure C r4 EXACT: unsigned short w43G_dde00_q(char *s) binary search over W43G_ENT {char *nm; short id; short pad;} table at __adbgmsg+0x60 (map _w43G_tab=__adbgmsg+0x60, DIR32 content delta 0x60, FA baked 0x51ad08 verified); call _W43G_stricmp=_stricmp (REL32 at FA reloc 29; _stricmp = 0x4d59e0 = FA call target, alias of __strcmpi)."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 908896,
+  "obj": "w43G_dde60_v3",
+  "src": "build/survey/probes/w43G_dde60_v1.c",
+  "maps": [
+   "_W43G_stricmp=_stricmp",
+   "_w43G_tabB=__adbgmsg+0x378"
+  ],
+  "patch": [
+   "21,2,c1f801",
+   "47,1,7d",
+   "50,1,dd",
+   "54,1,fd",
+   "63,1,cf"
+  ],
+  "aliases": [],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 21: toolchain-diff \u2014 CL d1 f8 -> FA c1 f8 01 (sar imm8 form); 2->3-B insert shifts the 3 obj fixups into FA positions",
+   "patch 47: toolchain-diff \u2014 branch polarity jle->jge (7d)",
+   "patch 50: toolchain-diff \u2014 rm-byte reg-color (dd)",
+   "patch 54: toolchain-diff \u2014 rm-byte reg-color (fd)",
+   "patch 63: toolchain-diff \u2014 tail compare spelling (cf)"
+  ],
+  "notes": "Pure C r4 EXACT: identical recipe to rva 908800 with hi=0x57 and table map _w43G_tabB=__adbgmsg+0x378 (DIR32 content delta 0x378, FA baked 0x51b020 verified = 0x51aca8+0x378)."
+ }
+]

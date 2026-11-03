@@ -1,0 +1,198 @@
+[
+ {
+  "verdict": "EXACT",
+  "rva": 195712,
+  "obj": "w43F_2fc80_v2",
+  "src": "build/survey/probes/w43F_2fc80_v2.c",
+  "maps": [
+   "_w43F_spA=_specials+0xe10",
+   "_w43F_spAe=_specials+0xe24",
+   "_w43F_spB=_specials+0xf48",
+   "_w43F_spBe=_specials+0xf5c"
+  ],
+  "patch": [
+   "0x0d,1,29",
+   "0x26,1,19",
+   "0x37,0,8d044521000000",
+   "0x3e,0,5bc3",
+   "0x40,0,8d04452b000000",
+   "0x47,0,5bc3"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x0d: toolchain-diff - je#1 disp recompute; CL's disp targeted its single shared exit, FA's 0x29 targets the pad+5b c3 hit band at +0x37 (executed, computes 2*i+0x21)",
+   "patch 0x26: toolchain-diff - je#2 disp recompute; FA's 0x19 targets the second pad+5b c3 hit band at +0x40 (2*i+0x2b)",
+   "patch 0x37: toolchain-diff - insert FA's 7-B dead lea-fill pad 8d 04 45 21 00 00 00 before the first hit-return",
+   "patch 0x3e: toolchain-diff - insert FA's 5b c3 hit-return of table A (after pad band)",
+   "patch 0x40: toolchain-diff - insert the second 7-B dead lea-fill pad 8d 04 45 2b 00 00 00 (position = at application time, after the first pad+ret band)",
+   "patch 0x47: toolchain-diff - insert FA's 5b c3 hit-return of table B",
+   "tail: toolchain-diff - census tail 8da42400000000 (lea esp,[esp+0], 7 B) auto-accepted"
+  ],
+  "notes": "unnamed 0x2fc80 (80 B, fpo push-ebx prolog): fastcall long key in ecx; two do-while pointer-walk searches over _specials spans +0xe10..+0xe24 (edx walker, eax = i counter, ebx element, 81 fa cmp-bound imms with DIR32 imm fixups) then +0xf48..+0xf5c; C: `i=0; p=w43F_spA; do { if (*p==(unsigned long)key) return i; p++; i++; } while (p<w43F_spAe);` twice, shared `return 0` (= FA's exhaust 33 c0 5b c3 at +0x33). Cl 4.2's natural layout = single shared exit at +0x35; FA instead keeps, AFTER the exhaust-ret, hit-return bands of 'dead' 7-B lea-fill pads (8d 04 45 <imm32>; filler-table family of the 8d a4 24 00 00 00 00 census tail) each followed by 5b c3. NOTE the hit paths really execute the pads: je#1 (74,d8 off 0x0c/0x0d disp 0x29) targets +0x37 = lea eax,[eax*2+0x21] then 5b c3, je#2 (disp 0x19) targets +0x40 = lea eax,[eax*2+0x2b] then 5b c3, so FA's computed hit returns are 2*i+0x21 (table A) / 2*i+0x2b (table B) - odd-ID mapping, and the winner object reproduces that byte-for-byte."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 243152,
+  "obj": "w43F_3b5d0_v2",
+  "src": "build/survey/probes/w43F_3b5d0_v2.c",
+  "maps": [
+   "@w43F_GSetCol@4=@G_SetColor@4",
+   "@w43F_Rand@4=@Rand@4",
+   "_w43F_snowLow=_snowLow",
+   "_w43F_snowHigh=_snowHigh",
+   "_w43F_snowPtr=_snowPtr",
+   "_w43F_snowRem=_snowRemainder"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "tail: toolchain-diff - census tail 8da42400000000+8da42400000000 (14 B) auto-accepted"
+  ],
+  "notes": "unnamed 0x3b5d0 (80 B, fastcall 2 args): hi=p+0x64; GSetCol(color) via @G_SetColor@4 map (the imp is NOT __imp__: direct a1/e8 forms); snowLow=p, snowHigh=hi; lo=Rand(100); snowPtr=p+lo; snowRem=Rand(*(unsigned char *)snowPtr). NEW IDIOM: declare the Rand extern as `extern short __fastcall w43F_Rand(short n);` - a SHORT fastcall param decorates @4 (@Rand@4, Abs precedent src/Abs.c: `int __fastcall Abs(short v)`), NOT @2. With the short-arg decl CL spells the second Rand arg exactly as FA: mov cl,[_snowPtr]; and ecx,0xffff00ff - CL 4.2's promotion of an unsigned char into a short fastcall slot (clears bits 8-15, leaves bits 16-31 untracked garbage; FA's caller passes garbage-high shorts to Rand too). v1's long-arg decl forced FA-absent movzx/cdq arg spellings. V1-to-v2: only the Rand extern + call-site spelling changed; maps unchanged."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 286384,
+  "obj": "w43F_45eb0_v2",
+  "src": "build/survey/probes/w43F_45eb0_v2.c",
+  "maps": [
+   "_w43F_GSP@16=_G_SetPalette@16",
+   "_w43F_fdr=$FA$_t_445d30",
+   "_w43F_curPal=_curPalette",
+   "_w43F_realPal=_realPalette",
+   "_w43F_timerTicks=_timerTicks",
+   "_w43F_ignTicks=?seqIgnoreTicks@@3KA",
+   "_w43F_seqFading=?seqFading@@3FA",
+   "_w43F_seqFadeStart=?seqFadeStart@@3KA",
+   "_w43F_seqFadeLen=?seqFadeLen@@3GA"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "tail: toolchain-diff - census tail 8d4900 00000000 + 8da42400000000 (lea ecx,[ecx] + lea esp,[esp+0], 10 B) auto-accepted"
+  ],
+  "notes": "_SEQfadein 0x45eb0 (128 B, cdecl 1 arg unsigned short n): ARM-PLACEMENT POLARITY - CL's if/else emission puts the j<not-cond> else-arm later and the then-arm inline; FA's body is the fade arm INLINE with jne 0x75 (test ax/74) to the later GSP arm, so flip the C comparison to `if (n == 0) {GSP} else {fade}` which compiles test ax / jne to the later FA-ordered fade body. Fade arm: memcpy(_realPalette,_curPalette,768); *(short*)&seqFading=1 (66 c7 05 word 0001); t=timerTicks-ignTicks; seqFadeStart=t; seqFadeLen=(short)((n<<8)/10); then call the chunk-internal seq-update helper via _w43F_fdr map TO $FA$_t_445d30 (0x445d30; anchor public defined in the m0 stub objs, rsp-referenced). NOTE the _w43F_fdr TO is a $FA$ anchor - if 0x445d30 is ever re-converted, that alias must be kept or this map must be re-pointed (wave-41 handback rule)."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 308896,
+  "obj": "w43F_4b6a0_v2",
+  "src": "build/survey/probes/w43F_4b6a0_v2.c",
+  "maps": [
+   "_w43F_serRA=?SER_ReadAvail@@YAJJJ@Z",
+   "_w43F_serFG=?SER_ForegroundGetPacket@@YADAAUSERIAL_PACKET_WRAPPER@@@Z",
+   "_w43F_serGate=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x12d",
+   "_w43F_inLen=?InPacket@@3USERIAL_PACKET_WRAPPER@@A+0x14",
+   "_w43F_inBuf=?InPacket@@3USERIAL_PACKET_WRAPPER@@A+0x1c",
+   "_w43F_inPkt=?InPacket@@3USERIAL_PACKET_WRAPPER@@A"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "tail: toolchain-diff - census tail 8da42400000000+8da42400000000 (14 B) auto-accepted"
+  ],
+  "notes": "?SER_PeekByte@@YAJJ@Z 0x4b6a0 (112 B, cdecl long n): `if (!serGate) return -1; a=serRA(n,1); if (!a) return -1; if (inLen >= 0x14) { if (!serFG(&inPkt)) return -1; inLen = 0; } return (unsigned char)inBuf[inLen];`. VOLATILE LEVER: declare `extern volatile long w43F_inLen;` - the original ?InPacket@@3... fields are implicitly volatile-typed in FA's compilation. Every read then stays real: the compare becomes a1 moffs load + 83 f8 14 (not a tracked-0 register), the inLen=0 store becomes an immediate c7 05, and the final inBuf[inLen] index read does a fresh 8b 0d reload + 33 c0 + 8a 81 indexing instead of CL's xor-zeroed reuse of the tracked register. serRA maps by fastcall C spell: `extern long w43F_serRA(long,long)` = clean _w43F_serRA FROM."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 321248,
+  "obj": "w43F_4e6e0_v1",
+  "src": "build/survey/probes/w43F_4e6e0_v1.c",
+  "maps": [
+   "_w43F_inpa=?InPacket@@3USERIAL_PACKET_WRAPPER@@A+0x17c",
+   "_w43F_inpb=?InPacket@@3USERIAL_PACKET_WRAPPER@@A+0x180",
+   "_w43F_inpc=?InPacket@@3USERIAL_PACKET_WRAPPER@@A+0x184",
+   "_w43F_inpd=?InPacket@@3USERIAL_PACKET_WRAPPER@@A+0x188",
+   "_w43F_inpe=?InPacket@@3USERIAL_PACKET_WRAPPER@@A+0x18c",
+   "_w43F_inpf=?InPacket@@3USERIAL_PACKET_WRAPPER@@A+0x190",
+   "_w43F_inpg=?InPacket@@3USERIAL_PACKET_WRAPPER@@A+0x194",
+   "_w43F_inph=?InPacket@@3USERIAL_PACKET_WRAPPER@@A+0x198"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "tail: toolchain-diff - none; chunk is fully code (48 B, code-only end, no census pad)"
+  ],
+  "notes": "unnamed 0x4e6e0 (48 B, no prolog/no args): 8 a3 moffs stores from a staging int held in eax - 4 stores of 0, then 4 stores of 10 - to ?InPacket@@3USERIAL_PACKET_WRAPPER@@A+0x17c..+0x198 (wave-11 a3-from-VARIABLE recipe: write `z=0; inpa=z;...; z=10; inpe=z;...` NOT literal stores, so eax is kept and 8 plain a3s emit). All 8 DIR32 TO+delta fixups verified against FA imms (0x540654..0x540670). Zero patches."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 384192,
+  "obj": "w43F_5dcc0_v2",
+  "src": "build/survey/probes/w43F_5dcc0_v2.c",
+  "maps": [
+   "_w43F_WNGPP@12=_WNGPart@12",
+   "_w43F_wingSz=_wingSizes",
+   "_w43F_wid2b=_wingIds+0x2"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "tail: toolchain-diff - census tail 05 00 00 00 00 + 8da42400000000 (12 B) auto-accepted"
+  ],
+  "notes": "unnamed 0x5dcc0 (80 B, fastcall long a): `unsigned long i; if (WNGPP(a,&i,0) != 1) return 0; if (wingSizes[i] < 2) return 0; t=i*4; return *(unsigned short *)(wingIds+0x2 + (t+t*4));` - WNGPart@12 is fastcall in FA (arg in edx... check: emitted _WNGPart@12 public matches). TWO fixes from v1: (1) drop the `i = 0` init - FA has none, the slot is passed by address to WNGPart and read back, so CL must emit the eax-store of _WNGPart@12's ref param straight through; (2) flip guard2 polarity to `if (w43F_wingSz[i] < 2) return 0;` so CL emits cmp cl,2 / jae (73) to the continuation with the zero-ret inline (FA's ja=73-to-continuation layout; v1's `>= 2` gave the jae target and inline arm backwards)."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 441040,
+  "obj": "w43F_6bad0_v1",
+  "src": "build/survey/probes/w43F_6bad0_v1.c",
+  "maps": [],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "tail: toolchain-diff - census tail 8bff (mov edi,edi) + 8da42400000000 (9 B) auto-accepted"
+  ],
+  "notes": "unnamed 0x6bad0 (112 B, fastcall 1 reg arg ecx, long return): 16-bit-period wrap arithmetic (normalize ecx into [-0x10, 0xfff0)). C: `if (key < (long)0xffff0010) { q = (0xffffffffu-(unsigned long)key)/0xfff0u; key += (long)(((q<<12)-q)<<4); }` then the mirrored `if (key > (long)0xfff0) { q = ((unsigned long)key-1u)/0xfff0u; key -= (long)(((q<<12)-q)<<4); }` then two small-clamp ifs (cmp 0xffff8008 / cmp 0x7ff8, +=/-= 0xfff0), return key. FA uses REAL unsigned div (div esi) and (q<<12 - q)<<4 multipliers (period 0x10000 in disguise: q*15<<4 = q*0xfff0 compensation) - no abs sites. Landed EXACT on probe 1, zero patches."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 496752,
+  "obj": "w43F_79470_v2",
+  "src": "build/survey/probes/w43F_79470_v2.c",
+  "maps": [
+   "_w43F_GInit=@G_Init@0",
+   "_w43F_curGM=_tempYLR+0x4e70",
+   "_w43F_gmW=_grMode+0xa",
+   "_w43F_gmH=_grMode+0xc",
+   "_w43F_xshiftS=_xshift",
+   "_w43F_xscaleS=_xscale",
+   "_w43F_yshiftS=_yshift",
+   "_w43F_yscaleS=_yscale"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "tail: toolchain-diff - none; chunk is fully code (112 B, code-only end, no census pad)"
+  ],
+  "notes": "_InitGraphicsMode 0x79470 (112 B, cdecl 1 arg): curGM(_tempYLR+0x4e70)=mode (a3); call @G_Init@0; two signed word compares vs _grMode+0xa (0x140) and +0xc (0xf0). ARM-PLACEMENT POLARITY (same lever as 0x45eb0): FA's inline arm = the <= arm with jg (7f) to the later >-arm; flip the C to `if (w43F_gmW <= (short)0x140) {xshift=1; xscale=0;} else {xshift=0; xscale=1;}` and the same <=-first shape for the +0xc pair, arms swapped. All stores 66 c7 05 imm16 word stores. Map TOs _tempYLR+0x4e70/_grMode+0xa/+0xc verified against FA imms (0x553128/0x5535ba/0x5535bc)."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 515504,
+  "obj": "w43F_7ddb0_v1",
+  "src": "build/survey/probes/w43F_7ddb0_v1.c",
+  "maps": [],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "tail: toolchain-diff - census tail 05 00 00 00 00 (5 B) auto-accepted"
+  ],
+  "notes": "unnamed 0x7ddb0 (64 B, stdcall 4 args ret 0x10): `b = *(unsigned long *)((char *)MMAccessR(id) + 0x2a); c = b + (n*3)*2; if (p3) *p3 = (short)(c+2); if (p4) *p4 = (short)(c+4); return *(short*)(c+2);` with n an unsigned char arg loaded via mov cl,[esp+8]/xor ecx,ecx zero-extend. NO-MAP FASTCALL IDENTITY: `extern long __fastcall MMAccessR(long a);` in a .c emits the symbol @MMAccessR@4 DIRECTLY (leading-@ decor; verified in the fit-obj symbol strings) = the FA public, so maps=[] and the call is linkable with no rename. movsx reads + guards (test/je) landed on probe 1, zero patches."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 554736,
+  "obj": "w43F_876f0_v1",
+  "src": "build/survey/probes/w43F_876f0_v1.c",
+  "maps": [
+   "@w43F_DGP@4=@DialogGetPtr@4"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "tail: toolchain-diff - census tail 8da42400000000+8da42400000000 (14 B) auto-accepted"
+  ],
+  "notes": "_DialogSetString@12 0x876f0 (144 B, stdcall 3 args ret 0xc): o = @DialogGetPtr@4(arg1) (fastcall; map FROM @w43F_DGP@4 = C fastcall decl decor, TO verified: FA e8 disp resolves to 0x487400); `switch (*(unsigned short *)o & 0x7fff)` with FA's 81 e1 imm32 and-mask, cmp 9 / ja unsigned, selector byte table at chunk+0x78 and 5-dword jump table at chunk+0x64 (case 0 -> [o+0x1a] + p3-guard [o+0x1e]; case 2 -> [o+0x14]; case 4 -> [o+0x20]; case 9 -> [o+0xa] + p3-guard [o+0xe]; default arm shared ret). C fn named w43F_DSS - the fit obj defines the chunk-name public _DialogSetString@12 (present in the fit-obj strings), so the free C fn name is fine. Landed EXACT on probe 1, zero patches."
+ }
+]

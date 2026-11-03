@@ -88,8 +88,8 @@ def done_set(entries):
     for e in entries:
         rva = int(e["rva"], 0) if isinstance(e["rva"], str) else e["rva"]
         if e.get("span"):
-            cs = [c for c in L["text_chunks"] if rva <= c["rva"] < rva +
-                  int(e["span"], 0)]
+            sp = int(e["span"], 0) if isinstance(e["span"], str) else e["span"]
+            cs = [c for c in L["text_chunks"] if rva <= c["rva"] < rva + sp]
             for c in cs:
                 done.add((c["rva"], c["size"]))
         else:

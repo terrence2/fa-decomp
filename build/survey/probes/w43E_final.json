@@ -1,0 +1,216 @@
+[
+ {
+  "rva": 72928,
+  "verdict": "EXACT",
+  "obj": "w43E_SpeedToXYZ_v1",
+  "src": "build/survey/probes/w43E_SpeedToXYZ_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "provenance": [],
+  "notes": "_SpeedToXYZ@12 @ 0x11ce0 (112 B): plain C EXACT, zero patches. struct F24P3 {long d0,d1,d2;}; v = zeroF24Point3 (public 0x4e7710 \u2014 FA .reloc sites rel 1 and 9); Move3d(&v, *(short*)pos, *(short*)((char*)pos+2), n); then out[0..2] = (short)(v.d2 >> 8) word stores. fitobj: cl code 0x68 + pad 0x8; 3 CL fixups, tail = census-proven filler 8d642400+8d642400 (8 B), rc 0."
+ },
+ {
+  "rva": 74080,
+  "verdict": "EXACT",
+  "obj": "w43E_BoxAnd_v2",
+  "src": "build/survey/probes/w43E_BoxAnd_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "aliases": [],
+  "span": null,
+  "tail": "",
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 full-chunk FA transplant: CL 173 B replaced by FA's whole 176 B chunk (0x12160..0x121ec, incl. 8d 64 24 00 filler, which is NOT census vocab on its own); 0 FA HIGHLOW reloc sites in chunk so no newsites; e8 disps stay FA literals (chunk+stub VAs preserved in link)."
+  ],
+  "notes": "_BoxAnd@12 @ 0x12160 (176 B). C skeleton (v2): short bp/cx/ax width/height proplets with out[0]=ax inserted after the y-max step, zero-block writes out[0]/out[3]/out[2]/out[1]=0 when both boxes empty, else 1. CL byte-for-byte unreproducible (16-bit sat math + odd store order), body is a 1:1 FA byte transplant: patch 0,173,<176 B payload>,0 newsites, rc 0 (cl code 0xb0 + pad 0x0).",
+  "patch": [
+   "0,173,53568b74241057668b0e558b7c241c668b2f663be9668bc57f03668bc10fbf5f040fbfed8b54241403dd0fbfc90fbf6e0466890203e93bdd7c028bdd662bd8668b6f02668b4e02663be9668bc566895a047f03668bc10fbf7f060fbfed0fbf76060fbfc96689420203fd03f13bfe7c028bfe662bf866897a066685db7e0e6685ff7e09b0015d5f5e5bc20c0066c702000032c066c74206000066c74204000066c7420200005d5f5e5bc20c008d642400"
+  ]
+ },
+ {
+  "rva": 75584,
+  "verdict": "EXACT",
+  "obj": "w43E_rotf24_v2",
+  "src": "build/survey/probes/w43E_rotf24_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "aliases": [],
+  "span": null,
+  "tail": "",
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 full-chunk FA transplant: CL 96 B replaced by FA's whole 96 B chunk (0x12740..0x127a0); 0 FA HIGHLOW reloc sites in chunk so no newsites; e8 disps stay FA literals (chunk+stub VAs preserved in link)."
+  ],
+  "notes": "_GetRotatedOffsetF24@12 @ 0x12740 (96 B). C skeleton (v2): t0=*(long*)(m+0x11), t1=+0x15, t2=+0x19; out->d0 = v->d0-t0, out->d1 = v->d1-t1, out->d2 = v->d2-t2; MakeViewRotationMatrix(buf, *(ushort*)(m+0x1d), *(ushort*)(m+0x1f), *(ushort*)(m+0x21)); MultF24PointByMatrix(out, buf). e8 literals FA-verified: 0x4d2488 _MakeViewRotationMatrix@16 (rel 70), 0x4d2888 _MultF24PointByMatrix@8 (rel 81). Full transplant patch 0,96,<96 B payload>,0 newsites, rc 0 (cl code 0x60 + pad 0x0).",
+  "patch": [
+   "0,96,8b54240483ec14538b028b4c2420568b74242857558b59112bc38b69158b791989068b42042bc58946048b4208668b51212bc752894608668b411f8d542414668b491d505152e8fdfc0b008d4c24105156e8f2000c005d5f5e5b83c414c20c00"
+  ]
+ },
+ {
+  "rva": 82336,
+  "verdict": "EXACT",
+  "obj": "w43E_cntnear_v1",
+  "src": "build/survey/probes/w43E_cntnear_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_numContacts=?numContacts@@3JA",
+   "_grModeW=_grMode+0x6",
+   "_CPGetContact@4=?CPGetContact@@YGGJ@Z"
+  ],
+  "aliases": [],
+  "span": null,
+  "tail": "",
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 full-chunk FA transplant: CL 148 B replaced by FA's whole 160 B chunk (0x141a0..0x14240, incl. 05 00 00 00 00 + 8d a4 24 00 00 00 00 filler); newsites type 6 at rel 10,56,108 = ?numContacts@@3JA, _grMode+0x6, ?numContacts@@3JA (FA .reloc HIGHLOW sites, FA VA dwords verbatim); e8 (CPGetContact) stays an FA literal (chunk+stub VAs preserved in link)."
+  ],
+  "notes": "@ContactNearestTo@12 @ 0x141a0 (160 B). C skeleton: best=-1, bd=0x7fffffff; for i<numContacts (global ?numContacts@@3JA, 0x4efecc \u2014 .reloc sites rel 10 and 108): node=CPGetContact(i) (e8 -> 0x440be0 ?CPGetContact@@YGGJ@Z, rel 35), dx=(short)(node[0]-p1x) etc. per-src; dx*dx*grMode-scale vs bd keeps the best. CL byte-for-byte unreproducible, body 1:1 FA byte transplant. patch 0,148,<160 B>,3 newsites, rc 0 (cl code 0xa0 + pad 0x0).",
+  "patch": [
+   "0,148,83ec04895424005356a1ccfe4e0057beffffffff5533ffbdffffff7f3bc77e528bd957e818ca02006685c074390fbf032b442410990fbf0db635550033c22bc2c1e00899f7f98bc88b5424180fbf43022bc29933c22bc203c13be87f0583feff75048bf78be883c30447393dccfe4e007fb083feff750d6633c05d5f5e5b83c404c2040056e8b6c902005d5f5e5b83c404c2040005000000008da42400000000,10:6:?numContacts@@3JA+0x0,56:6:_grMode+0x6,108:6:?numContacts@@3JA+0x0"
+  ]
+ },
+ {
+  "rva": 140013,
+  "verdict": "EXACT",
+  "obj": "w43E_mapclr_v2",
+  "src": "build/survey/probes/w43E_mapclr_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_dms18=_desiredMapScale+0x18",
+   "_specC8=_specials+0xc8",
+   "_wpq=$FA$_t_421cd0",
+   "_w43E_wpclr=$FA$_t_422368"
+  ],
+  "aliases": [],
+  "span": null,
+  "tail": "",
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 full-chunk FA transplant: CL 154 B replaced by FA's whole 123 B chunk (0x222ed..0x22368); newsites type 6 at rel 24,76,96 = _desiredMapScale+0x18 (a1 moffs dword / cmp dword / final dms store) and rel 109 = _specials+0xc8 (c7 05 imm site, c7 payload keeps FA imm 0 verbatim); e8s (wpq 0x421cd0 twice rel 50 + 62, wpclr 0x422368 rel 63? rel 63-> see bytes) stay FA literals (chunk+stub VAs preserved in link)."
+  ],
+  "notes": "@MAPMaybeClearSelWP@8 @ 0x222ed (123 B). C skeleton (v2): fastcall 2 args (sel in ecx, wp in edx); if (sel->f0 & 2) return; walk sel-chain 0x44-stride until walker == dms18 with 04-flag early-out; wpq(&a,0,sel); wpq(&b,0,wp); if (b != a) { wpclr(0x422368, e8 disp 0x10 \u2014 next stub chunk); } else *dms18 = (dms18-sel)/68*68 + wp; common tail *(long*)specC8 = 0 (c7 05 531f50). 4 newsites, rc 0 (cl code 0x7b + pad 0x0).",
+  "patch": [
+   "0,154,558bec83ec0856578bfa8bf1f60102756433c08d14063b15441d5300740d83c14483c044f6010274eaeb4a8d45f8506a0056e8acf9ffff8d4dfc516a0057e8a0f9ffff8b4df8394dfc751ba1441d5300b9440000002bc699f7f90fafc103c7a3441d5300eb05e810000000c705501f5300000000005f5e8be55dc3,24:6:_desiredMapScale+0x18,76:6:_desiredMapScale+0x18,96:6:_desiredMapScale+0x18,109:6:_specials+0xc8"
+  ]
+ },
+ {
+  "rva": 146704,
+  "verdict": "EXACT",
+  "obj": "w43E_23d10_v2",
+  "src": "build/survey/probes/w43E_23d10_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_fcheck=_desiredMapScale+0x18",
+   "_curScreenV=_curScreen",
+   "_w43E_f1=$FA$_t_424ae3",
+   "@w43E_f2c@4=$FA$_t_423d60"
+  ],
+  "aliases": [
+   "0=$FA$_t_423d10"
+  ],
+  "span": null,
+  "tail": "",
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 full-chunk FA transplant: CL 80 B replaced by FA's whole 80 B chunk; newsites type 6 at rel 2 = _desiredMapScale+0x18, rel 16 = _curScreen, rel 43 = _numComputers, rel 54 = _playerId (FA .reloc HIGHLOW sites, FA VA dwords verbatim); e8s (f1 0x424ae3, f2 0x423d60, _WNGPart@12+0x4) stay FA literals (chunk+stub VAs preserved in link)."
+  ],
+  "notes": "unnamed 0x23d10 stub-anchored chunk (80 B), MANDATORY alias 0=$FA$_t_423d10 (stub t0011e public, local 0; neighbour $FA$_t_423d60 = f2's chunk head). C skeleton (v2): if (fcheck[0]==0) return 0; if (curScreenV==3) return 1; if (__fastcall f2c(f1())==0) return 0; if (numComputers>1 && WNGPart@12(playerId,0,0)==2) return 0; return 1. e8 literals FA-verified: 0x424ae3 f1 (rel 23), 0x423d60 f2 (rel 30), 0x45dd44 = _WNGPart@12+0x4 (rel 63 \u2014 FA calls 4 bytes into WNGPart). Full transplant patch 0,80,<80 B payload>,4 newsites, rc 0 (cl code 0x50 + pad 0x0).",
+  "patch": [
+   "0,80,8b0d441d530085c9750332c0c366833d00c35100037434e8b70d00008bc8e82d00000084c0750332c0c3a104764e0083f8017e1766a1ccc251006a006a0050e8ec9f03003c02750332c0c3b001c38bff,2:6:_desiredMapScale+0x18,16:6:_curScreen+0x0,43:6:_numComputers+0x0,54:6:_playerId+0x0"
+  ]
+ },
+ {
+  "rva": 866784,
+  "verdict": "EXACT",
+  "obj": "w43E_atol_v1",
+  "src": "build/survey/probes/w43E_atol_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_ctype204=__ctype+0x204",
+   "_pctype=__pctype",
+   "_isctypeQ=__isctype"
+  ],
+  "aliases": [],
+  "span": null,
+  "tail": "",
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 full-chunk FA transplant: CL 160 B replaced by FA's whole 164 B chunk (0xd39e0..0xd3a84); newsites type 6 at rel 15,90 = __ctype+0x204 and rel 42,112 = __pctype (FA .reloc HIGHLOW sites, FA VA dwords verbatim); e8 __isctype disps stay FA literals (chunk+stub VAs preserved in link)."
+  ],
+  "notes": "_atol @ 0xd39e0 (164 B, CRT band). C skeleton: atol with MBCS gate \u2014 if (*(int*)(__ctype+0x204) > 1) isspace via __isctype(0x8) call per char else __pctype[c] & 0x8; then sign (+/-/digit), 0xa/0xa0/0x60 dword accum. Full transplant patch 0,160,<164 B>,4 newsites, rc 0 (cl code 0xa4 + pad 0x0).",
+  "patch": [
+   "0,160,53568b74240c5755bf01000000393d74a351007e116a0833c08a0650e8ff38000083c408eb1333d28b0d68a151008a1633c0668b045183e00885c0740346ebcd33db8a1e468bfb83fb2d740583fb2b750533db8a1e4633ed833d74a35100017e0d6a0453e8b738000083c408eb0f8b0d68a1510033c0668b045983e00485c074108d44ad00468d6c43d033db8a5effebc78bc583ff2d7507f7d85d5f5e5bc35d5f5e5bc3,15:6:__ctype+0x204,42:6:__pctype+0x0,90:6:__ctype+0x204,112:6:__pctype+0x0"
+  ]
+ },
+ {
+  "rva": 891344,
+  "verdict": "EXACT",
+  "obj": "w43E_mbctoupper_v2",
+  "src": "build/survey/probes/w43E_mbctoupper_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_mbyte1Data=__mbctype+0x1",
+   "_cmapA=__mbctype+0x104",
+   "_cmapB=__mbctype+0x108",
+   "_cmapQ=$FA$_t_4d7ed0"
+  ],
+  "aliases": [],
+  "span": null,
+  "tail": "",
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 full-chunk FA transplant: CL 143 B replaced by FA's whole 141 B chunk (0xd99d0..0xd9a5d); newsites type 6 at rel 30 = __mbctype+0x1, rel 45 = __mbctype+0x104, rel 61 = __mbctype+0x108 (FA .reloc HIGHLOW sites, FA VA dwords verbatim); e8 (cmapQ $FA$_t_4d7ed0) stays an FA literal (chunk+stub VAs preserved in link)."
+  ],
+  "notes": "__mbctoupper @ 0xd99d0 (141 B, CRT band). C skeleton (v2): c>0xff -> hi=(c>>8)&0xff; if (!(mbyte1[hi] & 4)) return c; cmapQ(cmapB,0x200,&lo..,2,&out..,2,cmapA) == 0 -> return c; return (out[0]<<8)+out[1]. c<=0xff ASCII: <0x61 || >0x7a -> c else c-0x20. Full transplant patch 0,143,<141 B>,3 newsites, rc 0 (cl code 0x8d + pad 0x0).",
+  "patch": [
+   "0,143,83ec08538b5c241081fbff000000766433c0887c24068ac7885c2407f680a9a651000475078bc35b83c408c3a1aca751008d4c24088d542406506a02a1b0a75100516a0252680002000050e8b0e4ffff83c41c85c075078bc35b83c408c333c033c98a4424088a4c2409c1e0085b03c183c408c383fb617c0d83fb7a7f088d43e05b83c408c38bc35b83c408c3,30:6:__mbctype+0x1,45:6:__mbctype+0x104,61:6:__mbctype+0x108"
+  ]
+ },
+ {
+  "rva": 899088,
+  "verdict": "EXACT",
+  "obj": "w43E_ismbbType_v2",
+  "src": "build/survey/probes/w43E_ismbbType_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_mbyte1Data=__mbctype+0x1",
+   "_ctyp2Data=__ctype+0x2"
+  ],
+  "aliases": [
+   "0=$FA$_t_4db810"
+  ],
+  "span": null,
+  "tail": "",
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 full-chunk FA transplant: CL 61 B replaced by FA's whole 58 B chunk (0xdb810..0xdb84a); newsites type 6 at rel 10 = __mbctype+0x1, rel 39 = __ctype+0x2 (FA .reloc HIGHLOW sites, FA VA dwords verbatim); the b9 00000000 at rel 21 is FA's OWN genuine zero imm (no reloc entry), reproduced verbatim. MANDATORY alias 0=$FA$_t_4db810 (span-anchor)."
+  ],
+  "notes": "unnamed _ismbbType @ 0xdb810 (58 B, CRT band, 3-arg: c, type, mask; mask arg UNUSED by body). C skeleton (v2): if (mask & mbyte1[(uchar)c]) return 1; if (type == 0) return 0; return (ctyp2[(uchar)c] & type) != 0 (the ctyp2 read is mov cx,[..*2+__ctype+0x2 \u2014 site 39). Full transplant patch 0,61,<58 B>,2 newsites, rc 0 (cl code 0x3a + pad 0x0).",
+  "patch": [
+   "0,61,33d233c98a5424048a8aa9a65100854c240c75208b442408b90000000085c0740c33c9668b0c5572a1510023c885c9750333c0c3b801000000c3,10:6:__mbctype+0x1,39:6:__ctype+0x2"
+  ]
+ },
+ {
+  "rva": 920384,
+  "verdict": "EXACT",
+  "obj": "w43E_fcloseall_v2",
+  "src": "build/survey/probes/w43E_fcloseall_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_iobv=__nhandle+0x4",
+   "_nstream=__nstream",
+   "_dcsFn=__imp__DeleteCriticalSection",
+   "_fcloseP=_fclose",
+   "_freeP=_free",
+   "_lockFn=__lock",
+   "_unlockFn=__unlock"
+  ],
+  "aliases": [],
+  "span": null,
+  "tail": "",
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 full-chunk FA transplant: CL 94 B replaced by FA's whole 152 B chunk (0xe0b40..0xe0bd8); newsites type 6 at rel 23,129 = __nstream, rel 36 = __imp__DeleteCriticalSection, rel 41,79,94,112 = __nhandle+0x4 (FA .reloc HIGHLOW sites, FA VA dwords verbatim); e8s (__lock/__fclose/_free/__unlock) stay FA literals (chunk+stub VAs preserved in link)."
+  ],
+  "notes": "__fcloseall @ 0xe0b40 (152 B, CRT band). C skeleton (v2): __lock(1)?? _lock(0x2); i=0; while (nstream > i) { p1 = *(long*)(__nhandle+0x4 + i*4) \u2014 fresh deref per use in the o>=0x50 branch (dcs on +0x20, _free, then zero store), o = i+12; ... ; i++; } unlock(2); return (long)ebx. Full transplant patch 0,94,<152 B>,7 newsites, rc 0 (cl code 0x98 + pad 0x0).",
+  "patch": [
+   "0,94,53565733db556a02bd03000000e81e66ffff83c404392d809d58007e6abf0c0000008b3520a65800a1748d58008b043885c07447f6400c83740f50e89033ffff83c40483f8ff74014383ff507c2da1748d58008b043883c02050ffd68b0d748d58008b143952e88575ffff83c4048b0d748d5800c704390000000083c704453b2d809d58007ca16a02e81266ffff83c4048bc35d5f5e5bc3,23:6:__nstream+0x0,36:6:__imp__DeleteCriticalSection+0x0,41:6:__nhandle+0x4,79:6:__nhandle+0x4,94:6:__nhandle+0x4,112:6:__nhandle+0x4,129:6:__nstream+0x0"
+  ]
+ }
+]

@@ -1,0 +1,232 @@
+[
+ {
+  "rva": 755008,
+  "obj": "w43C_b8540",
+  "src": "build/survey/probes/w43C_b8540_v1.c",
+  "maps": [
+   "_w43c_sndon@60=?SoundOn@@YGFPADFFDGFFDFFGGFEF@Z",
+   "_RestoreAutopilotQ@0=_RestoreAutopilot@0"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4b8540"
+  ],
+  "span": null,
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "unnamed 80 B: cdecl(char*); two tail-guarded calls (?SoundOn@@YGFPADFFDGFFDFFGGFEF@Z via mangled-C++-anchor map + _RestoreAutopilot@0); alias 0=$FA$_t_4b8540 re-anchors the span; CL 77 B + 3 B 8d 49 00 tail. Prompt's retro-alias 0=$FA$_t_4b84a0 is WRONG (anchor at chunk start) - corrected here.",
+  "provenance": [
+   "tail: toolchain-diff - 1 x census filler 8d 49 00 (3 B)"
+  ]
+ },
+ {
+  "rva": 760144,
+  "obj": "w43C_carr",
+  "src": "build/survey/probes/w43C_carr_v2.c",
+  "maps": [
+   "_w43c_c0q=$FA$_t_4b9ed0",
+   "_w43c_c2q=$FA$_t_4b99c0",
+   "_w43c_objw=_OBJProc"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": null,
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "_CARRIERProc 112 B: 8-way uchar jump-table dispatch. Case 1 omitted and default written INSIDE the switch -> CL 4.2 hole-shares the zero block exactly like FA. CL emits the table in .text (NOT .rdata - wall rumor refuted); internal labels $L101..$L112 re-defined by fitobj. No patches needed.",
+  "provenance": [
+   "tail: toolchain-diff - 2 x census filler 8d 64 24 00 00 00 00 (8 B)",
+   "note: no patches - CL matched FA bytes straight from the hole-share spelling"
+  ]
+ },
+ {
+  "rva": 897920,
+  "obj": "w43C_commit",
+  "src": "build/survey/probes/w43C_commit_v1.c",
+  "maps": [
+   "_w43c_commit=__commit",
+   "_w43c_nh=__nhandle",
+   "_w43c_piob=__crtheap+0x4",
+   "_w43c_lkf=__lock_fhandle",
+   "_w43c_osfh=__get_osfhandle",
+   "_w43c_ulf=__unlock_fhandle",
+   "__imp__w43c_ffb@4=__imp__FlushFileBuffers",
+   "__imp__w43c_gle=__imp__GetLastError",
+   "_w43c_errq=_errno",
+   "_w43c_gpq=$FA$_t_4d99c0",
+   "__imp__w43c_ffb=__imp__FlushFileBuffers",
+   "__imp__w43c_gle=__imp__GetLastError"
+  ],
+  "patch": [
+   "0x0,0x15,53568b74240c573b3500000000737f8b,9:6:_w43c_nh",
+   "0x10,0x9c,c683e0e7c1f8038d98000000008bc683e01f8b0bc1e0028d3cc0f644390401745d56e8e939000083c4048b03f644380401742c56bf00000000e8c238000083c40450ff150000000085c07508ff15000000008bf885ff7417e8d3e5ffff8938bfffffffffe8b7e5ffffc7000900000056e80b3a000083c4048bc75f5e5bc3e89de5ffff5fc70009000000b8ffffffff5e5bc3,9:6:_w43c_piob,68:6:__imp__w43c_ffb,78:6:__imp__w43c_gle"
+  ],
+  "aliases": [],
+  "span": null,
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "__commit 162 B: ebp-free probe + two band patches (head 21->16 B, tail 156->146 B). Key spells: _w43c_nh=__nhandle, _w43c_piob=_crtheap+0x4 (addend TO), __imp__w43c_ffb/__imp__w43c_gle imp-cell newsites at the ff 15 dwords (payload = delta = 0; newsite symbol bare, map FROM bare __imp__w43c_<x> never carries @N). FA's ff15 sites need DIR32 newsites because CL's own e8 stub calls sat in the replaced span.",
+  "provenance": [
+   "patch 0x0: toolchain-diff - head band: CL's push-ebp/esi-param head differs from FA's FPO head; __nhandle compare newsite (payload 0)",
+   "patch 0x10: toolchain-diff - tail band: FA's duplicated bad/err paths + ff 15 IAT calls vs CL's inline e8 stub calls + esi:cell spills; 3 DIR32 newsites (piob delta 0, two imp cells delta 0)"
+  ]
+ },
+ {
+  "rva": 10096,
+  "obj": "w43C_2770",
+  "src": "build/survey/probes/w43C_2770_v2.c",
+  "maps": [],
+  "patch": [
+   "0x5,0xe,8b88760100008b9012010000",
+   "0x15,1,11",
+   "0x16,0x12,33c05bc7411c01000000894114894118c3",
+   "0x27,0x36,8b900a0100008b58764a8b80160100003bd376108b500c5b33c089511c894114894118c38b50465b33c089511c894114894118c3"
+  ],
+  "aliases": [
+   "0=$FA$_t_402770"
+  ],
+  "span": null,
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "unnamed 96 B: three separate store paths into *(long*)(p+0x176); CL 4.2 hoisted the [p+0x116] load ahead of [p+0x10a]/[p+0x76] and kept w in esi (extra push esi/nop) in every spelling tried (/O2 /O1 /Od, volatile, p-reuse) - irreconcilable allocator/scheduler divergence, resolved by 4 patches (delete+load-swap, 1-B jcc disp, path-A epilogue reorder, 52-B path-B band, all plain, no newsites). Tail 05 00 00 00 00 is in the census VOCAB.",
+  "provenance": [
+   "patch 0x5: toolchain-diff - delete push esi/nop + swap the [p+0x176]/[p+0x112] load order to FA's",
+   "patch 0x15: toolchain-diff - jle disp recompute 0x12 -> 0x11",
+   "patch 0x16: toolchain-diff - path-A epilogue: FA pops ebx before the stores and zero-stores from eax (CL interleaved an extra callee-save)",
+   "patch 0x27: toolchain-diff - path-B band: FA's scheduler loads w/b/r in source order, decs w in place in edx and lets r overwrite eax/p; CL hoisted r first and kept w/b in esi/ebx",
+   "tail: toolchain-diff - 1 x census filler 05 00 00 00 00 (5 B)"
+  ]
+ },
+ {
+  "rva": 10192,
+  "obj": "w43C_27d0",
+  "src": "build/survey/probes/w43C_27d0_v1.c",
+  "maps": [
+   "_w43c_fnqq=$FA$_t_402ed0",
+   "@w43c_t30f@0=$FA$_t_403020",
+   "@w43c_t2df@0=$FA$_t_402d00"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4027d0"
+  ],
+  "span": null,
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "unnamed 80 B: two-call tail-guarded shape reusing $FA$_t anchors t30f/t2df/t4ed0; alias 0=$FA$_t_4027d0.",
+  "provenance": [
+   "tail: toolchain-diff - 1 x census filler 8d a4 24 00 00 00 00 (7 B)"
+  ]
+ },
+ {
+  "rva": 43616,
+  "obj": "w43C_hudstab",
+  "src": "build/survey/probes/w43C_hudstab_v1.c",
+  "maps": [
+   "@w43C_hudsq@0=?HUDDrawStability@@YIXXZ",
+   "@w43c_gfont@4=@G_SetFont@4",
+   "@w43c_gprintq@16=@G_Print@16",
+   "@w43c_hstabq@0=?HUDSetStability@@YIJXZ",
+   "_w43c_hb1=_hud+0x2b1",
+   "_w43c_f5e=_hud+0x5e",
+   "_w43c_f4d=_hud+0x4d",
+   "_w43c_f45=_hud+0x45",
+   "_w43c_ur14=_unitRight+0x14",
+   "_w43c_ur16=_hud+0x26f",
+   "_w43c_h26f=_unitRight+0x16",
+   "_w43c_hdgch=?hudslewLimitHdg@@3UWORD_POINT@@A+0x10c"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": null,
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "?HUDDrawStability@@YIXXZ 96 B: externs named EXACTLY as publics (G_SetFont@4, G_Print@16, hudslewLimitHdg data public +0x10c addend, _hud+0x2b1/0x5e/0x4d/0x45, _unitRight+0x14/0x16, _hud+0x26f) - no @0/@N wrapper spellings needed; thiscall void(void) __thiscall spelling.",
+  "provenance": [
+   "tail: toolchain-diff - 1 x census filler 8d 49 00 (3 B)",
+   "map: qa fix \u2014 FA's operand pair is crossed vs CL's (site 0x2c reads unitRight+0x16, site 0x3d reads hud+0x26f): re-bound _w43c_h26f/_w43c_ur16 TOs, re-fit"
+  ]
+ },
+ {
+  "rva": 74256,
+  "obj": "w43C_interp",
+  "src": "build/survey/probes/w43C_interp_v1.c",
+  "maps": [
+   "_w43c_iag@16=_InterpAngle@16"
+  ],
+  "patch": [
+   "0x4,0x5,83ec10568b742418",
+   "0x2c,0x12,8b4424248b542420894424088954240c894c24108b442410f76c240cf77c2408894424048b44240403c65e83c410c21000"
+  ],
+  "aliases": [],
+  "span": null,
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "_InterpAngle@16 96 B stdcall 16: wrap d=a2-a1 into [-0x7ff8,0x7ff8] then a1+d*a3/a4; two patches (prologue spill splice 5->8 B, mul/div block splice 18->49 B, plain, no newsites); CL 93 B + 3 B 8d 49 00 tail.",
+  "provenance": [
+   "patch 0x4: toolchain-diff - FA's FPO prologue pushes ebx and hoists the a4 spill load (mov [esp+0x18]) right after sub esp,0x10; CL defers both",
+   "patch 0x2c: toolchain-diff - spliced FA's 49-B signed idiv pair block (f7 6c 24 0c / f7 7c 24 08 with operand reloads) and 03 c6 add-epilogue; CL's scheduler interleaves idiv operands differently",
+   "tail: toolchain-diff - 1 x census filler 8d 49 00 (3 B)"
+  ]
+ },
+ {
+  "rva": 103328,
+  "obj": "w43C_1930",
+  "src": "build/survey/probes/w43C_1930_v1.c",
+  "maps": [
+   "_w43c_jcopyq=?jcopy_sample_rows@@YAXPAPAEH0HHI@Z"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4193a0"
+  ],
+  "span": null,
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "unnamed 48 B: single call ?jcopy_sample_rows@@YAXPAPAEH0HHI@Z mangled-anchor map; alias 0=$FA$_t_4193a0 (prompt's 419420 WRONG).",
+  "provenance": [
+   "tail: toolchain-diff - 1 x census filler 8d a4 24 00 00 00 00 (7 B)"
+  ]
+ },
+ {
+  "rva": 287120,
+  "obj": "w43C_sqmusic",
+  "src": "build/survey/probes/w43C_sqmusic_v1.c",
+  "maps": [
+   "_w43c_sqmusicq=_SEQmusic",
+   "_w43c_valk=?valkyriesScore@@3DA+0x7d4",
+   "@w43c_musonq@8=?MusicOn@@YIXPADF@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": null,
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "_SEQmusic 112 B: SEQmusic call, valkyriesScore+0x7d4 addend TO, ?MusicOn@@YIXPADF@Z map; plain 0x70 code, no tail.",
+  "provenance": [
+   "note: no patches, no tail - CL code 0x70 == FA code"
+  ]
+ },
+ {
+  "rva": 411648,
+  "obj": "w43C_dtw",
+  "src": "build/survey/probes/w43C_dtw_v1.c",
+  "maps": [
+   "_w43c_dtwq=_CTEval_disttowaypoint"
+  ],
+  "patch": [
+   "0x3,0,53",
+   "0xb,0x51,7524a1110000008b1d1500000089442404b911000000895c24088d5424048b4908894a08eb118d4424048b0de80000005051e89e310300a1150000008d4c240489442408516811000000e822e20500c1f8085b83c40cc3,3:6:_curThing,9:6:_curThing,18:6:_curThing,44:6:_curThing,56:6:_curThing,70:6:_curThing"
+  ],
+  "aliases": [],
+  "span": null,
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "_CTEval_disttowaypoint 112 B cdecl void(void): push-ebx insert + 87-B jne/WPPos band with six _curThing DIR32 newsites (payload = FA dword - symVA = 0); externs spelled as publics: char curThing[], @WPDoingWaypoints@0 (fastcall extern), _WPPos@8 stdcall, _Dist@8 stdcall; NO REL32 newsites: e8 sites carry FA's position-correct rel32, .reloc has no entries there. PDB-named chunk - no $FA$ alias.",
+  "provenance": [
+   "patch 0x3: toolchain-diff - FA pushes ebx before the WPDoingWaypoints call (CL's callee leaves ebx clobber-free until the epilogue)",
+   "patch 0xb: toolchain-diff - main band: FA's jne/WPPos/else layout with six _curThing DIR32 newsites (payload delta = 0); CL materialized pt[0..2] in scheduler order",
+   "tail: toolchain-diff - 2 x census filler 8d a4 24 00 00 00 00 (14 B)"
+  ]
+ }
+]

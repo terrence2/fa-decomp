@@ -1,0 +1,251 @@
+[
+ {
+  "rva": 459040,
+  "verdict": "EXACT",
+  "obj": "w43H_70120_v1",
+  "src": "build/survey/probes/w43H_70120_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w43H_numC=_numComputers",
+   "_w43H_thisC=_thisComputer",
+   "_w43H_gPrefs=_gamePrefs",
+   "_w43H_gMPref=_gameMultiPrefs",
+   "_w43H_send@16=$FA$_t_46b260",
+   "@w43H_flush@4=?MPFlushAll@@YIXD@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "notes": "?MPSendPrefs@@YGXXZ (96 B = 85 code + 11-B census pad 8d642400+8da42400000000). First-try EXACT, zero patches: declared the 5 globals as plain externs (numComputers/thisComputer/gamePrefs/gameMultiPrefs) and the two calls with exact arg-list widths (_send@16 = $FA$_t_46b260 gap-chunk stub TO, _flush@4 = ?MPFlushAll@@YIXD fastcall bare form), CL picked the same store/call encodings and esp-frame as FA.",
+  "provenance": []
+ },
+ {
+  "rva": 795472,
+  "verdict": "EXACT",
+  "obj": "w43H_c2350_v1",
+  "src": "build/survey/probes/w43H_c2350_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w43H_terF=_terFileName",
+   "_w43H_th2=_th",
+   "_w43H_tdicA=_tdic",
+   "_w43H_tmapN=_tmapName",
+   "_w43H_tdicS=_tdicSize",
+   "_w43H_tlistA=_tlist",
+   "_w43H_tlistS=_tlistSize",
+   "@w43H_mmfree@4=@MMFreeHandle@4",
+   "_w43H_rmfree@4=_RMFree@4"
+  ],
+  "patch": [],
+  "aliases": [],
+  "notes": "_T_Shutdown@0 (128 B = 113 code + 15-B census pad 8d642400+8d642400+8da42400000000). First-try EXACT, zero patches: 9 globals as externs (terFileName/th/tdic/tmapName/tdicSize/tlist/tlistSize) plus @MMFreeHandle@4 (fastcall imp form) and _RMFree@4 (stdcall). CL matched FA's zero-store band, call encodings and both census pads with no levers.",
+  "provenance": []
+ },
+ {
+  "rva": 281808,
+  "verdict": "EXACT",
+  "obj": "w43H_44cd0_v1",
+  "src": "build/survey/probes/w43H_44cd0_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w43H_seqLine=?seqLine@@3PADA",
+   "_w43H_lit=?valkyriesScore@@3DA+0x720"
+  ],
+  "patch": [],
+  "aliases": [],
+  "notes": "$FA$_span_044cd0 (80 B = 71 code + 9-B census pad 8bff+8da42400000000; layout name empty). EXACT after only the rva correction (281808 = 0x44cd0): naked-asm repz cmpsb body \u2014 the only C lever was the declared-char-pointer externs _w43H_seqLine=?seqLine@@3PADA and _w43H_lit=?valkyriesScore@@3DA+0x720; the repz cmpsb + repe tail is emitted from naked asm (dis.py elides these instrs; chunk bytes verified from FA/FA.EXE).",
+  "provenance": []
+ },
+ {
+  "rva": 450144,
+  "verdict": "EXACT",
+  "obj": "w43H_6dh",
+  "src": "build/survey/probes/w43H_6dh.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [
+   "1,1,4c",
+   "10,59,0fbe4103c1e00c558b1a8b6a0403d8891a8b72080fbe4104c1e00c03c58942040fbe4905c1e10c03f185c08972087d07c74204000000005d5e5bc20c00"
+  ],
+  "aliases": [],
+  "notes": "$FA$_span_06de60 (80 B = 71 code + 9-B census pad 8bff+8da42400000000; layout name empty). Recipe: __stdcall(void *a2, long *pt, long unused) \u2014 CL's param/register plan flip (FA keeps a2 in EAX where CL wanted it in ECX) fixed by declaring param order a2/arg2/unused with pt and ps locals; the three signed-byte loads written as separate statements (long)(*(signed char*)(ps+3))<<12 style so CL shares the c1e0 shift shape; the conditional zero-store for pt[1] spelled if(d2<0) so CL emits the 7d07 short-jump + c7420400000000. Two patches: '1,1,4c' = mov rm-byte (8b 44 24 04 -> 8b 4c 24 04, param in ECX); '10,59,...' = 0x37-B tail block replace (FA bytes, from the shared movsbl band through ret 0x18) after CL's split pt[0]+=d1 reg plan and dropped 33 c0 - 0x39 B old -> 0x3b B new.",
+  "provenance": [
+   "patch 1: toolchain-diff reg plan: param a2 read in ECX in FA (8b 4c 24 04), CL chose EAX; 1 B modrm",
+   "patch 10: toolchain-diff tail block: CL split the pt[0]+=d1/pt[1]+=d2 adds and dropped FA's 33 c0 zeroing before the second movsbl; replaced the 0x59-B band 0x10..0x69 with FA's 61-B band 0x10..0x69 (89 91 / 89 72 add spellings, 7d 07 jge + c7 42 04 00000000 conditional zero, 5d 5e 5b c2 0c 00 epilogue with ret 0x18)"
+  ]
+ },
+ {
+  "rva": 276336,
+  "verdict": "EXACT",
+  "obj": "w43H_43770_v3",
+  "src": "build/survey/probes/w43H_43770_v3.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w43H_graphics=_graphics",
+   "_w43H_noMixLeft=?noMixLeft@@3UMODSPEC@@A",
+   "@w43H_gAdd@4=$FA$_t_443280"
+  ],
+  "patch": [
+   "8,1,65",
+   "9,12,b81893530033c9ba00010000,1:6:_graphics+0x0",
+   "0x3f,0x37,8a44240c8b4c2410804e030166894e4b8a5424148a4c241c88464a8a44241888564d88464e884e4fc74650000000005ec21800"
+  ],
+  "aliases": [],
+  "notes": "_GRAPHICMakeAdder@24 (128 B = 114 code + 14-B lea-pad census 8da42400000000+8da42400000000). Winner v3: stdcall 6 args. Decls ordered count-then-p (FA: EAX=ptr/ECX=count - declaring the count local first put it in ECX); m[3]|=1 spelled as a plain array RMW (CL emits the single-instr or byte); a3 kept as an unsigned long PARAM word-store (no local); the six field stores written in FA's byte order 4b/4a/4d/4e/4f/50. 3 patches: '8,1,65' (1-B branch byte in the loop head), '9,12,b81893530033c9ba00010000' (12-B mask/count init band: FA materializes mov eax,_graphics / xor ecx,ecx / mov edx,1), '0x3f,0x37,...' (0x33-B tail replace: FA's field-store band through ret 0x18 with the 5e c2 18 00 epilogue; CL had the stores in a different order and a longer epilogue), shrinking 4 B.",
+  "provenance": [
+   "patch 8: toolchain-diff branch rel8: CL jump target shift after the init-band reorder; 1 B",
+   "patch 9: toolchain-diff init band: CL materialized the 0x100 mask in B8-EAX and the count in ECX with a different push order; replaced 12 B with FA bytes",
+   "patch 0x3f: toolchain-diff tail block: FA store order + 0x66 8b/8a field loads + 5e c2 18 00 epilogue vs CL's longer plan; 55 -> 51 B",
+   "map: qa fix \u2014 band killed CL's b8 fixup; FA .reloc has the _graphics entry at rva 0x4377a (chunk+0xa = band+1): re-added newsite +0x0 (hex baked full VA), re-fit"
+  ]
+ },
+ {
+  "rva": 310160,
+  "verdict": "EXACT",
+  "obj": "w43H_4bb90_v2",
+  "src": "build/survey/probes/w43H_4bb90_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w43H_mpOn1=?mpInfo@@3UMP_INFO@@C+0x154",
+   "_w43H_mpSt=?mpInfo@@3UMP_INFO@@C+0x170",
+   "_w43H_ctrlC1=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x234",
+   "_w43H_ctrlC2=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x238",
+   "_w43H_appIO=?appIO@@3P6AJJPAD@ZA",
+   "_w43H_opk14=?OutPacket@@3USERIAL_PACKET_WRAPPER@@A+0x14",
+   "_w43H_ipk14=?InPacket@@3USERIAL_PACKET_WRAPPER@@A+0x14",
+   "_w43H_serIO=?serIO@@YAXJ@Z"
+  ],
+  "patch": [
+   "0,2,33c9",
+   "3,1,54",
+   "7,1,0d",
+   "0xd,1,0d",
+   "0x13,1,82",
+   "0x1e,1,0d",
+   "0x2e,1,42",
+   "0x30,2,3bc1",
+   "0x33,1,05",
+   "0x37,2,7e0d",
+   "0x39,0x20,6a01e81007000083c40433c0c38b4264a300bd4f008b4264a320835600b802000000c3,3:20:_w43H_serIO+0x0,0x11:6:?mpInfo@@3UMP_INFO@@C+0x170,0x19:6:?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x238"
+  ],
+  "aliases": [],
+  "notes": "?SER_Initialize1@@YAJPAUCN_INFO@@J@Z (96 B = 92 code + 4-B census pad 8d642400). Recipe: cdecl (void *info, long arg2) with a LIVE zero local spelled explicitly (long zero; zero=0; stores =zero) so CL keeps the value in ECX (FA's 3b c1 compare partner = the stored zero; CL's own zeroing wanted EAX). Explicit-goto CFG shape (if(v<zero) goto bad; if(v<=3) goto ok; bad: serIO(1); return 0; ok: rewrites; return 2) \u2014 CL still placed the bad block mid-stream like FA here. 11 small patches: prologue reg-color band (33c9 54 0d 0d 82 0d 42 = modrm/rm-byte + push slot fixes), the 3b c1 compare + 05 imm + jle rel8 band, and the 0x39 tail block replace (32 B old -> 33 B new: FA's mpSt/ctrlC2 reload band + serIO call site with newsite rel 2 = _w43H_serIO@4 REL32; CL's own serIO call and 33 c0 return moved into FA's order).",
+  "provenance": [
+   "patch 0: toolchain-diff zero local reg: FA xor ecx,ecx (33 c9) vs CL 33 c0; 2 B",
+   "patch 0x3: toolchain-diff prologue push slot: FA pushes the saved-reg slot one instruction later; 1 B",
+   "patch 0x7/0xd/0x13/0x1e/0x2e: toolchain-diff modrm/rm bytes of the zero-store spellings (89 0d imm32 forms and the 0x42 rm word store); 1 B each",
+   "patch 0x30: toolchain-diff cmp orientation: FA 3b c1 (v<zero pair vs ECX-zero) vs CL 3b c?; 2 B",
+   "patch 0x33: toolchain-diff imm operand: FA 05 (and eax,3 imm byte); 1 B",
+   "patch 0x37: toolchain-diff jle rel8 placement into FA's ok-block order; 2 B",
+   "patch 0x39: toolchain-diff tail block: FA's reload band (mov [mpSt],[p+0x64] / a2 00bd4f00 / mov b802000000 kinds) and the serIO call rel32; CL's block had a different order; 32 -> 33 B, killed CL's own serIO call fixup and re-added newsite 2:20:_w43H_serIO",
+   "map: qa fix \u2014 newsite site was the e8 opcode byte (chunk+0x3b); the disp dword = chunk+0x3c (band+3); +0x0 (hex baked FA disp), re-fit",
+   "map: qa fix \u2014 the 0x39 band also killed CL's two DIR32 zero-store fixups: FA re-encodes them as a3 moffs (imm sites chunk+0x4a = mpInfo+0x170, chunk+0x52 = Ctrl+0x238 = FA's missing .reloc entries): re-added newsites +0x0, re-fit"
+  ]
+ },
+ {
+  "rva": 670960,
+  "verdict": "EXACT",
+  "obj": "w43H_a3cf0_v2b",
+  "src": "build/survey/probes/w43H_a3cf0_v2b.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "@w43H_rmfind@4=@RMFind@4",
+   "_w43H_rmct@12=_RMChangeType@12",
+   "_w43H_glb@20=_G_LoadBitmap@20",
+   "_w43H_rml@12=_RMLocate@12",
+   "_w43H_avr18=?averageTest@@3_JA+0x18",
+   "_w43H_avr1c=?averageTest@@3_JA+0x1c",
+   "_w43H_brs=_brsColorProcess",
+   "_w43H_lit2=$FA$_d_4e7000+0x548"
+  ],
+  "patch": [
+   "0x12,1,47",
+   "0x46,0x1e,5051e83303010085c07409506a0356e846faffff5e83c410c3,3:20:_w43H_glb@20+0x0,0x10:20:_w43H_rml@12+0x0"
+  ],
+  "aliases": [],
+  "notes": "_LoadPIC (96 B = 95 code + 1-B census pad 90). Recipe: cdecl (void *p1, unsigned long p2) with a 16-B local unsigned long rbuf[4] whose &rbuf[0] anchor gives FA's slot leas ([esp+4]/[esp+0x10]); arg2 read via the alias spelling (unsigned long)*(unsigned short *)&p2 so CL emits 66 8b (mov reg16,mem) matching FA (the plain (unsigned short)p2 cast makes CL dword-load + and 0x1_0000-style mask junk instead). rmfind __fastcall, rmct/glb/rml stdcall @12/@20/@12, short externs for averageTest+0x18/+0x1c and brsColorProcess, the fmt literal spelled as an interior char array _IID_IDirectDrawClipper+0x22a8. 2 patches: '0x12,1,47' = je rel8 (CL's shared exit target sits 5 B later because CL emitted a redundant and eax,0xffff at 0x46); '0x46,0x1e,...' = 0x1e-B tail replace deleting CL's redundant and (25 ff ff 00 00) and copying FA's 0x46..0x5e call band verbatim (pop esi/add esp,0x10/ret), killing CL's own two call relocs and re-adding newsites span-rel 3 (_w43H_glb@20) and 0x10 (_w43H_rml@12).",
+  "provenance": [
+   "patch 0x12: toolchain-diff je rel8 target (CL's extra and eax,0xffff shifts the shared pop esi); 1 B",
+   "patch 0x46: toolchain-diff redundant and-mask: CL re-masked the movswl arg2 read (25 ffff0000) FA doesn't have; 0x1e B old -> 0x19 B new, both e8 call sites killed and re-added as newsites 0x3/_w43H_glb@20 and 0x10/_w43H_rml@12",
+   "map: qa fix \u2014 transplanted hex carries FA's e8 disps; rel32 newsites need content = FA_target-symVA = 0: re-spelled tokens +0x0, re-fit"
+  ]
+ },
+ {
+  "rva": 685184,
+  "verdict": "EXACT",
+  "obj": "w43H_a7480_v1",
+  "src": "build/survey/probes/w43H_a7480_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w43H_tdicM1=_PLthrustYaw+0x7",
+   "_w43H_tdicSize=_tdicSize",
+   "_w43H_tmapName=_tmapName",
+   "_w43H_fmt=?mcFlyAll@@3DA+0x46c",
+   "_w43H_sprint=_Sprintf",
+   "@w43H_tide@8=@T_InitDictionaryEntry@8"
+  ],
+  "patch": [
+   "3,0x15,33c05333db50a3000000008d4424086800000000,7:6:_w43H_tdicSize,0x10:6:_w43H_tmapName",
+   "0x25,1,14",
+   "0x34,0x24,84c0a100000000741b8d0c40408d5488ffa3000000003d2c010000889c90000000007cb0,3:6:_w43H_tdicSize,0x12:6:_w43H_tdicSize,0x1e:6:_w43H_tdicM1"
+  ],
+  "aliases": [],
+  "notes": "_T_InitDictionary@0 (96 B = 93 code + 3-B census pad 8d4900). Recipe: stdcall void with the tdic entry loop: tdicSize extern (FA stores via a3 mov [imm],al BYTE then dword a1 loads), the fmt/tmapName/tdicM1 externs, _w43H_sprint=_Sprintf cdecl (vararg), @w43H_tide@8=@T_InitDictionaryEntry@8 fastcall uchar. 3 patches: '3,0x15,[FA 0x3..0x17 masked]' prologue band (FA stores tdicSize with a3 BEFORE pushing tmapName/fmt and pushes the zero via EAX not ECX; 21->20 B, killed CL's 0xe/0x14 relocs, newsites 7:6 tdicSize + 0x10:6 tmapName); '0x25,1,14' (FA's lea buffer slot [esp+0x14] vs CL [esp+0x18]); '0x34,0x24,[FA 0x34..0x58 masked]' loop tail (FA orders test/load-before-je and computes the byte store through a 3*eax lea + eax+edx*4 SIB with cmp eax/0x12c, vs CL's load-after-test + 890d store + 81f9; 36 B equal, killed 3 relocs, newsites 2/0x11:6 tdicSize + 0x1d:6 tdicM1 over the baked 88 9c 90 disp). FA chunk carries ZERO .reloc fixups - every symbol address is a baked literal, so all payloads are zeroed and carried by newsites.",
+  "provenance": [
+   "patch 3: toolchain-diff prologue store/push order: FA stores tdicSize via a3 (byte al) before the push train and pushes the zero from eax; 0x15 B old -> 0x14 B new with newsites 7:6/_w43H_tdicSize and 0x10:6/_w43H_tmapName",
+   "patch 0x25: toolchain-diff stack slot: lea buffer disp 0x14 (FA) vs 0x18 (CL); 1 B",
+   "patch 0x34: toolchain-diff loop tail: FA test-then-a1-load before the je plus ecx=3*eax lea / edx 13n SIB store vs CL's je-first/890d/81f9 plan; 0x24 B equal, newsites 2/0x11:6/_w43H_tdicSize and 0x1d:6/_w43H_tdicM1"
+  ]
+ },
+ {
+  "rva": 772672,
+  "verdict": "EXACT",
+  "obj": "w43H_bca40_v1",
+  "src": "build/survey/probes/w43H_bca40_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w43H_trkD0=_trackLockEndT",
+   "_w43H_trkD1=_trackLockEndT+0x4",
+   "_w43H_tw0=_trackLockEndT+0x14",
+   "_w43H_tw1=_trackLockEndT+0x16",
+   "_w43H_trkW1=_trackLockEndT+0x8",
+   "_w43H_slkD0=_searchLockEndT",
+   "_w43H_slkD1=_searchLockEndT+0x4",
+   "_w43H_slkW1=_searchLockEndT+0x8",
+   "_w43H_pjkD0=_projLocksOnPlayer",
+   "_w43H_pjkD1=_projLocksOnPlayer+0x4",
+   "_w43H_pjkW1=_projLocksOnPlayer+0x8",
+   "_w43H_lpp=_lastPlayerProjId",
+   "_w43H_plc=?projLockCalcTime@@3FA",
+   "_w43H_plc4=?projLockCalcTime@@3FA+0x4"
+  ],
+  "patch": [
+   "0,0x51,33c9b80000000066890d00000000890866890d0000000089480466890d00000000890d0000000066890d00000000890d0000000066894808890d0000000066890d00000000b80000000066890d00000000,0x3:6:_w43H_pjkD0,0xa:6:_w43H_tw1,0x13:6:_w43H_tw0,0x1d:6:_w43H_lpp,0x23:6:_w43H_slkD0,0x2a:6:_w43H_plc4,0x30:6:_w43H_slkD1,0x3a:6:_w43H_trkD0,0x41:6:_w43H_slkW1,0x46:6:_w43H_slkD0,0x4d:6:_w43H_plc",
+   "81,0,b800000000890d0000000066894808c3,0x1:6:_w43H_trkD0,0x7:6:_w43H_trkD1"
+  ],
+  "aliases": [],
+  "notes": "_PROJInit@0 (112 B = 97 code + 15-B census pad 8d642400+8d642400+8da42400000000). Recipe: pure zero-store block over 14 track/search/proj-lock globals (trackLockEndT/searchLockEndT/projLocksOnPlayer +0x4/0x8/0x14/0x16 interiors, lastPlayerProjId, projLockCalcTime +0x4). C cannot steer two FA-optimizer choices: (1) the zero lives in ECX and word/dword stores go through 66 89 0d/89 0d memory-immediates while (2) whole field-groups are CSE'd through eax-base-pointer spellings b8/89 08/89 48 04/66 89 48 08 (CL emits a3/66 a3 imm32-spellings instead). 2 patches: '0,0x51,[FA 0..0x51 masked]' full 81-B store prologue with 11 DIR32 newsites (pjkD0/tw1/tw0/lpp/slkD0/plc4/slkD1/trkD0/slkW1/plc), '81,0,[FA 0x51..0x61]' 15-B INSERT for FA's two trailing struct groups + ret that CL folded away (trkD0/trkD1 newsites). FA chunk carries 0 fixups (all baked).",
+  "provenance": [
+   "patch 0: toolchain-diff store encoders + CSE groups: FA's 33 c9 / b8 / 89 08 / 66 89 0d families vs CL's 33 c0 / a3 / 66 a3; whole 0x51-B prologue replaced with FA bytes, 11 DIR32 newsites (two sites reuse _w43H_slkD0/_w43H_trkD0)",
+   "patch 81: toolchain-diff folded tail: CL code ended at 0x51, FA has two more eax-base store groups + ret; 15-B insert with newsites 1:6/_w43H_trkD0 and 7:6/_w43H_trkD1"
+  ]
+ },
+ {
+  "rva": 881408,
+  "verdict": "EXACT",
+  "obj": "w43H_d7300_v1",
+  "src": "build/survey/probes/w43H_d7300_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w43H_pct=__pctype",
+   "_w43H_ide6=$FA$_t_4dc9b0"
+  ],
+  "patch": [
+   "0,0xa5,8b4c240483ec08538d41013d0001000077158b150000000033c0668b044a234424145b83c408c38ad533db8adaa100000000f6445801807414b80200000088542408c644240a00884c2409eb0eb801000000884c2408c6442409008d4c24066a006a0051508d442418506a01e80000000083c41885c0750733c05b83c408c38b44240625ffff0000234424145b83c408c3,0x14:6:_w43H_pct,0x2e:6:_w43H_pct,0x6d:20:_w43H_ide6"
+  ],
+  "aliases": [],
+  "notes": "__isctype (145 B = 145 code, no census pad). Recipe: cdecl (int c, unsigned long mask) with the C recipe from the v1 comment intact (fastcall c+1 test = 3d d000000, _pctype[c] word load 66 8b 04 4a, lead-byte test f6 44 58 01 80, kind-2/kind-1 local blk stores through [esp] slots, 6-arg cdecl call to the t000e6 gap-chunk stub $FA$_t_4dc9b0, result = blk-dword & 0xffff & mask). CL's own encoding differs three ways it cannot be steered out of: FA reads the param into ECX (8b 4c 24 04) and lea 0x1(ecx) instead of inc eax; FA lays FAST-path first (jbe +0x15 into the slow arm at 0x27) while CL canonicalizes slow-inline-first with the fast arm at the end; FA's second __pctype read uses a1 moffs. One patch: '0,0xa5,[FA 0..0x91 masked]' full 165->145 B body replace with 3 newsites: 0x14:6/_w43H_pct (8b 15 moffs), 0x2e:6/_w43H_pct (a1 moffs), 0x6d:20/_w43H_ide6 (e8 rel32 to the gap stub).",
+  "provenance": [
+   "patch 0: toolchain-diff layout/register plan: FA param-in-ECX prologue + fast-path-first branch layout + a1 moffs reload; 0xa5 B old -> 0x91 B new; newsites 0x14/0x2e:6:_w43H_pct, 0x6d:20:_w43H_ide6"
+  ]
+ }
+]

@@ -1,0 +1,289 @@
+[
+ {
+  "rva": 542464,
+  "obj": "w43B_84700_v1",
+  "src": "build/survey/probes/w43B_84700_v1.c",
+  "verdict": "EXACT",
+  "maps": [],
+  "aliases": [
+   "0=$FA$_t_484700"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [],
+  "provenance": [],
+  "notes": [
+   "qsort comparator calling fastcall ?MISSIONScore@@YIHK@Z; probe externs spell the real publics directly (@MISSIONScore@4 etc.), so maps is empty",
+   "MANDATE DISCREPANCY: handback text said 542464 -> 0=$FA$_t_4846a0, but $FA$_t_4846a0 is referenced nowhere in the tree; the evidence-backed anchor is 0=$FA$_t_484700 (still-stub obj EXT-ref + converted MISSIONSortPlayers map _mcmpPlayers_q=$FA$_t_484700) -> transcription slip, 484700 applied",
+   "patch: none; maps: none (probe externs = real publics); fit fit-obj externs verified: @MISSIONScore@4 plus section-backed defs $FA$_span_084700 / $FA$_t_484700",
+   "tail: census-proven filler 90 (1 B nop)"
+  ]
+ },
+ {
+  "rva": 509312,
+  "obj": "w43B_7c580_v1",
+  "src": "build/survey/probes/w43B_7c580_v1.c",
+  "verdict": "EXACT",
+  "maps": [
+   "_w43b_bb=_buttonBoxes+0xc8",
+   "_w43b_fb=_fmtReduceButtonH",
+   "_w43b_ft=_fmtText"
+  ],
+  "aliases": [
+   "0=$FA$_t_47c580"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [],
+  "provenance": [
+   "map: qa fix \u2014 rel 16: FA = _fmtReduceButtonH base (CL baked its own +0x4, no addend); rel 0x36: FA = _fmtText base (CL baked +0x3c): fb TO un-addended; ft TO bare (content keeps CL's 0x3c), re-fit"
+  ],
+  "notes": [
+   "button-box text prep helper (fastcall): buttonBoxes row base _buttonBoxes+0xc8, fmtReduceButtonH+0x4, fmtText+0x3c, plain _textNum",
+   "patch: none; TOs verified in fit-obj symbol table: _buttonBoxes / _fmtReduceButtonH / _fmtText (interior deltas baked in maps) / _textNum / _RMAccessHandle@8 (probe direct); defs $FA$_span_07c580 + $FA$_t_47c580",
+   "tail: census-proven filler 8d642400 (4 B lea esp,[esp+0])"
+  ]
+ },
+ {
+  "rva": 741184,
+  "obj": "w43B_b4f40_v2",
+  "src": "build/survey/probes/w43B_b4f40_v2.c",
+  "verdict": "EXACT",
+  "maps": [],
+  "aliases": [
+   "0=$FA$_t_4b4f40"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [
+   "0x1,1,4c",
+   "0x7,1,11",
+   "0xe,1,06",
+   "0x11,1,d0",
+   "0x12,1,7e",
+   "0x1b,1,7d",
+   "0x26,1,51",
+   "0x2a,1,4e",
+   "0x2f,1,7e",
+   "0x3f,1,9c"
+  ],
+  "provenance": [
+   "patch 0x1: toolchain-diff pb pointer EAX->ECX (FA colors b-fields through DX)",
+   "patch 0x7: toolchain-diff b0 deref CX,[EAX]->DX,[ECX]",
+   "patch 0xe: toolchain-diff a0 deref DX,[ESI]->AX,[ESI]",
+   "patch 0x11: toolchain-diff first cmp operand order (cmp dx,cx -> cmp dx,ax)",
+   "patch 0x12: toolchain-diff jcc jge->jle for b>a early out",
+   "patch 0x1b: toolchain-diff jcc jle->jge (b<a early out, flags reused)",
+   "patch 0x26: toolchain-diff b1 deref CX,[EAX+2]->DX,[ECX+2]",
+   "patch 0x2a: toolchain-diff a1 deref DX,[ESI+2]->CX,[ESI+2]",
+   "patch 0x2f: toolchain-diff jcc jge->jle for b1>a1 early out",
+   "patch 0x3f: toolchain-diff setg->setl final (b1<a1)"
+  ],
+  "notes": [
+   "short-field qsort comparator: b0/b1 ride dx via *pb derefs, a0/a1 eax via *pa, pa=esi pb=ecx; 10 one-byte reg/jcc/color patches, all toolchain-diff (CL scheduler/canonicalization)",
+   "patch: 10 one-byte patches (see provenance); fit-obj externs verified: none beyond the def (maps empty, no externs needed)",
+   "tail: census-proven filler 8da42400000000 x2 (14 B)"
+  ]
+ },
+ {
+  "rva": 461584,
+  "obj": "w43B_70b10_v2",
+  "src": "build/survey/probes/w43B_70b10_v2.c",
+  "verdict": "EXACT",
+  "maps": [
+   "_w43b_players=?mpStatus@@3PAJA",
+   "_MP_Info_q=?MP_Info@@YAPAUMP_INFO@@XZ"
+  ],
+  "aliases": [
+   "0=$FA$_t_470b10"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [
+   "0x3a,2,d87c"
+  ],
+  "provenance": [
+   "patch 0x3a: toolchain-diff CL cmp-operand canonicalization (cmp eax,ebx/jg -> cmp ebx,eax/jl to match FA loop bottom)"
+  ],
+  "notes": [
+   "MP status loop: while (numComputers > i) over MP_Info_q() chain testing ?mpStatus@@3PAJA bits; CL canonicalizes relational operand ORDER (spelling flips are ineffective) -> jcc patch",
+   "patch: 0x3a 2-B jcc rewrite (see provenance); fit-obj externs verified: ?MP_Info@@YAPAUMP_INFO@@XZ / ?mpStatus@@3PAJA (maps) + _numComputers (probe direct); defs $FA$_span_070b10 + $FA$_t_470b10",
+   "tail: census-proven filler 8bff + 8da42400000000"
+  ]
+ },
+ {
+  "rva": 506432,
+  "obj": "w43B_7ba40_v2",
+  "src": "build/survey/probes/w43B_7ba40_v2.c",
+  "verdict": "EXACT",
+  "maps": [],
+  "aliases": [
+   "0=$FA$_t_47ba40"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [],
+  "provenance": [],
+  "notes": [
+   "serviceTicks update: extern short serviceTicks; LMultDiv256(long, SHORT) - second arg must be typed short (FA loads it with 66 8b 15 without movsx); serviceTicks<0 branch adds, else subtracts in place",
+   "patch: none; probe externs spell real publics directly (serviceTicks=_serviceTicks, LMultDiv256=@LMultDiv256@8), so maps is empty; fit-obj externs verified: @LMultDiv256@8 / _serviceTicks; defs $FA$_span_07ba40 + $FA$_t_47ba40",
+   "tail: census-proven filler 0500000000 (5 B add fill)"
+  ]
+ },
+ {
+  "rva": 538256,
+  "obj": "w43B_83690_v3",
+  "src": "build/survey/probes/w43B_83690_v3.c",
+  "verdict": "EXACT",
+  "maps": [
+   "_w43b_next=_nextObjId",
+   "_w43b_objP=_objPtrs",
+   "_w43b_pforts=_playerForts",
+   "@w43b_Alive@4=@Alive@4"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [
+   "0x0,39,8b442404535633db578b0c850000000066bf01005533ed66393d000000007658be00000001d3e6,12:6:_w43b_pforts,26:6:_w43b_next",
+   "0x28,1,c7",
+   "0x39,1,f0",
+   "0x4a,1,43",
+   "0x5e,1,43",
+   "0x6c,1,45",
+   "0x6e,1,47",
+   "0x71,1,3d",
+   "0x79,1,eb",
+   "0x7d,1,db"
+  ],
+  "provenance": [
+   "patch 0x0: toolchain-diff CL prologue schedule: val arg load deferred to [esp+0x14] and pforts defer/byte-deref (8a) delayed until after guard; replaces with FA order (load val [esp+4], push ebx/esi, xor ebx cnt=0, push edi, dword-load pforts 8b, mov di,1, push ebp, xor ebp, cmp next/di guard jbe, mask base 0x1000000 shl esi,cl); newsites 12:6:_w43b_pforts 26:6:_w43b_next (patch-span killed CL relocs 15/33, dwords zeroed, link adds symVA)",
+   "patch 0x28: toolchain-diff loop counter i colored ebp by CL vs FA edi (mov eax,ebp -> mov eax,edi)",
+   "patch 0x39: toolchain-diff a&mask test reg CL ebx vs FA esi (test eax,ebx -> test eax,esi)",
+   "patch 0x4a: toolchain-diff cnt inc reg CL esi vs FA ebx (inc esi -> inc ebx)",
+   "patch 0x5e: toolchain-diff cnt inc reg (2nd site, esi->ebx)",
+   "patch 0x6c: toolchain-diff nalive inc reg CL edi vs FA ebp (inc edi -> inc ebp)",
+   "patch 0x6e: toolchain-diff loop counter i inc CL 16-bit bp vs FA di (inc bp -> inc di)",
+   "patch 0x71: toolchain-diff loop-bottom cmp modrm bp vs di (cmp [next],bp -> cmp [next],di)",
+   "patch 0x79: toolchain-diff exit cmp operand regs (cmp esi,edi -> cmp ebp,ebx = nalive,cnt per FA)",
+   "patch 0x7d: toolchain-diff exit test reg CL esi vs FA ebx (test esi -> test ebx = cnt)"
+  ],
+  "notes": [
+   "_MISSIONFortDestroyed@4 (stdcall, ret 4): fort-destroyed tally - mask 0x1000000 << (playerForts[val]&0xff) is LIVE (test eax,esi=85 f0; a9 00 00 80 00 = test eax,0x00800000); exit = if (cnt==nalive && cnt!=0) return 1; return 0;",
+   "e8 sign trap: FA's 0xffff0018 disp is Alive at rva 0x73710, NOT 0x83610 (computed with python)",
+   "patch: 39-B equal-span prologue band with 2 DIR32 newsites (12:_w43b_pforts 26:_w43b_next, dwords zeroed) + 9 one-byte reg-color/jcc patches (see provenance); the two call rel32s use CL's own relocs (same site/instruction layout, no newsite needed)",
+   "fit-obj externs verified: _playerForts / _nextObjId / _objPtrs (maps + newsites) / @Alive@4; def $FA$_...FortDestroyed@4 (named chunk)",
+   "tail: census-proven filler 8da42400000000 x2 (14 B)"
+  ]
+ },
+ {
+  "rva": 590992,
+  "obj": "w43B_90490_v3",
+  "src": "build/survey/probes/w43B_90490_v3.c",
+  "verdict": "EXACT",
+  "maps": [
+   "_w43b_uqh=?updateQueueHead@@YAXAAUSERIAL_QUEUE@@J@Z",
+   "_w43b_InQ=?InQueue@@3USERIAL_QUEUE@@A",
+   "_w43b_mpe=?mpInfo@@3UMP_INFO@@C+0x164",
+   "_w43b_mpeX=?mpInfo@@3UMP_INFO@@C+0x164",
+   "_w43b_ctrl128=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x128",
+   "_w43b_mpeA=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x18e",
+   "_w43b_ctrl12a=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x12a"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [],
+  "provenance": [],
+  "notes": [
+   "?SER_ProcessStatusPacket@@YAXAAUSERIAL_PACKET_WRAPPER@@@Z (void cdecl): uqh(&InQueue, [p+4]+1) first, then m=mpInfo+0x164, ctrl128=0, if (m != -1) block with m^1-indexed byte store into Ctrl+0x18e, then if (p->f21) ctrl12a=1 (al leftover = return value slot)",
+   "twin map-FROM trick: w43b_mpe/w43b_mpeX both = mpInfo+0x164 (same address, distinct symbols defeat CL's CSE reload, matching FA's two loads)",
+   "patch: none; fit-obj externs verified: ?updateQueueHead@@YAXAAUSERIAL_QUEUE@@J@Z (imp-@N safe: void fn) / ?InQueue@@3USERIAL_QUEUE@@A / ?mpInfo@@3UMP_INFO@@C / ?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A (interior deltas baked); def ?SER_ProcessStatusPacket@@YAXAAUSERIAL_PACKET_WRAPPER@@@Z",
+   "tail: census-proven filler 8d9b00000000 (6 B lea ebx,[ebx])"
+  ]
+ },
+ {
+  "rva": 599424,
+  "obj": "w43B_92580_v2",
+  "src": "build/survey/probes/w43B_92580_v2.c",
+  "verdict": "EXACT",
+  "maps": [
+   "_w43b_joyInit=?joysticksInitialized@@3DA",
+   "_w43b_joyDev=?joystickDevices@@3KA",
+   "_w43b_joyMask=?joystickMask@@3KA",
+   "_w43b_capB=?joystickCaps@@3PAUtagJOYCAPSA@@A"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [],
+  "provenance": [],
+  "notes": [
+   "?GetJoystickType@@YA?AW4JOYRESULT@@K@Z (cdecl, ulong id): !joyInit / joyDev<=id / !(joyMask & (1<<id)) guards, then merged || chain (ids*404 into joyCaps) -> return 1; return 0 reproduces FA's cmp/jg-or-ja + the exit",
+   "patch: none; fit-obj externs verified: ?joysticksInitialized@@3DA / ?joystickDevices@@3KA / ?joystickMask@@3KA / ?joystickCaps@@3PAUtagJOYCAPSA@@A (interior +0x68/+0x3c deltas as *(unsigned long *)& expressions); def ?GetJoystickType@@YA?AW4JOYRESULT@@K@Z",
+   "tail: census-proven filler 8da42400000000 x2 (14 B)"
+  ]
+ },
+ {
+  "rva": 712688,
+  "obj": "w43B_adff0_v2",
+  "src": "build/survey/probes/w43B_adff0_v2.c",
+  "verdict": "EXACT",
+  "maps": [
+   "_w43b_plc=?player_list@@3UNET_PLAYER_LIST@@A+4",
+   "_w43b_my=?player_list@@3UNET_PLAYER_LIST@@A+0x14",
+   "_w43b_pl=?player_list@@3UNET_PLAYER_LIST@@A+0x66",
+   "_w43b_pkt=?pkt_send@@YADPAUNET_PKT@@H@Z",
+   "_w43b_ssd=?socket_set_doa@@YAXI@Z"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [
+   "0x9,2,85f6"
+  ],
+  "provenance": [
+   "patch 0x9: toolchain-diff cmp esi,edi -> test esi,esi (FA tests the plain pkT pointer)"
+  ],
+  "notes": [
+   "?net_send_all@@YAXPAUNET_PKT@@@Z (void cdecl): null-pkt guard (test esi,esi - CL merges any == 0 spelling with a zeroed reg, so patched), player-list walk, pkt_send / socket_set_doa calls",
+   "patch: 0x9 2-B cmp->test (see provenance); fit-obj externs verified: ?player_list@@3UNET_PLAYER_LIST@@A (plc/my/pl interior deltas baked in maps) / ?pkt_send@@YADPAUNET_PKT@@H@Z / ?socket_set_doa@@YAXI@Z; def ?net_send_all@@YAXPAUNET_PKT@@@Z",
+   "tail: census-proven filler 8d642400 8da42400000000"
+  ]
+ },
+ {
+  "rva": 408000,
+  "obj": "w43B_639c0_v4",
+  "src": "build/survey/probes/w43B_639c0_v4.c",
+  "verdict": "EXACT",
+  "maps": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [
+   "0x7,0,55",
+   "0xe,1,63",
+   "0x12,1,18",
+   "0x22,1,69",
+   "0x25,1,6e",
+   "0x27,15,668b410cb9ffffffff6689460c2bc0",
+   "0x49,1,1c",
+   "0x59,1,0e",
+   "0x5f,1,5d",
+   "0x64,0,5f",
+   "0x68,9,b8020000005d5f5e5bc3",
+   "0x72,6,33c05d5f5e5bc3"
+  ],
+  "provenance": [
+   "patch 0x7: toolchain-diff CL keeps 3 saved regs (ebx/esi/edi); FA pushes ebp as 4th saved reg (d2 field copy holder) - insert push ebp",
+   "patch 0xe: toolchain-diff ret0 je disp follows FA layout (61 -> 63; ret0 target shifts +2 from inserts)",
+   "patch 0x12: toolchain-diff addr reload [esp+0x14] -> [esp+0x18] (FA saves 4 regs)",
+   "patch 0x22: toolchain-diff d2 (addr+8 field) load reg CL reuses eax vs FA ebp (8b4108 -> 8b6908)",
+   "patch 0x25: toolchain-diff d2 store reg eax -> ebp (894608 -> 896e08)",
+   "patch 0x27: toolchain-diff w3 copy + strlen-init interleave: CL sub eax,eax then 66-load cx then 66-store cx then mov ecx,-1; FA 66-load ax, mov ecx,-1, 66-store ax, sub eax,eax (equal 15-B span reorder, no fixups)",
+   "patch 0x49: toolchain-diff str reload [esp+0x18] -> [esp+0x1c] (FA saves 4 regs)",
+   "patch 0x59: toolchain-diff ret2 je disp follows FA layout (0d -> 0e)",
+   "patch 0x5f: toolchain-diff ret1 early pop reg CL edi(5f) vs FA ebp(5d)",
+   "patch 0x64: toolchain-diff ret1 trailing pops 5e5bc3 -> 5f5e5bc3 (insert pop edi before pop esi)",
+   "patch 0x68: toolchain-diff ret2 exit pops 5f5e5bc3 -> 5d5f5e5bc3 (FA pops ebp too)",
+   "patch 0x72: toolchain-diff ret0 exit pops 5f5e5bc3 -> 5d5f5e5bc3 (FA pops ebp too)"
+  ],
+  "notes": [
+   "?dlg_list_get_selection@@YA?AW4DLG_SELECTION@@PAXPAUNET_ADDRESS@@PAD@Z (enum cdecl): copy UNET_ADDRESS (0x10 B) from rec+0x2a (materialized base: load eax, rec+=2a, then 3 dword/1 word field copies through named locals) + inline-strlen strcpy + flag byte [p+0x19] one-shot -> return 2/1/0",
+   "wrapper shape matters: rec != 0 wrapper (return 0 at end) reproduces FA's test/je-forward-0x63; rec == 0 early-return regressed to CL's jne-over-early-out",
+   "patch: push-ebp insert (oldlen 0) + two 1-B inserts in exit pop sets + ret2/ret0 exit-block extensions + equal 15-B interleave band + 5 one-byte imm/modrm patches (see provenance); patches apply sequentially to the growing buffer; no fixups inside any patched span (chunk has zero relocs)",
+   "fit-obj externs verified: none beyond def ?dlg_list_get_selection@@YA?AW4DLG_SELECTION@@PAXPAUNET_ADDRESS@@PAD@Z (all locals)",
+   "tail: census-proven filler 8da42400000000 (7 B)"
+  ]
+ }
+]

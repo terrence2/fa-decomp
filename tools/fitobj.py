@@ -109,7 +109,18 @@ def apply_patches(text, patches):
         text["relocs"] = rels
         txt[off:off + oldlen] = new
         for site, t, sym in newsites:
-            text["relocs"].append((off + site, sym, t))
+            o2 = off + site
+            if "+" in sym:
+                # interior newsite "SYM+0xN": sym must be linked bare —
+                # the delta rides in the payload, not the symbol (DIR32
+                # final = symVA + content). Bare tokens keep the hex bytes
+                # untouched: the standing convention is hex = delta.
+                base_, delta_ = sym.rsplit("+", 1)
+                struct.pack_into("<I", txt, o2, int(delta_, 0))
+                sym = base_
+                print("newsite @%#x: %s t%d (payload := 0x%x)"
+                      % (o2, base_, t, int(delta_, 0)))
+            text["relocs"].append((o2, sym, t))
         print("patch @%#x: %d -> %d bytes (%s)" %
               (off, oldlen, len(new), new.hex() or "-"))
 
@@ -147,10 +158,16 @@ def main():
     # symbol only covers the chunk start
     addend = {k: 0 for k in remap}
     for k, v in list(remap.items()):
-        if "+" in v:
-            t, d_ = v.rsplit("+", 1)
-            remap[k] = t
-            addend[k] = int(d_, 0)
+        # "TO+0xdelta"/"TO-0xdelta" (or plain decimal): a (possibly negative)
+        # addend baked into the reloc site's content dword — used when the
+        # target is INSIDE a gap chunk / shared symbol whose stub symbol only
+        # covers the chunk start
+        import re as _re
+        m = _re.match(r"^(.+)([+-]0x[0-9a-fA-F]+|[+-]\d+)$", v)
+        if m:
+            remap[k] = m.group(1)
+            addend[k] = int(m.group(2), 16) if "x" in m.group(2) \
+                else int(m.group(2))
     secs, defs = read_obj(cl_obj)
     text_idx = secs.index(next(s for s in secs if s["name"] == ".text")) + 1
     text = next(s for s in secs if s["name"] == ".text")
@@ -198,6 +215,17 @@ def main():
             # bake the extra addend into the referenced content dword
             site = struct.unpack_from("<i", text["content"], o)[0]
             struct.pack_into("<i", text["content"], o, site + d_)
+        elif "+" in v:
+            # newsite "SITE:TYPE:SYM+0xNNN": SYM is only linkable bare —
+            # strip the interior offset and carry it in the content dword
+            # (DIR32 final = symVA + content; REL32 final = symVA + content
+            # − (site+4)). The payload here is either FA's baked absolute
+            # dword (from a transplant) or zero — both replaced by DELTA.
+            base_, delta_ = v.rsplit("+", 1)
+            struct.pack_into("<i", text["content"], o, int(delta_, 0))
+            print("NOTE: newsite sym %#x %s: delta +0x%x baked into payload "
+                  "(sym bare %s)" % (o, v, int(delta_, 0), base_))
+            v = base_
         relocs.append((o, v, t))
     # Byte-verify (wave-2 lesson): outside the reloc'd dword sites the
     # patched CL code must equal FA's chunk bytes exactly — the content
