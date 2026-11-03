@@ -1,0 +1,133 @@
+[
+ {
+  "rva": 664512,
+  "obj": "w38A_a23c0_v1",
+  "src": "build/survey/probes/w38A_a23c0_v1.c",
+  "maps": [
+   "_w38a_strchr=_strchr",
+   "@w38a_strend@4=@Strend@4"
+  ],
+  "aliases": [
+   "0=$FA$_t_4a23c0"
+  ],
+  "patch": [
+   "0x26,2,c772",
+   "0x34,1,f0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Trim trailing zeros from a numeric path string (strchr '.' + strend scan). CL mirrors the cmp operands in the mem-compare condition (3b f8 77 -> FA 3b c7 72, ja->jb) and the do-while back-edge disp differs (e7->f0) because FA's latch re-enters at its own cmp eax,edi at 0x25; both are running-offset patches after no earlier length deltas. Map TOs verified: _strchr 0x4d3b90, @Strend@4 0x411ee0 (both real layout publics; fastcall decl in probe emits @w38a_strend@4 -> map TO @Strend@4). Self-anchor alias 0=$FA$_t_4a23c0 (unnamed chunk).",
+  "provenance": [
+   "patch 0x26: toolchain-diff CL mirrors cmp-operand order + uses ja where FA cmp eax,edi/jb (2 bytes: c7 72 -> 77 72, running off = 7e1+27)",
+   "patch 0x34: toolchain-diff do-while back-edge disp e7->f0 (CL latch targets its own cmp; FA retargets to FA's cmp eax,edi at 0x25)"
+  ]
+ },
+ {
+  "rva": 127712,
+  "obj": "w38A_1f2e0_v2",
+  "src": "build/survey/probes/w38A_1f2e0_v2.c",
+  "maps": [
+   "_w38a_set=$FA$_t_41f340",
+   "_w38a_h1=$FA$_t_41f280",
+   "@w38a_h2@4=$FA$_t_41f320",
+   "_w38a_namePtr=?janesOnlineName@@3PADA+0xb8"
+  ],
+  "aliases": [
+   "0=$FA$_t_41f2e0"
+  ],
+  "patch": [
+   "0x16,2,7521",
+   "0x18,5,"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Copy *(char**)namePtr to dst until pred pair h1/h2 (h2 fastcall in ecx) succeeds. KEY shape: the break-guard call h2(h1()) sits OUTSIDE the do-while (FA 'if (h2(h1())) return *d=0;' then 'do { copy } while (!h2(h1()))') - with the C-idiom 'do { if (P()) break; copy; } while (!P())' CL re-emits the guard call inside the loop body (back-edge to the guard call instead of the copy head) and grows past 0x40. Second fix: h2 declared __fastcall (FA 8b c8 + e8 vs CL cdecl push eax + e8 + add esp,4). CL then hoists the shared '*d = 0' epilogue INTO the break-branch (5 extra B); patches flip the je polarity to FA's jne (sharing FA's tail) and delete the inlined copy; the do-while back-edge disp (74 df / -0x21) lands on the new loop head 0x18 automatically after the deletion. Map TOs: $FA$_t_41f340/$FA$_t_41f280/$FA$_t_41f320 defined by still-stub groups (t00019/t000d4 - 0x41f2e0 calls set/h1/h2 all still stubs); _w38a_namePtr is TO ?janesOnlineName@@3PADA (0x524a30) + interior delta 0xb8 -> FA a1 imm 0x524ae8 (wave-35 interior-data TO+delta class).",
+  "provenance": [
+   "patch 0x16: toolchain-diff break-branch polarity: CL je (74 05) -> FA jne (75 21) sharing FA's *d=0/ret tail at 0x39",
+   "patch 0x18: toolchain-diff delete CL-inlined *d=0/ret block (c6 06 00 5e c3, 5 B) that FA keeps only in the shared tail"
+  ]
+ },
+ {
+  "rva": 506928,
+  "obj": "w38A_7bc30_vX",
+  "src": "build/survey/probes/w38A_7bc30_v1.c",
+  "maps": [
+   "@w38a_pct@4=@Percent@4",
+   "__curThing=_curThing"
+  ],
+  "aliases": [
+   "0=$FA$_t_47bc30"
+  ],
+  "patch": [
+   "0x0,0x44,a17f01000085c07e06b801000000c37d06b8ffffffffc366833d21000000007f16750eb932000000e80000000084c07506b801000000c3b8ffffffffc3,0x01:6:__curThing,0x1a:6:__curThing,0x29:20:@w38a_pct@4"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Full-body newsite patch (single spec: 3-byte 8d 49 00 pad trimmed by 0x44-span replace, CL natural comp 0x44 B). CL wall: even with movsx/direct-mem spellings CL reorders the loads (hoists the short load) and re-encodes moffs as 8b 0d - natural C cannot match FA's a1-test-branch shape, so the whole 0x44-B body is patched verbatim from FA chunk bytes (FA code 61 B + 3-B 8d 49 00 pad). Newsites (comma-joined into the SAME patch spec - separate list items parse as their own patch specs and ValueError): __curThing DIR32 at patch+0x01 (t = *(int*)(curThing+0x17f), payload imm 0x17f) and patch+0x1a (w imm 0x21), @w38a_pct@4 REL32 at patch+0x29 (e8 disp byte; payload disp ZEROED - e8-fold/double-addend rule, wave-31/37); map TO @Percent@4 (0x4557c0 real layout public). Self-anchor alias 0=$FA$_t_47bc30.",
+  "provenance": [
+   "patch 0x0: toolchain-diff whole-body rewrite 0x44 B -> FA's 61-B code + 3-B 8d 49 00 pad (CL reordered loads / re-encoded moffs); newsites __curThing@+0x01 (payload 0x17f), __curThing@+0x1a (payload 0x21), @w38a_pct@4@+0x29 REL32 payload-zero"
+  ]
+ },
+ {
+  "rva": 543008,
+  "obj": "w38A_84920_v1",
+  "src": "build/survey/probes/w38A_84920_v1.c",
+  "maps": [
+   "__numComputers=_numComputers",
+   "__objControlledBy=_objControlledBy"
+  ],
+  "aliases": [
+   "0=$FA$_t_484920"
+  ],
+  "patch": [
+   "0x3,1,56",
+   "0xb,1,5e",
+   "0x17,31,7e12be0000000066390e740d83c602403bd07ff3b8ffffffff5ec3,3:6:__objControlledBy"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Find unsigned short id in _objControlledBy[] table (eax=i, edx=count cached, esi=ptr with 2-byte step). Natural CL body overflows the 64-B chunk by ~5 B (CL re-writes the loop with 4-byte step and test-al forms); solution: trim CL's prologue 'mov eax,n' head (patch 0x3 -> '56' pushes the right-reg prologue in), 0xb '5e', and a 31-B patch at 0x17 writing FA's tail-loop verbatim (7e 12 ... newsite DIR32 __objControlledBy at patch+3). Map FROMs are the obj's double-underscore spellings (__numComputers/__objControlledBy from leading-underscore probe locals); TOs are real layout publics (_numComputers 0x4e7604, _objControlledBy 0x4e7610). Self-anchor alias 0=$FA$_t_484920.",
+  "provenance": [
+   "patch 0x3: toolchain-diff CL prologue tail-shave: replace jcc byte with FA's 56 push (CL frameless head differs by 1 B)",
+   "patch 0xb: toolchain-diff CL prologue tail-shave: replace byte with FA's 5e pop at 0x0b",
+   "patch 0x17: toolchain-diff 31-B tail-loop rewrite to FA's exact bytes (7e 12 be..7e 12..b8..5e c3); newsite DIR32 __objControlledBy at patch+0x3 (FA imm 0x4e7610 carried in payload - link writes symVA+payload)"
+  ]
+ },
+ {
+  "rva": 862280,
+  "obj": "w38A_d2848_v1",
+  "src": "build/survey/probes/w38A_d2848_v1.c",
+  "maps": [
+   "_xv=xv",
+   "_yv=yv",
+   "_zv=zv",
+   "_vector_table=vector_table",
+   "_w38a_grexec=@GRExec@4"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Naked-asm escape hatch (one allowed retry): FA pushes word [xv]/[yv]/[zv] (66 ff 35 <imm>), saves ecx (thiscall object ptr) into esi, reads word [esi] -> movzx ebx, calls CALL VECTOR_TABLE[ebx*2] (FA SIB 5d = [ebx*2 + disp32], stride*2 not *4 - wave-34 class), then pops in reverse, popad, bare ret (c3, NOT ret 4 despite @GRExec@4 name). CL cannot express: push word ptr [global] (would emit 66 ff 35 only in asm), SIB 5d call through a table, and bare-ret-vs-stdcall-mismatch. Map TOs verified: xv 0x518662, yv 0x518664, zv 0x518666, vector_table 0x513c58 (layout publics; wave-35 undecorated data publics); name TO @GRExec@4 is the layout chunk's own name (0xd2848). CL emits the obj's defined symbol bare '_w38a_grexec' (naked + __stdcall -> no decoration), so map FROM is _w38a_grexec. C-symbol refs inside __asm emit real COFF DIR32 relocations at exactly FA's imm sites - first-try EXACT after two sed fixes (SIB 9d->5d, ret 4->ret).",
+  "provenance": []
+ },
+ {
+  "rva": 894224,
+  "obj": "w38A_da510_v1",
+  "src": "build/survey/probes/w38A_da510_v1.c",
+  "maps": [
+   "_w38a_sub=$FA$_t_4d5f30"
+  ],
+  "aliases": [
+   "0=$FA$_t_4da510"
+  ],
+  "patch": [
+   "0x0,9,837c24040056742e",
+   "0x0c,5,f6460d10",
+   "0x18,3,",
+   "0x26,0,83c404"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "thiscall-ish (arg1 in ecx? no: stdcall 2-arg) guarded mask-and-clear (arg0 flag; *(b+0xd) & 0x10 gate; then w38a_sub($FA$_t_4d5f30); four in-place clears). CL-vs-FA idiom set: (1) FA cmp [esp+4],0 direct memory (83 7c 24 04 00) where CL loads+tests (8b 44 24 04 + 85 c0) - same-length 9->8 head saves 1 B, so patch running offsets shift after each; (2) FA test BYTE [mem],imm (f6 46 0d 10) where CL mov al + test al (8a 46 0d a8 10) - another 1-B save; (3) FA defers the call cleanup 'add esp,4' past the and/c7-46 stores (CL has it right after the call) - delete 3 B at running 0x18; (4) insert 83c404 at running 0x26, after the c7 46 18 store (FA's deferred cleanup position). Running-offset bookkeeping critical: patch offsets account for the earlier deltas manually (0x0e was the v2b mistake; 0x27 was one byte late at the insert - both fixed to 0x0c and 0x26). Map TO $FA$_t_4d5f30 (still-stub anchor, t000d4 group). Self-anchor alias 0=$FA$_t_4da510.",
+  "provenance": [
+   "patch 0x0: toolchain-diff CL load+test head -> FA direct cmp [esp+4],0 (8b 44 24 04 85 c0 74 = 83 7c 24 04 00 74, 8 B for 9)",
+   "patch 0x0c: toolchain-diff CL mov al + test al (8a 46 0d a8 10) -> FA direct test byte [esi+d],0x10 (f6 46 0d 10, 4 B for 5)",
+   "patch 0x18: toolchain-diff delete CL's add esp,4 after the sub call (FA defers cleanup past the and/c7-46 stores)",
+   "patch 0x26: toolchain-diff insert FA's 83 c4 04 after the c7 46 18 store (deferred cleanup position, running offset incl. previous deltas)"
+  ]
+ }
+]

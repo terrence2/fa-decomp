@@ -1,0 +1,139 @@
+[
+ {
+  "rva": 600992,
+  "verdict": "EXACT",
+  "obj": "w38D_92ba0_v2",
+  "src": "build/survey/probes/w38D_92ba0_v2.c",
+  "maps": [
+   "_joysticksInitialized=?joysticksInitialized@@3DA",
+   "_joystickPOVDevice=?joystickPOVDevice@@3KA",
+   "_ReadDevice=?ReadDevice@@YA?AW4JOYRESULT@@K@Z",
+   "_w38d_jixX=?joystickInfoEx@@3PAUjoyinfoex_tag@@A+0x28"
+  ],
+  "patch": [
+   "0x4d,57,7f06b848000000c33d870000007f06b84d000000c33de10000007f06b850000000c33d3b010000b84b0000007e05b848000000c3",
+   "0x81,0,8d6424008d6424008da42400000000"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "@GetPOV@0 (144 B = 129 code + 15-B deco tail). fastcall; FA plan has NO prologue pushes: jok byte test (a0 moffs + 84 c0), funcs a8 10 test, ReadDevice(pov) cdecl call discarded (83 c4 04), val=jix[pov*13] via 8b 04 95 <jix+0x28>, val==0xffff via 3d 32-B cmp, t=val/100 kept in EAX throughout (cdq/b9 100/idiv, then 83 f8 2d / 3d 87 / 3d e1 / 3d 3b chain, never copied). Recipe: declare `long r;` with NO initializer and assign r=0x4b only before the final band (v1's `r = 0x4b` initializer hoists into esi -> 7 esi-pops in return paths); CL then keeps t in eax through 0x4c BUT copies t to ecx (8b c8) and reorders the final band to b8-4b-then-cmp with 81 f9 imm32 compares - patch the 0x4d..0x85 closing chain (57 B, all-immediate, no relocs) with FA 0x4d..0x80 (52 B), then insert the 15-B deco tail at 0x81. ReadDevice's return is discarded by FA (povDevice reloaded after the call) - source assigns val twice; CL already matches.",
+  "provenance": [
+   "patch 0x4d: toolchain-diff closing if-chain (57 B -> 52 B): FA keeps t in eax, each branch cmp eax,imm (3d, 5 B) with load-then-jle order in the final band (3d 3b 01 00 00 b8 4b 00 00 00 7e 05 b8 48 c3); CL v2 copies t to ecx (8b c8) and uses cmp ecx,imm32 (81 f9, 6 B) with mov-0x4b-then-cmp order; pure-immediate band, no relocations inside",
+   "patch 0x81: toolchain-diff FA census deco inserted after ret (FA c3 at 0x80): 8d 64 24 00 8d 64 24 00 8d a4 24 00 00 00 00 (15 B)"
+  ]
+ },
+ {
+  "rva": 384800,
+  "verdict": "EXACT",
+  "obj": "w38D_5df20_v1",
+  "src": "build/survey/probes/w38D_5df20_v1.c",
+  "maps": [
+   "@WNGLeader@4=$FA$_t_45dc60",
+   "_w38d_ctX=_curThing"
+  ],
+  "patch": [
+   "0x00,18,668b0d0000000083ec088d442404536a005051,3:6:_curId",
+   "0x79,0,8da42400000000"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "_WNGLeaderLanding@0 (128 B = 121 code + 7-B deco). Landing twin: id=curId (66 8b 0d), _WNGPart@12 call (layout public, no map), PushCurObj(WNGLeader(buf)) - _WNGLeader@4 is NOT a public (0x5dc60 still stub) so map @WNGLeader@4=$FA$_t_45dc60 (0x5dc60 stub defines the anchor directly); _curThing is an absolute-addressed global base: b = *(long*)(_curThing+1) & 1 as 8b 1d <base+1> and ch = _curThing[0xe3] as a0 <base+0xe3> via map _w38d_ctX=_curThing (delta addends through the map). Recipe: plain C exactly as in w38D_5df20_v1.c (char fl[4]; int buf; short id; u8 ch/b; fl[3]=(ch>=0x13&&ch<=0x1e); fl[2]=OnTheGround(); PopCurObj(); return b&&(fl[3]||fl[2])); CL matches FA byte-for-byte from 0x12 on; patch the 18-B CL head with FA's 19-B head (newsite DIR32 on _curId, payload zeroed), then insert the 7-B deco at 0x79. No self-anchor needed: nothing references $FA$_t_45df20 (grep in tools/swap.json = 0).",
+  "provenance": [
+   "patch 0x00: toolchain-diff head (18 B -> 19 B): FA loads curId via 66 8b 0d <disp32> (mov cx,[curId], 7 B) and pushes args 50 51 (push eax, push ecx); CL uses moffs form 66 a1 (mov ax,[curId], 6 B) and pushes 51 50 (push ecx, push eax); replaced CL 0x00..0x11 with FA 0x00..0x12, newsite 3:6:_curId (DIR32, disp payload zeroed per wave-31/34 payload-zero rule)",
+   "patch 0x79: toolchain-diff FA census deco inserted after final ret (FA c3 at 0x78): 8d a4 24 00 00 00 00 (7 B)"
+  ]
+ },
+ {
+  "rva": 388176,
+  "verdict": "EXACT",
+  "obj": "w38D_5ec50_v1",
+  "src": "build/survey/probes/w38D_5ec50_v1.c",
+  "maps": [
+   "_w38d_ctX=_curThing"
+  ],
+  "patch": [
+   "0x00,18,668b0d0000000083ec088d442404536a005051,3:6:_curId",
+   "0x79,0,8da42400000000"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "_GRPLeaderLanding@0 (128 B = 121 code + 7-B deco), byte-for-byte twin of 0x5df20 with GRPPart/GRPLeader callees. _GRPPart@12 and @GRPLeader@4 are layout publics (no maps needed here, unlike _WNGLeader@4 which required the $FA$_t_45dc60 map). Same head patch as 0x5df20 (newsite 3:6:_curId payload zeroed) + 7-B deco insert at 0x79. Map _w38d_ctX=_curThing for the _curThing base derefs (8b 1d <base+1>, a0 <base+0xe3>). No self-anchor needed: nothing references $FA$_t_45ec50 (grep 0).",
+  "provenance": [
+   "patch 0x00: toolchain-diff head (18 B -> 19 B): FA 66 8b 0d <disp32> mov cx,[curId] + push order 50 51; CL 66 a1 moffs + push order 51 50; replaced CL 0x00..0x11 with FA 0x00..0x12, newsite 3:6:_curId (DIR32, payload zeroed)",
+   "patch 0x79: toolchain-diff FA census deco inserted after final ret (FA c3 at 0x78): 8d a4 24 00 00 00 00 (7 B)"
+  ]
+ },
+ {
+  "rva": 389904,
+  "verdict": "EXACT",
+  "obj": "w38D_5f310_v1",
+  "src": "build/survey/probes/w38D_5f310_v1.c",
+  "maps": [
+   "_w38d_gsizesX=_groupSizes",
+   "_w38d_gidsX=_groupIds",
+   "_w38d_opsX=_objPtrs"
+  ],
+  "patch": [
+   "0x00,38,83ec0433d25356578a9900000000553ada74658d04898d34450000000033c08ac389442410,10:6:_w38d_gsizesX",
+   "0x4c,2,8bc2",
+   "0x52,4,668b6bfe",
+   "0x5d,1,48",
+   "0x59,4,66896b02",
+   "0x74,2,3bd0",
+   "0x76,2,7cad"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "@GRPHumansFirst@4 (128 B, NO tail pad - FA c3 at 0x7f). fastcall ecx=g; FA reg plan: g=ecx, i=edx (xor edx,edx), count=bl (direct 8a 99 load; tested vs dl=0 via 3a da, no al test), saved=[esp+0x10] via xor eax/mov bl,al zero-extend placed AFTER lea esi; pushes 53 56 57 BEFORE the gsizes load + 55 after; shift loop: t=eax (8b c2), p=u16* in ebx with bp as the move word (66 8b 6b fe / 66 89 6b 02, dec eax 48); bottom test 3b d0 (cmp edx,eax = i vs saved) + jl 7c ad - inverted-operand jl polarity. CL's plan differs but collapses to one 38->37 B head-band replace plus 6 equal-length 1-4 B mods (all inside the loop; relative jcc disps unchanged so targets stay consistent after the head shift). No deco tail to insert.",
+  "provenance": [
+   "patch 0x00: toolchain-diff prologue/entry band (38 B -> 37 B): FA = sub esp,4; xor edx,edx; push ebx,esi,edi; mov bl,[gsizes+ecx] (8a 99); push ebp; cmp bl,dl (3a da); je; lea eax,[ecx+ecx*4]; lea esi,[eax*2] (unrelocated disp 0); xor eax/mov bl,al; mov [esp+0x10],eax; vs CL = load count to al (8a 81), test al (84 c0), pushes after the load, xor ebx/mov bl earlier, mov [esp+0x10],ebx before lea esi, plus a 90 nop; head band replaced with FA spelling; newsite 10:6:_w38d_gsizesX (DIR32, disp payload zeroed; the CL obj's original gsizes reloc at 0x07 is inside the span and killed by it)",
+   "patch 0x4c: toolchain-diff shift-loop counter copy: CL 8b ea (t=ebp copy of edx) vs FA 8b c2 (t=eax)",
+   "patch 0x52: toolchain-diff shift-loop u16 load: CL 66 8b 43 fe (word via ax) vs FA 66 8b 6b fe (word via bp)",
+   "patch 0x59: toolchain-diff shift-loop u16 store: CL 66 89 43 02 (ax) vs FA 66 89 6b 02 (bp)",
+   "patch 0x5d: toolchain-diff shift-loop decrement: CL dec ebp (4d) vs FA dec eax (48)",
+   "patch 0x74: toolchain-diff loop-bottom compare operand order: CL 3b c2 (cmp eax,edx = saved vs i) vs FA 3b d0 (cmp edx,eax = i vs saved)",
+   "patch 0x76: toolchain-diff loop-bottom jump polarity: CL jg (7f) against cmp saved,i vs FA jl (7c) against cmp i,saved - same semantics, inverted-operand jl tell"
+  ]
+ },
+ {
+  "rva": 413312,
+  "verdict": "EXACT",
+  "obj": "w38D_64e80_v1",
+  "src": "build/survey/probes/w38D_64e80_v1.c",
+  "maps": [
+   "_w38d_f00X=$FA$_t_464f00",
+   "_w38d_e50X=$FA$_t_464e50",
+   "_w38d_f60X=$FA$_t_464f60",
+   "_w38d_fc0X=$FA$_t_464fc0",
+   "_w38d_fa0X=$FA$_t_464fa0",
+   "_w38d_stecX=_serviceTicks+0xec",
+   "_w38d_stf0X=_serviceTicks+0xf0",
+   "_w38d_stf8X=_serviceTicks+0xf8",
+   "_w38d_stfcX=_serviceTicks+0xfc",
+   "_w38d_st100X=_serviceTicks+0x100"
+  ],
+  "patch": [
+   "0x00,92,53565755e800000000668bf0e800000000668bf8e8000000008be8e800000000668bd8e8000000008a0d0000000084c97544668b0d000000005066a100000000535081fdffffff7f0f94c25152555756,5:20:_w38d_f00X,13:20:_w38d_e50X,21:20:_w38d_f60X,28:20:_w38d_fc0X,36:20:_w38d_fa0X,42:6:_w38d_stecX,53:6:_w38d_stfcX,60:6:_w38d_st100X",
+   "0x7a,4,c3",
+   "0x7b,0,0500000000"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "_CTDo_move (128 B = 123 code + 5-B deco 05 00 00 00 00). Five bare cdecl 0-arg calls (FA result homes: a=si 66 8b f0, e2=di 66 8b f8, e3=ebp 8b e8, e7=bx 66 8b d8, e5=eax), then the serviceTicks band: gate char [st+0xec] (8a 0d + 84 c9), m=[st+0xfc] into cx (66 8b 0d), e5 push BEFORE the n load (66 a1 [st+0x100]), z via sete dl, push order 50 53 50 51 52 55 57 56 (e5,e7,n,m,z,e3,e2,a). CL's plan (a on a stack home 66 89 44 24 12 with an 8b 44 24 1a reload, e3=ebx with cmp ebx, z=sete cl, extra 83 ec 04 head sub) is not steerable by decl order - patch the whole arg band: replace CL 0x00..0x5b (92 B) with FA 0x00..0x4f (80 B) carrying 9 newsites (5 e8 REL32 call sites + 3 DIR32 serviceTicks loads); the _MVRMove@32 e8 (FA 0x50) stays OUTSIDE the band so its obj reloc survives; then replace the epilogue's 83 c4 04 c3 with c3 (FA 0x7a) and insert the 5-B deco. All newsite payloads zeroed.",
+  "provenance": [
+   "patch 0x00: toolchain-diff arg band (92 B -> 80 B): FA homes call results in regs (a=si, e2=di, e3=ebp, e7=bx, e5=eax) and omits the sub esp,4; CL homes a on a stack slot (66 89 44 24 12), e3 in ebx (cmp ebx,0x7fffffff), z via sete cl, and reloads a from [esp+0x1a] between pushes; replaced CL 0x00..0x5b with FA 0x00..0x4f; newsites 5:20:_w38d_f00X, 13:20:_w38d_e50X, 21:20:_w38d_f60X, 28:20:_w38d_fc0X, 36:20:_w38d_fa0X (e8 disps zeroed; TOs $FA$_t_464f00/$FA$_t_464e50/$FA$_t_464f60/$FA$_t_464fc0/$FA$_t_464fa0 - 0x64e50/0x64f60/0x64fa0 anchors live via converted objs w32E_64e50_v1/w35A_64f60_v1/w30a_64fa0_v2 self-anchor aliases, 0x64f00/0x64fc0 are still stubs defining theirs directly), 42:6:_w38d_stecX, 52:6:_w38d_stfcX, 60:6:_w38d_st100X (DIR32, deltas _serviceTicks+0xec/0xfc/0x100 through maps)",
+   "patch 0x7a: toolchain-diff epilogue: CL keeps the sub esp,4 undo (83 c4 04) that FA never needed (no head sub) - 83 c4 04 c3 replaced with c3",
+   "patch 0x7b: toolchain-diff FA census deco inserted after ret (FA c3 at 0x7a): 05 00 00 00 00 (5 B)"
+  ]
+ },
+ {
+  "rva": 714224,
+  "verdict": "EXACT",
+  "obj": "w38D_ae5f0_v1",
+  "src": "build/survey/probes/w38D_ae5f0_v1.c",
+  "maps": [
+   "_w38d_sfxX=?state_funcs_list@@3PAU__unnamed@@A+0xf0"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "?net_unmung_name@@YADPADPAUPKT_PLAYER_AD@@@Z (112 B = 108 code + 4-B tail 8d 64 24 00; FA ret at 0x6b). EXACT round 1 with ZERO patches: CL produces the full 108-B code byte-identical, and the 4-B tail (8d 64 24 00) is a census-proven padcensus composition that copies automatically - no patch needed. cdecl char returner; strncmp(name, state_funcs_list+0xf0, 7) via push offset/push esi + _strncmp (layout public), then two do-while rotated copy loops into ((char*)pkt)[2..0x29] / [0x2b..0x4c] with '.'/NUL breaks and i<0x28 bound, terminal NUL store, *s!='.' -> return 0 between them, s++, return 1. Map _w38d_sfxX=?state_funcs_list@@3PAU__unnamed@@A+0xf0 (delta map). Source spells struct PKT_PLAYER_AD { int q[16]; } inline, reproducing the PAUPKT_PLAYER_AD@@ pointer mangle (wave-21 .cpp-mangling class).",
+  "provenance": [
+   "tail 0x6c: toolchain-diff FA census deco 8d 64 24 00 (4 B) - census-proven filler, copies without a patch (fitobj padcensus composition)"
+  ]
+ }
+]

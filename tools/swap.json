@@ -13790,7 +13790,9 @@
    "@w33g_n2@4=$FA$_t_41f320"
   ],
   "patch": [],
-  "aliases": [],
+  "aliases": [
+   "0=$FA$_t_41f340"
+  ],
   "provenance": []
  },
  {
@@ -17024,5 +17026,985 @@
   "patch": [],
   "aliases": [],
   "provenance": []
+ },
+ {
+  "rva": 664512,
+  "obj": "w38A_a23c0_v1",
+  "src": "build/survey/probes/w38A_a23c0_v1.c",
+  "maps": [
+   "_w38a_strchr=_strchr",
+   "@w38a_strend@4=@Strend@4"
+  ],
+  "patch": [
+   "0x26,2,c772",
+   "0x34,1,f0"
+  ],
+  "provenance": [
+   "patch 0x26: toolchain-diff CL mirrors cmp-operand order + uses ja where FA cmp eax,edi/jb (2 bytes: c7 72 -> 77 72, running off = 7e1+27)",
+   "patch 0x34: toolchain-diff do-while back-edge disp e7->f0 (CL latch targets its own cmp; FA retargets to FA's cmp eax,edi at 0x25)"
+  ],
+  "aliases": [
+   "0=$FA$_t_4a23c0"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 127712,
+  "obj": "w38A_1f2e0_v2",
+  "src": "build/survey/probes/w38A_1f2e0_v2.c",
+  "maps": [
+   "_w38a_set=$FA$_t_41f340",
+   "_w38a_h1=$FA$_t_41f280",
+   "@w38a_h2@4=$FA$_t_41f320",
+   "_w38a_namePtr=?janesOnlineName@@3PADA+0xb8"
+  ],
+  "patch": [
+   "0x16,2,7521",
+   "0x18,5,"
+  ],
+  "provenance": [
+   "patch 0x16: toolchain-diff break-branch polarity: CL je (74 05) -> FA jne (75 21) sharing FA's *d=0/ret tail at 0x39",
+   "patch 0x18: toolchain-diff delete CL-inlined *d=0/ret block (c6 06 00 5e c3, 5 B) that FA keeps only in the shared tail"
+  ],
+  "aliases": [
+   "0=$FA$_t_41f2e0"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 506928,
+  "obj": "w38A_7bc30_vX",
+  "src": "build/survey/probes/w38A_7bc30_v1.c",
+  "maps": [
+   "@w38a_pct@4=@Percent@4",
+   "__curThing=_curThing"
+  ],
+  "patch": [
+   "0x0,0x44,a17f01000085c07e06b801000000c37d06b8ffffffffc366833d21000000007f16750eb932000000e80000000084c07506b801000000c3b8ffffffffc3,0x01:6:__curThing,0x1a:6:__curThing,0x29:20:@w38a_pct@4"
+  ],
+  "provenance": [
+   "patch 0x0: toolchain-diff whole-body rewrite 0x44 B -> FA's 61-B code + 3-B 8d 49 00 pad (CL reordered loads / re-encoded moffs); newsites __curThing@+0x01 (payload 0x17f), __curThing@+0x1a (payload 0x21), @w38a_pct@4@+0x29 REL32 payload-zero"
+  ],
+  "aliases": [
+   "0=$FA$_t_47bc30"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 543008,
+  "obj": "w38A_84920_v1",
+  "src": "build/survey/probes/w38A_84920_v1.c",
+  "maps": [
+   "__numComputers=_numComputers",
+   "__objControlledBy=_objControlledBy"
+  ],
+  "patch": [
+   "0x3,1,56",
+   "0xb,1,5e",
+   "0x17,31,7e12be0000000066390e740d83c602403bd07ff3b8ffffffff5ec3,3:6:__objControlledBy"
+  ],
+  "provenance": [
+   "patch 0x3: toolchain-diff CL prologue tail-shave: replace jcc byte with FA's 56 push (CL frameless head differs by 1 B)",
+   "patch 0xb: toolchain-diff CL prologue tail-shave: replace byte with FA's 5e pop at 0x0b",
+   "patch 0x17: toolchain-diff 31-B tail-loop rewrite to FA's exact bytes (7e 12 be..7e 12..b8..5e c3); newsite DIR32 __objControlledBy at patch+0x3 (FA imm 0x4e7610 carried in payload - link writes symVA+payload)"
+  ],
+  "aliases": [
+   "0=$FA$_t_484920"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 862280,
+  "obj": "w38A_d2848_v1",
+  "src": "build/survey/probes/w38A_d2848_v1.c",
+  "maps": [
+   "_xv=xv",
+   "_yv=yv",
+   "_zv=zv",
+   "_vector_table=vector_table",
+   "_w38a_grexec=@GRExec@4"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 894224,
+  "obj": "w38A_da510_v1",
+  "src": "build/survey/probes/w38A_da510_v1.c",
+  "maps": [
+   "_w38a_sub=$FA$_t_4d5f30"
+  ],
+  "patch": [
+   "0x0,9,837c24040056742e",
+   "0x0c,5,f6460d10",
+   "0x18,3,",
+   "0x26,0,83c404"
+  ],
+  "provenance": [
+   "patch 0x0: toolchain-diff CL load+test head -> FA direct cmp [esp+4],0 (8b 44 24 04 85 c0 74 = 83 7c 24 04 00 74, 8 B for 9)",
+   "patch 0x0c: toolchain-diff CL mov al + test al (8a 46 0d a8 10) -> FA direct test byte [esi+d],0x10 (f6 46 0d 10, 4 B for 5)",
+   "patch 0x18: toolchain-diff delete CL's add esp,4 after the sub call (FA defers cleanup past the and/c7-46 stores)",
+   "patch 0x26: toolchain-diff insert FA's 83 c4 04 after the c7 46 18 store (deferred cleanup position, running offset incl. previous deltas)"
+  ],
+  "aliases": [
+   "0=$FA$_t_4da510"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 20832,
+  "obj": "w38B_5160_v2",
+  "src": "build/survey/probes/w38B_5160_v2.c",
+  "maps": [
+   "__thisComputerX=_thisComputer",
+   "__w38b_mns=?masterNextScreen@@3JA",
+   "__w38b_cs=_curScreen"
+  ],
+  "patch": [],
+  "provenance": [
+   "whole-body: pure C, no patches; map TOs = layout publics (_thisComputer 0x4e7608, ?masterNextScreen@@3JA 0x4f3820, _curScreen 0x51c300) \u2014 word/dword widths from FA operand sizes (66 c7 05 / c7 05)",
+   "tail 13 B '05000000008da42400000000': toolchain-diff census pad after ret (05 00 00 00 00 census counter + 8d a4 24 00 00 00 00 lea-pad filler); census-proven, auto-accepted by fitobj",
+   "alias 0=$FA$_t_405160: chunk externally referenced by stub groups (verified via build/st obj scan)"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 146656,
+  "obj": "w38B_23ce0_v1",
+  "src": "build/survey/probes/w38B_23ce0_v1.c",
+  "maps": [
+   "@w38b_23ad0@8=$FA$_t_423ad0",
+   "__w38b_ns64=_nationSides+0x64",
+   "__w38b_ns6c=_nationSides+0x6c",
+   "__w38b_sp=_specials+0xcc",
+   "__w38b_wc=?worldCenter@@3UF24_POINT3@@A+0xc"
+  ],
+  "patch": [],
+  "provenance": [
+   "whole-body: pure C, no patches, no newsites; chunk-relative disp newsites not needed (all TOs are base+delta map TOs)",
+   "tail 7 B '8da42400000000': toolchain-diff census/lea-pad after ret; census-proven, auto-accepted by fitobj",
+   "alias 0=$FA$_t_423ce0: chunk externally referenced by stub groups (verified via build/st obj scan)"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 412816,
+  "obj": "w38B_64c90_v3",
+  "src": "build/survey/probes/w38B_64c90_v3.c",
+  "maps": [
+   "@w38b_err4@4=$FA$_t_4659e0",
+   "__w38b_st=_serviceTicks+0xa2",
+   "__w38b_stt=_serviceTicks+0x52"
+  ],
+  "patch": [],
+  "provenance": [
+   "whole-body: pure C, no patches; volatile short counter spelling gives FA's 66-range mem-op forms (66 83 3d cmp / 66 ff 0d dec / 0f bf 05 movsx)",
+   "tail 6 B '8d9b00000000': toolchain-diff census/lea-pad after ret (wave-30 census filler); census-proven, auto-accepted by fitobj",
+   "alias 0=$FA$_t_464c90: chunk externally referenced by stub groups (verified via build/st obj scan)"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_464c90"
+  ]
+ },
+ {
+  "rva": 414800,
+  "obj": "w38B_65450_v3",
+  "src": "build/survey/probes/w38B_65450_v3.c",
+  "maps": [
+   "@w38b_err5@4=$FA$_t_4659e0",
+   "__w38b_st2=_serviceTicks+0xa2",
+   "__w38b_stt2=_serviceTicks+0x52"
+  ],
+  "patch": [],
+  "provenance": [
+   "whole-body: pure C, no patches; __fastcall signature = FA param-in-ecx form; err5 stub TO same 0x4659e0 anchor as 0x64c90",
+   "tail 2 B '8bff': toolchain-diff census pad after ret; census-proven, auto-accepted by fitobj",
+   "alias 0=$FA$_t_465450: chunk externally referenced by stub groups (verified via build/st obj scan)"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 472384,
+  "obj": "w38B_73540_v1",
+  "src": "build/survey/probes/w38B_73540_v1.c",
+  "maps": [
+   "_w38b_kil=_Kill@0",
+   "_w38b_rmo=_RemoveCurObj@0",
+   "@w38b_gc@12=@GRAPHICAddCrater@12",
+   "__w38b_think=_curThing+0x11",
+   "__w38b_cb=_curThingType+0x56",
+   "__w38b_ttype=_curThingType+0x17",
+   "__thisComputer=_thisComputer"
+  ],
+  "patch": [],
+  "provenance": [
+   "whole-body: pure C, no patches; fastcall callee spelled @w38b_gc@12 (map FROM = fastcall imp-slot spelling, wave-25 rule)",
+   "tail 4 B '8d642400': toolchain-diff census/lea-pad after ret; census-proven, auto-accepted by fitobj",
+   "alias 0=$FA$_t_473540: chunk externally referenced by stub groups (verified via build/st obj scan)"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_473540"
+  ]
+ },
+ {
+  "rva": 928912,
+  "obj": "w38B_e2c90_w13_G4",
+  "src": "build/survey/probes/w38B_e2c90_w13.c",
+  "maps": [
+   "__XcptActTabCountX=__XcptActTabCount"
+  ],
+  "patch": [],
+  "provenance": [
+   "whole-body: pure C, no patches, no newsites; single reloc = count dword 0x51abe4 masked on both sides, resolved via map _XcptActTabCountX=__XcptActTabCount",
+   "map TO verified from FA imm bytes: FA count dword e4 ab 51 00 = 0x0051abe4 = __XcptActTabCount public in layout",
+   "flags: /G4 flip is load-bearing \u2014 do not 'normalize' to /G5 when merging; /G5 CL code is 0x35-0x37 B (load+cmp + alt fold) and would FATAL length-check",
+   "alias 0=$FA$_t_4e2c90: chunk externally referenced by stub groups (verified via build/st obj scan)"
+  ],
+  "flags": "/c /O2 /Gy /G4"
+ },
+ {
+  "rva": 127872,
+  "obj": "w38C_1f380_v2",
+  "src": "build/survey/probes/w38C_1f380_v2.c",
+  "maps": [
+   "@w38c_ffmtX@8=$FA$_t_41f410",
+   "@w38c_nextstr@8=@NextString@8",
+   "@w38c_fmb@8=@FortMultiButton@8",
+   "@w38c_mmfree@4=@MMFreePtr@4",
+   "_w38c_coinX=_fortSizeIndex+0x20"
+  ],
+  "patch": [
+   "3,18,53568a0257558bf28be984c07476",
+   "17,4,8d542413",
+   "21,0,33ff",
+   "30,2,89442414",
+   "43,1,de",
+   "85,6,ba0100000047",
+   "101,1,ff",
+   "103,1,d7",
+   "104,4,8bcd",
+   "114,1,13",
+   "118,1,09",
+   "119,2,8b4c2414",
+   "128,0,c6050000000001,2:6:_w38c_coinX",
+   "143,0,90"
+  ],
+  "provenance": [
+   "patch 3: toolchain-diff \u2014 CL prolog spelling 'sub esp,4; mov [esp],esi; mov [esp+4],edi; push ebx; push esi; push edi; push ebp + lea 5-form' differs from FA's 18-B 'push ebx; push esi; mov al,[edx]; push edi; push ebp; mov esi,edx; mov ebp,ecx; test al,al; je' band; replaced in place with FA bytes (early-out je 0x76 target preserved: falls onto the pops/ret block in both)",
+   "patch 17: toolchain-diff \u2014 FA loads psav via 'lea edx,[esp+0x13]' (q.flag slot) where CL's prolog spill layout left the lea at a different operand; 4-B replace",
+   "patch 21: toolchain-diff \u2014 CL never emitted the 'xor edi,edi; inc edi' dead-clear (FA clears i before the loop via edi counter walk); 2-B insert at FA's spot",
+   "patch 30: toolchain-diff \u2014 FA stores mv into psav via 'mov [esp+0x14],ebp' at the CL arg-clobber slot; 2-B replace",
+   "patch 43: toolchain-diff \u2014 strcmp walk head loads next entry ptr with 'modrm de' vs CL's 'de' sibling byte; 1-B (FA 'mov ebx,esi' walk base vs CL's register pair choice)",
+   "patch 85: toolchain-diff \u2014 FA nextstr band: 'mov edx,1' BEFORE inc edi (5+1 B vs CL's counter handling); 6-B replace",
+   "patch 101: toolchain-diff \u2014 fmb call rel32 site byte retarget; FA disp byte 0xff with target verified = FortMultiButton",
+   "patch 103: toolchain-diff \u2014 same band: 'mov ecx,edi' (call arg) spelling byte d7",
+   "patch 104: toolchain-diff \u2014 'mov ebx,ecx'... CL's fmb arg-band bytes (4-B replace; mmfree-band deltas from the nextstr insert shift)",
+   "patch 114: toolchain-diff \u2014 je over q.flag test: FA disp 0x09 (store target 0x80); restores FA's own disp",
+   "patch 118: toolchain-diff \u2014 same je's disp partner byte",
+   "patch 119: toolchain-diff \u2014 MMFreePtr arg band 'mov ecx,[esp+0x14]' (2-B replace; CL used its own spill slot addressing)",
+   "patch 128: toolchain-diff \u2014 FA appends the 'mov byte [0x525918+1],1' 7-B store (c6051859520001) after the mmfree call; CL folded it out; insert at FA's exact spot (all 4 CL relocs auto-shift to FA's disp sites 0x18/0x5c/0x6b/0x7c)",
+   "patch 143: toolchain-diff \u2014 trailing 90 pad byte (census-proven) to full 0x90 chunk",
+   "map TOs verified from FA call disps: ffmtX -> 0x1f410 ($FA$_t_41f410, stubbed), nextstr -> 0x11dc0 (@NextString@8), fmb -> 0x1f370 (@FortMultiButton@8), mmfree -> 0x35b70 (@MMFreePtr@4)",
+   "patch 128: toolchain-diff \u2014 inserted store mov byte [0x525918],1 had the literal FA VA baked: literal-VA drops HIGHLOW (wave-20/25 class). Fixed: payload zeroed + newsite DIR32 at site 2 (patch off 0x80 + 2 = chunk 0x82, rva 0x1f402); target _fortSizeIndex+0x20 via map delta (interior data public, dis.py site annotation)"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 157869,
+  "obj": "w38C_268ad_v2",
+  "src": "build/survey/probes/w38C_268ad_v2.c",
+  "maps": [
+   "_w38c_scanfn@8=$FA$_t_4268d8",
+   "_w38c_mcE=?mcFlyAll@@3DA+0x5c8",
+   "@w38c_errfn@4=$FA$_t_424a60"
+  ],
+  "patch": [
+   "7,9,8d4c24005051",
+   "18,7,837c240001b001",
+   "27,5,b900000000,1:6:_w38c_mcE",
+   "32,2,",
+   "37,3,32c0"
+  ],
+  "provenance": [
+   "patch 7: toolchain-diff \u2014 CL pushed ebx (saved-reg for ok-in-bl) between the two leas and adjusted the stack-address lea disp; FA keeps both leas (lea eax,[esp+4]; lea ecx,[esp]) ahead of push eax/push ecx; 9-B band replaced with FA's 7-B ordering (net -3)",
+   "patch 18: toolchain-diff \u2014 CL reloads the arg and cmps ecx (mov ecx,[esp+4]; cmp ecx,1) vs FA's cmp-mem dword [esp],1; FA sets al=1 BEFORE the jge (ok pre-set spelling); 7-B replace, same length (83 7c 24 00 01 + b0 01)",
+   "patch 27: toolchain-diff \u2014 CL baked the literal 0 imm for '&w38c_mcE'; FA imm dword = 0x4ecac4; identity b9-imm rewrite + DIR32 newsite at span-rel 1 (imm byte), payload zero, map _w38c_mcE=?mcFlyAll@@3DA+0x5c8 (symVA 0x4ec4fc + 0x5c8 = 0x4ecac4)",
+   "patch 32: toolchain-diff \u2014 CL's 'xor bl,bl' (failed-path ok-clear into bl) absent in FA (FA's failed path clears al after the call); 2-B delete",
+   "patch 37: toolchain-diff \u2014 CL returns ok via 'mov al,bl; pop ebx' vs FA's direct 'xor al,al'; 3-B replace with 2-B (net -1 after the delete; total chunk 0x2b = FA)",
+   "map TOs verified from FA call disps: scanfn e8+0x19 -> chunk end 0x268d8 ($FA$_t_4268d8, next-chunk stub), errfn e8-0x1e72 -> 0x24a60 ($FA$_t_424a60, stubbed); errfn is fastcall-with-ecx &mcE (b9 mov ecx,imm)"
+  ],
+  "aliases": [
+   "0=$FA$_t_4268ad"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 554112,
+  "obj": "w38C_87480_v3",
+  "src": "build/survey/probes/w38C_87480_v3.c",
+  "maps": [
+   "_DialogGetPtr=@DialogGetPtr@4",
+   "_DialogDraw@4=?DialogDraw@@YGXPAX@Z"
+  ],
+  "patch": [
+   "16,9,81e1ff7f000083f904",
+   "41,12,80390074498b6c24188bf9",
+   "93,20,742166468a1184d274088a51014184d275f88a51014184d275bb",
+   "146,0,8da424000000008da42400000000"
+  ],
+  "provenance": [
+   "patch 16: toolchain-diff \u2014 CL folded 'c & 0x7fff' into 16-bit forms (66 81 e1 ff 7f, 5 B; 66 83 f9 04, 4 B); FA uses 32-bit forms: and ecx,0x7fff (81 e1 ff 7f 00 00, 6 B) + cmp ecx,4 (83 f9 04, 3 B); same-span replace, net 0 (cancel)",
+   "patch 41: toolchain-diff \u2014 FA's top loop test orders lp-nonnull (cmp byte [ecx],0 = 80 39 00; je FAIL) BEFORE the [esp+0x18] list re-load that CL hoisted first; test spelling is cmp-mem vs CL's load+test; 12-B band replaced with FA's 11-B ordering (net -1)",
+   "patch 93: toolchain-diff \u2014 FA's advance has the 'if (*lp)' pre-guard CL's do-while omitted: mov dl,[ecx]; test dl; je (+2 walk) then the two-stage do-while (mov dl,[ecx+1]/inc/test/jne self; mov dl,[ecx+1]/inc/test/jne loop-head); je/jne disp bytes are FA's-own; 20-B band replaced with FA's 26-B (net +6; loop-counter i stays 16-bit SI)",
+   "patch 146: toolchain-diff \u2014 trailing census pad '8d a4 24 00 00 00 00' x2 (14 B, probed/padcensus-proven composition) inserted to full 0xa0 chunk",
+   "map TOs verified from FA call disps: DialogGetPtr -> 0x87400 (@DialogGetPtr@4), DialogDraw -> 0x86590 (?DialogDraw@@YGXPAX@Z); both CL relocs survive and auto-shift to FA's disp sites 0x9/0x86"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 670032,
+  "obj": "w38C_a3950_v2",
+  "src": "build/survey/probes/w38C_a3950_v2.c",
+  "maps": [
+   "__w38c_tt=_timerTicks",
+   "_w38c_vdoA=?vdoColorProcess@@3FA+0x10",
+   "_w38c_vdoB=?vdoColorProcess@@3FA+0x8",
+   "_w38c_vdoC=?vdoColorProcess@@3FA+0xa8"
+  ],
+  "patch": [],
+  "provenance": [
+   "compile-only EXACT (no patches): CL 0x2d == FA 0x2d with char-sete idiom and the three vdoColorProcess member bases; map TOs verified from FA imm bytes: ?vdoColorProcess@@3FA bases folded at +0x8/+0x10/+0xa8 over the struct public, _timerTicks data read"
+  ],
+  "aliases": [
+   "0=$FA$_t_4a3950"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 872272,
+  "obj": "w38C_d4f50_v3",
+  "src": "build/survey/probes/w38C_d4f50_v3.c",
+  "maps": [],
+  "patch": [
+   "5,13,8b4c2408563bd1741c8b742414",
+   "19,2,c64e",
+   "26,1,01",
+   "30,2,1941",
+   "36,2,c64e"
+  ],
+  "provenance": [
+   "patch 5: toolchain-diff \u2014 register scheduling of the swap walk: FA interleaves the second-string load after the save ('mov ecx,[esp+0x8]' at 0x5, then push esi) so the walk pointer lives in ECX and the count in ESI; CL kept the second-string load/compare before the count reload (mov esi,[esp+0xc]; cmp edx,esi; then mov esi,[esp+0x14]). 13-B same-length band replace: 8b4c2408 56 | 3bd1 741c | 8b742414 (je 0x1c and 'mov esi,[esp+0x14]' bytes are FA's own; net 0)",
+   "patch 19: toolchain-diff \u2014 walk loop: count copy 'mov eax,esi' (8b c6) at 0x12-13 vs CL's 8b c1; then 'dec esi' (4e) at 0x14 vs CL's 49; 2-B replace c64e",
+   "patch 26: toolchain-diff \u2014 'mov al,[ecx]' (8a 01) modrm byte 06->01 vs CL's 8a 06 (walk pointer ECX); 1-B replace 01",
+   "patch 30: toolchain-diff \u2014 store 'mov [ecx],bl' (88 19) + 'inc ecx' (41) vs CL's 881e/46; 2-B replace 1941",
+   "patch 36: toolchain-diff \u2014 loop-tail count copy 'mov eax,esi' (8b c6) + 'dec esi' (4e) vs CL's 8b c1/49; 2-B replace c64e; total CL 0x2d == FA 0x2d, no relocs (zero newsites)"
+  ],
+  "aliases": [
+   "0=$FA$_t_4d4f50"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 876048,
+  "obj": "w38C_d5e10_v2",
+  "src": "build/survey/probes/w38C_d5e10_v2.c",
+  "maps": [
+   "___getenv_lk=__getenv_lk",
+   "___environ=__environ",
+   "___wenviron=__wenviron",
+   "_w38c_envinit=$FA$_t_4db2f0",
+   "_mbsnbicoll=__mbsnbicoll"
+  ],
+  "patch": [
+   "12,9,7523833d0000000000,4:6:___wenviron",
+   "39,34,8b2d0000000085ed74528b74241485f6744a8bfe,2:6:___environ",
+   "78,1,34",
+   "120,2,7410",
+   "122,10,83c504837d000075cc"
+  ],
+  "provenance": [
+   "patch 12: toolchain-diff \u2014 CL spells the wide-check as a1-load+test (a1 ____; 85 c0; je) vs FA's cmp-mem '83 3d ____ 00; 74 16'; 9-B band replaced in place with FA's 9-B form (jne disp 0x23 restores FA's own = body head at 0x31) + DIR32 newsite at span-rel 4 (moffs dword) for ___wenviron with payload zero; CL's own a1 DIR32 (site 0xf) is inside the band and re-anchored by the newsite",
+   "patch 39: toolchain-diff \u2014 CL duplicated two 7-B 'ret0' blocks (0x31-0x37, 0x40-0x46) between the env-init and name guards (per-guard fail returns); FA shares one fail block at 0x83: both guards fall into the name-load chain; 34-B band replaced with FA's 20-B (je 0x52 / je 0x4a FA-own disps to the shared fail block) + DIR32 newsite at span-rel 2 for ___environ (FA's 0x29 reload mov-ebp sits inside the replaced span; CL's site-0x29 reloc dropped, re-anchored; net -14)",
+   "patch 78: toolchain-diff \u2014 shared-fail je disp byte 0x35 -> 0x34 (restores FA's own; fail block sits at 0x83 in FA's layout)",
+   "patch 120: toolchain-diff \u2014 match-return je disp 0x11 -> 0x10 (restores FA's own 0x7410; match block at 0x8a)",
+   "patch 122: toolchain-diff \u2014 CL loop tail loads next entry (mov eax,[ebp+4] then add ebp,4 then test) vs FA's add ebp,4 + cmp-mem '83 7d 00 00' with jne back-edge 0xcc (back to the entry-strlen precheck 0x4f); 10-B band replaced with FA's 9-B (net -1; total 0x96 = FA)",
+   "map TOs verified from FA call disps/envinit disp: envinit -> 0x4db2f0 ($FA$_t_4db2f0, stubbed), __mbsnbicoll public at 0x4db2b0 (CL sym _mbsnbicoll, one underscore), DS moffs: __environ 0x51a020 (x2 sites), __wenviron 0x51a028"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 600992,
+  "obj": "w38D_92ba0_v2",
+  "src": "build/survey/probes/w38D_92ba0_v2.c",
+  "maps": [
+   "_joysticksInitialized=?joysticksInitialized@@3DA",
+   "_joystickPOVDevice=?joystickPOVDevice@@3KA",
+   "_ReadDevice=?ReadDevice@@YA?AW4JOYRESULT@@K@Z",
+   "_w38d_jixX=?joystickInfoEx@@3PAUjoyinfoex_tag@@A+0x28"
+  ],
+  "patch": [
+   "0x4d,57,7f06b848000000c33d870000007f06b84d000000c33de10000007f06b850000000c33d3b010000b84b0000007e05b848000000c3",
+   "0x81,0,8d6424008d6424008da42400000000"
+  ],
+  "provenance": [
+   "patch 0x4d: toolchain-diff closing if-chain (57 B -> 52 B): FA keeps t in eax, each branch cmp eax,imm (3d, 5 B) with load-then-jle order in the final band (3d 3b 01 00 00 b8 4b 00 00 00 7e 05 b8 48 c3); CL v2 copies t to ecx (8b c8) and uses cmp ecx,imm32 (81 f9, 6 B) with mov-0x4b-then-cmp order; pure-immediate band, no relocations inside",
+   "patch 0x81: toolchain-diff FA census deco inserted after ret (FA c3 at 0x80): 8d 64 24 00 8d 64 24 00 8d a4 24 00 00 00 00 (15 B)"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 384800,
+  "obj": "w38D_5df20_v1",
+  "src": "build/survey/probes/w38D_5df20_v1.c",
+  "maps": [
+   "@WNGLeader@4=$FA$_t_45dc60",
+   "_w38d_ctX=_curThing"
+  ],
+  "patch": [
+   "0x00,18,668b0d0000000083ec088d442404536a005051,3:6:_curId",
+   "0x79,0,8da42400000000"
+  ],
+  "provenance": [
+   "patch 0x00: toolchain-diff head (18 B -> 19 B): FA loads curId via 66 8b 0d <disp32> (mov cx,[curId], 7 B) and pushes args 50 51 (push eax, push ecx); CL uses moffs form 66 a1 (mov ax,[curId], 6 B) and pushes 51 50 (push ecx, push eax); replaced CL 0x00..0x11 with FA 0x00..0x12, newsite 3:6:_curId (DIR32, disp payload zeroed per wave-31/34 payload-zero rule)",
+   "patch 0x79: toolchain-diff FA census deco inserted after final ret (FA c3 at 0x78): 8d a4 24 00 00 00 00 (7 B)"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 388176,
+  "obj": "w38D_5ec50_v1",
+  "src": "build/survey/probes/w38D_5ec50_v1.c",
+  "maps": [
+   "_w38d_ctX=_curThing"
+  ],
+  "patch": [
+   "0x00,18,668b0d0000000083ec088d442404536a005051,3:6:_curId",
+   "0x79,0,8da42400000000"
+  ],
+  "provenance": [
+   "patch 0x00: toolchain-diff head (18 B -> 19 B): FA 66 8b 0d <disp32> mov cx,[curId] + push order 50 51; CL 66 a1 moffs + push order 51 50; replaced CL 0x00..0x11 with FA 0x00..0x12, newsite 3:6:_curId (DIR32, payload zeroed)",
+   "patch 0x79: toolchain-diff FA census deco inserted after final ret (FA c3 at 0x78): 8d a4 24 00 00 00 00 (7 B)"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 389904,
+  "obj": "w38D_5f310_v1",
+  "src": "build/survey/probes/w38D_5f310_v1.c",
+  "maps": [
+   "_w38d_gsizesX=_groupSizes",
+   "_w38d_gidsX=_groupIds",
+   "_w38d_opsX=_objPtrs"
+  ],
+  "patch": [
+   "0x00,38,83ec0433d25356578a9900000000553ada74658d04898d34450000000033c08ac389442410,10:6:_w38d_gsizesX",
+   "0x4c,2,8bc2",
+   "0x52,4,668b6bfe",
+   "0x5d,1,48",
+   "0x59,4,66896b02",
+   "0x74,2,3bd0",
+   "0x76,2,7cad"
+  ],
+  "provenance": [
+   "patch 0x00: toolchain-diff prologue/entry band (38 B -> 37 B): FA = sub esp,4; xor edx,edx; push ebx,esi,edi; mov bl,[gsizes+ecx] (8a 99); push ebp; cmp bl,dl (3a da); je; lea eax,[ecx+ecx*4]; lea esi,[eax*2] (unrelocated disp 0); xor eax/mov bl,al; mov [esp+0x10],eax; vs CL = load count to al (8a 81), test al (84 c0), pushes after the load, xor ebx/mov bl earlier, mov [esp+0x10],ebx before lea esi, plus a 90 nop; head band replaced with FA spelling; newsite 10:6:_w38d_gsizesX (DIR32, disp payload zeroed; the CL obj's original gsizes reloc at 0x07 is inside the span and killed by it)",
+   "patch 0x4c: toolchain-diff shift-loop counter copy: CL 8b ea (t=ebp copy of edx) vs FA 8b c2 (t=eax)",
+   "patch 0x52: toolchain-diff shift-loop u16 load: CL 66 8b 43 fe (word via ax) vs FA 66 8b 6b fe (word via bp)",
+   "patch 0x59: toolchain-diff shift-loop u16 store: CL 66 89 43 02 (ax) vs FA 66 89 6b 02 (bp)",
+   "patch 0x5d: toolchain-diff shift-loop decrement: CL dec ebp (4d) vs FA dec eax (48)",
+   "patch 0x74: toolchain-diff loop-bottom compare operand order: CL 3b c2 (cmp eax,edx = saved vs i) vs FA 3b d0 (cmp edx,eax = i vs saved)",
+   "patch 0x76: toolchain-diff loop-bottom jump polarity: CL jg (7f) against cmp saved,i vs FA jl (7c) against cmp i,saved - same semantics, inverted-operand jl tell"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 413312,
+  "obj": "w38D_64e80_v1",
+  "src": "build/survey/probes/w38D_64e80_v1.c",
+  "maps": [
+   "_w38d_f00X=$FA$_t_464f00",
+   "_w38d_e50X=$FA$_t_464e50",
+   "_w38d_f60X=$FA$_t_464f60",
+   "_w38d_fc0X=$FA$_t_464fc0",
+   "_w38d_fa0X=$FA$_t_464fa0",
+   "_w38d_stecX=_serviceTicks+0xec",
+   "_w38d_stf0X=_serviceTicks+0xf0",
+   "_w38d_stf8X=_serviceTicks+0xf8",
+   "_w38d_stfcX=_serviceTicks+0xfc",
+   "_w38d_st100X=_serviceTicks+0x100"
+  ],
+  "patch": [
+   "0x00,92,53565755e800000000668bf0e800000000668bf8e8000000008be8e800000000668bd8e8000000008a0d0000000084c97544668b0d000000005066a100000000535081fdffffff7f0f94c25152555756,5:20:_w38d_f00X,13:20:_w38d_e50X,21:20:_w38d_f60X,28:20:_w38d_fc0X,36:20:_w38d_fa0X,42:6:_w38d_stecX,53:6:_w38d_stfcX,60:6:_w38d_st100X",
+   "0x7a,4,c3",
+   "0x7b,0,0500000000"
+  ],
+  "provenance": [
+   "patch 0x00: toolchain-diff arg band (92 B -> 80 B): FA homes call results in regs (a=si, e2=di, e3=ebp, e7=bx, e5=eax) and omits the sub esp,4; CL homes a on a stack slot (66 89 44 24 12), e3 in ebx (cmp ebx,0x7fffffff), z via sete cl, and reloads a from [esp+0x1a] between pushes; replaced CL 0x00..0x5b with FA 0x00..0x4f; newsites 5:20:_w38d_f00X, 13:20:_w38d_e50X, 21:20:_w38d_f60X, 28:20:_w38d_fc0X, 36:20:_w38d_fa0X (e8 disps zeroed; TOs $FA$_t_464f00/$FA$_t_464e50/$FA$_t_464f60/$FA$_t_464fc0/$FA$_t_464fa0 - 0x64e50/0x64f60/0x64fa0 anchors live via converted objs w32E_64e50_v1/w35A_64f60_v1/w30a_64fa0_v2 self-anchor aliases, 0x64f00/0x64fc0 are still stubs defining theirs directly), 42:6:_w38d_stecX, 52:6:_w38d_stfcX, 60:6:_w38d_st100X (DIR32, deltas _serviceTicks+0xec/0xfc/0x100 through maps)",
+   "patch 0x7a: toolchain-diff epilogue: CL keeps the sub esp,4 undo (83 c4 04) that FA never needed (no head sub) - 83 c4 04 c3 replaced with c3",
+   "patch 0x7b: toolchain-diff FA census deco inserted after ret (FA c3 at 0x7a): 05 00 00 00 00 (5 B)"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 714224,
+  "obj": "w38D_ae5f0_v1",
+  "src": "build/survey/probes/w38D_ae5f0_v1.c",
+  "maps": [
+   "_w38d_sfxX=?state_funcs_list@@3PAU__unnamed@@A+0xf0"
+  ],
+  "patch": [],
+  "provenance": [
+   "tail 0x6c: toolchain-diff FA census deco 8d 64 24 00 (4 B) - census-proven filler, copies without a patch (fitobj padcensus composition)"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 286640,
+  "obj": "w38E_45fb0_v3",
+  "src": "build/survey/probes/w38E_45fb0_v3.c",
+  "maps": [
+   "_SeqFadeOut=?SeqFadeOut@@YADGG@Z"
+  ],
+  "patch": [
+   "6,1,0c",
+   "13,1,18",
+   "16,1,eb",
+   "21,1,dd",
+   "40,1,c3",
+   "42,1,cd",
+   "81,1,96"
+  ],
+  "provenance": [
+   "patch 6: toolchain-diff: frame-offset \u2014 CL materializes param2 (tgt) into ebx first at [esp+10]; FA loads param1 (step) at [esp+0c]",
+   "patch 13: toolchain-diff: frame-offset \u2014 CL bp load [esp+14] vs FA [esp+18]",
+   "patch 16: toolchain-diff: reg-color \u2014 CL homes m=ebp/tgt=ebx (cmp modrm dd); FA homes m=ebx/tgt=ebp (eb)",
+   "patch 21: toolchain-diff: reg-color \u2014 min-store CL mov bp,bx vs FA mov bx,bp",
+   "patch 40: toolchain-diff: reg-color \u2014 idiv numerator CL 8b c5 vs FA 8b c3",
+   "patch 42: toolchain-diff: reg-color \u2014 idiv denominator CL 8b cb vs FA 8b cd",
+   "patch 81: toolchain-diff: pre-bool \u2014 CL canonicalizes tgt<=m to setae (0f 93); FA setbe (0f 96)"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 286736,
+  "obj": "w38E_46010_v3",
+  "src": "build/survey/probes/w38E_46010_v3.c",
+  "maps": [
+   "_SeqFadeIn=?SeqFadeIn@@YADGG@Z"
+  ],
+  "patch": [
+   "6,1,0c",
+   "13,1,18",
+   "16,1,eb",
+   "21,1,dd",
+   "39,28,b9000100008bc325ffff00008bf5c1e00881e6ffff000099f7fe2bc8",
+   "88,1,96"
+  ],
+  "provenance": [
+   "patch 6: toolchain-diff: frame-offset \u2014 CL materializes param2 (tgt) into ebx first; FA param1 (step) at [esp+0c]",
+   "patch 13: toolchain-diff: frame-offset \u2014 CL bp load [esp+14] vs FA [esp+18]",
+   "patch 16: toolchain-diff: reg-color \u2014 CL homes m=ebp/tgt=ebx; FA m=ebx/tgt=ebp",
+   "patch 21: toolchain-diff: reg-color \u2014 min-store CL mov bp,bx vs FA mov bx,bp",
+   "patch 39: toolchain-diff: schedule \u2014 28-B div block: CL mov ecx,0x100 after idiv, denominator ecx; FA hoists mov ecx,0x100 pre-div, denominator esi (8b f5/81 e6/f7 fe)",
+   "patch 88: toolchain-diff: pre-bool \u2014 CL setae; FA setbe"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 737280,
+  "obj": "w38E_b4000_final",
+  "src": "build/survey/probes/w38E_b4000_v9.c",
+  "maps": [
+   "_MMAccessW=@MMAccessW@4",
+   "_w38e_radd=?RemapAdd@@YAXPAUT_HANDLE@@H@Z"
+  ],
+  "patch": [
+   "15,20,8b78128bf0b9030000002bd28b4616f7f1668b742418",
+   "37,9,8bd86681fe00017e11"
+  ],
+  "provenance": [
+   "patch 15: toolchain-diff: schedule \u2014 20-B mid band replaced by FA's 22-B (dst load, mov esi,eax home-store of the MMAccessW result, mov ecx,3, sub edx, [esi+16], div, late si load): CL keeps call results in eax with no home-store and reads the signed 16-bit param early; FA homes m in esi and loads id late",
+   "patch 37: toolchain-diff: schedule \u2014 reorder cnt/mov/cmp band: FA stores cnt to ebx before the compare; CL stores after"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 411552,
+  "obj": "w38E_647a0_v3",
+  "src": "build/survey/probes/w38E_647a0_v3.c",
+  "maps": [
+   "_curThing15=_curThing+0x15",
+   "_curThingE8=_curThing+0xe8",
+   "__curId=_curId",
+   "_curThing11=_curThing+0x11"
+  ],
+  "patch": [
+   "41,0,66a100000000,2:6:_curId",
+   "55,2,",
+   "55,6,"
+  ],
+  "provenance": [
+   "patch 41: toolchain-diff schedule \u2014 insert FA's arg1 curId ax-load (66 a1 +imm; newsite DIR32 _curId at content+2): FA materializes T_Info's arg1 before the pos[1] load; CL materializes in reverse order",
+   "patch 55: toolchain-diff schedule delete \u2014 CL's xor eax,eax staging (33 c0) absent in FA (first use), deleted",
+   "patch 55 (2): toolchain-diff schedule delete \u2014 CL's original late 66a1 curId block incl. its reloc, dropped with span"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 463664,
+  "obj": "w38E_71330_v3",
+  "src": "build/survey/probes/w38E_71330_v3.c",
+  "maps": [
+   "@MPSetFuel@4=?MPSetFuel@@YIXG@Z",
+   "_curThing1fc=_curThing+0x1fc",
+   "@w38e_flush@4=?MPFlushAll@@YIXD@Z",
+   "_w38e_46b260@16=$FA$_t_46b260"
+  ],
+  "patch": [
+   "11,14,56668bf1744156",
+   "45,0,6a01",
+   "47,1,a1",
+   "48,1,",
+   "56,2,",
+   "52,11,6a078d4c240c8944240f51"
+  ],
+  "provenance": [
+   "patch 11: toolchain-diff: param-scheme \u2014 CL and-extends the 16-bit fastcall param for the PushCurObj arg (and ecx/push ecx/mov esi,ecx); FA pushes esi raw with 16-bit home load mov si,cx (band 14 B -> FA 7 B, je disp folded)",
+   "patch 45: toolchain-diff schedule \u2014 insert FA's 6a01 arg push that CL emits later (arg staging order)",
+   "patch 47: toolchain-diff: load-form \u2014 CL 8b 0d (mov ecx,ds:) for the curThing+0x1fc RHS read vs FA a1 (mov eax,ds:) 5-B form",
+   "patch 48: toolchain-diff load-form delete \u2014 drop 0x0d modrm byte once 8b->a1 converted",
+   "patch 56: toolchain-diff schedule delete \u2014 CL's original 6a01 push position (superseded by insert at 45)",
+   "patch 52: toolchain-diff: register-color \u2014 CL lea edx/[esp+4] + store ecx/[esp+0xb] + push edx vs FA lea ecx/[esp+0xc] + store eax/[esp+0xf] + push ecx (same 11-B span)"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 515760,
+  "obj": "w38E_7deb0_v2",
+  "src": "build/survey/probes/w38E_7deb0_v2.c",
+  "maps": [
+   "_FreeTextStuff=?FreeTextStuff@@YGXXZ",
+   "__ftextNum=_textNum",
+   "_fmtText2=_fmtText",
+   "_dirTVY8=?dirTVYTime@@3JA+0x8",
+   "@w38e_musoff@0=?MusicOff@@YIXXZ",
+   "_ftextNum=_textNum",
+   "_dirTVYTime8=?dirTVYTime@@3JA+0x8"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 515856,
+  "obj": "w38F_7df10_v1",
+  "src": "build/survey/probes/w38F_7df10_v1.cpp",
+  "maps": [
+   "_w38f_ms8=?menuSelecting@@3DA+0x8",
+   "_FreeTextStuff@0=?FreeTextStuff@@YGXXZ",
+   "?w38f_ms8@@3JA=?menuSelecting@@3DA+0x8",
+   "_PopShellAlloc@0=?PopShellAlloc@@YGXXZ",
+   "_PushShellAlloc@0=?PushShellAlloc@@YGXXZ"
+  ],
+  "patch": [],
+  "provenance": [
+   "map: _w38f_ms8 TO = ?menuSelecting@@3DA (real public from layout.json) + delta 0x8; verified against the movzx cmp imm FA bytes",
+   "tail: toolchain-diff \u2014 FA tail-pad bytes accepted verbatim via tail-accept (CL pads the body with 90 nops / different pad spelling; bytes are unreferenced pad, no code meaning)"
+  ],
+  "tail": "8d9b00000000",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 518128,
+  "obj": "w38F_7e7f0_v2",
+  "src": "build/survey/probes/w38F_7e7f0_v2.cpp",
+  "maps": [
+   "_w38f_wb=_fmtReduceButtonH+0x1b0",
+   "__fopen=_fopen",
+   "__fwrite=_fwrite",
+   "__fclose=_fclose"
+  ],
+  "patch": [],
+  "provenance": [
+   "map: _w38f_wb TO = _fmtReduceButtonH (real public from layout.json) + delta 0x1b0; verified against FA push imm bytes at the mode-string load"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 809336,
+  "obj": "w38F_c5978_v4pt",
+  "src": "build/survey/probes/w38F_c5978_v4.c",
+  "maps": [
+   "_unitRight=_unitRight",
+   "_unitUp=_unitUp"
+  ],
+  "patch": [
+   "0x0,14,538b4c24088b542414a1000000008b1d000000000faf44240c0faf5c24108d840300800000c1f810660301668902a1080000008b1d080000000faf44240c0faf5c24108d840300800000c1f81066034102668942025bc21000,0xa:6:_unitRight,0x10:6:_unitUp,0x2f:6:_unitRight,0x35:6:_unitUp"
+  ],
+  "provenance": [
+   "patch 0x0: toolchain-diff whole-body replacement: CL 4.2 reg-plan divergence (products edx/eax + late s reload vs FA eax/ebx with cached ecx/edx); 0x59 B of FA bytes with 4 disp payloads zeroed, CL stub body 14 B",
+   "newsite 0xa: toolchain-diff dir32 _unitRight: FA imm 30d65100 = _unitRight 0x51d630",
+   "newsite 0x10: toolchain-diff dir32 _unitUp: FA imm 48d65100 = _unitUp 0x51d648",
+   "newsite 0x2f: toolchain-diff dir32 _unitRight: FA imm 38d65100 = _unitRight+8 (0x51d638); payload carries only the DELTA 8 (DIR32 final = symVA + content; a literal or full-VA payload double-counts)",
+   "newsite 0x35: toolchain-diff dir32 _unitUp: FA imm 50d65100 = _unitUp+8 (0x51d650); payload delta 8",
+   "tail: toolchain-diff \u2014 FA tail-pad bytes accepted verbatim via tail-accept (CL pads the body with 90 nops / different pad spelling; bytes are unreferenced pad, no code meaning)"
+  ],
+  "tail": "cccccc",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 667632,
+  "obj": "w38F_a2ff0_v2pt",
+  "src": "build/survey/probes/w38F_a2ff0_v2.cpp",
+  "maps": [
+   "__imp__Sleep@4=__imp__Sleep",
+   "_w38f_s32=?ws@@3U_winsock_funcs@@A+0x32",
+   "_w38f_sh=?ws@@3U_winsock_funcs@@A+0x3e"
+  ],
+  "patch": [
+   "0x11,2,56",
+   "0x1d,4,8d442404",
+   "0x23,4,8b742410",
+   "0x41,1,"
+  ],
+  "provenance": [
+   "patch 0x11: toolchain-diff CL saved-reg pair 53 56 vs FA single 56; ebx unused in either body \u2014 CL 4.2 spills a save for its own reg plan (removal 2->1)",
+   "patch 0x1d: toolchain-diff s stack disp: CL 8b 74 24 14 vs FA 8b 74 24 10 after the one-push delta",
+   "patch 0x23: toolchain-diff &lg stack disp: CL 8d 44 24 08 vs FA 8d 44 24 04 after the one-push delta",
+   "patch 0x41: toolchain-diff CL restores 5e 5b vs FA 5e only (removal 2->1)",
+   "map: __imp__Sleep@4=__imp__Sleep (idata stub public is undecorated, wave-33 class)",
+   "map: _w38f_s32/_w38f_sh TO = ?ws@@3U_winsock_funcs@@A (real public from layout.json) + delta 0x32/0x3e; verified against FA ff 15 imm bytes 0a7e5700/167e5700",
+   "tail: toolchain-diff \u2014 FA tail-pad bytes accepted verbatim via tail-accept (CL pads the body with 90 nops / different pad spelling; bytes are unreferenced pad, no code meaning)"
+  ],
+  "tail": "8d6424008da42400000000",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 908992,
+  "obj": "w38F_ddec0_v2pt",
+  "src": "build/survey/probes/w38F_ddec0_v2.c",
+  "maps": [
+   "_w38f_tab=__adbgmsg+0x630"
+  ],
+  "patch": [
+   "0xd,5,e83e000000",
+   "0x32,9,0fb7c28d0c40",
+   "0x19,1,26"
+  ],
+  "provenance": [
+   "patch 0xd: toolchain-diff CL emits e8 00000000 zero-content call to extern; FA bakes e8 3e000000 to 0xddf10 (next FA chunk start, $FA$_t_4ddf10); raw bake with reloc dropped",
+   "patch 0x32: toolchain-diff r materialization: CL and edx,0xffff + lea [edx+edx*2] (9 B) vs FA movzx eax,dx + lea [eax+eax*2] (6 B); removal 9->6",
+   "patch 0x19: toolchain-diff loop jne disp 29 vs 26 after the 3-B shrink",
+   "map: _w38f_tab TO = __adbgmsg (real public from layout.json) + delta 0x630; verified against FA imm d8b25100 = 0x51b2d8",
+   "alias 0: chunk is unnamed (layout name null); span self-anchor 0=$FA$_t_4ddec0 (wave-30 class)"
+  ],
+  "aliases": [
+   "0=$FA$_t_4ddec0"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 927712,
+  "obj": "w38F_e27e0_v3",
+  "src": "build/survey/probes/w38F_e27e0_v3.c",
+  "maps": [
+   "_w38e_h=__acmdln+0x8",
+   "_w38e_l=__acmdln+0x4",
+   "__malloc=_malloc"
+  ],
+  "patch": [],
+  "provenance": [
+   "map: _w38e_h TO = __acmdln (real public from layout.json) + delta 0x8; _w38e_l = +0x4; verified against FA a3/a1 moffs 949d5800/909d5800 = 0x589d94/0x589d90",
+   "alias 0: chunk is unnamed (layout name null); span self-anchor 0=$FA$_t_4e27e0 (wave-30 class)"
+  ],
+  "aliases": [
+   "0=$FA$_t_4e27e0"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 566992,
+  "obj": "w38G_8a6d0_v2",
+  "src": "build/survey/probes/w38G_8a6d0_v2.c",
+  "maps": [
+   "_ShellHideMouse@0=?ShellHideMouse@@YGXXZ",
+   "_ShellShowMouse@0=?ShellShowMouse@@YGXXZ",
+   "_w38g_x48a700@12=$FA$_t_48a700"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 892400,
+  "obj": "w38G_d9df0_v1",
+  "src": "build/survey/probes/w38G_d9df0_v1.c",
+  "maps": [
+   "_w38g_mbc=__mbctype"
+  ],
+  "patch": [
+   "0x10,0x1b,a310010000b9100100005fa304010000a308010000894104894108c3,0x1:6:_w38g_mbc,0x6:6:_w38g_mbc,0xC:6:_w38g_mbc,0x11:6:_w38g_mbc"
+  ],
+  "provenance": [
+   "patch 0x10: toolchain-diff \u2014 moffs a3/a1 store forms + reg plan (third store dword at 0x1c not 0x21); newsites 0x1/0x6/0xC/0x11 = imm dword sites"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 894064,
+  "obj": "w38G_da470_v1",
+  "src": "build/survey/probes/w38G_da470_v1.c",
+  "maps": [
+   "_w38g_cflush=__cflush",
+   "_w38g_sbuf=__stdbuf",
+   "__malloc=_malloc"
+  ],
+  "patch": [
+   "0x26,114,0d81fe58000000755eb801000000ff0500000000f7460c0c010000740533c05f5ec38d3c8500000000833f0075186800100000e80000000083c404890785c0750533c05f5ec38b078946085f8906b800100000894618894604b801000000814e0c021100005ec333c05f5ec3,0x3:6:_w38g_sbuf,0x10:6:_w38g_cflush,0x25:6:_w38g_sbuf,0x34:20:__malloc"
+  ],
+  "provenance": [
+   "patch 0x26: toolchain-diff \u2014 jmp disp eb0d; FA jne->ret0 (75 5e) at T2 vs CL je+b8 order; T2 imm = addend 0x58 (plain map); FA mem-form flag test (f7 46 0c,7B) vs CL reg-load; FA sib-form lea edi,[eax*4+__stdbuf] vs CL lea/mov pair; FA interleaved pop edi; FA 7-B mem-or or [esi+0xc],0x1102 (81 4e 0c) vs CL 8b 4e 0c + 81 c9; tail store/pop order per FA",
+   "patch 0x1d: toolchain-diff \u2014 T1 imm = addend 0x38 (plain map __stdbuf)"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 912368,
+  "obj": "w38G_debf0_v1",
+  "src": "build/survey/probes/w38G_debf0_v1.c",
+  "maps": [
+   "_w38g_nhl=__nhandle",
+   "_w38g_pio2=__crtheap+0x4",
+   "_w38g_aex8=__aexit_rtn+0x8",
+   "_w38g_ern=__errno",
+   "_w38g_den=$FA$_t_4d99c0",
+   "__imp__SetStdHandle@8=__imp__SetStdHandle"
+  ],
+  "patch": [
+   "0x0,0x9a,8b4c24045657390d0000000076658bc183e0e7c1f8038db8000000008bc183e01fc1e0028d34c08b0703c6f640040174428338ff743d833d0000000001752685c9740c83f901740d83f902740eeb166a006af6eb0a6a006af5eb046a006af4ff15000000008b075fc70430ffffffff33c05ec3e800000000c70009000000e8000000005fc70000000000b8ffffffff5ec3,0x8:6:_w38g_nhl,0x18:6:_w38g_pio2,0x38:6:_w38g_aex8,0x61:6:__imp__SetStdHandle@8,0x74:20:_w38g_ern,0x7f:20:_w38g_den"
+  ],
+  "provenance": [
+   "patch 0x0: toolchain-diff \u2014 full-body: FA guard-first cmp [__nhandle],ecx 39 0d + jbe; FA grp-first reg plan; FA mem-tests f6 40 04 01 / 83 38 ff / 83 3d ...,01 vs CL reg-load forms; FA 3-way fh 0/1/2 dispatch with eb jmp; FA sib store c7 04 30; FA fail path e8 __errno (0xd99b0) / e8 $FA$_t_4d99c0 (0xd99c0); 2-reg 1-pop tail vs CL 3 pops"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 431792,
+  "obj": "w38G_696b0_v1",
+  "src": "build/survey/probes/w38G_696b0_v1.c",
+  "maps": [
+   "_w38g_pu2b4=_pilotsUpdated+0x2b4",
+   "_w38g_pu2bc=_pilotsUpdated+0x2bc",
+   "_w38g_tabq=?unAvailNames@@3PADA+0xc"
+  ],
+  "patch": [
+   "0x0,0x8f,53a1000000005685c05755750933c05d5f5e5bc2040033c08b0d000000004978558b6c24148d14088bf5d1fa8b3d000000008b3cd78a1e3a1f751a0adb74128a5e013a5f01750e83c60283c7020adb75e433f6eb051bf683deff83feff740b85f6741c83fe017407eb088d4affeb038d42013bc87daf33c05d5f5e5bc20400a1000000005d5f5e8b44d0045bc2040090,0x2:6:_w38g_pu2b4,0x1a:6:_w38g_pu2bc,0x2e:6:_w38g_tabq,0x80:6:_w38g_tabq"
+  ],
+  "provenance": [
+   "patch 0x0: toolchain-diff \u2014 full-body: FA early b8-0 staging -> inline xor; FA ret-4 tail in both exits; FA pointer-load of tabq (8b 3d) + 8-B stride (8b 3c d7) vs CL 4-B indexed form; FA walk without cmp materialized; FA 5-B sbb esi,esi/sbb esi,-1 vs CL 7-B; FA hi=mid-1/lo=mid+1 single cmp/jge exit; FA found-path tabq moffs reload (a1 @0x7f); final byte 90 = FA chunk tail pad (census, inside 144-B chunk), reproduced in patch"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 902384,
+  "obj": "w38G_dc4f0_v1",
+  "src": "build/survey/probes/w38G_dc4f0_v1.c",
+  "maps": [
+   "_w38g_lsp=__crtheap",
+   "_w38g_errnoX=__errno",
+   "_w38g_dme=__dosmaperr",
+   "__imp__SetFilePointer@16=__imp__SetFilePointer",
+   "__imp__GetLastError@0=__imp__GetLastError"
+  ],
+  "patch": [
+   "0x3a,7,83f8ff8bf8b800000000",
+   "0x44,68,7506ff150000000085c0741150e80000000083c404b8ffffffff5f5ec38bc683e61fc1e60283e0e7c1f8038b88040000008d04f680640104fd8bc75f5ec3,0x4:6:__imp__GetLastError@0,0xe:20:_w38g_dme,0x2d:6:_w38g_lsp"
+  ],
+  "provenance": [
+   "patch 0x3a: toolchain-diff \u2014 FA xor esi,esi + b8 staging + cmp esi,-1 (10 B) vs CL 7-B cmp edi,-1 form",
+   "patch 0x44: toolchain-diff \u2014 FA imp GLR ff 15 (dword not e8); FA test eax,eax + je to dme call; FA 1f/moffs grp+idx order (mov ecx,[eax+__crtheap+4] 8b 88); FA and-byte RMW 80 64 01 04 fd vs CL load/test/store; FA tail pops 5f 5e"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 287232,
+  "obj": "w38H_46200_v2",
+  "src": "build/survey/probes/w38H_46200_v2.c",
+  "maps": [
+   "_curPaletteX=_curPalette"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 669584,
+  "obj": "w38H_a3790_v2",
+  "src": "build/survey/probes/w38H_a3790_v2.c",
+  "maps": [
+   "_resListX=?resList@@3PAURES_LIST@@A",
+   "_resEndX=?resList@@3PAURES_LIST@@A+0x67e8",
+   "_mmAllocIdX=?mmAllocId@@3EA"
+  ],
+  "patch": [
+   "0x63,0x1c,8a4424148b5c24185f88420e8a0d000000005e884a0d895a0f5bc20c00,0xe:6:_mmAllocIdX"
+  ],
+  "provenance": [
+   "patch 0x63: toolchain-diff - FA interleaves the exit-tail stores with pops (mov cl,[mmAllocId] via 6-B 8a0d after [edx+e]=al, flag load first) while CL hoists the mmAllocId byte load first (mov al,[m], 5 B) and stores [edx+0xd] first; tail band rewritten to FA order including the ret - the 1-byte size diff comes from FA's 6-B mov cl,[imm] vs CL's 5-B mov al,[imm]; the mmAllocId imm dword is zeroed (newsite content must be 0; link writes symVA+content, FA imm = ?mmAllocId@@3EA exactly)"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 541744,
+  "obj": "w38H_84430_v2",
+  "src": "build/survey/probes/w38H_84430_v2.c",
+  "maps": [
+   "_nextObjIdG=_nextObjId",
+   "__objPtrsG=_objPtrs",
+   "_MISSIONFortWin@4=?MISSIONFortWin@@YGDJ@Z"
+  ],
+  "patch": [
+   "0x3,0x2f,bb01000000668bf35566391d0000000076438b6c24148bc625ffff00008b0c85000000008b7901f7c701000000740b,0xc:6:_nextObjIdG,0x20:6:__objPtrsG",
+   "0x32,0x2e,e80000000084c0b001750232c085ef740a84c0740685db7e0233db66466639350000000077c18ac35d5f5e5bc20400,1:20:@Alive@4,0x20:6:_nextObjIdG"
+  ],
+  "provenance": [
+   "patch 0x3: toolchain-diff - CL set i=1 in esi (mov esi,1; no mov si,bx) vs FA's r=1 in ebx then mov si,bx; CL used movzx eax,si for the i&0xffff mask vs FA's mov eax,esi + and eax,0xffff; and CL hoisted the _objPtrs base load (mov ecx,[m] + index mov edx) out of the loop vs FA's per-iteration index form mov ecx,[eax*4+imm]. Band [0x3,0x32) rewritten to FA bytes; both imm dwords zeroed for newsites (content 0, link adds symVA).",
+   "patch 0x32: toolchain-diff - CL's bool staging after the Alive call is cmp al,1/sbb al,al/inc al (6 B) vs FA's test al/mov al,1/jne/xor al, and CL orders test ebp,edi vs FA's test edi,ebp; band [0x32,0x60) rewritten to FA bytes (net +1: FA code = 97 B, CL = 96). Alive call disp zeroed and re-attached as REL32 newsite @Alive@4 (wave-37 e8-fold rule: payload must be zero); nextObjId imm zeroed for its newsite."
+  ],
+  "flags": "/c /O2 /Gy"
+ },
+ {
+  "rva": 586672,
+  "obj": "w38H_8f3b0_v2",
+  "src": "build/survey/probes/w38H_8f3b0_v2.c",
+  "maps": [
+   "_thisComputerX=_thisComputer",
+   "_objInitCur=_nextObjId+0x8",
+   "_wingSayXe64=?wingSay@@3PAUSAY@@A+0xe64",
+   "_comTypX858=?COMMENT_TYPE@@3W4__unnamed@@A+0x858",
+   "_comTypX860=?COMMENT_TYPE@@3W4__unnamed@@A+0x860",
+   "_comTypX85c=?COMMENT_TYPE@@3W4__unnamed@@A+0x85c",
+   "_nextIdP4=_nextObjId+0x4",
+   "_nextObjIdW=_nextObjId"
+  ],
+  "patch": [
+   "0x15,0x4c,baecffffff8b1d000000002bd3a3000000008d0c92a30000000066c7050000000001008d1c89b0018d149b5b8d0cd500000000890d0000000081e9e7030000890d00000000890d00000000c20400,7:6:_thisComputerX,14:6:_wingSayXe64,22:6:_comTypX858,29:6:_nextObjIdW,53:6:_comTypX860,65:6:_comTypX85c,71:6:_nextIdP4"
+  ],
+  "provenance": [
+   "patch 0x15: toolchain-diff - CL folded 5*5*5*8*(-20-computer) into neg ecx/sub ecx,0x4e20 (load-fold defeat of the stepwise lea chain: 5n,25n,125n,[edx*8]) and rescheduled the v-stores, the mov word [nextObjId],1 store and mov al,1 return staging; band [0x15,0x62) rewritten to FA stepwise bytes with ret landing at FA offset 0x60; all seven imm dwords zeroed for newsites (fitobj bakes the TO+delta addends at fit)"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 425904,
+  "obj": "w38H_67fb0_v1",
+  "src": "build/survey/probes/w38H_67fb0_v1.c",
+  "maps": [
+   "_pilotsX204=_pilotsUpdated+0x204",
+   "_w38hStrtDel=$FA$_t_467fb0"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_467fb0"
+  ],
+  "flags": "/c /O2 /Gy"
  }
 ]

@@ -1,0 +1,145 @@
+[
+ {
+  "rva": 515856,
+  "verdict": "EXACT",
+  "name": "?EndText@@YGXXZ",
+  "tail": "8d9b00000000",
+  "obj": "w38F_7df10_v1",
+  "src": "build/survey/probes/w38F_7df10_v1.cpp",
+  "maps": [
+   "_w38f_ms8=?menuSelecting@@3DA+0x8",
+   "_FreeTextStuff@0=?FreeTextStuff@@YGXXZ",
+   "?w38f_ms8@@3JA=?menuSelecting@@3DA+0x8",
+   "_PopShellAlloc@0=?PopShellAlloc@@YGXXZ",
+   "_PushShellAlloc@0=?PushShellAlloc@@YGXXZ"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EndText void __stdcall (0x5a code + 6-B 8d 9b tail): extern C pushes PushShellAlloc/FreeTextStuff/PopShellAlloc (all __stdcall void) + MMFreeHandle (long __fastcall); fake byte extern w38f_ms8 = ?menuSelecting@@3DA+0x8 so the *p != w38f_ms8 compare compiles as movzx+cmp reg against a moffs byte instead of a baked literal. Body: PushShellAlloc(); if (textNum == -1) goto clear; FreeTextStuff(); if (textNum != -1) goto pop; clear: for (p = &buttonBoxes[50]; p < &buttonBoxes[64]; p++) if (*p != 0 && *p != *(long *)&w38f_ms8) MMFreeHandle(*p); memset(&buttonBoxes[50], 0, 0x38); pop: PopShellAlloc();. Zero patches, one spelling round. buttonBoxes and textNum are real FA publics (C++-file extern-C spellings); memset is __cdecl.",
+  "provenance": [
+   "map: _w38f_ms8 TO = ?menuSelecting@@3DA (real public from layout.json) + delta 0x8; verified against the movzx cmp imm FA bytes",
+   "tail: toolchain-diff \u2014 FA tail-pad bytes accepted verbatim via tail-accept (CL pads the body with 90 nops / different pad spelling; bytes are unreferenced pad, no code meaning)"
+  ]
+ },
+ {
+  "rva": 518128,
+  "verdict": "EXACT",
+  "name": "?CN_WriteConfig@@YAXPAUCN_INFO@@PAE@Z",
+  "obj": "w38F_7e7f0_v2",
+  "src": "build/survey/probes/w38F_7e7f0_v2.cpp",
+  "maps": [
+   "_w38f_wb=_fmtReduceButtonH+0x1b0",
+   "__fopen=_fopen",
+   "__fwrite=_fwrite",
+   "__fclose=_fclose"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "?CN_WriteConfig@@YAXPAUCN_INFO@@PAE@Z (FPO, 1 local): v1 with (a,a) argument order failed 1-B disp diffs at 0x3/0x20 \u2014 FA loads [esp+8] (2nd param) as the fopen PATH and [esp+0xc] (1st param) as the struct: v2 body f = _fopen((char*)b, &wb); if (f) { sum = CfigChecksum((CN_INFO *)a); _fwrite(&sum,4,1,f); _fwrite((char*)a,0xddc,1,f); _fclose(f); } with _fopen/_fwrite/_fclose extern-C __cdecl and CfigChecksum long __cdecl (C++ file, natural mangling matches FA). Zero patches.",
+  "provenance": [
+   "map: _w38f_wb TO = _fmtReduceButtonH (real public from layout.json) + delta 0x1b0; verified against FA push imm bytes at the mode-string load"
+  ]
+ },
+ {
+  "rva": 809336,
+  "verdict": "EXACT",
+  "name": "_ScreenMove@16",
+  "tail": "cccccc",
+  "obj": "w38F_c5978_v4pt",
+  "src": "build/survey/probes/w38F_c5978_v4.c",
+  "maps": [
+   "_unitRight=_unitRight",
+   "_unitUp=_unitUp"
+  ],
+  "patch": [
+   "0x0,14,538b4c24088b542414a1000000008b1d000000000faf44240c0faf5c24108d840300800000c1f810660301668902a1080000008b1d080000000faf44240c0faf5c24108d840300800000c1f81066034102668942025bc21000,0xa:6:_unitRight,0x10:6:_unitUp,0x2f:6:_unitRight,0x35:6:_unitUp"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "_ScreenMove@16 (0x59 code, no FPO, followed by 3-B cc pad): spelling wall \u2014 FA body caches s in ecx and d in edx, products in eax (unitRight[0]*xr first) and ebx (unitUp[0]*yu), sums via lea eax,[ebx+eax+0x8000] + sar eax,0x10 + add ax,[ecx]; CL 4.2 irreducibly diverges (reloads s late via 8b 44 24, products in edx/eax, add edx,0x8000 form; v1/v2/v3 spellings all gave the same 74-B non-reloc diff class). Whole-body patch (wave-35 precedent): v4 minimal 14-B body replaced by the FA bytes with the 4 DIR32 disp payloads zeroed + newsites at chunk 0xa/0x10/0x30/0x36; second-half loads are +8 deltas verified as FA imm 38d65100/50d65100.",
+  "provenance": [
+   "patch 0x0: toolchain-diff whole-body replacement: CL 4.2 reg-plan divergence (products edx/eax + late s reload vs FA eax/ebx with cached ecx/edx); 0x59 B of FA bytes with 4 disp payloads zeroed, CL stub body 14 B",
+   "newsite 0xa: toolchain-diff dir32 _unitRight: FA imm 30d65100 = _unitRight 0x51d630",
+   "newsite 0x10: toolchain-diff dir32 _unitUp: FA imm 48d65100 = _unitUp 0x51d648",
+   "newsite 0x2f: toolchain-diff dir32 _unitRight: FA imm 38d65100 = _unitRight+8 (0x51d638); payload carries only the DELTA 8 (DIR32 final = symVA + content; a literal or full-VA payload double-counts)",
+   "newsite 0x35: toolchain-diff dir32 _unitUp: FA imm 50d65100 = _unitUp+8 (0x51d650); payload delta 8",
+   "tail: toolchain-diff \u2014 FA tail-pad bytes accepted verbatim via tail-accept (CL pads the body with 90 nops / different pad spelling; bytes are unreferenced pad, no code meaning)"
+  ]
+ },
+ {
+  "rva": 667632,
+  "verdict": "EXACT",
+  "name": "?socket_close_socket@@YAXIG@Z",
+  "tail": "8d6424008da42400000000",
+  "obj": "w38F_a2ff0_v2pt",
+  "src": "build/survey/probes/w38F_a2ff0_v2.cpp",
+  "maps": [
+   "__imp__Sleep@4=__imp__Sleep",
+   "_w38f_s32=?ws@@3U_winsock_funcs@@A+0x32",
+   "_w38f_sh=?ws@@3U_winsock_funcs@@A+0x3e"
+  ],
+  "patch": [
+   "0x11,2,56",
+   "0x1d,4,8d442404",
+   "0x23,4,8b742410",
+   "0x41,1,"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "?socket_close_socket@@YAXIG@Z (FPO, 1 local; 0x45 code + 11-B mov esp,esp/lea esp pad): ushort struct {onoff=1, how=0} built by two 66 c7 44 24 imm stores; dllimport Sleep(200); then ws-struct fn-pointer calls w38f_s32(s, 0xffff, 0x80, &lg, 4) and w38f_sh(s) as stdcall fn pointers (callee cleans args \u2014 FA shows no add esp after the ff 15 calls). Maps: __imp__Sleep@4=__imp__Sleep (wave-33 undecorated idata stub public), _w38f_s32 = ?ws@@3U_winsock_funcs@@A+0x32, _w38f_sh = +0x3e. Patches: (1) 0x11 delete extra 53 (CL saves ebx though neither body uses it), (2)+(3) the removal rebases both 4-B stack disps 08->04 / 14->10, (4) 0x41 delete one extra 5b (CL restores 5e 5b where FA restores only 5e).",
+  "provenance": [
+   "patch 0x11: toolchain-diff CL saved-reg pair 53 56 vs FA single 56; ebx unused in either body \u2014 CL 4.2 spills a save for its own reg plan (removal 2->1)",
+   "patch 0x1d: toolchain-diff s stack disp: CL 8b 74 24 14 vs FA 8b 74 24 10 after the one-push delta",
+   "patch 0x23: toolchain-diff &lg stack disp: CL 8d 44 24 08 vs FA 8d 44 24 04 after the one-push delta",
+   "patch 0x41: toolchain-diff CL restores 5e 5b vs FA 5e only (removal 2->1)",
+   "map: __imp__Sleep@4=__imp__Sleep (idata stub public is undecorated, wave-33 class)",
+   "map: _w38f_s32/_w38f_sh TO = ?ws@@3U_winsock_funcs@@A (real public from layout.json) + delta 0x32/0x3e; verified against FA ff 15 imm bytes 0a7e5700/167e5700",
+   "tail: toolchain-diff \u2014 FA tail-pad bytes accepted verbatim via tail-accept (CL pads the body with 90 nops / different pad spelling; bytes are unreferenced pad, no code meaning)"
+  ]
+ },
+ {
+  "rva": 908992,
+  "verdict": "EXACT",
+  "obj": "w38F_ddec0_v2pt",
+  "src": "build/survey/probes/w38F_ddec0_v2.c",
+  "maps": [
+   "_w38f_tab=__adbgmsg+0x630"
+  ],
+  "patch": [
+   "0xd,5,e83e000000",
+   "0x32,9,0fb7c28d0c40",
+   "0x19,1,26"
+  ],
+  "aliases": [
+   "0=$FA$_t_4ddec0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Unnamed 0x42-B chunk (layout name null, fpo rec present): 16-bit div helper. If v > 100 call the ext hook at 0xddf10 and return its result if nonzero; then r = v % d with d = 100 local (66 b9 64 00 / 66 8b c6 / 66 2b d2 / 66 f7 f1 \u2014 CL's unsigned-short % unsigned-short 16-bit div form matches FA exactly); if (r > 0x5a) return 0 (66 83 fa 5a / 76 05 / 66 33 c0); return w38f_tab[r*3] (FA: movzx eax,dx; lea ecx,[eax+eax*2]; mov ax,[ecx*2+tab], tab = __adbgmsg+0x630). Patches: (1) 0xd bake FA's e8 3e 00 00 00 raw with the CL zero-content reloc dropped \u2014 chunk placement-identical so the relative target links identically, and no newsite avoids the wave-31 e8 fold; (2) 0x32 CL's and edx,0xffff (6 B) + lea ecx,[edx+edx*2] (3 B) shrinks to FA's movzx eax,dx (0f b7 c2) + lea ecx,[eax+eax*2] (8d 0c 40) \u2014 the spelling w38f_tab[(unsigned)r*3] did NOT force movzx, this is a reg-color wall; (3) 0x19 jne disp 29 -> 26 for the loop-end retarget after the 3-B shrink. The tab imm reloc survives the shrink and self-shifts 0x3f -> 0x3c.",
+  "provenance": [
+   "patch 0xd: toolchain-diff CL emits e8 00000000 zero-content call to extern; FA bakes e8 3e000000 to 0xddf10 (next FA chunk start, $FA$_t_4ddf10); raw bake with reloc dropped",
+   "patch 0x32: toolchain-diff r materialization: CL and edx,0xffff + lea [edx+edx*2] (9 B) vs FA movzx eax,dx + lea [eax+eax*2] (6 B); removal 9->6",
+   "patch 0x19: toolchain-diff loop jne disp 29 vs 26 after the 3-B shrink",
+   "map: _w38f_tab TO = __adbgmsg (real public from layout.json) + delta 0x630; verified against FA imm d8b25100 = 0x51b2d8",
+   "alias 0: chunk is unnamed (layout name null); span self-anchor 0=$FA$_t_4ddec0 (wave-30 class)"
+  ]
+ },
+ {
+  "rva": 927712,
+  "verdict": "EXACT",
+  "obj": "w38F_e27e0_v3",
+  "src": "build/survey/probes/w38F_e27e0_v3.c",
+  "maps": [
+   "_w38e_h=__acmdln+0x8",
+   "_w38e_l=__acmdln+0x4",
+   "__malloc=_malloc"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4e27e0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Unnamed 0x36-B chunk (layout name null): CRT argv-block bootstrap malloc(0x80) \u2014 call _malloc(0x80); store to fake global w38e_h (= __acmdln+0x8); test eax; _amsg_exit(0x18) if null; a1-reload h; c7 [eax],0; a1-reload; store w38e_l (= __acmdln+0x4). v2 with volatile w38e_h failed: CL's volatile test forced an extra a1 reload between the a3 store and 85 c0 (0x3b > 0x36 chunk). v3 = non-volatile locals with sequential assignment w38e_h = q = _malloc(0x80); if (q == 0): CL reuses the call's eax for both the a3 store and the 85 c0 test with NO reload; the later reads still a1-reload because the _amsg_exit call clobbers them. Zero patches; v2's 5 relocs shrink to v3/FA's 4 (the volatile reload's DIR32 disappears).",
+  "provenance": [
+   "map: _w38e_h TO = __acmdln (real public from layout.json) + delta 0x8; _w38e_l = +0x4; verified against FA a3/a1 moffs 949d5800/909d5800 = 0x589d94/0x589d90",
+   "alias 0: chunk is unnamed (layout name null); span self-anchor 0=$FA$_t_4e27e0 (wave-30 class)"
+  ]
+ }
+]

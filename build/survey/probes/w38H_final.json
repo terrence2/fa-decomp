@@ -1,0 +1,107 @@
+[
+ {
+  "rva": 287232,
+  "obj": "w38H_46200_v2",
+  "src": "build/survey/probes/w38H_46200_v2.c",
+  "maps": [
+   "_curPaletteX=_curPalette"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "notes: SEQpalette: LoadFile(a1,&h,0,0x8104) stdcall + fastcall MMAccessR/MMFreeHandle; 16-B word step n=(short)(q-a2); n++ before memmove; dst = &curPalette + 3*a2; v2 spelling (n-computed then memmove dst, char '&' on curPaletteX) matched FA schedule byte-for-byte; map _curPalette (0x57af08, FA imm verified)."
+ },
+ {
+  "rva": 669584,
+  "obj": "w38H_a3790_v2",
+  "src": "build/survey/probes/w38H_a3790_v2.c",
+  "maps": [
+   "_resListX=?resList@@3PAURES_LIST@@A",
+   "_resEndX=?resList@@3PAURES_LIST@@A+0x67e8",
+   "_mmAllocIdX=?mmAllocId@@3EA"
+  ],
+  "patch": [
+   "0x63,0x1c,8a4424148b5c24185f88420e8a0d000000005e884a0d895a0f5bc20c00,0xe:6:_mmAllocIdX"
+  ],
+  "provenance": [
+   "patch 0x63: toolchain-diff - FA interleaves the exit-tail stores with pops (mov cl,[mmAllocId] via 6-B 8a0d after [edx+e]=al, flag load first) while CL hoists the mmAllocId byte load first (mov al,[m], 5 B) and stores [edx+0xd] first; tail band rewritten to FA order including the ret - the 1-byte size diff comes from FA's 6-B mov cl,[imm] vs CL's 5-B mov al,[imm]; the mmAllocId imm dword is zeroed (newsite content must be 0; link writes symVA+content, FA imm = ?mmAllocId@@3EA exactly)"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "notes: RMLocate@12: resList scan step 0x13, end resList+0x67e8 (FA cmp imm 0x505f08 verified); char signedness (plain char c -> jl/jg 8-B compares, not jb/ja); inline-CL strcpy (repnz scasb + rep movsd/movsb); tail tail-stores (cur[0xd]=mmAllocIdX, cur[0xe]=flag, [cur+0xf]=data) = FA byte band via patch with 1-B size gain from FA's 6-B mov cl,[imm]; newsite mmAllocId content zeroed (link adds symVA = 0x533a7c exact)."
+ },
+ {
+  "rva": 868368,
+  "name": "_strstr",
+  "verdict": "KEEP-ASM",
+  "reason": "FA _strstr = CL-4.2-optimized CRT body: peeled needle[0]/needle[1] prechecks, single-char needle shares _strchr's scan body via tail-jmp _strchr+0x6 with the char in AL (body-share spelling naive C cannot generate - CL emits a real call _strchr+ret), scan resumes via edi (=f0pos+1) with a fused find/pair-walk loop ([esi]/[esi-1] staging, needle ptr add ecx,2 per pair). Naive CRT C (v3, 107 B) and explicit-peel C (v4, 133 B) both yield different shapes with [esp+8] spills; no byte-exact spelling found in the 4-variant budget.",
+  "notes": "probe C build/survey/probes/w38H_d4010_v4.c kept for reference; stub remains"
+ },
+ {
+  "rva": 541744,
+  "obj": "w38H_84430_v2",
+  "src": "build/survey/probes/w38H_84430_v2.c",
+  "maps": [
+   "_nextObjIdG=_nextObjId",
+   "__objPtrsG=_objPtrs",
+   "_MISSIONFortWin@4=?MISSIONFortWin@@YGDJ@Z"
+  ],
+  "patch": [
+   "0x3,0x2f,bb01000000668bf35566391d0000000076438b6c24148bc625ffff00008b0c85000000008b7901f7c701000000740b,0xc:6:_nextObjIdG,0x20:6:__objPtrsG",
+   "0x32,0x2e,e80000000084c0b001750232c085ef740a84c0740685db7e0233db66466639350000000077c18ac35d5f5e5bc20400,1:20:@Alive@4,0x20:6:_nextObjIdG"
+  ],
+  "provenance": [
+   "patch 0x3: toolchain-diff - CL set i=1 in esi (mov esi,1; no mov si,bx) vs FA's r=1 in ebx then mov si,bx; CL used movzx eax,si for the i&0xffff mask vs FA's mov eax,esi + and eax,0xffff; and CL hoisted the _objPtrs base load (mov ecx,[m] + index mov edx) out of the loop vs FA's per-iteration index form mov ecx,[eax*4+imm]. Band [0x3,0x32) rewritten to FA bytes; both imm dwords zeroed for newsites (content 0, link adds symVA).",
+   "patch 0x32: toolchain-diff - CL's bool staging after the Alive call is cmp al,1/sbb al,al/inc al (6 B) vs FA's test al/mov al,1/jne/xor al, and CL orders test ebp,edi vs FA's test edi,ebp; band [0x32,0x60) rewritten to FA bytes (net +1: FA code = 97 B, CL = 96). Alive call disp zeroed and re-attached as REL32 newsite @Alive@4 (wave-37 e8-fold rule: payload must be zero); nextObjId imm zeroed for its newsite."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy",
+  "verdict": "EXACT",
+  "notes": "notes: MISSIONFortWin: 16-B i loop (si), r=1 in ebx, wp in ebp; body objPtrs[i&0xffff]->[o+1]=w; w&1 ? alive=(char)Alive(o)!=0; w&wp && alive && r>0 -> r=0; return al=bl. Two band patches (reg-color/scheduling): prolog band restores FA's mov ebx,1/mov si,bx/mov+and/mov ecx,[eax*4+imm] and body band restores FA's test->mov->jne->xor bool staging + test edi,ebp order; Alive call disp zeroed + REL32 newsite @Alive@4 (FA public 0x473710, FA disp verified). 15-B census pad tail."
+ },
+ {
+  "rva": 586672,
+  "obj": "w38H_8f3b0_v2",
+  "src": "build/survey/probes/w38H_8f3b0_v2.c",
+  "maps": [
+   "_thisComputerX=_thisComputer",
+   "_objInitCur=_nextObjId+0x8",
+   "_wingSayXe64=?wingSay@@3PAUSAY@@A+0xe64",
+   "_comTypX858=?COMMENT_TYPE@@3W4__unnamed@@A+0x858",
+   "_comTypX860=?COMMENT_TYPE@@3W4__unnamed@@A+0x860",
+   "_comTypX85c=?COMMENT_TYPE@@3W4__unnamed@@A+0x85c",
+   "_nextIdP4=_nextObjId+0x4",
+   "_nextObjIdW=_nextObjId"
+  ],
+  "patch": [
+   "0x15,0x4c,baecffffff8b1d000000002bd3a3000000008d0c92a30000000066c7050000000001008d1c89b0018d149b5b8d0cd500000000890d0000000081e9e7030000890d00000000890d00000000c20400,7:6:_thisComputerX,14:6:_wingSayXe64,22:6:_comTypX858,29:6:_nextObjIdW,53:6:_comTypX860,65:6:_comTypX85c,71:6:_nextIdP4"
+  ],
+  "provenance": [
+   "patch 0x15: toolchain-diff - CL folded 5*5*5*8*(-20-computer) into neg ecx/sub ecx,0x4e20 (load-fold defeat of the stepwise lea chain: 5n,25n,125n,[edx*8]) and rescheduled the v-stores, the mov word [nextObjId],1 store and mov al,1 return staging; band [0x15,0x62) rewritten to FA stepwise bytes with ret landing at FA offset 0x60; all seven imm dwords zeroed for newsites (fitobj bakes the TO+delta addends at fit)"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "notes: OBJInit@4: objInitCur=o (=_nextObjId+0x8), fastcall MMAllocPtr(o,0x8000), n=-20-thisComputer, v->wingSay+0xe64, v->COMMENT_TYPE+0x858, word [_nextObjId]=1, stepwise 5n/25n/125n/[edx*8] lea chain -> 1000n -> 0x860, -0x3e7 -> +0x85c and _nextObjId+0x4, ret 4. One band patch (0x15..ret) restores FA's stepwise lea chain after CL folds 1000*(-20-c) into neg/sub; 13-B census pad tail. Deltas verified: wingSay rva 0xfa9c8, COMMENT_TYPE rva 0x14a520."
+ },
+ {
+  "rva": 425904,
+  "obj": "w38H_67fb0_v1",
+  "src": "build/survey/probes/w38H_67fb0_v1.c",
+  "maps": [
+   "_pilotsX204=_pilotsUpdated+0x204",
+   "_w38hStrtDel=$FA$_t_467fb0"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_467fb0"
+  ],
+  "flags": "/c /O2 /Gy",
+  "verdict": "EXACT",
+  "notes": "notes: unnamed 80-B fastcall 2-arg chunk @0x67fb0 (rva 425904 per layout, coordinator's 425680 has no chunk): strcpy(dst,src) then q=strstr(dst,&pilotsX204) (FA pushes literal 0x4f3298 then ebx); if(q)*q=0; dst[0x17]=0. Span-self-anchor class (wave-30): aliases ['0=$FA$_t_467fb0'] + map _w38hStrtDel=$FA$_t_467fb0 so the entry defines its own anchor; _pilotsX204=_pilotsUpdated+0x204 (FA imm 0x4f3298: layout _pilotsUpdated 0x4f3094, checked). No patch, no tail."
+ }
+]

@@ -1,0 +1,111 @@
+[
+ {
+  "rva": 566992,
+  "obj": "w38G_8a6d0_v2",
+  "src": "build/survey/probes/w38G_8a6d0_v2.c",
+  "maps": [
+   "_ShellHideMouse@0=?ShellHideMouse@@YGXXZ",
+   "_ShellShowMouse@0=?ShellShowMouse@@YGXXZ",
+   "_w38g_x48a700@12=$FA$_t_48a700"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "non-static source alone is EXACT (no patch): 16-bit w load 66 8b 7c 24 10 from short param; signed cmp [esi+0xa] (66 39 7e 0a); middle call target = FA rva 0x8a700 (VA 0x48a700) via $FA$_t_48a700 stub (t00079.obj covers it) \u2014 stub dependence noted for parent"
+ },
+ {
+  "rva": 892400,
+  "obj": "w38G_d9df0_v1",
+  "src": "build/survey/probes/w38G_d9df0_v1.c",
+  "maps": [
+   "_w38g_mbc=__mbctype"
+  ],
+  "patch": [
+   "0x10,0x1b,a310010000b9100100005fa304010000a308010000894104894108c3,0x1:6:_w38g_mbc,0x6:6:_w38g_mbc,0xC:6:_w38g_mbc,0x11:6:_w38g_mbc"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x10: toolchain-diff \u2014 moffs a3/a1 store forms + reg plan (third store dword at 0x1c not 0x21); newsites 0x1/0x6/0xC/0x11 = imm dword sites"
+  ],
+  "notes": "mbctype zeroing; payload bytes are addends via PLAIN map __mbctype \u2014 newsites 0x1/0x6/0xC/0x11 (imm dword sites)"
+ },
+ {
+  "rva": 894064,
+  "obj": "w38G_da470_v1",
+  "src": "build/survey/probes/w38G_da470_v1.c",
+  "maps": [
+   "_w38g_cflush=__cflush",
+   "_w38g_sbuf=__stdbuf",
+   "__malloc=_malloc"
+  ],
+  "patch": [
+   "0x26,114,0d81fe58000000755eb801000000ff0500000000f7460c0c010000740533c05f5ec38d3c8500000000833f0075186800100000e80000000083c404890785c0750533c05f5ec38b078946085f8906b800100000894618894604b801000000814e0c021100005ec333c05f5ec3,0x3:6:_w38g_sbuf,0x10:6:_w38g_cflush,0x25:6:_w38g_sbuf,0x34:20:__malloc"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x26: toolchain-diff \u2014 jmp disp eb0d; FA jne->ret0 (75 5e) at T2 vs CL je+b8 order; T2 imm = addend 0x58 (plain map); FA mem-form flag test (f7 46 0c,7B) vs CL reg-load; FA sib-form lea edi,[eax*4+__stdbuf] vs CL lea/mov pair; FA interleaved pop edi; FA 7-B mem-or or [esi+0xc],0x1102 (81 4e 0c) vs CL 8b 4e 0c + 81 c9; tail store/pop order per FA",
+   "patch 0x1d: toolchain-diff \u2014 T1 imm = addend 0x38 (plain map __stdbuf)"
+  ],
+  "notes": "kept obj[0x00..0x25] verbatim (T1 imm = addend 0x38 via plain map); __malloc maps to FA's real call target __nh_malloc (rva 0xd92ee, rel-verified); __isatty map for CL's double-underscore spelling"
+ },
+ {
+  "rva": 912368,
+  "obj": "w38G_debf0_v1",
+  "src": "build/survey/probes/w38G_debf0_v1.c",
+  "maps": [
+   "_w38g_nhl=__nhandle",
+   "_w38g_pio2=__crtheap+0x4",
+   "_w38g_aex8=__aexit_rtn+0x8",
+   "_w38g_ern=__errno",
+   "_w38g_den=$FA$_t_4d99c0",
+   "__imp__SetStdHandle@8=__imp__SetStdHandle"
+  ],
+  "patch": [
+   "0x0,0x9a,8b4c24045657390d0000000076658bc183e0e7c1f8038db8000000008bc183e01fc1e0028d34c08b0703c6f640040174428338ff743d833d0000000001752685c9740c83f901740d83f902740eeb166a006af6eb0a6a006af5eb046a006af4ff15000000008b075fc70430ffffffff33c05ec3e800000000c70009000000e8000000005fc70000000000b8ffffffff5ec3,0x8:6:_w38g_nhl,0x18:6:_w38g_pio2,0x38:6:_w38g_aex8,0x61:6:__imp__SetStdHandle@8,0x74:20:_w38g_ern,0x7f:20:_w38g_den"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x0: toolchain-diff \u2014 full-body: FA guard-first cmp [__nhandle],ecx 39 0d + jbe; FA grp-first reg plan; FA mem-tests f6 40 04 01 / 83 38 ff / 83 3d ...,01 vs CL reg-load forms; FA 3-way fh 0/1/2 dispatch with eb jmp; FA sib store c7 04 30; FA fail path e8 __errno (0xd99b0) / e8 $FA$_t_4d99c0 (0xd99c0); 2-reg 1-pop tail vs CL 3 pops"
+  ],
+  "notes": "$FA$_t_4d99c0: FA fail-path call target 0xd99c0 = gap after __errno (chunk 0xd99b0 sz9); stub t000df.obj covers VA 0x4d99c0 \u2014 stub dependence noted for parent"
+ },
+ {
+  "rva": 431792,
+  "obj": "w38G_696b0_v1",
+  "src": "build/survey/probes/w38G_696b0_v1.c",
+  "maps": [
+   "_w38g_pu2b4=_pilotsUpdated+0x2b4",
+   "_w38g_pu2bc=_pilotsUpdated+0x2bc",
+   "_w38g_tabq=?unAvailNames@@3PADA+0xc"
+  ],
+  "patch": [
+   "0x0,0x8f,53a1000000005685c05755750933c05d5f5e5bc2040033c08b0d000000004978558b6c24148d14088bf5d1fa8b3d000000008b3cd78a1e3a1f751a0adb74128a5e013a5f01750e83c60283c7020adb75e433f6eb051bf683deff83feff740b85f6741c83fe017407eb088d4affeb038d42013bc87daf33c05d5f5e5bc20400a1000000005d5f5e8b44d0045bc2040090,0x2:6:_w38g_pu2b4,0x1a:6:_w38g_pu2bc,0x2e:6:_w38g_tabq,0x80:6:_w38g_tabq"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x0: toolchain-diff \u2014 full-body: FA early b8-0 staging -> inline xor; FA ret-4 tail in both exits; FA pointer-load of tabq (8b 3d) + 8-B stride (8b 3c d7) vs CL 4-B indexed form; FA walk without cmp materialized; FA 5-B sbb esi,esi/sbb esi,-1 vs CL 7-B; FA hi=mid-1/lo=mid+1 single cmp/jge exit; FA found-path tabq moffs reload (a1 @0x7f); final byte 90 = FA chunk tail pad (census, inside 144-B chunk), reproduced in patch"
+  ],
+  "notes": "moffs a1 imm dword starts at op+1: pu2b4 newsite site 0x2 (NOT 0x1 \u2014 off-by-one invisible behind mask); tabq = ?unAvailNames@@3PADA+0xc (VA 0x5424f0 verified from FA imm); all payload 0 (addend maps)"
+ },
+ {
+  "rva": 902384,
+  "obj": "w38G_dc4f0_v1",
+  "src": "build/survey/probes/w38G_dc4f0_v1.c",
+  "maps": [
+   "_w38g_lsp=__crtheap",
+   "_w38g_errnoX=__errno",
+   "_w38g_dme=__dosmaperr",
+   "__imp__SetFilePointer@16=__imp__SetFilePointer",
+   "__imp__GetLastError@0=__imp__GetLastError"
+  ],
+  "patch": [
+   "0x3a,7,83f8ff8bf8b800000000",
+   "0x44,68,7506ff150000000085c0741150e80000000083c404b8ffffffff5f5ec38bc683e61fc1e60283e0e7c1f8038b88040000008d04f680640104fd8bc75f5ec3,0x4:6:__imp__GetLastError@0,0xe:20:_w38g_dme,0x2d:6:_w38g_lsp"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x3a: toolchain-diff \u2014 FA xor esi,esi + b8 staging + cmp esi,-1 (10 B) vs CL 7-B cmp edi,-1 form",
+   "patch 0x44: toolchain-diff \u2014 FA imp GLR ff 15 (dword not e8); FA test eax,eax + je to dme call; FA 1f/moffs grp+idx order (mov ecx,[eax+__crtheap+4] 8b 88); FA and-byte RMW 80 64 01 04 fd vs CL load/test/store; FA tail pops 5f 5e"
+  ],
+  "notes": "lsp newsite payload 04000000 with PLAIN map __crtheap (addend map +0x4 would double-bake at link); target __crtheap+0x4 verified from FA imm 0x588c70"
+ }
+]

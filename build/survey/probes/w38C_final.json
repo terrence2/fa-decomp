@@ -1,0 +1,175 @@
+[
+ {
+  "rva": 127872,
+  "obj": "w38C_1f380_v2",
+  "src": "build/survey/probes/w38C_1f380_v2.c",
+  "maps": [
+   "@w38c_ffmtX@8=$FA$_t_41f410",
+   "@w38c_nextstr@8=@NextString@8",
+   "@w38c_fmb@8=@FortMultiButton@8",
+   "@w38c_mmfree@4=@MMFreePtr@4",
+   "_w38c_coinX=_fortSizeIndex+0x20"
+  ],
+  "patch": [
+   "3,18,53568a0257558bf28be984c07476",
+   "17,4,8d542413",
+   "21,0,33ff",
+   "30,2,89442414",
+   "43,1,de",
+   "85,6,ba0100000047",
+   "101,1,ff",
+   "103,1,d7",
+   "104,4,8bcd",
+   "114,1,13",
+   "118,1,09",
+   "119,2,8b4c2414",
+   "128,0,c6050000000001,2:6:_w38c_coinX",
+   "143,0,90"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 3: toolchain-diff \u2014 CL prolog spelling 'sub esp,4; mov [esp],esi; mov [esp+4],edi; push ebx; push esi; push edi; push ebp + lea 5-form' differs from FA's 18-B 'push ebx; push esi; mov al,[edx]; push edi; push ebp; mov esi,edx; mov ebp,ecx; test al,al; je' band; replaced in place with FA bytes (early-out je 0x76 target preserved: falls onto the pops/ret block in both)",
+   "patch 17: toolchain-diff \u2014 FA loads psav via 'lea edx,[esp+0x13]' (q.flag slot) where CL's prolog spill layout left the lea at a different operand; 4-B replace",
+   "patch 21: toolchain-diff \u2014 CL never emitted the 'xor edi,edi; inc edi' dead-clear (FA clears i before the loop via edi counter walk); 2-B insert at FA's spot",
+   "patch 30: toolchain-diff \u2014 FA stores mv into psav via 'mov [esp+0x14],ebp' at the CL arg-clobber slot; 2-B replace",
+   "patch 43: toolchain-diff \u2014 strcmp walk head loads next entry ptr with 'modrm de' vs CL's 'de' sibling byte; 1-B (FA 'mov ebx,esi' walk base vs CL's register pair choice)",
+   "patch 85: toolchain-diff \u2014 FA nextstr band: 'mov edx,1' BEFORE inc edi (5+1 B vs CL's counter handling); 6-B replace",
+   "patch 101: toolchain-diff \u2014 fmb call rel32 site byte retarget; FA disp byte 0xff with target verified = FortMultiButton",
+   "patch 103: toolchain-diff \u2014 same band: 'mov ecx,edi' (call arg) spelling byte d7",
+   "patch 104: toolchain-diff \u2014 'mov ebx,ecx'... CL's fmb arg-band bytes (4-B replace; mmfree-band deltas from the nextstr insert shift)",
+   "patch 114: toolchain-diff \u2014 je over q.flag test: FA disp 0x09 (store target 0x80); restores FA's own disp",
+   "patch 118: toolchain-diff \u2014 same je's disp partner byte",
+   "patch 119: toolchain-diff \u2014 MMFreePtr arg band 'mov ecx,[esp+0x14]' (2-B replace; CL used its own spill slot addressing)",
+   "patch 128: toolchain-diff \u2014 FA appends the 'mov byte [0x525918+1],1' 7-B store (c6051859520001) after the mmfree call; CL folded it out; insert at FA's exact spot (all 4 CL relocs auto-shift to FA's disp sites 0x18/0x5c/0x6b/0x7c)",
+   "patch 143: toolchain-diff \u2014 trailing 90 pad byte (census-proven) to full 0x90 chunk",
+   "map TOs verified from FA call disps: ffmtX -> 0x1f410 ($FA$_t_41f410, stubbed), nextstr -> 0x11dc0 (@NextString@8), fmb -> 0x1f370 (@FortMultiButton@8), mmfree -> 0x35b70 (@MMFreePtr@4)",
+   "patch 128: toolchain-diff \u2014 inserted store mov byte [0x525918],1 had the literal FA VA baked: literal-VA drops HIGHLOW (wave-20/25 class). Fixed: payload zeroed + newsite DIR32 at site 2 (patch off 0x80 + 2 = chunk 0x82, rva 0x1f402); target _fortSizeIndex+0x20 via map delta (interior data public, dis.py site annotation)"
+  ]
+ },
+ {
+  "rva": 157869,
+  "obj": "w38C_268ad_v2",
+  "src": "build/survey/probes/w38C_268ad_v2.c",
+  "maps": [
+   "_w38c_scanfn@8=$FA$_t_4268d8",
+   "_w38c_mcE=?mcFlyAll@@3DA+0x5c8",
+   "@w38c_errfn@4=$FA$_t_424a60"
+  ],
+  "patch": [
+   "7,9,8d4c24005051",
+   "18,7,837c240001b001",
+   "27,5,b900000000,1:6:_w38c_mcE",
+   "32,2,",
+   "37,3,32c0"
+  ],
+  "aliases": [
+   "0=$FA$_t_4268ad"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 7: toolchain-diff \u2014 CL pushed ebx (saved-reg for ok-in-bl) between the two leas and adjusted the stack-address lea disp; FA keeps both leas (lea eax,[esp+4]; lea ecx,[esp]) ahead of push eax/push ecx; 9-B band replaced with FA's 7-B ordering (net -3)",
+   "patch 18: toolchain-diff \u2014 CL reloads the arg and cmps ecx (mov ecx,[esp+4]; cmp ecx,1) vs FA's cmp-mem dword [esp],1; FA sets al=1 BEFORE the jge (ok pre-set spelling); 7-B replace, same length (83 7c 24 00 01 + b0 01)",
+   "patch 27: toolchain-diff \u2014 CL baked the literal 0 imm for '&w38c_mcE'; FA imm dword = 0x4ecac4; identity b9-imm rewrite + DIR32 newsite at span-rel 1 (imm byte), payload zero, map _w38c_mcE=?mcFlyAll@@3DA+0x5c8 (symVA 0x4ec4fc + 0x5c8 = 0x4ecac4)",
+   "patch 32: toolchain-diff \u2014 CL's 'xor bl,bl' (failed-path ok-clear into bl) absent in FA (FA's failed path clears al after the call); 2-B delete",
+   "patch 37: toolchain-diff \u2014 CL returns ok via 'mov al,bl; pop ebx' vs FA's direct 'xor al,al'; 3-B replace with 2-B (net -1 after the delete; total chunk 0x2b = FA)",
+   "map TOs verified from FA call disps: scanfn e8+0x19 -> chunk end 0x268d8 ($FA$_t_4268d8, next-chunk stub), errfn e8-0x1e72 -> 0x24a60 ($FA$_t_424a60, stubbed); errfn is fastcall-with-ecx &mcE (b9 mov ecx,imm)"
+  ]
+ },
+ {
+  "rva": 554112,
+  "obj": "w38C_87480_v3",
+  "src": "build/survey/probes/w38C_87480_v3.c",
+  "maps": [
+   "_DialogGetPtr=@DialogGetPtr@4",
+   "_DialogDraw@4=?DialogDraw@@YGXPAX@Z"
+  ],
+  "patch": [
+   "16,9,81e1ff7f000083f904",
+   "41,12,80390074498b6c24188bf9",
+   "93,20,742166468a1184d274088a51014184d275f88a51014184d275bb",
+   "146,0,8da424000000008da42400000000"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 16: toolchain-diff \u2014 CL folded 'c & 0x7fff' into 16-bit forms (66 81 e1 ff 7f, 5 B; 66 83 f9 04, 4 B); FA uses 32-bit forms: and ecx,0x7fff (81 e1 ff 7f 00 00, 6 B) + cmp ecx,4 (83 f9 04, 3 B); same-span replace, net 0 (cancel)",
+   "patch 41: toolchain-diff \u2014 FA's top loop test orders lp-nonnull (cmp byte [ecx],0 = 80 39 00; je FAIL) BEFORE the [esp+0x18] list re-load that CL hoisted first; test spelling is cmp-mem vs CL's load+test; 12-B band replaced with FA's 11-B ordering (net -1)",
+   "patch 93: toolchain-diff \u2014 FA's advance has the 'if (*lp)' pre-guard CL's do-while omitted: mov dl,[ecx]; test dl; je (+2 walk) then the two-stage do-while (mov dl,[ecx+1]/inc/test/jne self; mov dl,[ecx+1]/inc/test/jne loop-head); je/jne disp bytes are FA's-own; 20-B band replaced with FA's 26-B (net +6; loop-counter i stays 16-bit SI)",
+   "patch 146: toolchain-diff \u2014 trailing census pad '8d a4 24 00 00 00 00' x2 (14 B, probed/padcensus-proven composition) inserted to full 0xa0 chunk",
+   "map TOs verified from FA call disps: DialogGetPtr -> 0x87400 (@DialogGetPtr@4), DialogDraw -> 0x86590 (?DialogDraw@@YGXPAX@Z); both CL relocs survive and auto-shift to FA's disp sites 0x9/0x86"
+  ]
+ },
+ {
+  "rva": 670032,
+  "obj": "w38C_a3950_v2",
+  "src": "build/survey/probes/w38C_a3950_v2.c",
+  "maps": [
+   "__w38c_tt=_timerTicks",
+   "_w38c_vdoA=?vdoColorProcess@@3FA+0x10",
+   "_w38c_vdoB=?vdoColorProcess@@3FA+0x8",
+   "_w38c_vdoC=?vdoColorProcess@@3FA+0xa8"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4a3950"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "compile-only EXACT (no patches): CL 0x2d == FA 0x2d with char-sete idiom and the three vdoColorProcess member bases; map TOs verified from FA imm bytes: ?vdoColorProcess@@3FA bases folded at +0x8/+0x10/+0xa8 over the struct public, _timerTicks data read"
+  ]
+ },
+ {
+  "rva": 872272,
+  "obj": "w38C_d4f50_v3",
+  "src": "build/survey/probes/w38C_d4f50_v3.c",
+  "maps": [],
+  "patch": [
+   "5,13,8b4c2408563bd1741c8b742414",
+   "19,2,c64e",
+   "26,1,01",
+   "30,2,1941",
+   "36,2,c64e"
+  ],
+  "aliases": [
+   "0=$FA$_t_4d4f50"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 5: toolchain-diff \u2014 register scheduling of the swap walk: FA interleaves the second-string load after the save ('mov ecx,[esp+0x8]' at 0x5, then push esi) so the walk pointer lives in ECX and the count in ESI; CL kept the second-string load/compare before the count reload (mov esi,[esp+0xc]; cmp edx,esi; then mov esi,[esp+0x14]). 13-B same-length band replace: 8b4c2408 56 | 3bd1 741c | 8b742414 (je 0x1c and 'mov esi,[esp+0x14]' bytes are FA's own; net 0)",
+   "patch 19: toolchain-diff \u2014 walk loop: count copy 'mov eax,esi' (8b c6) at 0x12-13 vs CL's 8b c1; then 'dec esi' (4e) at 0x14 vs CL's 49; 2-B replace c64e",
+   "patch 26: toolchain-diff \u2014 'mov al,[ecx]' (8a 01) modrm byte 06->01 vs CL's 8a 06 (walk pointer ECX); 1-B replace 01",
+   "patch 30: toolchain-diff \u2014 store 'mov [ecx],bl' (88 19) + 'inc ecx' (41) vs CL's 881e/46; 2-B replace 1941",
+   "patch 36: toolchain-diff \u2014 loop-tail count copy 'mov eax,esi' (8b c6) + 'dec esi' (4e) vs CL's 8b c1/49; 2-B replace c64e; total CL 0x2d == FA 0x2d, no relocs (zero newsites)"
+  ]
+ },
+ {
+  "rva": 876048,
+  "obj": "w38C_d5e10_v2",
+  "src": "build/survey/probes/w38C_d5e10_v2.c",
+  "maps": [
+   "___getenv_lk=__getenv_lk",
+   "___environ=__environ",
+   "___wenviron=__wenviron",
+   "_w38c_envinit=$FA$_t_4db2f0",
+   "_mbsnbicoll=__mbsnbicoll"
+  ],
+  "patch": [
+   "12,9,7523833d0000000000,4:6:___wenviron",
+   "39,34,8b2d0000000085ed74528b74241485f6744a8bfe,2:6:___environ",
+   "78,1,34",
+   "120,2,7410",
+   "122,10,83c504837d000075cc"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 12: toolchain-diff \u2014 CL spells the wide-check as a1-load+test (a1 ____; 85 c0; je) vs FA's cmp-mem '83 3d ____ 00; 74 16'; 9-B band replaced in place with FA's 9-B form (jne disp 0x23 restores FA's own = body head at 0x31) + DIR32 newsite at span-rel 4 (moffs dword) for ___wenviron with payload zero; CL's own a1 DIR32 (site 0xf) is inside the band and re-anchored by the newsite",
+   "patch 39: toolchain-diff \u2014 CL duplicated two 7-B 'ret0' blocks (0x31-0x37, 0x40-0x46) between the env-init and name guards (per-guard fail returns); FA shares one fail block at 0x83: both guards fall into the name-load chain; 34-B band replaced with FA's 20-B (je 0x52 / je 0x4a FA-own disps to the shared fail block) + DIR32 newsite at span-rel 2 for ___environ (FA's 0x29 reload mov-ebp sits inside the replaced span; CL's site-0x29 reloc dropped, re-anchored; net -14)",
+   "patch 78: toolchain-diff \u2014 shared-fail je disp byte 0x35 -> 0x34 (restores FA's own; fail block sits at 0x83 in FA's layout)",
+   "patch 120: toolchain-diff \u2014 match-return je disp 0x11 -> 0x10 (restores FA's own 0x7410; match block at 0x8a)",
+   "patch 122: toolchain-diff \u2014 CL loop tail loads next entry (mov eax,[ebp+4] then add ebp,4 then test) vs FA's add ebp,4 + cmp-mem '83 7d 00 00' with jne back-edge 0xcc (back to the entry-strlen precheck 0x4f); 10-B band replaced with FA's 9-B (net -1; total 0x96 = FA)",
+   "map TOs verified from FA call disps/envinit disp: envinit -> 0x4db2f0 ($FA$_t_4db2f0, stubbed), __mbsnbicoll public at 0x4db2b0 (CL sym _mbsnbicoll, one underscore), DS moffs: __environ 0x51a020 (x2 sites), __wenviron 0x51a028"
+  ]
+ }
+]

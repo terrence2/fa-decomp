@@ -1,0 +1,127 @@
+[
+ {
+  "rva": 20832,
+  "verdict": "EXACT",
+  "obj": "w38B_5160_v2",
+  "src": "build/survey/probes/w38B_5160_v2.c",
+  "maps": [
+   "__thisComputerX=_thisComputer",
+   "__w38b_mns=?masterNextScreen@@3JA",
+   "__w38b_cs=_curScreen"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "@0x5160 unnamed gap chunk (40 B). Screen-transition helper: if (_thisComputer > 0 && ?masterNextScreen@@3JA != -1) { _curScreen = (short)?masterNextScreen@@3JA; ?masterNextScreen@@3JA = -1; }. extern short _w38b_cs; extern int _w38b_mns; extern int _thisComputerX. CL reproduced FA verbatim incl. the c7 05 long-form store (dis.py hides it \u2014 verified from raw FA bytes, .text file off = rva-0xC00).",
+  "provenance": [
+   "whole-body: pure C, no patches; map TOs = layout publics (_thisComputer 0x4e7608, ?masterNextScreen@@3JA 0x4f3820, _curScreen 0x51c300) \u2014 word/dword widths from FA operand sizes (66 c7 05 / c7 05)",
+   "tail 13 B '05000000008da42400000000': toolchain-diff census pad after ret (05 00 00 00 00 census counter + 8d a4 24 00 00 00 00 lea-pad filler); census-proven, auto-accepted by fitobj",
+   "alias 0=$FA$_t_405160: chunk externally referenced by stub groups (verified via build/st obj scan)"
+  ]
+ },
+ {
+  "rva": 146656,
+  "verdict": "EXACT",
+  "obj": "w38B_23ce0_v1",
+  "src": "build/survey/probes/w38B_23ce0_v1.c",
+  "maps": [
+   "@w38b_23ad0@8=$FA$_t_423ad0",
+   "__w38b_ns64=_nationSides+0x64",
+   "__w38b_ns6c=_nationSides+0x6c",
+   "__w38b_sp=_specials+0xcc",
+   "__w38b_wc=?worldCenter@@3UF24_POINT3@@A+0xc"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "@0x23ce0 unnamed gap chunk. void fn: lookup r = w38b_23ad0(_nationSides+0x64, _nationSides+0x6c); if (r != 0) { *(short*)((char*)r+0xcc) = specials word? no \u2014 reads: _specials+0xcc word = *(short*)((char*)r+4); ?worldCenter@@3UF24_POINT3@@A+0xc word = *(short*)((char*)r+6); }. EXACT first shot (v1). Call target: FA e8@+0x2 -> 0x423ad0 = $FA$_t_423ad0 stub TO verified in layout; TO deltas verified from FA disp bytes (_nationSides 0x531d68 +0x64/+0x6c; _specials 0x531e88 +0xcc; worldCenter base 0x531d50 +0xc).",
+  "provenance": [
+   "whole-body: pure C, no patches, no newsites; chunk-relative disp newsites not needed (all TOs are base+delta map TOs)",
+   "tail 7 B '8da42400000000': toolchain-diff census/lea-pad after ret; census-proven, auto-accepted by fitobj",
+   "alias 0=$FA$_t_423ce0: chunk externally referenced by stub groups (verified via build/st obj scan)"
+  ]
+ },
+ {
+  "rva": 412816,
+  "verdict": "EXACT",
+  "obj": "w38B_64c90_v3",
+  "src": "build/survey/probes/w38B_64c90_v3.c",
+  "maps": [
+   "@w38b_err4@4=$FA$_t_4659e0",
+   "__w38b_st=_serviceTicks+0xa2",
+   "__w38b_stt=_serviceTicks+0x52"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "@0x64c90 unnamed gap chunk. POP-side stack helper: int w38b_64c90(void) { volatile short _w38b_st; if (_w38b_st <= 0) w38b_err4(4); _w38b_st--; return _w38b_stt[_w38b_st]; } (extern int _w38b_stt[1]). CRITICAL: FA's 66 ff 0d is FF /1 = DEC word (not inc) \u2014 v2's ++ produced CL 83 3d-family; '--' steers 66 ff 0d. Call target: w38b_err4 = $FA$_t_4659e0 stub TO (FA e8 -> 0x4659e0).",
+  "provenance": [
+   "whole-body: pure C, no patches; volatile short counter spelling gives FA's 66-range mem-op forms (66 83 3d cmp / 66 ff 0d dec / 0f bf 05 movsx)",
+   "tail 6 B '8d9b00000000': toolchain-diff census/lea-pad after ret (wave-30 census filler); census-proven, auto-accepted by fitobj",
+   "alias 0=$FA$_t_464c90: chunk externally referenced by stub groups (verified via build/st obj scan)"
+  ],
+  "aliases": [
+   "0=$FA$_t_464c90"
+  ]
+ },
+ {
+  "rva": 414800,
+  "verdict": "EXACT",
+  "obj": "w38B_65450_v3",
+  "src": "build/survey/probes/w38B_65450_v3.c",
+  "maps": [
+   "@w38b_err5@4=$FA$_t_4659e0",
+   "__w38b_st2=_serviceTicks+0xa2",
+   "__w38b_stt2=_serviceTicks+0x52"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "@0x65450 unnamed gap chunk. PUSH-side twin of 0x64c90: void __fastcall w38b_65450(int val) { if (_w38b_st2 >= 0x14) w38b_err5(5); _w38b_stt2[_w38b_st2] = val; _w38b_st2++; }. BOTH the counter (volatile short) AND the table must be declared volatile (extern volatile int _w38b_stt2[1]) or CL schedules the inc before the store + 90 nop (v1/v2 diff). Store-then-inc order is the volatile-table lever.",
+  "provenance": [
+   "whole-body: pure C, no patches; __fastcall signature = FA param-in-ecx form; err5 stub TO same 0x4659e0 anchor as 0x64c90",
+   "tail 2 B '8bff': toolchain-diff census pad after ret; census-proven, auto-accepted by fitobj",
+   "alias 0=$FA$_t_465450: chunk externally referenced by stub groups (verified via build/st obj scan)"
+  ]
+ },
+ {
+  "rva": 472384,
+  "verdict": "EXACT",
+  "obj": "w38B_73540_v1",
+  "src": "build/survey/probes/w38B_73540_v1.c",
+  "maps": [
+   "_w38b_kil=_Kill@0",
+   "_w38b_rmo=_RemoveCurObj@0",
+   "@w38b_gc@12=@GRAPHICAddCrater@12",
+   "__w38b_think=_curThing+0x11",
+   "__w38b_cb=_curThingType+0x56",
+   "__w38b_ttype=_curThingType+0x17",
+   "__thisComputer=_thisComputer"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "@0x73540 unnamed gap chunk. void w38b_73540(void) { w38b_kil(); if (_w38b_ttype == 0) w38b_rmo(); w38b_gc(_thisComputer, (void*)&_w38b_think? no \u2014 (int)_w38b_cb third arg, &_w38b_think second); } with extern void __fastcall w38b_gc(int, void*, int). EXACT first shot. Call targets from FA e8 rel32s: 0x4c4b70=_Kill@0, 0x49b4f0=_RemoveCurObj@0, 0x4a1d20=@GRAPHICAddCrater@12; data TOs from FA disp bytes (_curThing 0x508738 +0x11, _curThingType 0x508b20 +0x56/+0x17, _thisComputer 0x4e7608).",
+  "provenance": [
+   "whole-body: pure C, no patches; fastcall callee spelled @w38b_gc@12 (map FROM = fastcall imp-slot spelling, wave-25 rule)",
+   "tail 4 B '8d642400': toolchain-diff census/lea-pad after ret; census-proven, auto-accepted by fitobj",
+   "alias 0=$FA$_t_473540: chunk externally referenced by stub groups (verified via build/st obj scan)"
+  ],
+  "aliases": [
+   "0=$FA$_t_473540"
+  ]
+ },
+ {
+  "rva": 928912,
+  "verdict": "EXACT",
+  "obj": "w38B_e2c90_w13_G4",
+  "src": "build/survey/probes/w38B_e2c90_w13.c",
+  "maps": [
+   "__XcptActTabCountX=__XcptActTabCount"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G4",
+  "notes": "@0xe2c90 unnamed gap chunk (49 B, no tail pad). CRT __XcptActTab lookup helper: typedef struct { int a; int f; int b; } W38B_ACT; volatile int count; W38B_ACT *w38b_e2c90(int id, W38B_ACT *p) { p0=q=p; for(;;){ if (q->f == id) break; q++; if (p0 + _Xcnt > q) continue; break; } d = q->f - id; mask = (d < 1) ? -1u : 0; return (W38B_ACT*)((int)q & (int)mask); }. NOTE the bound is in 12-B-ELEMENT units (p0 + count), NOT count*3 \u2014 FA's 8d 0c 49 / 8d 0c 88 = CL's internal *12 fold of the element add (count*3 in int units). /G4 FLIP (wave-27 lever): with /G5 CL emits 5-B load+cmp (8b 4e 04 3b ca) and a shl2/lea9 fold + 3-reg plan; /G4 emits FA's 39 56 04 mem-cmp, the lea3/lea4 count chain, and the 1-reg (56 esi) prologue. 13 spelling variants (v1-v8, w9-w13, /Oy-...) all under /G5 failed length; /G4 on w9 and w13 both hit EXACT-in-bytes first shot. Count public: FA dword 0x0051abe4 = __XcptActTabCount (map FROM = probe-local _XcptActTabCountX).",
+  "provenance": [
+   "whole-body: pure C, no patches, no newsites; single reloc = count dword 0x51abe4 masked on both sides, resolved via map _XcptActTabCountX=__XcptActTabCount",
+   "map TO verified from FA imm bytes: FA count dword e4 ab 51 00 = 0x0051abe4 = __XcptActTabCount public in layout",
+   "flags: /G4 flip is load-bearing \u2014 do not 'normalize' to /G5 when merging; /G5 CL code is 0x35-0x37 B (load+cmp + alt fold) and would FATAL length-check",
+   "alias 0=$FA$_t_4e2c90: chunk externally referenced by stub groups (verified via build/st obj scan)"
+  ]
+ }
+]

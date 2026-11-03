@@ -1,0 +1,139 @@
+[
+ {
+  "rva": 286640,
+  "obj": "w38E_45fb0_v3",
+  "src": "build/survey/probes/w38E_45fb0_v3.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_SeqFadeOut=?SeqFadeOut@@YADGG@Z"
+  ],
+  "patch": [
+   "6,1,0c",
+   "13,1,18",
+   "16,1,eb",
+   "21,1,dd",
+   "40,1,c3",
+   "42,1,cd",
+   "81,1,96"
+  ],
+  "provenance": [
+   "patch 6: toolchain-diff: frame-offset \u2014 CL materializes param2 (tgt) into ebx first at [esp+10]; FA loads param1 (step) at [esp+0c]",
+   "patch 13: toolchain-diff: frame-offset \u2014 CL bp load [esp+14] vs FA [esp+18]",
+   "patch 16: toolchain-diff: reg-color \u2014 CL homes m=ebp/tgt=ebx (cmp modrm dd); FA homes m=ebx/tgt=ebp (eb)",
+   "patch 21: toolchain-diff: reg-color \u2014 min-store CL mov bp,bx vs FA mov bx,bp",
+   "patch 40: toolchain-diff: reg-color \u2014 idiv numerator CL 8b c5 vs FA 8b c3",
+   "patch 42: toolchain-diff: reg-color \u2014 idiv denominator CL 8b cb vs FA 8b cd",
+   "patch 81: toolchain-diff: pre-bool \u2014 CL canonicalizes tgt<=m to setae (0f 93); FA setbe (0f 96)"
+  ]
+ },
+ {
+  "rva": 286736,
+  "obj": "w38E_46010_v3",
+  "src": "build/survey/probes/w38E_46010_v3.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_SeqFadeIn=?SeqFadeIn@@YADGG@Z"
+  ],
+  "patch": [
+   "6,1,0c",
+   "13,1,18",
+   "16,1,eb",
+   "21,1,dd",
+   "39,28,b9000100008bc325ffff00008bf5c1e00881e6ffff000099f7fe2bc8",
+   "88,1,96"
+  ],
+  "provenance": [
+   "patch 6: toolchain-diff: frame-offset \u2014 CL materializes param2 (tgt) into ebx first; FA param1 (step) at [esp+0c]",
+   "patch 13: toolchain-diff: frame-offset \u2014 CL bp load [esp+14] vs FA [esp+18]",
+   "patch 16: toolchain-diff: reg-color \u2014 CL homes m=ebp/tgt=ebx; FA m=ebx/tgt=ebp",
+   "patch 21: toolchain-diff: reg-color \u2014 min-store CL mov bp,bx vs FA mov bx,bp",
+   "patch 39: toolchain-diff: schedule \u2014 28-B div block: CL mov ecx,0x100 after idiv, denominator ecx; FA hoists mov ecx,0x100 pre-div, denominator esi (8b f5/81 e6/f7 fe)",
+   "patch 88: toolchain-diff: pre-bool \u2014 CL setae; FA setbe"
+  ]
+ },
+ {
+  "rva": 737280,
+  "obj": "w38E_b4000_final",
+  "src": "build/survey/probes/w38E_b4000_v9.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_MMAccessW=@MMAccessW@4",
+   "_w38e_radd=?RemapAdd@@YAXPAUT_HANDLE@@H@Z"
+  ],
+  "patch": [
+   "15,20,8b78128bf0b9030000002bd28b4616f7f1668b742418",
+   "37,9,8bd86681fe00017e11"
+  ],
+  "provenance": [
+   "patch 15: toolchain-diff: schedule \u2014 20-B mid band replaced by FA's 22-B (dst load, mov esi,eax home-store of the MMAccessW result, mov ecx,3, sub edx, [esi+16], div, late si load): CL keeps call results in eax with no home-store and reads the signed 16-bit param early; FA homes m in esi and loads id late",
+   "patch 37: toolchain-diff: schedule \u2014 reorder cnt/mov/cmp band: FA stores cnt to ebx before the compare; CL stores after"
+  ]
+ },
+ {
+  "rva": 411552,
+  "obj": "w38E_647a0_v3",
+  "src": "build/survey/probes/w38E_647a0_v3.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_curThing15=_curThing+0x15",
+   "_curThingE8=_curThing+0xe8",
+   "__curId=_curId",
+   "_curThing11=_curThing+0x11"
+  ],
+  "patch": [
+   "41,0,66a100000000,2:6:_curId",
+   "55,2,",
+   "55,6,"
+  ],
+  "provenance": [
+   "patch 41: toolchain-diff schedule \u2014 insert FA's arg1 curId ax-load (66 a1 +imm; newsite DIR32 _curId at content+2): FA materializes T_Info's arg1 before the pos[1] load; CL materializes in reverse order",
+   "patch 55: toolchain-diff schedule delete \u2014 CL's xor eax,eax staging (33 c0) absent in FA (first use), deleted",
+   "patch 55 (2): toolchain-diff schedule delete \u2014 CL's original late 66a1 curId block incl. its reloc, dropped with span"
+  ]
+ },
+ {
+  "rva": 463664,
+  "obj": "w38E_71330_v3",
+  "src": "build/survey/probes/w38E_71330_v3.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "@MPSetFuel@4=?MPSetFuel@@YIXG@Z",
+   "_curThing1fc=_curThing+0x1fc",
+   "@w38e_flush@4=?MPFlushAll@@YIXD@Z",
+   "_w38e_46b260@16=$FA$_t_46b260"
+  ],
+  "patch": [
+   "11,14,56668bf1744156",
+   "45,0,6a01",
+   "47,1,a1",
+   "48,1,",
+   "56,2,",
+   "52,11,6a078d4c240c8944240f51"
+  ],
+  "provenance": [
+   "patch 11: toolchain-diff: param-scheme \u2014 CL and-extends the 16-bit fastcall param for the PushCurObj arg (and ecx/push ecx/mov esi,ecx); FA pushes esi raw with 16-bit home load mov si,cx (band 14 B -> FA 7 B, je disp folded)",
+   "patch 45: toolchain-diff schedule \u2014 insert FA's 6a01 arg push that CL emits later (arg staging order)",
+   "patch 47: toolchain-diff: load-form \u2014 CL 8b 0d (mov ecx,ds:) for the curThing+0x1fc RHS read vs FA a1 (mov eax,ds:) 5-B form",
+   "patch 48: toolchain-diff load-form delete \u2014 drop 0x0d modrm byte once 8b->a1 converted",
+   "patch 56: toolchain-diff schedule delete \u2014 CL's original 6a01 push position (superseded by insert at 45)",
+   "patch 52: toolchain-diff: register-color \u2014 CL lea edx/[esp+4] + store ecx/[esp+0xb] + push edx vs FA lea ecx/[esp+0xc] + store eax/[esp+0xf] + push ecx (same 11-B span)"
+  ]
+ },
+ {
+  "rva": 515760,
+  "obj": "w38E_7deb0_v2",
+  "src": "build/survey/probes/w38E_7deb0_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_FreeTextStuff=?FreeTextStuff@@YGXXZ",
+   "__ftextNum=_textNum",
+   "_fmtText2=_fmtText",
+   "_dirTVY8=?dirTVYTime@@3JA+0x8",
+   "@w38e_musoff@0=?MusicOff@@YIXXZ",
+   "_ftextNum=_textNum",
+   "_dirTVYTime8=?dirTVYTime@@3JA+0x8"
+  ],
+  "patch": [],
+  "provenance": []
+ }
+]
