@@ -1,0 +1,111 @@
+[
+ {
+  "rva": 869328,
+  "verdict": "EXACT",
+  "obj": "w33g_toupper_v2",
+  "src": "build/survey/probes/w33g_toupper_v2.c",
+  "maps": [
+   "_w33g_lock=__lock",
+   "_w33g_unlock=__unlock",
+   "_w33g_tlk=__toupper_lk",
+   "_w33g_ctf=__ctype+0x388",
+   "_w33g_s1=__nstream+0x4",
+   "_w33g_s2=__nstream+0x8"
+  ],
+  "patch": [
+   "0x0,11,833d000000000056577514,2:6:_w33g_ctf",
+   "0x1f,9,833d00000000007411,2:6:_w33g_s1"
+  ],
+  "provenance": [
+   "patch 0x0: CL pushes esi then loads __ctype+0x388 into eax and tests the register (a1-first test tell); FA compares the memory operand directly (83 3d 00) before the pushes in the same byte budget - toolchain-diff",
+   "patch 0x1f: second flag test (__nstream+0x4) same mov-then-test vs cmp-mem form; newsite DIR32 at the imm dword restores FA's .reloc HIGHLOW - toolchain-diff"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "CRT toupper wrapper. esi=flag, edi=r by decl order (push esi/push edi). Fast path `c-0x20` guard uses signed 7c/7f. Both cmp [ mem ],0 tests are patches (0x0 11 B, 0x1f 9 B) - CL always folds these flag loads into a1+85 c0, mem-operand cmp is unreachable from C spellings tried; newsite payload zeros keep the imm dwords reloc'd (no baked-VA / missing-.reloc class)."
+ },
+ {
+  "rva": 69824,
+  "verdict": "EXACT",
+  "obj": "w33g_smin_v1",
+  "src": "build/survey/probes/w33g_smin_v1.c",
+  "maps": [
+   "_w33g_ct=_currentTime",
+   "_w33g_dmin=_dam+0x75"
+  ],
+  "patch": [
+   "0xa,1,3b",
+   "0x10,1,73"
+  ],
+  "provenance": [
+   "patch 0xa: CL emits cmp [dmin],ax (39, mem-first) + jbe with identical semantics; FA compares reg-first (3b) - toolchain-diff",
+   "patch 0x10: jcc polarity rides the operand-order swap (jbe->jae) - toolchain-diff"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "16-bit running-min: fastcall short arg in cx, 66 a1 moffs load, 66 3b/73 compare against _dam+0x75 interior map TO, 66 a3 store; ret leaves ax=r naturally. 7-B census tail 8d a4 24 00 00 00 00."
+ },
+ {
+  "rva": 119696,
+  "verdict": "EXACT",
+  "obj": "w33g_icmp_v2",
+  "src": "build/survey/probes/w33g_icmp_v2.c",
+  "maps": [
+   "_w33g_itp=_items",
+   "_w33g_sicmp=_stricmp"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "KEY: declare _items as a pointer VARIABLE (extern char *) not an array - as an array CL /O2 folds it into the add-imms (81 c2, dir32-in-imm) and drops FA's a1 load + 03 d0/83 c2 11 sequence. it-load in eax interleaves above the second shl under /G5; args evaluate right-to-left so the edx (arg2) chain runs first; +17 stays imm8 (83 c2/c1 11)."
+ },
+ {
+  "rva": 127808,
+  "verdict": "EXACT",
+  "obj": "w33g_poll_v1",
+  "src": "build/survey/probes/w33g_poll_v1.c",
+  "maps": [
+   "_w33g_n1=$FA$_t_41f280",
+   "_w33g_n2=$FA$_t_41f320",
+   "_w33g_ocnt=?janesOnlineName@@3PADA+0xb8"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "plain `while (n2(n1())) cnt++;` - CL 4.2 /O2 rotates: first condition copy at top, duplicated call pair after the inc, loop-back to the inc (not the top). n2 is __fastcall char return (test al,al); cnt++ = inc moffs ff 05. Call TOs are still-stub anchors in group t00019 (verified in build/stubs/t00019.obj)."
+ },
+ {
+  "rva": 140136,
+  "verdict": "EXACT",
+  "obj": "w33g_rst_v1",
+  "src": "build/survey/probes/w33g_rst_v1.c",
+  "maps": [
+   "_w33g_z1=_desiredMapScale+0x4",
+   "_w33g_z2=_desiredMapScale+0x18",
+   "_w33g_z3=?worldCenter@@3UF24_POINT3@@A+0x10",
+   "_w33g_z4=?cobraData@@3UGlobalData@@A+0xc2e0"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "zero four globals in decl order (16-bit first); single xor eax,eax CSEs across all four stores; short store emits 66 a3, dword stores a3 (moffs) - all interior map TOs taken verbatim from dis.py annotations."
+ },
+ {
+  "rva": 252176,
+  "verdict": "EXACT",
+  "obj": "w33g_psk_v1",
+  "src": "build/survey/probes/w33g_psk_v1.c",
+  "maps": [
+   "_w33g_nob=_nextObjId",
+   "_w33g_pob=_objPtrs"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "for-counter as if(nob>i) do{...}while(nob>i): 16-bit unsigned counter in si (66 be/mov si,1, cmp [nob],si jbe/ja - CL keeps mem-first cmp here), mask 0x80 as unsigned int lands in edx (ba) with byte-wise test dl,bl; index widen CL 4.2 emits mov eax,esi / and eax,0xffff (not movzx) for ushort->uint; body at the array load is the ja target; cl/cx 16-bit arg load outside the loop; store (uchar)val at p+0xe2. 3-B tail pad 8d 49 00 (census)."
+ }
+]

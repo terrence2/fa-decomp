@@ -1,0 +1,14 @@
+[
+ {"rva": 278448, "obj": "w33C_43fb0", "src": "build/survey/probes/w33C_43fb0_v1.c",
+  "maps": ["_w33C_43fb0=$FA$_t_443fb0"], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 386752, "obj": "w33C_wngwm", "src": "build/survey/probes/w33C_wngwm_v1.c",
+  "maps": ["_W1=_wingIds+0x2", "_W0=_wingIds"], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 390128, "obj": "w33C_grpwm", "src": "build/survey/probes/w33C_grpwm_v1.c",
+  "maps": ["_G1=_groupIds+0x2", "_G0=_groupIds"], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 410512, "obj": "w33C_cteval", "src": "build/survey/probes/w33C_cteval_v1.c",
+  "maps": ["_cT=_curThing+0x11", "_srvT=_serviceTicks+0xf4"], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 454688, "obj": "w33C_mpp", "src": "build/survey/probes/w33C_mpp_v1.c",
+  "maps": ["_MP_Info=?MP_Info@@YAPAUMP_INFO@@XZ", "_packetBytes=?packetTicks@@3PAJA+0x4d8"], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 458416, "obj": "w33C_shells", "src": "build/survey/probes/w33C_shells_v1.c",
+  "maps": ["_mpSend=$FA$_t_46b260", "@MPFlushAll@4=?MPFlushAll@@YIXD@Z", "@MPShellSendScreen@4=?MPShellSendScreen@@YIXJ@Z"], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"}
+]

@@ -1,0 +1,79 @@
+[
+ {
+  "rva": 386752,
+  "obj": "w33C_wngwm5",
+  "src": "build/survey/probes/w33C_wngwm_v5.c",
+  "maps": [
+   "_Wb=_wingIds+0x2",
+   "_Wb0=_wingIds"
+  ],
+  "patch": [
+   "0x1c,5,"
+  ]
+ },
+ {
+  "rva": 390128,
+  "obj": "w33C_grpwm5",
+  "src": "build/survey/probes/w33C_grpwm_v5.c",
+  "maps": [
+   "_Gb=_groupIds+0x2",
+   "_Gb0=_groupIds"
+  ],
+  "patch": [
+   "0x1c,5,"
+  ]
+ },
+ {
+  "rva": 386752,
+  "obj": "w33C_wngwm3p",
+  "src": "build/survey/probes/w33C_wngwm_v3.c",
+  "maps": [
+   "_Wb=_wingIds+0x2",
+   "_Wb0=_wingIds"
+  ],
+  "patch": [
+   "0x0e,0,6633c083c404c3",
+   "0x0c,2,7507",
+   "0x1c,5,"
+  ]
+ },
+ {
+  "rva": 390128,
+  "obj": "w33C_grpwm3p",
+  "src": "build/survey/probes/w33C_grpwm_v3.c",
+  "maps": [
+   "_Gb=_groupIds+0x2",
+   "_Gb0=_groupIds"
+  ],
+  "patch": [
+   "0x0e,0,6633c083c404c3",
+   "0x0c,2,7507",
+   "0x1c,5,"
+  ]
+ },
+ {
+  "rva": 454688,
+  "obj": "w33C_mpp3",
+  "src": "build/survey/probes/w33C_mpp_v2.c",
+  "maps": [
+   "_MP_Info=?MP_Info@@YAPAUMP_INFO@@XZ",
+   "_packetBytes=?packetTicks@@3PAJA+0x4d8"
+  ],
+  "patch": [
+   "0x40,4,3bd87cd6"
+  ]
+ },
+ {
+  "rva": 410512,
+  "obj": "w33C_cteval3",
+  "src": "build/survey/probes/w33C_cteval_v2.c",
+  "maps": [
+   "_cT=_curThing+0x11",
+   "_srvT=_serviceTicks+0xf4",
+   "_Dist=_Dist@8"
+  ],
+  "patch": [
+   "0x0,65,a10000000083ec0cb900000000908d542400538b59048b49088902a10000000083c011895a0450894a088b50048d4c24088954240c51e800000000c1f8085b83c40cc3,1:6:_cT,9:6:_cT,0x1c:6:_srvT,0x37:20:_Dist"
+  ]
+ }
+]

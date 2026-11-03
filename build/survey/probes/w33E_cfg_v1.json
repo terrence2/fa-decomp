@@ -1,0 +1,14 @@
+[
+ {"rva": 759744, "obj": "w33E_apAssignPark_v1", "src": "build/survey/probes/w33E_APAssignPark_v1.c",
+  "maps": ["_thp=_curThing+0x231"], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 709232, "obj": "w33E_netFlush_v1", "src": "build/survey/probes/w33E_netFlush_v1.cpp",
+  "maps": ["_flushq=$FA$_t_4ae200"], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 715584, "obj": "w33E_netFreePlayerList_v1", "src": "build/survey/probes/w33E_netFreePlayerList_v1.cpp",
+  "maps": [], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 691792, "obj": "w33E_tcpaddr2str_v1", "src": "build/survey/probes/w33E_tcpaddr2str_v1.cpp",
+  "maps": ["?tcpaddr2strFmt@@3PADA=?videoInitialized@@3DA+0x414"], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 748448, "obj": "w33E_apAdd_v1", "src": "build/survey/probes/w33E_apAdd_v1.c",
+  "maps": [], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 695904, "obj": "w33E_close_v1", "src": "build/survey/probes/w33E_close_v1.c",
+  "maps": ["_handles32=?handles32@@3PAPAXA", "_openHandles=?openHandles@@3FA"], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"}
+]

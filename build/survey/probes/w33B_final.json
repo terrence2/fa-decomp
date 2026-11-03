@@ -1,0 +1,108 @@
+[
+ {
+  "rva": 70272,
+  "obj": "w33B_11280_c2",
+  "src": "build/survey/probes/w33B_11280_c2.c",
+  "maps": [
+   "_kbCount=?kbCount@@3GA",
+   "_kbHeadPtr=?kbHeadPtr@@3GA",
+   "_keyarray=_keyarray",
+   "_w33b_kbtp=?kbTailPtr@@3GA",
+   "_w33b_cs=?keyboard_critical_section@@3U_RTL_CRITICAL_SECTION@@A",
+   "__imp__InitializeCriticalSection@4=__imp__InitializeCriticalSection",
+   "_qualStatus=_qualStatus",
+   "_keyFlags=_keyFlags",
+   "_keyboardInitialized=?keyboardInitialized@@3DA"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "recipe: plain C with (a) __declspec(dllimport) on the import so CL emits ff 15 imm (direct IAT call) instead of e8+stub, letting the zero reg (edx) survive 33 d2; (b) store order kbCount, *(word*)(keyarray+4), kbHeadPtr keeps CL's scheduler on FA's interleaving (mov edi,keyarray / xor eax lands between); (c) rep stosd from for(i<64)keyarray[i]=0 dword-array loop; (d) qual/keyFlags stores BEFORE the call, keyboardInitialized=1 after. Data-site landmine: FA's imm at chunk off 0x12 is 0x51de4c = _keyarray+0x4 (a struct-field store via the array base, not a global) - dis.py's site preview mislabels it ?kbTailPtr@@3GA (real kbTailPtr is 0x51df4c); trust anchors.Anchors + FA .reloc bytes. Map _w33b_kbtp=_keyarray+0x4 bakes the 0x4 addend; payload dword zeros.",
+  "provenance-lines": []
+ },
+ {
+  "rva": 150450,
+  "obj": "w33B_24bb2_v3",
+  "src": "build/survey/probes/w33B_24bb2_v2.c",
+  "maps": [
+   "_w33b_apn@20=_APNearest@20"
+  ],
+  "patch": [
+   "0x1d,1,c1",
+   "0x1f,1,c1"
+  ],
+  "provenance": [
+   "patch 0x1d: toolchain-diff - setle staging reg: CL chose dl, FA stages through cl (0f 9e c1)",
+   "patch 0x1f: toolchain-diff - mov al,cl staging (8a c1), CL's mov al,dl"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "recipe: __fastcall 2-param wrapper; APNearest call spelled (a, b, &x, 0, 1) lands ecx/edx fastcall params pushed as args 1/2 without spills, &local x as arg3; x<=0x271000 compares the LOCAL (cmp [esp],imm) so x stays at [esp]; one dword local = FPO locals 1. Map FROM must be decorated: obj emits _w33b_apn@20 (stdcall). 2 one-byte reg-color patches (setle/mov staging cl vs dl). No anchors/referees for this unnamed chunk (checked swap.json for $FA$_t_424bb2: none)."
+ },
+ {
+  "rva": 206688,
+  "obj": "w33B_32760_v2",
+  "src": "build/survey/probes/w33B_32760_c1.c",
+  "maps": [
+   "_w33b_muon=$FA$_d_4e7000+0x5f0",
+   "@w33b_scoreoff@0=?ScoreOff@@YIXXZ",
+   "_w33b_scorestart=?scoreStart@@3PAXA",
+   "_w33b_scoreoffset=?scoreOffset@@3JA",
+   "_w33b_scoreishandle=?scoreIsHandle@@3DA",
+   "_w33b_scoreprefix=?scorePrefix@@3PADA",
+   "_w33b_scoreneedcheck=_scoreNeedCheck"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "recipe: __fastcall void(void* start, char ishandle); if (muon) { ScoreOff(); ishandle/scoreStart stores then 3 global zero stores; }. First probe spelling, zero patches. Map FROM for the ScoreOff call must be fastcall-bare @w33b_scoreoff@0 (not _w33b_scoreoff); muon = $FA$_d_4e7000+0x5f0 addend map (same byte wave-27/29 entries use); ScoreOff push order: FA pushes ebx/esi regs interleaved with the muon load+test, CL scheduled identically from this spelling."
+ },
+ {
+  "rva": 209072,
+  "obj": "w33B_330b0_v4",
+  "src": "build/survey/probes/w33B_330b0_v3.c",
+  "maps": [
+   "_w33b_soundon@60=?SoundOn@@YGFPADFFDGFFDFFGGFEF@Z"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "recipe: __stdcall short(char* p1, short p2, unsigned char p3, short p4) forwarding to the 15-arg SoundOn: arg2=(short)p3 (CL stages mov al,[esp+0xc] + and eax,0xffff00ff), arg3=p2 dword forward, arg4=0, arg5=0, arg6/7/10=-1, arg8/9=0, arg13=p4 (read first: mov ax,[esp+0x10], pushed with garbage high bits like FA), arg14=0, arg15=-1. TYPE matters: SoundOn's arg11/arg12 are UNSIGNED SHORT (G in the mangle) - C must pass (unsigned short)-1 so CL pushes 68 ffff0000 (zero-extended imm16 form); a short -1 pushes 6a ff (sign-extended) and never matches. Map FROM decorated: _w33b_soundon@60 (@60 = 15 dword args)."
+ },
+ {
+  "rva": 209264,
+  "obj": "w33B_33170_v4",
+  "src": "build/survey/probes/w33B_33170_v3.c",
+  "maps": [
+   "_w33b_soundon@60=?SoundOn@@YGFPADFFDGFFDFFGGFEF@Z"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "recipe: same as SingleSound (rva 209072) with arg12 = 1: w33b_soundon(p1,(short)p3,p2,1,0,-1,-1,0,0,-1,(unsigned short)-1,(unsigned short)-1,p4,0,-1). Map-FROM decorated _w33b_soundon@60 (same as w33B_330b0_v4).",
+  "provenance-lines": []
+ },
+ {
+  "rva": 278416,
+  "obj": "w33B_43f90_c3",
+  "src": "build/survey/probes/w33B_43f90_c3.c",
+  "maps": [
+   "@w33b_mmp1@4=@MMFreePtr@4"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "recipe: PURE C, no patch, no naked asm: the 16-B thunk is a cdecl 3-param function tail-calling a __fastcall extern with ONE dword param (@4 = total param bytes for fastcall mangling, not stack remainder): mov ecx,[esp+8] (arg2 -> ecx), edx left as caller's, jmp @MMFreePtr@4 (CL 4.2 /O2 tail call). Fastcall mangle widths confirmed here: 1-dword fastcall extern = @4; 3-dword = @12 (first naked probe spelled @12 and failed the map). Map FROM is fastcall-bare @w33b_mmp1@4. No newsite needed for the e9 (rel32, no .reloc entry), map TO verifies against FA's jmp target 0x435b70 = @MMFreePtr@4."
+ }
+]

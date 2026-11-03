@@ -1,0 +1,21 @@
+[
+ {"rva": 596160, "obj": "w33D_0918c0_v1", "src": "build/survey/probes/w33D_0918c0_v1.c",
+  "maps": ["_CNGetString=?CN_GetString@@YAJPADPAE@Z", "_wingSay1008=?wingSay@@3PAUSAY@@A+0x1008"],
+  "patch": [], "aliases": ["0=$FA$_t_4918c0"], "span": "", "flags": "/c /O2 /Gy /G5"},
+ {"rva": 602528, "obj": "w33D_0931a0_v1", "src": "build/survey/probes/w33D_0931a0_v1.c",
+  "maps": ["_vAt4931c0=$FA$_t_4931c0"],
+  "patch": [], "aliases": ["0=$FA$_t_4931a0"], "span": "", "flags": "/c /O2 /Gy /G5"},
+ {"rva": 612272, "obj": "w33D_gsetcolor_v1", "src": "build/survey/probes/w33D_gsetcolor_v1.c",
+  "maps": ["_spxFh8=?spx_proto@@3UNET_PROTOCOL@@A+0xf8", "_cRemapTable=?cRemapTable@@3PAEA"],
+  "patch": [], "aliases": [], "span": "", "flags": "/c /O2 /Gy /G5"},
+ {"rva": 649264, "obj": "w33D_dlgbkgd_v1", "src": "build/survey/probes/w33D_dlgbkgd_v1.c",
+  "maps": ["_RMChangeType=RMChangeType@12", "_SetupBitmapAccess=SetupBitmapAccess@12",
+           "_RMAccessHandle=RMAccessHandle@8", "_G_BlitToScreen=G_BlitToScreen@16",
+           "_RMFree=RMFree@4", "_remapDarkenTbl=?remapDarken320@@3PAEA"],
+  "patch": [], "aliases": [], "span": "", "flags": "/c /O2 /Gy /G5"},
+ {"rva": 520336, "obj": "w33D_miminfo_v1", "src": "build/survey/probes/w33D_miminfo_v1.c",
+  "maps": ["_playerId=_playerId", "_WNGPart=WNGPart@12", "_MISSIONSetCheating=MISSIONSetCheating@0"],
+  "patch": [], "aliases": [], "span": "", "flags": "/c /O2 /Gy /G5"},
+ {"rva": 543232, "obj": "w33D_msft_v1", "src": "build/survey/probes/w33D_msft_v1.c",
+  "maps": [], "patch": [], "aliases": [], "span": "", "flags": "/c /O2 /Gy /G5"}
+]

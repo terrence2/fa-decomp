@@ -1,0 +1,65 @@
+[
+ {
+  "rva": 709232,
+  "obj": "w33E_netFlush_v2",
+  "src": "build/survey/probes/w33E_netFlush_v2.cpp",
+  "maps": [
+   "_flushq=$FA$_t_4ae200",
+   "_vp=?validate_player@@YAPAU_player_info@@J@Z",
+   "_ws=?ws@@3U_winsock_funcs@@A",
+   "_doa=?socket_process_doa@@YAXXZ"
+  ],
+  "patch": [
+   "0x0,79,53a0000000005684c0743f8b74240c56e80000000083c40485c0742e8b887e280000057e28000085c97e1a5650e80000000083c4088ad884db7505e8000000008ac35e5bc3b0015e5bc332c05e5bc3,0x2:6:_ws,0x11:20:_vp,0x2e:20:_flushq,0x3c:20:_doa"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 715584,
+  "obj": "w33E_netFreePlayerList_v2",
+  "src": "build/survey/probes/w33E_netFreePlayerList_v2.cpp",
+  "maps": [
+   "_plC=?player_list@@3UNET_PLAYER_LIST@@A+0x4",
+   "_plB=?player_list@@3UNET_PLAYER_LIST@@A+0x66",
+   "_plA0=?player_list@@3UNET_PLAYER_LIST@@A",
+   "_plA8=?player_list@@3UNET_PLAYER_LIST@@A+0x8",
+   "_MMF=@MMFreePtr@4"
+  ],
+  "patch": [
+   "0x0,64,56a1000000005733f63bc67e1fbf000000008b0f83c70446e800000000c747fc000000003935000000007fe633c05f5ea300000000a300000000a300000000c3,0x2:6:_plC,0xe:6:_plB,0x19:20:_MMF,0x26:6:_plC,0x31:6:_plA0,0x36:6:_plA8,0x3b:6:_plC"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 695904,
+  "obj": "w33E_close_v2",
+  "src": "build/survey/probes/w33E_close_v2.c",
+  "maps": [
+   "_handles32=?handles32@@3PAPAXA",
+   "_openHandles=?openHandles@@3FA"
+  ],
+  "patch": [
+   "0x0,3,0fbfc9",
+   "0xd,14,8b048d000000008d348d00000000,0x3:6:_handles32,0xa:6:_handles32",
+   "0x2a,5,83f8017521",
+   "0x2f,37,66a100000000c7060000000066485e66c70500000000000066a300000000b001c332c05ec3,0x2:6:_openHandles,0x8:6:_handles32,0x12:6:_dosError,0x1a:6:_openHandles"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 748448,
+  "obj": "w33E_apAdd_v2",
+  "src": "build/survey/probes/w33E_apAdd_v2.c",
+  "maps": [],
+  "patch": [
+   "0x7,31,538bd0568d1cc057bf000000008d045a8d14828d0495000000003bc7761a,0x9:6:_airports,0x16:6:_airports",
+   "0x25,26,668b91e6000000663997e6000000742381c7340100003bf872ed",
+   "0x3f,42,66833d00000000287c0632c05f5e5bc366ff05000000008bf88bf1b94d000000f3a5b0015f5e5bc3,0x3:6:_numAirports,0x13:6:_numAirports"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ }
+]

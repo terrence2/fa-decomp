@@ -1,0 +1,16 @@
+[
+ {"rva": 807452, "obj": "w33F_wrwhitenpalette_v1", "src": "build/survey/probes/w33F_wrwhitenpalette_v1.c",
+  "maps": [], "aliases": [],
+  "patch": ["0x15,69,38f7db660fb6076683e83f66f7eb0027660fb647016683e83f66f7eb006701660fb647026683e83f66f7eb00670283c703e2d05f5b5dc20c008bd1d1e103cab03ff3aaebee"],
+  "provenance": ["patch 0x15: toolchain-diff CL emits sub-ax as 66 2d imm16 (3 sites, -1 B each) and places the 3*ecx fill block before the epilog, while FA reorders epilog-first + jmp back into the fill tail; in-place block patch to FA's exact layout (je disp, body, epilog, fill, loop disp all rewritten)"]},
+ {"rva": 823492, "obj": "w33F_copysb15_v2", "src": "build/survey/probes/w33F_copysb15_v2.c",
+  "maps": [], "patch": [], "aliases": []},
+ {"rva": 825656, "obj": "w33F_sincos_v2", "src": "build/survey/probes/w33F_sincos_v2.c",
+  "maps": ["_in_table=sin_table", "_cos_table=cos_table"],
+  "patch": ["0x10,1,ab", "0x17,1,83", "0x27,1,ab", "0x2e,1,9b"],
+  "aliases": [],
+  "provenance": ["patch 0x10: toolchain-diff CL drops the [ebx+symbol] movsx base (wave-31 wall) and encodes base-dropped modrm 2d; FA keeps rm=ebx (ab); 1-byte dir32 modrm patch",
+                 "patch 0x17: toolchain-diff base-dropped movsx2 modrm 05 -> FA 83 (reg=eax, [ebx+disp]); CL disp content 2 == FA_imm - symVA addend, link writes sin_table+2",
+                 "patch 0x27: toolchain-diff base-dropped movsx3 modrm 2d -> FA ab; disp content 0 -> link writes cos_table",
+                 "patch 0x2e: toolchain-diff base-dropped movsx4 modrm 1d -> FA 9b (reg=ebx); disp content 2 -> link writes cos_table+2"]}
+]

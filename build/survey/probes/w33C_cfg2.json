@@ -1,0 +1,87 @@
+[
+ {
+  "rva": 386752,
+  "obj": "w33C_wngwm2",
+  "src": "build/survey/probes/w33C_wngwm_v2.c",
+  "maps": [
+   "_Wb=_wingIds+0x2",
+   "_Wb0=_wingIds"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 386752,
+  "obj": "w33C_wngwm3",
+  "src": "build/survey/probes/w33C_wngwm_v3.c",
+  "maps": [
+   "_Wb=_wingIds+0x2",
+   "_Wb0=_wingIds"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 390128,
+  "obj": "w33C_grpwm2",
+  "src": "build/survey/probes/w33C_grpwm_v2.c",
+  "maps": [
+   "_Gb=_groupIds+0x2",
+   "_Gb0=_groupIds"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 410512,
+  "obj": "w33C_cteval2",
+  "src": "build/survey/probes/w33C_cteval_v2.c",
+  "maps": [
+   "_cT=_curThing+0x11",
+   "_srvT=_serviceTicks+0xf4"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 454688,
+  "obj": "w33C_mpp2",
+  "src": "build/survey/probes/w33C_mpp_v2.c",
+  "maps": [
+   "_MP_Info=?MP_Info@@YAPAUMP_INFO@@XZ",
+   "_packetBytes=?packetTicks@@3PAJA+0x4d8"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 458416,
+  "obj": "w33C_shells2",
+  "src": "build/survey/probes/w33C_shells_v2.c",
+  "maps": [
+   "_mpSend=$FA$_t_46b260",
+   "@MPFlushAll@4=?MPFlushAll@@YIXD@Z",
+   "@MPShellSendScreen@4=?MPShellSendScreen@@YIXJ@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 410512,
+  "obj": "w33C_microOrd",
+  "src": "build/survey/probes/w33C_microOrd_v1.c",
+  "maps": [
+   "_gA=_curThing+0x11",
+   "_gB=_serviceTicks+0xf4"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ }
+]

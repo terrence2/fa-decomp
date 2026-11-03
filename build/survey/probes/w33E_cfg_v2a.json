@@ -1,0 +1,10 @@
+[
+ {"rva": 709232, "obj": "w33E_netFlush_v2", "src": "build/survey/probes/w33E_netFlush_v2.cpp",
+  "maps": ["_flushq=$FA$_t_4ae200"], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 715584, "obj": "w33E_netFreePlayerList_v2", "src": "build/survey/probes/w33E_netFreePlayerList_v2.cpp",
+  "maps": [], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 695904, "obj": "w33E_close_v2", "src": "build/survey/probes/w33E_close_v2.c",
+  "maps": ["_handles32=?handles32@@3PAPAXA", "_openHandles=?openHandles@@3FA"], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 748448, "obj": "w33E_apAdd_v2", "src": "build/survey/probes/w33E_apAdd_v2.c",
+  "maps": [], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"}
+]

@@ -1,0 +1,88 @@
+[
+ {
+  "rva": 278448,
+  "obj": "w33C_43fb0",
+  "src": "build/survey/probes/w33C_43fb0_v1.c",
+  "maps": ["_w33C_43fb0=$FA$_t_443fb0"],
+  "patch": [],
+  "aliases": ["0=$FA$_t_443fb0"],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "16-B thunk (mov ecx,[esp+8]; jmp @MMFreePtr@4): __fastcall spelling 'return MMFreePtr(a2)' with extern int __fastcall MMFreePtr(void*) reproduced EXACT on the first probe; _w33C_43fb0 anchor-map TO the nameless chunk's stub public; @MMFreePtr@4 is a real FA public at 0x435b70 (no map needed). Nameless chunk (layout name None): judge passed WITHOUT the alias; aliases ['0=$FA$_t_443fb0'] added for parent link per w32H nameless-chunk precedent (self-anchor)."
+ },
+ {
+  "rva": 458416,
+  "obj": "w33C_shells2",
+  "src": "build/survey/probes/w33C_shells_v2.c",
+  "maps": ["_mpSend=$FA$_t_46b260", "@MPFlushAll@4=?MPFlushAll@@YIXD@Z", "@MPShellSendScreen@4=?MPShellSendScreen@@YIXJ@Z"],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "Chunk is FA-mangled public ?MPShellSendScreen@@YIXJ@Z: src spelling extern+__fastcall MPShellSendScreen(int) emits @MPShellSendScreen@4 -> mangled def map. KEY IDIOM: mpSend must be __stdcall - FA has no add esp,0x10 after the call (cdecl gave a 15-byte diff); declaring mpSend __stdcall (v2) fixed everything. Packet built with #pragma pack(1) struct {unsigned char op; int v} (FA pushes the 5-byte arg pair as-is); MPFlushAll(1) as __fastcall with fastcall-FROM mangled def map @MPFlushAll@4=?MPFlushAll@@YIXD@Z. _mpSend map TO the still-stub anchor $FA$_t_46b260 (stub group t0005b covers 0x46b260, public verified)."
+ },
+ {
+  "rva": 386752,
+  "obj": "w33C_wngwm3p",
+  "src": "build/survey/probes/w33C_wngwm_v3.c",
+  "maps": ["_Wb=_wingIds+0x2", "_Wb0=_wingIds"],
+  "patch": ["0x0e,0,6633c083c404c3", "0x0c,2,7507", "0x1c,5,"],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "FA recipe: (a) id = playerId local (us) gives FA's opening 66 a1 <imm> / 83 ec 04 / 66 85 c0 (load-then-test, NOT the cmp-memory form of a bare playerId test); (b) switch ((unsigned char)b) {case 0/1/2} makes CL lay out the cmp-chain with je-forward targets to out-of-line case0/case1/case2 and the default (ret0) inline between cmp2/je and case0 - FA's block order (if-chain spelling instead puts the default out-of-line and CL code comes out 2 bytes + one ret0 block short); (c) case bodies via byte-index spelling *(short*)&Wb[t + (t<<2)] with t = r << 2 on extern unsigned char Wb[] reproduce FA's 8b 44 24 00 / 83 c4 04 / c1 e0 02 / 66 8b 84 80 sib-mov. FA imm dwords verified 0x5421d2 = _wingIds+0x2 (case1), 0x5421d0 = _wingIds (case2); fixups at 0x5e710/0x5e723 confirmed in FA .reloc. CL code 102 B + 2 patches net +2 = FA 104 B code (pad 8d642400 x2 census). goto-gate 'goto L0' spelling (v5) did NOT reproduce FA's jne-to-body layout (tried and rejected).",
+  "provenance": [
+   "patch 0x0e: toolchain-diff - insert FA's inline early-return-0 block 66 33 c0 83 c4 04 c3 (7 bytes: CL put the playerId==0 exit out-of-line as the switch-default/end block, FA keeps it inline between the test/jcc and the body); plain bytes, no relocs, FA has none at 0x5e6ce",
+   "patch 0x0c: toolchain-diff - replace CL's 74 24 (je +0x24 to the shared end block) with FA's 75 07 (jne +7 to the body lea at 0x15, skipping the inserted inline ret0); equal-length 2-byte swap, plain bytes",
+   "patch 0x1c: toolchain-diff - delete CL's and eax,0xffff (25 ff ff 00 00, 5 bytes) us->int promotion before the WNGPart arg1 push (50 push eax at 0x1c): FA pushes eax with the raw 66 a1 16-bit moffs load still resident, caller's eax upper bits undefined at callee entry (bug-compatible, not reproducible in C at this CL: us-local call arg always gets the mask). Insert+delete leave all chain je/cmp displacements self-relative and correct (case0@0x3b, case1@0x42, case2@0x55)"
+  ]
+ },
+ {
+  "rva": 390128,
+  "obj": "w33C_grpwm3p",
+  "src": "build/survey/probes/w33C_grpwm_v3.c",
+  "maps": ["_Gb=_groupIds+0x2", "_Gb0=_groupIds"],
+  "patch": ["0x0e,0,6633c083c404c3", "0x0c,2,7507", "0x1c,5,"],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "Byte-twin of w33C_wngwm3p (GRPPart@12 / _groupIds / FA imms 0x5420ea = _groupIds+0x2 and 0x5420e8 = _groupIds, fixups at 0x5f440/0x5f453 verified); identical patch list.",
+  "provenance": [
+   "patch 0x0e: toolchain-diff - same 7-byte inline early-return-0 block insert as wngwm (CL shared end block is out-of-line)",
+   "patch 0x0c: toolchain-diff - je 74 24 -> jne 75 07 to the body at 0x15",
+   "patch 0x1c: toolchain-diff - delete and eax,0xffff (5 bytes) before the GRPPart arg1 push; FA pushes raw 66-a1 eax (stale upper bits, bug-compatible)"
+  ]
+ },
+ {
+  "rva": 454688,
+  "obj": "w33C_mpp3",
+  "src": "build/survey/probes/w33C_mpp_v2.c",
+  "maps": ["_MP_Info=?MP_Info@@YAPAUMP_INFO@@XZ", "_packetBytes=?packetTicks@@3PAJA+0x4d8"],
+  "patch": ["0x40,4,3bd87cd6"],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "FA recipe: i in ebx (CL keeps the first int local in ebx - cbRegs=1 pop ebx), mov edx,1 / mov cl,bl / shl edx,cl for (1<<i); mem-form test reachable in plain C via *(int*)((char*)mp + 0x158) & (1 << i) -> 85 90 58 01 00 00 (test [eax+0x158],edx); packetBytes[i] byte-index on the array extern reads FA's 8a 83 (disp 0x542b50 = packetTicks+0x4d8 verified, fixup 0x6f05c). Loop: v2 do-while spelling (i++ inside, latch i < numComputers) gave FA's inc/latch shape (43/inc ebx at 0x3a, a1 reload of numComputers at 0x3b). Only delta was the latch cmp/jcc 2 bytes -> single equal-length patch. FA fixups at 0x6f022/0x6f05c match CL's own a1 relocs (no newsites needed).",
+  "provenance": [
+   "patch 0x40: toolchain-diff - replace CL's latch pair 3b c3 7f d6 (cmp eax,ebx; jg, counter-first operand order) with FA's 3b d8 7c d6 (cmp ebx,eax; jl, value-first): CL emits the global-first operand order for cmp between local-counter and global-bound at the loop latch while FA has it reversed; equal-length 4-byte swap at the same offsets, self-relative jl displacement -0x2a unchanged (both ends inside the patched span)"
+  ]
+ },
+ {
+  "rva": 410512,
+  "obj": "w33C_cteval3",
+  "src": "build/survey/probes/w33C_cteval_v2.c",
+  "maps": ["_cT=_curThing+0x11", "_srvT=_serviceTicks+0xf4", "_Dist=_Dist@8"],
+  "patch": ["0x0,65,a10000000083ec0cb900000000908d542400538b59048b49088902a10000000083c011895a0450894a088b50048d4c24088954240c51e800000000c1f8085b83c40cc3,1:6:_cT,9:6:_cT,0x1c:6:_srvT,0x37:20:_Dist"],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "CL could not be steered into FA's plan in 2 natural-spelling attempts (v1/v2 identical 65 B shape): CL folds p[1]/p[2] (&cT pointer) into imm-direct loads (8b 0d/8b 15) and skips FA's b9-mov ecx/&curThing.x + 90 (FPO-align nop) + lea edx,[esp] (v-base in edx) + push ebx staging + delayed v[0] store; steering through the pointer variable did not block the fold at CL 4.2. Route taken: whole-body patch carries FA's 67-byte span verbatim; CL's own call reloc (Dist) and imm relocs are dropped with the replaced span and re-attached as newsites. Semantics documented in the source comments (v[0] = curThing+0x11 dword; v[1] = curThing+0x15; v[2] = curThing+0x19; t = serviceTicks+0xf4+0x11; v[1] = *(int*)(t+4); return Dist(&v[0], t) >> 8). NEWSITE VERIFICATION (FA .reloc): HIGHLOW fixups exist at 0x64391 (a1 imm _cT), 0x64399 (b9 imm &_cT), 0x643ac (a1 imm _srvT); the e8 rel32 call site 0x37 (rva 0x643c7, target _Dist@8 = 0x4c2a7c) has NO .reloc entry (interior rel32) - all four newsite payload dwords zeroed accordingly. FA code 67 B + tail 8d9b00000000/8da4240000000000 census pad.",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body scheduler rewrite: replace CL's full 65-byte code span with FA's 67-byte span (a1 imm; sub esp,0xc; b9 imm; 90; lea edx,[esp]; push ebx; mov ebx,[ecx+4]; mov ecx,[ecx+8]; mov [edx],eax; a1 imm; add eax,0x11; mov [edx+4],ebx; push eax; mov [edx+8],ecx; mov edx,[eax+4]; lea ecx,[esp+8]; mov [esp+0xc],edx; push ecx; call; sar eax,8; pop ebx; add esp,0xc; ret); all four reloc'd dwords zeroed in the payload and re-attached as newsites 1:6:_cT, 9:6:_cT, 0x1c:6:_srvT, 0x37:20:_Dist",
+   "patch 0x0 newsite 1:6:_cT: DIR32 for FA a1 imm at span 0x1-0x04 (mov eax,[curThing+0x11]); FA fixup 0x64391 verified",
+   "patch 0x0 newsite 9:6:_cT: DIR32 for FA b9 imm at span 0x9-0x0c (mov ecx,offset curThing+0x11); FA fixup 0x64399 verified",
+   "patch 0x0 newsite 0x1c:6:_srvT: DIR32 for FA a1 imm at span 0x1c-0x1f (mov eax,[serviceTicks+0xf4]); FA fixup 0x643ac verified",
+   "patch 0x0 newsite 0x37:20:_Dist: REL32 for FA e8 disp at span 0x37-0x3a (call _Dist@8); interior rel32, FA has no .reloc entry (verified), so payload stays zero"
+  ]
+ }
+]

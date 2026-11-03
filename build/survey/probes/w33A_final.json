@@ -1,0 +1,90 @@
+[
+ {
+  "rva": 622640,
+  "verdict": "EXACT",
+  "obj": "w33A_98030_v1",
+  "src": "build/survey/probes/w33A_98030_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "?packetCRC@@YAKAAUSERIAL_PACKET@@@Z (cdecl, USERIAL_PACKET&): switch (p->data[0] & 3) {case 0: case 3: return (p->data[10] << 8) | p->data[1]; case 1: case 2: return p->data[1];} return 0. EXACT on first probe, no patches/maps. CL matches the whole shape naturally: mov ecx,[esp+4] arg-into-ecx, xor eax+8-bit loads for the (b10<<8)|b1 build (shl eax,8/or eax,edx), and CL emits the same '8b ff' 2-B pad before the jump table plus the 16-B rel-table at chunk tail (CL's own reloc at 0x30 carries the table base; fitobj re-defines CL's $L interior labels, whose offsets land exactly on FA's 0x498048/0x498058 targets). No .reloc concern: FA has no HIGHLOW entries in this chunk (no abs data VAs), CL's obj relocs are all internal rel32/label-resolved at link to identical VAs."
+ },
+ {
+  "rva": 915120,
+  "verdict": "EXACT",
+  "obj": "w33A_df6b0_v4",
+  "src": "build/survey/probes/w33A_df6b0_v4.c",
+  "maps": ["_g54=$FA$_t_4e2ce0", "_setdp=__setdefaultprecision"],
+  "patch": [],
+  "aliases": ["0=$FA$_t_4df6b0"],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "Unnamed 49-B gap chunk (layout name None) -> self-anchor alias 0=$FA$_t_4df6b0 required (the replaced split stub defined $FA$_t_4df6b0; wave-30 self-anchor class, mirrors the committed Chunk_e2ce0 precedent). CRITICAL dis.py hidden-instr lesson drove v4: dis.py elided two 7-B store instructions (mov [eax+0x20],0 / mov [eax+0x24],0xffff) between the 0x10008 mem-test and add eax,0x1c — always raw-read the chunk (fixing this changed the whole CFG). Recipe: FA sequence = v = *(long*)g54(); __asm fninit; e = setdp(); if(v){ r=*(char**)(v+4); if(*(long*)r & 0x10008){ *(long*)(r+0x20)=0; *(long*)(r+0x24)=0xffff; r+=0x1c; } return r; } return (char*)e; — returns must sit INSIDE the branches: FA's v==0 path je's straight to the shared pop-esi/ret epilog carrying setdp's eax (so e must actually be assigned 'setdp()' return, int-typed, and returned on the false path with CL folding the mov (eax already holds e)); the inner je (+0x11) skips the store block AND the add, returning r itself, so the inner if's body is {stores; r+=0x1c} and 'return r' is shared epilog. v lives in esi across the fninit asm (CL keeps callee-saved locals across __asm without spilling; r needed NO stack slot once returns moved inside the branches — v1's 'sub esp,4' came from r's use-after-join, not asm pessimism). setdp declared 'extern int setdp(void)' returning int (C2120 'void' illegal otherwise); g54 declared char* (fninit opcode dbe3 = one allowed inline x87 asm, placed exactly between the two calls). Maps: _g54=$FA$_t_4e2ce0 (the committed w24b Chunk_e2ce0 entry = 'return _getptd()+0x54' thunk, its alias defines that anchor at link), _setdp=__setdefaultprecision (still-stub chunk public @ 0xd9360, 19 B, not in swap.json)."
+ },
+ {
+  "rva": 917584,
+  "verdict": "EXACT",
+  "obj": "w33A_e0050_v2",
+  "src": "build/survey/probes/w33A_e0050_v1.c",
+  "maps": ["_mbtowc_q=_mbtowc", "_gctr1=__nstream+0x4", "_gctr2=__nstream+0x8",
+           "_lockq=__lock", "_unlockq=__unlock", "_mbtowcLkq=__mbtowc_lk"],
+  "patch": ["0,1,83", "1,1,3d", "6,3,005657"],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0: toolchain-diff — cmp-before-pushes prologue: FA tests the stream-lock counter in memory BEFORE the esi/edi saves (cmp dword ptr [__nstream+0x4],0 — 83 3d, 7 B); CL pushes esi and a1-loads the counter first, then push edi and test eax,eax. First byte of the modrm pair.",
+   "patch 1: toolchain-diff — companion modrm of the same FA cmp (3d = [disp32],imm8 form); the disp32 itself is CL's own DIR32 reloc at 0x2 (map _gctr1=__nstream+0x4 addend-bakes 0x4 into the content dword, landing FA's 0x00589d84) so only the opcode byte changes.",
+   "patch 6: toolchain-diff — prologue span completion: the in-place cmp form (7 B) plus FA's push esi/push edi occupy the same 11-B span as CL's push esi/a1/push edi/test; this 3-B span writes FA's bytes (00 = the cmp imm8, then 56 57). Lengths equal, je at 0x9 shared, no newsites."
+  ],
+  "notes": "_mbtowc (pwc,s,n): w29b-wctomb twin with the SAME prolog patches (0/1/6) but NONE of wctomb's register-swap patches — FA's plan here is (flag=esi, result=edi), which is CL's NATIVE plan for the twin src spelling, so patch 13/29/54/56/71/76 are not applicable; FA's no-lock-arm tail is dec-before-pops = CL natural (wctomb's patch 77 was for its flipped FA plan). Src = w29b_wctomb_final.c structure with 3-arg Lk call (mbtowcLkq(pwc,s,n)); CL re-emits FA's exact arg staging naturally: mov eax,[esp+0x14]/ecx,[esp+0x10]/edx,[esp+0xc] then push eax/push ecx/push edx (right-to-left reads staged in eax/ecx/edx). Maps identical to the gate-passed twin (__lock/__unlock/__nstream+0x4/+0x8/__mbtowc_lk still-stub publics, verify: _mbtowc_lk @ 0xe00b0 261 B NOT in swap.json)."
+ },
+ {
+  "rva": 936608,
+  "verdict": "EXACT",
+  "obj": "w33A_e4aa0_v2",
+  "src": "build/survey/probes/w33A_e4aa0_v1.c",
+  "maps": ["_wcstombs_q=_wcstombs", "_gctr1=__nstream+0x4", "_gctr2=__nstream+0x8",
+           "_lockq=__lock", "_unlockq=__unlock", "_wcstombsLkq=__wcstombs_lk"],
+  "patch": ["0,1,83", "1,1,3d", "6,3,005657"],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0: toolchain-diff — cmp-before-pushes prologue: FA tests the stream-lock counter in memory BEFORE the esi/edi saves (cmp dword ptr [__nstream+0x4],0 — 83 3d, 7 B); CL pushes esi and a1-loads the counter first, then push edi and test eax,eax. First byte of the modrm pair.",
+   "patch 1: toolchain-diff — companion modrm of the same FA cmp (3d = [disp32],imm8 form); the disp32 itself is CL's own DIR32 reloc at 0x2 (map _gctr1=__nstream+0x4 addend-bakes 0x4 into the content dword, landing FA's 0x00589d84) so only the opcode byte changes.",
+   "patch 6: toolchain-diff — prologue span completion: the in-place cmp form (7 B) plus FA's push esi/push edi occupy the same 11-B span as CL's push esi/a1/push edi/test; this 3-B span writes FA's bytes (00 = the cmp imm8, then 56 57). Lengths equal, je at 0x9 shared, no newsites."
+  ],
+  "notes": "_wcstombs (s,ws,n): byte-identical twin of the _mbtowc entry (same 91-B chunk shape, same __lock band, same 3 prolog patches); only the Lk call target differs (_wcstombsLkq=__wcstombs_lk, still-stub @ 0xe4b00 618 B). Return type unsigned long (size_t), flag=esi/result=edi = CL natural plan, no tail."
+ },
+ {
+  "rva": 9056,
+  "verdict": "EXACT",
+  "obj": "w33A_2360_v1",
+  "src": "build/survey/probes/w33A_2360_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": ["0=$FA$_t_402360"],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "Unnamed 32-B gap chunk (layout name None) -> self-anchor alias 0=$FA$_t_402360 (replaced split stub defined $FA$_t_402360; wave-30 class). EXACT on first probe, no patches/maps. dis.py elided the store (c7 40 04 04 00 00 00 = mov DWORD PTR [eax+4],4) between the jne and the final ret — raw bytes required. Recipe: t->f8 = timerTicks; b = t->f1a; if (!b) t->f4 = 4; — polarity INVERTED from the naive 'if (b) store' (FA's test dl,dl jne' skips PAST the store to ret; the store belongs to the byte==0 branch, and the v1 '!b' spelling produced FA's exact fallthrough/jne shape). CL naturally emits: 8b 0d moffs load of timerTicks (map-free: src spells bare 'timerTicks', emitting _timerTicks — no leading-underscore double-decor trap), mov dl,[eax+0x1a] load hoisted before the [eax+8] store, test dl,dl, jne +0x7 over the c7 40 04 imm-store, then the 4-B census pad 8d642400 (auto-proven by padcensus, no tail key/flag needed)."
+ },
+ {
+  "rva": 21104,
+  "verdict": "EXACT",
+  "obj": "w33A_5270_v2",
+  "src": "build/survey/probes/w33A_5270_v2.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "?ZeroFrame@@YGXPAEJJF@Z (stdcall void ret 0x10): the WHOLE chunk is memset(f, val, w*h) — CL 4.2 /O2 inline-expands the dynamic-size memset into FA's exact shape: mov dx=a3 (left operand of the product loaded first), push edi, movsx eax,[esp+0x14] (sign-extending the SHORT val for memset's int fill arg — movsx not movzx is the tell), edi=a1, the cl/ch/cl eax/shl 0x10/mov ax,cx byte-replication pattern build, imul edx,[esp+0xc] for w*h, mov ecx,edx/shr ecx,2/rep stosd + mov ecx,edx/and ecx,3/rep stosb dynamic fill, pop edi, ret 0x10. v2 = v1 plus 'void *memset(void*,int,unsigned);' prototype (undeclared memset was the only v1 failure — C-style implicit decl is rejected). CL code 0x33 B == FA code, tail = FA's 13-B census pad (8d9b00000000 + 8da42400000000, padcensus-proven, auto-copied by fitobj, no tail key/flag needed). No maps: no externs, no sites. Frame: fpo, cbProlog=5 (push edi), cbRegs=1."
+ }
+]

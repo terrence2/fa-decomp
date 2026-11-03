@@ -1,0 +1,8 @@
+[
+ {"rva": 649264, "obj": "w33D_dlgbkgd_v2", "src": "build/survey/probes/w33D_dlgbkgd_v2.c",
+  "maps": ["_remapDarkenTbl=?remapDarken320@@3PAEA"],
+  "patch": ["0x25,6,680481000050"], "aliases": [], "span": "", "flags": "/c /O2 /Gy /G5"},
+ {"rva": 520336, "obj": "w33D_miminfo_v3", "src": "build/survey/probes/w33D_miminfo_v3.c",
+  "maps": ["_playerId=_playerId", "_WNGPart=WNGPart@12", "_MISSIONSetCheating=MISSIONSetCheating@0"],
+  "patch": ["0x15,5,", "0x0d,1,40"], "aliases": [], "span": "", "flags": "/c /O2 /Gy /G5"}
+]

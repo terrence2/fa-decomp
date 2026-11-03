@@ -1,0 +1,103 @@
+[
+ {
+  "rva": 867760,
+  "verdict": "EXACT",
+  "obj": "w33F_tolower_v1",
+  "src": "build/survey/probes/w33F_tolower_v1.c",
+  "maps": [
+   "_lock=__lock",
+   "_tolower_lk=__tolower_lk",
+   "_unlock=__unlock",
+   "_ctype=__ctype",
+   "_nstream=__nstream"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "tolower (110 B chunk, no pad; FPO fpo/esp cbProlog=9 cbRegs=2). Whole-body naked-asm escape: FA's prolog cmp ds:[__ctype+0x388],0 comes BEFORE push esi/push edi (CL's C route reorders or misframes the global-cmp-embedded prolog + __lock/__nstream counter dance). Fast path: 0x41..0x5a -> +0x20; slow path = cmp __nstream+4, je fresh (esi=0, inc __nstream+8) else push 0x13 / esi=1 / call __lock; [esp+0xc] -> call __tolower_lk; esi-steared unlock-vs-free tails share the pop edi/pop esi/ret at chunk end. All abs moffs (__ctype+0x388, __nstream+4, __nstream+8) ride CL's own asm-reloc HIGHLOWs - payload = FA_imm - symVA addends; rel32 calls need no newsites. No patches at all; emitted 110/110 B with zero diffs.",
+  "provenance": []
+ },
+ {
+  "rva": 765600,
+  "verdict": "EXACT",
+  "obj": "w33F_apaddtocarrier_v1",
+  "src": "build/survey/probes/w33F_apaddtocarrier_v1.c",
+  "maps": [
+   "_apsetoffset=?APSetOffset@@YGXPAUOBJ@@PAUAIRPORT@@PAUOBJ_ON_CARRIER@@@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "APAddToCarrier@4 (96 B = 83 code + 13 census pad 8d9b.. + 8da4..; FPO fpo frame 6-B prolog). Naked-asm escape: dx is LOCAL scratch (mov dx,word ptr ds:_curId inside the loop, 66 8b 15 moffs) though mangled @4 says one fastcall arg (ecx = value stored into [slot+2]); the empty-slot path's push esi IS the third APSetOffset arg (caller-cleaned by its ret 0x10). Linear scan over 0x18-B carrier slots from _airports+0x3020 (imm = symVA+0x3020 addend class) to _overflow_ptr end, empty-slot re-find pass, _curThing push (68 imm32 reloc), APSetOffset call, _curId store (66 a1 moffs). Zero patches: all encodings came from CL's assembler directly.",
+  "provenance": []
+ },
+ {
+  "rva": 806376,
+  "verdict": "EXACT",
+  "obj": "w33F_gpolygon_v1",
+  "src": "build/survey/probes/w33F_gpolygon_v1.c",
+  "maps": [
+   "_gsup1=@G_SUPolygon@8+0x11b4",
+   "_gsup2=@G_SUPolygon@8+0x4cc",
+   "_gup=@G_UPolygon@8"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "G_Polygon@8 (60 B = 59 code + census pad 90). Naked-asm escape: fastcall (cx=slot, edx=poly#) whose args PASS THROUGH to the callees (call sites push nothing - @G_SUPolygon@8 sees the same ecx/edx), and the G_UPolygon call is CF-conditional (jae 73 05 straight off the second call - no test in between; callee returns truth in CF) - both expressible only in asm. Stores: __right+0x14/0x10 (dword) and __right+0x7c (byte 0), dword cmp on _expandTerrain (83 3d moffs). Two interior call deltas via map TO '+delta' spelling (rel32, no .reloc entries).",
+  "provenance": []
+ },
+ {
+  "rva": 807452,
+  "verdict": "EXACT",
+  "obj": "w33F_wrwhitenpalette_v1",
+  "src": "build/survey/probes/w33F_wrwhitenpalette_v1.c",
+  "maps": [],
+  "patch": [
+   "0x15,69,38f7db660fb6076683e83f66f7eb0027660fb647016683e83f66f7eb006701660fb647026683e83f66f7eb00670283c703e2d05f5b5dc20c008bd1d1e103cab03ff3aaebee"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "WRWhitenPalette@12 (92 B = 90 code + census pad 8bc0). Naked-asm escape for the 16-bit band: movzx ax / sub ax,3f / imul bx / add [edi],ah x3 per pixel, ecx `loop` countdown; if step==0x100 (ebx==-... wait cmp ebx,0x100 je) the fill branch: ecx=3*count, mov al,0x3f, rep stosb, jmp epilog. CL's asm is byte-right for the loop band (0x00-0x14: prolog, arg loads, cmp/neg, je, first movzx/imul are identical); only the tail needed one in-place 69-B block patch. Tail pad 8b c0 is census-proven filler (no tail key needed).",
+  "provenance": [
+   "patch 0x15: toolchain-diff CL emits 'sub ax,3f' as 66 2d imm16 (-1 B each, 3 sites) and places the 3*ecx fill block BEFORE the epilog, while FA reorders epilog-first with jmp back into the fill tail; in-place same-length block patch rewrites je disp + body + epilog + fill + loop disp to FA's exact layout"
+  ]
+ },
+ {
+  "rva": 823492,
+  "verdict": "EXACT",
+  "obj": "w33F_copysb15_v2",
+  "src": "build/survey/probes/w33F_copysb15_v2.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "CopySB15 (92 B = 89 code + census pad 2e8bc0). Naked-asm escape: pushad/popad band (caller ebx/esi/edi preserved) + raw [ebp+8/+0xc/+0x10] arg reads + 8 unrolled dword copies with dst stride +4/+4+ecx alternating; no fixups, no data refs. TRAP: the function body must be __declspec(naked) - the non-naked twin (v1) adds CL's own 53 56 57 prolog and a 5f 5e 5b asm-clobber epilog (+7 B, over-length FATAL). Tail cs-mov eax,eax pad is census-proven.",
+  "provenance": []
+ },
+ {
+  "rva": 825656,
+  "verdict": "EXACT",
+  "obj": "w33F_sincos_v2",
+  "src": "build/survey/probes/w33F_sincos_v2.c",
+  "maps": [
+   "_in_table=sin_table",
+   "_cos_table=cos_table"
+  ],
+  "patch": [
+   "0x10,1,ab",
+   "0x17,1,83",
+   "0x27,1,ab",
+   "0x2e,1,9b"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "sincos (62 B, no pad). Register-ABI fixed-point lerp helper (args/results in eax/ebx/ebp - callers pass angle in bx): ebx->slot index ((angle>>8 cleared bh)*2), then 4 movsx table reads; eax = (s1-s0)*cl>>8 + s0 (sin lerp from sin_table/sin_table+2), ebx = (c1-c0)*cl>>8 + c0 (cos lerp from cos_table/cos_table+2); bare ret. Naked-asm escape. Wave-31 [reg+symbol] base-drop wall: CL encodes all four `movsx, word ptr [ebx+sin_table]` refs base-DROPPED (0f bf 2d/05/1d forms, 7 B) - only the modrm byte differs from FA's [ebx+disp32] forms (ab/83/ab/9b), positions identical, so four 1-byte modrm patches fix it. CL already bakes the +2 disp addends itself (content = FA_imm - symVA = 2, legal); CL's own disp32 relocs supply the .reloc HIGHLOWs (no newsites needed). sin_table 0x511300, cos_table 0x511380 from layout syms.",
+  "provenance": [
+   "patch 0x10: toolchain-diff CL base-dropped movsx1 modrm 2d -> FA ab (rm=ebx disp32 form) for the sin_table read",
+   "patch 0x17: toolchain-diff CL base-dropped movsx2 modrm 05 -> FA 83 (reg=eax); CL disp content 2 == FA_imm - symVA, link writes sin_table+2",
+   "patch 0x27: toolchain-diff CL base-dropped movsx3 modrm 2d -> FA ab; disp content 0 -> link writes cos_table",
+   "patch 0x2e: toolchain-diff CL base-dropped movsx4 modrm 1d -> FA 9b (reg=ebx); disp content 2 -> link writes cos_table+2"
+  ]
+ }
+]

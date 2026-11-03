@@ -1,0 +1,18 @@
+[
+ {"rva": 765600, "obj": "w33F_apaddtocarrier_v1", "src": "build/survey/probes/w33F_apaddtocarrier_v1.c",
+  "maps": ["_apsetoffset=?APSetOffset@@YGXPAUOBJ@@PAUAIRPORT@@PAUOBJ_ON_CARRIER@@@Z"],
+  "patch": [], "aliases": []},
+ {"rva": 806376, "obj": "w33F_gpolygon_v1", "src": "build/survey/probes/w33F_gpolygon_v1.c",
+  "maps": ["_gsup1=@G_SUPolygon@8+0x11b4", "_gsup2=@G_SUPolygon@8+0x4cc", "_gup=@G_UPolygon@8"],
+  "patch": [], "aliases": []},
+ {"rva": 807452, "obj": "w33F_wrwhitenpalette_v1", "src": "build/survey/probes/w33F_wrwhitenpalette_v1.c",
+  "maps": [], "patch": [], "aliases": []},
+ {"rva": 823492, "obj": "w33F_copysb15_v1", "src": "build/survey/probes/w33F_copysb15_v1.c",
+  "maps": [], "patch": [], "aliases": []},
+ {"rva": 825656, "obj": "w33F_sincos_v1", "src": "build/survey/probes/w33F_sincos_v1.c",
+  "maps": ["_in_table=sin_table"], "patch": [], "aliases": []},
+ {"rva": 867760, "obj": "w33F_tolower_v1", "src": "build/survey/probes/w33F_tolower_v1.c",
+  "maps": ["_lock=__lock", "_tolower_lk=__tolower_lk", "_unlock=__unlock",
+           "_ctype=__ctype", "_nstream=__nstream"],
+  "patch": [], "aliases": []}
+]

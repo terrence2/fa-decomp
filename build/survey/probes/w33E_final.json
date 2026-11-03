@@ -1,0 +1,119 @@
+[
+ {
+  "rva": 691792,
+  "obj": "w33E_tcpaddr2str_v1",
+  "src": "build/survey/probes/w33E_tcpaddr2str_v1.cpp",
+  "maps": [
+   "?tcpaddr2strFmt@@3PADA=?videoInitialized@@3DA+0x414"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT zero-patch. CL 4.2 matches FA vararg byte-extraction byte-for-byte when spelled with explicit masks in the right arg order (>>24, >>16&ff, >>8&ff, &ff) plus a 5th push of the fmt string. fmt addr = ?videoInitialized@@3DA+0x414 (videoInitialized base 0x4e78e8, +0x414 = 0x4e7cfc) via the delta-map class. Tail: census-proven filler 8d642400+8d642400+8da42400000000 (15 B).",
+  "provenance": [
+   "tail: padcensus filler composition, no patches"
+  ]
+ },
+ {
+  "rva": 759744,
+  "obj": "w33E_apAssignPark_v1",
+  "src": "build/survey/probes/w33E_APAssignPark_v1.c",
+  "maps": [
+   "_thp=_curThing+0x231"
+  ],
+  "patch": [
+   "0x2f,17,663bc87e1d8b150000000081c211010000,0x7:6:_thp"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT 1 patch. FA tests the park slot-count (cmp cx,ax; jle) BEFORE reloading _thp into edx; CL reloads _thp first then tests \u2014 17 B reorder. CL's DIR32 at 0x31 dropped; newsite span-rel 7 = imm byte of mov edx,ds:_thp. _thp = _curThing+0x231 (0x508969). Tail: census-proven filler 90 (1 B).",
+  "provenance": [
+   "patch 0x2f: toolchain-diff \u2014 FA schedules the slot-count test/jle ahead of the thing-pointer reload; CL inlines the reload first. 17 B reorder patch, imm-site newsite 7:6:_thp (addend _curThing+0x231)"
+  ]
+ },
+ {
+  "rva": 709232,
+  "obj": "w33E_netFlush_v2",
+  "src": "build/survey/probes/w33E_netFlush_v2.cpp",
+  "maps": [
+   "_flushq=$FA$_t_4ae200",
+   "_vp=?validate_player@@YAPAU_player_info@@J@Z",
+   "_ws=?ws@@3U_winsock_funcs@@A",
+   "_doa=?socket_process_doa@@YAXXZ"
+  ],
+  "patch": [
+   "0x0,79,53a0000000005684c0743f8b74240c56e80000000083c40485c0742e8b887e280000057e28000085c97e1a5650e80000000083c4088ad884db7505e8000000008ac35e5bc3b0015e5bc332c05e5bc3,0x2:6:_ws,0x11:20:_vp,0x2e:20:_flushq,0x3c:20:_doa"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT 1 whole-code patch (equal length 79->79). CL inline-returns each block and reads player cnt at +0x2880 (struct padding: CL aligns the int field; FA keeps it at the unaligned +0x287e dword). Whole code replaced with FA bytes: 3 shared 5-B ret blocks (mov al,bl / mov al,1 / xor al,al at 0x40/0x45/0x4a), 2-byte jumps 74 3f/74 2e/7e 1a/75 05 to them, flushq args pushed as 56 50. Newsites (FA-span-rel): 0x2 a0-moffs ws; 0x11/0x2e/0x3c REL32 disp bytes (validate_player / $FA$_t_4ae200 / socket_process_doa). Note: flushq call disp bytes in FA are real (5e 0f 00 00 rel to 0xae200); patch payload zeros + newsite per wave-31 rule. Tail: census-proven filler 90 (1 B).",
+  "provenance": [
+   "patch 0x0: toolchain-diff \u2014 CL inlines return blocks and pads _player_info cnt to +0x2880; FA uses shared trailing exits with 2-byte jumps and unaligned cnt at +0x287e. Whole 79-B code span replaced; 4 newsites (DIR32 ws moffs, REL32 validate_player/$FA$_t_4ae200/socket_process_doa)"
+  ]
+ },
+ {
+  "rva": 715584,
+  "obj": "w33E_netFreePlayerList_v2",
+  "src": "build/survey/probes/w33E_netFreePlayerList_v2.cpp",
+  "maps": [
+   "_plC=?player_list@@3UNET_PLAYER_LIST@@A+0x4",
+   "_plB=?player_list@@3UNET_PLAYER_LIST@@A+0x66",
+   "_plA0=?player_list@@3UNET_PLAYER_LIST@@A",
+   "_plA8=?player_list@@3UNET_PLAYER_LIST@@A+0x8",
+   "_MMF=@MMFreePtr@4"
+  ],
+  "patch": [
+   "0x0,64,56a1000000005733f63bc67e1fbf000000008b0f83c70446e800000000c747fc000000003935000000007fe633c05f5ea300000000a300000000a300000000c3,0x2:6:_plC,0xe:6:_plB,0x19:20:_MMF,0x26:6:_plC,0x31:6:_plA0,0x36:6:_plA8,0x3b:6:_plC"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT 1 whole-code patch (equal length 64->64). CL wastes push ebx + xor ebx,ebx on the slot-null constant (FA stores imm32 c7 47 fc), interleaves pop ebx between the final stores, and spells the loop compare cmp esi,[count] (3b 35) and jle-back; FA: cmp [count],esi (39 35) + jg-back. Whole code replaced with FA bytes. Newsites (span-rel): 0x2/0x26/0x3b DIR32 (count, delta +4 via _plC); 0xe DIR32 (ptr array base +0x66 via _plB); 0x19 REL32 (@MMFreePtr@4 fastcall \u2014 bare-@ mangling, still-stub public); 0x31/0x36 DIR32 (+0 via _plA0, +8 via _plA8). _pl* keys carry per-site deltas so one C symbol spans five addends. No tail (64 B exact).",
+  "provenance": [
+   "patch 0x0: toolchain-diff \u2014 CL zero-cache reg + interleaved epilog pops + reversed loop-compare direction; FA uses imm32 store, 39 35/jg form, all-pop-then-stores. Whole 64-B code span replaced; 7 newsites (_plC/_plB/_plA0/_plA8 DIR32, _MMF REL32 -> @MMFreePtr@4)"
+  ]
+ },
+ {
+  "rva": 695904,
+  "obj": "w33E_close_v2",
+  "src": "build/survey/probes/w33E_close_v2.c",
+  "maps": [
+   "_handles32=?handles32@@3PAPAXA",
+   "_openHandles=?openHandles@@3FA",
+   "__imp__CloseHandle@4=__imp__CloseHandle"
+  ],
+  "patch": [
+   "0x0,3,0fbfc9",
+   "0xd,14,8b048d000000008d348d00000000,0x3:6:_handles32,0xa:6:_handles32",
+   "0x2a,5,83f8017521",
+   "0x2f,37,66a100000000c7060000000066485e66c70500000000000066a300000000b001c332c05ec3,0x2:6:_openHandles,0x12:6:_dosError,0x1a:6:_openHandles"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT 4 equal-length patches (need __declspec(dllimport) on CloseHandle for the ff 15 IAT call; no (short) cast so the cmp stays eax-wide). (1) movsx ecx,cx not eax (0x2 c1->c9). (2) FA loads the handle value BEFORE the slot address (mov eax,8b048d then lea esi,8d348d; CL does lea first) \u2014 14 B reorder, 2 DIR32 newsites on the 0x577d60 disps. (3) cmp eax,1 + jne 21 to the shared ret0 at 0x50 (CL: je 04 to inline continuation). (4) FA success-block order: mov ax,[oh]; mov [esi],0; dec ax; POP ESI; dosError=0; mov [oh],ax \u2014 CL dec'd before the slot store and held the pop to the end \u2014 37 B reorder, newsites on _openHandles/_handles32/_dosError disps. All 4 patches equal length; tail: census-proven filler 0500000000+8da42400000000 (12 B).",
+  "provenance": [
+   "patch 0x0: toolchain-diff \u2014 FA sign-extends the handle index into ecx (movsx ecx,cx); picked in eax by CL",
+   "patch 0xd: toolchain-diff \u2014 FA schedules the value-load ahead of the slot-address lea; CL emits lea first; both 7-B mov/lea with sib [ecx*4+disp32], DIR32 newsites 3/a",
+   "patch 0x2a: toolchain-diff \u2014 FA branches jne to the shared trailing ret0; CL je's to an inline continuation",
+   "patch 0x2f: toolchain-diff \u2014 FA store order slot/dec/pop-early/dosError/oh; CL dec-first and pop-last; 37 B reorder, DIR32 newsites 2/8/0x12/0x1a (_openHandles, _handles32, _dosError)"
+  ]
+ },
+ {
+  "rva": 748448,
+  "obj": "w33E_apAdd_v2",
+  "src": "build/survey/probes/w33E_apAdd_v2.c",
+  "maps": [],
+  "patch": [
+   "0x7,31,538bd0568d1cc057bf000000008d045a8d14828d0495000000003bc7761a,0x9:6:_airports,0x16:6:_airports",
+   "0x25,26,668b91e6000000663997e6000000742381c7340100003bf872ed",
+   "0x3f,42,66833d00000000287c0632c05f5e5bc366ff05000000008bf88bf1b94d000000f3a5b0015f5e5bc3,0x3:6:_numAirports,0x13:6:_numAirports"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT 3 patches (fastcall arg stays in ecx; end-reg/scan-reg inversion fixed by patches). (1) prolog: CL keeps arg in esi via mov esi,ecx, wastes push ebp + a third scratch lea (8d 2c 82) and computes the append slot into edx; FA interleaves saves with first loads (53/8bd0/56/8d1cc0/57) and computes: bf mov edi,_airports + 8d045a/8d1482 chain + 8d0495 lea eax=end \u2014 31->30 B, 2 DIR32 newsites on _airports (0x582998). (2) scan: FA cmp eax,edi/jbe (end vs walked-start), mov dx,[ecx+0xe6], cmp [edi+0xe6],dx, je->copy-block, add edi,0x134, cmp edi,eax, jb back \u2014 26->26 B. (3) tail: FA cmp word [_numAirports],0x28; jl->append with FAIL BLOCK INLINE BEFORE IT (32c0 5f5e5b c3); append = inc word + mov edi,eax + shared mov esi,ecx/mov ecx,0x4d/rep movsd (found-path je lands past mov edi,eax); ret1 = mov al,1; 5f5e5b; c3 \u2014 42->40 B, 2 DIR32 newsites on _numAirports (0x582970). Tail: census-proven filler 8bff+8da42400000000 (9 B).",
+  "provenance": [
+   "patch 0x7: toolchain-diff \u2014 CL esi-copies the fastcall arg and spills an extra ebp scratch reg; FA interleaves push ebx with mov edx,eax and chains the append-slot leas into eax; DIR32 newsites 9/16 (_airports imm sites)",
+   "patch 0x25: toolchain-diff \u2014 FA compares the walk cursor against ax-end (3b c7) and loads the airport word into dx (66 8b 91); CL chose edx as end/ax as word",
+   "patch 0x3f: toolchain-diff \u2014 FA shares the copy block with the found path (je lands past mov edi,eax) and places the capacity-fail return before the append; CL emits a separate found block at the end; DIR32 newsites 3/13 (_numAirports)"
+  ]
+ }
+]

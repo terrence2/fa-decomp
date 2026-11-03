@@ -1,0 +1,112 @@
+[
+ {
+  "rva": 596160,
+  "verdict": "EXACT",
+  "obj": "w33D_0918c0_v1",
+  "src": "build/survey/probes/w33D_0918c0_v1.c",
+  "maps": [
+   "_CNGetString=?CN_GetString@@YAJPADPAE@Z",
+   "_wingSay1008=?wingSay@@3PAUSAY@@A+0x1008"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4918c0"
+  ],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "nameless 22-B thunk: f(p) -> CN_GetString(wingSay+0x1008, (char*)p+4); the wingSay delta 0x1008 rides the map TO+delta; extern char[] decay keeps the address as a plain imm push. Self-anchor alias for the nameless chunk (chunk @0x4918c0 lives in stub group t0007f which defines $FA$_t_4918c0)."
+ },
+ {
+  "rva": 602528,
+  "verdict": "EXACT",
+  "obj": "w33D_0931a0_v2",
+  "src": "build/survey/probes/w33D_0931a0_v2.c",
+  "maps": [
+   "_vAt4931c0=$FA$_t_4931c0"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4931a0"
+  ],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "nameless 17-B thunk: **((char***)((uchar*)o+0x17e)) = vAt4931c0 \u2014 vtable-init store of the ADDRESS of stub-group anchor $FA$_t_4931c0; declare the extern as char[] (array decay) so CL emits c7 01 <imm32> with DIR32 payload 0 instead of an 8b 0d pointer load. Anchor t00082 is still-stub, valid TO. Self-anchor alias for the nameless chunk."
+ },
+ {
+  "rva": 612272,
+  "verdict": "EXACT",
+  "obj": "w33D_gsetcolor_v2",
+  "src": "build/survey/probes/w33D_gsetcolor_v2.c",
+  "maps": [
+   "_spxFh8=?spx_proto@@3UNET_PROTOCOL@@A+0xf8",
+   "_cRemapTable=?cRemapTable@@3PAEA"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "fastcall G_SetColor(c): f=*(uchar*)(spx_proto+0xf8) as a0-moffs test; c>=0x100 -> cColor=tempYLR[c*2+0x4c78], cFillType=temp2YLR[c+0x4d28], cRemapTable=*(ulong*)&tempYLR[c*4+0x4cc0]; else cFillType=0, cColor=cl. CL emits the a0/a2/a3 moffs forms and 880d/c605 stores natively; third table needs SIB *4 (8d) not *2 (4d); deltas fold via plain array externs, no extra maps."
+ },
+ {
+  "rva": 649264,
+  "verdict": "EXACT",
+  "obj": "w33D_dlgbkgd_v2",
+  "src": "build/survey/probes/w33D_dlgbkgd_v2.c",
+  "maps": [
+   "_remapDarkenTbl=?remapDarken320@@3PAEA"
+  ],
+  "patch": [
+   "0x25,6,680481000050"
+  ],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x25: toolchain-diff - FA evaluates RMAccessHandle(0x8104, buf) args LEFT-to-right (push 0x8104, push lea'd buf); CL pushes right-to-left. 6-B push reorder 506804810000 50 -> 680481000050; the 0x8104 push is a plain literal, and the call e8 that follows is its own reloc entry, so no newsites and no relocs in the replaced span."
+  ],
+  "notes": "fastcall DialogDrawBkgd(p): uchar buf[0x10]; RMChangeType(p, remapDarken320+0x18, buf); SetupBitmapAccess(0x100,0,0); h=RMAccessHandle(0x8104,buf); G_BlitToScreen(0,h,0,0); RMFree(buf). All callees __stdcall (no per-call add esp; FA cleans once at end); keep h in an explicit local \u2014 the nested-call spelling changed CL's push order."
+ },
+ {
+  "rva": 543232,
+  "verdict": "EXACT",
+  "obj": "w33D_msft_p1",
+  "src": "build/survey/probes/w33D_msft_v1.c",
+  "maps": [],
+  "patch": [
+   "0x0,0x6c,53a100000000558b0d0000000085c9744366833d00000000007439668b144d000000006685d2742c33c981e2ffff0000668b0d000000008b2c8d000000008b0c95000000008a5d098a510932daf6c3807402f7d85d5bc3,0x2:6:_missionSucceeded,0x9:6:_thisComputer,0x14:6:_objControlledBy,0x1f:6:_objControlledBy,0x33:6:_objControlledBy,0x3a:6:_objPtrs,0x41:6:_objPtrs"
+  ],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x0: toolchain-diff - WHOLE-CHUNK patch: CL 4.2's register plan for this function is unsteerable (it re-loads missionSucceeded on every return path, drops the push ebp frame, and re-orders the objPtrs reads), so the full 108-B CL body is replaced with FA's 87-B code (ret at 0x56), payload-zeroed at the 7 FA abs sites with newsites: 0x2 missionSucceeded (a1), 0x9 thisComputer (8b0d), 0x14/0x1f/0x33 objControlledBy (66 83 3d imm test / 66 8b 14 4d word-array [0]/[thisComputer]/[0] with SIB 4d), 0x3a objPtrs (8b 2c 8d), 0x41 objPtrs (8b 0c 95 - SIB byte 95 at 0x40 preserved in content, imm is 0x41-0x44). Body semantics: r=missionSucceeded; if(!thisComputer) return r; if(!objControlledBy[0]) return r; m=objControlledBy[thisComputer] (and edx,0xffff); if(!m) return r; a=objPtrs[objControlledBy[0]] (xor ecx+mov cx); b=objPtrs[m]; x1=a[9], x2=b[9]; if ((x1^x2)&0x80) return -r; return r."
+  ],
+  "notes": "whole-chunk patch (oldlen 0x6c = full CL code, content = FA's 87-B code; no map lines \u2014 src defines locals only, all publics are identity). src is compile-src only (its bytes are fully replaced; kept for provenance/future recompile)."
+ },
+ {
+  "rva": 520336,
+  "verdict": "EXACT",
+  "obj": "w33D_miminfo_v3",
+  "src": "build/survey/probes/w33D_miminfo_v3.c",
+  "maps": [
+   "_playerId=_playerId",
+   "_WNGPart=WNGPart@12",
+   "_MISSIONSetCheating=MISSIONSetCheating@0"
+  ],
+  "patch": [
+   "0x15,5,",
+   "0x0d,1,40"
+  ],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x15: toolchain-diff - CL zero-extends the ushort _playerId arg with and eax,0xffff (25 ff ff 00 00, 5 B) before the push; FA's codegen pushes the raw 16-bit AX with stale upper bits \u2014 5-B and deleted.",
+   "patch 0x0d: toolchain-diff - after the 5-B body delete, CL's je disp still encodes the pre-delete distance 45; FA's block-3 target (store 0 tail) lands at 0x43 post-shift, so the disp byte is re-aimed 45->40 (the delete sits AFTER the je and BEFORE its target, so only this je needs a disp fix)."
+  ],
+  "notes": "void f(void): if (playerId) { int out; if (WNGPart(playerId,&out,0)==1 && wingSizes[out]>=2) playerHasWingmen=1; else playerHasWingmen=0; MISSIONSetCheating(); return; } else { playerHasWingmen=0; MISSIONSetCheating(); } \u2014 wingSizes MUST be unsigned char (FA uses jb 72; signed spells 7c jl); the two store0/call/ret tails are the early-return duplication shape."
+ }
+]

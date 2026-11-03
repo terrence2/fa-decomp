@@ -1,0 +1,85 @@
+[
+ {
+  "rva": 622640,
+  "obj": "w33A_98030_v1",
+  "src": "build/survey/probes/w33A_98030_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 915120,
+  "obj": "w33A_df6b0_v1",
+  "src": "build/survey/probes/w33A_df6b0_v1.c",
+  "maps": [
+   "_g54=$FA$_t_4e2ce0",
+   "_setdp=__setdefaultprecision"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 917584,
+  "obj": "w33A_e0050_v1",
+  "src": "build/survey/probes/w33A_e0050_v1.c",
+  "maps": [
+   "_mbtowc_q=_mbtowc",
+   "_gctr1=__nstream+0x4",
+   "_gctr2=__nstream+0x8",
+   "_lockq=__lock",
+   "_unlockq=__unlock",
+   "_mbtowcLkq=__mbtowc_lk"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 936608,
+  "obj": "w33A_e4aa0_v1",
+  "src": "build/survey/probes/w33A_e4aa0_v1.c",
+  "maps": [
+   "_wcstombs_q=_wcstombs",
+   "_gctr1=__nstream+0x4",
+   "_gctr2=__nstream+0x8",
+   "_lockq=__lock",
+   "_unlockq=__unlock",
+   "_wcstombsLkq=__wcstombs_lk"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 9056,
+  "obj": "w33A_2360_v1",
+  "src": "build/survey/probes/w33A_2360_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 21104,
+  "obj": "w33A_5270_v1",
+  "src": "build/survey/probes/w33A_5270_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5"
+ }
+]

@@ -1,0 +1,8 @@
+[
+ {"rva": 807452, "obj": "w33F_wrwhitenpalette_v1", "src": "build/survey/probes/w33F_wrwhitenpalette_v1.c",
+  "maps": [], "patch": [], "aliases": []},
+ {"rva": 823492, "obj": "w33F_copysb15_v2", "src": "build/survey/probes/w33F_copysb15_v2.c",
+  "maps": [], "patch": [], "aliases": []},
+ {"rva": 825656, "obj": "w33F_sincos_v2", "src": "build/survey/probes/w33F_sincos_v2.c",
+  "maps": ["_in_table=sin_table", "_cos_table=cos_table"], "patch": [], "aliases": []}
+]

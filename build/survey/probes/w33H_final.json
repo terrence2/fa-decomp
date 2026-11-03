@@ -1,0 +1,119 @@
+[
+ {
+  "rva": 508512,
+  "verdict": "EXACT",
+  "name": "0x7c260 (32 B, 2 params)",
+  "obj": "w33H_7c260_v2",
+  "src": "build/survey/probes/w33H_7c260_v2.c",
+  "maps": [
+   "@w33h_c280@8=$FA$_t_47c280"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "stdcall(int,char*) wrapper ret 0x8: calls fastcall stub $FA$_t_47c280(&a1, a2) (tail e8, maps @w33h_c280@8), then atoi(a1). v1 missteored the helper cdecl \u2014 CL pushed args instead of ecx/edx; __fastcall on the extern landed it. No patches."
+ },
+ {
+  "rva": 472432,
+  "verdict": "EXACT",
+  "name": "0x73570 (48 B, 0 params)",
+  "obj": "w33H_73570_v2",
+  "src": "build/survey/probes/w33H_73570_v2.c",
+  "maps": [
+   "_thng2=_curThing+0x1"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "fastcall void: a1-moffs of _curThing+0x1, test ah,0x20 (word 0x2000 of the dword) \u2014 if clear: Kill() then tail-jmp @MANRunAway@4(Rand(2)+1). Driving levers: extern unsigned long thng2 (a1 moffs A-form); short n staging makes CL emit movsx ecx,ax; inc ecx for Rand(2)+1. No patches."
+ },
+ {
+  "rva": 418464,
+  "verdict": "EXACT",
+  "name": "0x662a0 (48 B, 1 param)",
+  "obj": "w33H_662a0_v3",
+  "src": "build/survey/probes/w33H_662a0_v3.c",
+  "maps": [
+   "@w33h_svcerr@4=$FA$_t_4659e0",
+   "_svcTb=_serviceTicks+0x28"
+  ],
+  "patch": [
+   "0x1c,7,5e908d048500000000c3,5:6:_svcTb"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x1c: toolchain-diff CL emits add-eax-moffs (05+dword) then pop/ret; FA pads with nop+lea eax,[eax*1+moffs] sib before pop \u2014 band rewritten, dword newsited DIR32 (payload zeros + +0x28 map addend)"
+  ],
+  "notes": "fastcall int(short s): if (s<0 || s>4) svcerr(3); returns _serviceTicks+0x28 + (int)s. svcerr extern must be __fastcall (FA uses ecx). Table base via map TO _svcTb=_serviceTicks+0x28; the sib lea band needs a 7 B patch with DIR32 newsite, site 5, payload e8 zeros: 5e 90 8d0485000000 c3 = pop/nop/lea eax,[eax*1+moffs]/ret."
+ },
+ {
+  "rva": 404816,
+  "verdict": "EXACT",
+  "name": "0x62d50 (48 B, 1 param)",
+  "obj": "w33H_62d50_v3",
+  "src": "build/survey/probes/w33H_62d50_v3.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "fastcall unsigned short(unsigned short c): 16-bit saturating add of _currentT low word + c, clamp 0x7fff. Identity maps (extern unsigned short currentT). C89: all unsigned s,t decls BEFORE statements (C2143). CL branch-layout scheme: fall-through = then-return inline, jcc(not C) -> else-return \u2014 polarity (int)(s+t) >= 0x7fff puts the clamp inline. No patches."
+ },
+ {
+  "rva": 379056,
+  "verdict": "EXACT",
+  "name": "?pkt_build_message@@YAXPAUNET_PKT@@GPAD@Z (80 B, 3 params)",
+  "obj": "w33H_5c8b0_v3",
+  "src": "build/survey/probes/w33H_5c8b0_v3.c",
+  "maps": [
+   "_pkt_set_header=?pkt_set_header@@YAXHPAUNET_PKT@@H@Z"
+  ],
+  "patch": [
+   "0x5,17,5725ffff00008b74240c50566aff8d7e04",
+   "0x1c,1,44",
+   "0x27,1,50"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x5: toolchain-diff prolog/arg band reorder (17 B, len-equal): FA pushes edi before the and-mask then reloads p via [esp+0xc] and pushes -1/lea edi last; CL hoists the p-load and appends push -1 after lea \u2014 no newsites, the set_header rel disp (obj 0x17) sits outside this span",
+   "patch 0x1c: toolchain-diff reg field: FA sources strncpy src from eax, CL from ecx (8b4c2420 -> 8b442420)",
+   "patch 0x27: toolchain-diff reg byte: FA pushes src in eax (50), CL in ecx (51) \u2014 both bands retargeted to eax"
+  ],
+  "notes": "void cdecl(p, g, msg): pkt_set_header(-1, p, msg) (map to the public C++ symbol); strncpy(p->data /* edi=p+4 */, p->str /* [esp+0x20] */, 0x200); then ecx=0xffffffff, repnz scasb strlen over the COPIED buffer, p->len2 (word p+2) += strlen+1; p->data[0x1ff] = 0. KEY: dis.py ELIDES a real instruction here \u2014 c6 86 03 02 00 00 00 (mov byte [esi+0x203],0) is invisible in dis.py output but present in FA raw bytes; the v1/v2 probes missed it. p->data[0x1ff] = 0 in C emits the c686 byte-exact at the FA position."
+ },
+ {
+  "rva": 276240,
+  "verdict": "EXACT",
+  "name": "_GRAPHICAddInvisible@20 (96 B, 5 params)",
+  "obj": "w33H_43710_v4",
+  "src": "build/survey/probes/w33H_43710_v4.c",
+  "maps": [
+   "_w33h_msg43@20=$FA$_t_443190"
+  ],
+  "patch": [
+   "0x6,90,4c240c6aff50518a44241425ff00ffff506a2be80000000085c0750633c05ec21400668b4c2410668948048b4c241485c974138d701c8b118916668b490466894e045ec2140033c95e668948206689481e6689481cc21400,20:20:_w33h_msg43@20"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x6: toolchain-diff band rewrite (90->88 B): FA fuses the blend as mov al,[a1]+and eax,0xffff00ff over the already-pushed a5 copy in eax and pushes a5/a2 from eax/ecx; CL computes blend via and ecx,0xffff0000+mov cl,byte and drops the 66 prefix on the [esp+0x10] word load \u2014 arg-setup band + post-call block rewritten verbatim to FA bytes; call disp dword zeroed and newsited REL32 at site 20 (payload zeros; map _w33h_msg43@20 -> $FA$_t_443190); CL's reloc (obj 0x1d) lies inside the span and is dropped"
+  ],
+  "notes": "stdcall int 5-arg AddInvisible: msg43(0x2b, (a5&0xffff0000)|(a1&0xff), a2, a5, -1); if (!obj) return 0; *(u16*)(obj+4) = a3 word; if (a4) copy dword+word from a4 to obj+0x1c else three reversed zero word-stores at obj+0x20/0x1e/0x1c; return obj. FA ret-0 block includes the esi pop (5e) once esi is enreg'd (blend/dst local) -> 7506 layout; v1-v3 couldn't get CL to enreg esi the FA way (v1: a5-copy spill \u2014 but with cdecl msg43 and a4/a5 misread; v2: address-taken temp bloated the code 116>96; v3: ecx blend, esi-less) \u2014 v4 + one 88 B patch converges. msg43 extern MUST be __stdcall (FA callee cleans 0x14) and mapped to stub public $FA$_t_443190."
+ }
+]
