@@ -41,7 +41,7 @@
   "src": "src/carefulDiv.c",
   "cls": "x87",
   "patch": false,
-  "probes": true,
+  "probes": false,
   "game": false
  },
  {
@@ -1695,9 +1695,9 @@
   "rva": "0x63060",
   "obj": "MaskEvents",
   "src": "src/MaskEvents.c",
-  "cls": "masm-enc",
-  "patch": false,
-  "probes": true,
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
   "game": false
  },
  {
@@ -1920,9 +1920,9 @@
   "rva": "0xdfa40",
   "obj": "IsZeroMan",
   "src": "src/IsZeroMan.c",
-  "cls": "reg-plan: param must sit in ecx with cmp [ecx],0 while CL always assigns to eax; structural (n3 refit-verified KEEP)",
-  "patch": false,
-  "probes": true,
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
   "game": false
  },
  {
@@ -2298,7 +2298,7 @@
   "rva": "0xb4990",
   "obj": "G_ColorStringWidth",
   "src": "src/G_ColorStringWidth.c",
-  "cls": "sched: sum pinned in edx + w+0x2a load hoisted pre-loop; bare label stale (n3 refit-verified KEEP)",
+  "cls": "bare",
   "patch": false,
   "probes": true,
   "game": true
@@ -2928,8 +2928,8 @@
   "rva": "0xdb7e0",
   "obj": "ISMbbkana",
   "src": "src/_ismbbkana.c",
-  "cls": "masm-enc",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": true,
   "game": false
  },
@@ -3351,9 +3351,9 @@
   "rva": "0xa24c0",
   "obj": "EveryoneHasChosenSides",
   "src": "src/EveryoneHasChosenSides.c",
-  "cls": "reg-plan: FA pushes ebx for the elem load + jle to shared mov-al-1 tail; CL emits early-return-1 guard; 8 probes (v8 fresh n3)",
+  "cls": "bare",
   "patch": false,
-  "probes": true,
+  "probes": false,
   "game": false
  },
  {
@@ -3405,9 +3405,9 @@
   "rva": "0xd0604",
   "obj": "do_start",
   "src": "src/do_start.c",
-  "cls": "bare: KEEP-ASM - push esi/ret ABI gadget (4 B); no C form can push+pop-to-self",
+  "cls": "bare",
   "patch": false,
-  "probes": true,
+  "probes": false,
   "game": true
  },
  {
@@ -3423,9 +3423,9 @@
   "rva": "0xdf3e0",
   "obj": "unexpected",
   "src": "src/unexpected.c",
-  "cls": "bare",
-  "patch": false,
-  "probes": true,
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
   "game": false
  },
  {
@@ -3756,8 +3756,8 @@
   "rva": "0xd6230",
   "obj": "AmsgExit",
   "src": "src/AmsgExit.c",
-  "cls": "masm-enc",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": true,
   "game": false
  },
@@ -5952,8 +5952,8 @@
   "rva": 868112,
   "obj": "Fclose",
   "src": "src/Fclose.c",
-  "cls": "reg-plan",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": true,
   "game": false
  },
@@ -5961,8 +5961,8 @@
   "rva": 868496,
   "obj": "Isalpha",
   "src": "src/Isalpha.c",
-  "cls": "reg-plan",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": true,
   "game": false
  },
@@ -5970,8 +5970,8 @@
   "rva": 868560,
   "obj": "Isupper",
   "src": "src/Isupper.c",
-  "cls": "reg-plan",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": true,
   "game": false
  },
@@ -5979,8 +5979,8 @@
   "rva": 868608,
   "obj": "Islower",
   "src": "src/Islower.c",
-  "cls": "reg-plan",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": true,
   "game": false
  },
@@ -5988,8 +5988,8 @@
   "rva": 868656,
   "obj": "Isdigit",
   "src": "src/Isdigit.c",
-  "cls": "reg-plan",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": true,
   "game": false
  },
@@ -5997,8 +5997,8 @@
   "rva": 868704,
   "obj": "Isxdigit",
   "src": "src/Isxdigit.c",
-  "cls": "reg-plan",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": true,
   "game": false
  },
@@ -6006,8 +6006,8 @@
   "rva": 868768,
   "obj": "Isspace",
   "src": "src/Isspace.c",
-  "cls": "reg-plan",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": true,
   "game": false
  },
@@ -6015,8 +6015,8 @@
   "rva": 868864,
   "obj": "Isalnum",
   "src": "src/Isalnum.c",
-  "cls": "reg-plan",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": true,
   "game": false
  },
@@ -6024,8 +6024,8 @@
   "rva": 868928,
   "obj": "Isprint",
   "src": "src/Isprint.c",
-  "cls": "reg-plan",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": true,
   "game": false
  },
@@ -6033,8 +6033,8 @@
   "rva": 868992,
   "obj": "Isgraph",
   "src": "src/Isgraph.c",
-  "cls": "reg-plan",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": true,
   "game": false
  },
@@ -6042,8 +6042,8 @@
   "rva": 869056,
   "obj": "Iscntrl",
   "src": "src/Iscntrl.c",
-  "cls": "reg-plan",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": true,
   "game": false
  },
@@ -6051,8 +6051,8 @@
   "rva": 876272,
   "obj": "FflushLk",
   "src": "src/FflushLk.c",
-  "cls": "sched",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": true,
   "game": false
  },
@@ -6096,8 +6096,8 @@
   "rva": 902608,
   "obj": "Isatty",
   "src": "src/Isatty.c",
-  "cls": "reg-plan",
-  "patch": false,
+  "cls": "plain",
+  "patch": true,
   "probes": true,
   "game": false
  },
@@ -6762,9 +6762,9 @@
   "rva": 74496,
   "obj": "SampleUpdate",
   "src": "src/SampleUpdate.c",
-  "cls": "sched: 5 live dwords across memmove pushes, ebp/ebx/esi/edi pinning; v5-v8 probes existed and fail at whole-body reg-plan",
+  "cls": "sched",
   "patch": false,
-  "probes": true,
+  "probes": false,
   "game": false
  },
  {
@@ -7493,7 +7493,7 @@
   "src": "src/MISSIONEnsureLegalName.c",
   "cls": "reg-plan",
   "patch": false,
-  "probes": true,
+  "probes": false,
   "game": false
  },
  {
@@ -7772,7 +7772,7 @@
   "src": "src/NPCSetStateTarget.c",
   "cls": "sched",
   "patch": false,
-  "probes": true,
+  "probes": false,
   "game": false
  },
  {
@@ -7979,7 +7979,7 @@
   "src": "src/__strcats.c",
   "cls": "reg-plan",
   "patch": false,
-  "probes": true,
+  "probes": false,
   "game": false
  },
  {
@@ -8031,9 +8031,9 @@
   "rva": 912528,
   "obj": "get_osfhandle",
   "src": "src/get_osfhandle.c",
-  "cls": "reg-plan",
-  "patch": false,
-  "probes": true,
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
   "game": false
  },
  {
@@ -8130,9 +8130,9 @@
   "rva": 404288,
   "obj": "MaybeCallEventProc",
   "src": "src/MaybeCallEventProc.c",
-  "cls": "reg-plan/stale-upper-arg: FA pushes dx with garbage upper 16 bits as the arg and clears only al on an exit path; C cannot define deliberately-stale-upper values (fresh v1/v2)",
+  "cls": "masm-enc",
   "patch": false,
-  "probes": true,
+  "probes": false,
   "game": false
  },
  {
@@ -8141,7 +8141,7 @@
   "src": "src/MaxSpeed.c",
   "cls": "elision",
   "patch": false,
-  "probes": true,
+  "probes": false,
   "game": false
  },
  {
@@ -8294,7 +8294,7 @@
   "src": "src/InsectWingAngle.c",
   "cls": "sched",
   "patch": true,
-  "probes": true,
+  "probes": false,
   "game": false
  },
  {
@@ -8391,9 +8391,9 @@
   "rva": 868176,
   "obj": "FcloseLk",
   "src": "src/FcloseLk.c",
-  "cls": "bare",
-  "patch": false,
-  "probes": true,
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
   "game": false
  },
  {
@@ -8411,7 +8411,7 @@
   "src": "src/ValidateRead.c",
   "cls": "reg-plan",
   "patch": false,
-  "probes": true,
+  "probes": false,
   "game": false
  },
  {
@@ -8420,7 +8420,8449 @@
   "src": "src/ValidateWrite.c",
   "cls": "twin",
   "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 137152,
+  "obj": "ZONEAdd",
+  "src": "src/ZONEAdd.c",
+  "cls": "plain",
+  "patch": false,
   "probes": true,
+  "game": false
+ },
+ {
+  "rva": 300736,
+  "obj": "MultDiv32",
+  "src": "src/MultDiv32.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 479152,
+  "obj": "jcopy_block_row",
+  "src": "src/jcopy_block_row.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 547674,
+  "obj": "WaitTicks",
+  "src": "src/WaitTicks.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 622496,
+  "obj": "setPacketInfo",
+  "src": "src/setPacketInfo.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 668096,
+  "obj": "socket_set_state_func",
+  "src": "src/socket_set_state_func.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 670912,
+  "obj": "SetupBitmapAccess",
+  "src": "src/SetupBitmapAccess.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 708912,
+  "obj": "NET_Disconnect",
+  "src": "src/NET_Disconnect.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 709184,
+  "obj": "NET_WriteAvail",
+  "src": "src/NET_WriteAvail.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 712576,
+  "obj": "net_handle_fd_write",
+  "src": "src/net_handle_fd_write.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 740192,
+  "obj": "G_Texture",
+  "src": "src/G_Texture.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 740240,
+  "obj": "G_AcTexture",
+  "src": "src/G_AcTexture.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 866736,
+  "obj": "strrchr",
+  "src": "src/strrchr.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 869680,
+  "obj": "chkstk",
+  "src": "src/chkstk.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 72176,
+  "obj": "Checksum",
+  "src": "src/Checksum.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 81680,
+  "obj": "GetTargetPositions",
+  "src": "src/GetTargetPositions.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 206592,
+  "obj": "DMusicOff",
+  "src": "src/DMusicOff.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 206752,
+  "obj": "ScoreOff",
+  "src": "src/ScoreOff.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 220048,
+  "obj": "MMReallocHandle",
+  "src": "src/MMReallocHandle.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 220176,
+  "obj": "MMInternalAlloc",
+  "src": "src/MMInternalAlloc.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 220224,
+  "obj": "MMInternalFree",
+  "src": "src/MMInternalFree.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 287360,
+  "obj": "SEQrun",
+  "src": "src/SEQrun.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 307568,
+  "obj": "SERLeaveCCF",
+  "src": "src/SERLeaveCCF.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 335152,
+  "obj": "FMUpdateBay",
+  "src": "src/FMUpdateBay.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 336688,
+  "obj": "HARDLoadAll",
+  "src": "src/HARDLoadAll.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 338528,
+  "obj": "HARDGunsOnlyAll",
+  "src": "src/HARDGunsOnlyAll.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 876448,
+  "obj": "Chunk_d5fa0",
+  "src": "src/Chunk_d5fa0.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 881120,
+  "obj": "UnlockCrt",
+  "src": "src/UnlockCrt.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 891328,
+  "obj": "Chunk_d99c0",
+  "src": "src/Chunk_d99c0.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 892464,
+  "obj": "Chunk_d9e30",
+  "src": "src/Chunk_d9e30.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 897712,
+  "obj": "Mbsnbcoll",
+  "src": "src/Mbsnbcoll.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 901408,
+  "obj": "Ioterm",
+  "src": "src/Ioterm.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 914832,
+  "obj": "Setnvh",
+  "src": "src/Setnvh.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 915568,
+  "obj": "Chunk_df870",
+  "src": "src/Chunk_df870.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 925632,
+  "obj": "I64toa",
+  "src": "src/I64toa.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 928976,
+  "obj": "Chunk_e2cd0",
+  "src": "src/Chunk_e2cd0.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 928992,
+  "obj": "Chunk_e2ce0",
+  "src": "src/Chunk_e2ce0.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 933072,
+  "obj": "Strdup",
+  "src": "src/Strdup.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 71264,
+  "obj": "KEYPause",
+  "src": "src/KEYPause.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 866464,
+  "obj": "ExitTrap",
+  "src": "src/ExitTrap.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 873504,
+  "obj": "Validdrive",
+  "src": "src/Validdrive.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 889456,
+  "obj": "ThkThreadId",
+  "src": "src/ThkThreadId.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 889472,
+  "obj": "ThkCurThread",
+  "src": "src/ThkCurThread.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 54544,
+  "obj": "VIEWSlew",
+  "src": "src/VIEWSlew.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 66640,
+  "obj": "Min100",
+  "src": "src/Min100.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 76592,
+  "obj": "LimitAngle",
+  "src": "src/LimitAngle.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 122768,
+  "obj": "FwdDestroy",
+  "src": "src/FwdDestroy.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 122864,
+  "obj": "DdECSGet",
+  "src": "src/DdECSGet.c",
+  "cls": "cc-shape",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 122880,
+  "obj": "FwdDDLCS",
+  "src": "src/FwdDDLCS.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 127696,
+  "obj": "IsCrNl",
+  "src": "src/IsCrNl.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 136288,
+  "obj": "Empty21460",
+  "src": "src/Empty21460.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 146896,
+  "obj": "Alret0",
+  "src": "src/Alret0.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 380992,
+  "obj": "Pktsethdr",
+  "src": "src/Pktsethdr.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 399280,
+  "obj": "Shellclick",
+  "src": "src/Shellclick.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 622896,
+  "obj": "SERLeaveBg",
+  "src": "src/SERLeaveBg.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 715264,
+  "obj": "NetSetCbHost",
+  "src": "src/NetSetCbHost.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 715296,
+  "obj": "NetSetCbPlayers",
+  "src": "src/NetSetCbPlayers.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 715328,
+  "obj": "NetSetCbConnected",
+  "src": "src/NetSetCbConnected.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 737232,
+  "obj": "RemapAdd",
+  "src": "src/RemapAdd.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 686944,
+  "obj": "TInitHorizon",
+  "src": "src/TInitHorizon.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 619440,
+  "obj": "WPSetWaypoints",
+  "src": "src/WPSetWaypoints.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 685552,
+  "obj": "TNamedTmaps",
+  "src": "src/TNamedTmaps.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 823288,
+  "obj": "CopySB8",
+  "src": "src/CopySB8.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 824068,
+  "obj": "ExpandDB",
+  "src": "src/ExpandDB.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 797376,
+  "obj": "QuickDist",
+  "src": "src/QuickDist.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 645680,
+  "obj": "PLANECheckEject",
+  "src": "src/PLANECheckEject.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 773056,
+  "obj": "PROJAccurateHardPos",
+  "src": "src/PROJAccurateHardPos.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 340112,
+  "obj": "HARDTotalFuel",
+  "src": "src/HARDTotalFuel.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 387568,
+  "obj": "GRPWingman",
+  "src": "src/GRPWingman.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 405184,
+  "obj": "AllocCmdBuf",
+  "src": "src/AllocCmdBuf.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 415648,
+  "obj": "CTDoWmBreak",
+  "src": "src/CTDoWmBreak.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": 454320,
+  "obj": "MPEndMission",
+  "src": "src/MPEndMission.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 508048,
+  "obj": "FormatInit",
+  "src": "src/FormatInit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 516688,
+  "obj": "CNSetLines",
+  "src": "src/CNSetLines.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 520528,
+  "obj": "InitCampaignPilot",
+  "src": "src/InitCampaignPilot.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 522464,
+  "obj": "AbortCampaign",
+  "src": "src/AbortCampaign.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 522512,
+  "obj": "CampaignMenu",
+  "src": "src/CampaignMenu.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 541520,
+  "obj": "MISSIONLoadCommonRes",
+  "src": "src/MISSIONLoadCommonRes.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 543072,
+  "obj": "MISSIONPrefsChanged",
+  "src": "src/MISSIONPrefsChanged.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 554944,
+  "obj": "DialogGetString",
+  "src": "src/DialogGetString.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 569664,
+  "obj": "ShellButtonSound",
+  "src": "src/ShellButtonSound.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 615056,
+  "obj": "GLine",
+  "src": "src/GLine.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x659e0",
+  "obj": "Chunk_659e0",
+  "src": "src/Chunk_659e0.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x779a0",
+  "obj": "Chunk_779a0",
+  "src": "src/Chunk_779a0.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x77a60",
+  "obj": "Chunk_77a60",
+  "src": "src/Chunk_77a60.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x8b760",
+  "obj": "Chunk_8b760",
+  "src": "src/Chunk_8b760.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x9d850",
+  "obj": "Chunk_9d850",
+  "src": "src/Chunk_9d850.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0xb9660",
+  "obj": "Chunk_b9660",
+  "src": "src/Chunk_b9660.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0xa7290",
+  "obj": "Chunk_a7290",
+  "src": "src/Chunk_a7290.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x8c2a0",
+  "obj": "Chunk_8c2a0",
+  "src": "src/Chunk_8c2a0.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x22380",
+  "obj": "Chunk_22380",
+  "src": "src/Chunk_22380.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0xd4310",
+  "obj": "Chunk_d4310",
+  "src": "src/Chunk_d4310.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x99ad0",
+  "obj": "IsComment",
+  "src": "src/IsComment.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xae240",
+  "obj": "validate_player",
+  "src": "src/validate_player.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xce684",
+  "obj": "do_ifdestroyed",
+  "src": "src/do_ifdestroyed.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0xd0df7",
+  "obj": "do_brush_area",
+  "src": "src/do_brush_area.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0xd1f58",
+  "obj": "GRInit3d",
+  "src": "src/GRInit3d.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xd4990",
+  "obj": "Strncmp",
+  "src": "src/Strncmp.c",
+  "cls": "masm-enc",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd7240",
+  "obj": "LockFile2",
+  "src": "src/LockFile2.c",
+  "cls": "const-fold",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd72b0",
+  "obj": "UnlockFile2",
+  "src": "src/UnlockFile2.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd9300",
+  "obj": "HeapAllocX",
+  "src": "src/HeapAllocX.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd9470",
+  "obj": "CropZeros",
+  "src": "src/CropZeros.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd420",
+  "obj": "ShellHideMouse",
+  "src": "src/ShellHideMouse.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xdf8f0",
+  "obj": "IncMan",
+  "src": "src/IncMan.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xc2be8",
+  "obj": "CpymemXRemap",
+  "src": "src/CpymemXRemap.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x12b80",
+  "obj": "CompareMemory",
+  "src": "src/CompareMemory.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x90460",
+  "obj": "SERUQStatus",
+  "src": "src/SERUQStatus.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x984d0",
+  "obj": "RetrieveFromQueue",
+  "src": "src/RetrieveFromQueue.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x63a40",
+  "obj": "DlgListGetSel",
+  "src": "src/DlgListGetSel.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x5cf70",
+  "obj": "PktSockSend",
+  "src": "src/PktSockSend.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x11f00",
+  "obj": "PointInBox",
+  "src": "src/PointInBox.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x11a40",
+  "obj": "Octant",
+  "src": "src/Octant.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa8a0",
+  "obj": "HUDBrightness",
+  "src": "src/HUDBrightness.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x14240",
+  "obj": "GetContactPositions",
+  "src": "src/GetContactPositions.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x17c60",
+  "obj": "PotRudder",
+  "src": "src/PotRudder.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x35760",
+  "obj": "SoundName",
+  "src": "src/SoundName.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x4b840",
+  "obj": "SERExNamesTimeout",
+  "src": "src/SERExNamesTimeout.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x4c1f0",
+  "obj": "SERShutdown1",
+  "src": "src/SERShutdown1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x5ec00",
+  "obj": "GRPControl",
+  "src": "src/GRPControl.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x64340",
+  "obj": "CTEval_tgtfacing",
+  "src": "src/CTEval_tgtfacing.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x64400",
+  "obj": "CTEval_htotgt",
+  "src": "src/CTEval_htotgt.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x64450",
+  "obj": "CTEval_ptotgt",
+  "src": "src/CTEval_ptotgt.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x7f2a0",
+  "obj": "UkraineCheckMaxPlanes",
+  "src": "src/UkraineCheckMaxPlanes.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x7f840",
+  "obj": "CampaignSave",
+  "src": "src/CampaignSave.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x87830",
+  "obj": "TopCenterDialog",
+  "src": "src/TopCenterDialog.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x8b4b0",
+  "obj": "SAYMsg",
+  "src": "src/SAYMsg.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x8f8e0",
+  "obj": "OBJAliasForMulti",
+  "src": "src/OBJAliasForMulti.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x12c50",
+  "obj": "w27c_Chunk_12c50_v1",
+  "src": "src/w27c_Chunk_12c50_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x19540",
+  "obj": "w27c_Chunk_19540_v1",
+  "src": "src/w27c_Chunk_19540_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x2aa0",
+  "obj": "w27c_Chunk_2aa0_v1",
+  "src": "src/w27c_Chunk_2aa0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x2380",
+  "obj": "w27c_Chunk_2380_v2",
+  "src": "src/w27c_Chunk_2380_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd4880",
+  "obj": "w27c_Chunk_d4880_v1",
+  "src": "src/w27c_Chunk_d4880_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xd7090",
+  "obj": "w27c_Chunk_d7090_v3",
+  "src": "src/w27c_Chunk_d7090_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x32730",
+  "obj": "w27c_MusicOff_v1",
+  "src": "src/w27c_MusicOff_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x33870",
+  "obj": "w27c_SoundAllOff_v1",
+  "src": "src/w27c_SoundAllOff_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xd360",
+  "obj": "w27c_PushShellAlloc_v1",
+  "src": "src/w27c_PushShellAlloc_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x17610",
+  "obj": "w27c_GetPlayerControl_v1",
+  "src": "src/w27c_GetPlayerControl_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x21d10",
+  "obj": "w27c_MAPObjAlts_v4",
+  "src": "src/w27c_MAPObjAlts_v4.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xdf880",
+  "obj": "w27c_ZeroTail_zt_G4",
+  "src": "src/w27c_ZeroTail_zt_G4.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x61ba0",
+  "obj": "PushCurObj",
+  "src": "src/PushCurObj.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x7e910",
+  "obj": "ArmPlane",
+  "src": "src/ArmPlane.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x86290",
+  "obj": "Chunk_86290",
+  "src": "src/Chunk_86290.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x862a0",
+  "obj": "Chunk_862a0",
+  "src": "src/Chunk_862a0.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0xb8590",
+  "obj": "Chunk_b8590",
+  "src": "src/Chunk_b8590.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0xb85a0",
+  "obj": "Chunk_b85a0",
+  "src": "src/Chunk_b85a0.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0xc9be4",
+  "obj": "GRSetLightSource",
+  "src": "src/GRSetLightSource.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x12270",
+  "obj": "SampleInit",
+  "src": "src/SampleInit.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x66480",
+  "obj": "PilotPhoto",
+  "src": "src/PilotPhoto.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x69810",
+  "obj": "G_InitCircles",
+  "src": "src/G_InitCircles.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x95830",
+  "obj": "G_UPoint",
+  "src": "src/G_UPoint.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0x97e20",
+  "obj": "MOUSEInit",
+  "src": "src/MOUSEInit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0x9b880",
+  "obj": "PLANEBlow",
+  "src": "src/PLANEBlow.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xa2b50",
+  "obj": "winsock_cleanup",
+  "src": "src/winsock_cleanup.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": "0xac0b0",
+  "obj": "ReadVDOHeader",
+  "src": "src/ReadVDOHeader.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xad7c0",
+  "obj": "NET_MakeAutoConnectAddress",
+  "src": "src/NET_MakeAutoConnectAddress.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0xae270",
+  "obj": "clear_all_syncs",
+  "src": "src/clear_all_syncs.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xad6b0",
+  "obj": "NETIsAddrLocal",
+  "src": "src/NETIsAddrLocal.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xae2a0",
+  "obj": "clear_all_sync_replies",
+  "src": "src/clear_all_sync_replies.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xb4300",
+  "obj": "G_BlitToBrush",
+  "src": "src/G_BlitToBrush.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0xb4340",
+  "obj": "G_BlitToScreen",
+  "src": "src/G_BlitToScreen.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x47060",
+  "obj": "G_TileInit",
+  "src": "src/G_TileInit.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": true
+ },
+ {
+  "rva": "0x78c10",
+  "obj": "LibFileSize",
+  "src": "src/LibFileSize.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0x8b520",
+  "obj": "SAYDefaultSayProc",
+  "src": "src/SAYDefaultSayProc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xa3c00",
+  "obj": "RMFreeAllId",
+  "src": "src/RMFreeAllId.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xab2c0",
+  "obj": "PlayVDOFile",
+  "src": "src/PlayVDOFile.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": "0xb84b0",
+  "obj": "Chunk_b84b0",
+  "src": "src/Chunk_b84b0.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": "0xc55d4",
+  "obj": "NoHorizon",
+  "src": "src/NoHorizon.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 458656,
+  "obj": "MPPlayerChoseFort",
+  "src": "src/MPPlayerChoseFort.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 488304,
+  "obj": "COGPullDrag",
+  "src": "src/COGPullDrag.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 496864,
+  "obj": "InitGraphicsSystem",
+  "src": "src/InitGraphicsSystem.cpp",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 554016,
+  "obj": "DialogGetValue",
+  "src": "src/DialogGetValue.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 569744,
+  "obj": "ShellClickSound",
+  "src": "src/ShellClickSound.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 570160,
+  "obj": "w28b_Chunk_8b330_v1",
+  "src": "src/w28b_Chunk_8b330_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 570368,
+  "obj": "w28b_Chunk_8b400_v1",
+  "src": "src/w28b_Chunk_8b400_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 570384,
+  "obj": "SAYInit",
+  "src": "src/SAYInit.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 601248,
+  "obj": "ReadJoystickButtons",
+  "src": "src/ReadJoystickButtons.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 611072,
+  "obj": "convert_addr_ipx2usnf",
+  "src": "src/convert_addr_ipx2usnf.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 611136,
+  "obj": "convert_addr_usnf2ipx",
+  "src": "src/convert_addr_usnf2ipx.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 611200,
+  "obj": "spxaddr2str",
+  "src": "src/spxaddr2str.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 614000,
+  "obj": "G_UBox",
+  "src": "src/G_UBox.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 614080,
+  "obj": "G_Box",
+  "src": "src/G_Box.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 623760,
+  "obj": "overwriteQueue",
+  "src": "src/overwriteQueue.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 624352,
+  "obj": "SER_ShutdownLowLevel",
+  "src": "src/SER_ShutdownLowLevel.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 636224,
+  "obj": "PLANERemove",
+  "src": "src/PLANERemove.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 667568,
+  "obj": "socket_close_non_player_sockets",
+  "src": "src/socket_close_non_player_sockets.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 685632,
+  "obj": "T_CompareTlist",
+  "src": "src/T_CompareTlist.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 696448,
+  "obj": "UGetFileSize",
+  "src": "src/UGetFileSize.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 718128,
+  "obj": "WRGetLayer",
+  "src": "src/WRGetLayer.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 736464,
+  "obj": "G_RelocBitmap",
+  "src": "src/G_RelocBitmap.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 797308,
+  "obj": "_Dist",
+  "src": "src/_Dist.c",
+  "cls": "cc-shape",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 849072,
+  "obj": "w28c_Chunk_4cf4b0_v1",
+  "src": "src/w28c_Chunk_4cf4b0_v1.c",
+  "cls": "cc-shape",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 869104,
+  "obj": "w28c_Chunk_4d42f0_v2",
+  "src": "src/w28c_Chunk_4d42f0_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 870784,
+  "obj": "w28c_Chunk_4d4980_v1",
+  "src": "src/w28c_Chunk_4d4980_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 870896,
+  "obj": "w28c_Chunk_4d49f0_v1",
+  "src": "src/w28c_Chunk_4d49f0_v1.c",
+  "cls": "gap-anchor",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 880832,
+  "obj": "w28c_Chunk_4d70c0_v1",
+  "src": "src/w28c_Chunk_4d70c0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 898304,
+  "obj": "w28c_Chunk_4db500_v1",
+  "src": "src/w28c_Chunk_4db500_v1.c",
+  "cls": "gap-anchor",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 23472,
+  "obj": "RunNetConfigurationScreen",
+  "src": "src/RunNetConfigurationScreen.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 621184,
+  "obj": "WPObj",
+  "src": "src/WPObj.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 278512,
+  "obj": "w28a_Chunk_43ff0_v1",
+  "src": "src/w28a_Chunk_43ff0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 278528,
+  "obj": "w28a_Chunk_44000_v1",
+  "src": "src/w28a_Chunk_44000_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 278752,
+  "obj": "w28a_Chunk_440e0_v1",
+  "src": "src/w28a_Chunk_440e0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 278768,
+  "obj": "w28a_Chunk_440f0_v1",
+  "src": "src/w28a_Chunk_440f0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 307120,
+  "obj": "w28a_Chunk_4afb0_v1",
+  "src": "src/w28a_Chunk_4afb0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 307136,
+  "obj": "w28a_Chunk_4afc0_v1",
+  "src": "src/w28a_Chunk_4afc0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 307392,
+  "obj": "RORemoveCurObj",
+  "src": "src/RORemoveCurObj.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 309200,
+  "obj": "SER_Often",
+  "src": "src/SER_Often.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 311952,
+  "obj": "SER_Shutdown3",
+  "src": "src/SER_Shutdown3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": true
+ },
+ {
+  "rva": 330656,
+  "obj": "FMUpdateGear",
+  "src": "src/FMUpdateGear.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 337200,
+  "obj": "HARDFindECMForObj",
+  "src": "src/HARDFindECMForObj.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 384640,
+  "obj": "WNGSetWaypoints",
+  "src": "src/WNGSetWaypoints.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 387472,
+  "obj": "GRPLeader",
+  "src": "src/GRPLeader.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 388016,
+  "obj": "GRPSetWaypoints",
+  "src": "src/GRPSetWaypoints.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 458480,
+  "obj": "MPPlayerChoseSide",
+  "src": "src/MPPlayerChoseSide.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 120640,
+  "obj": "bm_w29a_SetDisplayMode_v1",
+  "src": "src/bm_w29a_SetDisplayMode_v1.c",
+  "cls": "cc-shape",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 308448,
+  "obj": "bm_w29a_SER_Transmitting_v4",
+  "src": "src/bm_w29a_SER_Transmitting_v4.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 340784,
+  "obj": "bm_w29a_HARDUsedWeapons_v1",
+  "src": "src/bm_w29a_HARDUsedWeapons_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 405008,
+  "obj": "bm_w29a_WriteCmdBuf_v1",
+  "src": "src/bm_w29a_WriteCmdBuf_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 435872,
+  "obj": "bm_w29a_SetupCobra_v2",
+  "src": "src/bm_w29a_SetupCobra_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 519216,
+  "obj": "bm_w29a_SelectPlane_v2",
+  "src": "src/bm_w29a_SelectPlane_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 569936,
+  "obj": "w29b_DialogEnableItem_v2",
+  "src": "src/w29b_DialogEnableItem_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 707424,
+  "obj": "w29b_NetProtocolPresent_v5",
+  "src": "src/w29b_NetProtocolPresent_v5.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 806436,
+  "obj": "w29b_G_SPolygon_v2",
+  "src": "src/w29b_G_SPolygon_v2.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 807544,
+  "obj": "w29b_WRReddenPalette_v1",
+  "src": "src/w29b_WRReddenPalette_v1.c",
+  "cls": "reg-plan",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 875184,
+  "obj": "w29b_strlen_v2",
+  "src": "src/w29b_strlen_v2.c",
+  "cls": "bare",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 902656,
+  "obj": "w29b_wctomb_final",
+  "src": "src/w29b_wctomb_final.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 912800,
+  "obj": "w29c_lockfhandle_v2",
+  "src": "src/w29c_lockfhandle_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 44320,
+  "obj": "w29c_NETMasterStartGame_v1",
+  "src": "src/w29c_NETMasterStartGame_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 72736,
+  "obj": "w29c_BoundsAnd_v3",
+  "src": "src/w29c_BoundsAnd_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 206032,
+  "obj": "w29c_DMusicOn_v1",
+  "src": "src/w29c_DMusicOn_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 208816,
+  "obj": "w29c_SoundPoints_v2",
+  "src": "src/w29c_SoundPoints_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 213712,
+  "obj": "w29c_CheckSndPurge_v1",
+  "src": "src/w29c_CheckSndPurge_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 218736,
+  "obj": "bm_w29d_GetMixerStatus_v1",
+  "src": "src/bm_w29d_GetMixerStatus_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 218800,
+  "obj": "bm_w29d_SoundStatus_v1",
+  "src": "src/bm_w29d_SoundStatus_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 405520,
+  "obj": "bm_w29d_CancelCmdBuf_A",
+  "src": "src/bm_w29d_CancelCmdBuf_A.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 415488,
+  "obj": "bm_w29d_CTDo_splits_A",
+  "src": "src/bm_w29d_CTDo_splits_A.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 415568,
+  "obj": "bm_w29d_CTDo_immelman_A",
+  "src": "src/bm_w29d_CTDo_immelman_A.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 433600,
+  "obj": "bm_w29d_ntp_v1",
+  "src": "src/bm_w29d_ntp_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 439056,
+  "obj": "w29e_MPSetSlowComm_v1",
+  "src": "src/w29e_MPSetSlowComm_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 454560,
+  "obj": "w29e_MPSendMissionSucceeded_v1",
+  "src": "src/w29e_MPSendMissionSucceeded_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 458352,
+  "obj": "w29e_MPGraphicRemove_v1",
+  "src": "src/w29e_MPGraphicRemove_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 459872,
+  "obj": "w29e_MPStatusInit_v2",
+  "src": "src/w29e_MPStatusInit_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 521840,
+  "obj": "w29e_AtFriendlyAP_v1",
+  "src": "src/w29e_AtFriendlyAP_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 543152,
+  "obj": "w29e_MISSIONCheckSuccess_v2",
+  "src": "src/w29e_MISSIONCheckSuccess_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 570448,
+  "obj": "w29f_SAYInit2_v1",
+  "src": "src/w29f_SAYInit2_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 626944,
+  "obj": "w29f_MOD_Shutdown_v1",
+  "src": "src/w29f_MOD_Shutdown_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 669264,
+  "obj": "w29f_socket_process_doa_v2",
+  "src": "src/w29f_socket_process_doa_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 807376,
+  "obj": "w29f_WRBlackenPalette_v4",
+  "src": "src/w29f_WRBlackenPalette_v4.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 885152,
+  "obj": "w29f_close_v2",
+  "src": "src/w29f_close_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 888992,
+  "obj": "w29f_mtinit_v2",
+  "src": "src/w29f_mtinit_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 889856,
+  "obj": "w29g_forcdecpt_v6",
+  "src": "src/w29g_forcdecpt_v6.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 935568,
+  "obj": "w29g_setmode_lk_v6",
+  "src": "src/w29g_setmode_lk_v6.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 219584,
+  "obj": "w29g_MMUnmapFile_v2",
+  "src": "src/w29g_MMUnmapFile_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 404896,
+  "obj": "w29g_objplusdeltaparm_v1",
+  "src": "src/w29g_objplusdeltaparm_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 418512,
+  "obj": "w29g_awardmedal_v1",
+  "src": "src/w29g_awardmedal_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 611264,
+  "obj": "w29h_spxbuildaddress_v6",
+  "src": "src/w29h_spxbuildaddress_v6.cpp",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 636672,
+  "obj": "w29h_PLANESetEjectTime_v4",
+  "src": "src/w29h_PLANESetEjectTime_v4.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 667840,
+  "obj": "w29h_socket_get_state_ptr_v2",
+  "src": "src/w29h_socket_get_state_ptr_v2.cpp",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 543424,
+  "obj": "w30a_84ac0_v1",
+  "src": "src/w30a_84ac0_v1.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 54624,
+  "obj": "w30a_d560_v1",
+  "src": "src/w30a_d560_v1.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 413600,
+  "obj": "w30a_64fa0_v2",
+  "src": "src/w30a_64fa0_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 684480,
+  "obj": "w30a_a71c0_v2",
+  "src": "src/w30a_a71c0_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 69936,
+  "obj": "w30a_11130_v1",
+  "src": "src/w30a_11130_v1.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 645168,
+  "obj": "w30a_9d830_v1",
+  "src": "src/w30a_9d830_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 845400,
+  "obj": "bm_w30b_do_sfcal_long_v1",
+  "src": "src/bm_w30b_do_sfcal_long_v1.c",
+  "cls": "gap-anchor",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 57792,
+  "obj": "bm_w30b_fq_v1",
+  "src": "src/bm_w30b_fq_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 413632,
+  "obj": "bm_w30b_spdclamp_v1",
+  "src": "src/bm_w30b_spdclamp_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 784128,
+  "obj": "bm_w30b_selchk_v3",
+  "src": "src/bm_w30b_selchk_v3.c",
+  "cls": "gap-anchor",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 76896,
+  "obj": "bm_w30b_r16_v1",
+  "src": "src/bm_w30b_r16_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 692032,
+  "obj": "bm_w30b_tpf_v3",
+  "src": "src/bm_w30b_tpf_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 71472,
+  "obj": "w30c_final_11730_v1",
+  "src": "src/w30c_final_11730_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 127776,
+  "obj": "w30c_final_1f320_v1",
+  "src": "src/w30c_final_1f320_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 420384,
+  "obj": "w30c_final_66a20_v1",
+  "src": "src/w30c_final_66a20_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 795376,
+  "obj": "w30c_final_c22f0_v1",
+  "src": "src/w30c_final_c22f0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 132592,
+  "obj": "w30c_final_205f0_v1",
+  "src": "src/w30c_final_205f0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 692272,
+  "obj": "w30c_final_a9030_v1",
+  "src": "src/w30c_final_a9030_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 278400,
+  "obj": "w30d_alloc2",
+  "src": "src/w30d_alloc2.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 205328,
+  "obj": "w30d_rseed16",
+  "src": "src/w30d_rseed16.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 508640,
+  "obj": "w30d_skipws5",
+  "src": "src/w30d_skipws5.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 880800,
+  "obj": "w30d_pop2p",
+  "src": "src/w30d_pop2p.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 576048,
+  "obj": "w30d_objsay_b2",
+  "src": "src/w30d_objsay_b2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 778992,
+  "obj": "w30d_projproc",
+  "src": "src/w30d_projproc.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 860616,
+  "obj": "w30e_TransposeMatrix_na",
+  "src": "src/w30e_TransposeMatrix_na.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 205488,
+  "obj": "w30e_white_a_v1",
+  "src": "src/w30e_white_a_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 533040,
+  "obj": "w30e_white_b_v1",
+  "src": "src/w30e_white_b_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 887696,
+  "obj": "w30e_cxxfilter_v1",
+  "src": "src/w30e_cxxfilter_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 278432,
+  "obj": "w30e_mmthunk_v1",
+  "src": "src/w30e_mmthunk_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 139787,
+  "obj": "w30f_pair_v1",
+  "src": "src/w30f_pair_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 557488,
+  "obj": "w30f_mou_v1",
+  "src": "src/w30f_mou_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 449776,
+  "obj": "w30f_addt_v1",
+  "src": "src/w30f_addt_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 290963,
+  "obj": "w30f_tile_v2",
+  "src": "src/w30f_tile_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 871744,
+  "obj": "w30f_allmul_v1",
+  "src": "src/w30f_allmul_v1.c",
+  "cls": "gap-anchor",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 907904,
+  "obj": "w30g_strcspn_v1",
+  "src": "src/w30g_strcspn_v1.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 330096,
+  "obj": "w30g_randrange_v5",
+  "src": "src/w30g_randrange_v5.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 570736,
+  "obj": "w30g_ctclear_v1",
+  "src": "src/w30g_ctclear_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 909072,
+  "obj": "w30g_lang354_v5",
+  "src": "src/w30g_lang354_v5.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 453360,
+  "obj": "w30g_ctsub_v1",
+  "src": "src/w30g_ctsub_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 907968,
+  "obj": "w30h_strpbrk_v4",
+  "src": "src/w30h_strpbrk_v4.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 330256,
+  "obj": "w30h_50a10_v1",
+  "src": "src/w30h_50a10_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 670128,
+  "obj": "w30h_a39b0_v1",
+  "src": "src/w30h_a39b0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 48976,
+  "obj": "w30h_bf50_v1",
+  "src": "src/w30h_bf50_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 571200,
+  "obj": "w30h_8b740_v1",
+  "src": "src/w30h_8b740_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 870000,
+  "obj": "w31B_d4670_v1",
+  "src": "src/w31B_d4670_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 10064,
+  "obj": "w31B_2750_v1",
+  "src": "src/w31B_2750_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 77104,
+  "obj": "w31B_12d30_v1",
+  "src": "src/w31B_12d30_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 100864,
+  "obj": "w31B_18a00_v1",
+  "src": "src/w31B_18a00_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 125488,
+  "obj": "w31B_1ea30_v4",
+  "src": "src/w31B_1ea30_v4.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 355328,
+  "obj": "w31B_56c00_v2",
+  "src": "src/w31B_56c00_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 547264,
+  "obj": "w31H_859c0_v1",
+  "src": "src/w31H_859c0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 598880,
+  "obj": "w31H_92360_v1",
+  "src": "src/w31H_92360_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 671872,
+  "obj": "w31H_a4080_v1",
+  "src": "src/w31H_a4080_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 699312,
+  "obj": "w31H_aabb0_v1",
+  "src": "src/w31H_aabb0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 720640,
+  "obj": "w31H_aff00_v1",
+  "src": "src/w31H_aff00_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 736400,
+  "obj": "w31H_b3c90_v1",
+  "src": "src/w31H_b3c90_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 47744,
+  "obj": "w31D_mcm2_v1",
+  "src": "src/w31D_mcm2_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 454368,
+  "obj": "w31D_mpSendGameMode_v1",
+  "src": "src/w31D_mpSendGameMode_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 458544,
+  "obj": "w31D_mpQuickButton_v1",
+  "src": "src/w31D_mpQuickButton_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 458720,
+  "obj": "w31D_mpFortButton_v3",
+  "src": "src/w31D_mpFortButton_v3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 458832,
+  "obj": "w31D_mpFortButton2_v1",
+  "src": "src/w31D_mpFortButton2_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 459744,
+  "obj": "w31D_mpLandingStats_v1",
+  "src": "src/w31D_mpLandingStats_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 916912,
+  "obj": "w31a_atodbl_v1",
+  "src": "src/w31a_atodbl_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 916976,
+  "obj": "w31a_atoldbl_v1",
+  "src": "src/w31a_atoldbl_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 917040,
+  "obj": "w31a_atoflt_v1",
+  "src": "src/w31a_atoflt_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 833056,
+  "obj": "w31a_codePnt_a1",
+  "src": "src/w31a_codePnt_a1.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 826287,
+  "obj": "w31a_atan2_a1",
+  "src": "src/w31a_atan2_a1.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 826127,
+  "obj": "w31a_asin_a2",
+  "src": "src/w31a_asin_a2.c",
+  "cls": "seh-nlg",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 623872,
+  "obj": "w31G_fqtail_v3",
+  "src": "src/w31G_fqtail_v3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 666496,
+  "obj": "w31G_wsockerr_v8",
+  "src": "src/w31G_wsockerr_v8.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 691872,
+  "obj": "w31G_usnf2tcp_v1",
+  "src": "src/w31G_usnf2tcp_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 691952,
+  "obj": "w31G_tcp2usnf_v1",
+  "src": "src/w31G_tcp2usnf_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 692368,
+  "obj": "w31G_sendhold_v2",
+  "src": "src/w31G_sendhold_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 716016,
+  "obj": "w31G_ucfg_v1",
+  "src": "src/w31G_ucfg_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 404352,
+  "obj": "w31E_CEP_v3",
+  "src": "src/w31E_CEP_v3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 405632,
+  "obj": "w31E_CDP_v1",
+  "src": "src/w31E_CDP_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 415408,
+  "obj": "w31E_BTOH_v5",
+  "src": "src/w31E_BTOH_v5.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 461168,
+  "obj": "w31E_ES_v1",
+  "src": "src/w31E_ES_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 390032,
+  "obj": "w31E_IHW_v3",
+  "src": "src/w31E_IHW_v3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 382112,
+  "obj": "w31E_SP_v2",
+  "src": "src/w31E_SP_v2.cpp",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 73936,
+  "obj": "bm_w31C_SortObjs_v3",
+  "src": "src/bm_w31C_SortObjs_v3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 332368,
+  "obj": "bm_w31C_FMHook_v2",
+  "src": "src/bm_w31C_FMHook_v2.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 337088,
+  "obj": "bm_w31C_HardFindJammer_v2",
+  "src": "src/bm_w31C_HardFindJammer_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 338416,
+  "obj": "bm_w31C_HardGunsOnly_v3",
+  "src": "src/bm_w31C_HardGunsOnly_v3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 335376,
+  "obj": "bm_w31C_HardUnload_v1",
+  "src": "src/bm_w31C_HardUnload_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 73200,
+  "obj": "bm_w31C_MaybeExit_v1",
+  "src": "src/bm_w31C_MaybeExit_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 587296,
+  "obj": "w31F_objalias_v2",
+  "src": "src/w31F_objalias_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 587632,
+  "obj": "w31F_objaliaspref_v1",
+  "src": "src/w31F_objaliaspref_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 587904,
+  "obj": "w31F_objaliaswp_v2",
+  "src": "src/w31F_objaliaswp_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 648496,
+  "obj": "w31F_planefeetwet_v1",
+  "src": "src/w31F_planefeetwet_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 674928,
+  "obj": "w31F_tobjlist_v3",
+  "src": "src/w31F_tobjlist_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 842604,
+  "obj": "w31F_doshapename_v2",
+  "src": "src/w31F_doshapename_v2.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 870944,
+  "obj": "w32A_cfltinit_v1",
+  "src": "src/w32A_cfltinit_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 871008,
+  "obj": "w32A_d4a60_v1",
+  "src": "src/w32A_d4a60_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 875824,
+  "obj": "w32A_lsearch_v1",
+  "src": "src/w32A_lsearch_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 927104,
+  "obj": "w32A_chsize_v1",
+  "src": "src/w32A_chsize_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 935456,
+  "obj": "w32A_setmode_v1",
+  "src": "src/w32A_setmode_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 897584,
+  "obj": "w32A_db230_v1",
+  "src": "src/w32A_db230_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 912960,
+  "obj": "w32B_sopenw_v1",
+  "src": "src/w32B_sopenw_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 897632,
+  "obj": "w32B_ungetc2_v1",
+  "src": "src/w32B_ungetc2_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 48320,
+  "obj": "w32B_tempalias_v1",
+  "src": "src/w32B_tempalias_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 891184,
+  "obj": "w32B_dosmaperr_v3p2",
+  "src": "src/w32B_dosmaperr_v3p2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 880896,
+  "obj": "w32B_mtdel_v2p2",
+  "src": "src/w32B_mtdel_v2p2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 875616,
+  "obj": "w32B_fgets_v3p2",
+  "src": "src/w32B_fgets_v3p2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 123984,
+  "obj": "w32C_isdll_v3",
+  "src": "src/w32C_isdll_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 138944,
+  "obj": "w32C_mapwts_v3",
+  "src": "src/w32C_mapwts_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 507984,
+  "obj": "w32C_pagetext_v3",
+  "src": "src/w32C_pagetext_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 612160,
+  "obj": "w32C_pushclipbox_v3",
+  "src": "src/w32C_pushclipbox_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 736432,
+  "obj": "w32C_4b3cb0_v4",
+  "src": "src/w32C_4b3cb0_v4.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 748560,
+  "obj": "w32C_apdelete_v3",
+  "src": "src/w32C_apdelete_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 139687,
+  "obj": "w32D_221a7_v1",
+  "src": "src/w32D_221a7_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 204096,
+  "obj": "w32D_31d40_v1",
+  "src": "src/w32D_31d40_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 205552,
+  "obj": "w32D_322f0_v1",
+  "src": "src/w32D_322f0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 285744,
+  "obj": "w32D_45c30_v5p",
+  "src": "src/w32D_45c30_v5p.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 329056,
+  "obj": "w32D_50560_v1",
+  "src": "src/w32D_50560_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 330320,
+  "obj": "w32E_50a50_v1",
+  "src": "src/w32E_50a50_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 339632,
+  "obj": "w32E_52eb0_v2",
+  "src": "src/w32E_52eb0_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 407584,
+  "obj": "w32E_dllistinit_v1",
+  "src": "src/w32E_dllistinit_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 413264,
+  "obj": "w32E_64e50_v1",
+  "src": "src/w32E_64e50_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 420416,
+  "obj": "w32E_66a40_v2",
+  "src": "src/w32E_66a40_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 454144,
+  "obj": "w32E_6ee00_v1",
+  "src": "src/w32E_6ee00_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 480928,
+  "obj": "w32F_756a0_final",
+  "src": "src/w32F_756a0_final.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 488384,
+  "obj": "w32F_773c0_final",
+  "src": "src/w32F_773c0_final.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 490096,
+  "obj": "w32F_77a70_final",
+  "src": "src/w32F_77a70_final.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 517632,
+  "obj": "w32F_7e600_final",
+  "src": "src/w32F_7e600_final.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 544528,
+  "obj": "w32F_84f10_final",
+  "src": "src/w32F_84f10_final.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 547632,
+  "obj": "w32F_wu_final",
+  "src": "src/w32F_wu_final.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 552992,
+  "obj": "w32G_87020_v4",
+  "src": "src/w32G_87020_v4.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 613184,
+  "obj": "w32G_95b40_v5",
+  "src": "src/w32G_95b40_v5.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 645072,
+  "obj": "w32G_9d7d0_v1",
+  "src": "src/w32G_9d7d0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 667904,
+  "obj": "w32G_sockadd_v2",
+  "src": "src/w32G_sockadd_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 675248,
+  "obj": "w32G_a4db0_v3",
+  "src": "src/w32G_a4db0_v3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 683264,
+  "obj": "w32G_a6d00_v3",
+  "src": "src/w32G_a6d00_v3.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 59664,
+  "obj": "w32H_0e910_v1",
+  "src": "src/w32H_0e910_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 794800,
+  "obj": "w32H_0c20b0_v2",
+  "src": "src/w32H_0c20b0_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 796688,
+  "obj": "w32H_0c2810_v7",
+  "src": "src/w32H_0c2810_v7.c",
+  "cls": "bare",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 622640,
+  "obj": "w33A_98030_v1",
+  "src": "build/survey/probes/w33A_98030_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 915120,
+  "obj": "w33A_df6b0_v4",
+  "src": "build/survey/probes/w33A_df6b0_v4.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 917584,
+  "obj": "w33A_e0050_v2",
+  "src": "build/survey/probes/w33A_e0050_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 936608,
+  "obj": "w33A_e4aa0_v2",
+  "src": "build/survey/probes/w33A_e4aa0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 9056,
+  "obj": "w33A_2360_v1",
+  "src": "build/survey/probes/w33A_2360_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 21104,
+  "obj": "w33A_5270_v2",
+  "src": "build/survey/probes/w33A_5270_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 70272,
+  "obj": "w33B_11280_c2",
+  "src": "build/survey/probes/w33B_11280_c2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 150450,
+  "obj": "w33B_24bb2_v3",
+  "src": "build/survey/probes/w33B_24bb2_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 206688,
+  "obj": "w33B_32760_v2",
+  "src": "build/survey/probes/w33B_32760_c1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 209072,
+  "obj": "w33B_330b0_v4",
+  "src": "build/survey/probes/w33B_330b0_v3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 209264,
+  "obj": "w33B_33170_v4",
+  "src": "build/survey/probes/w33B_33170_v3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 278416,
+  "obj": "w33B_43f90_c3",
+  "src": "build/survey/probes/w33B_43f90_c3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 278448,
+  "obj": "w33C_43fb0",
+  "src": "build/survey/probes/w33C_43fb0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 458416,
+  "obj": "w33C_shells2",
+  "src": "build/survey/probes/w33C_shells_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 386752,
+  "obj": "w33C_wngwm3p",
+  "src": "build/survey/probes/w33C_wngwm_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 390128,
+  "obj": "w33C_grpwm3p",
+  "src": "build/survey/probes/w33C_grpwm_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 454688,
+  "obj": "w33C_mpp3",
+  "src": "build/survey/probes/w33C_mpp_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 410512,
+  "obj": "w33C_cteval3",
+  "src": "build/survey/probes/w33C_cteval_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 596160,
+  "obj": "w33D_0918c0_v1",
+  "src": "build/survey/probes/w33D_0918c0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 602528,
+  "obj": "w33D_0931a0_v2",
+  "src": "build/survey/probes/w33D_0931a0_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 612272,
+  "obj": "w33D_gsetcolor_v2",
+  "src": "build/survey/probes/w33D_gsetcolor_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 649264,
+  "obj": "w33D_dlgbkgd_v2",
+  "src": "build/survey/probes/w33D_dlgbkgd_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 543232,
+  "obj": "w33D_msft_p1",
+  "src": "build/survey/probes/w33D_msft_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 520336,
+  "obj": "w33D_miminfo_v3",
+  "src": "build/survey/probes/w33D_miminfo_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 691792,
+  "obj": "w33E_tcpaddr2str_v1",
+  "src": "build/survey/probes/w33E_tcpaddr2str_v1.cpp",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 759744,
+  "obj": "w33E_apAssignPark_v1",
+  "src": "build/survey/probes/w33E_APAssignPark_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 709232,
+  "obj": "w33E_netFlush_v2",
+  "src": "build/survey/probes/w33E_netFlush_v2.cpp",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 715584,
+  "obj": "w33E_netFreePlayerList_v2",
+  "src": "build/survey/probes/w33E_netFreePlayerList_v2.cpp",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 695904,
+  "obj": "w33E_close_v2",
+  "src": "build/survey/probes/w33E_close_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 748448,
+  "obj": "w33E_apAdd_v2",
+  "src": "build/survey/probes/w33E_apAdd_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 867760,
+  "obj": "w33F_tolower_v1",
+  "src": "build/survey/probes/w33F_tolower_v1.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 765600,
+  "obj": "w33F_apaddtocarrier_v1",
+  "src": "build/survey/probes/w33F_apaddtocarrier_v1.c",
+  "cls": "cc-shape",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 806376,
+  "obj": "w33F_gpolygon_v1",
+  "src": "build/survey/probes/w33F_gpolygon_v1.c",
+  "cls": "cc-shape",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 807452,
+  "obj": "w33F_wrwhitenpalette_v1",
+  "src": "build/survey/probes/w33F_wrwhitenpalette_v1.c",
+  "cls": "reg-plan",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 823492,
+  "obj": "w33F_copysb15_v2",
+  "src": "build/survey/probes/w33F_copysb15_v2.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 825656,
+  "obj": "w33F_sincos_v2",
+  "src": "build/survey/probes/w33F_sincos_v2.c",
+  "cls": "bare",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 869328,
+  "obj": "w33g_toupper_v2",
+  "src": "build/survey/probes/w33g_toupper_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 69824,
+  "obj": "w33g_smin_v1",
+  "src": "build/survey/probes/w33g_smin_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 119696,
+  "obj": "w33g_icmp_v2",
+  "src": "build/survey/probes/w33g_icmp_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 127808,
+  "obj": "w33g_poll_v1",
+  "src": "build/survey/probes/w33g_poll_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 140136,
+  "obj": "w33g_rst_v1",
+  "src": "build/survey/probes/w33g_rst_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 252176,
+  "obj": "w33g_psk_v1",
+  "src": "build/survey/probes/w33g_psk_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 508512,
+  "obj": "w33H_7c260_v2",
+  "src": "build/survey/probes/w33H_7c260_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 472432,
+  "obj": "w33H_73570_v2",
+  "src": "build/survey/probes/w33H_73570_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 418464,
+  "obj": "w33H_662a0_v3",
+  "src": "build/survey/probes/w33H_662a0_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 404816,
+  "obj": "w33H_62d50_v3",
+  "src": "build/survey/probes/w33H_62d50_v3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 379056,
+  "obj": "w33H_5c8b0_v3",
+  "src": "build/survey/probes/w33H_5c8b0_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 276240,
+  "obj": "w33H_43710_v4",
+  "src": "build/survey/probes/w33H_43710_v4.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 543440,
+  "obj": "w34A_84ad0_v1",
+  "src": "build/survey/probes/w34A_84ad0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 670864,
+  "obj": "w34A_a3c90_v1",
+  "src": "build/survey/probes/w34A_a3c90_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 807724,
+  "obj": "w34A_c532c_v3",
+  "src": "build/survey/probes/w34A_c532c_v3.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 866704,
+  "obj": "w34A_d3990_v3",
+  "src": "build/survey/probes/w34A_d3990_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 888176,
+  "obj": "w34A_d8d70_v8",
+  "src": "build/survey/probes/w34A_d8d70_v8.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 888864,
+  "obj": "w34A_d9020_v7",
+  "src": "build/survey/probes/w34A_d9020_v7.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 8960,
+  "obj": "w34b_2300_v1",
+  "src": "build/survey/probes/w34b_2300_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 48816,
+  "obj": "w34b_beb0_v2",
+  "src": "build/survey/probes/w34b_beb0_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 254512,
+  "obj": "w34b_3e230_v1",
+  "src": "build/survey/probes/w34b_3e230_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 286320,
+  "obj": "w34b_seqcall_v1",
+  "src": "build/survey/probes/w34b_seqcall_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 304960,
+  "obj": "w34b_4a740_v1",
+  "src": "build/survey/probes/w34b_4a740_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 332832,
+  "obj": "w34b_fmvector_v2",
+  "src": "build/survey/probes/w34b_fmvector_v2.c",
+  "cls": "masm-enc",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 338608,
+  "obj": "w34C_glp_v4",
+  "src": "build/survey/probes/w34C_glp_v4.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 454768,
+  "obj": "w34C_paused_v2",
+  "src": "build/survey/probes/w34C_paused_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 455168,
+  "obj": "w34C_eject_v1",
+  "src": "build/survey/probes/w34C_eject_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 459664,
+  "obj": "w34C_kill_v1",
+  "src": "build/survey/probes/w34C_kill_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 489328,
+  "obj": "w34C_lock_v3",
+  "src": "build/survey/probes/w34C_lock_v3.cpp",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 494960,
+  "obj": "w34C_find_v3",
+  "src": "build/survey/probes/w34C_find_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 515952,
+  "obj": "w34D_7df70_v4",
+  "src": "build/survey/probes/w34D_7df70_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 518496,
+  "obj": "w34D_7e960_v3",
+  "src": "build/survey/probes/w34D_7e960_v3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 518752,
+  "obj": "w34D_7ea60_v3",
+  "src": "build/survey/probes/w34D_7ea60_v3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 521392,
+  "obj": "w34D_7f4b0_v2",
+  "src": "build/survey/probes/w34D_7f4b0_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 521728,
+  "obj": "w34D_7f600_v2",
+  "src": "build/survey/probes/w34D_7f600_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 553040,
+  "obj": "w34D_87050_v1",
+  "src": "build/survey/probes/w34D_87050_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 553616,
+  "obj": "w34E_87290_v2",
+  "src": "build/survey/probes/w34E_87290_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 564544,
+  "obj": "w34E_89d40_v2",
+  "src": "build/survey/probes/w34E_89d40_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 590768,
+  "obj": "w34E_903b0_v2",
+  "src": "build/survey/probes/w34E_903b0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 598992,
+  "obj": "w34E_923d0_v2",
+  "src": "build/survey/probes/w34E_923d0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 623664,
+  "obj": "w34E_98430_v2",
+  "src": "build/survey/probes/w34E_98430_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 689840,
+  "obj": "w34E_a86b0_v2",
+  "src": "build/survey/probes/w34E_a86b0_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 695792,
+  "obj": "w34F_create_v1",
+  "src": "build/survey/probes/w34F_create_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 705376,
+  "obj": "w34F_dealloc_final",
+  "src": "build/survey/probes/w34F_dealloc_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 713008,
+  "obj": "w34F_netppf_v1",
+  "src": "build/survey/probes/w34F_netppf_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 714032,
+  "obj": "w34F_addreq_v6p",
+  "src": "build/survey/probes/w34F_addreq_v5.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 715360,
+  "obj": "w34F_sfqh_v5",
+  "src": "build/survey/probes/w34F_sfqh_v5.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 723648,
+  "obj": "w34F_wrw_final",
+  "src": "build/survey/probes/w34F_wrw_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 736304,
+  "obj": "w34g_b3c30_v2",
+  "src": "build/survey/probes/w34g_b3c30_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 736352,
+  "obj": "w34g_b3c60_v2",
+  "src": "build/survey/probes/w34g_b3c60_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 768640,
+  "obj": "w34g_bba80_v4",
+  "src": "build/survey/probes/w34g_bba80_v4.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 782928,
+  "obj": "w34g_projradar_v2",
+  "src": "build/survey/probes/w34g_projradar_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 845556,
+  "obj": "w34g_utd_v1",
+  "src": "build/survey/probes/w34g_utd_v1.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 848774,
+  "obj": "w34g_setcolc_v1",
+  "src": "build/survey/probes/w34g_setcolc_v1.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 51344,
+  "obj": "w34H_c890_v2",
+  "src": "build/survey/probes/w34H_c890_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 71808,
+  "obj": "w34H_11880_v2",
+  "src": "build/survey/probes/w34H_11880_v2.c",
+  "cls": "sched",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 935680,
+  "obj": "w34H_e4700_v1",
+  "src": "build/survey/probes/w34H_e4700_v1.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 935008,
+  "obj": "w34H_e4460_v1",
+  "src": "build/survey/probes/w34H_e4460_v1.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 914128,
+  "obj": "w34H_df2d0_v1",
+  "src": "build/survey/probes/w34H_df2d0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 863644,
+  "obj": "w34H_d2d9c_v1",
+  "src": "build/survey/probes/w34H_d2d9c_v1.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 101136,
+  "obj": "w35A_18b10_v1",
+  "src": "build/survey/probes/w35A_18b10_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 101152,
+  "obj": "w35A_18b20_v1",
+  "src": "build/survey/probes/w35A_18b20_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 205072,
+  "obj": "w35A_32110_v12",
+  "src": "build/survey/probes/w35A_32110_v12.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 278464,
+  "obj": "w35A_43fc0_v1",
+  "src": "build/survey/probes/w35A_43fc0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 386336,
+  "obj": "w35A_5e520_v1",
+  "src": "build/survey/probes/w35A_5e520_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 413536,
+  "obj": "w35A_64f60_v1",
+  "src": "build/survey/probes/w35A_64f60_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 433840,
+  "obj": "w35B_69eb0_v2",
+  "src": "build/survey/probes/w35B_69eb0_v2.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 481104,
+  "obj": "w35B_75750_v1",
+  "src": "build/survey/probes/w35B_75750_v1.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 538992,
+  "obj": "w35B_83970_v1",
+  "src": "build/survey/probes/w35B_83970_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 613424,
+  "obj": "w35B_95c30_v3",
+  "src": "build/survey/probes/w35B_95c30_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 645120,
+  "obj": "w35B_9d800_v2",
+  "src": "build/survey/probes/w35B_9d800_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 668912,
+  "obj": "w35B_a34f0_v1",
+  "src": "build/survey/probes/w35B_a34f0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 669456,
+  "obj": "w35c_rmtype_v1",
+  "src": "build/survey/probes/w35c_rmtype_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 704896,
+  "obj": "w35c_vdopal_v1",
+  "src": "build/survey/probes/w35c_vdopal_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 711360,
+  "obj": "w35c_ret16_v1",
+  "src": "build/survey/probes/w35c_ret16_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 754560,
+  "obj": "w35c_states_v1",
+  "src": "build/survey/probes/w35c_states_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 759344,
+  "obj": "w35c_disp_v2",
+  "src": "build/survey/probes/w35c_disp_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 765520,
+  "obj": "w35c_apset_v1",
+  "src": "build/survey/probes/w35c_apset_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 889168,
+  "obj": "w35D_d9150_v6",
+  "src": "build/survey/probes/w35D_d9150_v6.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 891136,
+  "obj": "w35D_d9900_v1",
+  "src": "build/survey/probes/w35D_d9900_v1.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 776656,
+  "obj": "w35D_bd9d0_v3",
+  "src": "build/survey/probes/w35D_bd9d0_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 845484,
+  "obj": "w35D_ce6ac_v8",
+  "src": "build/survey/probes/w35D_ce6ac_v8.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 9008,
+  "obj": "w35E_2330_v1",
+  "src": "build/survey/probes/w35E_2330_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 897664,
+  "obj": "w35E_db280_v1",
+  "src": "build/survey/probes/w35E_db280_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 914160,
+  "obj": "w35E_df2f0_v6",
+  "src": "build/survey/probes/w35E_df2f0_v6.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 929232,
+  "obj": "w35E_e2dd0_v9",
+  "src": "build/survey/probes/w35E_e2dd0_v9.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 43520,
+  "obj": "w35F_hud_v2",
+  "src": "build/survey/probes/w35F_hud_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 70384,
+  "obj": "w35F_getkey2_v1",
+  "src": "build/survey/probes/w35F_getkey2_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 80304,
+  "obj": "w35F_chatfix_v2",
+  "src": "build/survey/probes/w35F_chatfix_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 90384,
+  "obj": "w35F_setap_v2",
+  "src": "build/survey/probes/w35F_setap_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 151146,
+  "obj": "w35F_swnat_v3n",
+  "src": "build/survey/probes/w35F_swnat_v3n.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 210960,
+  "obj": "w35F_soundoff_v2",
+  "src": "build/survey/probes/w35F_soundoff_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 278480,
+  "obj": "w35G_43fd0_v1",
+  "src": "build/survey/probes/w35G_43fd0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 332064,
+  "obj": "w35G_setthr_v1",
+  "src": "build/survey/probes/w35G_setthr_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 335600,
+  "obj": "w35G_unloadfort_v1",
+  "src": "build/survey/probes/w35G_unloadfort_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 339488,
+  "obj": "w35G_clearhar_v2",
+  "src": "build/survey/probes/w35G_clearhar_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 388640,
+  "obj": "w35G_grpctl_v1",
+  "src": "build/survey/probes/w35G_grpctl_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 402288,
+  "obj": "w35G_cfe1_v2",
+  "src": "build/survey/probes/w35G_cfe1_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 454240,
+  "obj": "w35H_6ee60_v2",
+  "src": "build/survey/probes/w35H_6ee60_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 463456,
+  "obj": "w35H_71260_v3",
+  "src": "build/survey/probes/w35H_71260_v3.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 489216,
+  "obj": "w35H_77700_v1",
+  "src": "build/survey/probes/w35H_77700_v1.cpp",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 499184,
+  "obj": "w35H_79df0_v1",
+  "src": "build/survey/probes/w35H_79df0_v1.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 522384,
+  "obj": "w35H_7f890_v1",
+  "src": "build/survey/probes/w35H_7f890_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 523840,
+  "obj": "w35H_7fe40_v2",
+  "src": "build/survey/probes/w35H_7fe40_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 929008,
+  "obj": "w36A_e2cf0_v2",
+  "src": "build/survey/probes/w36A_e2cf0_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 884992,
+  "obj": "w36A_d8100_v5",
+  "src": "build/survey/probes/w36A_d8100_v5.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 919536,
+  "obj": "w36A_e07f0_v5",
+  "src": "build/survey/probes/w36A_e07f0_v5.c",
+  "cls": "reg-plan",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 885408,
+  "obj": "w36A_d82a0_v2",
+  "src": "build/survey/probes/w36A_d82a0_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 624272,
+  "obj": "w36A_98690_v1",
+  "src": "build/survey/probes/w36A_98690_v1.cpp",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 711088,
+  "obj": "w36A_ad9b0_v4",
+  "src": "build/survey/probes/w36A_ad9b0_v4.cpp",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 711376,
+  "obj": "w36B_g1ev_v2",
+  "src": "build/survey/probes/w36B_g1ev_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 590816,
+  "obj": "w36B_slew_v3",
+  "src": "build/survey/probes/w36B_slew_v3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 695472,
+  "obj": "w36B_gh16_v1",
+  "src": "build/survey/probes/w36B_gh16_v1.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 796776,
+  "obj": "w36B_swapmem_v1",
+  "src": "build/survey/probes/w36B_swapmem_v1.c",
+  "cls": "cc-shape",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 807616,
+  "obj": "w36B_wrcp_final",
+  "src": "build/survey/probes/w36B_wrcp_v2.c",
+  "cls": "seh-nlg",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 885040,
+  "obj": "w36B_free_v1",
+  "src": "build/survey/probes/w36B_free_v1.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 119872,
+  "obj": "w36C_1d440_v2",
+  "src": "build/survey/probes/w36C_1d440_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 138896,
+  "obj": "w36C_21e90_v1",
+  "src": "build/survey/probes/w36C_21e90_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 284560,
+  "obj": "w36C_45790_v1",
+  "src": "build/survey/probes/w36C_45790_v1.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 306672,
+  "obj": "w36C_4adf0_v3",
+  "src": "build/survey/probes/w36C_4adf0_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 935296,
+  "obj": "w36C_e4580_v3",
+  "src": "build/survey/probes/w36C_e4580_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 601136,
+  "obj": "w36C_92c30_v3",
+  "src": "build/survey/probes/w36C_92c30_v3.c",
+  "cls": "sched",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 405744,
+  "obj": "w36D_630f0_v1",
+  "src": "build/survey/probes/w36D_630f0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 416432,
+  "obj": "w36D_65ab0_v2",
+  "src": "build/survey/probes/w36D_65ab0_v2.c",
+  "cls": "masm-enc",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 462992,
+  "obj": "w36D_71090_v3",
+  "src": "build/survey/probes/w36D_71090_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 559648,
+  "obj": "w36D_88a20_v1",
+  "src": "build/survey/probes/w36D_88a20_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 668976,
+  "obj": "w36D_a3530_v1",
+  "src": "build/survey/probes/w36D_a3530_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 725456,
+  "obj": "w36D_b11d0_v1",
+  "src": "build/survey/probes/w36D_b11d0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 779056,
+  "obj": "w36E_be330_v2",
+  "src": "build/survey/probes/w36E_be330_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 933120,
+  "obj": "w36E_e3d00_v2",
+  "src": "build/survey/probes/w36E_e3d00_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 937328,
+  "obj": "w36E_e4d70_v2",
+  "src": "build/survey/probes/w36E_e4d70_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 884368,
+  "obj": "w36E_d7e90_v4",
+  "src": "build/survey/probes/w36E_d7e90_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 918720,
+  "obj": "w36E_e04c0_v4",
+  "src": "build/survey/probes/w36E_e04c0_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 915504,
+  "obj": "w36E_df830_v1",
+  "src": "build/survey/probes/w36E_df830_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 929168,
+  "obj": "w36F_shl3_v4",
+  "src": "build/survey/probes/w36F_shl3_v4.c",
+  "cls": "twin",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 426176,
+  "obj": "w36F_initp_v1",
+  "src": "build/survey/probes/w36F_initp_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 426240,
+  "obj": "w36F_gdfc_v7",
+  "src": "build/survey/probes/w36F_gdfc_v7.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 449920,
+  "obj": "w36F_ralloc_v1",
+  "src": "build/survey/probes/w36F_ralloc_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 506672,
+  "obj": "w36F_envc_v2",
+  "src": "build/survey/probes/w36F_envc_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 778928,
+  "obj": "w36F_objc_v1",
+  "src": "build/survey/probes/w36F_objc_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 218640,
+  "obj": "w36G_csnd_v1",
+  "src": "build/survey/probes/w36G_csnd_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 407664,
+  "obj": "w36G_dlgs_v3p",
+  "src": "build/survey/probes/w36G_dlgs_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 611344,
+  "obj": "w36G_hbtoa_v3",
+  "src": "build/survey/probes/w36G_hbtoa_v3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 623536,
+  "obj": "w36G_iniq_v4",
+  "src": "build/survey/probes/w36G_iniq_v4.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 666784,
+  "obj": "w36G_wsnb_v3",
+  "src": "build/survey/probes/w36G_wsnb_v3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 703712,
+  "obj": "w36G_vdo_v8",
+  "src": "build/survey/probes/w36G_vdo_v8.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 140621,
+  "obj": "w36H_2254d_v4",
+  "src": "build/survey/probes/w36H_2254d_v4.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 414226,
+  "obj": "w36H_65212_v4",
+  "src": "build/survey/probes/w36H_65212_v4.c",
+  "cls": "masm-enc",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 337312,
+  "obj": "w36H_525a0_v4",
+  "src": "build/survey/probes/w36H_525a0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 518608,
+  "obj": "w36H_7e9d0_v1",
+  "src": "build/survey/probes/w36H_7e9d0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 711456,
+  "obj": "w36H_adb20_v3",
+  "src": "build/survey/probes/w36H_adb20_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 885264,
+  "obj": "w37A_d8210_v1",
+  "src": "build/survey/probes/w37A_d8210_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 892736,
+  "obj": "w37A_d9f40_v1",
+  "src": "build/survey/probes/w37A_d9f40_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 893424,
+  "obj": "w37A_da1f0_v1",
+  "src": "build/survey/probes/w37A_da1f0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 889728,
+  "obj": "w37A_d9380_v2",
+  "src": "build/survey/probes/w37A_d9380_v2.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 99696,
+  "obj": "w37A_18570_v2",
+  "src": "build/survey/probes/w37A_18570_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 178272,
+  "obj": "w37A_2b860_v2",
+  "src": "build/survey/probes/w37A_2b860_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 188864,
+  "obj": "w37B_2e1c0_v3",
+  "src": "build/survey/probes/w37B_2e1c0_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 312624,
+  "obj": "w37B_4c530_v3",
+  "src": "build/survey/probes/w37B_4c530_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 137216,
+  "obj": "w37B_21800_v2",
+  "src": "build/survey/probes/w37B_21800_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 472720,
+  "obj": "w37B_73690_v2",
+  "src": "build/survey/probes/w37B_73690_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 487328,
+  "obj": "w37B_76fa0_v2",
+  "src": "build/survey/probes/w37B_76fa0_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 524048,
+  "obj": "w37B_7ff10_v1",
+  "src": "build/survey/probes/w37B_7ff10_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 759856,
+  "obj": "w37C_apup_v3",
+  "src": "build/survey/probes/w37C_apup_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 71920,
+  "obj": "w37C_aon_v2",
+  "src": "build/survey/probes/w37C_aon_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 413152,
+  "obj": "w37C_rudder_v4",
+  "src": "build/survey/probes/w37C_rudder_v4.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 625968,
+  "obj": "w37C_modinit_v1",
+  "src": "build/survey/probes/w37C_modinit_v1.cpp",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 413056,
+  "obj": "w37C_play_v1",
+  "src": "build/survey/probes/w37C_play_v1.cpp",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 645824,
+  "obj": "w37C_planes_v3",
+  "src": "build/survey/probes/w37C_planes_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 630160,
+  "obj": "w37D_w99d90_v1",
+  "src": "build/survey/probes/w37D_w99d90_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 826372,
+  "obj": "w37D_cc9c04_v1",
+  "src": "build/survey/probes/w37D_cc9c04_v1.c",
+  "cls": "bare",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 188432,
+  "obj": "w37D_d2e010_v1",
+  "src": "build/survey/probes/w37D_d2e010_v1.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 308816,
+  "obj": "w37D_e4b650_v1",
+  "src": "build/survey/probes/w37D_e4b650_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 459936,
+  "obj": "w37D_f704a0_v1",
+  "src": "build/survey/probes/w37D_f704a0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 460016,
+  "obj": "w37D_g704f0_v1",
+  "src": "build/survey/probes/w37D_g704f0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 645744,
+  "obj": "w37E_9da70_v2",
+  "src": "build/survey/probes/w37E_9da70_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 906352,
+  "obj": "w37E_dd470_v11",
+  "src": "build/survey/probes/w37E_dd470_v11.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 907008,
+  "obj": "w37E_dd700_v11",
+  "src": "build/survey/probes/w37E_dd700_v11.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 279632,
+  "obj": "w37E_44450_v2",
+  "src": "build/survey/probes/w37E_44450_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 279696,
+  "obj": "w37E_44490_v1",
+  "src": "build/survey/probes/w37E_44490_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 574128,
+  "obj": "w37E_8c2b0_v1",
+  "src": "build/survey/probes/w37E_8c2b0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 597536,
+  "obj": "w37F_91e20_v2pt",
+  "src": "build/survey/probes/w37F_91e20_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 598176,
+  "obj": "w37F_920a0_v1",
+  "src": "build/survey/probes/w37F_920a0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 727984,
+  "obj": "w37F_b1bb0_v1",
+  "src": "build/survey/probes/w37F_b1bb0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 735904,
+  "obj": "w37F_b3aa0_v1",
+  "src": "build/survey/probes/w37F_b3aa0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 131904,
+  "obj": "w37F_20340_v2pt",
+  "src": "build/survey/probes/w37F_20340_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 898672,
+  "obj": "w37F_db670_v6",
+  "src": "build/survey/probes/w37F_db670_v6.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 923840,
+  "obj": "w37G_e18c0_v2pt",
+  "src": "build/survey/probes/w37G_e18c0_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 337984,
+  "obj": "w37G_52840_v2",
+  "src": "build/survey/probes/w37G_52840_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 384320,
+  "obj": "w37G_5dd40_v4",
+  "src": "build/survey/probes/w37G_5dd40_v4.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 387696,
+  "obj": "w37G_5ea70_v4",
+  "src": "build/survey/probes/w37G_5ea70_v4.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 538416,
+  "obj": "w37G_83730_v2pt",
+  "src": "build/survey/probes/w37G_83730_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 538560,
+  "obj": "w37G_837c0_v2pt2",
+  "src": "build/survey/probes/w37G_837c0_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 670592,
+  "obj": "w37H_a3b80_v2",
+  "src": "build/survey/probes/w37H_a3b80_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 806928,
+  "obj": "w37H_c5010_v1",
+  "src": "build/survey/probes/w37H_c5010_v1.c",
+  "cls": "gap-anchor",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 517520,
+  "obj": "w37H_7e590_v2",
+  "src": "build/survey/probes/w37H_7e590_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 622528,
+  "obj": "w37H_97fc0_v2",
+  "src": "build/survey/probes/w37H_97fc0_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 692096,
+  "obj": "w37H_a8f80_v2",
+  "src": "build/survey/probes/w37H_a8f80_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 664512,
+  "obj": "w38A_a23c0_v1",
+  "src": "build/survey/probes/w38A_a23c0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 127712,
+  "obj": "w38A_1f2e0_v2",
+  "src": "build/survey/probes/w38A_1f2e0_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 506928,
+  "obj": "w38A_7bc30_vX",
+  "src": "build/survey/probes/w38A_7bc30_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 543008,
+  "obj": "w38A_84920_v1",
+  "src": "build/survey/probes/w38A_84920_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 862280,
+  "obj": "w38A_d2848_v1",
+  "src": "build/survey/probes/w38A_d2848_v1.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 894224,
+  "obj": "w38A_da510_v1",
+  "src": "build/survey/probes/w38A_da510_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 20832,
+  "obj": "w38B_5160_v2",
+  "src": "build/survey/probes/w38B_5160_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 146656,
+  "obj": "w38B_23ce0_v1",
+  "src": "build/survey/probes/w38B_23ce0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 412816,
+  "obj": "w38B_64c90_v3",
+  "src": "build/survey/probes/w38B_64c90_v3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 414800,
+  "obj": "w38B_65450_v3",
+  "src": "build/survey/probes/w38B_65450_v3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 472384,
+  "obj": "w38B_73540_v1",
+  "src": "build/survey/probes/w38B_73540_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 928912,
+  "obj": "w38B_e2c90_w13_G4",
+  "src": "build/survey/probes/w38B_e2c90_w13.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 127872,
+  "obj": "w38C_1f380_v2",
+  "src": "build/survey/probes/w38C_1f380_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 157869,
+  "obj": "w38C_268ad_v2",
+  "src": "build/survey/probes/w38C_268ad_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 554112,
+  "obj": "w38C_87480_v3",
+  "src": "build/survey/probes/w38C_87480_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 670032,
+  "obj": "w38C_a3950_v2",
+  "src": "build/survey/probes/w38C_a3950_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 872272,
+  "obj": "w38C_d4f50_v3",
+  "src": "build/survey/probes/w38C_d4f50_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 876048,
+  "obj": "w38C_d5e10_v2",
+  "src": "build/survey/probes/w38C_d5e10_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 600992,
+  "obj": "w38D_92ba0_v2",
+  "src": "build/survey/probes/w38D_92ba0_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 384800,
+  "obj": "w38D_5df20_v1",
+  "src": "build/survey/probes/w38D_5df20_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 388176,
+  "obj": "w38D_5ec50_v1",
+  "src": "build/survey/probes/w38D_5ec50_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 389904,
+  "obj": "w38D_5f310_v1",
+  "src": "build/survey/probes/w38D_5f310_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 413312,
+  "obj": "w38D_64e80_v1",
+  "src": "build/survey/probes/w38D_64e80_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 714224,
+  "obj": "w38D_ae5f0_v1",
+  "src": "build/survey/probes/w38D_ae5f0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 286640,
+  "obj": "w38E_45fb0_v3",
+  "src": "build/survey/probes/w38E_45fb0_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 286736,
+  "obj": "w38E_46010_v3",
+  "src": "build/survey/probes/w38E_46010_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 737280,
+  "obj": "w38E_b4000_final",
+  "src": "build/survey/probes/w38E_b4000_v9.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 411552,
+  "obj": "w38E_647a0_v3",
+  "src": "build/survey/probes/w38E_647a0_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 463664,
+  "obj": "w38E_71330_v3",
+  "src": "build/survey/probes/w38E_71330_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 515760,
+  "obj": "w38E_7deb0_v2",
+  "src": "build/survey/probes/w38E_7deb0_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 515856,
+  "obj": "w38F_7df10_v1",
+  "src": "build/survey/probes/w38F_7df10_v1.cpp",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 518128,
+  "obj": "w38F_7e7f0_v2",
+  "src": "build/survey/probes/w38F_7e7f0_v2.cpp",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 809336,
+  "obj": "w38F_c5978_v4pt",
+  "src": "build/survey/probes/w38F_c5978_v4.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 667632,
+  "obj": "w38F_a2ff0_v2pt",
+  "src": "build/survey/probes/w38F_a2ff0_v2.cpp",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 908992,
+  "obj": "w38F_ddec0_v2pt",
+  "src": "build/survey/probes/w38F_ddec0_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 927712,
+  "obj": "w38F_e27e0_v3",
+  "src": "build/survey/probes/w38F_e27e0_v3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 566992,
+  "obj": "w38G_8a6d0_v2",
+  "src": "build/survey/probes/w38G_8a6d0_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 892400,
+  "obj": "w38G_d9df0_v1",
+  "src": "build/survey/probes/w38G_d9df0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 894064,
+  "obj": "w38G_da470_v1",
+  "src": "build/survey/probes/w38G_da470_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 912368,
+  "obj": "w38G_debf0_v1",
+  "src": "build/survey/probes/w38G_debf0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 431792,
+  "obj": "w38G_696b0_v1",
+  "src": "build/survey/probes/w38G_696b0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 902384,
+  "obj": "w38G_dc4f0_v1",
+  "src": "build/survey/probes/w38G_dc4f0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 287232,
+  "obj": "w38H_46200_v2",
+  "src": "build/survey/probes/w38H_46200_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 669584,
+  "obj": "w38H_a3790_v2",
+  "src": "build/survey/probes/w38H_a3790_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 541744,
+  "obj": "w38H_84430_v2",
+  "src": "build/survey/probes/w38H_84430_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 586672,
+  "obj": "w38H_8f3b0_v2",
+  "src": "build/survey/probes/w38H_8f3b0_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 425904,
+  "obj": "w38H_67fb0_v1",
+  "src": "build/survey/probes/w38H_67fb0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 826212,
+  "obj": "w39A_acos_v1",
+  "src": "build/survey/probes/w39A_acos_v1.c",
+  "cls": "seh-nlg",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 824120,
+  "obj": "w39A_ExpandSB_v1",
+  "src": "build/survey/probes/w39A_ExpandSB_v1.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 767472,
+  "obj": "w39B_bb5f0_v3",
+  "src": "build/survey/probes/w39B_overflow_handler_reg_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 881152,
+  "obj": "w39C_d7200_v1",
+  "src": "build/survey/probes/w39C_d7200_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 881264,
+  "obj": "w39C_d7270_v1",
+  "src": "build/survey/probes/w39C_d7270_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 890096,
+  "obj": "w40A_fassign_v2",
+  "src": "build/survey/probes/w40A_fassign_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 146128,
+  "obj": "w40A_tlistfind_v2",
+  "src": "build/survey/probes/w40A_tlistfind_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 570304,
+  "obj": "w40A_refill_v1",
+  "src": "build/survey/probes/w40A_refill_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 57504,
+  "obj": "w40A_angmap_v1",
+  "src": "build/survey/probes/w40A_angmap_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 405856,
+  "obj": "w40A_ignore_v4",
+  "src": "build/survey/probes/w40A_ignore_v4.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 621024,
+  "obj": "w40A_wppos_v2",
+  "src": "build/survey/probes/w40A_wppos_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 902528,
+  "obj": "w40A_dc580_v1",
+  "src": "build/survey/probes/w40A_dc580_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 891024,
+  "obj": "w40B_cfltcvt_v1",
+  "src": "build/survey/probes/w40B_cfltcvt_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 692192,
+  "obj": "w40B_bmask_v1",
+  "src": "build/survey/probes/w40B_bmask_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 155851,
+  "obj": "w40B_mscale_final",
+  "src": "build/survey/probes/w40B_mscale_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 668016,
+  "obj": "w40B_socset_final",
+  "src": "build/survey/probes/w40B_socset_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 72032,
+  "obj": "w40B_clock16_final",
+  "src": "build/survey/probes/w40B_clock16_v4.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 479072,
+  "obj": "w40B_jcopy_final",
+  "src": "build/survey/probes/w40B_jcopy_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 918000,
+  "obj": "w40C_e01f0_v3",
+  "src": "build/survey/probes/w40C_e01f0_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 306608,
+  "obj": "w40C_4adb0_v4",
+  "src": "build/survey/probes/w40C_4adb0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 669184,
+  "obj": "w40C_a3600_v3",
+  "src": "build/survey/probes/w40C_a3600_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 81408,
+  "obj": "w40C_13e00_v3",
+  "src": "build/survey/probes/w40C_13e00_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 494112,
+  "obj": "w40C_78a20_v4",
+  "src": "build/survey/probes/w40C_78a20_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 714128,
+  "obj": "w40C_ae590_v1",
+  "src": "build/survey/probes/w40C_ae590_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 409456,
+  "obj": "w40D_63f70_v1",
+  "src": "build/survey/probes/w40D_63f70_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 713216,
+  "obj": "w40D_ae200_v1",
+  "src": "build/survey/probes/w40D_ae200_v1.cpp",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 155164,
+  "obj": "w40D_25e1c_v2",
+  "src": "build/survey/probes/w40D_25e1c_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 543472,
+  "obj": "w40D_84af0_v2",
+  "src": "build/survey/probes/w40D_84af0_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 748976,
+  "obj": "w40D_b6db0_v2",
+  "src": "build/survey/probes/w40D_b6db0_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 544800,
+  "obj": "w40E_85020_v1.obj",
+  "src": "build/survey/probes/w40E_85020_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 160297,
+  "obj": "w40E_27229_v2.obj",
+  "src": "build/survey/probes/w40E_27229_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 450368,
+  "obj": "w40E_450368_v2.obj",
+  "src": "build/survey/probes/w40E_450368_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 723488,
+  "obj": "w40E_b0a20_v2.obj",
+  "src": "build/survey/probes/w40E_b0a20_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 565184,
+  "obj": "w40E_89fc0_v4.obj",
+  "src": "build/survey/probes/w40E_89fc0_v4.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 768688,
+  "obj": "w40E_bbab0_v1.obj",
+  "src": "build/survey/probes/w40E_bbab0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 870144,
+  "obj": "w40F_d4700_v2",
+  "src": "build/survey/probes/w40F_d4700_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 218864,
+  "obj": "w40F_356f0_v2",
+  "src": "build/survey/probes/w40F_356f0_v2.c",
+  "cls": "seh-nlg",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 589680,
+  "obj": "w40F_8ff70_v1",
+  "src": "build/survey/probes/w40F_8ff70_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 823720,
+  "obj": "w40F_c91a8_v2",
+  "src": "build/survey/probes/w40F_c91a8_v2.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 5760,
+  "obj": "Chunk_1680_v5",
+  "src": "build/survey/probes/w40G_1680_v4.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 498416,
+  "obj": "Chunk_79af0_v4",
+  "src": "build/survey/probes/w40G_79af0_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 897520,
+  "obj": "Chunk_db1f0_v2",
+  "src": "build/survey/probes/w40G_db1f0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 283792,
+  "obj": "SeqRect_v2",
+  "src": "build/survey/probes/w40G_SeqRect_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 601856,
+  "obj": "Chunk_92f00_v2",
+  "src": "build/survey/probes/w40G_92f00_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 131792,
+  "obj": "w40H_202d0_v2",
+  "src": "build/survey/probes/w40H_202d0_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 389760,
+  "obj": "w40H_5f280_v3",
+  "src": "build/survey/probes/w40H_5f280_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 547568,
+  "obj": "w40H_85af0_v3",
+  "src": "build/survey/probes/w40H_85af0_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 604368,
+  "obj": "w40H_938d0_v3",
+  "src": "build/survey/probes/w40H_938d0_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 868272,
+  "obj": "w40H_d3fb0_v1",
+  "src": "build/survey/probes/w40H_d3fb0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 903024,
+  "obj": "w40H_dc770_v3",
+  "src": "build/survey/probes/w40H_dc770_v3.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 823584,
+  "obj": "w41F_CopyDB15_v1",
+  "src": "build/survey/probes/w41F_CopyDB15_v1.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 869152,
+  "obj": "w41F_isalpha5f_v2",
+  "src": "build/survey/probes/w41F_isalpha5f_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 869232,
+  "obj": "w41F_isalnum5f_v2",
+  "src": "build/survey/probes/w41F_isalnum5f_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 880656,
+  "obj": "w41F_loop1_v3",
+  "src": "build/survey/probes/w41F_loop1_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 23184,
+  "obj": "w41A_5a90_v1",
+  "src": "build/survey/probes/w41A_5a90_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 48864,
+  "obj": "w41A_bee0_v2",
+  "src": "build/survey/probes/w41A_bee0_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 51392,
+  "obj": "w41A_c8c0_v1",
+  "src": "build/survey/probes/w41A_c8c0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 62064,
+  "obj": "w41A_f270_v3",
+  "src": "build/survey/probes/w41A_f270_v3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 79536,
+  "obj": "w41A_136b0_v1",
+  "src": "build/survey/probes/w41A_136b0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 385504,
+  "obj": "w41D_5e1e0_v1",
+  "src": "build/survey/probes/w41D_5e1e0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 393728,
+  "obj": "w41D_60200_v2",
+  "src": "build/survey/probes/w41D_60200_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 413440,
+  "obj": "w41D_64f00_v2",
+  "src": "build/survey/probes/w41D_64f00_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 450224,
+  "obj": "w41D_6deb0_v1",
+  "src": "build/survey/probes/w41D_6deb0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 385376,
+  "obj": "w41C_gtype_v1",
+  "src": "build/survey/probes/w41C_gtype_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 385440,
+  "obj": "w41C_gspac_v1",
+  "src": "build/survey/probes/w41C_gspac_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 285008,
+  "obj": "w41C_rmseq_v1",
+  "src": "build/survey/probes/w41C_rmseq_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 287568,
+  "obj": "w41C_sofs_v4",
+  "src": "build/survey/probes/w41C_sofs_v4.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 290656,
+  "obj": "w41C_dispv_v1",
+  "src": "build/survey/probes/w41C_dispv_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 508544,
+  "obj": "w41E_7c280_v1",
+  "src": "build/survey/probes/w41E_7c280_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 591296,
+  "obj": "w41E_905c0_v1",
+  "src": "build/survey/probes/w41E_905c0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 713664,
+  "obj": "w41E_ae3c0_v1",
+  "src": "build/survey/probes/w41E_ae3c0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 776896,
+  "obj": "w41E_bdac0_v1",
+  "src": "build/survey/probes/w41E_bdac0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 776960,
+  "obj": "w41E_bdb00_v1",
+  "src": "build/survey/probes/w41E_bdb00_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 135264,
+  "obj": "w41B_21060_v2",
+  "src": "build/survey/probes/w41B_21060_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 150016,
+  "obj": "w41B_24a00_v2",
+  "src": "build/survey/probes/w41B_24a00_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 160224,
+  "obj": "w41B_271e0_v2",
+  "src": "build/survey/probes/w41B_271e0_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 175511,
+  "obj": "w41B_2ad97_v2",
+  "src": "build/survey/probes/w41B_2ad97_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 34496,
+  "obj": "w42A_initmove_v1",
+  "src": "build/survey/probes/w42A_initmove_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 131840,
+  "obj": "w42A_zap_v2",
+  "src": "build/survey/probes/w42A_zap_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 138448,
+  "obj": "w42A_seek_v1",
+  "src": "build/survey/probes/w42A_seek_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 157488,
+  "obj": "w42A_thing_v1",
+  "src": "build/survey/probes/w42A_thing_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 187504,
+  "obj": "w42A_cdi_v1",
+  "src": "build/survey/probes/w42A_cdi_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 307264,
+  "obj": "w42B_roget_v5",
+  "src": "build/survey/probes/w42B_roget_v5.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 379984,
+  "obj": "w42B_pktnew_v2",
+  "src": "build/survey/probes/w42B_pktnew_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 380096,
+  "obj": "w42B_pktlost_v2",
+  "src": "build/survey/probes/w42B_pktlost_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 410784,
+  "obj": "w42B_tgta_v2",
+  "src": "build/survey/probes/w42B_tgta_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 413664,
+  "obj": "w42B_mtalt_v2",
+  "src": "build/survey/probes/w42B_mtalt_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 494816,
+  "obj": "w42C_findfirst_v2",
+  "src": "build/survey/probes/w42C_findfirst_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 520992,
+  "obj": "w42C_addstore_v3",
+  "src": "build/survey/probes/w42C_addstore_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 544208,
+  "obj": "w42C_getmillis_v2",
+  "src": "build/survey/probes/w42C_getmillis_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 544576,
+  "obj": "w42C_settimerint_v2",
+  "src": "build/survey/probes/w42C_settimerint_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 603264,
+  "obj": "w42C_93480_v1",
+  "src": "build/survey/probes/w42C_93480_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 691232,
+  "obj": "w42D_tcpsave_v2",
+  "src": "build/survey/probes/w42D_tcpsave_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 692288,
+  "obj": "w42D_sersend_v2",
+  "src": "build/survey/probes/w42D_sersend_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 704976,
+  "obj": "w42D_vdofrom_v2",
+  "src": "build/survey/probes/w42D_vdofrom_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 709952,
+  "obj": "w42D_netread_v6",
+  "src": "build/survey/probes/w42D_netread_v6.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 880576,
+  "obj": "w42D_bufput_v2",
+  "src": "build/survey/probes/w42D_bufput_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 880720,
+  "obj": "w42E_d7050_v4",
+  "src": "build/survey/probes/w42E_d7050_v4.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 881008,
+  "obj": "w42E_lock_v6",
+  "src": "build/survey/probes/w42E_lock_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 916768,
+  "obj": "w42E_ld12_v1",
+  "src": "build/survey/probes/w42E_ld12_v1.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 925392,
+  "obj": "w42E_e1ed0_v1",
+  "src": "build/survey/probes/w42E_e1ed0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 935136,
+  "obj": "w42E_towup_v5",
+  "src": "build/survey/probes/w42E_towup_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 740288,
+  "obj": "w42F_b4bc0_v1",
+  "src": "build/survey/probes/w42F_b4bc0_v1.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 645936,
+  "obj": "w42F_9db30_v1",
+  "src": "build/survey/probes/w42F_9db30_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 868368,
+  "obj": "w42F_d4010_v2",
+  "src": "build/survey/probes/w42F_d4010_v2.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 5440,
+  "obj": "w43A_1540_v4",
+  "src": "build/survey/probes/w43A_1540_v4.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 20768,
+  "obj": "w43A_5120_v2",
+  "src": "build/survey/probes/w43A_5120_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 52352,
+  "obj": "w43A_cc80_v1",
+  "src": "build/survey/probes/w43A_cc80_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 52512,
+  "obj": "w43A_cd20_v1",
+  "src": "build/survey/probes/w43A_cd20_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 132624,
+  "obj": "w43A_20610_v1",
+  "src": "build/survey/probes/w43A_20610_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 139251,
+  "obj": "w43A_21ff3_v3",
+  "src": "build/survey/probes/w43A_21ff3_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 158933,
+  "obj": "w43A_26cd5_v3",
+  "src": "build/survey/probes/w43A_26cd5_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 163216,
+  "obj": "w43A_27d90_v1",
+  "src": "build/survey/probes/w43A_27d90_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 290704,
+  "obj": "w43A_46f90_v3",
+  "src": "build/survey/probes/w43A_46f90_v3.cpp",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 290808,
+  "obj": "w43A_46ff8_v3",
+  "src": "build/survey/probes/w43A_46ff8_v3.cpp",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 542464,
+  "obj": "w43B_84700_v1",
+  "src": "build/survey/probes/w43B_84700_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 509312,
+  "obj": "w43B_7c580_v1",
+  "src": "build/survey/probes/w43B_7c580_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 741184,
+  "obj": "w43B_b4f40_v2",
+  "src": "build/survey/probes/w43B_b4f40_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 461584,
+  "obj": "w43B_70b10_v2",
+  "src": "build/survey/probes/w43B_70b10_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 506432,
+  "obj": "w43B_7ba40_v2",
+  "src": "build/survey/probes/w43B_7ba40_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 538256,
+  "obj": "w43B_83690_v3",
+  "src": "build/survey/probes/w43B_83690_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 590992,
+  "obj": "w43B_90490_v3",
+  "src": "build/survey/probes/w43B_90490_v3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 599424,
+  "obj": "w43B_92580_v2",
+  "src": "build/survey/probes/w43B_92580_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 712688,
+  "obj": "w43B_adff0_v2",
+  "src": "build/survey/probes/w43B_adff0_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 408000,
+  "obj": "w43B_639c0_v4",
+  "src": "build/survey/probes/w43B_639c0_v4.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 755008,
+  "obj": "w43C_b8540",
+  "src": "build/survey/probes/w43C_b8540_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 760144,
+  "obj": "w43C_carr",
+  "src": "build/survey/probes/w43C_carr_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 897920,
+  "obj": "w43C_commit",
+  "src": "build/survey/probes/w43C_commit_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 10096,
+  "obj": "w43C_2770",
+  "src": "build/survey/probes/w43C_2770_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 10192,
+  "obj": "w43C_27d0",
+  "src": "build/survey/probes/w43C_27d0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 43616,
+  "obj": "w43C_hudstab",
+  "src": "build/survey/probes/w43C_hudstab_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 74256,
+  "obj": "w43C_interp",
+  "src": "build/survey/probes/w43C_interp_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 103328,
+  "obj": "w43C_1930",
+  "src": "build/survey/probes/w43C_1930_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 287120,
+  "obj": "w43C_sqmusic",
+  "src": "build/survey/probes/w43C_sqmusic_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 411648,
+  "obj": "w43C_dtw",
+  "src": "build/survey/probes/w43C_dtw_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 412448,
+  "obj": "w43D_ctwing_v3",
+  "src": "build/survey/probes/w43D_ctwing_v3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 438176,
+  "obj": "w43D_mpflush_v3",
+  "src": "build/survey/probes/w43D_mpflush_v3.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 457056,
+  "obj": "w43D_crater_v2",
+  "src": "build/survey/probes/w43D_crater_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 457760,
+  "obj": "w43D_hulk_v2",
+  "src": "build/survey/probes/w43D_hulk_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 458944,
+  "obj": "w43D_filename_v1",
+  "src": "build/survey/probes/w43D_filename_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 549360,
+  "obj": "w43D_dlg_v3",
+  "src": "build/survey/probes/w43D_dialogshow_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 646384,
+  "obj": "w43D_setthr_v2",
+  "src": "build/survey/probes/w43D_setthr_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 703360,
+  "obj": "w43D_vdoclear_v2",
+  "src": "build/survey/probes/w43D_vdoclear_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 724688,
+  "obj": "w43D_wrsee",
+  "src": "build/survey/probes/w43D_wrsee_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 806812,
+  "obj": "w43D_bsmc_v1",
+  "src": "build/survey/probes/w43D_bsmc_v1.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 72928,
+  "obj": "w43E_SpeedToXYZ_v1",
+  "src": "build/survey/probes/w43E_SpeedToXYZ_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 74080,
+  "obj": "w43E_BoxAnd_v2",
+  "src": "build/survey/probes/w43E_BoxAnd_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 75584,
+  "obj": "w43E_rotf24_v2",
+  "src": "build/survey/probes/w43E_rotf24_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 82336,
+  "obj": "w43E_cntnear_v1",
+  "src": "build/survey/probes/w43E_cntnear_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 140013,
+  "obj": "w43E_mapclr_v2",
+  "src": "build/survey/probes/w43E_mapclr_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 146704,
+  "obj": "w43E_23d10_v2",
+  "src": "build/survey/probes/w43E_23d10_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 866784,
+  "obj": "w43E_atol_v1",
+  "src": "build/survey/probes/w43E_atol_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 891344,
+  "obj": "w43E_mbctoupper_v2",
+  "src": "build/survey/probes/w43E_mbctoupper_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 899088,
+  "obj": "w43E_ismbbType_v2",
+  "src": "build/survey/probes/w43E_ismbbType_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 920384,
+  "obj": "w43E_fcloseall_v2",
+  "src": "build/survey/probes/w43E_fcloseall_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 195712,
+  "obj": "w43F_2fc80_v2",
+  "src": "build/survey/probes/w43F_2fc80_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 243152,
+  "obj": "w43F_3b5d0_v2",
+  "src": "build/survey/probes/w43F_3b5d0_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 286384,
+  "obj": "w43F_45eb0_v2",
+  "src": "build/survey/probes/w43F_45eb0_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 308896,
+  "obj": "w43F_4b6a0_v2",
+  "src": "build/survey/probes/w43F_4b6a0_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 321248,
+  "obj": "w43F_4e6e0_v1",
+  "src": "build/survey/probes/w43F_4e6e0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 384192,
+  "obj": "w43F_5dcc0_v2",
+  "src": "build/survey/probes/w43F_5dcc0_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 441040,
+  "obj": "w43F_6bad0_v1",
+  "src": "build/survey/probes/w43F_6bad0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 496752,
+  "obj": "w43F_79470_v2",
+  "src": "build/survey/probes/w43F_79470_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 515504,
+  "obj": "w43F_7ddb0_v1",
+  "src": "build/survey/probes/w43F_7ddb0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 554736,
+  "obj": "w43F_876f0_v1",
+  "src": "build/survey/probes/w43F_876f0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 597696,
+  "obj": "w43G_91ec0_v1",
+  "src": "build/survey/probes/w43G_91ec0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 684224,
+  "obj": "w43G_a70c0_v3",
+  "src": "build/survey/probes/w43G_a70c0_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 768576,
+  "obj": "w43G_bba40_v1",
+  "src": "build/survey/probes/w43G_bba40_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 823340,
+  "obj": "w43G_c902c_v1",
+  "src": "build/survey/probes/w43G_c902c_v1.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 867216,
+  "obj": "w43G_d3b90_v2",
+  "src": "build/survey/probes/w43G_d3b90_v2.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 876336,
+  "obj": "w43G_d5f30_v2",
+  "src": "build/survey/probes/w43G_d5f30_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 889280,
+  "obj": "w43G_d91c0_v3",
+  "src": "build/survey/probes/w43G_d91c0_v3.c",
+  "cls": "seh-nlg",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 891488,
+  "obj": "w43G_d9a60_v2",
+  "src": "build/survey/probes/w43G_d9a60_v2.c",
+  "cls": "seh-nlg",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 908800,
+  "obj": "w43G_dde00_v3",
+  "src": "build/survey/probes/w43G_dde00_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 908896,
+  "obj": "w43G_dde60_v3",
+  "src": "build/survey/probes/w43G_dde60_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 459040,
+  "obj": "w43H_70120_v1",
+  "src": "build/survey/probes/w43H_70120_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 795472,
+  "obj": "w43H_c2350_v1",
+  "src": "build/survey/probes/w43H_c2350_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 281808,
+  "obj": "w43H_44cd0_v1",
+  "src": "build/survey/probes/w43H_44cd0_v1.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 450144,
+  "obj": "w43H_6dh",
+  "src": "build/survey/probes/w43H_6dh.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 276336,
+  "obj": "w43H_43770_v3",
+  "src": "build/survey/probes/w43H_43770_v3.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 310160,
+  "obj": "w43H_4bb90_v2",
+  "src": "build/survey/probes/w43H_4bb90_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 670960,
+  "obj": "w43H_a3cf0_v2b",
+  "src": "build/survey/probes/w43H_a3cf0_v2b.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 685184,
+  "obj": "w43H_a7480_v1",
+  "src": "build/survey/probes/w43H_a7480_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 772672,
+  "obj": "w43H_bca40_v1",
+  "src": "build/survey/probes/w43H_bca40_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 881408,
+  "obj": "w43H_d7300_v1",
+  "src": "build/survey/probes/w43H_d7300_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 764384,
+  "obj": "w44A_ba9e0_v1",
+  "src": "build/survey/probes/w44A_ba9e0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 52096,
+  "obj": "w44A_cb80_v3",
+  "src": "build/survey/probes/w44A_cb80_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 157912,
+  "obj": "w44A_268d8_v3",
+  "src": "build/survey/probes/w44A_268d8_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 205600,
+  "obj": "w44A_32320_v1",
+  "src": "build/survey/probes/w44A_32320_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 286512,
+  "obj": "w44A_45f30_v1",
+  "src": "build/survey/probes/w44A_45f30_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 308704,
+  "obj": "w44A_4b5e0_v3",
+  "src": "build/survey/probes/w44A_4b5e0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 330368,
+  "obj": "w44A_50a80_v1",
+  "src": "build/survey/probes/w44A_50a80_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 340240,
+  "obj": "w44A_53110_v2",
+  "src": "build/survey/probes/w44A_53110_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 384720,
+  "obj": "w44A_5ded0_v3",
+  "src": "build/survey/probes/w44A_5ded0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 416480,
+  "obj": "w44A_65ae0_v2",
+  "src": "build/survey/probes/w44A_65ae0_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 696192,
+  "obj": "w44B_a9f80_v1",
+  "src": "build/survey/probes/w44B_a9f80_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 425472,
+  "obj": "w44B_67e00_v1",
+  "src": "build/survey/probes/w44B_67e00_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 494704,
+  "obj": "w44B_78c70_v1",
+  "src": "build/survey/probes/w44B_78c70_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 565424,
+  "obj": "w44B_8a0b0_v1",
+  "src": "build/survey/probes/w44B_8a0b0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 570752,
+  "obj": "w44B_8b580_v1",
+  "src": "build/survey/probes/w44B_8b580_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 598240,
+  "obj": "w44B_920e0_v2",
+  "src": "build/survey/probes/w44B_920e0_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 615600,
+  "obj": "w44B_964b0_v1",
+  "src": "build/survey/probes/w44B_964b0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 664432,
+  "obj": "w44B_a2370_v2",
+  "src": "build/survey/probes/w44B_a2370_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 674800,
+  "obj": "w44B_a4bf0_v2",
+  "src": "build/survey/probes/w44B_a4bf0_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 684704,
+  "obj": "w44B_a72a0_v1",
+  "src": "build/survey/probes/w44B_a72a0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 696320,
+  "obj": "w44C_aa000_v2",
+  "src": "build/survey/probes/w44C_aa000_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 707008,
+  "obj": "w44C_ac9c0_v1",
+  "src": "build/survey/probes/w44C_ac9c0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 791456,
+  "obj": "w44C_c13a0_v2",
+  "src": "build/survey/probes/w44C_c13a0_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 875920,
+  "obj": "w44C_d5d90_v2",
+  "src": "build/survey/probes/w44C_d5d90_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 902752,
+  "obj": "w44C_dc660_v1",
+  "src": "build/survey/probes/w44C_dc660_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 907088,
+  "obj": "w44C_dd750_v1",
+  "src": "build/survey/probes/w44C_dd750_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 910080,
+  "obj": "w44C_de300_v2",
+  "src": "build/survey/probes/w44C_de300_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 920272,
+  "obj": "w44C_e0ad0_v2",
+  "src": "build/survey/probes/w44C_e0ad0_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 76000,
+  "obj": "w44C_128e0_v1",
+  "src": "build/survey/probes/w44C_128e0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 96928,
+  "obj": "w44D_17aa0_v4",
+  "src": "build/survey/probes/w44D_17aa0_v2.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 145939,
+  "obj": "w44D_23a13_v2",
+  "src": "build/survey/probes/w44D_23a13_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 155061,
+  "obj": "w44D_25db5_v1",
+  "src": "build/survey/probes/w44D_25db5_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 188528,
+  "obj": "w44D_2e070_v2",
+  "src": "build/survey/probes/w44D_2e070_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 252256,
+  "obj": "w44D_3d960_v1",
+  "src": "build/survey/probes/w44D_3d960_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 307472,
+  "obj": "w44D_4b110_v2",
+  "src": "build/survey/probes/w44D_4b110_v1.cpp",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 331328,
+  "obj": "w44D_50e40_v1",
+  "src": "build/survey/probes/w44D_50e40_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 332688,
+  "obj": "w44D_51390_v2",
+  "src": "build/survey/probes/w44D_51390_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 383440,
+  "obj": "w44D_5d9d0_v2",
+  "src": "build/survey/probes/w44D_5d9d0_v1.cpp",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 390240,
+  "obj": "w44D_5f460_v1",
+  "src": "build/survey/probes/w44D_5f460_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 461248,
+  "obj": "w44e_709c0_v1",
+  "src": "build/survey/probes/w44E_709c0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 493872,
+  "obj": "w44e_78930_v1",
+  "src": "build/survey/probes/w44E_78930_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 495280,
+  "obj": "w44e_78eb0_v1",
+  "src": "build/survey/probes/w44E_78eb0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 495328,
+  "obj": "w44e_78ee0_v1",
+  "src": "build/survey/probes/w44E_78ee0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 495392,
+  "obj": "w44e_78f20_v1",
+  "src": "build/survey/probes/w44E_78f20_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 589568,
+  "obj": "w44e_8ff00_v1",
+  "src": "build/survey/probes/w44E_8ff00_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 601776,
+  "obj": "w44e_92eb0_v1",
+  "src": "build/survey/probes/w44E_92eb0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 622800,
+  "obj": "w44e_980d0_v1",
+  "src": "build/survey/probes/w44E_980d0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 624640,
+  "obj": "w44e_98800_v1",
+  "src": "build/survey/probes/w44E_98800_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 647792,
+  "obj": "w44e_9e270_v1",
+  "src": "build/survey/probes/w44E_9e270_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 667712,
+  "obj": "w44F_a3040_v6",
+  "src": "build/survey/probes/w44F_a3040_v6.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 709840,
+  "obj": "w44F_ad4d0_v4",
+  "src": "build/survey/probes/w44F_ad4d0_v4.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 768768,
+  "obj": "w44F_bbb00_v2",
+  "src": "build/survey/probes/w44F_bbb00_v2.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 914656,
+  "obj": "w44F_df4e0_v11",
+  "src": "build/survey/probes/w44F_df4e0_v11.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 929056,
+  "obj": "w44F_e2d20_v5",
+  "src": "build/survey/probes/w44F_e2d20_v5.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 45952,
+  "obj": "w44F_b380_v1",
+  "src": "build/survey/probes/w44F_b380_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 70144,
+  "obj": "w44F_11200_v5",
+  "src": "build/survey/probes/w44F_11200_v5.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 127616,
+  "obj": "w44F_1f280_v2",
+  "src": "build/survey/probes/w44F_1f280_v2.c",
+  "cls": "bare",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 135168,
+  "obj": "w44F_21000_v4",
+  "src": "build/survey/probes/w44F_21000_v4.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 139434,
+  "obj": "w44F_220aa_v3",
+  "src": "build/survey/probes/w44F_220aa_v3.c",
+  "cls": "seh-nlg",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 160353,
+  "obj": "w44G_27261_v1",
+  "src": "build/survey/probes/w44G_27261_v1.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 245808,
+  "obj": "w44G_3c030_v1",
+  "src": "build/survey/probes/w44G_3c030_v1.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 335248,
+  "obj": "w44G_51d90_v1",
+  "src": "build/survey/probes/w44G_51d90_v1.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 335504,
+  "obj": "w44G_51e90_v1",
+  "src": "build/survey/probes/w44G_51e90_v1.c",
+  "cls": "twin",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 384096,
+  "obj": "w44G_5dc60_v1",
+  "src": "build/survey/probes/w44G_5dc60_v1.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 393792,
+  "obj": "w44G_60240_v1",
+  "src": "build/survey/probes/w44G_60240_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 463344,
+  "obj": "w44G_711f0_v1",
+  "src": "build/survey/probes/w44G_711f0_v1.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 480848,
+  "obj": "w44G_75650_v1",
+  "src": "build/survey/probes/w44G_75650_v1.c",
+  "cls": "sched",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 491936,
+  "obj": "w44G_781a0_v1",
+  "src": "build/survey/probes/w44G_781a0_v1.c",
+  "cls": "seh-nlg",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 668128,
+  "obj": "w44G_a31e0_v1",
+  "src": "build/survey/probes/w44G_a31e0_v1.c",
+  "cls": "plain",
+  "patch": false,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 924032,
+  "obj": "w44H_e1980_v1",
+  "src": "build/survey/probes/w44H_e1980_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 915808,
+  "obj": "w44H_df960_v1",
+  "src": "build/survey/probes/w44H_df960_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 912608,
+  "obj": "w44H_dece0_v1",
+  "src": "build/survey/probes/w44H_dece0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 792096,
+  "obj": "w44H_c1620_v1",
+  "src": "build/survey/probes/w44H_c1620_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 704736,
+  "obj": "w44H_ac0e0_v6",
+  "src": "build/survey/probes/w44H_ac0e0_v4.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 165134,
+  "obj": "w44H_2850e_v1",
+  "src": "build/survey/probes/w44H_2850e_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 150371,
+  "obj": "w44H_24b63_v1",
+  "src": "build/survey/probes/w44H_24b63_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 136464,
+  "obj": "w44H_21510_v1",
+  "src": "build/survey/probes/w44H_21510_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": true,
+  "game": false
+ },
+ {
+  "rva": 80112,
+  "obj": "w44H_138f0_v1",
+  "src": "build/survey/probes/w44H_138f0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
+  "game": false
+ },
+ {
+  "rva": 54192,
+  "obj": "w44H_d3b0_v1",
+  "src": "build/survey/probes/w44H_d3b0_v1.c",
+  "cls": "plain",
+  "patch": true,
+  "probes": false,
   "game": false
  }
 ]

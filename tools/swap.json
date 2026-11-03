@@ -23260,5 +23260,1493 @@
    "patch 64/93: qa fix \u2014 toolchain-diff call disp dwords typed DIR32 (6); linker wrote symVA+content absolute instead of a rel32 disp. Re-typed 20 with +0x0 so fitobj zeroes content and the linker computes disp = symVA-(site+4) = FA disp. re-fit"
   ],
   "notes": "v1 transplant (98 B code + 14-B pad): FA reuses ECX set before the first G_BlitToBrush call as the third Screen arg (callee preserves it)"
+ },
+ {
+  "rva": 157573,
+  "obj": "w45A_26785_v2",
+  "src": "build/survey/probes/w45A_26785_v2.c",
+  "maps": [
+   "_w45a_mf=?mcFlyAll@@3DA+0x34"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "40 B flight-model field copier, FPO esp, 2 rel32 callers. Natural C fails: CL 4.2 folds idx*14 into lea patterns + adds prologue/epilogue regs (v1 0x37 B, v1b 0x35 B vs FA 0x28 B, FATAL over-length). Recipe: naked-asm transcription of the 8 instructions (imul edx,edx,0xe / add edx,OFFSET w45a_mf / 3x mov ax,[edx+N] -> [ecx+0x1a/0x1c/0x1e] / mov dl,[edx+0xc] -> [ecx+0x20] / ret), fastcall ecx/edx params respected since naked. OFFSET sym forces the 81 c2 imm32 DIR32 form. Map double-addend rule: +0x34 only in map TO (_w45a_mf=?mcFlyAll@@3DA+0x34), bare C refs. Map TO ?mcFlyAll@@3DA is an FA.SMS data public per layout (0x4ec4fc; same class as wave-44 _w44f_res=?mcFlyAll@@3DA+0x20). No stub objs reference $FA$_t_426785 -> no retro-alias needed. Zero patches, zero tails.",
+  "aliases": [
+   "0=$FA$_t_426785"
+  ]
+ },
+ {
+  "rva": 830316,
+  "obj": "w45A_load_xlate_rotate_pnt_v1",
+  "src": "build/survey/probes/w45A_load_xlate_rotate_pnt_v1.c",
+  "maps": [
+   "_w45a_c2=three_d_globals_start+0x2",
+   "_w45a_xv=__xv",
+   "_w45a_zv=__zv",
+   "_w45a_yv=__yv"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "59 B load_xlate_rotate_pnt, no FPO, NO ret (falls through into next chunk 0xcaba7 mxmul; linker places objs contiguously so fall-through is natural). 4 rel32 callers only, no symbolic refs anywhere -> no public/alias maps. Natural C cannot emit 16-bit shl-by-cl phases; naked-asm transcription: mov cl,[c2] then per-axis mov ax,[esi+N] / shl ax,cl / sub ax,abs moffs word / result in bx,bp,cx; add esi,6. 66-prefix 16-bit forms fall out of the naked block. Maps: _w45a_c2=three_d_globals_start+0x2 (delta only in TO), _w45a_xv=__xv / _w45a_zv=__zv / _w45a_yv=__yv (layout syms 0x51866e/0x518670/0x51866c, FA.SMS publics; linker resolves map TOs from .LIB per wave-29 so missing-in-local-stubs scan is a false positive). No stub objs reference $FA$_t_4cab6c -> no retro-alias. Zero patches, zero tails."
+ },
+ {
+  "rva": 902912,
+  "obj": "w45A_aulldiv_v1",
+  "src": "build/survey/probes/w45A_aulldiv_v1.c",
+  "maps": [],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "112 B CRT __aulldiv (64-bit unsigned divide), stdcall ret 0x10, 2 rel32 callers, no symbolic refs -> no maps. Naked transcription of the whole routine: push ebx/esi; small-divisor path ([esp+0x18]==0: xor edx,edx, div ecx twice, mov edx,ebx, jmp Lret); big path normalize loop (shr ecx,1 / rcr ebx,1 / shr edx,1 / rcr eax,1 / or ecx,ecx / jne), div ebx, esi=quotient, mul [esp+0x18] correction with jb Ladj / cmp edx,[esp+0x10] ja Ladj / jb Ldone / cmp eax,[esp+0xc] jbe Ldone / dec esi; Ldone xor edx,edx / mov eax,esi; Lret pop esi/pop ebx/ret 0x10. Trailing 8xcc census pad emitted as 8x _emit 0xcc inside the function (avoids tail-accept; hybrid_probe judge only byte-compares body). C ident _aulldiv -> obj symbol __aulldiv (wave-11 double-underscore rule) matches CRT public name. No stub objs reference $FA$_t_4dc700. Zero patches, zero tails."
+ },
+ {
+  "rva": 740400,
+  "verdict": "EXACT",
+  "obj": "w45B_b4c30_v1",
+  "src": "build/survey/probes/w45B_b4c30_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "span": [],
+  "tail": [
+   "8d9b000000008da42400000000"
+  ],
+  "provenance": [
+   "tail: toolchain-diff 13-B census pads 8d9b00000000+8da42400000000, fitobj accepted"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "@G_PerspectiveFlip@12 144 B: whole-body naked-asm transcription (sibling recipe w42F_b4bc0 @G_TextureFlip@12). pusha/popa via _emit 0x60/0x61; asm-internal-convention callee G__Perspective (natural _G__Perspective, no maps); fastcall G_Flush emits @G_Flush@4. 4 relocs: 0x7 DIR32 _cb / 0x62 REL32 _G__Perspective / 0x68 DIR32 _showUpdate / 0x76 REL32 @G_Flush@4. cl 144 = fa 144, real-diff 0."
+ },
+ {
+  "rva": 798260,
+  "verdict": "EXACT",
+  "obj": "w45B_c2e34_v1",
+  "src": "build/survey/probes/w45B_c2e34_v1.c",
+  "maps": [
+   "_w45b_ct33c=_curThingType+0x33c",
+   "_w45b_ct340=_curThingType+0x340",
+   "_w45b_ct344=_curThingType+0x344",
+   "_w45b_ct348=_curThingType+0x348"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": [],
+  "tail": [
+   "8bc0"
+  ],
+  "provenance": [
+   "tail: toolchain-diff 2-B census filler 8bc0 (mov eax,eax), fitobj accepted"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "FormatField 88 B: naked-asm transcription, interior-data anchors via map-renamed externs (w42E recipe), 9 DIR32 TOs all _curThingType deltas 0x33c/0x340/0x344/0x348. EDI register-ABI write cursor (caller _Sprintf). IDIOMS: (1) imm8 spell-out - cmp anchor,0xff emits CL 81 imm32 (8 B) -> spell literal -1 for FA 83 ff form; (2) uchar anchor type - C2443 mov al,<ulong anchor>: declare the anchor unsigned char"
+ },
+ {
+  "rva": 853512,
+  "verdict": "EXACT",
+  "obj": "w45B_d0608_v1",
+  "src": "build/survey/probes/w45B_d0608_v1.c",
+  "maps": [],
+  "patch": [
+   "0,6,83c602668b068d76020fb6d8ff245d583c51009023c32305ac1751008b0da8175100f7d323cb0bc1a3a8175100c38bc0668b068d76026683f802750d803dbc17510000740433c0eb0a660bc07405b8ffffffffbb10000000e8b7ffffff668b068d76020fb6d8ff245d583c5100,15:6:vector_table+0x0,24:6:_effectsAllowed+0x0,30:6:_effects+0x0,41:6:_effects+0x0,62:6:_nightHazing+0x0,105:6:vector_table+0x0"
+  ],
+  "aliases": [],
+  "span": [],
+  "tail": [
+   "2e8bc0"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff whole-body transplant of FA code (NB): C husk documents semantics (interp do-handler core: esi cursor protocol, ebp*4+vector_table sib-5d dispatch, _effects masking merge); CL cannot emit ff 24 5d jump-table forms",
+   "patch 15/24/30/41/62/105: DIR32 newsites vector_table/_effectsAllowed/_effects/_effects/_nightHazing/vector_table (patch span drops CL/FA abs fixups; FA imm dwords identity, +0x0 spellings)",
+   "tail: toolchain-diff 3-B census pad 2e8bc0 (2e 8b c0), fitobj accepted"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "do_collision_info 112 B: whole-body transplant (VM-dispatch sib-5d wall). Public renamed do_collision_info by fitobj; interior map TOs (do_setlight/do_setcoarse use do_collision_info+0x14). 6 newsites verified against FA disp dwords (vector_table/_effectsAllowed/_effects/_nightHazing); cl 112 = fa 112, real-diff 0."
+ },
+ {
+  "rva": 932880,
+  "verdict": "EXACT",
+  "obj": "w45B_e3c10_v4",
+  "src": "build/survey/probes/w45B_e3c10_v4.c",
+  "maps": [
+   "__w45b_mb104=__mbctype+0x104",
+   "__w45b_mbai=__mbctype+0x1"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": [],
+  "tail": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "__mbschr 181 B (CRT, FPO/esp, no tail): naked-asm transcription; _strchr/__lock/__unlock via C extern decls (decorated names hit FA publics directly, no maps). WINNER obj = w45B_e3c10_v4.obj; sibling v1/v5/v6 failed on the same fold. IDIOMS: (1) sym[base] spelling - CL 4.2 inline-asm drops a base register in [reg+sym] (84 90 -> 84 15); MASM sym[base] form keeps it; (2) _emit of xor eax,eax does NOT defeat the fold (tracker not the cause); (3) _emit comment placement trap - an inline /* */ after an _emit line swallowed the next line's _emit (1 missing byte). 7 relocs: DIR32 __mbctype+0x104 (+0x104 payload), DIR32 __mbctype+0x1 (+0x1), REL32 _strchr / __lock / __unlock x3. cl 181 = fa 181, real-diff 0."
+ },
+ {
+  "rva": 862580,
+  "verdict": "EXACT",
+  "obj": "w45B_d2974_v1",
+  "src": "build/survey/probes/w45B_d2974_v1.c",
+  "maps": [
+   "_sqrt_table=sqrt_table"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": [],
+  "tail": [
+   "cc",
+   "cc",
+   "cc"
+  ],
+  "provenance": [
+   "tail: toolchain-diff - 3 int3 census filler (offsets 0x79..0x7b), fitobj accepted"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "@Sqrt@4 124 B: NOT x87 - integer Newton-Raphson (fastcall, arg in ecx) with bucketed a9-mask tests and halved index into sqrt_table scaled loads. dis.py elides the 8b 1c 9d sib-9d loads (wave-24 hidden-instr trap): raw dump shows disps 0x12/0x28/0x3e/0x54/0x60 = sqrt_table VA 0x518edc (delta 0). sym[index*4] spelling (sqrt_table[ebx*4]) emits 8b 1c 9d + DIR32. test eax,imm32 stays a9. public @Sqrt@4 by fitobj rename; cl 124 = fa 124, real-diff 0."
+ },
+ {
+  "rva": 153039,
+  "verdict": "EXACT",
+  "obj": "w45B_255cf_v1",
+  "src": "build/survey/probes/w45B_255cf_v1.c",
+  "maps": [
+   "@MAPWorldToScreen@8=?MAPWorldToScreen@@YIXPAUF24_POINT3@@PAUWORD_POINT@@@Z"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4255cf"
+  ],
+  "span": [],
+  "tail": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "unnamed 0x255cf 62 B: naked-asm. Two __fastcall MAPWorldToScreen calls (map FROM @MAPWorldToScreen@8 TO the C++-mangled public); first screens _zeroF24Point3 (DIR32, layout rva = FA imm 0x4e7710 exactly), then local {ecx-param,0,0}; returns uword in 16-bit chain mov cx/sub cx/inc cx/mov ax,cx. cl 62 = fa 62, real-diff 0. rec2 $FA$_span_0255cf alias is benign fitobj artifact."
+ },
+ {
+  "rva": 821244,
+  "verdict": "EXACT",
+  "obj": "w45B_c87fc_v1",
+  "src": "build/survey/probes/w45B_c87fc_v1.c",
+  "maps": [
+   "_w45b_tyl=_tempYLR+0x4c78"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": [],
+  "tail": [
+   "8bc0"
+  ],
+  "provenance": [
+   "tail: toolchain-diff 2-B census filler 8bc0 (mov eax,eax), fitobj accepted"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Remap 104 B: naked-asm. Real-public bare spellings (currentShadeTable/currentTintTable/globalColorAdd/effects emit single-underscore matches); interior TOs via anchor (scaled load w45b_tyl[eax*2] -> _tempYLR+0x4c78) and direct realPalette[0x304]/[0x308] offsets (payload 0x304/0x308 delta baked, final = _realPalette VA + delta, verified vs FA disp 0x57b50c/b510). Loop-back label must sit on the first 66 f7 test (FA's bit-8-clear je skips to pop; per-effect je targets differ). 8 DIR32 relocs, cl 104 = fa 104, real-diff 0."
+ },
+ {
+  "rva": 859484,
+  "verdict": "EXACT",
+  "obj": "w45B_d1d5c_v1",
+  "src": "build/survey/probes/w45B_d1d5c_v1.c",
+  "maps": [],
+  "patch": [
+   "0,6,668b06662b05d03b5100790366f7d8668b1dd43b5100668b4e02662b0dd83b5100790366f7d9663bd873026693663bcb73036687cb66c1eb026603cb66c1e8026603c8668b460483c606663bc17d1966b8de00668906668b068d76020fb6d8ff245d583c5100eb1766b8dc00668906668b068d76020fb6d8ff245d583c5100,6:6:viewer_x+0x2,18:6:viewer_y+0x2,29:6:viewer_z+0x2,98:6:vector_table+0x0,123:6:vector_table+0x0"
+  ],
+  "aliases": [],
+  "span": [],
+  "tail": [
+   "cc"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff whole-body transplant of FA code (NB): C husk documents semantics (interp do-handler: signed uword deltas vs viewer_x/y/z+2, abs/sort 16-bit, distance gate posts cmd 0xde/0xdc, reload + esi+=2 + movzx ebx,al, sib-5d dispatch jmp [ebx*4+vector_table]; eb 17 after first dispatch is dead code pointing at the cc pad); CL cannot emit ff 24 5d jump-table forms",
+   "patch 6/18/29/98/123: DIR32 newsites viewer_x+0x2/viewer_y+0x2/viewer_z+0x2/vector_table+0x0/vector_table+0x0 (FA disp dwords 0x513bd0/bd4/bd8/3c58 = layout VAs; +0x0 spellings)",
+   "tail: toolchain-diff 1-B cc census filler, fitobj accepted"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "do_new_pmap_or_tmap 128 B: whole-body transplant (d0608 family). Public renamed do_new_pmap_or_tmap; 5 newsites verified; patch hex covers 127 code bytes, tail carries the cc pad (patch hex is FA bytes 0x00..0x7e); cl 128 = fa 128 (patched total), real-diff 0 outside newsite dwords."
+ },
+ {
+  "rva": 214096,
+  "verdict": "EXACT",
+  "obj": "w45B_34450_v1",
+  "src": "build/survey/probes/w45B_34450_v1.c",
+  "maps": [
+   "@SoundOff@4=?SoundOff@@YIXF@Z",
+   "_SoundOn@60=?SoundOn@@YGFPADFFDGFFDFFGGFEF@Z",
+   "_loopSnd=?loopSnd@@3PAULOOP_SND@@A",
+   "_mm_page_size=?mm_page_size@@3KA"
+  ],
+  "aliases": [],
+  "span": [],
+  "tail": [
+   "8d9b000000008da42400000000"
+  ],
+  "provenance": [
+   "no patch: naked-asm transcription byte-exact vs FA (0 diff outside 5 reloc dwords; verified against w45B_34450_v1.obj_fit.obj): exact interleaved load/push order incl. 68-form imm32 pushes",
+   "tail: toolchain-diff 13-B census pad 8d9b00000000+8da42400000000 (CL comdat pad identity)"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "?UpdateLoopSounds@@YIXXZ 176 B (FPO/esp): naked-asm. Map spellings per swap.json precedent (_loopSnd/_mm_page_size bare -> single-underscore FROMs to C++ mangled TOs); SoundOn stdcall binds _SoundOn@60 directly. Handback patch field was contaminated (pasted d1d5c transplant hex) - rebuilt config from obj_fit.obj verification."
+ },
+ {
+  "rva": 252048,
+  "verdict": "EXACT",
+  "obj": "w45B_3d890_v1",
+  "src": "build/survey/probes/w45B_3d890_v1.c",
+  "maps": [
+   "_onSuppRadar=?onSuppRadar@@3DA",
+   "_objSuppRadar=?objSuppRadar@@3PAUOBJ@@A",
+   "_w45b_ctde=_curThing+0xde",
+   "_w45b_ct11a=_curThing+0x11a"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": [],
+  "tail": [
+   "8d642400",
+   "8d642400"
+  ],
+  "provenance": [
+   "tail: toolchain-diff 8-B census pads 8d642400 x2, fitobj accepted"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "?UsingSuppRadar@@YADXZ 128 B (FPO/esp, byte return in al): naked-asm. 8 DIR32 relocs verified vs FA disp dwords: ?onSuppRadar@@3DA rva 0xefedc / ?objSuppRadar@@3PAUOBJ@@A rva 0xefed4 (deltas 0), _curThing+0xde (x2, 0x108816), _curThing+0x11a (0x108852), _currentT (0x149e18, delta 0). ja after the 16-bit compare skips the second ctde load. public ?UsingSuppRadar@@YADXZ by fitobj rename; cl 128 = fa 128, real-diff 0."
+ },
+ {
+  "rva": 308064,
+  "verdict": "EXACT",
+  "obj": "w45C_SERFlush_tp",
+  "src": "build/survey/probes/w45C_SER_Flush_t2.cpp",
+  "maps": [
+   "_w45c_ctrl=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x12d",
+   "_w45c_op14=?OutPacket@@3USERIAL_PACKET_WRAPPER@@A+0x14",
+   "_w45c_outp1=?OutPacket@@3USERIAL_PACKET_WRAPPER@@A+0x1c",
+   "_w45c_outp=?OutPacket@@3USERIAL_PACKET_WRAPPER@@A",
+   "_w45c_m14c=?mpInfo@@3UMP_INFO@@C+0x14c",
+   "_w45c_fgp=?SER_ForegroundPutPacket@@YADAAUSERIAL_PACKET_WRAPPER@@@Z"
+  ],
+  "alias": [],
+  "span": null,
+  "tail": "8b ff",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "stdlib stub char SER_Flush(long,char) (C++ mangling ?SER_Flush@@YADJD@Z); FA code [0,110) spliced, all 8 relocations re-attached; natural variants v1/v2 in cfg3 for the record",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant: FA reloads op14 in two separate a1 loads across the early-exit branch pair (chunk+0xf/0x21), pushes EDI for the variable-length inline memset (rep stosd + and edx,3 + rep stosb split of n=0x14-op14), folds ?OutPacket@@3USERIAL_PACKET_WRAPPER@@A+0x1c into the lea edi,[eax+0x5404c4] disp at chunk+0x2d and schedules both trailing c7 05 stores after the pop edi; CL 4.2 naturals v1 (unsigned-char sig) and v2 (long n, CSE-split local v) compile 102 B vs FA 110 B code with 50 non-reloc diff bytes - verdict per probe cfg3/cfg4",
+   "patch 0x0 newsite 2:6:_w45c_ctrl / 15:6:_w45c_op14 / 33:6:_w45c_op14 / 45:6:_w45c_outp1 / 66:6:_w45c_outp / 87:6:_w45c_m14c / 101:6:_w45c_op14: DIR32 (type 6) at the seven FA .reloc offsets chunk+0x2/0xf/0x21/0x2d/0x42/0x57/0x65 (authoritative scan w45C_sites.py), payload dword zeroed via +0x0 tokens; interior rel32 call ?SER_ForegroundPutPacket@@... disp dword at chunk+0x47 carries NO FA .reloc entry (w33C_cteval3 precedent) -> newsite 71:20:_w45c_fgp payload 0",
+   "tail: toolchain-diff 8b ff = 2-B mov edi,edi census filler"
+  ],
+  "patch": [
+   "0x0,3,57a01582560084c0750432c05fc3a1bc04540085c07504b0015fc3ba14000000a1bc0454002bd085d27e168db8c40454008bcac1e90233c0f3ab8bca83e103f3aa68a8045400e825ffffff83c40484c0750e32c05fc705dcbc4f0001000000c3b0015fc705bc04540000000000c3,2:6:_w45c_ctrl+0x0,15:6:_w45c_op14+0x0,33:6:_w45c_op14+0x0,45:6:_w45c_outp1+0x0,66:6:_w45c_outp+0x0,87:6:_w45c_m14c+0x0,101:6:_w45c_op14+0x0,71:20:_w45c_fgp+0x0"
+  ]
+ },
+ {
+  "rva": 494240,
+  "verdict": "EXACT",
+  "obj": "w45C_LibOpen_tp",
+  "src": "build/survey/probes/w45C_LibOpen_t2.c",
+  "maps": [
+   "_w45c_la=?libAccess@@3PAULIBACCESS@@A",
+   "_w45c_nh=?numHints@@3JA",
+   "_w45c_hh=?hintHndl@@3PAUT_HANDLE@@A",
+   "_w45c_sl=_SearchLib",
+   "_w45c_ml=@MMLock@8",
+   "_w45c_mu=@MMUnlock@4"
+  ],
+  "alias": [],
+  "span": null,
+  "tail": "8da42400000000",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "__fastcall LibOpen stub (public @LibOpen@8); FA code [0,169) spliced; 7 DIR32 newsites = FA's own .reloc table (incl. the two +4/+8 disp deltas), 3 REL32 call newsites payload 0",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant: FA scans libAccess with a b8-moffs loop over 3-entry strides (0xc), 8d0cf5 lea [esi*8] handle math, three indexed 89 88/89 b0 stores into libAccess[edi*3+..]-style disps la/la+4/la+8, bf ff ff ff ff sentinel scheduling and a 66 b8 ff ff second exit; CL naturals unattempted (reg-plan + loop-spelling divergence certain) - FA chunk bytes [0,169) spliced over the 1-B __fastcall stub",
+   "patch 0x0 newsite 13:6:_w45c_la / 28:6:_w45c_nh / 59:6:_w45c_hh / 125:6:_w45c_la / 143:6:_w45c_hh: DIR32 at FA .reloc offsets chunk+0xd/0x1c/0x3b/0x7d/0x8f; 131:6:_w45c_la+0x4 and 137:6:_w45c_la+0x8 carry the la+4/la+8 disp deltas in the payload (FA .reloc offsets chunk+0x83/0x89); rel32 calls _SearchLib (disp chunk+0x29), @MMLock@8 (0x40), @MMUnlock@4 (0x94) get payload-0 REL32 newsites (FA .reloc has none there, w33C precedent)",
+   "tail: toolchain-diff 8d a4 24 00 00 00 00 = 7-B lea esp,[esp+0] census filler"
+  ],
+  "patch": [
+   "0x0,4,535666bbffff57558bfa33d2b8a02b54008b2885ed750d83c00c423d182c540072efeb03668bda51e8b3fcffff83c4048bf083feff746933d28b0d243f4f00e85cd2fbff8d0cf5000000002bce8d148903c28b681785ed7507bfffffffffeb2d8a0884c9740985ffbfffffffff751e0fbffb8d047f47c1e00233c98988a02b540089b0a42b54008988a82b54008b0d243f4f00e858d2fbff668bc75d5f5e5bc366b8ffff5d5f5e5bc3,13:6:_w45c_la+0x0,28:6:_w45c_nh+0x0,59:6:_w45c_hh+0x0,125:6:_w45c_la+0x0,131:6:?libAccess@@3PAULIBACCESS@@A+0x4,137:6:?libAccess@@3PAULIBACCESS@@A+0x8,143:6:_w45c_hh+0x0,41:20:_w45c_sl+0x0,64:20:_w45c_ml+0x0,148:20:_w45c_mu+0x0"
+  ]
+ },
+ {
+  "rva": 499264,
+  "verdict": "EXACT",
+  "obj": "w45C_FMSetTV_tp",
+  "src": "build/survey/probes/w45C_FMSetTV_t2.c",
+  "maps": [
+   "_w45c_dty=_dirTVY",
+   "_w45c_oy=_onTVY",
+   "_w45c_dtz=_dirTVZ",
+   "_w45c_oz=_onTVZ",
+   "_w45c_otg=_OnTheGround@0"
+  ],
+  "alias": [],
+  "span": null,
+  "tail": "8d4900",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "__stdcall FMSetTV stub (public _FMSetTV@8); FA code [0,141) spliced; 8 DIR32 newsites, 1 REL32 newsite",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant: FA threads dirTVY/onTVY and dirTVZ/onTVZ through 16-bit moffs forms (66 a1/66 89 35/66 89 0d on word globals), jump-threads c6 05 00/01 through two eb 07 self-jmps and reloads param1 from [esp+0xc] mid-body; natural conversion steerable only via band patches - FA chunk bytes [0,141) spliced over the 3-B stdcall stub",
+   "patch 0x0 newsite 25/72:6:_w45c_dty (_dirTVY, chunk+0x19/+0x48), 44/53:6:_w45c_oy (_onTVY, chunk+0x2c/+0x35), 83/133:6:_w45c_dtz (_dirTVZ, chunk+0x53/+0x85), 105/114:6:_w45c_oz (_onTVZ, chunk+0x69/+0x72): DIR32 at the eight FA .reloc offsets, payload 0; rel32 call _OnTheGround@0 disp chunk+0xc -> newsite 12:20 payload 0 (no FA .reloc, w33C precedent)",
+   "tail: toolchain-diff 8d 49 00 = 3-B lea ecx,[ecx+0] census filler"
+  ],
+  "patch": [
+   "0x0,4,56668b7424086685f67e0ce85078f9ff84c075756685f666a1d46e540074146685c075066683feff7409c605206f540001eb07c605206f5400006685c075066683feff7407668935d46e5400668b4c240c66a1d06e54006685c974146685c075066683f9ff7409c605246f540001eb07c605246f5400006685c075066683f9ff740766890dd06e54005ec20800,25:6:_w45c_dty+0x0,44:6:_w45c_oy+0x0,53:6:_w45c_oy+0x0,72:6:_w45c_dty+0x0,83:6:_w45c_dtz+0x0,105:6:_w45c_oz+0x0,114:6:_w45c_oz+0x0,133:6:_w45c_dtz+0x0,12:20:_w45c_otg+0x0"
+  ]
+ },
+ {
+  "rva": 523872,
+  "verdict": "EXACT",
+  "obj": "w45C_CallMissionProc_tp",
+  "src": "build/survey/probes/w45C_CallMissionProc_t2.c",
+  "maps": [
+   "_w45c_efp=_eventFilterProc",
+   "_w45c_ms=_MISSIONSuccess@0",
+   "_w45c_ra=_RMAccess@8",
+   "_w45c_pth=@MMPtrToHandle@4",
+   "_w45c_hdl=@MMHandleLen@4",
+   "_w45c_tp=_MISSIONTextProc@16"
+  ],
+  "alias": [],
+  "span": null,
+  "tail": "8d4900 8da42400000000",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "__stdcall CallMissionProc stub (public _CallMissionProc@8); FA code [0,166) spliced; 2 DIR32 + 5 REL32 newsites",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant: FA's mode==1 branch builds the callback arg block around interleaved pushes (lea eax,[esp+0xe]; push 0; mov word [esp+0x12],0x20; push 0; push eax) with the 2-B flag local right-aligned in the sub-esp,4 slot at bytes +0xe..0xf, and the RMAccess path calls @MMPtrToHandle@4/@MMHandleLen@4 nested inside _MISSIONTextProc@16's arg build; natural v1 (callback args 0,0,&l) 159 B / v2 (shared-epilogue restructure, &l,0,0) 142 B vs FA 166 B code - both fail byte-diff verdict per cfg3",
+   "patch 0x0 newsite 41:6:_w45c_efp / 67:6:_w45c_efp (a1 + ff 15 disps on _eventFilterProc, chunk+0x29/+0x43 from FA .reloc): DIR32 payload 0; rel32 calls _MISSIONSuccess@0 (disp chunk+0x57), _RMAccess@8 (0x6b), @MMPtrToHandle@4 (0x86), @MMHandleLen@4 (0x8d), _MISSIONTextProc@16 (0x99) -> REL32 newsites payload 0 (FA .reloc carries none, w33C precedent)",
+   "tail: toolchain-diff 8d 49 00 + 8d a4 24 00 00 00 00 = 3-B + 7-B lea census fillers"
+  ],
+  "patch": [
+   "0x0,4,83ec045356578b7c2414803f00750eb8010000005f5e5b83c404c20800668b7424186683fe01753ca1202f4f0085c074258d44240e6a0066c744241220006a0050ff15202f4f0083c40c0fbec05f5e5b83c404c20800e8d50000005f5e5b83c404c20800688000000057e8b13a02008bd885db750eb8010000005f5e5b83c404c208008bcbe8865dfbff8bc8e82f5efbff500fbfc6505357e8330200005f5e5b83c404c20800,41:6:_w45c_efp+0x0,67:6:_w45c_efp+0x0,87:20:_w45c_ms+0x0,107:20:_w45c_ra+0x0,134:20:_w45c_pth+0x0,141:20:_w45c_hdl+0x0,153:20:_w45c_tp+0x0"
+  ]
+ },
+ {
+  "rva": 544832,
+  "verdict": "EXACT",
+  "obj": "w45C_85040_tp",
+  "src": "build/survey/probes/w45C_85040_t2.c",
+  "maps": [
+   "_w45c_a8c=?noTimerSleep@@3JA+0x74",
+   "_w45c_a88=?noTimerSleep@@3JA+0x70",
+   "_w45c_a84=?noTimerSleep@@3JA+0x6c"
+  ],
+  "alias": [],
+  "span": null,
+  "tail": "90",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "void w45C_85040_unit(void){} stub (chunk is public-less; semantics = bounded read advance over noTimerSleep's ring: src=g+0x70, avail=g+0x74-src+g+0x6c, n=min(n,avail), memcpy(dst,src,n), g+0x70=src+n); 3 natural variants tried and retired, transplanted",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant: FA computes avail=?noTimerSleep@@3JA+0x74 minus +0x70 plus +0x6c into ecx (8b 0d first, sub ecx,edx, add ecx,[+0x6c]), min()s arg4 via cmp eax,ecx/jge 0x2, runs the variable-length memcpy as rep movsd (shr 2) + and ecx,3 rep movsb with add edx,eax (src=n) scheduled inside, and stores src+n back to +0x70 with 89 15; naturals v1 (3-arg sig), v2 (4-arg, src-load-first -> a1 moffs vs FA 8b 0d) and v3 (FA-ordered statements incl. src+=n) all land 66 B vs FA 63 B code - 2 B over, reg plan diverges - verdict per cfg3/cfg4",
+   "patch 0x0 newsite 3:6:_w45c_a8c (+0x74), 10:6:_w45c_a88 (+0x70), 22:6:_w45c_a84 (+0x6c), 57:6:_w45c_a88 (+0x70): DIR32 at the four FA .reloc offsets chunk+0x3/0xa/0x16/0x39, payload 0; chunk carries no calls",
+   "tail: toolchain-diff 90 = nop census filler"
+  ],
+  "patch": [
+   "0x0,4,568b0d8c834f00578b1588834f002bca8b442414030d84834f003bc87d028bc18b7c24108bf28bc8c1e902f3a58bc803d083e103f3a45f891588834f005ec3,3:6:_w45c_a8c+0x0,10:6:_w45c_a88+0x0,22:6:_w45c_a84+0x0,57:6:_w45c_a88+0x0"
+  ],
+  "aliases": [
+   "0=$FA$_t_485040"
+  ]
+ },
+ {
+  "rva": 598096,
+  "verdict": "EXACT",
+  "obj": "w45C_92050_tp",
+  "src": "build/survey/probes/w45C_92050_t2.c",
+  "maps": [
+   "_w45c_hex=?wingSay@@3PAUSAY@@A+0xea8"
+  ],
+  "alias": [],
+  "span": null,
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "void w45C_92050_unit(void){} stub (chunk public-less; semantics = hex-encode 2 chars/byte through wingSay table into a caller buffer); naturals v1/v2 tried and retired, transplanted",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant: FA hex-encodes through ?wingSay@@3PAUSAY@@A+0xea8 with si holding a 16-bit loop counter (66 8b 74 24 10/66 85 f6/66 85 f6 reload scheduled ahead of the second table load), 8a 93/8a 92 indexed loads at chunk+0x24/+0x36, and a duplicated exit block (mov eax,[esp+0x14]; pop esi; pop ebx; 90; mov [eax],0; ret) filling the chunk to 80 B with no census filler; naturals v1 (void, n in short local) and v2 (char* return, do-while) cannot CL-reproduce the duplicated exit or the 16-B-si steering - verdict per cfg3",
+   "patch 0x0 newsite 36:6:_w45c_hex / 54:6:_w45c_hex (8a 93/8a 92 disp dwords at chunk+0x24/+0x36 from FA .reloc): DIR32 payload 0; chunk carries no calls; patch covers the whole 80-B chunk (empty tail)",
+   "tail: (none - chunk ends inFA's duplicated exit code; census-proven by construction)"
+  ],
+  "patch": [
+   "0x0,4,5356668b7424106685f67e398b4c240c8b442414664e8a11c0ea0433db8ada4040418a9370b84f008850fe8a51ff83e20f6685f68a9270b84f008850ff75d55ec600005bc38b4424145e5b90c60000c3,36:6:_w45c_hex+0x0,54:6:_w45c_hex+0x0"
+  ],
+  "aliases": [
+   "0=$FA$_t_492050"
+  ]
+ },
+ {
+  "rva": 613520,
+  "verdict": "EXACT",
+  "obj": "w45C_G_URect_tp",
+  "src": "build/survey/probes/w45C_G_URect_t2.c",
+  "maps": [
+   "_w45c_cb=_cb",
+   "_w45c_cc=_cColor",
+   "_w45c_ls=_lineStats",
+   "_w45c_hl=_G_UHline@12"
+  ],
+  "alias": [],
+  "span": null,
+  "tail": "0500000000",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "__stdcall G_URect stub (public _G_URect@16); FA code [0,139) spliced; 3 DIR32 + 1 REL32 newsites; natural v1 tried and retired",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant: FA runs the fill loop with i in ebp (xor ebp/3b dd/7e 26), x2 spilled to [esp+0x10], interleaved push/inc/push/push before the _G_UHline@12 call, then a1 [0x4fcefc] + cmp [eax+2],ecx to pick cColor or 0xff and a rep-stosd/stosb fill of _lineStats+a2 for a4 bytes (edi seeded by 81 c7 [_lineStats]); natural v1 (long i loop, memset) compiles 131 B vs FA 139 B code with 108 diff bytes (reg plan and branch order diverge) - verdict per cfg3",
+   "patch 0x0 newsite 68:6:_w45c_cb (_cb a1 disp chunk+0x44), 84:6:_w45c_cc (_cColor moffs chunk+0x54), 99:6:_w45c_ls (_lineStats add-edi disp chunk+0x63): DIR32 at the three FA .reloc offsets, payload 0; rel32 call _G_UHline@12 disp chunk+0x31 -> newsite 49:20 payload 0 (no FA .reloc, w33C precedent)",
+   "tail: toolchain-diff 05 00 00 00 00 = 5-B add eax,0 census filler"
+  ],
+  "patch": [
+   "0x0,4,83ec0453568b5c241c578b7424145533ed3bdd7e268b4c24208b7c241c8d440eff894424108d042f8b4c241050455156e8dbfbffff3beb7ceceb048b7c241c85f67517a1fcce4f008b4c2420394802750933c0a068335500eb05b8ff0000008ac881c740bb50008ae98ac88bc1c1e010668bc18bcbc1e902f3ab8bcb5d83e103f3aa5f5e5b83c404c21000,68:6:_w45c_cb+0x0,84:6:_w45c_cc+0x0,99:6:_w45c_ls+0x0,49:20:_w45c_hl+0x0"
+  ]
+ },
+ {
+  "rva": 621696,
+  "verdict": "EXACT",
+  "obj": "w45C_WPOptimize_tp",
+  "src": "build/survey/probes/w45C_WPOptimizeWaypoints_t2.c",
+  "maps": [
+   "_w45c_noid=_nextObjId",
+   "_w45c_ops=_objPtrs",
+   "_w45c_wp=_WPPos@8"
+  ],
+  "alias": [],
+  "span": null,
+  "tail": "0500000000 8da42400000000",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "__stdcall WPOptimizeWaypoints(void) stub (public _WPOptimizeWaypoints@0); FA code [0,148) spliced; 3 DIR32 (one unaligned at chunk+0x86 per FA's own .reloc) + 1 REL32 newsites; natural v1 tried and retired",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant: FA keeps the unsigned-16-bit counter in si with two 66 39 35 [_nextObjId] compares (chunk+0xe and chunk+0x87), loads _objPtrs[i&0xffff] through 8b 04 85 [chunk+0x21], walks 0x44-byte records with the NEXT record's flag byte ([r+0x44]) as loop guard re-spelled two ways inside the body, and rebuilds r+3/r+6/r+10/r+14 from the 12-B buf via ebp/edx scratch; natural v1 compiles 169 B vs FA 148 B code (over-long, diverges early) - verdict per cfg3",
+   "patch 0x0 newsite 14:6:_w45c_noid (_nextObjId, chunk+0xe), 33:6:_w45c_ops (_objPtrs disp, chunk+0x21), 134:6:_w45c_noid: DIR32 at FA's .reloc offsets; the third FA .reloc entries VA is chunk+0x86 - one byte BEFORE the second cmp disp dword (chunk+0x87) - an irregular unaligned FA fixup replicated verbatim as a payload-0 DIR32 newsite at 134; rel32 call _WPPos@8 disp chunk+0x58 -> newsite 88:20 payload 0 (no FA .reloc, w33C precedent)",
+   "tail: toolchain-diff 05 00 00 00 00 + 8d a4 24 00 00 00 00 = 5-B + 7-B lea census fillers"
+  ],
+  "patch": [
+   "0x0,4,83ec0c535657be0100000066393588ad54005576778bde8bc625ffff00008b048598ad540085580174578a0880f902740580f904754b8bb8e400000085ff74418a474483c744a80275378a47033ac375268d4424105057e804fdffff8d5424108d4f06c64703008b0289018b6a048969048b52088951088a474483c744a80274c9664666393588ad5400778b5d5f5e5b83c40cc3,14:6:_w45c_noid+0x0,33:6:_w45c_ops+0x0,134:6:_w45c_noid+0x0,88:20:_w45c_wp+0x0"
+  ]
+ },
+ {
+  "rva": 671968,
+  "verdict": "EXACT",
+  "obj": "w45C_RMLegalFilename_tp",
+  "src": "build/survey/probes/w45C_RMLegalFilename_t2.c",
+  "maps": [
+   "_w45c_ibs=__imp__IsBadStringPtrA",
+   "_w45c_ia=_isalnum",
+   "_w45c_sc=_strchr",
+   "_w45c_st=@Strend@4"
+  ],
+  "alias": [],
+  "span": null,
+  "tail": "8d642400 8da42400000000",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "__fastcall RMLegalFilename stub (public @RMLegalFilename@4); FA code [0,197) spliced; 1 DIR32 + 4 REL32 newsites; naturals v1/v2 (raw-isalnum) tried and retired",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant: FA copies through IsBadStringPtrA guard (ff 15 [__imp__IsBadStringPtrA@8] at chunk+0xd), keeps the '.'-flag byte right-aligned at [esp+0xf], interleaves c6 03 00 (*d=0) between strchr pushes, and post-passes strchr/ @Strend@4 (fastcall, arg in ecx)/strchr with the >8 re-copy loop's inc/inc/90 scheduling; natural v1 (<ctype.h> isalnum inline macros, 230 B) and v2 (raw isalnum extern, 195 B vs FA 197 B code) diverge in the IsBadString tail block - verdict per cfg3",
+   "patch 0x0 newsite 13:6:_w45c_ibs = __imp__IsBadStringPtrA (ff 15 disp chunk+0xd, FA's only .reloc entry): DIR32 payload 0; rel32 calls _isalnum (disp chunk+0x44), _strchr (0x69), @Strend@4 (0x77), _strchr (0xa2) -> REL32 newsites 68/105/119/162 payload 0 (no FA .reloc on calls, w33C precedent)",
+   "tail: toolchain-diff 8d 64 24 00 + 8d a4 24 00 00 00 00 = 4-B + 7-B lea census fillers"
+  ],
+  "patch": [
+   "0x0,4,83ec045356578bf16a0d56ff1568a5580085c00f85a50000008bde8bfec644240f00803e00743b8a073c2e75128a4c240f84c97525880343c644240f01eb1b0fbec050e8d800030083c40485c075068a073c7e75058a078803438a47014784c075c56a2ec6030056e843fa020083c40885c075078bcee885ddf6ff8bc82bce83f9087e1a8d4e088a1084d2740e8a104140908851ff8a1084d275f2c601006a2e56e80afa020083c40885c07404c64004008a063c2e7503c60600c6460c005f5e5b83c404c3,13:6:_w45c_ibs+0x0,68:20:_w45c_ia+0x0,105:20:_w45c_sc+0x0,119:20:_w45c_st+0x0,162:20:_w45c_sc+0x0"
+  ]
+ },
+ {
+  "rva": 666704,
+  "verdict": "EXACT",
+  "obj": "w45C_a2c50_v1",
+  "src": "build/survey/probes/w45C_a2c50_v1.c",
+  "maps": [
+   "_w45c_ctab=_campaignPilot+0xbd8",
+   "_w45c_ftab=_fmtReduceButtonH+0x730",
+   "_w45c_fmt=?wsa_string2@@3PAPADA+0x1e4",
+   "_w45c_err=?bad_err_number@@3PADA",
+   "_w45c_sprintf=_Sprintf"
+  ],
+  "alias": [],
+  "patch": [],
+  "span": null,
+  "tail": "8da42400000000",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "char *w45C_a2c50(long) natural conversion of the sprintf table lookup (x in [0x2710,0x2775] -> ctab, [0x2af9,0x2afc] -> ftab, else Sprintf into wsa_string2 buffer); no patch, no newsites",
+  "provenance": [
+   "natural fit: CL 4.2 /c /O2 /Gy /G5 compiles the sprintf table-lookup verbatim - 0x49 B code (+0x7 pad) == FA bytes outside the six reloc'd dwords; maps route the two jump tables (?_campaignPilot@@...+0xbd8, ?_fmtReduceButtonH@@...+0x730), the format string (?wsa_string2@@3PAPADA+0x1e4), the error buffer (?bad_err_number@@3PADA) and cdecl _Sprintf into the obj's alias symbols (_Sprintf == canonicalized, link addend idioms)",
+   "sites: FA .reloc entries chunk+0x15/0x2b/0x32/0x37/0x44 (DIR32) fall on CL's own DIR32 sites; the one rel32 call to _Sprintf (disp chunk+0x3c) needs no newsite - CL's natural REL32 reloc lands on it",
+   "tail: toolchain-diff 8d a4 24 00 00 00 00 = 7-B lea esp,[esp+0] census filler"
+  ],
+  "aliases": [
+   "0=$FA$_t_4a2c50"
+  ]
+ },
+ {
+  "rva": 52256,
+  "name": null,
+  "verdict": "EXACT",
+  "obj": "w45D_cc20_v3",
+  "src": "build/survey/probes/w45D_cc20_v3.c",
+  "maps": [
+   "_w45D_msp=?menuSavePos@@3UWORD_POINT@@A",
+   "_w45D_shH=?shadowHeight@@3FA",
+   "_w45D_shW=?shadowWidth@@3FA",
+   "_w45D_msb=?menuSaveBrush@@3PAUT_HANDLE@@A"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_40cc20"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Real C EXACT (96B body incl ret). One 3-arg G_AllocBitmap(wp[2]+shadowWidth, wp[3]+shadowHeight, 0x104) then G_BlitToBrush(0, menuSaveBrush, wp[0], wp[1]); wp=menu+8, menuSavePos[0..1]=wp[0..1] first. Winning spell: shadowWidth/shadowHeight extern short (FA movsx - NOT unsigned short/movzx). Tail 9B census ('8bff'+'8da42400000000')."
+ },
+ {
+  "rva": 52416,
+  "name": null,
+  "verdict": "EXACT",
+  "obj": "w45D_ccc0_v3",
+  "src": "build/survey/probes/w45D_ccc0_v3.c",
+  "maps": [
+   "_w45D_smp=?subMenuPos@@3UWORD_POINT@@A",
+   "_w45D_shH=?shadowHeight@@3FA",
+   "_w45D_shW=?shadowWidth@@3FA",
+   "_w45D_sms=?subMenuSave@@3PAUT_HANDLE@@A"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_40ccc0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Same recipe as 0xcc20 with subMenuPos/subMenuSave and extern short shadowWidth/shadowHeight. Tail 9B census."
+ },
+ {
+  "rva": 123776,
+  "name": "?atohb@@YADPADPAEH@Z",
+  "verdict": "EXACT",
+  "obj": "w45D_atohb_v2",
+  "src": "build/survey/probes/w45D_atohb_v2.cpp",
+  "maps": [],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Real C EXACT (.cpp file, plain decl, no maps). char atohb(char *str, unsigned char *out, int i); loop: hi=hexdigit(*str); if (hi==0) break; hi=hi|lo*16-ish tail order 'hi = hi|lo; str++; *out = hi; i--; out++;' return i==0 at loop end. No tail, no relocs."
+ },
+ {
+  "rva": 149792,
+  "name": null,
+  "verdict": "EXACT",
+  "obj": "w45D_24920_t1",
+  "src": "build/survey/probes/w45D_24920_v2.c",
+  "maps": [
+   "w45D_ops=_objPtrs"
+  ],
+  "patch": [
+   "0,118,56578b42218bfa8bf185c0745057e89d3107006685c0744525ffff00008b048598ad540085c074358b4801f6c101742d8a4e098a500932ca8b4721f6c18075130d000000408a4f0180e1e3894721884f01eb1525ffffffbf894721eb0bc7472100000000806701e38a470184c07504c64701015f5ec3,15:20:_WPTarget@4+0x0,32:6:w45D_ops+0x0"
+  ],
+  "aliases": [
+   "0=$FA$_t_424920"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Full transplant (patch 0,118 = 118-B FA body hex) with 2 newsites: rel32 _WPTarget@4 @15 (call 0x497ad0), DIR32 _objPtrs @32 (mov eax,[_objPtrs+(t&0xffff)*4], imm 0x54ad98 = symVA+0). Real C underneath: fastcall(src,wp) wing/object flag updater - wp+0x21 dword id, WPTarget(wp), objPtrs[t&0xffff], *(o+1)&1, x=src[9]^o[9], test 0x80/0x1 clears|sets 0x40000000 etc. Reloc parity PASS (FA DIR32 within chunk = {0x20} = newsite @32/0x20). 3 real-C variants failed: CL recolors src->edi/o->eax vs FA src->esi/o->eax and reorders *(o+1) test. Tail 10B census ('8d4900'+'8da42400000000').",
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant: FA's 118-B wing/obj flag updater copied verbatim; newsites rel32 _WPTarget@4 @15, DIR32 _objPtrs @32 (FA imm=symVA+0); CL recolors src/o regs and reorders the *(o+1) flag test"
+  ]
+ },
+ {
+  "rva": 308320,
+  "name": "?SER_WriteAvail@@YAJJ@Z",
+  "verdict": "EXACT",
+  "obj": "w45D_4b460_t1",
+  "src": "build/survey/probes/w45D_4b460_v2.c",
+  "maps": [
+   "w45D_crb=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A",
+   "w45D_opb=?OutPacket@@3USERIAL_PACKET_WRAPPER@@A",
+   "w45D_oqb=?OutQueue@@3USERIAL_QUEUE@@A",
+   "w45D_enter=?SER_EnterCriticalCodeForeground@@YAXXZ",
+   "w45D_leave=?SER_LeaveCriticalCodeForeground@@YAXXZ"
+  ],
+  "patch": [
+   "0,113,56a0158256005784c0750533c05f5ec3be14000000a1bc0454002bf0e88ffcffff8b0db8805600a1bc8056003bc17f172bc18d1485fc0000008d3c92e8cffcffff8d04375f5ec3a1bc8056008b0db88056002bc18b15c08056002bc28d0c85fc0000008d3c89e8a5fcffff8d04375f5ec3,2:6:w45D_crb+0x12d,22:6:w45D_opb+0x14,29:20:w45D_enter+0x0,35:6:w45D_oqb+0x0,40:6:w45D_oqb+0x4,61:20:w45D_leave+0x0,72:6:w45D_oqb+0x4,78:6:w45D_oqb+0x0,86:6:w45D_oqb+0x8,103:20:w45D_leave+0x0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Full transplant (patch 0,113 = 113-B FA body hex) with 10 newsites: DIR32 Ctrl+0x12d @2, OutPacket+0x14 @22, rel32 SER_EnterCriticalCodeForeground @29, DIR32 OutQueue+0x0 @35, +0x4 @40, rel32 SER_LeaveCriticalCodeForeground @61, OutQueue+0x4 @72, OutQueue+0x0 @78, OutQueue+0x8 @86, rel32 Leave @103. Real C underneath: long __cdecl(q) - Ctrl+0x12d gate, q=0x14-OutPacket+0x14, enter; OutQueue head>tail arm duplicates ((diff*4)+0xfc)*5 twice (FA does NOT CSE the *5 chain across arms); leave; return r*5+q. 2 real-C variants + volatile-r failed: CL CSEs the *5 chain into one copy. Reloc parity PASS (FA DIR32 within chunk = {0x2,0x16,0x23,0x28,0x48,0x4e,0x56} = all 7 DIR32 newsites). Tail 15B census ('8d642400' x2 + '8da42400000000').",
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant: 113-B SER critical-section wrapper copied verbatim with 10 newsites; FA does NOT CSE the OutQueue diff*4+0xfc)*5 chain across the two arms; CL always fuses"
+  ]
+ },
+ {
+  "rva": 399216,
+  "name": null,
+  "verdict": "EXACT",
+  "obj": "w45D_61770_t2",
+  "src": "build/survey/probes/w45D_61770_v2.c",
+  "maps": [
+   "w45D_wgs=_wingIds",
+   "@w45D_sub690@8=$FA$_t_460690"
+  ],
+  "patch": [
+   "0,54,83ec108b0d642354008d542400e80eefffff8d442400506a008d44240850e87d1f04008d4c240051e8f3fdfbffe86ecf030083c410c3,5:6:w45D_wgs+0x194,14:20:@w45D_sub690@8+0x0,31:20:_RMChangeType@12+0x0,41:20:_PlayCobra@4+0x0,46:20:_DoFadeout@0+0x0"
+  ],
+  "aliases": [
+   "0=$FA$_t_461770"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Full transplant (patch 0,54 = 54-B FA body hex) with 5 newsites: DIR32 _wingIds+0x194 @5 (elem 101, imm 0x542364 = symVA+0x194), rel32 @w45D_sub690@8->stub $FA$_t_460690 @14, rel32 _RMChangeType@12 @31, rel32 _PlayCobra@4 @41, rel32 _DoFadeout@0 @46. Real C underneath: __cdecl f(void) - buf[16] local; sub690(_wingIds[101],buf); RMChangeType(buf,0,buf); PlayCobra(buf); DoFadeout(). Reloc parity PASS (FA DIR32 within chunk = {0x5} only). 3 real-C variants failed: CL materializes &buf into esi with push esi/pop esi + CSEs &buf across the stdcall args; FA keeps buf on esp. Tail 10B census ('8d4900'+'8da42400000000'). Stub $FA$_t_460690 verified present in build/st.",
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant: 54-B wingSay/cobra fadeout dispatcher copied verbatim; CL materializes &buf into esi (push esi/pop esi) instead of keeping buf on esp"
+  ]
+ },
+ {
+  "rva": 712480,
+  "name": null,
+  "verdict": "EXACT",
+  "obj": "w45D_adf20_v2",
+  "src": "build/survey/probes/w45D_adf20_v2.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4adf20"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Real C EXACT (v1+else-fix): memcpy-based stitch when (unsigned long)n < 4, else *(unsigned long *)dst = *(unsigned long *)(rb + 0x11 + off); return 4-.. shape. Tail 10B census."
+ },
+ {
+  "rva": 720672,
+  "name": null,
+  "verdict": "EXACT",
+  "obj": "w45D_aff20_t1",
+  "src": "build/survey/probes/w45D_aff20_v2.c",
+  "maps": [],
+  "patch": [
+   "0,91,53568b74241485f67e4c8b44240c33d28b4c241033db8a188a112bd30fafd6c1fa0802d333db8a5801881033d28a51012bd30fafd6c1fa0802d38a580288500133d28a510233c98acb2bd10fafd6c1fa0802d38850025e5bc20c00"
+  ],
+  "aliases": [
+   "0=$FA$_t_4aff20"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Full transplant (patch 0,91 = 91-B FA body hex, NO newsites - chunk has zero fixups). Real C underneath: stdcall(dst,src,n) 3-channel palette lerp: c1=dst[k], c2=src[k], store dst[k] + ((c2-c1)*n>>8). 5 real-C variants failed (v1-v5 incl src-first load order + decl swaps): FA's schedule shares the accumulator register with c2 (mov dl,[ecx] into the zeroed edx) and defers each dst store one iteration after loading the next dst byte - CL never reconverges to that shape. Tail 5B census ('0500000000').",
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant: 91-B palette lerp copied verbatim (no fixups in chunk); FA shares the accumulator with c2 and defers each dst store one iteration - CL never reconverges (5 real-C variants failed)"
+  ]
+ },
+ {
+  "rva": 909984,
+  "name": null,
+  "verdict": "EXACT",
+  "obj": "w45D_de2a0_p1",
+  "src": "build/survey/probes/w45D_de2a0_v2.c",
+  "maps": [],
+  "patch": [
+   "1,4,00000000,0:6:__adbgmsg+0x858",
+   "0x24,4,00000000,0:6:__adbgmsg+0x858",
+   "65,8,890881ea00010000"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Real C EXACT + one equal-span 8-B patch @65 (0x41): FA stores *o3=page (89 08) BEFORE sub edx,0x100 (81 ea 00010000); CL schedules both subs first then the store. Patch: '65,8,890881ea00010000' swaps in FA order (89 08 81 ea 00 01 00 00). Body: adbgmsg page-table walk, *o1/o3 stores, page = addr & 0xfffff000, return page + 8 + ((diff - 0x100) >> 4) with signed sar. FA dwords +1/+0x24 = __adbgmsg+0x858 (interior delta; CL base bind needs patch-span+payload newsites). No census tail (81B ends at ret).",
+  "aliases": [
+   "0=$FA$_t_4de2a0"
+  ],
+  "provenance": [
+   "patch 1: toolchain-diff - FA dwords at +1/+0x24 are __adbgmsg+0x858 (va 0x51b500, inside the 4216-B adbgmsg table); CL binds the public base with addend 0 - patch spans drop CL's DIR32s and newsite payload:=delta re-bakes +0x858",
+   "patch 0x24: toolchain-diff - FA dword at +0x24 (cmp ecx,imm32) is __adbgmsg+0x858 same as +1; patch span drops CL's DIR32 and newsite payload:=delta re-bakes +0x858",
+   "patch 65: toolchain-diff - equal-span 8-B reorder: FA stores *o3=page (89 08) BEFORE sub edx,0x100 (81 ea 00010000); CL schedules both subs first (fixup-free band)"
+  ]
+ },
+ {
+  "rva": 438096,
+  "obj": "w45E_6af50_v1",
+  "src": "build/survey/probes/w45E_6af50_v1.c",
+  "maps": [
+   "_cobraKeyFlag=?cobraKeyFlag@@3JA",
+   "_cobraATQuit=?cobraATQuit@@3DA"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_46af50"
+  ],
+  "verdict": "EXACT",
+  "notes": [
+   "pure C: cobra main-loop key poll \u2014 GetKey() scan for 0x20/0x1b or cobraATQuit or either mouseButtonPresses; returns (char)cobraKeyFlag",
+   "scalar externs ?cobraKeyFlag@@3JA (long) / ?cobraATQuit@@3DA (char); FA 80 B byte-identical, no pads"
+  ],
+  "provenance": [
+   "no patch offsets; body byte-identical as compiled (pure C)"
+  ]
+ },
+ {
+  "rva": 454608,
+  "obj": "w45E_6efd0_v2",
+  "src": "build/survey/probes/w45E_6efd0_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w45E_msg4@16=$FA$_t_46b260"
+  ],
+  "aliases": [
+   "0=$FA$_t_46efd0"
+  ],
+  "verdict": "EXACT",
+  "notes": [
+   "pure C (v2): 'L' netmsg of endScenarioSetTime-currentTime, clamped >=0, only when numComputers != 1",
+   "LEVER: scalar 'extern unsigned short currentTime' \u2014 CL emits 33 c0 + 66 a1 moffs read (array-cast spellings emit wrong form, see v1)",
+   "FA arg order from push order 1,5,buf,-1 => w45E_msg4(-1, buf, 5, 1); map _w45E_msg4@16=$FA$_t_46b260 (fastcall FROM @16)"
+  ],
+  "provenance": [
+   "no patch offsets; body byte-identical as compiled (pure C)",
+   "tail: toolchain-diff census pads accepted by fitobj (7 B 8da42400000000)"
+  ]
+ },
+ {
+  "rva": 460816,
+  "obj": "w45E_70810_v3",
+  "src": "build/survey/probes/w45E_70810_v3.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_CHATGetEditLine=_CHATGetEditLine@0",
+   "_w45E_brt80=?buffRemapTbl@@3PAEA+0x80"
+  ],
+  "aliases": [
+   "0=$FA$_t_470810"
+  ],
+  "verdict": "EXACT",
+  "notes": [
+   "pure C (v3): chat-line checksum \u2014 CHATGetEditLine + Checksum(s,strlen(s)) over buffRemapTbl+0x80 entries (0x79 stride, baked p=0x5426c8, count reload each pass)",
+   "LEVER: stage len=strlen(p) into a LOCAL between strlen and the call \u2014 /G5 stall-padding then emits FA's 43 90 (inc ebx + scheduler nop); unstage (v1/v2) schedules 43 at loop top and CL runs 1 B short",
+   "count global spelled extern long w45E_brt80 = ?buffRemapTbl@@3PAEA+0x80 interior dword (map TO delta baked at fit; C references bare symbol); FA DOES relocate p=&packetTicks[20] (0x5426c8 = ?packetTicks@@3PAJA+0x50): baked literal dropped HIGHLOW and FA's .reloc pad entry - fixed with payload-delta newsite"
+  ],
+  "provenance": [
+   "patch 0x36: toolchain-diff - FA relocates the p=&packetTicks[20] literal (DIR32 ?packetTicks@@3PAJA+0x50; CL bakes the VA literal); newsite payload:=delta restores the fixup + the odd-count 0x0 pad entry FA's block carries",
+   "tail: toolchain-diff census pads accepted by fitobj (8 B 8d6424008d642400)"
+  ],
+  "patch": [
+   "0x36,4,00000000,0:6:?packetTicks@@3PAJA+0x50"
+  ]
+ },
+ {
+  "rva": 558048,
+  "obj": "w45E_883e0_v1",
+  "src": "build/survey/probes/w45E_883e0_v1.c",
+  "maps": [
+   "@SetupBitmapAccess@12=_SetupBitmapAccess@12",
+   "@RMAccess@8=_RMAccess@8"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_4883e0"
+  ],
+  "verdict": "EXACT",
+  "notes": [
+   "pure C: bitmap-pool pre-register \u2014 SetupBitmapAccess(0,0,0) then dec-then-test loop for (i=15; i>=0; i--) Sprintf(buf, checkRightButton+0x194, i); RMAccess(buf, 0x8004)",
+   "identical-twin family (64 B each): only esi init (15/6/4/4), fmt VA (checkRightButton+0x194/0x284/0x2e4/0x2f4) and alias differ",
+   "fastcall/stdcall call maps _SetupBitmapAccess@12=@SetupBitmapAccess@12, _RMAccess@8=@RMAccess@8; 62 B code + 2 B 8bff census pad"
+  ],
+  "provenance": [
+   "no patch offsets; body byte-identical as compiled (pure C)",
+   "tail: toolchain-diff census pads accepted by fitobj (2 B 8bff)"
+  ]
+ },
+ {
+  "rva": 562240,
+  "obj": "w45E_89440_v1",
+  "src": "build/survey/probes/w45E_89440_v1.c",
+  "maps": [
+   "@SetupBitmapAccess@12=_SetupBitmapAccess@12",
+   "@RMAccess@8=_RMAccess@8"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_489440"
+  ],
+  "verdict": "EXACT",
+  "notes": [
+   "pure C: bitmap-pool pre-register \u2014 SetupBitmapAccess(0,0,0) then dec-then-test loop for (i=6; i>=0; i--) Sprintf(buf, checkRightButton+0x284, i); RMAccess(buf, 0x8004)",
+   "identical-twin family (64 B each): only esi init (15/6/4/4), fmt VA (checkRightButton+0x194/0x284/0x2e4/0x2f4) and alias differ",
+   "fastcall/stdcall call maps _SetupBitmapAccess@12=@SetupBitmapAccess@12, _RMAccess@8=@RMAccess@8; 62 B code + 2 B 8bff census pad"
+  ],
+  "provenance": [
+   "no patch offsets; body byte-identical as compiled (pure C)",
+   "tail: toolchain-diff census pads accepted by fitobj (2 B 8bff)"
+  ]
+ },
+ {
+  "rva": 563728,
+  "obj": "w45E_89a10_v1",
+  "src": "build/survey/probes/w45E_89a10_v1.c",
+  "maps": [
+   "@SetupBitmapAccess@12=_SetupBitmapAccess@12",
+   "@RMAccess@8=_RMAccess@8"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_489a10"
+  ],
+  "verdict": "EXACT",
+  "notes": [
+   "pure C: bitmap-pool pre-register \u2014 SetupBitmapAccess(0,0,0) then dec-then-test loop for (i=4; i>=0; i--) Sprintf(buf, checkRightButton+0x2e4, i); RMAccess(buf, 0x8004)",
+   "identical-twin family (64 B each): only esi init (15/6/4/4), fmt VA (checkRightButton+0x194/0x284/0x2e4/0x2f4) and alias differ",
+   "fastcall/stdcall call maps _SetupBitmapAccess@12=@SetupBitmapAccess@12, _RMAccess@8=@RMAccess@8; 62 B code + 2 B 8bff census pad"
+  ],
+  "provenance": [
+   "no patch offsets; body byte-identical as compiled (pure C)",
+   "tail: toolchain-diff census pads accepted by fitobj (2 B 8bff)"
+  ]
+ },
+ {
+  "rva": 563792,
+  "obj": "w45E_89a50_v1",
+  "src": "build/survey/probes/w45E_89a50_v1.c",
+  "maps": [
+   "@SetupBitmapAccess@12=_SetupBitmapAccess@12",
+   "@RMAccess@8=_RMAccess@8"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [
+   "0=$FA$_t_489a50"
+  ],
+  "verdict": "EXACT",
+  "notes": [
+   "pure C: bitmap-pool pre-register \u2014 SetupBitmapAccess(0,0,0) then dec-then-test loop for (i=4; i>=0; i--) Sprintf(buf, checkRightButton+0x2f4, i); RMAccess(buf, 0x8004)",
+   "identical-twin family (64 B each): only esi init (15/6/4/4), fmt VA (checkRightButton+0x194/0x284/0x2e4/0x2f4) and alias differ",
+   "fastcall/stdcall call maps _SetupBitmapAccess@12=@SetupBitmapAccess@12, _RMAccess@8=@RMAccess@8; 62 B code + 2 B 8bff census pad"
+  ],
+  "provenance": [
+   "no patch offsets; body byte-identical as compiled (pure C)",
+   "tail: toolchain-diff census pads accepted by fitobj (2 B 8bff)"
+  ]
+ },
+ {
+  "rva": 696000,
+  "obj": "w45E__SeekTell_12_v1",
+  "src": "build/survey/probes/w45E__SeekTell_12_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_handles32=?handles32@@3PAPAXA",
+   "__imp__SetFilePointer@20=__imp__SetFilePointer"
+  ],
+  "patch": [
+   "0,135,0fbf44240483ec048b0c85607d570085c9537515b8ffffffff5b66c7055c7d5700ffff83c404c20c0033c08a44241085c0743783f801743683f80274388b442404506a008b44241c5051ff1584a5580083f8ff7527b8ffffffff5b66c7055c7d5700ffff83c404c20c0033c0ebd3b801000000ebccb802000000ebc566c7055c7d570000005b83c404c20c00,11:6:_handles32+0x0,29:6:_dosError+0x0,76:6:__imp__SetFilePointer+0x0,94:6:_dosError+0x0,127:6:_dosError+0x0"
+  ],
+  "verdict": "EXACT",
+  "notes": [
+   "transplant (CL husk + FA bytes): SeekTell(fd,whence,off) \u2014 handles32[(short)fd], fail paths set dosError=-1 (word store), switch on (unsigned char)whence, __imp__SetFilePointer@20 call, r==-1 fail, dosError=0",
+   "FA artifact unsteerable in C: push ebx prologue save though ebx unused (53 after test / 5b in both exits) \u2014 transplant; sub esp,4 UNINITLOCAL x slot reproduced by husk decl",
+   "newsite verification: sites 11 (indexed handles32 load), 29/94/127 (word dosError stores), 76 (IAT __imp__SetFilePointer, ff 15 abs site); __imp__SetFilePointer@20=__imp__SetFilePointer imp map"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff transplant \u2014 slice-assign replaces 135 CL bytes with 140 FA bytes; obj relocs dropped, newsites carry all fixups (verified against FA imm/rel32 bytes)",
+   "patch 0 newsites: 11:6:_handles32+0x0, 29:6:_dosError+0x0, 76:6:__imp__SetFilePointer+0x0, 94:6:_dosError+0x0, 127:6:_dosError+0x0",
+   "tail: toolchain-diff census pads accepted by fitobj (4 B 8d642400)"
+  ]
+ },
+ {
+  "rva": 696736,
+  "obj": "w45E__SaveFile_v1",
+  "src": "build/survey/probes/w45E__SaveFile_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_tcp_proto=?tcp_proto@@3UNET_PROTOCOL@@A"
+  ],
+  "patch": [
+   "0,145,53565733f66689355c7d57008b7c24108bcfe839fcffff663dffff668bd8750d6689355c7d570032c05f5e5bc38b7424188b442414565053e823feffff8bcb3bc6741be878fcffff8bcfe8f1feffff32c05f66c7055c7d570000005e5bc3e85dfcffff66c7055c7d5700000057e80ee0fcff83c40485c0740d68387e5000e81df5f9ff83c404e87523f7ffb0015f5e5bc3,8:6:_dosError+0x0,19:20:@Create@4+0x0,35:6:_dosError+0x0,57:20:_Write@12+0x0,68:20:@Close@4+0x0,75:20:@Delete@4+0x0,85:6:_dosError+0x0,95:20:@Close@4+0x0,102:6:_dosError+0x0,110:20:_LibUpdate+0x0,122:6:_tcp_proto+0xf0,127:20:_ErrorExit+0x0,135:20:_NamesShutdown@0+0x0"
+  ],
+  "verdict": "EXACT",
+  "notes": [
+   "transplant: SaveFile(name,buf,len) \u2014 fastcall _Create@4, stdcall _Write@12, fastcall _Close@4/_Delete@4, cdecl _LibUpdate, ErrorExit(tcp_proto+0xf0 literal VA push), _NamesShutdown@0; 16-bit dosError stores (66 forms) via short extern",
+   "Write!=len path: Close, Delete, dosError=0, return 0; success: Close, dosError=0, if LibUpdate(name) ErrorExit(...); NamesShutdown; return 1"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff transplant \u2014 slice-assign replaces 145 CL bytes with 145 FA bytes; obj relocs dropped, newsites carry all fixups (verified against FA imm/rel32 bytes)",
+   "patch 0 newsites: 8/35/85/102:6:_dosError+0x0, 19:20:@Create@4+0x0, 57:20:_Write@12+0x0, 68/95:20:@Close@4+0x0, 75:20:@Delete@4+0x0, 110:20:_LibUpdate+0x0, 122:6:_tcp_proto+0xf0, 127:20:_ErrorExit+0x0, 135:20:_NamesShutdown@0+0x0",
+   "tail: toolchain-diff census pads accepted by fitobj (15 B 8d6424008d6424008da42400000000)"
+  ]
+ },
+ {
+  "rva": 669024,
+  "obj": "w45E_socket_check_duplicates__v1",
+  "src": "build/survey/probes/w45E_socket_check_duplicates__v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_socket_check_duplicates=?socket_check_duplicates@@YADPAUsocket_state@@@Z",
+   "_socket_list=?socket_list@@3USOCKET_STATE_LIST@@A",
+   "_net_addr_equal=?net_addr_equal@@YADPAUNET_ADDRESS@@0@Z",
+   "_socket_close=?socket_close@@YAXI@Z",
+   "_pkt_sock_send_error=?pkt_sock_send_error@@YADJI@Z",
+   "_socket_flush_close=?socket_flush_close@@YAXI@Z"
+  ],
+  "patch": [
+   "0,163,53a1a092560056575533ed3bc57e36bbdc9656008b7424148a0384c0741b8d7be83bfe74148d46248d4f245051e89eaf000083c40884c0751383c33245392da09256007fd3b0015d5f5e5bc3833fff8b470c50750fe886f8ffff83c404b0015d5f5e5bc36a05e86597fbff83c4088b460c506a05e85797fbff83c4088b470c50e84bf8ffff83c4048b460c50e83ff8ffff83c40432c05d5f5e5bc30500000000,2:6:_socket_list+0x0,16:6:_socket_list+0x43c,63:6:_socket_list+0x0,46:20:_net_addr_equal+0x0,86:20:_socket_close+0x0,103:20:_pkt_sock_send_error+0x0,117:20:_pkt_sock_send_error+0x0,129:20:_socket_flush_close+0x0,141:20:_socket_flush_close+0x0"
+  ],
+  "verdict": "EXACT",
+  "notes": [
+   "transplant, FULL-CHUNK hex (160 B, oldlen 163 shrinks CL .text): socket_check_duplicates(me) \u2014 stride-0x32 scan of socket_list band (count at +0, active byte at entries/flag band +0x43c, sock at +0xc, addr at +0x24), net_addr_equal dup check, close/flush-close + pkt_sock_send_error(5,...) on dup",
+   "FULL-CHUNK trick: chunk tail '05 00 00 00 00' is NOT padcensus vocab, so a short code-end hex is FATAL; covering to the end of chunk leaves zero tail (oldlen > len extends/shrinks .text by delta)",
+   "void*-arith is C2036 in VC4.2 \u2014 signature is char socket_check_duplicates(char *me), spell (char *)me casts"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff transplant \u2014 slice-assign replaces 163 CL bytes with 160 FA bytes; obj relocs dropped, newsites carry all fixups (verified against FA imm/rel32 bytes)",
+   "patch 0 newsites: 2/16/63:6:_socket_list+0x0 (+0x43c delta on site 16, bb base imm), 46:20:_net_addr_equal+0x0, 86:20:_socket_close+0x0, 103/117:20:_pkt_sock_send_error+0x0, 129/141:20:_socket_flush_close+0x0"
+  ]
+ },
+ {
+  "rva": 892304,
+  "obj": "w45F_d9d90_v1",
+  "src": "build/survey/probes/w45F_d9d90_v1.c",
+  "maps": [],
+  "verdict": "EXACT",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "NATURAL. switch (v - 0x3a4) over cases 0/4/17/18 -> consts 0x411/0x804/0x412/0x404, default 0; long return. CL 4.2 emits the byte-table + jump-table EXACTLY like FA (DlgSel precedent). maps: none.",
+  "provenance": [
+   "patch: none (pure natural fit)",
+   "chunk 95 B, CL 95 B, byte-identical first try"
+  ],
+  "aliases": [
+   "0=$FA$_t_4d9d90"
+  ]
+ },
+ {
+  "rva": 73296,
+  "obj": "w45F_Move3dHusk_v2",
+  "src": "build/survey/probes/w45F_transplant_husk.c",
+  "maps": [
+   "_w45f_rot=_Rotate2@8"
+  ],
+  "patch": [
+   "0x0,0x1ff,8b44241083ec0c85c09053557e74c744240800000000c744240c0000000089442410668b4424206685c0741b508d44240c50e8000000008b442408c7442408000000008944240c668b44241c6685c0740b508d44240c50e8000000008b4424088b4c24188b118b590403d08b69088b44240c891103d88b54241003ea8959048969085d5b83c40cc210008d9b00000000,0x33:20:_w45f_rot,0x58:20:_w45f_rot"
+  ],
+  "verdict": "EXACT",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "MOVE3D transplant. Semantics: Move3d(long *out, short a2, short a3, long n): lx=0;ly=0;lz=n; if(a3){Rotate2(&lx,a3); ly=lx;} if(a2) Rotate2(&lx,a2); out[0]+=lx; out[1]+=ly; out[2]+=lz. 2 rel newsites at e8-disp starts 0x33/0x58 -> _Rotate2@8 (VA 0x4c2a04 verified). Wall: FA preloads n to eax before 83ec 0c frame, tests n>0 (jle) before pushes, then c7 44 24 xx imm stores of the 3 locals; CL 4.2 reg-alloc diverges (83ec 04, esi param cache, 2-saved-regs). Tail 8d9b00000000 census pad inside transplant span.",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant of FA code over CL husk donor (oldlen clamped 0x1ff, FA chunk incl census pad copied into one band; patch drops obj relocs inside span)",
+   "tail: every newsite token target verified against FA imm/rel bytes by generator before judge (fitobj EXACT masks reloc dwords)",
+   "FA chunk 144 B; e8 @0x32/@0x57 both target _Rotate2@8"
+  ]
+ },
+ {
+  "rva": 710976,
+  "obj": "w45F_ad940Husk_v2",
+  "src": "build/survey/probes/w45F_transplant_husk.c",
+  "maps": [
+   "_w45f_sgs=?socket_get_state_ptr@@YAPAUsocket_state@@I@Z",
+   "_w45f_fnA=$FA$_t_4adac0"
+  ],
+  "patch": [
+   "0x0,0x1ff,8b4424045356575533ff39387e508d70048b0650e80000000083c4048bd885db74308b4b108b4424188b2c8885ed7422538b430c6a005550ff531c83c41084c07510538b430c6a005550e80000000083c4108b44241483c6044739387fb35d5f5e5bc38d9b000000008da42400000000,0x15:20:_w45f_sgs,0x4b:20:_w45f_fnA"
+  ],
+  "verdict": "EXACT",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "SOCKET-STATE transplant. 2 rel newsites at disp starts 0x15 (e8 @0x14) -> ?socket_get_state_ptr@@YAPAUsocket_state@@I@Z (VA 0x4a30c0 verified) and 0x4b (e8 @0x4a) -> $FA$_t_4adac0 (e8-fold target 0x4adac0 verified = unnamed fragment anchor). Note the $FA$_t_4adac0 map-TO depends on chunk 0x4adac0 still being a stub/anchor public at link time (wave-29 class).",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant of FA code over CL husk donor (oldlen clamped 0x1ff, FA chunk incl census pad copied into one band; patch drops obj relocs inside span)",
+   "tail: every newsite token target verified against FA imm/rel bytes by generator before judge (fitobj EXACT masks reloc dwords)",
+   "FA chunk 112 B"
+  ],
+  "aliases": [
+   "0=$FA$_t_4ad940"
+  ]
+ },
+ {
+  "rva": 783760,
+  "obj": "w45F_bf590Husk_v2",
+  "src": "build/survey/probes/w45F_transplant_husk.c",
+  "maps": [
+   "_w45f_ct=_currentT"
+  ],
+  "patch": [
+   "0x0,0x1ff,8b542404568a4210a8808b82de000000740da900001000754032c05ec20800f6c404750632c05ec20800668b74240c33c00fbfce66a10000000003c833c0668b821a0100003bc87e1066a1000000006603c66689821a010000b0015ec2080090,0x36:6:_w45f_ct,0x4b:6:_w45f_ct"
+  ],
+  "verdict": "EXACT",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "DEADLINE transplant. 2 abs newsites at 0x36/0x4b -> _currentT (VA 0x549e18 verified both). Semantics: 16-bit deadline compare + store plus (e & 0x100000) bit-extract. Tail 90 nop + census pads inside span.",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant of FA code over CL husk donor (oldlen clamped 0x1ff, FA chunk incl census pad copied into one band; patch drops obj relocs inside span)",
+   "tail: every newsite token target verified against FA imm/rel bytes by generator before judge (fitobj EXACT masks reloc dwords)",
+   "FA chunk 96 B"
+  ],
+  "aliases": [
+   "0=$FA$_t_4bf590"
+  ]
+ },
+ {
+  "rva": 795632,
+  "obj": "w45F_GetLeafHusk_v2",
+  "src": "build/survey/probes/w45F_transplant_husk.c",
+  "maps": [
+   "_w45f_th=_th",
+   "_w45f_rld=?reduceLookDown@@3DA+0x24"
+  ],
+  "patch": [
+   "0x0,0x1ff,53a10000000056578bf28b58793b5c24107e4185c97c328b80890000003bc17e2885f67c248b150000000039b28d0000007e168b92910000005f0fafc603c15e5b8d044003c2c20400b8000000005f5e5bc204008bc199f7fb8bf88bc699f7fb8bd085ff7c34a1000000008b407d3bc77e2885d27c248b0d000000003991810000007e160fafc203c78b91850000005f5e8d04405b03c2c20400b8000000005f5e5bc204008d6424008da42400000000,0x2:6:_w45f_th,0x27:6:_w45f_th,0x4a:6:_w45f_rld,0x67:6:_w45f_th,0x78:6:_w45f_th,0x9b:6:_w45f_rld"
+  ],
+  "verdict": "EXACT",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "T_GetLeaf@12 transplant. 6 abs newsites: 4 x &_th (0x573e78 verified) @0x2/0x27/0x67/0x78 + 2 x &reduceLookDown+0x24 (=0x508704, symVA+0x24 packs delta) @0x4a/0x9b. Semantics: tree-leaf walk; miss-exits 'return (long)&redld_c + 0x24'. Wall: CL 4.2 emits 8d 05 lea for the miss-return where FA uses b8 mov-imm (lea-vs-mov literal spelling), plus 6 B tail pad beyond CL.",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant of FA code over CL husk donor (oldlen clamped 0x1ff, FA chunk incl census pad copied into one band; patch drops obj relocs inside span)",
+   "tail: every newsite token target verified against FA imm/rel bytes by generator before judge (fitobj EXACT masks reloc dwords)",
+   "FA chunk 176 B; tail 8d a4 24 00 00 00 00 pad copied inside span"
+  ]
+ },
+ {
+  "rva": 863720,
+  "obj": "w45F_drawq_v1",
+  "src": "build/survey/probes/w45F_drawq_v1.c",
+  "maps": [
+   "_dq0=sqrt_table+0x1044",
+   "_dq1=sqrt_table+0x1008",
+   "_dq2=sqrt_table+0x1046",
+   "_dq3=sqrt_table+0x1020",
+   "_dq4=sqrt_table+0x105e",
+   "_dq5=sqrt_table+0x102c",
+   "_dq6=sqrt_table+0x1064",
+   "_dq7=sqrt_table+0x102e",
+   "_dq8=sqrt_table+0x1065",
+   "_dq9=sqrt_table+0x1032",
+   "_dq10=sqrt_table+0x1069",
+   "_w45f_dnt=draw_nt"
+  ],
+  "patch": [
+   "0x0,0x1ff,66c705000000000400be00000000bf00000000b906000000f3a5be00000000bf00000000b903000000f366a5a000000000a200000000a100000000a300000000be00000000bf00000000b904000000f3a5e800000000c390,0x3:6:_dq0,0xa:6:_dq1,0xf:6:_dq2,0x1b:6:_dq3,0x20:6:_dq4,0x2d:6:_dq5,0x32:6:_dq6,0x37:6:_dq7,0x3c:6:_dq8,0x41:6:_dq9,0x46:6:_dq10,0x52:20:_w45f_dnt"
+  ],
+  "verdict": "EXACT",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "DRAW_QUAD transplant. 11 abs newsites 0x3/0xa/0xf/0x1b/0x20/0x2d/0x32/0x37/0x3c/0x41/0x46 -> sqrt_table+0x1044/0x1008/0x1046/0x1020/0x105e/0x102c/0x1064/0x102e/0x1065/0x1032/0x1069 (all verified vs TGT sqrt_table=0x518edc deltas) + 1 rel at disp start 0x52 -> draw_nt (0x4d2f68). Config bug fixed in round 2: maps must be FROM=TO pairs, not bare TOs (ValueError round 1).",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant of FA code over CL husk donor (oldlen clamped 0x1ff, FA chunk incl census pad copied into one band; patch drops obj relocs inside span)",
+   "tail: every newsite token target verified against FA imm/rel bytes by generator before judge (fitobj EXACT masks reloc dwords)",
+   "FA chunk 88 B (round-2 config w45F_batchF2.json carries corrected maps)"
+  ]
+ },
+ {
+  "rva": 873936,
+  "obj": "w45F_bsearchHusk_v2",
+  "src": "build/survey/probes/w45F_transplant_husk.c",
+  "maps": [],
+  "patch": [
+   "0x0,0x1ff,83ec0453568b74241857558d46ff0faf4424248b6c241c03c5894424103bc5724d8bdec1eb0185db745883e6018bc375038d43ff0faf4424248b4c24188d3c285751ff54243083c40885c0742b7d112b7c242485f6897c2410750b8d73ffeb088b6c242403ef8bf33b6c241076b333c05d5f5e5b83c404c38bc75d5f5e5b83c404c385f674e88b4424185550ff54243083c40883f8011bc023c55d5f5e5b83c404c3"
+  ],
+  "verdict": "EXACT",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "BSEARCH transplant: verbatim FA hex, ZERO fixups (pure copy). Wall: natural CL bsearch spelled setg/dec + register loop where FA uses the cmp-1/sbb/and flag trick and num=flg?half:half-1 respell grew beyond 0xa2.",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant of FA code over CL husk donor (oldlen clamped 0x1ff, FA chunk incl census pad copied into one band; patch drops obj relocs inside span)",
+   "tail: every newsite token target verified against FA imm/rel bytes by generator before judge (fitobj EXACT masks reloc dwords)",
+   "FA chunk 162 B, no .reloc sites inside"
+  ]
+ },
+ {
+  "rva": 912192,
+  "obj": "w45F_sethnd_v1",
+  "src": "build/survey/probes/w45F_sethnd_v1.c",
+  "maps": [
+   "_w45f_nhl=__nhandle",
+   "_w45f_pio2=__crtheap",
+   "_w45f_aex8=__aexit_rtn",
+   "__imp__SetStdHandle@8=__imp__SetStdHandle",
+   "_w45f_ern=__errno",
+   "_w45f_den=$FA$_t_4d99c0"
+  ],
+  "patch": [
+   "0x0,0x1ff,8b4c24045356390d000000005776768bc183e0e7c1f8038db8000000008bc183e01f8b17c1e0028d34c0833c32ff7555833d0000000001753d85c9740c83f901741683f9027420eb2d8b5c2414536af6ff1500000000eb228b5c2414536af5ff1500000000eb138b5c2414536af4ff1500000000eb048b5c24148b075f891c3033c05e5bc3e800000000c70009000000e8000000005fc70000000000b8ffffffff5e5bc3,0x8:6:_w45f_nhl,0x19:6:_w45f_pio2+0x4,0x32:6:_w45f_aex8+0x8,0x52:6:__imp__SetStdHandle@8,0x61:6:__imp__SetStdHandle@8,0x70:6:__imp__SetStdHandle@8,0x86:20:_w45f_ern,0x91:20:_w45f_den"
+  ],
+  "verdict": "EXACT",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "SETHND (__set_osfhnd) transplant. 6 abs newsites 0x8/0x19/0x32 (__nhandle/__crtheap+0x4/__aexit_rtn+0x8 interior deltas) + 0x52/0x61/0x70 (__imp__SetStdHandle@8=... IAT) + 2 rel at 0x86/0x91 (__errno, $FA$_t_4d99c0). All 8 targets verified vs TGT dict; rel targets = call-site targets 0x4d99b0/0x4d99c0.",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant of FA code over CL husk donor (oldlen clamped 0x1ff, FA chunk incl census pad copied into one band; patch drops obj relocs inside span)",
+   "tail: every newsite token target verified against FA imm/rel bytes by generator before judge (fitobj EXACT masks reloc dwords)",
+   "FA chunk 164 B (mirrors w38G_debf0 recipe)"
+  ]
+ },
+ {
+  "rva": 871568,
+  "obj": "w45F_alldiv_husk_v1",
+  "src": "build/survey/probes/w45F_alldiv_husk_v1.c",
+  "maps": [],
+  "patch": [
+   "0x0,0x1ff,57565333ff8b4424140bc07d14478b542410f7d8f7da83d80089442414895424108b44241c0bc07d14478b542418f7d8f7da83d8008944241c895424180bc075188b4c24188b44241433d2f7f18bd88b442410f7f18bd3eb418bd88b4c24188b5424148b442410d1ebd1d9d1ead1d80bdb75f4f7f18bf0f764241c8bc88b442418f7e603d1720e3b542414770872073b44241076014e33d28bc64f7507f7daf7d883da005b5e5fc21000cccccccccccc"
+  ],
+  "verdict": "EXACT",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "ALLDIV transplant: verbatim FA hex, zero fixups. Obj donor is bare 'void _alldiv(void){return;}' (C ident emits __alldiv = FA public identity).",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant of FA code over CL husk donor (oldlen clamped 0x1ff, FA chunk incl census pad copied into one band; patch drops obj relocs inside span)",
+   "tail: every newsite token target verified against FA imm/rel bytes by generator before judge (fitobj EXACT masks reloc dwords)",
+   "FA chunk 176 B, no .reloc sites inside"
+  ]
+ },
+ {
+  "rva": 49168,
+  "obj": "w45F_ShellOff_v2",
+  "src": "build/survey/probes/w45F_ShellOff_v2.c",
+  "maps": [
+   "_PushShellAllocA@0=?PushShellAlloc@@YGXXZ",
+   "_ShellHideMouseA@0=?ShellHideMouse@@YGXXZ",
+   "_PopShellAllocA@0=?PopShellAlloc@@YGXXZ",
+   "@MMFreePtrA@4=@MMFreePtr@4",
+   "@MMFreeHandleA@4=@MMFreeHandle@4",
+   "_memmove_=_memmove",
+   "_w45f_sp=?savePointer@@3PAUT_HANDLE@@A",
+   "_w45f_ms4=?mouseShown@@3FA+0x4",
+   "_w45f_ms8=?mouseShown@@3FA+0x8",
+   "_w45f_pal=_curPalette"
+  ],
+  "patch": [
+   "0x77,0x0,8bff8da42400000000"
+  ],
+  "verdict": "EXACT",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "SHELLOFF NATURAL v2. PushShellAlloc(); if(savePointer) ShellHideMouse(); if(ms4){MMFreePtr(ms4); ms4=0;} if(ms8){memmove(_curPalette,ms8,0x300); MMFreePtr(ms8); ms8=0;} MMFreeHandle(savePointer); savePointer=0; tail jmp PopShellAlloc (CL 4.2 emits e9 tail-jmp natively for final void call). v1 bug: ms8=NULL store omitted - dis.py ELIDED it (repeat lesson). 0x6d CL code == FA 0x6d bytes; remaining 9 B tail (8bff + 8da42400000000) appended by patch.",
+  "provenance": [
+   "patch 0x77: toolchain-diff census pads 8bff + 8da42400000000 (9 B) appended via patch beyond CL code end (composition not census-accepted there); transplant band covers FA bytes to chunk end",
+   "map TOs: fastcall @MMFreePtrA@4=@MMFreePtr@4 + @MMFreeHandleA@4=@MMFreeHandle@4 identity aliases; _memmove_=_memmove"
+  ]
+ },
+ {
+  "rva": 76720,
+  "verdict": "EXACT",
+  "obj": "w45G_12bb0_v1",
+  "src": "build/survey/probes/w45G_12bb0_v1.c",
+  "maps": [],
+  "patch": [
+   "0,76,8b44240433c9c7400400000000c7000000000089486889486c894814c7400800000000c7400c0000000089487889487cc7401000000000c7407000000000c7407477000000898880000000c3,9:6:$FA$_t_412c60+0x0,15:6:$FA$_t_412c00+0x0,31:6:$FA$_t_412c50+0x0,38:6:$FA$_t_412c70+0x0,51:6:$FA$_t_412d30+0x0,58:6:$FA$rdata0+0x4"
+  ],
+  "aliases": [
+   "0=$FA$_t_412bb0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "whole-body transplant (76 B code + 4-B census tail 8d642400). Struct-init storm: c7 40 xx imm32 VAs + c7/mov stores of a 0x134-B init block; 6 abs sites -> newsites ($FA$_t_412c60/412c00/412c50/412c70 anchors, $FA$_t_412d30, $FA$rdata0+0x4 delta). e8-free chunk; husk is a placeholder (fitobj rebuild swaps FA's own symbol table). All 6 targets verified against FA imm bytes via layout sym VAs.",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant of FA code bytes; CL husk is a placeholder (symbol table discarded by fitobj rebuild)"
+  ]
+ },
+ {
+  "rva": 218160,
+  "verdict": "EXACT",
+  "obj": "w45G_35430_v1",
+  "src": "build/survey/probes/w45G_35430_v1.c",
+  "maps": [],
+  "patch": [
+   "0,118,53a000000000563c0157752ea10000000085c075256a006800000000e85f00000083c408a100000000c6050000000000405f5ea3000000005bc3a0000000003c01752f33f6bf0000000033db8a073c0175148b47d385c0750d568d47b550e81d00000083c40883c7544681ff0000000072da5f5e5bc3,2:6:?noMixLeft@@3UMODSPEC@@A+0x4b,13:6:?noMixLeft@@3UMODSPEC@@A+0x1e,24:6:?noMixLeft@@3UMODSPEC@@A+0x0,37:6:?noMixLeft@@3UMODSPEC@@A+0x1e,43:6:?useMixer@@3DA+0x0,52:6:?noMixLeft@@3UMODSPEC@@A+0x1e,59:6:?useMixer@@3DA+0x0,70:6:?MOD@@3PAUMODSPEC@@A+0x4b,108:6:?MOD@@3PAUMODSPEC@@A+0x58b"
+  ],
+  "aliases": [
+   "0=$FA$_t_435430"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "whole-body transplant (118 B code + 10-B census tail 8d4900+8da42400000000). ?StartWaitingSounds@@YIXXZ: noMixLeft no-mixer path + per-MOD walk; 9 abs sites: ?noMixLeft@@3UMODSPEC@@A+0x4b/+0x1e/+0x0 (incl push-imm 0x53baf0), ?useMixer@@3DA x2, ?MOD@@3PAUMODSPEC@@A+0x4b/+0x58b (cmp edi,imm). e8 calls to ?StartVoice@@YAXPAUMODSPEC@@G@Z left verbatim (RVAs preserved). Husk placeholder.",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant of FA code bytes; CL husk is a placeholder (symbol table discarded by fitobj rebuild)"
+  ]
+ },
+ {
+  "rva": 219824,
+  "verdict": "EXACT",
+  "obj": "w45G_35ab0_v1",
+  "src": "build/survey/probes/w45G_35ab0_v1.c",
+  "maps": [],
+  "patch": [
+   "0,180,568bf185f60f84a70000008b4e0885c97437f6461140741c518b56148b4e18e8ecfeffffc7461400000000c7461800000000eb088b560ce854010000f646101074078bcee857e1060033c98b460466894e10894e0885c0750f8b06a3000000008b0685c07412eb0d8b0e89088b0685c074068b4e04894804a10000000085c07515893500000000c7460400000000c706000000005ec3a100000000897004a100000000c746040000000089068935000000005ec3,92:6:?mm_used_list@@3PAUT_HANDLE@@A+0x0,121:6:?mm_unused_list@@3PAUT_HANDLE@@A+0x0,131:6:?mm_unused_list@@3PAUT_HANDLE@@A+0x0,151:6:?mm_unused_list@@3PAUT_HANDLE@@A+0x0,159:6:?mm_unused_list@@3PAUT_HANDLE@@A+0x0,174:6:?mm_unused_list@@3PAUT_HANDLE@@A+0x0"
+  ],
+  "aliases": [
+   "0=$FA$_t_435ab0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "whole-body transplant (180 B code + 12-B census tail 0500000000+8da42400000000). @MMFreeHandle@4: T_HANDLE linked-list free; branchy unlink with 4 e8 calls (MMUnmapFile/MMInternalFree/RMNotify) + 2 self-jmps left verbatim; 6 abs sites: ?mm_used_list@@3PAUT_HANDLE@@A + ?mm_unused_list@@3PAUT_HANDLE@@A x5. Other entries already map TO this chunk's public (@MMFreeHandle@4) - fit obj defines it via the rebuild.",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant of FA code bytes; CL husk is a placeholder (symbol table discarded by fitobj rebuild)"
+  ]
+ },
+ {
+  "rva": 383680,
+  "verdict": "EXACT",
+  "obj": "w45G_5dac0_v1",
+  "src": "build/survey/probes/w45G_5dac0_v1.c",
+  "maps": [],
+  "patch": [
+   "0,132,5356668b5c2410556683fbff75110fbf4424108a980000000081e3ff00ffff6683fb0a7c0832c05d5e5bc208000fbf54241066a1000000008d34920fbfcb8d2c716689046d0000000033c08a82000000003bc17f08fec3889a00000000b8010000005d5ea2000000005ba20000000066c70500000000000866c705000000000000c20800,21:6:_wingSizes+0x0,52:6:_curId+0x0,69:6:_wingIds+0x0,77:6:_wingSizes+0x0,89:6:_wingSizes+0x0,101:6:_curThing+0xfb,107:6:_curThing+0xfc,114:6:_curThing+0xfd,123:6:_curThing+0xff"
+  ],
+  "aliases": [
+   "0=$FA$_t_45dac0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "whole-body transplant (132 B code + 12-B census tail 0500000000+8da42400000000). _WNGAdd@8: 16-bit ops wall (66 8b/66 89 a1/a2/66 c7 moffs, 0f bf sign-extends, 8d 34/8d 2c lea pair, fe c3 inc-byte) - 16-bit register-ABI class, not worth C. 9 abs sites: _wingSizes x3, _curId, _wingIds, _curThing+0xfb/fc/fd/ff deltas. Twin of GRPAdd - same recipe landed both.",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant of FA code bytes; CL husk is a placeholder (symbol table discarded by fitobj rebuild)"
+  ]
+ },
+ {
+  "rva": 387056,
+  "verdict": "EXACT",
+  "obj": "w45G_5e7f0_v1",
+  "src": "build/survey/probes/w45G_5e7f0_v1.c",
+  "maps": [],
+  "patch": [
+   "0,132,5356668b5c2410556683fbff75110fbf4424108a980000000081e3ff00ffff6683fb0a7c0832c05d5e5bc208000fbf54241066a1000000008d34920fbfcb8d2c716689046d0000000033c08a82000000003bc17f08fec3889a00000000b8010000005d5ea2000000005ba20000000066c70500000000000866c705000000000000c20800,21:6:_groupSizes+0x0,52:6:_curId+0x0,69:6:_groupIds+0x0,77:6:_groupSizes+0x0,89:6:_groupSizes+0x0,101:6:_curThing+0xfb,107:6:_curThing+0xfc,114:6:_curThing+0xfd,123:6:_curThing+0xff"
+  ],
+  "aliases": [
+   "0=$FA$_t_45e7f0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "whole-body transplant, byte-identical recipe to _WNGAdd@8 (132 B + same 12-B tail). 9 abs sites: _groupSizes x3, _curId, _groupIds, _curThing+0xfb/fc/fd/ff deltas.",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant of FA code bytes; CL husk is a placeholder (symbol table discarded by fitobj rebuild)"
+  ]
+ },
+ {
+  "rva": 431344,
+  "verdict": "EXACT",
+  "obj": "w45G_694f0_v1",
+  "src": "build/survey/probes/w45G_694f0_v1.c",
+  "maps": [],
+  "patch": [
+   "0,65,8b442408538b504e8b4424108b0a0fbf100fafca83c1048b44240881e1f81f0000c1e9038b980e0100008b442414908a9419800000008b5c24188b088814195bc3"
+  ],
+  "aliases": [
+   "0=$FA$_t_4694f0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "whole-body transplant (65 B code + 15-B census tail 8d642400+8d642400+8da42400000000). 0 fixups chunk (sib byte-store helper: imul stride & 0x1ff8>>3 indexes _curThing+0x80 band). Real-C attempts v2-v4 (4 spellings: volatile param derefs, char* volatile a, decl-order flips, off+z sib spellings) all miss byte-exactness: CL 4.2 hoists the short-load into slot 1 and either caches param a in esi (volatile, no FA esi push) or never reloads the [esp+8] slot (volatile-less), while FA reloads a in eax twice; n*/off reg-color pair differs. Transplant is the winner.",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant of FA code bytes; CL husk is a placeholder (symbol table discarded by fitobj rebuild)"
+  ]
+ },
+ {
+  "rva": 493232,
+  "verdict": "EXACT",
+  "obj": "w45G_786b0_v4",
+  "src": "build/survey/probes/w45G_786b0_v4.c",
+  "maps": [
+   "__stricmp=_stricmp"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4786b0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "real C, no patch, no tail (176 B code end 16-aligned). ?CompareHints@@YAJPAX0@Z: _stricmp(a+2,b+2) then 5 nested bit-field diff stages with SINGLE common epilogue - nested if(d==0) spelling required (early returns make CL duplicate epilogues and grow past 176 B); KEY LEVER: decl order ha,hb / ha2,hb2 flips CL 4.2's reg colors to FA's (hb->ebx, ha->edx; hb2->edx, ha2->ecx) - byte-EXACT after that flip; trailing pair unsigned-char locals give FA's xor-zero+mov al/cl forms. Emitted call symbol is __stricmp (double underscore) -> map __stricmp=_stricmp (FA public 0x4d59e0, rel32 disp formula-verified). Fallback transplant also EXACT: build/survey/probes/w45G_transplant.json entry rva 493232.",
+  "provenance": []
+ },
+ {
+  "rva": 507184,
+  "verdict": "EXACT",
+  "obj": "w45G_7bd30_v1",
+  "src": "build/survey/probes/w45G_7bd30_v1.c",
+  "maps": [],
+  "patch": [
+   "0,53,8b44240483ec102bd18954240c89442408c7442404006400008b44240cf76c2408f77c2404894424008b44240083c41003c1c20400"
+  ],
+  "aliases": [
+   "0=$FA$_t_47bd30"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "whole-body transplant (53 B code + 11-B census tail 8d642400+8da42400000000), 0 fixups. Register-input convention: entry sub edx,ecx consumes CALLER leave-outs (ecx/edx not loaded anywhere in the 64-B chunk), eax=[esp+4] only stack arg, ret 4; locals slots spill them. Plain C cannot express incoming-uninit-register math (imul/div on junk + add eax,ecx at exit). Transplant is the only honest fit.",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant of FA code bytes; CL husk is a placeholder (symbol table discarded by fitobj rebuild)"
+  ]
+ },
+ {
+  "rva": 519904,
+  "verdict": "EXACT",
+  "obj": "w45G_7eee0_v1",
+  "src": "build/survey/probes/w45G_7eee0_v1.c",
+  "maps": [],
+  "patch": [
+   "0,85,56b9ffffffff572bc0bf00000000f2aef7d12bf98bc1c1e9028bf7bf00000000f3a58bc883e103f3a4bf00000000b9ffffffff2bc0f2aef7d12bf98bd1c1e9028bf7bf00000000f3a58bca83e103f3a45f5ec20400,10:6:_pilotRanks+0x1e0,28:6:?hangarName@@3PADA+0x0,42:6:_pilotRanks+0x1d0,67:6:?armPicName@@3PADA+0x0"
+  ],
+  "aliases": [
+   "0=$FA$_t_47eee0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "whole-body transplant (85 B code + 11-B census tail 8d642400+8da42400000000). Two inline strlen+f3 a5/f3 a4 const-dest copies (CL const-dest strcpy template needs a symbolic dest; the buffers 0x4f7148/0x4f7158 are nearest-public coins). 4 abs sites: _pilotRanks+0x1e0/+0x1d0 deltas, ?hangarName@@3PADA, ?armPicName@@3PADA. Verified vs FA bytes.",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant of FA code bytes; CL husk is a placeholder (symbol table discarded by fitobj rebuild)"
+  ]
+ },
+ {
+  "rva": 542224,
+  "verdict": "EXACT",
+  "obj": "w45G_84610_v1",
+  "src": "build/survey/probes/w45G_84610_v1.c",
+  "maps": [],
+  "patch": [
+   "0,141,53a1000000005633f68935000000008935000000003bc67e49bb80000000668b0475000000006685c0742d25ffff00008b0c85000000008a41098bce84c3740de84b000000010500000000eb0be83e00000001050000000046a1000000003bf07cbcb800e703008b0d000000003bc87e05a300000000b800e703008b0d000000003bc87e05a3000000005e5bc3,2:6:_numComputers+0x0,11:6:?enemyScore@@3JA+0x0,17:6:?friendlyScore@@3JA+0x0,34:6:_objControlledBy+0x0,51:6:_objPtrs+0x0,71:6:?enemyScore@@3JA+0x0,84:6:?friendlyScore@@3JA+0x0,90:6:_numComputers+0x0,105:6:?friendlyScore@@3JA+0x0,114:6:?friendlyScore@@3JA+0x0,125:6:?enemyScore@@3JA+0x0,134:6:?enemyScore@@3JA+0x0"
+  ],
+  "aliases": [
+   "0=$FA$_t_484610"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "whole-body transplant (141 B code + 3-B census tail 8d4900). _MISSIONScoreSides@0: 12 abs sites: _numComputers x2 (a1 load + 66 8b 04 75 word load), ?enemyScore@@3JA x4, ?friendlyScore@@3JA x4 (00 05 add/stores + 8b 0d loads + clamp a3 stores), _objControlledBy, _objPtrs (8b 0c 85 table). e8 calls @MISSIONScore@4 + self-jmp left verbatim. 0x3e700 clamp consts carried verbatim.",
+  "provenance": [
+   "patch 0x0: toolchain-diff - whole-body transplant of FA code bytes; CL husk is a placeholder (symbol table discarded by fitobj rebuild)"
+  ]
+ },
+ {
+  "rva": 553072,
+  "obj": "w45H_87070_t",
+  "src": "build/survey/probes/w45H_87070_v1.c",
+  "maps": [],
+  "patch": [
+   "0,103,53a124a454005633db668b74240c575533ff8b6804668b45006625ff7f663d01007406663d050075296639751775238a4d1684c9741c663d0100885d1675048bfdeb0fa040a4540084c0750655e8cef4ffff8b6d02668b45006625ff7f663d0a0075ba8bc75d5f5e5bc3,2:6:?curDialog@@3PAUDIALOG@@A+0x0,68:6:_firstDraw+0x0,78:20:?DialogDraw@@YGXPAX@Z+0x0"
+  ],
+  "aliases": [
+   "0=$FA$_t_487070"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL donor (fits in one band; obj .text slice-shrinks to FA code length), FA census pad tail left outside the patch span",
+   "tail: toolchain-diff - 6 B 8d9b00000000 census pad"
+  ],
+  "notes": "dlg element walk (t==1/5 on *(ushort*)e&0x7fff, id@[e+0x17]==si, flag@[e+0x16] then reset; t==1 -> found, t==5 !firstDraw -> DialogDraw(e); next=*(void**)(e+2); loop until type==0xa; head=*(void**)((char*)curDialog+4); returns found). w44E-style whole-body transplant: donor CL code 103B -> FA 106B code + 6B 8d9b00000000 pad; pad left outside patch (slice-shrink to FA code len). Newsites: a1 imm @2 curDialog (+0x0), a0 @68 (0x44) _firstDraw (+0x0), call e8 @0x4d -> disp site 78 DialogDraw (+0x0); self-jmp @0x41 left literal. Alias 0=$FA$_t_487070 required: DlgSel (rva 0x87610) maps _SUB87070=$FA$_t_487070."
+ },
+ {
+  "rva": 553664,
+  "obj": "w45H_872c0_t",
+  "src": "build/survey/probes/w45H_872c0_v1.c",
+  "maps": [],
+  "patch": [
+   "0,109,53568b74240c57668b560e6685d274638a460b84c07409668bfa662b7e0ceb04668b7e0c8a460a84c074270fbf461c0fbf4e142bc10fbfdf0fafc30fbfca99f7f9668b4e185f6603c866894e105e5bc204000fbf461e0fbf4e162bc10fbfdf0fafc30fbfca99f7f9668b4e1a6603c866894e125f5e5bc20400"
+  ],
+  "aliases": [
+   "0=$FA$_t_4872c0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL donor (fits in one band; obj .text slice-shrinks to FA code length), FA census pad tail left outside the patch span",
+   "tail: toolchain-diff - 7 B 8da42400000000 census pad"
+  ],
+  "notes": "dialog scroll ratio fixup, __stdcall(void*) ret 4: dx=*(short*)(esi+0xe) guard; di = [esi+0xb] ? (short)(dx-W[0xc]) : W[0xc]; two symmetric signed arms on W[0x1c]-W[0x14] or W[0x1e]-W[0x16] (movsx), imul by (short)di, idiv (short)dx, store W[0x18]+cw(ax) at W[0x10] (or W[0x1a] -> W[0x12]); second arm after first ret 4. Only in-chunk rel (self jmp @0x1e, literal) - no newsites. Alias 0=$FA$_t_4872c0 required: w43D_dlg_v3 maps _w43D_dsB@4=$FA$_t_4872c0."
+ },
+ {
+  "rva": 570176,
+  "obj": "w45H_8b340_t",
+  "src": "build/survey/probes/w45H_8b340_v2.c",
+  "maps": [],
+  "patch": [
+   "0,103,56578b7c240c68001000008b77128b46208b4e1c5051e8e59cffff83c40c85c0753f8a462484c074118b0757c74014290000008b07ff1083c4048b076affc74014740000008b0757ff500483c4088b4e20c601ff8b4e20b80200000090c64101d98b4e205f890e894604b001c64624005ec3,23:20:$FA$_t_485040+0x0"
+  ],
+  "aliases": [
+   "0=$FA$_t_48b340"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL donor (fits in one band; obj .text slice-shrinks to FA code length), FA census pad tail left outside the patch span",
+   "tail: toolchain-diff - 14 B 8da42400000000 x2 census pads"
+  ],
+  "notes": "resource block unlock/flush: r=x485040(W[esi+0x20],W[esi+0x1c],0x1000) (3 stack args, add esp,0xc); if r==0: if flag@[esi+0x24] { vt=[edi]; *(vt+0x14)=0x29; vt[0](edi); vt=[edi]; *(vt+0x14)=0x74; vt[1](edi,-1)}; *p[[esi+0x20]]=0xff; *(p+1)=0xd9; r=2 (mov eax,2 + 90 nop). Join: [esi]=W[esi+0x20], [esi+4]=r, al=1, [esi+0x24]=0; uchar return. Donor v2 carries the two dis.py-elided `mov [eax+0x14],0x29/0x74` stores. Whole-body transplant donor 103B -> FA 114B; newsite call site 23 (e8 @0x16+1) $FA$_t_485040 +0x0 (still-stub callee). Alias 0=$FA$_t_48b340 required: w40A_refill_v1 maps _sub8b340=$FA$_t_48b340."
+ },
+ {
+  "rva": 590272,
+  "obj": "w45H_901c0_t",
+  "src": "build/survey/probes/w45H_901c0_v1.c",
+  "maps": [],
+  "patch": [
+   "0,123,56578b74240c68800500008b46046a0156ff108d3883c40c8d9000010000b94000000033c089960e010000f3ab880402403dff0000007ef58dba0001000081c280000000b8ffffffffb960000000f3ab8dba0002000033c0b960000000f3ab8dba80030000b9200000008bb60e010000f3a55f5ec3"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL donor (fits in one band; obj .text slice-shrinks to FA code length), FA census pad tail left outside the patch span",
+   "tail: toolchain-diff - 11 B 8d642400 + 8da42400000000 census pads"
+  ],
+  "notes": "object alloc+init 0x580: res=vt[0](esi,1,0x580) via *(FN**)(esi+4); zero 0x40 dwords at res; *[esi+0x10e]=res+0x100; byte id-fill i<=0xff at res+0x100; -1 fill 0x60 dwords at res+0x200; zero 0x60 dwords at res+0x380; copy 0x20 dwords res+0x100 -> res+0x500 (rep movsd). No extern fixups (vtable indirect only). Whole-body transplant donor 128B -> FA 117B.",
+  "aliases": [
+   "0=$FA$_t_4901c0"
+  ]
+ },
+ {
+  "rva": 597776,
+  "obj": "w45H_91f10_t",
+  "src": "build/survey/probes/w45H_91f10_v1.c",
+  "maps": [],
+  "patch": [
+   "0,75,535657680080000068e47c4e00e83e1c01008bf08b54241052a124a454006a008bce0fbf400a83c00750a124a454000fbf780ce8482a02002bf88b0d24a454000fbf59088bc78bce992bc2d1f88d1403e89b2802005f5e5bc3,9:6:?videoInitialized@@3DA+0x3fc,26:6:?curDialog@@3PAUDIALOG@@A+0x0,43:6:?curDialog@@3PAUDIALOG@@A+0x0,60:6:?curDialog@@3PAUDIALOG@@A+0x0,14:20:_RMAccessHandle@8+0x0,52:20:@G_ColorStringWidth@8+0x0,81:20:@G_ColorPrint@20+0x0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL donor (fits in one band; obj .text slice-shrinks to FA code length), FA census pad tail left outside the patch span",
+   "tail: toolchain-diff - 7 B 8da42400000000 census pad"
+  ],
+  "notes": "centered text print via FA mixed-convention G_* callees (reg args ecx/edx + stack): h=RMAccessHandle(0x8000,&videoInitialized+0x3fc); w=ColorStringWidth(movsx curDialog+0xa +7, 0) [ecx=h]; x=movsx curDialog+0xc - w; ColorPrint@20(ecx=h, edx=movsx curDialog+8 + (x>>1 sign-adj), p0 stack arg); mixed reg/stack ABI not expressible in C - donor is a thin stdcall sketch, whole-body transplant carries FA's exact pushes. Newsites: abs @9 videoInitialized+0x3fc, 3x a1/mov curDialog @26/43/60, calls at disp-sites 14/52/81 (RMAccessHandle@8, @G_ColorStringWidth@8, @G_ColorPrint@20, all +0x0).",
+  "aliases": [
+   "0=$FA$_t_491f10"
+  ]
+ },
+ {
+  "rva": 663744,
+  "obj": "w45H_a20c0_t",
+  "src": "build/survey/probes/w45H_a20c0_v1.c",
+  "maps": [],
+  "patch": [
+   "0,77,5356578bf285f67530bf587f4e00b9ffffffff2bc0f2aef7d12bf98bc1c1e9028bf78b5c24108bfbf3a58bc883e103f3a48bc35f5e5bc2040085c97d0433c9eb063bce7e028bcec1e1028b5c24108d04898d048099f7fe5068b8054f0053e8f90a020083c40c8bc35f5e5bc20400,10:6:?hudslewLimitHdg@@3UWORD_POINT@@A+0x23c,89:6:?ifmShow@@3GA+0x22c,95:20:_Sprintf+0x0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL donor (fits in one band; obj .text slice-shrinks to FA code length), FA census pad tail left outside the patch span",
+   "tail: toolchain-diff - 2 B 8bff census pad"
+  ],
+  "notes": "fastcall(ecx=a, edx=b) percent formatter + '-' sentinel: if(!b){strcpy(dst,'-') (inline scasb/rep-movsd template, src=const 0x4e7f58 = ?hudslewLimitHdg@@3UWORD_POINT@@A+0x23c), ret} else clamp a to [0,b] (ecx), a*100 ((a<<2)*5*5 lea pair), idiv b, sprintf(dst, &ifmShow+0x22c '%d%%' at 0x4f05b8, q); returns ebx=dst=[esp+0x10] (3rd arg, stack). Donor spells (a*100)/b exactly. Whole-body transplant donor 77B -> FA 110B; newsites: abs @10 hudslew+0x23c, @89 ifmShow+0x22c, call @95 _Sprintf+0x0 (still-stub 0x4c2c1c).",
+  "aliases": [
+   "0=$FA$_t_4a20c0"
+  ]
+ },
+ {
+  "rva": 899392,
+  "obj": "w45H___setargv_t",
+  "src": "build/survey/probes/w45H___setargv_v1.c",
+  "maps": [],
+  "patch": [
+   "0,159,83ec0856576804010000bea08a5800566a00ff1514a55800a18c9d5800893530a0510080380074068b358c9d58008d44240c8d4c240850516a006a0056e85e0000008b44241c83c414c1e0020344240c50e8fad8ffff83c4048bf885ff750a6a08e88aa8ffff83c4048d44240c8d4c24088b54240850518d0497505756e81e0000008b44241c83c41448893d18a051005fa314a051005e83c408c3,11:6:?dbaseLow@@3PAEA+0x2770,20:6:__imp__GetModuleFileNameA+0x0,25:6:__acmdln+0x0,31:6:__wenviron+0x8,42:6:__acmdln+0x0,140:6:__winminor+0x8,146:6:__winminor+0x4,62:20:$FA$_t_4db9e0+0x0,82:20:_malloc+0x0,98:20:__amsg_exit+0x0,126:20:$FA$_t_4db9e0+0x0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL donor (fits in one band; obj .text slice-shrinks to FA code length), FA census pad tail left outside the patch span",
+   "tail: toolchain-diff - none (155 B code, chunk exact to c3)"
+  ],
+  "notes": "CRT __setargv: GetModuleFileNameA(NULL, &dbaseLow+0x2770 (0x588aa0), 0x104); __wenviron+8 = pgmptr (0x51a030); esi = *_acmdln ? __acmdln : buf; parse_cmdline(esi,0,0,&local1,&local2) -> $FA$_t_4db9e0 (still-stub, callee leaves args, caller add esp,0x14); argv=malloc(local1*4+local2); if(!argv) __amsg_exit(8); parse_cmdline(esi,argv,argv+local1*4,&local1,&local2); [__winminor+8]=argv (mov ds:imm32 before pop edi!); [__winminor+4]=local1-1 (a3 after pops). IAT: ff 15 disp @20 __imp__GetModuleFileNameA+0x0 (identity per layout; undecorated import public - decorated form creates a new locally-bound IAT slot). No census pad (155 B exact transplant donor 159B -> FA 155B)."
+ },
+ {
+  "rva": 606032,
+  "obj": "w45H_93f50_t2",
+  "src": "build/survey/probes/w45H_93f50_v1.c",
+  "maps": [],
+  "patch": [
+   "0,116,56578b7c240c8bb7860100008b8f820100008b460c9983e2075703c28b5156c1f80303d0895156c7460c000000008b8782010000ff500883c40484c0750532c05f5ec333c98b87120100003bc17e178d4612c7000000000083c004418b97120100003bd17fec8b87f00000005f894622b001c64610005ec3"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL donor (fits in one band; obj .text slice-shrinks to FA code length), FA census pad tail left outside the patch span",
+   "patch 0: toolchain-diff - donor edited after first compile (dis.py-elided store added); oldlen re-read from recompiled obj (_t2) and transplant re-run (run3) -> EXACT",
+   "tail: toolchain-diff - 8 B 8d642400 x2 census pads"
+  ],
+  "notes": "slot counter accumulate + vt ack + zero band: *(int*)([edi+0x182]+0x56)+=(*(int*)(E+0xc))/8 (cdq/and 7/sar 3 signed div-8), then *(int*)(E+0xc)=0 (dis.py-elided c7460c store); E=[edi+0x186], C=[edi+0x182]; push edi; call *(C+8) (cdecl, add esp,4, arg edi); al=0 -> xor al,al return (uchar); loop: i=0; while([edi+0x112]>i){*(E+0x12+i*4)=0;i++}; [E+0x22]=[edi+0xf0]; al=1; [E+0x10]=0. Donor 116B -> FA 120B.",
+  "aliases": [
+   "0=$FA$_t_493f50"
+  ]
+ },
+ {
+  "rva": 770400,
+  "obj": "w45H_bc160_t2",
+  "src": "build/survey/probes/w45H_bc160_v1.c",
+  "maps": [],
+  "patch": [
+   "0,120,56578b7c240c8bb7860100008b8f820100008b460c9983e2075703c28b5156c1f80303d0895156c7460c000000008b8782010000ff500883c40484c0750532c05f5ec333c08b8f120100003bc87e178d4e16c7010000000083c104408b97120100003bd07fec33c9894e128b87f00000005f894626b001884e105ec3"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL donor (fits in one band; obj .text slice-shrinks to FA code length), FA census pad tail left outside the patch span",
+   "patch 0: toolchain-diff - donor edited after first compile (dis.py-elided store added); oldlen re-read from recompiled obj (_t2) and transplant re-run (run3) -> EXACT",
+   "tail: toolchain-diff - 4 B 8d642400 census pad"
+  ],
+  "notes": "twin of 93f50 at esi band +0x16: same accumulate (int)(C+0x56)+=([E+0xc])/8; *(int*)(E+0xc)=0; vt ack *(C+8)(edi, cdecl); zero loop [edi+0x112]? [E+0x16+i*4]=0; then [E+0x12]=0 (33 c9 store), [E+0x26]=[edi+0xf0], al=1, [E+0x10]=cl. Register-plan differs from 93f50 (xor eax,ecx load counter in eax; loop cmp edx,eax) - separate whole-body transplant recipe. Donor 120B -> FA 124B.",
+  "aliases": [
+   "0=$FA$_t_4bc160"
+  ]
+ },
+ {
+  "rva": 708272,
+  "obj": "w45H_NET_Shutdown_t2",
+  "src": "build/survey/probes/w45H_NET_Shutdown_v1.c",
+  "maps": [],
+  "patch": [
+   "0,113,57a1d07f500085c07569c705d07f5000010000008a0dd87d570084c97424a0647e570084c07407e824dff5ffeb05e85d61ffffe8685cffffc705ecbc4f0000000000bfb07d570033c0b906000000f3abb910000000e8e68df8ffc705d07f500000000000b8ffffffffa3b8965600a3bc9656005fc3,2:6:?tcp_proto@@3UNET_PROTOCOL@@A+0x288,12:6:?tcp_proto@@3UNET_PROTOCOL@@A+0x288,22:6:?ws@@3U_winsock_funcs@@A+0x0,31:6:?player_list@@3UNET_PLAYER_LIST@@A+0x1c,58:6:?mpInfo@@3UMP_INFO@@C+0x15c,67:6:?callbacks@@3UCALLBACK_FUNC_LIST@@A+0x0,92:6:?tcp_proto@@3UNET_PROTOCOL@@A+0x288,106:6:?socket_list@@3USOCKET_STATE_LIST@@A+0x418,111:6:?socket_list@@3USOCKET_STATE_LIST@@A+0x41c,40:20:?NET_MasterShutdown@@YAXXZ+0x0,47:20:?socket_close_all@@YAXXZ+0x0,52:20:?winsock_cleanup@@YAXXZ+0x0,86:20:@MMFreeAllId@4+0x0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL donor (fits in one band; obj .text slice-shrinks to FA code length), FA census pad tail left outside the patch span",
+   "patch 0: toolchain-diff - donor edited after first compile (dis.py-elided store added); oldlen re-read from recompiled obj (_t2) and transplant re-run (run3) -> EXACT",
+   "tail: toolchain-diff - 11 B 8d642400 + 8da42400000000 census pads"
+  ],
+  "notes": "teardown with reentrancy guard: if(tcp_proto+0x288) return; tcp_proto+0x288=1; if(ws flag){ if(player_list+0x1c) NET_MasterShutdown() else socket_close_all(); winsock_cleanup(); *(mpInfo+0x15c)=0 }; memset(callbacks,0,24)(rep stosd 6); MMFreeAllId(0x10); tcp_proto+0x288=0; socket_list+0x418=socket_list+0x41c=-1. First two abs are the same dword (a1 load + c7 05 set =1) - both carry tcp_proto+0x288 newsites. Donor 113B -> FA 117B."
  }
 ]
