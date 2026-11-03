@@ -208,6 +208,16 @@ def main():
     mask = bytearray(len(text["content"]))
     for o, _, _ in relocs:
         mask[o:o + 4] = b"\x01" * 4
+    # The obj contributes len(content) bytes at the chunk VA (the stub it
+    # replaces covered exactly the chunk extent): code LONGER than the chunk
+    # shifts every downstream .text obj one byte per extra byte, and the
+    # verify loop below only sees min(len, FA) — so an over-long patched
+    # code must fail here (wave-32: stale patches appended 2 junk bytes past
+    # __dosmaperr's 115-B chunk; the +2 shift cascaded 52360 B at gate).
+    if len(text["content"]) > len(fa_bytes):
+        sys.exit("FATAL: patched CL code %#x B > FA chunk %#x B for %#x — "
+                 "the obj would shift .text downstream; fix/trim the "
+                 "patches" % (len(text["content"]), len(fa_bytes), rva))
     diffs = [i for i in range(min(len(text["content"]), len(fa_bytes)))
              if text["content"][i] != fa_bytes[i] and not mask[i]]
     if diffs:

@@ -1,0 +1,159 @@
+[
+ {
+  "rva": 870944,
+  "obj": "w32A_cfltinit_v1",
+  "src": "build/survey/probes/w32A_cfltinit_v1.c",
+  "maps": [
+   "_w32a_tab=__cfltcvt_tab",
+   "_w32a_cropzeros=__cropzeros",
+   "_w32a_fassign=__fassign",
+   "_w32a_forcdecpt=__forcdecpt",
+   "_w32a_positive=__positive",
+   "_w32a_cfltcvt=__cfltcvt"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "recipe: table init as six ordered stores spelled in FA's emission order (tab[1..4] cropzeros/fassign/forcdecpt/positive, then tab[0] and tab[5] = cfltcvt duplicated); CL 4.2 /O2 CSEs the two identical refs into one mov eax+reg stores, exactly FA's shape; map _w32a_tab=__cfltcvt_tab, function-address maps are identity"
+ },
+ {
+  "rva": 871008,
+  "obj": "w32A_d4a60_v1",
+  "src": "build/survey/probes/w32A_d4a60_v1.c",
+  "maps": [
+   "_w32a_ldv=__ldused+0x4"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "recipe: plain get-old-set-new on a moffs global (map _w32a_ldv=__ldused+0x4 with +0x4 addend on the map TO); return the OLD value via the a1 read; EXACT on first spelling"
+ },
+ {
+  "rva": 875824,
+  "obj": "w32A_lsearch_v1",
+  "src": "build/survey/probes/w32A_lsearch_v1.c",
+  "maps": [
+   "_w32a_lsearch_q=__lsearch"
+  ],
+  "patch": [
+   "0x2,18,8b74240c575533ff8b6c241c8b5c2418",
+   "0x12,4,397d007620",
+   "0x17,1,53",
+   "0x22,2,740c",
+   "0x24,7,035c242047",
+   "0x29,6,397d0077e9",
+   "0x31,1,c3",
+   "0x3c,1,fb",
+   "0x4b,12,8bc3ff45005d5f5e5bc3"
+  ],
+  "provenance": [
+   "patch 0x2: toolchain-diff - CL assigns num->ebx, base->ebp and caches *num into eax (8b 03) before esi=key; FA assigns esi=key first (8b 74 24 0c), then ebp=num (8b 6c 24 1c), ebx=base (8b 5c 24 18) with no *num pre-load",
+   "patch 0x12: toolchain-diff - entry loop test: CL compares cached eax (3b c7 / je rel8 0x23) on the CSE'd *num load; FA re-tests memory (39 7d 00 / jbe rel8 0x20)",
+   "patch 0x17: toolchain-diff - compar's element push: CL pushes ebp (its element reg); FA pushes ebx (its element reg)",
+   "patch 0x22: toolchain-diff - found-path je disp 0x0f (CL) -> 0x0c (FA), found-return block shifted by the deleted *num cache prologue",
+   "patch 0x24: toolchain-diff - loop tail: CL walks element via ebp with width preloaded into eax (8b 44 24 20 / 47 / 03 e8); FA adds width from memory directly (03 5c 24 20 / 47)",
+   "patch 0x29: toolchain-diff - bottom test: CL re-reads *num into ecx (8b 0b / 3b cf / ja rel8 0xe6); FA compares memory form (39 7d 00 / ja rel8 0xe9)",
+   "patch 0x31: toolchain-diff - found-path return-value load: FA returns its element reg ebx (8b c3), CL returns ebp (8b c5)",
+   "patch 0x3c: toolchain-diff - copy-loop dest: FA's rep-movs source pair is mov edi,ebx (element); CL's mov edi,ebp",
+   "patch 0x4b: toolchain-diff - tail: CL stages ++*num through ecx with the epilogue popping between (8b 0d..8b c5 41 5d 5f 89 0b 5e 5b c3); FA does mov eax,ebx (8b c3) / incl [ebp] (ff 45 00) / pops / ret"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "recipe: CRT _lsearch with inline-expanded memcpy (rep movsd + and-3 rep movsb tail) - CL's reg plan differs structurally (num->ebx/base->ebp swap, *num CSE into eax, split epilogue), so the winner is CL v1 + 9-patch byte chain; every diff is a toolchain-diff instruction substitution (prologue reg loads, mem-form cmp [ebp]/jbe, element push ebx, je disp, width-add from mem, bottom test mem form, found-path return mov eax,ebx, rep-movs dest edi,ebx, moved ret-load/++*num staging)"
+ },
+ {
+  "rva": 927104,
+  "obj": "w32A_chsize_v1",
+  "src": "build/survey/probes/w32A_chsize_v1.c",
+  "maps": [
+   "_w32a_nhandle=__nhandle",
+   "_w32a_pio=__crtheap+0x4",
+   "_w32a_lkfh=__lock_fhandle",
+   "_w32a_chsizelk=__chsize_lk",
+   "_w32a_unlockfh=__unlock_fhandle",
+   "_w32a_errno=__errno"
+  ],
+  "patch": [
+   "0,8,56578b74240c",
+   "0x6,8,3b35000000007347,2:6:_w32a_nhandle",
+   "0x1e,1,",
+   "0x27,9,f6440204017427",
+   "0x34,4,8b442414",
+   "0x54,1,",
+   "0x67,1,"
+  ],
+  "provenance": [
+   "patch 0x6: toolchain-diff - FA's fd guard is cmp [__nhandle],esi (3b 35 / jae rel8 0x47, DIR32 newsite at site 0x2 (abs 0x8)) re-anchored because CL's own __nhandle DIR32 sat inside the replaced a1-load span",
+   "patch 0: toolchain-diff - CL opens with push ebx + a1-load of __nhandle for the fd guard; FA frames push esi/edi and loads esi via 8b 74 24 0c, so the 6-byte prologue head is rewritten as 56 57 8b 74 24 0c",
+   "patch 0x1e: toolchain-diff - CL emits a 90 nop (obj alignment) after the shl ecx,2; FA has none",
+   "patch 0x27: toolchain-diff - CL materializes the FOPEN byte test into bl (8a 5c 02 04 / f6 c3 01 / je rel8 0x28); FA tests memory directly (f6 44 02 04 01 / je rel8 0x27)",
+   "patch 0x34: toolchain-diff - size arg re-load uses [esp+0x14] in FA (4 saved regs) vs CL's [esp+0x18] (5 saved regs incl. ebx)",
+   "patch 0x54: toolchain-diff - CL keeps a stray pop ebx (5b) in the success-path epilogue; FA ends pop edi/pop esi/ret",
+   "patch 0x67: toolchain-diff - CL keeps a stray pop ebx (5b) at the tail of the fail-path epilogue; FA ends pop esi/ret",
+   "map/alias:link fix: lockfhandle chunk public is __lock_fhandle (layout-baked mangled name), not _lockfhandle_q."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "recipe: w29f_close_v2 ioinfo-band twin (thiscall-free fd guard, 36-byte-stride ioinfo lookup, lk/unlock around __chsize_lk, errno-9 fail path with NO doserrno store); CL v1 + 7-patch byte chain (prologue 53 a1->56 57 8b74240c, cmp [__nhandle],esi 3b 35+jae with DIR32 newsite site 2, nop delete, mem-form FOPEN test, arg-load esp+0x14, 2x stray 5b Deletes) in POST-PREVIOUS-PATCH offsets; fail path writes 9/ -1 only"
+ },
+ {
+  "rva": 935456,
+  "obj": "w32A_setmode_v1",
+  "src": "build/survey/probes/w32A_setmode_v1.c",
+  "maps": [
+   "_w32b_nhandle=__nhandle",
+   "_w32b_pio=__crtheap+0x4",
+   "_w32b_lkfh=__lock_fhandle",
+   "_w32b_setmodelk=__setmode_lk",
+   "_w32b_unlockfh=__unlock_fhandle",
+   "_w32b_errno=__errno"
+  ],
+  "patch": [
+   "0,8,56578b74240c",
+   "0x6,8,3935000000007647,2:6:_w32b_nhandle",
+   "0x1e,1,",
+   "0x27,9,f6440204017427",
+   "0x34,4,8b442414",
+   "0x54,1,",
+   "0x67,1,"
+  ],
+  "provenance": [
+   "patch 0x6: toolchain-diff - FA's fd guard is cmp [__nhandle],esi (39 35 / jbe rel8 0x47, DIR32 newsite at site 0x2 (abs 0x8)); __setmode spelling uses jbe polarity, chsize twin uses 3b 35/jae",
+   "patch 0: toolchain-diff - CL opens with push ebx + a1-load of __nhandle for the fd guard; FA frames push esi/edi and loads esi via 8b 74 24 0c, so the 6-byte prologue head is rewritten as 56 57 8b 74 24 0c",
+   "patch 0x1e: toolchain-diff - CL emits a 90 nop (obj alignment) after the shl ecx,2; FA has none",
+   "patch 0x27: toolchain-diff - CL materializes the FOPEN byte test into bl (8a 5c 02 04 / f6 c3 01 / je rel8 0x28); FA tests memory directly (f6 44 02 04 01 / je rel8 0x27)",
+   "patch 0x34: toolchain-diff - size arg re-load uses [esp+0x14] in FA (4 saved regs) vs CL's [esp+0x18] (5 saved regs incl. ebx)",
+   "patch 0x54: toolchain-diff - CL keeps a stray pop ebx (5b) in the success-path epilogue; FA ends pop edi/pop esi/ret",
+   "patch 0x67: toolchain-diff - CL keeps a stray pop ebx (5b) at the tail of the fail-path epilogue; FA ends pop esi/ret",
+   "map/alias:link fix: TOs = layout publics __lock_fhandle / __setmode_lk."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "recipe: byte-identical twin of the chsize chain; map _w32b_setmodelk=_w29g_smlk (converted def _lockfhandle target) and FA's guard cmp polarity differs: 39 35 + jbe (setmode) vs 3b 35 + jae (chsize) - everything else patch-for-patch identical"
+ },
+ {
+  "rva": 897584,
+  "obj": "w32A_db230_v1",
+  "src": "build/survey/probes/w32A_db230_v1.c",
+  "maps": [
+   "_w32a_filbuf=__filbuf"
+  ],
+  "patch": [
+   "0,4,8b542404",
+   "0x5,1,42",
+   "0x9,1,42",
+   "0xb,24,780c8b0a8d4101890233c08a01c352e80000000083c404c3,0x10:20:_w32a_filbuf"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - FA holds the FILE* arg in edx (8b 54 24 04); CL chose ecx (8b 4c 24 04)",
+   "patch 0x5: toolchain-diff - f->cnt accesses follow FA's edx: [edx+4] (8b 42 04 / 89 42 04) vs CL's [ecx+4]",
+   "patch 0x9: toolchain-diff - second f->cnt access reg swap, see patch 0x5",
+   "patch 0xb: toolchain-diff - CL order: jns skips the inlined call path (79 0a) and puts the read at 0x17 with the old-ptr reg in edx; FA order: js jumps FORWARD to the tail-call block (78 0c js, call at 0x19 with push edx), read path falls through with old ptr in ecx (8b 0a / 8d 41 01 / 89 02); __filbuf's e8 re-anchored as REL32 newsite at site 0x10 (abs 0x1b) (payload zeros) because CL's own call reloc sat inside the replaced span"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "recipe: getc macro helper (--f->n; <0 -> tail-call __filbuf, else zero-extend *f->p++ with store-first plan); CL v1 + 4-patch chain: arg reg ecx->edx (8b 54 24 04, [edx+4] swaps), block order js-forward-tail-call / read-fallthrough with old ptr in ecx, __filbuf e8 re-anchored as REL32 newsite site 0x10 (abs 0x1b, payload zeros)"
+ }
+]

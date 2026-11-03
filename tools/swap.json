@@ -12352,5 +12352,774 @@
    "0=$FA$_t_cdb6c"
   ],
   "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 870944,
+  "obj": "w32A_cfltinit_v1",
+  "src": "src/w32A_cfltinit_v1.c",
+  "maps": [
+   "_w32a_tab=__cfltcvt_tab",
+   "_w32a_cropzeros=__cropzeros",
+   "_w32a_fassign=__fassign",
+   "_w32a_forcdecpt=__forcdecpt",
+   "_w32a_positive=__positive",
+   "_w32a_cfltcvt=__cfltcvt"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 871008,
+  "obj": "w32A_d4a60_v1",
+  "src": "src/w32A_d4a60_v1.c",
+  "maps": [
+   "_w32a_ldv=__ldused+0x4"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 875824,
+  "obj": "w32A_lsearch_v1",
+  "src": "src/w32A_lsearch_v1.c",
+  "maps": [
+   "_w32a_lsearch_q=__lsearch"
+  ],
+  "patch": [
+   "0x2,18,8b74240c575533ff8b6c241c8b5c2418",
+   "0x12,4,397d007620",
+   "0x17,1,53",
+   "0x22,2,740c",
+   "0x24,7,035c242047",
+   "0x29,6,397d0077e9",
+   "0x31,1,c3",
+   "0x3c,1,fb",
+   "0x4b,12,8bc3ff45005d5f5e5bc3"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x2: toolchain-diff - CL assigns num->ebx, base->ebp and caches *num into eax (8b 03) before esi=key; FA assigns esi=key first (8b 74 24 0c), then ebp=num (8b 6c 24 1c), ebx=base (8b 5c 24 18) with no *num pre-load",
+   "patch 0x12: toolchain-diff - entry loop test: CL compares cached eax (3b c7 / je rel8 0x23) on the CSE'd *num load; FA re-tests memory (39 7d 00 / jbe rel8 0x20)",
+   "patch 0x17: toolchain-diff - compar's element push: CL pushes ebp (its element reg); FA pushes ebx (its element reg)",
+   "patch 0x22: toolchain-diff - found-path je disp 0x0f (CL) -> 0x0c (FA), found-return block shifted by the deleted *num cache prologue",
+   "patch 0x24: toolchain-diff - loop tail: CL walks element via ebp with width preloaded into eax (8b 44 24 20 / 47 / 03 e8); FA adds width from memory directly (03 5c 24 20 / 47)",
+   "patch 0x29: toolchain-diff - bottom test: CL re-reads *num into ecx (8b 0b / 3b cf / ja rel8 0xe6); FA compares memory form (39 7d 00 / ja rel8 0xe9)",
+   "patch 0x31: toolchain-diff - found-path return-value load: FA returns its element reg ebx (8b c3), CL returns ebp (8b c5)",
+   "patch 0x3c: toolchain-diff - copy-loop dest: FA's rep-movs source pair is mov edi,ebx (element); CL's mov edi,ebp",
+   "patch 0x4b: toolchain-diff - tail: CL stages ++*num through ecx with the epilogue popping between (8b 0d..8b c5 41 5d 5f 89 0b 5e 5b c3); FA does mov eax,ebx (8b c3) / incl [ebp] (ff 45 00) / pops / ret"
+  ]
+ },
+ {
+  "rva": 927104,
+  "obj": "w32A_chsize_v1",
+  "src": "src/w32A_chsize_v1.c",
+  "maps": [
+   "_w32a_nhandle=__nhandle",
+   "_w32a_pio=__crtheap+0x4",
+   "_w32a_lkfh=__lock_fhandle",
+   "_w32a_chsizelk=__chsize_lk",
+   "_w32a_unlockfh=__unlock_fhandle",
+   "_w32a_errno=__errno"
+  ],
+  "patch": [
+   "0,8,56578b74240c",
+   "0x6,8,3b35000000007347,2:6:_w32a_nhandle",
+   "0x1e,1,",
+   "0x27,9,f6440204017427",
+   "0x34,4,8b442414",
+   "0x54,1,",
+   "0x67,1,"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x6: toolchain-diff - FA's fd guard is cmp [__nhandle],esi (3b 35 / jae rel8 0x47, DIR32 newsite at site 0x2 (abs 0x8)) re-anchored because CL's own __nhandle DIR32 sat inside the replaced a1-load span",
+   "patch 0: toolchain-diff - CL opens with push ebx + a1-load of __nhandle for the fd guard; FA frames push esi/edi and loads esi via 8b 74 24 0c, so the 6-byte prologue head is rewritten as 56 57 8b 74 24 0c",
+   "patch 0x1e: toolchain-diff - CL emits a 90 nop (obj alignment) after the shl ecx,2; FA has none",
+   "patch 0x27: toolchain-diff - CL materializes the FOPEN byte test into bl (8a 5c 02 04 / f6 c3 01 / je rel8 0x28); FA tests memory directly (f6 44 02 04 01 / je rel8 0x27)",
+   "patch 0x34: toolchain-diff - size arg re-load uses [esp+0x14] in FA (4 saved regs) vs CL's [esp+0x18] (5 saved regs incl. ebx)",
+   "patch 0x54: toolchain-diff - CL keeps a stray pop ebx (5b) in the success-path epilogue; FA ends pop edi/pop esi/ret",
+   "patch 0x67: toolchain-diff - CL keeps a stray pop ebx (5b) at the tail of the fail-path epilogue; FA ends pop esi/ret"
+  ]
+ },
+ {
+  "rva": 935456,
+  "obj": "w32A_setmode_v1",
+  "src": "src/w32A_setmode_v1.c",
+  "maps": [
+   "_w32b_nhandle=__nhandle",
+   "_w32b_pio=__crtheap+0x4",
+   "_w32b_lkfh=__lock_fhandle",
+   "_w32b_setmodelk=__setmode_lk",
+   "_w32b_unlockfh=__unlock_fhandle",
+   "_w32b_errno=__errno"
+  ],
+  "patch": [
+   "0,8,56578b74240c",
+   "0x6,8,3935000000007647,2:6:_w32b_nhandle",
+   "0x1e,1,",
+   "0x27,9,f6440204017427",
+   "0x34,4,8b442414",
+   "0x54,1,",
+   "0x67,1,"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x6: toolchain-diff - FA's fd guard is cmp [__nhandle],esi (39 35 / jbe rel8 0x47, DIR32 newsite at site 0x2 (abs 0x8)); __setmode spelling uses jbe polarity, chsize twin uses 3b 35/jae",
+   "patch 0: toolchain-diff - CL opens with push ebx + a1-load of __nhandle for the fd guard; FA frames push esi/edi and loads esi via 8b 74 24 0c, so the 6-byte prologue head is rewritten as 56 57 8b 74 24 0c",
+   "patch 0x1e: toolchain-diff - CL emits a 90 nop (obj alignment) after the shl ecx,2; FA has none",
+   "patch 0x27: toolchain-diff - CL materializes the FOPEN byte test into bl (8a 5c 02 04 / f6 c3 01 / je rel8 0x28); FA tests memory directly (f6 44 02 04 01 / je rel8 0x27)",
+   "patch 0x34: toolchain-diff - size arg re-load uses [esp+0x14] in FA (4 saved regs) vs CL's [esp+0x18] (5 saved regs incl. ebx)",
+   "patch 0x54: toolchain-diff - CL keeps a stray pop ebx (5b) in the success-path epilogue; FA ends pop edi/pop esi/ret",
+   "patch 0x67: toolchain-diff - CL keeps a stray pop ebx (5b) at the tail of the fail-path epilogue; FA ends pop esi/ret"
+  ]
+ },
+ {
+  "rva": 897584,
+  "obj": "w32A_db230_v1",
+  "src": "src/w32A_db230_v1.c",
+  "maps": [
+   "_w32a_filbuf=__filbuf"
+  ],
+  "patch": [
+   "0,4,8b542404",
+   "0x5,1,42",
+   "0x9,1,42",
+   "0xb,24,780c8b0a8d4101890233c08a01c352e80000000083c404c3,0x10:20:_w32a_filbuf"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0: toolchain-diff - FA holds the FILE* arg in edx (8b 54 24 04); CL chose ecx (8b 4c 24 04)",
+   "patch 0x5: toolchain-diff - f->cnt accesses follow FA's edx: [edx+4] (8b 42 04 / 89 42 04) vs CL's [ecx+4]",
+   "patch 0x9: toolchain-diff - second f->cnt access reg swap, see patch 0x5",
+   "patch 0xb: toolchain-diff - CL order: jns skips the inlined call path (79 0a) and puts the read at 0x17 with the old-ptr reg in edx; FA order: js jumps FORWARD to the tail-call block (78 0c js, call at 0x19 with push edx), read path falls through with old ptr in ecx (8b 0a / 8d 41 01 / 89 02); __filbuf's e8 re-anchored as REL32 newsite at site 0x10 (abs 0x1b) (payload zeros) because CL's own call reloc sat inside the replaced span"
+  ]
+ },
+ {
+  "rva": 912960,
+  "obj": "w32B_sopenw_v1",
+  "src": "src/w32B_sopenw_v1.c",
+  "maps": [
+   "_w32b_sopenw=$FA$_t_4dee40"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4dee40"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 897632,
+  "obj": "w32B_ungetc2_v1",
+  "src": "src/w32B_ungetc2_v1.c",
+  "maps": [
+   "_w32b_ungetc2=$FA$_t_4db260"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4db260"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 48320,
+  "obj": "w32B_tempalias_v1",
+  "src": "src/w32B_tempalias_v1.c",
+  "maps": [
+   "_w32b_tempalias@8=$FA$_t_4bcc0"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4bcc0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 891184,
+  "obj": "w32B_dosmaperr_v3p2",
+  "src": "src/w32B_dosmaperr_v3p2.c",
+  "maps": [
+   "_w32b_dosmaperr=__dosmaperr",
+   "__w32b_dz=$FA$_t_4d99c0",
+   "_errno=__errno",
+   "___cfltcvt_tab=__cfltcvt_tab"
+  ],
+  "patch": [
+   "0x13,4,",
+   "0x13,0,3908",
+   "0x21,1,f1",
+   "0x25,1,72",
+   "0x2a,1,77"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x0: toolchain-diff CL load-then-cmp (8b10/3bd1) at FA folded cmp [eax],ecx (3908), 4->0 B",
+   "patch 0x13: toolchain-diff FA cmp [eax],ecx (3908) inserted at loop head",
+   "patch 0x21: toolchain-diff jb back-edge disp stale after -2 B shrink (ef->f1)",
+   "patch 0x25: toolchain-diff signed jl (7c) vs FA unsigned jb (72) on >= cast compare",
+   "patch 0x2a: toolchain-diff signed jg (7f) vs FA unsigned ja (77) on <= cast compare",
+   "patch 0x7f: toolchain-diff signed jl (7c) vs FA unsigned jb (72), ENOMEM range check",
+   "patch 0x87: toolchain-diff signed jg (7f) vs FA unsigned ja (77), ENOMEM range check"
+  ]
+ },
+ {
+  "rva": 880896,
+  "obj": "w32B_mtdel_v2p2",
+  "src": "src/w32B_mtdel_v2p2.c",
+  "maps": [
+   "_w32b_mtdel=__mtdeletelocks",
+   "__free=_free"
+  ],
+  "patch": [
+   "0x0b,7,8d1cbd00000000,3:6:__locktable",
+   "0x12,7,8b03",
+   "0x3f,1,cb"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x0b: toolchain-diff CL mov eax,[edi*4+..] vs FA lea ebx,[edi*4+..] loop-head order",
+   "patch 0x12: toolchain-diff CL lea ebx,[edi*4+..] vs FA mov eax,[ebx] (7->2 B, -5 net)",
+   "patch 0x3f: toolchain-diff jl back-edge disp stale after -5 B shrink (c6->cb)"
+  ]
+ },
+ {
+  "rva": 875616,
+  "obj": "w32B_fgets_v3p2",
+  "src": "src/w32B_fgets_v3p2.c",
+  "maps": [
+   "_w32b_fgets=_fgets",
+   "_lock_file=__lock_file",
+   "_filbuf=__filbuf",
+   "_unlock_file=__unlock_file"
+  ],
+  "patch": [
+   "0,19,53568b74240c578b7c2414558bee85ff7f0733c05d5f5e5bc3",
+   "0x23,4,",
+   "0x26,2,",
+   "0x28,1,2c",
+   "0x4a,1,1e",
+   "0x4e,4,8bcd453c0a",
+   "0x54,1,d1",
+   "0x6a,1,f5"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x0: toolchain-diff FA interleaved prolog (push/load/push/load) 19->25 B, replaces all-pushes prolog",
+   "patch 0x23: toolchain-diff CL re-load esi=s after lock call (8b742418), FA did it pre-test in prolog",
+   "patch 0x26: toolchain-diff CL mov ebp,esi (p=s) re-derived post-call, FA did it pre-test in prolog",
+   "patch 0x28: toolchain-diff je store0 disp shifts with tail blocks (2b->2c)",
+   "patch 0x4a: toolchain-diff je eof disp shifts with dead-mov rewrite (1d->1e)",
+   "patch 0x4e: toolchain-diff FA dead mov ecx,ebp + cmp al,0xa (8bcd 45 3c0a) vs CL cmp eax,0xa (83f80a)",
+   "patch 0x54: toolchain-diff jne loop disp stale after +1 B rewrite (d2->d1)",
+   "patch 0x6a: toolchain-diff EOF cmp modrm: CL cmp edi,esi (ee) vs FA cmp esi,ebp (f5)"
+  ]
+ },
+ {
+  "rva": 123984,
+  "obj": "w32C_isdll_v3",
+  "src": "src/w32C_isdll_v3.c",
+  "maps": [
+   "_brentDLLName=?setSoundAndMusic@@3JA+0x38",
+   "@IsBrentDLLh@4=?IsBrentDLL@@YIDPAX@Z"
+  ],
+  "patch": [
+   "0x65,20,740d3d504c0000740632c05ec20400b0015ec20400",
+   "0x7a,0,8d9b00000000"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x65: toolchain-diff CL folds the 0x4550 check to jne/sete al; FA re-cmps 0x4550 with je, then 0x4c50 je, falling to xor al ret-0",
+   "patch 0x7a: toolchain-diff FA pads the chunk with lea-pad 8d 9b 00 00 00 00 after the final ret; CL emits no pad"
+  ]
+ },
+ {
+  "rva": 138944,
+  "obj": "w32C_mapwts_v3",
+  "src": "src/w32C_mapwts_v3.c",
+  "maps": [
+   "_wcX=?worldCenter@@3UF24_POINT3@@A",
+   "_wcZ=?worldCenter@@3UF24_POINT3@@A+0x8",
+   "_mapScale=?mapScale@@3JA",
+   "_panX=_desiredMapScale+0xc",
+   "_panY=_desiredMapScale+0xe"
+  ],
+  "patch": [
+   "0x00,6,568b018bf2",
+   "0x24,12,2b4108668b0d00000000,6:6:_panY",
+   "0x3d,1,"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x00: toolchain-diff CL pushes ebx then esi late; FA pushes esi first (56 8b 01 8b f2)",
+   "patch 0x24: toolchain-diff CL stages [ecx+8] via mov ebx,[ecx+8]/sub eax,ebx; FA folds sub eax,[ecx+8] (2b 41 08); imm newsite _panY (panX+2 = +0xe)",
+   "patch 0x3d: toolchain-diff CL trailing pop ebx with no use; FA rets straight"
+  ]
+ },
+ {
+  "rva": 507984,
+  "obj": "w32C_pagetext_v3",
+  "src": "src/w32C_pagetext_v3.c",
+  "maps": [],
+  "patch": [
+   "0x00,1,",
+   "0x0c,16,8b1485100000008d0485000000003bd1,3:6:_fmtText,10:6:_fmtText",
+   "0x1c,7,7f0333c0c38d0c498b00",
+   "0x26,4,8b44c814",
+   "0x2d,2,7309",
+   "0x38,6,c3"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x00: toolchain-diff CL spares cnt in ebx (push+pop); FA keeps cnt in edx, no ebx",
+   "patch 0x0c: toolchain-diff CL emits bp-lea first (bp=edx, cnt=ebx, 3b d9); FA loads cnt first (edx, imm addend 0x10) then lea bp/eax, cmp 3b d1",
+   "patch 0x1c: toolchain-diff CL branches jle to dup exit block; FA inverts to jg-over inline ret-0",
+   "patch 0x26: toolchain-diff CL sib index/base swapped (c1 vs c8)",
+   "patch 0x2d: toolchain-diff CL jae disp targets dup exit at 0x3a; FA targets inline ret 0x38",
+   "patch 0x38: toolchain-diff CL trailing 5b c3 33 c0 5b c3 dup-exit; FA single c3"
+  ]
+ },
+ {
+  "rva": 612160,
+  "obj": "w32C_pushclipbox_v3",
+  "src": "src/w32C_pushclipbox_v3.c",
+  "maps": [
+   "_g2s=_globalSecondarySurface+0x4",
+   "_slotBase=_tempYLR+0x4e18",
+   "_slot2=_tempYLR+0x4e18"
+  ],
+  "patch": [
+   "0x08,1,15",
+   "0x0d,49,a300000000668914c5000000008d0cc5000000008b1d00000000668959025ba100000000668941048b150000000066895106,1:6:_g2s,9:6:_slotBase,16:6:_slotBase,22:6:_clipTop,32:6:_clipWidth,42:6:_clipHeight",
+   "0x3f,1,"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x08: toolchain-diff CL loads clipLeft into ecx (8b 0d); FA into edx (8b 15) \u2014 modrm byte only",
+   "patch 0x0d: toolchain-diff CL stores g2s late and clips in v3 reg colors (ecx/eax/edx/ebx); FA stores g2s after the left-load then uses edx/ebx/eax/edx with lea ecx slot pointer; content restored from FA bytes with imm newsites g2s/slotBase x2/clipTop/clipWidth/clipHeight",
+   "patch 0x3f: toolchain-diff CL trailing pop ebx after the FA-span restore; FA's pop ebx sits early (covered by patch 0x0d)"
+  ]
+ },
+ {
+  "rva": 736432,
+  "obj": "w32C_4b3cb0_v4",
+  "src": "src/w32C_4b3cb0_v4.c",
+  "maps": [],
+  "patch": [
+   "0x00,13,8b4424045368120100006a0050",
+   "0x0d,6,8b5804ff1383c40c",
+   "0x15,7,c6801101000000",
+   "0x1c,1,5b"
+  ],
+  "aliases": [
+   "0=$FA$_t_4b3cb0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x00: toolchain-diff CL defers p-load (esi,[esp+0xc] after push) + extra push esi; FA loads p into eax first then push ebx/0x112/0/eax",
+   "patch 0x0d: toolchain-diff CL calls *0x4(%esi) one-step; FA materializes mov ebx,[eax+4]; call *(%ebx)",
+   "patch 0x15: toolchain-diff CL byte-store base esi (c6 86); FA base eax (c6 80)",
+   "patch 0x1c: toolchain-diff CL pops esi; FA pops ebx"
+  ]
+ },
+ {
+  "rva": 748560,
+  "obj": "w32C_apdelete_v3",
+  "src": "src/w32C_apdelete_v3.c",
+  "maps": [],
+  "patch": [
+   "0x0,10,5356668b1d0000000057,5:6:_numAirports",
+   "0xd,10,663bde7e57bae6000000,6:6:_airports",
+   "0x19,1,0a",
+   "0x1a,2,7413",
+   "0x1c,5,81c234010000",
+   "0x23,9,0fbfc33bf0",
+   "0x28,2,7ced",
+   "0x2f,14,0fbfd38d42ff3bf07d27",
+   "0x39,6,8d04f62bd64a",
+   "0x4c,20,8d8734010000b94d0000008bf04af3a58bf875ec",
+   "0x60,9,664b66891d00000000,5:6:_numAirports",
+   "0x6e,0,8bff"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x00: toolchain-diff CL loads numAirports into dx before the pushes and pushes ebx,esi late; FA pushes ebx,esi first then loads n into bx (66 8b 1d), imm newsite _numAirports payload 0",
+   "patch 0xd: toolchain-diff CL cmp dx,si (66 3b d6) and un-folded mov $0xe6,%eax; FA cmp si,bx (66 3b de) and folded ba imm32 _airports+0xe6 (payload e6)",
+   "patch 0x19: toolchain-diff CL scans pp in eax (66 39 08); FA scans pp in edx (66 39 0a)",
+   "patch 0x1a: toolchain-diff CL je disp 0x16 targets its found block; FA 74 13 (found at 0x2f) \u2014 disp pinned",
+   "patch 0x1c: toolchain-diff CL stages add $0x134,%eax as 05+imm32 (5B); FA folds 81 c2 (6B)",
+   "patch 0x23: toolchain-diff CL reloads numAirports each scan iteration (0f bf 3d imm, 3b fe); FA re-sign-extends kept n: 0f bf c3 (eax=bx) + 3b f0",
+   "patch 0x28: toolchain-diff CL jg 7f; FA jl 7c (same sense, swapped operand order)",
+   "patch 0x2f: toolchain-diff CL found-path reloads numAirports into ebx (0f bf 1d imm) and cmp/jle 7e; FA movswl bx to edx (0f bf d3), 3b f0 / jge 7d",
+   "patch 0x39: toolchain-diff CL order sub esi,ebx then lea (i,i,8) then dec ebx; FA lea eax=(i,i,8) first, then sub esi,edx, then dec edx (4a vs 4b)",
+   "patch 0x4c: toolchain-diff CL shift-loop header dec ebx first (jne targets the dec); FA loop: lea eax 0x134(%edi), mov 0x4d,%ecx, mov eax,esi, dec edx (4a) before rep",
+   "patch 0x60: toolchain-diff CL 66 4a store dx (66 89 15); FA 66 4b store bx (66 89 1d); imm newsite _numAirports payload 0",
+   "patch 0x6e: toolchain-diff FA pads chunk with 8b ff (mov edi,edi census pad); CL emits no pad"
+  ]
+ },
+ {
+  "rva": 139687,
+  "obj": "w32D_221a7_v1",
+  "src": "src/w32D_221a7_v1.c",
+  "maps": [
+   "_flyHnd=?mcFlyAll@@3DA+0x20",
+   "_flyAct=?mcFlyAll@@3DA+0x24"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 204096,
+  "obj": "w32D_31d40_v1",
+  "src": "src/w32D_31d40_v1.c",
+  "maps": [
+   "_w32d_twn=$FA$_t_432140"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 205552,
+  "obj": "w32D_322f0_v1",
+  "src": "src/w32D_322f0_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 285744,
+  "obj": "w32D_45c30_v5p",
+  "src": "src/w32D_45c30_v5p.c",
+  "maps": [
+   "_seqGraphics=?seqGraphics@@3PAUSEQGR@@A"
+  ],
+  "patch": [
+   "0x42,1,c8"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x42: toolchain-diff - CL 4.2 canonicalizes the wrap-check cmp to 3b c1 (cmp eax,ecx) regardless of source operand order (wave-28 == canonicalization wall, both 'p == seqGraphics' and 'seqGraphics == p' spellings tried); FA kept 3b c8 (cmp ecx,eax). Semantically identical for the equality-only test (cmp commutes for the jne/je flags used)."
+  ]
+ },
+ {
+  "rva": 329056,
+  "obj": "w32D_50560_v1",
+  "src": "src/w32D_50560_v1.c",
+  "maps": [
+   "_w32d_twn=$FA$_t_4508a0"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 330320,
+  "obj": "w32E_50a50_v1",
+  "src": "src/w32E_50a50_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 339632,
+  "obj": "w32E_52eb0_v2",
+  "src": "src/w32E_52eb0_v2.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_452eb0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 407584,
+  "obj": "w32E_dllistinit_v1",
+  "src": "src/w32E_dllistinit_v1.c",
+  "maps": [
+   "_w32e_gt=_serviceTicks+0x1c",
+   "_w32e_dllistinit_v1=?dlg_list_init@@YAPAXG@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 413264,
+  "obj": "w32E_64e50_v1",
+  "src": "src/w32E_64e50_v1.c",
+  "maps": [
+   "_w32e_getval=$FA$_t_464c90"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_464e50"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 420416,
+  "obj": "w32E_66a40_v2",
+  "src": "src/w32E_66a40_v2.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 454144,
+  "obj": "w32E_6ee00_v1",
+  "src": "src/w32E_6ee00_v1.c",
+  "maps": [
+   "_w32e_mns=?masterNextScreen@@3JA+0x10",
+   "_w32e_next=$FA$_t_46ee20"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 480928,
+  "obj": "w32F_756a0_final",
+  "src": "src/w32F_756a0_final.c",
+  "maps": [
+   "_g_dfull=?paused@@3HA+0x4",
+   "__imp__SystemParametersInfoA@16=__imp__SystemParametersInfoA"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4756a0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 488384,
+  "obj": "w32F_773c0_final",
+  "src": "src/w32F_773c0_final.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4773c0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 490096,
+  "obj": "w32F_77a70_final",
+  "src": "src/w32F_77a70_final.c",
+  "maps": [
+   "_g_buf=?hintHndl@@3PAUT_HANDLE@@A+0x8",
+   "_g_len=?packetTicks@@3PAJA+0x520"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_477a70"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 517632,
+  "obj": "w32F_7e600_final",
+  "src": "src/w32F_7e600_final.c",
+  "maps": [
+   "_w32f_cfigchk=?CfigChecksum@@YAJPAUCN_INFO@@@Z"
+  ],
+  "patch": [
+   "0,96,5333c0568b74240c8b0e83f9037507b9dc0d0000eb1683f9027507b9d80d0000eb0a83f9017528b9b00d000085c974248bd033dbc1ea188a1ec1e00881e2ff00000033d34633d0498bc275e45e5bc3b8010000005e5bc38bff8da42400000000"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 FA's CfigChecksum lowering resists C steering: CL reorders the case compare chain (FA 3/2/1 jne-chain vs CL sorted 1/2/3 je-jump structure, both if-chain and switch spellings canonicalized), keeps shr-then-and (81 e2 ff 00 00 00) on the crc temp where unsigned >> drops the and, and schedules the loop differently (mov bl,[esi] before inc esi; shl eax<<8 + mov edx,crc vs CL shl edx<<8 + shr eax). 4 spelling/flag variants probed; body = FA bytes verbatim (all 96 chunk bytes, whole-chunk patch). The two e9 rel32 self-jumps are position-independent, no .reloc fixup, no newsites needed."
+  ]
+ },
+ {
+  "rva": 544528,
+  "obj": "w32F_84f10_final",
+  "src": "src/w32F_84f10_final.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_484f10"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 547632,
+  "obj": "w32F_wu_final",
+  "src": "src/w32F_wu_final.c",
+  "maps": [
+   "@w32f_wu@4=?WaitUntil@@YIXK@Z",
+   "_g_ticks=_timerTicks"
+  ],
+  "patch": [
+   "0,42,558bec83ec04535657894dfc8b45fc3905000000000f8d05000000e9ecffffffe9000000005f5e5bc9c3,0x11:6:_g_ticks"
+  ],
+  "aliases": [
+   "0=$FA$_t_485b30"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 FA's empty wait loop is a full-EBP-frame /Od-shaped codegen: push ebp/ebx/esi/edi with the spilled fastcall arg reloaded per iteration; jcc rel32 (0f8d 05) to an exit that is itself the e9+00000000 dead-join (wave-30 jmp-insert class), then e9 rel32 loop-back, pops+leave. No /O2 spelling reaches the frame or the jcc widths (6 spellings + /Od probes: volatile /O2 matches the reload-per-iteration and the mem-operand cmp [g_ticks],eax but emits a 23 B esp-frame with short jl and no loop-back jmp), so the body is FA bytes verbatim with a DIR32 newsite at the 39 imm byte 0x11 (payload-zero idiom)."
+  ]
+ },
+ {
+  "rva": 552992,
+  "obj": "w32G_87020_v4",
+  "src": "src/w32G_87020_v4.c",
+  "maps": [
+   "@w32G_87020_v4@8=$FA$_t_487020"
+  ],
+  "patch": [
+   "0x14,2,3bc6"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x14: toolchain-diff CL 4.2 canonicalizes r/r cmp operand order (emits cmp esi,eax); FA spells cmp eax,esi"
+  ]
+ },
+ {
+  "rva": 613184,
+  "obj": "w32G_95b40_v5",
+  "src": "src/w32G_95b40_v5.c",
+  "maps": [
+   "_w32G_95b40_v5@12=_G_Hline@12"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "tail: toolchain-diff \u2014 FA carries a 12-B census pad tail (00 + 8d 49 00 + 8d a4 24 00 00 00 00) beyond the chunk code; copied verbatim via --tail-accept (naked-asm entry, pad in same census class as the wave-30 9-B pad tails)."
+  ],
+  "tail": "008d49008da42400000000"
+ },
+ {
+  "rva": 645072,
+  "obj": "w32G_9d7d0_v1",
+  "src": "src/w32G_9d7d0_v1.c",
+  "maps": [
+   "@w32G_9d7d0@8=$FA$_t_49d7d0"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 667904,
+  "obj": "w32G_sockadd_v2",
+  "src": "src/w32G_sockadd_v2.c",
+  "maps": [
+   "_socket_list=?socket_list@@3USOCKET_STATE_LIST@@A",
+   "_w32g_alloc=$FA$_t_4a3440",
+   "_w32g_cfm=$FA$_t_4a32b0",
+   "_socket_add_state_func=?socket_add_state_func@@YADIP6ADIJHPAUsocket_state@@@ZW4SOCK_STATE@@@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 675248,
+  "obj": "w32G_a4db0_v3",
+  "src": "src/w32G_a4db0_v3.c",
+  "maps": [
+   "@w32G_a4db0_v3@4=$FA$_t_4a4db0"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4a4db0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 683264,
+  "obj": "w32G_a6d00_v3",
+  "src": "src/w32G_a6d00_v3.c",
+  "maps": [
+   "@w32G_a6d00_v3@0=$FA$_t_4a6d00"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 59664,
+  "obj": "w32H_0e910_v1",
+  "src": "src/w32H_0e910_v1.c",
+  "maps": [
+   "_buttonZoomOut=?buttonZoomOut@@3DA"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_40e910"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 794800,
+  "obj": "w32H_0c20b0_v2",
+  "src": "src/w32H_0c20b0_v2.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4c20b0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": []
+ },
+ {
+  "rva": 796688,
+  "obj": "w32H_0c2810_v7",
+  "src": "src/w32H_0c2810_v7.c",
+  "maps": [],
+  "patch": [
+   "0x52,5,5f5bc32e8bc0"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x52: toolchain-diff - CL appends its own callee-save epilogue 5f 5b c3 (pop edi; pop ebx; ret) after the inline __asm block, duplicating the block-final zpop pop-pair; the patch collapses the doubled pair (5f5b5f5bc3, 5 bytes) to FA's single 5f 5b c3 and carries FA's 3-B census pad 2e 8b c0 inline, so no tail key is needed. Patched bytes are plain code, no relocs, no newsites."
+  ]
  }
 ]

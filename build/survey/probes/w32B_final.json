@@ -1,0 +1,135 @@
+[
+ {
+  "rva": 912960,
+  "obj": "w32B_sopenw_v1",
+  "src": "build/survey/probes/w32B_sopenw_v1.c",
+  "maps": [
+   "_w32b_sopenw=$FA$_t_4dee40"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4dee40"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "int w32b_sopenw(char *path, int oflag, int pmode) { return _sopen(path, oflag, 0x40, pmode); }\nplain C, EXACT v1, no patch: SH_DENYNO=0x40 pushed inline between oflag and pmode; FA arg order path,oflag,0x40,pmode matches _sopen's 4-arg cdecl."
+ },
+ {
+  "rva": 897632,
+  "obj": "w32B_ungetc2_v1",
+  "src": "build/survey/probes/w32B_ungetc2_v1.c",
+  "maps": [
+   "_w32b_ungetc2=$FA$_t_4db260"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4db260"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "void w32b_ungetc2(int c, void *f) { if (c != -1) _ungetc_lk(c, f); }\nplain C, EXACT v1, no patch: -1/EOF sentinel early-out before the locked worker call."
+ },
+ {
+  "rva": 48320,
+  "obj": "w32B_tempalias_v1",
+  "src": "build/survey/probes/w32B_tempalias_v1.c",
+  "maps": [
+   "_w32b_tempalias@8=$FA$_t_4bcc0"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4bcc0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "void __fastcall w32b_tempalias(short ix, unsigned long val) {\n  temp2YLR[0x4d28 + ix] = 1; tempYLR[0x1330 + ix] = val; }\nplain C, EXACT v1, no patch: fastcall, movsx sign-extends cx; FA disp addends 0x4d28 (b) / 0x1330 (w) are literal in C."
+ },
+ {
+  "rva": 891184,
+  "obj": "w32B_dosmaperr_v3p2",
+  "src": "build/survey/probes/w32B_dosmaperr_v3.c",
+  "maps": [
+   "_w32b_dosmaperr=__dosmaperr",
+   "__w32b_dz=$FA$_t_4d99c0",
+   "_errno=__errno",
+   "___cfltcvt_tab=__cfltcvt_tab"
+  ],
+  "patch": [
+   "0x13,4,",
+   "0x13,0,3908",
+   "0x21,1,f1",
+   "0x25,1,72",
+   "0x2a,1,77"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x0: toolchain-diff CL load-then-cmp (8b10/3bd1) at FA folded cmp [eax],ecx (3908), 4->0 B",
+   "patch 0x13: toolchain-diff FA cmp [eax],ecx (3908) inserted at loop head",
+   "patch 0x21: toolchain-diff jb back-edge disp stale after -2 B shrink (ef->f1)",
+   "patch 0x25: toolchain-diff signed jl (7c) vs FA unsigned jb (72) on >= cast compare",
+   "patch 0x2a: toolchain-diff signed jg (7f) vs FA unsigned ja (77) on <= cast compare",
+   "patch 0x7f: toolchain-diff signed jl (7c) vs FA unsigned jb (72), ENOMEM range check",
+   "patch 0x87: toolchain-diff signed jg (7f) vs FA unsigned ja (77), ENOMEM range check",
+   "map/alias:link fix: leading-underscore idents emit __w32b_dz/___cfltcvt_tab; TO __cfltcvt_tab = data stub d00878 public."
+  ],
+  "notes": "void w32b_dosmaperr(int oserrno): *_w32b_dz() = oserrno; map-table do-while scan\n(do { if (*pa == oserrno) { *_errno() = tab[0x1c+8*i]; return; } pa += 2; i++; } while (pa < tab+0x180))\nthen unsigned two-way range checks ((unsigned)e >= 0x13 && <= 0x24 -> 0xd; >= 0xbc && <= 0xca -> 8; else 0x16).\nCL-vs-FA diffs that needed patches: (1) CL loads table value into edx then cmp r,r (8b10/3bd1)\nwhere FA folds cmp [eax],ecx (39 08) \u2014 mov-elimination patch 4->2 B; (2) signed >= / <= casts\nemitted jl/jg (7c/7f), FA jb/ja (72/77) \u2014 need (unsigned) casts on BOTH bound compares;\n(3) delete/insert at 0x13 leaves the jb-back-edge site/target distance stale (ef), FA f1."
+ },
+ {
+  "rva": 880896,
+  "obj": "w32B_mtdel_v2p2",
+  "src": "build/survey/probes/w32B_mtdel_v2.c",
+  "maps": [
+   "_w32b_mtdel=__mtdeletelocks",
+   "__free=_free"
+  ],
+  "patch": [
+   "0x0b,7,8d1cbd00000000,3:6:__locktable",
+   "0x12,7,8b03",
+   "0x3f,1,cb"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x0b: toolchain-diff CL mov eax,[edi*4+..] vs FA lea ebx,[edi*4+..] loop-head order",
+   "patch 0x12: toolchain-diff CL lea ebx,[edi*4+..] vs FA mov eax,[ebx] (7->2 B, -5 net)",
+   "patch 0x3f: toolchain-diff jl back-edge disp stale after -5 B shrink (c6->cb)",
+   "map/alias:link fix: C ident _free emits __free; TO _free (Ioterm precedent)."
+  ],
+  "notes": "void w32b_mtdel(void): __locktable is a 4-B pointer array; loop elems 0..0x2f (cmp edi,0x30, stride 4,\nlea ebx,[edi*4+0x51a0a8] at LOOP HEAD), skip-set {0x11,0xd,9,1} = the tail moffs 0x44/0x34/0x24/0x4 /4;\n4 explicit tail d() calls on __locktable+0x24/+0x34/+0x44/+0x4 in that order.\nLever 1: declare extern del_t _imp__DeleteCriticalSection (VALUE decl, no #define wrapper) -> CL emits\nmov esi,[0x58a620] direct; pointer-decl gives double-indirect mov eax,[ptr]/mov esi,[eax].\nLever 2: *pp != 0 FIRST in the && chain with descending skip-set (FA: load/test/je then 0x11,0xd,9,1).\nPatches: FA's loop head is lea ebx,[edi*4+..] then mov eax,[ebx] (9 B); CL folds the first load into\nmov eax,[edi*4+..] then lea ebx (14 B) \u2014 swap the two: mov->lea rewrite + lea->mov [ebx] delete 7/2 B;\nthe jl back-edge disp (c6) goes stale after the -5 B shrink, FA cb."
+ },
+ {
+  "rva": 875616,
+  "obj": "w32B_fgets_v3p2",
+  "src": "build/survey/probes/w32B_fgets_v3.c",
+  "maps": [
+   "_w32b_fgets=_fgets",
+   "_lock_file=__lock_file",
+   "_filbuf=__filbuf",
+   "_unlock_file=__unlock_file"
+  ],
+  "patch": [
+   "0,19,53568b74240c578b7c2414558bee85ff7f0733c05d5f5e5bc3",
+   "0x23,4,",
+   "0x26,2,",
+   "0x28,1,2c",
+   "0x4a,1,1e",
+   "0x4e,4,8bcd453c0a",
+   "0x54,1,d1",
+   "0x6a,1,f5"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x0: toolchain-diff FA interleaved prolog (push/load/push/load) 19->25 B, replaces all-pushes prolog",
+   "patch 0x23: toolchain-diff CL re-load esi=s after lock call (8b742418), FA did it pre-test in prolog",
+   "patch 0x26: toolchain-diff CL mov ebp,esi (p=s) re-derived post-call, FA did it pre-test in prolog",
+   "patch 0x28: toolchain-diff je store0 disp shifts with tail blocks (2b->2c)",
+   "patch 0x4a: toolchain-diff je eof disp shifts with dead-mov rewrite (1d->1e)",
+   "patch 0x4e: toolchain-diff FA dead mov ecx,ebp + cmp al,0xa (8bcd 45 3c0a) vs CL cmp eax,0xa (83f80a)",
+   "patch 0x54: toolchain-diff jne loop disp stale after +1 B rewrite (d2->d1)",
+   "patch 0x6a: toolchain-diff EOF cmp modrm: CL cmp edi,esi (ee) vs FA cmp esi,ebp (f5)"
+  ],
+  "notes": "char *w32b_fgets(char *s, int n, void *f): EOF-null path must set s = 0 and GOTO the shared unlock tail\n(FA: xor esi,esi; jmp push; still locks/unlocks and returns via esi) \u2014 v1's plain 'return 0' bypassed unlock.\nLever: IOB {_ptr,_cnt}: c = --fp->_cnt < 0 ? _filbuf(fp) : (int)*fp->_ptr++;\nPatches: (1) FA prolog interleaves pushes with arg loads (push ebx,esi; mov esi,[esp+0xc]; push edi;\nmov edi,[esp+0x14]; push ebp; mov ebp,esi) 25 B, CL all-pushes-then-load 19 B \u2014 whole-prolog rewrite;\n(2) CL re-loads esi=s AFTER the lock call (8b742418) and re-derives p=esi (8bee) \u2014 delete both (FA did\np=s pre-test as mov ebp,esi inside the prolog patch); (3) FA keeps a DEAD mov ecx,ebp before inc ebp and\nnarrow-cmps al,0xa (3c 0a), CL cmps eax (83 f8 0a) \u2014 4->5 B rewrite; (4) je disps 2b->2c, 1d->1e shift\nwith the tail blocks; (5) EOF cmp: CL cmp edi,esi (3b ee), FA cmp esi,ebp (3b f5) \u2014 1 modrm byte."
+ }
+]

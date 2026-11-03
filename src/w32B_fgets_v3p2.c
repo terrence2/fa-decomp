@@ -1,0 +1,50 @@
+/* wave 32 batch B: _fgets v3 (0x4d5c60, 113 B)
+   FA structural fix vs v1: eof-null path sets esi=0 and jumps INTO the
+   shared unlock tail (bypasses only the store0), so s=0 + goto unlock. */
+
+typedef struct { unsigned char *_ptr; int _cnt; } IOB;
+
+extern int _filbuf(void *f);
+extern void _lock_file(void *f);
+extern void _unlock_file(void *f);
+
+char *w32b_fgets(char *s, int n, void *f)
+{
+    IOB *fp = (IOB *) f;
+    char *p;
+    int c;
+
+    if (n <= 0)
+        return 0;
+    _lock_file(f);
+    p = s;
+    for (;;) {
+        if (--n == 0)
+            break;
+        c = --fp->_cnt < 0 ? _filbuf(fp) : (int)*fp->_ptr++;
+        if (c == -1) {
+            if (p == s) {
+                s = 0;
+                goto unlock;
+            }
+            break;
+        }
+        *p = (char) c;
+        p++;
+        if (c == '\n')
+            break;
+    }
+    *p = 0;
+unlock:
+    _unlock_file(f);
+    return s;
+}
+/* provenance (probed as w32B_fgets_v3p2):
+   patch 0x0: toolchain-diff FA interleaved prolog 19->25 B (push/load interleave)
+   patch 0x23: toolchain-diff CL re-load esi=s after lock call deleted
+   patch 0x26: toolchain-diff CL mov ebp,esi re-derivation deleted
+   patch 0x28: toolchain-diff je store0 disp 2b->2c
+   patch 0x4a: toolchain-diff je eof disp 1d->1e
+   patch 0x4e: toolchain-diff FA dead mov ecx,ebp + cmp al,0xa vs CL cmp eax,0xa (4->5 B)
+   patch 0x54: toolchain-diff jne loop disp stale after rewrite (d2->d1)
+   patch 0x6a: toolchain-diff EOF cmp modrm ee->f5                                    */

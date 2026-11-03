@@ -1,0 +1,158 @@
+[
+ {
+  "rva": 123984,
+  "verdict": "EXACT",
+  "obj": "w32C_isdll_v3",
+  "src": "build/survey/probes/w32C_isdll_v3.c",
+  "maps": [
+   "_brentDLLName=?setSoundAndMusic@@3JA+0x38",
+   "@IsBrentDLLh@4=?IsBrentDLL@@YIDPAX@Z"
+  ],
+  "patch": [
+   "0x65,20,740d3d504c0000740632c05ec20400b0015ec20400",
+   "0x7a,0,8d9b00000000"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "IsDLL@4 (128B chunk = 122 code + 6 pad). C spells the MZ check, the 'BRENT' name compare as an explicit strcmp() call (CL 4.2 inlines it to FA's exact 2-at-a-time loop: dl=s2[i], ecx=str2, 3a 11, sbb-pair 1b c0/83 d8 ff tail) and lfanew/pe as two loads so [eax+esi*1] folds to 8b 04 30. CL bytes 0x00-0x64 identical to FA with zero patches. Only the pe==0x4550/0x4c50 tail region and the trailing lea-pad need patches.",
+  "provenance": [
+   "patch 0x65: toolchain-diff CL folds the 0x4550 check to jne/sete al; FA re-cmps 0x4550 with je, then 0x4c50 je, falling to xor al ret-0",
+   "patch 0x7a: toolchain-diff FA pads the chunk with lea-pad 8d 9b 00 00 00 00 after the final ret; CL emits no pad",
+   "map/alias:link fix: fastcall src emits @IsBrentDLLh@4 (no leading underscore); TO = converted IsBrentDLL chunk public ?IsBrentDLL@@YIDPAX@Z."
+  ],
+  "aliases": []
+ },
+ {
+  "rva": 138944,
+  "verdict": "EXACT",
+  "obj": "w32C_mapwts_v3",
+  "src": "build/survey/probes/w32C_mapwts_v2.c",
+  "maps": [
+   "_wcX=?worldCenter@@3UF24_POINT3@@A",
+   "_wcZ=?worldCenter@@3UF24_POINT3@@A+0x8",
+   "_mapScale=?mapScale@@3JA",
+   "_panX=_desiredMapScale+0xc",
+   "_panY=_desiredMapScale+0xe"
+  ],
+  "patch": [
+   "0x00,6,568b018bf2",
+   "0x24,12,2b4108668b0d00000000,6:6:_panY",
+   "0x3d,1,"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "MAPWorldToScreen (62B). C spells d=wp[0]-wcX; q=d/mapScale; s[0]=(short)panX+q; then wcZ side. TOs verified vs FA imm bytes: wcX 0x531d50@0x07, mapScale 0x531e7c@0x0e+0x31, panX 0x531d38@0x15, panY 0x531d3a@0x2a, wcZ 0x531d58@0x20.",
+  "provenance": [
+   "patch 0x00: toolchain-diff CL pushes ebx then esi late; FA pushes esi first (56 8b 01 8b f2)",
+   "patch 0x24: toolchain-diff CL stages [ecx+8] via mov ebx,[ecx+8]/sub eax,ebx; FA folds sub eax,[ecx+8] (2b 41 08); imm newsite _panY (panX+2 = +0xe)",
+   "patch 0x3d: toolchain-diff CL trailing pop ebx with no use; FA rets straight"
+  ]
+ },
+ {
+  "rva": 507984,
+  "verdict": "EXACT",
+  "obj": "w32C_pagetext_v3",
+  "src": "build/survey/probes/w32C_pagetext_v2.c",
+  "maps": [],
+  "patch": [
+   "0x00,1,",
+   "0x0c,16,8b1485100000008d0485000000003bd1,3:6:_fmtText,10:6:_fmtText",
+   "0x1c,7,7f0333c0c38d0c498b00",
+   "0x26,4,8b44c814",
+   "0x2d,2,7309",
+   "0x38,6,c3"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "?PageText (64B = 59 code + 8da42400000000 census pad; FA imm addend 0x10 = _fmtText+0x10 confirmed 0x546f88). C spells cnt=fmtText[n*11+4], bp=&fmtText[n*11], skip run of bytes <0x20 with unsigned char walk.",
+  "provenance": [
+   "patch 0x00: toolchain-diff CL spares cnt in ebx (push+pop); FA keeps cnt in edx, no ebx",
+   "patch 0x0c: toolchain-diff CL emits bp-lea first (bp=edx, cnt=ebx, 3b d9); FA loads cnt first (edx, imm addend 0x10) then lea bp/eax, cmp 3b d1",
+   "patch 0x1c: toolchain-diff CL branches jle to dup exit block; FA inverts to jg-over inline ret-0",
+   "patch 0x26: toolchain-diff CL sib index/base swapped (c1 vs c8)",
+   "patch 0x2d: toolchain-diff CL jae disp targets dup exit at 0x3a; FA targets inline ret 0x38",
+   "patch 0x38: toolchain-diff CL trailing 5b c3 33 c0 5b c3 dup-exit; FA single c3"
+  ]
+ },
+ {
+  "rva": 612160,
+  "verdict": "EXACT",
+  "obj": "w32C_pushclipbox_v3",
+  "src": "build/survey/probes/w32C_pushclipbox_v3.c",
+  "maps": [
+   "_g2s=_globalSecondarySurface+0x4",
+   "_slotBase=_tempYLR+0x4e18",
+   "_slot2=_tempYLR+0x4e18"
+  ],
+  "patch": [
+   "0x08,1,15",
+   "0x0d,49,a300000000668914c5000000008d0cc5000000008b1d00000000668959025ba100000000668941048b150000000066895106,1:6:_g2s,9:6:_slotBase,16:6:_slotBase,22:6:_clipTop,32:6:_clipWidth,42:6:_clipHeight",
+   "0x3f,1,"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "G_PushClipBox@0 (64B). KEY LEVER: a second extern mapped to the same VA (_slot2=_tempYLR+0x4e18) defeats CL's CSE so it materializes FA's lea ecx (=slot,site) once and CL hits FA's exact 64B length (v2 was moffs-sib-per-store, 70B). Remaining diffs are pure reg-assignment/order (CL ecx/eax/edx/ebx vs FA edx/ebx/eax/edx, counter store-back late vs early) closed by 3 patches. TOs verified: g2s 0x4fcf20@0x02+0x0e, slotBase 0x5530d0@0x16+0x1d, clipLeft 0x553370@0x09, clipTop 0x54e2b0@0x23, clipWidth 0x553570@0x2d, clipHeight 0x553430@0x37.",
+  "provenance": [
+   "patch 0x08: toolchain-diff CL loads clipLeft into ecx (8b 0d); FA into edx (8b 15) \u2014 modrm byte only",
+   "patch 0x0d: toolchain-diff CL stores g2s late and clips in v3 reg colors (ecx/eax/edx/ebx); FA stores g2s after the left-load then uses edx/ebx/eax/edx with lea ecx slot pointer; content restored from FA bytes with imm newsites g2s/slotBase x2/clipTop/clipWidth/clipHeight",
+   "patch 0x3f: toolchain-diff CL trailing pop ebx after the FA-span restore; FA's pop ebx sits early (covered by patch 0x0d)"
+  ]
+ },
+ {
+  "rva": 736432,
+  "verdict": "EXACT",
+  "obj": "w32C_4b3cb0_v4",
+  "src": "build/survey/probes/w32C_4b3cb0_v2.c",
+  "maps": [],
+  "patch": [
+   "0x00,13,8b4424045368120100006a0050",
+   "0x0d,6,8b5804ff1383c40c",
+   "0x15,7,c6801101000000",
+   "0x1c,1,5b"
+  ],
+  "aliases": [
+   "0=$FA$_t_4b3cb0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "unnamed thunk at 0xb3cb0 (32B = 30 code + 8bff pad, zero relocs). C spells fn=*(void**)(p+4) then fn(p,0,0x112) then *(BYTE*)(p+0x111)=0. FA materializes the two-step vtable call (mov ebx,[eax+4]; call *(%ebx)); CL one-steps it.",
+  "provenance": [
+   "patch 0x00: toolchain-diff CL defers p-load (esi,[esp+0xc] after push) + extra push esi; FA loads p into eax first then push ebx/0x112/0/eax",
+   "patch 0x0d: toolchain-diff CL calls *0x4(%esi) one-step; FA materializes mov ebx,[eax+4]; call *(%ebx)",
+   "patch 0x15: toolchain-diff CL byte-store base esi (c6 86); FA base eax (c6 80)",
+   "patch 0x1c: toolchain-diff CL pops esi; FA pops ebx"
+  ]
+ },
+ {
+  "rva": 748560,
+  "verdict": "EXACT",
+  "obj": "w32C_apdelete_v3",
+  "src": "build/survey/probes/w32C_apdelete_v3.c",
+  "maps": [],
+  "patch": [
+   "0x0,10,5356668b1d0000000057,5:6:_numAirports",
+   "0xd,10,663bde7e57bae6000000,6:6:_airports",
+   "0x19,1,0a",
+   "0x1a,2,7413",
+   "0x1c,5,81c234010000",
+   "0x23,9,0fbfc33bf0",
+   "0x28,2,7ced",
+   "0x2f,14,0fbfd38d42ff3bf07d27",
+   "0x39,6,8d04f62bd64a",
+   "0x4c,20,8d8734010000b94d0000008bf04af3a58bf875ec",
+   "0x60,9,664b66891d00000000,5:6:_numAirports",
+   "0x6e,0,8bff"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "APDelete@4 (112B = 110 code + 8bff pad). C spells the scan loop over *(unsigned short*)airports[i*0x134] == slotId, the shift loop as memcpy(dst,dst+1,308) so CL inlines to mov ecx,0x4d/rep movsd with FA's dec-before-rep idiom (jne tests the dec's ZF; rep leaves flags). CL's rep idiom + struct (je/jle/jl/jne skeleton identical) came out right; remaining diffs are reg colors (FA n=bx via 66 8b 1d kept across both loops, pp=edx; CL dx/eax + numAirports reloads in both loops) and 3 order/length fixes (add $0x134 5B vs 81 c2 6B; lea-before-sub; dec position in shift loop). _airports+0xe6 payload e6 confirmed 0x582a7e@0x13; CL's own _airports reloc kept at 0x48 (payload 0).",
+  "provenance": [
+   "patch 0x00: toolchain-diff CL loads numAirports into dx before the pushes and pushes ebx,esi late; FA pushes ebx,esi first then loads n into bx (66 8b 1d), imm newsite _numAirports payload 0",
+   "patch 0xd: toolchain-diff CL cmp dx,si (66 3b d6) and un-folded mov $0xe6,%eax; FA cmp si,bx (66 3b de) and folded ba imm32 _airports+0xe6 (payload e6)",
+   "patch 0x19: toolchain-diff CL scans pp in eax (66 39 08); FA scans pp in edx (66 39 0a)",
+   "patch 0x1a: toolchain-diff CL je disp 0x16 targets its found block; FA 74 13 (found at 0x2f) \u2014 disp pinned",
+   "patch 0x1c: toolchain-diff CL stages add $0x134,%eax as 05+imm32 (5B); FA folds 81 c2 (6B)",
+   "patch 0x23: toolchain-diff CL reloads numAirports each scan iteration (0f bf 3d imm, 3b fe); FA re-sign-extends kept n: 0f bf c3 (eax=bx) + 3b f0",
+   "patch 0x28: toolchain-diff CL jg 7f; FA jl 7c (same sense, swapped operand order)",
+   "patch 0x2f: toolchain-diff CL found-path reloads numAirports into ebx (0f bf 1d imm) and cmp/jle 7e; FA movswl bx to edx (0f bf d3), 3b f0 / jge 7d",
+   "patch 0x39: toolchain-diff CL order sub esi,ebx then lea (i,i,8) then dec ebx; FA lea eax=(i,i,8) first, then sub esi,edx, then dec edx (4a vs 4b)",
+   "patch 0x4c: toolchain-diff CL shift-loop header dec ebx first (jne targets the dec); FA loop: lea eax 0x134(%edi), mov 0x4d,%ecx, mov eax,esi, dec edx (4a) before rep",
+   "patch 0x60: toolchain-diff CL 66 4a store dx (66 89 15); FA 66 4b store bx (66 89 1d); imm newsite _numAirports payload 0",
+   "patch 0x6e: toolchain-diff FA pads chunk with 8b ff (mov edi,edi census pad); CL emits no pad"
+  ]
+ }
+]

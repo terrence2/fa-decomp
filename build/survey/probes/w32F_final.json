@@ -1,0 +1,103 @@
+[
+ {
+  "rva": 480928,
+  "obj": "w32F_756a0_final",
+  "src": "build/survey/probes/w32F_756a0_v1_f.c",
+  "maps": [
+   "_g_dfull=?paused@@3HA+0x4",
+   "__imp__SystemParametersInfoA@16=__imp__SystemParametersInfoA"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_4756a0"
+  ],
+  "span": "",
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 488384,
+  "obj": "w32F_773c0_final",
+  "src": "build/survey/probes/w32F_773c0_v1_f.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_4773c0"
+  ],
+  "span": "",
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 490096,
+  "obj": "w32F_77a70_final",
+  "src": "build/survey/probes/w32F_77a70_v4_f.c",
+  "maps": [
+   "_g_buf=?hintHndl@@3PAUT_HANDLE@@A+0x8",
+   "_g_len=?packetTicks@@3PAJA+0x520"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_477a70"
+  ],
+  "span": "",
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 517632,
+  "obj": "w32F_7e600_final",
+  "src": "build/survey/probes/w32F_7e600_v1_f.c",
+  "maps": [
+   "_w32f_cfigchk=?CfigChecksum@@YAJPAUCN_INFO@@@Z"
+  ],
+  "patch": [
+   "0,96,5333c0568b74240c8b0e83f9037507b9dc0d0000eb1683f9027507b9d80d0000eb0a83f9017528b9b00d000085c974248bd033dbc1ea188a1ec1e00881e2ff00000033d34633d0498bc275e45e5bc3b8010000005e5bc38bff8da42400000000"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 FA's CfigChecksum lowering resists C steering: CL reorders the case compare chain (FA 3/2/1 jne-chain vs CL sorted 1/2/3 je-jump structure, both if-chain and switch spellings canonicalized), keeps shr-then-and (81 e2 ff 00 00 00) on the crc temp where unsigned >> drops the and, and schedules the loop differently (mov bl,[esi] before inc esi; shl eax<<8 + mov edx,crc vs CL shl edx<<8 + shr eax). 4 spelling/flag variants probed; body = FA bytes verbatim (all 96 chunk bytes, whole-chunk patch). The two e9 rel32 self-jumps are position-independent, no .reloc fixup, no newsites needed."
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 544528,
+  "obj": "w32F_84f10_final",
+  "src": "build/survey/probes/w32F_84f10_v3_f.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_484f10"
+  ],
+  "span": "",
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 547632,
+  "obj": "w32F_wu_final",
+  "src": "build/survey/probes/w32F_wu_v3_f.c",
+  "maps": [
+   "@w32f_wu@4=?WaitUntil@@YIXK@Z",
+   "_g_ticks=_timerTicks"
+  ],
+  "patch": [
+   "0,42,558bec83ec04535657894dfc8b45fc3905000000000f8d05000000e9ecffffffe9000000005f5e5bc9c3,0x11:6:_g_ticks"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 FA's empty wait loop is a full-EBP-frame /Od-shaped codegen: push ebp/ebx/esi/edi with the spilled fastcall arg reloaded per iteration; jcc rel32 (0f8d 05) to an exit that is itself the e9+00000000 dead-join (wave-30 jmp-insert class), then e9 rel32 loop-back, pops+leave. No /O2 spelling reaches the frame or the jcc widths (6 spellings + /Od probes: volatile /O2 matches the reload-per-iteration and the mem-operand cmp [g_ticks],eax but emits a 23 B esp-frame with short jl and no loop-back jmp), so the body is FA bytes verbatim with a DIR32 newsite at the 39 imm byte 0x11 (payload-zero idiom)."
+  ],
+  "aliases": [
+   "0=$FA$_t_485b30"
+  ],
+  "span": "",
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5"
+ }
+]

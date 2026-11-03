@@ -1,0 +1,71 @@
+[
+ {
+  "rva": 139687,
+  "obj": "w32D_221a7_v1",
+  "src": "build/survey/probes/w32D_221a7_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_flyHnd=?mcFlyAll@@3DA+0x20",
+   "_flyAct=?mcFlyAll@@3DA+0x24"
+  ],
+  "aliases": [],
+  "provenance": [],
+  "notes": "EXACT v1 first try (no patch). Fly-handle cleanup: mov ecx,[mcFlyAll+0x20]; call @MMFreeHandle@4 (fastcall extern, direct name match, no map needed - emitted '@MMFreeHandle@4' defines nothing but matches the stub public via CL reloc); xor eax,eax; a3 / a2 moffs stores. TO delta check: FA imms 0x4ec51c/0x4ec520 = ?mcFlyAll@@3DA+0x20/+0x24 per dis.py site annotations. Map FROMs '_flyHnd'/'_flyAct' = plain-C emitted spellings (single underscore). No aliases: FA rel32 callers (0x422149/0x42392e) carry literal disp bytes (no .reloc inside .text), and no pilot objs reference $FA$_t_4221a7."
+ },
+ {
+  "rva": 204096,
+  "obj": "w32D_31d40_v1",
+  "src": "build/survey/probes/w32D_31d40_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w32d_twn=$FA$_t_432140"
+  ],
+  "aliases": [],
+  "provenance": [],
+  "notes": "EXACT v1 first try. Rand-dispatch (thiscall-shaped: sole arg in ecx, fastcall spelling): int n=0; while (ls->v[n]) n++; twin(ls->v[(short)Rand(n)]); - CL reproduces push esi/cbRegs=1 prolog, the [esi+eax*4] index, movsx (Rand returns long; (short) cast = 0f bf c0), add esp,4 (twin is cdecl-shaped caller pop). Externs: 'extern long __fastcall Rand(int n)' emits '@Rand@4' = converted Rand public (NO map, CL reloc resolves); twin map FROM '_w32d_twn' single underscore plain C. TO check: FA rel @0x24 -> 0x432140 annotated $FA$_t_432140, defined by stub group t00025. PARENT NOTE: 0x322f0 (also batch D) converts a chunk in the same t00025 group - mkstub SPLIT_AT must keep $FA$_t_432140 publics from the remaining t00025 members (0x432140 itself stays). No aliases: twin callers (0x44f938... etc) and 0x31d40 callers are FA-literal e8 (no .reloc)."
+ },
+ {
+  "rva": 205552,
+  "obj": "w32D_322f0_v1",
+  "src": "build/survey/probes/w32D_322f0_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "aliases": [],
+  "provenance": [],
+  "notes": "EXACT v1 first try (no maps, no patch, no relocs - pure frameless fastcall). Init loop: s->hdr=0; p=(char*)s+4; do { *(int*)p=-1; p+=18; *(p-14)=0; } while(--i); - the do-while with pointer-advance-then-byte-store reproduces FA's loop incl. the mid-loop nop (CL /G5 inserted it). No externs at all."
+ },
+ {
+  "rva": 285744,
+  "obj": "w32D_45c30_v5p",
+  "src": "build/survey/probes/w32D_45c30_v3.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_seqGraphics=?seqGraphics@@3PAUSEQGR@@A"
+  ],
+  "patch": [
+   "0x42,1,c8"
+  ],
+  "aliases": [],
+  "provenance": [
+   "patch 0x42: toolchain-diff - CL 4.2 canonicalizes the wrap-check cmp to 3b c1 (cmp eax,ecx) regardless of source operand order (wave-28 == canonicalization wall, both 'p == seqGraphics' and 'seqGraphics == p' spellings tried); FA kept 3b c8 (cmp ecx,eax). Semantically identical for the equality-only test (cmp commutes for the jne/je flags used)."
+  ],
+  "notes": "EXACT (73/74 bytes C + 1-byte cmp patch). SPELLING THAT MATTERS: inline strcmp ARG ORDER is 'strcmp(name, p->name)' - with strcmp(p->name, name) CL assigns name-walk/node-name registers swapped (8b c8/8b d6 at 0xc/0xe vs FA 8b ce/8b d0); equality-only usage makes both sign conventions valid, so flipped-order C still matches FA bytes except the one cmp. #include <string.h> (bare extern decl of strcmp collides with CL's predeclaration - C2371). Struct: SEQGR { char name[0x2c]; struct SEQGR *next; } - name at 0, next at 0x2c; global pointer extern 'SEQGR *seqGraphics' -> FROM _seqGraphics. Loop shape: while (strcmp(name, p->name)) { p = p->next; if (p == seqGraphics) return 0; } return p; - CL merges returns into shared epilogue (xor eax,eax falls in). No aliases: no FA xrefs to 0x445c30 at all (no abs, no rel32 callers found in the .text e8/e9 scan)."
+ },
+ {
+  "rva": 157573,
+  "verdict": "KEEP-ASM",
+  "reason": "CSE/fusion wall (documented fa-survey-tier0 16-bit-slot + CSE walls). FA spells: imul edx,edx,0xe / add edx,mcFlyAll+0x34 imm / 3 x (66 8b 42 off / 66 89 ax -> [ecx+0x1a..]) / 8a 52 0c 88 51 20. CL 4.2 /O2 /Gy /G5 (and /G4, /G3, bare /O2) strength-reduces idx*14 to a lea chain (lea eax,[edx*8]; sub eax,edx; scaled forms) and CSE-fuses the FIRST row load into mov bx,[idx*7*2+imm32] scale-2 addressing, pulling in push ebx/push ebp for 16-bit temps (57 B vs FA 40 B); 7 spellings tried (field-copy, in-place idx*=14, pointer-walk q/w, typed struct-array rows[idx], 3 flag sets) - CL always reconverges to its fused form, and the one cmp-order flip for 0x45c30 does not apply (mul has no order). No C spelling found; whole 40 B diverges (no contiguous C-matching span to patch)."
+ },
+ {
+  "rva": 329056,
+  "obj": "w32D_50560_v1",
+  "src": "build/survey/probes/w32D_50560_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w32d_twn=$FA$_t_4508a0"
+  ],
+  "aliases": [],
+  "provenance": [],
+  "notes": "EXACT v1 first try. twin of 0x31d40 (identical C body, distinct obj name; only the twin map TO differs): _w32d_twn -> $FA$_t_4508a0 (stub t0003c defines it). TO check: FA rel @0x24 -> 0x4508a0 annotated $FA$_t_4508a0. PARENT NOTE: converting 0x50560 splits t0003c (also holds $FA$_t_4508a0 - the remaining group members must keep defining it, mkstub SPLIT_AT handles). Rand extern '@Rand@4' direct match, no map. No aliases (FA-literal e8 callers; no pilot refs)."
+ }
+]

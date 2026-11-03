@@ -1,0 +1,21 @@
+[
+ {"rva": 59664, "verdict": "EXACT", "obj": "w32H_0e910_v1", "src": "build/survey/probes/w32H_0e910_v1.c",
+  "maps": ["_buttonZoomOut=?buttonZoomOut@@3DA"],
+  "patch": [], "aliases": ["0=$FA$_t_40e910"], "span": "", "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "memcpy(dst,&buttonZoomOut[8],0xc0) gated on buttonZoomOut[0xc8]; fastcall dst-in-ecx, CL rep movsd 0x30 matches FA (push esi/edi + rep movsd + pad). FA: 55?no - push esi; mov al,[?buttonZoomOut@@3DA+0xc8]; test al; je; mov esi,imm32(?buttonZoomOut@@3DA+8); mov edi,ecx; mov ecx,0x30; rep movsd; pop edi; pop esi; ret. map FROM _buttonZoomOut -> global ?buttonZoomOut@@3DA; the mov esi imm is a reloc site so alias 0=$FA$_t_40e910 defines the chunk anchor (VA form). obj name corrected from round-1 typo w32H_0db260_v1."},
+
+ {"rva": 794800, "verdict": "EXACT", "obj": "w32H_0c20b0_v2", "src": "build/survey/probes/w32H_0c20b0_v2.c",
+  "maps": [], "patch": [], "aliases": ["0=$FA$_t_4c20b0"], "span": "", "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "short __fastcall(x) clamp: v2 spelling reuses FA's first test flags: (x>=0 && x<182) return 182; (x>0 || x<=-182) return x; return -182. FA branches from the shared je to the second test's jg (flag reuse of test cx,cx); v1 if/else-if collapsed to a one-test shape. Alias 0=$FA$_t_4c20b0 self-anchors."},
+
+ {"rva": 796688, "verdict": "EXACT", "obj": "w32H_0c2810_v7", "src": "build/survey/probes/w32H_0c2810_v6.c",
+  "maps": [], "patch": ["0x52,5,5f5bc32e8bc0"], "aliases": [], "span": "", "flags": "/c /O2 /Gy /G5",
+  "provenance": ["patch 0x52: toolchain-diff - CL appends its own callee-save epilogue 5f 5b c3 (pop edi; pop ebx; ret) after the inline __asm block, duplicating the block-final zpop pop-pair; the patch collapses the doubled pair (5f5b5f5bc3, 5 bytes) to FA's single 5f 5b c3 and carries FA's 3-B census pad 2e 8b c0 inline, so no tail key is needed. Patched bytes are plain code, no relocs, no newsites."],
+  "notes": "@Zeromem@8 dst/mov edx,n; body is the one-allowed inline __asm re-emission of FA's unrolled 16-B store + rep stosb/zsmall tail-merge (not C control flow - the byte-match via CL is faithful, including CL's automatic push ebx/push edi prologue = FA's 53 57). Honest disclosure: only CL's prologue/epilogue scaffolding is auto-generated; the store algorithm itself is asm spelled in __asm{}. Parent may prefer KEEP-ASM treatment if policy excludes whole-__asm bodies; config is mergeable as-is either way."},
+
+ {"rva": 824120, "verdict": "KEEP-ASM", "reason": "_ExpandSB: FA body is naked original asm - frameful 55 8b ec + bare 60/61 (32-bit pushad/popad) with 16-bit operand regs (66-prefixed push cx/bx, o16 cx counter, bx shifts). CL inline-asm handling prepends push ebx/esi/edi (53 56 57) before any bare pushad and turns `pusha` into o16 66 60; /Od emits 53 56 57 after the frame + long-form 0f 85 jne + leave (c9 c3). CL cannot reproduce 55 8b ec 60 without callee-saves; 3 variants (incl. __declspec(naked) full-transcription) failed. Wall: 16-bit register-ABI + bare-pushad frame, beyond the one asm retry."},
+ {"rva": 826212, "verdict": "KEEP-ASM", "reason": "acos: 16-bit register-ABI in/out (ax = result of cwd/xor/abs on bx, outputs in cx) with abs-table loads [eax+0x516541]/[ebx+0x511686] - 16-bit register-ABI wall per directive, no probe spent."},
+ {"rva": 830316, "verdict": "KEEP-ASM", "reason": "load_xlate_rotate_pnt: 16-bit register-ABI - results land in bx/bp/cx after shl ax,cl + sub ax,[__xv/__zv/__yv] word globals; wall per directive, no probe spent."}
+]

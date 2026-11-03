@@ -1,0 +1,105 @@
+[
+ {
+  "rva": 552992,
+  "obj": "w32G_87020_v4",
+  "src": "build/survey/probes/w32G_87020_v4.c",
+  "maps": [
+   "@w32G_87020_v4@8=$FA$_t_487020"
+  ],
+  "patch": [
+   "0x14,2,3bc6"
+  ],
+  "provenance": [
+   "patch 0x14: toolchain-diff CL 4.2 canonicalizes r/r cmp operand order (emits cmp esi,eax); FA spells cmp eax,esi"
+  ],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "fastcall char __fastcall w32G_87020_v4(int s, int e): int now=TIMESystemTime(); ec=e-s; if(ec==-1) goto exit1; for(;;){ if(now==s) return 0; s++; ec=e-s; if(ec!=-1) continue; break; } exit1: return 1 \u2014 v1/v2 let CL hoist an exit block BEFORE the loop body (jne-body / exit / body) with CL's inverted polarity; goto-exit1 + for(;;) + continue makes CL emit FA's layout (je exit, body, je exit-tail after loop, jne back-edge to the now-check). Declaring the call result ('int now = TIMESystemTime();' first) keeps now in eax. The single residual byte is the r/r cmp operand order: CL canonicalizes == regardless of spelling (v4 proved s==now same as now==s) \u2192 2-byte patch 0x14 (3b f0 \u2192 3b c6). The call rides CL's own stdcall ext _TIMESystemTime@0 (no map)."
+ },
+ {
+  "rva": 613184,
+  "obj": "w32G_95b40_v5",
+  "src": "build/survey/probes/w32G_95b40_v5.c",
+  "maps": [
+   "_w32G_95b40_v5@12=_G_Hline@12"
+  ],
+  "patch": [],
+  "provenance": [
+   "tail: toolchain-diff \u2014 FA carries a 12-B census pad tail (00 + 8d 49 00 + 8d a4 24 00 00 00 00) beyond the chunk code; copied verbatim via --tail-accept (naked-asm entry, pad in same census class as the wave-30 9-B pad tails)."
+  ],
+  "aliases": [],
+  "span": null,
+  "tail": "008d49008da42400000000",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "__declspec(naked) void __stdcall w32G_95b40_v5(int l, int r, int y) with the chunk transcribed as inline __asm. Plain-C v1-v3 all fail on the wave-19/25 a1-first wall: CL /O2 uses a1 moffs for ALL four clip loads (eax every time) with r in ecx, while FA uses a1 for clipTop/clipBottom/clipLeft but 8b 0d for clipRight (ecx) and keeps r in eax \u2014 a byte patch can't fix it because CL's own obj reloc sits at the a1 imm site. Inline asm makes the register plan explicit: mov ecx, clipRight; mov eax, [esp+0Ch]. Also compares must spell the GLOBAL first (cmp eax, / cmp ecx,eax); value-first spelling (cmp edx,eax) emits the flipped operand order (v4 fail at 0x21/0x31). Single shared exit: jg/jl/jl all target the pop esi that FOLLOWS the call (pop esi / ret 0Ch after call G_UHline). tail = FA census pad 00 + 8d 49 00 + 8d a4 24 00 00 00 00. Externs _clipTop/_clipBottom/_clipLeft/_clipRight/_G_UHline@12 match the FA publics directly \u2014 no maps needed beyond the def rename."
+ },
+ {
+  "rva": 645072,
+  "obj": "w32G_9d7d0_v1",
+  "src": "build/survey/probes/w32G_9d7d0_v1.c",
+  "maps": [
+   "@w32G_9d7d0@8=$FA$_t_49d7d0"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Plain C on compile 1: int __fastcall w32G_9d7d0(int b, int v){ int d = v - b; int r = b + d / 5; if (r < 0x4b) r = b + d / 2; return r; } \u2014 CL emits FA's exact cdq + idiv edi (d/5, edi=immediate 5), saves d in esi, and reuses the idiv's edx remainder + cdq/sub/sar spelling for the signed d/2 (99/8bc6/2bc2/d1f8). Definer maps to the still-stub anchor $FA$_t_49d7d0 (stub t0008d, verified in stub defs)."
+ },
+ {
+  "rva": 667904,
+  "obj": "w32G_sockadd_v2",
+  "src": "build/survey/probes/w32G_sockadd_v2.c",
+  "maps": [
+   "_socket_list=?socket_list@@3USOCKET_STATE_LIST@@A",
+   "_w32g_alloc=$FA$_t_4a3440",
+   "_w32g_cfm=$FA$_t_4a32b0",
+   "_socket_add_state_func=?socket_add_state_func@@YADIP6ADIJHPAUsocket_state@@@ZW4SOCK_STATE@@@Z"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Plain C, char __cdecl socket_add_state_func(a, fn, st): struct socket_state fd@0 / z1[4..7] / f1@0xc / f2@0x10 / z2[4] (0x14..0x17) / unsigned char inuse@0x18 / z3[3] / fn ptr@0x1c \u2014 z2 MUST be char[4] (v1's char[6] pushed inuse to 0x1a and fn to 0x20; FA stores c6 40 18 01 and 89 50 1c). SOCKET_STATE_LIST: z[4] then int count at +4 \u2014 FA's a1 imm a4925600 = symVA 0x5692a0 + 4, matching socket_list.count via CL's DIR32 addend-4. Statement order in body: count>=0x40 guard (83f840 7c04), p=w32g_alloc() (e8 rel32, disp -0x32c \u2192 $FA$_t_4a3440, real public in stub t00092 0x4a3160..0x4a3700 verified in stub defs), push eax before the three stores (FA interleaves push eax at 0x20), f1=a / fn / f2=st / inuse=1 / fd=-1, then w32g_cfm(p) (disp -0x177 \u2192 $FA$_t_4a32b0) ; return 1 (b001 5bc3). C++-mangled FA publics map from plain C emits (_socket_list/?socket_add_state_func...)."
+ },
+ {
+  "rva": 675248,
+  "obj": "w32G_a4db0_v3",
+  "src": "build/survey/probes/w32G_a4db0_v3.c",
+  "maps": [
+   "@w32G_a4db0_v3@4=$FA$_t_4a4db0"
+  ],
+  "patch": [],
+  "provenance": [
+   "map/alias:link fix: self-anchor alias $FA$_t_4a4db0 (8 T_Init*Proc entries ref it)."
+  ],
+  "aliases": [
+   "0=$FA$_t_4a4db0"
+  ],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Plain C, void __fastcall w32G_a4db0_v3(char *p): h = *(int *)p; e = p; if (h == 0) return; do { *(int *)(e + 8) = RMAccess(*(int *)(e + 4), 0x8000); e += 0x1a; } while (*(int *)e != 0); \u2014 the pre-load h FIRST then e = p then the h==0 test is what CL needs to emit FA's load/copy/test order (8b 01 / 8b f1 / 85 c0 74 19); v1's `if (*(int*)p == 0) e = ...` spelling deferred the esi copy (8b f1 AFTER the test at 0x5). Loop body otherwise matched v1 byte-for-byte (push 0x8000 before the RMAccess rel32, store [esi+8] with 8946 ee, add esi,0x1a between pushes and call). RMAccess rides CL's stdcall ext _RMAccess@8 (no map)."
+ },
+ {
+  "rva": 683264,
+  "obj": "w32G_a6d00_v3",
+  "src": "build/survey/probes/w32G_a6d00_v3.c",
+  "maps": [
+   "@w32G_a6d00_v3@0=$FA$_t_4a6d00"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "__declspec(naked) void __fastcall w32G_a6d00_v3(void) with the chunk transcribed as inline __asm (CL emits @name@0 for the 0-register-arg fastcall). v1 plain C and v2 non-naked inline asm both failed: CL /O2 keeps ebx live across a shared epilogue (v2 emitted eb 04 jmp at 0x19 where FA falls through 5b c3) \u2014 FA has SEPARATE pop ebx / ret epilogues in both branches (or [ecx+0f],1; pop ebx; ret | or [ecx+0eh],80h; pop ebx; ret) \u2014 naked asm reproduces that two-tail layout with the ebx save inside the asm. Byte loads al+[13h]/dl+[10h]/bl+[11h], or chain al,dl / or al,bl / or al,dl, jne to the second tail. No sites in chunk."
+ }
+]

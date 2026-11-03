@@ -1,0 +1,86 @@
+[
+ {
+  "rva": 330320,
+  "obj": "w32E_50a50_v1",
+  "src": "build/survey/probes/w32E_50a50_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT no-patch. 10-record x 0x12-byte FPO init over thiscall ecx: *(int*)p=0; p+=4; then do { *(int*)p=-1; p+=0x12; i--; *(char*)(p-0xe)=0; } while(i) - i=10 init BEFORE the loop body, dec placed mid-body by spelling i-- as a statement before the byte store (CL emits dec eax; nop; mov [ecx-0xe],dl; jne verbatim). edx holds the zero byte via xor edx,edx hoisted from *(char*)=0. Anonymous chunk: if still-stub refs to $FA$_t_450a50 LNK2001 at parent link, add map _w32e_50a50_v1=$FA$_t_450a50."
+ },
+ {
+  "rva": 339632,
+  "obj": "w32E_52eb0_v2",
+  "src": "build/survey/probes/w32E_52eb0_v2.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_452eb0"
+  ],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT no-patch. Null-guard + byte-tag dispatch with TWO shared tail-jmps to @NextString@8 (extern int __fastcall NextString(int pv,int n) declared in src - emitted ext '@NextString@8' equals the stub public, so no map is needed). The *(int*)(p+1)/ *(int*)(p+5) arg reads are DEREFERENCES (mov ecx,[ecx+1]/[ecx+5]), not address forms. Polarity: if(c==7){[ecx+5] arm} then fallthrough [ecx+1] arm gives CL cmp al,7; jne -> exactly FA; the if(c!=7)-first spelling inverts to 74 (je) and swaps the arms. mov edx,2 (arg2) is hoisted BEFORE the cmp by CL for free with the two-call-site spelling.",
+  "provenance": [
+   "map/alias:link fix: self-anchor alias $FA$_t_452eb0 (old entry HARDResourceName refs it)."
+  ]
+ },
+ {
+  "rva": 407584,
+  "obj": "w32E_dllistinit_v1",
+  "src": "build/survey/probes/w32E_dllistinit_v1.c",
+  "maps": [
+   "_w32e_gt=_serviceTicks+0x1c",
+   "_w32e_dllistinit_v1=?dlg_list_init@@YAPAXG@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT no-patch. cdecl void*(unsigned short). MMPushAllocId(0x11)/MMPopAllocId() declared __fastcall in src -> emitted exts equal the stub publics @MMPushAllocId@4/@MMPopAllocId@0 (t00029 verified); MMAllocPtr(0x24, 0) gets the right-left ordering (xor edx,edx before mov ecx,0x24) from C arg order. 9-dword zero fill via for(i=0;i<9;i++) q[i]=0 -> xor eax; mov ecx,9; rep stosd. Store order after fill matters: [q+0x20]=w32e_gt (a1 moffs load) FIRST, then [q+0x1a]=x (the ushort reread from [esp+0xc]), then w32e_gt=q (89 35 moffs store) + return q (mov eax,esi pushed before). Def map renames _w32e_dllistinit_v1 to the stub public ?dlg_list_init@@YAPAXG@Z so existing refs resolve."
+ },
+ {
+  "rva": 413264,
+  "obj": "w32E_64e50_v1",
+  "src": "build/survey/probes/w32E_64e50_v1.c",
+  "maps": [
+   "_w32e_getval=$FA$_t_464c90"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_464e50"
+  ],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT no-patch. cdecl int(void). v = w32e_getval(); if (v > 90) v = 90; if (v < -90) v = -90; return v*182; -> branchy clamps (cmp/jsle/jge + b8 imm, no CMOV) and the 182 multiplication as the lea chain lea ecx,[eax+eax*8]; lea edx,[ecx+ecx*4]; lea ebx,[eax+edx*2]; lea eax,[ebx*2+0] (91x then 2x) with push/pop ebx scratch. PARENT DEPENDENCY: chunk 0x464c90 is ALREADY CONVERTED (not in rank un-done), so $FA$_t_464c90 may be undefined at parent link (wave-29 class). The neutral FROM _w32e_getval is deliberate: remap the TO to the 0x464c90 converting entry's def name at merge (or set this entry's call via a lit-newsite) if LNK2001 appears.",
+  "provenance": [
+   "map/alias:link fix: self-anchor alias $FA$_t_464e50 (old entry CTDoWmBreak refs it)."
+  ]
+ },
+ {
+  "rva": 420416,
+  "obj": "w32E_66a40_v2",
+  "src": "build/survey/probes/w32E_66a40_v2.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT no-patch. __fastcall(char **pdst, char **psrc) - ecx = dst slot, edx = src slot. Copy-with-newline-count: src=*psrc; cnt=0; dst=*pdst (order of cnt vs dst matters - FA has xor edi,edi BEFORE mov esi,[ecx]); if ((uchar)*src > 1) { for(;;) { if (cnt >= 3) break; b=*src; if (b == 10) cnt++; *dst=(char)b; src++; dst++; if ((uchar)*src > 1) continue; break; } } - the cnt>=3 test at loop TOP and the continue-when-src-above-1 at BOTTOM give FA's loop-head cmp edi,3/jge exit plus the backward ja back to the head. Storebacks: *psrc = src+1 (inc eax + pop edi + [edx]=eax), then *pdst = dst. Anonymous chunk: same $FA$_t_466a40 alias note as 50a50 if needed."
+ },
+ {
+  "rva": 454144,
+  "obj": "w32E_6ee00_v1",
+  "src": "build/survey/probes/w32E_6ee00_v1.c",
+  "maps": [
+   "_w32e_mns=?masterNextScreen@@3JA+0x10",
+   "_w32e_next=$FA$_t_46ee20"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT no-patch. void(void). dis.py ELIDED a byte here: the raw bytes are a0 30384f00 (mov al,moffs) 84c0 test 750c (jne ret-path) c60530384f0001 (mov BYTE [moffs],1 = masterNextScreen+0x10 flag) e90b000000 (tail-jmp to NEXT CHUNK $FA$_t_46ee20) c3. Plain char global (a0 moffs load + c6 05 store) with if (!g) { g = 1; next(); } gives FA verbatim incl. the in-branch void tail-jmp. PARENT DEPENDENCY: chunk 0x46ee20 is ALREADY CONVERTED, so $FA$_t_46ee20 may be undefined at parent link (wave-29 class): remap _w32e_next TO to the 0x46ee20 converting entry's def name at merge if LNK2001 appears."
+ }
+]
