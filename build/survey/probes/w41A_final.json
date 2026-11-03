@@ -1,0 +1,102 @@
+[
+ {
+  "rva": 23184,
+  "verdict": "EXACT",
+  "name": "0x5a90 (64 B, 2 dwords params, unnamed)",
+  "obj": "w41A_5a90_v1",
+  "src": "build/survey/probes/w41A_5a90_v1.c",
+  "maps": [
+   "_w41a_vfmt=?videoInitialized@@3DA+0x414",
+   "__Sprintf=_Sprintf"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": null,
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT v1 (first probe), no patches. void __cdecl w41a_5a90(char *buf, unsigned long ip): _Sprintf(buf, (char *)w41a_vfmt, ip >> 24, (ip & 0xff0000) >> 16, (ip & 0xff00) >> 8, ip & 0xff). FA/CL both emit the same right-to-left vararg sequence: mov eax,ecx / and eax,0xff / push; then octet-2 slot = xor eax,eax / mov al,ch / push (ch read from the ALREADY-masked eax, i.e. that slot is passed 0 — reproduced identically by CL 4.20.6166 from the same source shape, no patch; the original FA quirk is real and value-preserving); then reload eax=ecx / and eax,0xff0000 / shr eax,0x10 / push; shr ecx,0x18 / push ecx; mov eax,[esp+0x14] (param1 read after 4 pushes) / push fmt / push buf / call _Sprintf / add esp,0x18 / ret. Maps: _w41a_vfmt -> ?videoInitialized@@3DA+0x414 (FA imm 0x4e7cfc = 0x4e78e8+0x414 verified; payload string there is 'may enter a new broadcast address below.'); __Sprintf=_Sprintf per the w40C precedent (C ident _Sprintf emits __Sprintf). .reloc: 1 DIR32 abs (@0x25) + 1 REL32 call, both verified. Census tail 8d9b00000000+8da42400000000 (13 B) auto-accepted, no provenance needed.",
+  "relocs": "FA abs @0x25=0x4e7cfc, rel call->_Sprintf @0x4c2c1c — both verified from FA bytes"
+ },
+ {
+  "rva": 48864,
+  "verdict": "EXACT",
+  "name": "0xbee0 (64 B, 0 params, unnamed)",
+  "obj": "w41A_bee0_v2",
+  "src": "build/survey/probes/w41A_bee0_v2.c",
+  "maps": [
+   "_w41a_mres=?menuResolution@@3FA",
+   "_w41a_palLo=?remapDarken320@@3PAEA+0xf8",
+   "_w41a_palHi=?remapDarken320@@3PAEA+0x108",
+   "_w41a_msel8=?menuSelecting@@3DA+0x8"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": null,
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT v2 (v1 had (a) RMAccessHandle args swapped and (b) arms as pointer VARIABLES so CL emitted a1 content loads instead of FA's b8 address constants; v3 pre-init+if spelling diverged, v2 ternary exact). Recipe: void __cdecl w41a_bee0(void): SetupBitmapAccess(0, 0, 0); then msel8 = RMAccessHandle(mres==0x140 ? w41a_palHi : w41a_palLo, 0x8104u). KEY: FA pushes 0x8104 FIRST because it is ARG2 (right-to-left arg push) — arg1 is the palette pointer; externs must be declared as ARRAYS (extern unsigned char w41a_palLo[] / palHi[]) so the address constants materialize as b8 imm32 with DIR32 relocs, not a1 memory loads. Ternary arms hi/lo both map from ?remapDarken320@@3PAEA with deltas +0x108/+0xf8 (FA imms 0x4e83d8/0x4e83c8 verified; C refs bare, CL content 0 — double-addend safe). Result stored via a3 moffs to menuSelecting+0x8 (=0x4e81e4, map _w41a_msel8=?menuSelecting@@3DA+0x8). Identity stdcall externs _SetupBitmapAccess@12 (3 args) / _RMAccessHandle@8 (uchar* , ulong) matched FA publics (0x4a3cc0/0x4a3b60), no maps. Word ternary test on ?menuResolution@@3FA (ushort alias; word cmp 0x140). Census tail 8d642400x2+8da42400000000 (15 B) auto-accepted.",
+  "relocs": "FA abs @0x11=0x4e83d8 @0x18=0x4e8220 @0x21=0x4e83c8 @0x2c=0x4e81e4, rel calls->_SetupBitmapAccess@12/@RMAccessHandle@8 — all verified"
+ },
+ {
+  "rva": 51392,
+  "verdict": "EXACT",
+  "name": "0xc8c0 (64 B, 0 params, unnamed)",
+  "obj": "w41A_c8c0_v1",
+  "src": "build/survey/probes/w41A_c8c0_v1.c",
+  "maps": [
+   "_w41a_smp2=?subMenuPress@@3UWORD_POINT@@A+0x2",
+   "_w41a_csi=?curSubItem@@3PAUMENU_ITEM@@A",
+   "_w41a_isi=?invertSubItem@@3PAUT_HANDLE@@A",
+   "_w41a_hide@0=?ShellHideMouse@@YGXXZ",
+   "_w41a_mid@0=$FA$_t_40cd20",
+   "_w41a_show@0=?ShellShowMouse@@YGXXZ",
+   "@w41a_mmfh@4=@MMFreeHandle@4"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": null,
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT v1 (first probe), no patches. void __cdecl w41a_c8c0(void): *(unsigned short *)w41a_smp2 = 0; w41a_hide(); w41a_mid(); w41a_show(); if (w41a_csi) { w41a_mmfh(w41a_isi); w41a_isi = 0; } — CL emitted 66 c7 05 (word zero-store), a1/test/je guard, fastcall param via mov ecx,[isi], and c7 05 zero store, all byte-identical. Maps: word field via delta-in-TO rule (_w41a_smp2 -> ?subMenuPress@@3UWORD_POINT@@A+0x2 = 0x51d67a, C bare alias, CL content 0); C++-mangled data publics ?curSubItem@@3PAUMENU_ITEM@@A / ?invertSubItem@@3PAUT_HANDLE@@A (0x4e81d8/0x4e81fc) as FROM-aliased externs; call externs mapped to their C++/fastcall public names (_w41a_hide@0->?ShellHideMouse@@YGXXZ, _w41a_show@0->?ShellShowMouse@@YGXXZ, @w41a_mmfh@4->@MMFreeHandle@4 fastcall FROM, no leading underscore per wave-25) and the interior call _w41a_mid@0->$FA$_t_40cd20 — chunk 0xcd20 is still-stub (stub t00009 covers 0x40cd20 and defines the $FA$_t_40cd20 anchor public, verified in build/stubs/manifest.json), so the anchor is a valid link-time TO. Census tail 8bff+8da42400000000 (9 B) auto-accepted.",
+  "relocs": "FA abs @0x3=0x51d67a @0x19=0x4e81d8 @0x2e=0x4e81fc, rel calls->0x40d420/0x40cd20/0x40d3b0/0x435ab0 — all verified"
+ },
+ {
+  "rva": 62064,
+  "verdict": "EXACT",
+  "name": "0xf270 (64 B, 0 dwords params + fastcall ecx/edx, unnamed)",
+  "obj": "w41A_f270_v3",
+  "src": "build/survey/probes/w41A_f270_v3.c",
+  "maps": [
+   "_w41a_tbl8=?remapDarken320@@3PAEA+0x118",
+   "_w41a_tend=?remapDarken320@@3PAEA+0x138",
+   "_w41a_tbldef=?remapDarken320@@3PAEA+0x120"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": null,
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT v3. void * __fastcall w41a_f270(void *val /*ecx*/, int d /*edx*/): loop over an 8-entry pointer table (0x4e83e8..0x4e8408) by explicit walker + counter, return the displaced+clamped entry, default = tbl[2] slot. v1 (constant-index for-loop) gave the inverted reg plan (counter eax / walker esi); v2 (while) gave FA's plan but rotated the loop (extra push edi / mov edi,tend / cmp edi,eax / jbe entry test, 12 B over); v3 do-while matched every byte: p (eax) walker = mov eax,imm b8 form; i (esi) counter = xor esi; loop body mov ebx,[eax] / cmp ebx,ecx / je found / add eax,4 (p++ BEFORE i++) / inc esi / cmp eax,<tend> (3d cmp with reloc'd absolute imm — the C bound is the pointer p < (void **)w41a_tend, w41a_tend an extern ARRAY alias mapped to +0x138 so its address compares absolute) / jb; not-found falls to a1 moffs default load (w41a_tbldef mapped to ?remapDarken320@@3PAEA+0x120 = 0x4e83f0 = tbl[2] interior — the FA source evidently read a named variable there, alias needed since no public exists); found path: i += d (add esi,edx), branchy clamp if (i<0) i=0; else if (i>7) i=7 (jns/xor/jmp/jle/mov esi,7), return w41a_tbl8[i] via sib 8b 04 b5 <imm> (base-none index-esi — the extern void*[] indexing). Prolog push ebx / b8[tbl] / push esi / xor esi,esi matches (FPO cbProlog=7, cbRegs=2: ebx, esi). Census tail 8bff (2 B) auto-accepted.",
+  "relocs": "FA abs @0x2=0x4e83e8 @0x14=0x4e8408 @0x1b=0x4e83f0 @0x37=0x4e83e8 — all verified"
+ },
+ {
+  "rva": 79536,
+  "verdict": "EXACT",
+  "name": "0x136b0 (64 B, 0 params, unnamed)",
+  "obj": "w41A_136b0_v1",
+  "src": "build/survey/probes/w41A_136b0_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": null,
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT v1 (first probe), no patches, NO MAPS — all three data references are C-identity publics straight from layout.json syms (_curScreen 0x51c300, _playerId 0x51c2cc, _objPtrs 0x54ad98). unsigned short __cdecl w41a_136b0(void): if (curScreen != 0x10 || playerId == 0) return 0; id = playerId (ushort local: xor eax,eax / 66 a1 word moffs load); p = (unsigned long)objPtrs[id] — sib base-none 8b 04 85 <abs> from extern void *objPtrs[]; then *p compared: if (byte==2 || byte==4) return *(unsigned short *)((char *)p + 0xee) (word load 66 8b 80, deref of the object pointer); return 0. The || guard chain yields FA's SHARED ret0 block (both jne/je target the xor ax,ax/c3 epilogue — wave-9 ||-layout held; the merged guards avoided CL inlining three separate rets); ushort __cdecl return 0 = 66 33 c0/c3 per the wave-13 rule. Word cmps 66 81 3d on curScreen (0x10) and playerId (0) as ushort externs. Census tail 90 (1 B) auto-accepted. The 0x4136e3 target block (mov ax,[eax+0xee]/ret) and dead 0x4136ea c3 reproduced in sequence.",
+  "relocs": "FA abs @0x3=0x51c300 @0xd=0x51c2cc @0x18=0x51c2cc @0x1f=0x54ad98 — all verified"
+ }
+]

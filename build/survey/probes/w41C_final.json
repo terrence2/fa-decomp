@@ -1,0 +1,84 @@
+[
+ {
+  "rva": 385376,
+  "obj": "w41C_gtype_v1",
+  "src": "build/survey/probes/w41C_gtype_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_45e160"
+  ],
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "verbatim port of src/GRPSetType.c recipe (rva 0x5ee90 EXACT) with helper _WNGPart@12 (rva 0x5dd40) in place of _GRPPart@12; externs _curThing/_curId/_WNGPart@12/_MSGSend@32; fastcall one-char param; alias retro-defines $FA$_t_45e160 (t00260 band refs)"
+ },
+ {
+  "rva": 385440,
+  "obj": "w41C_gspac_v1",
+  "src": "build/survey/probes/w41C_gspac_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_45e1a0"
+  ],
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "verbatim port of src/GRPSetSpacingH.c recipe with _WNGPart@12; fastcall short param stored at *(short*)(curThing+0xfd); alias retro-defines $FA$_t_45e1a0"
+ },
+ {
+  "rva": 285008,
+  "obj": "w41C_rmseq_v1",
+  "src": "build/survey/probes/w41C_rmseq_v1.c",
+  "maps": [
+   "_w41C_seqTicks=?seqIgnoreTicks@@3KA"
+  ],
+  "patch": [
+   "0x17,0x1,15",
+   "0x1d,0x1,d6",
+   "0x20,0x1,15"
+  ],
+  "provenance": [
+   "patch 0x17: toolchain-diff FA reloads timerTicks into EDX (8b 15) vs CL ECX (8b 0d); modrm regcolor 0d->15",
+   "patch 0x1d: toolchain-diff FA sub EDX,ESI (2b d6) vs CL ECX (2b ce); rm-byte ce->d6",
+   "patch 0x20: toolchain-diff FA add [seqIgnoreTicks],EDX (01 15) vs CL ECX (01 0d); modrm 0d->15"
+  ],
+  "aliases": [
+   "0=$FA$_t_445950"
+  ],
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "stdcall @8 wrapper: before=timerTicks; RMAccessHandle(p1,p2); ?seqIgnoreTicks@@3KA += timerTicks-before. FPO prolog (push esi, esi=before) reproduced in plain C; only diff was reload reg color (CL ECX vs FA EDX), fixed by 3 one-byte modrm patches; reloc sites unchanged. Alias retro-defines $FA$_t_445950 (t001be refs). Spelling variants tried (unsigned types, staged delta local) left CL reg plan unchanged - patch is the stable solution"
+ },
+ {
+  "rva": 287568,
+  "obj": "w41C_sofs_v4",
+  "src": "build/survey/probes/w41C_sofs_v4.c",
+  "maps": [
+   "_w41C_modBase=?MOD@@3PAUMODSPEC@@A+0xe",
+   "@SoundOff@4=?SoundOff@@YIXF@Z",
+   "_w41C_RMSeqAccess@8=$FA$_t_445950"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "layout chunk name _SEQsndoff (rank's '_SEQsndoff@0' decoy); ret c3 + FPO cdwParams=1 + reads [esp+0x18] => cdecl 1-param. Recipe: RMChangeType(p, defaultChatSoundName+0x14, buf[16]); h=(long)RMSeqAccess(buf,0x104); if(!h) return; handle in EBX via 8b d8 staging - CL only produces 8b d8/mov ebx,eax when h is a LONG decl declared AFTER the counter (decls q, long i, long h) and inits ordered i=0 THEN q=&MOD+0xe; loop walker ESI stride 0x54, counter EDI. maps: _w41C_modBase=?MOD@@3PAUMODSPEC@@A+0xe; @SoundOff@4=?SoundOff@@YIXF@Z. No rel32 callers (dead chunk); no aliases needed"
+ },
+ {
+  "rva": 290656,
+  "obj": "w41C_dispv_v1",
+  "src": "build/survey/probes/w41C_dispv_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_446f60"
+  ],
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "41-B cdecl 4-param vt-dispatcher + 7-B pad (8da42400000000): p4/p3/p2/p1 staged to eax/ecx/edx, mov ebx,[eax+0x17a], push eax, call [ebx+4], add esp,0x1c, pop ebx, ret. Unreferenced by any rel32 caller or data; vt[1](p1,0,0,0,p2,p3,p4) call in plain C reproduced byte-exact round 1 with no patches. Alias retro-defines $FA$_t_446f60 (t001c9/t001ca gens)"
+ }
+]

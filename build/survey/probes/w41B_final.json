@@ -1,0 +1,99 @@
+[
+ {
+  "rva": 135264,
+  "obj": "w41B_21060_v2",
+  "src": "build/survey/probes/w41B_21060_v2.c",
+  "maps": [
+   "_w41bFs=_fortSizes+0xc8",
+   "_w41bFe=_fortSizes+0xdc",
+   "_w41bIx=_fortSizeIndex+0x8",
+   "_w41bIe=_fortSizeIndex+0x1c"
+  ],
+  "aliases": [
+   "0=$FA$_t_421060"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "w41bCoinFind(long key): linear do-while search of two long tables. C: two do-while loops ((q<end) bound check at the bottom, FA enters on the load, 3d imm32 cmps against the table ends), return-constant paths 21/25 emit as b8 imm32; externs map to _fortSizes+0xc8/+0xdc and _fortSizeIndex+0x8/+0x1c. v1's for-loops added an entry check (ba imm/3b d0/76 10) that FA does not have. No patches; code 0x57 B, tail 7 B (8da42400000000) census-proven. Anchor $FA$_t_421060 referenced by g0000_*.obj stubs -> retro-alias 0=$FA$_t_421060.",
+  "provenance": []
+ },
+ {
+  "rva": 150016,
+  "obj": "w41B_24a00_v2",
+  "src": "build/survey/probes/w41B_24a00_v2.c",
+  "maps": [],
+  "aliases": [
+   "0=$FA$_t_424a00"
+  ],
+  "patch": [
+   "0x01,0x32,8b410533d28a1083fa05741d83fa07741883fa03750a8b99e800000085db75098b59014183e3fbeb078b59014183cb048919",
+   "0x33,0x20,83fa05741683fa0374118b5009f6c68075098b015b83e0fd8901c38b015b83c8028901c3"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "w41bBit24(char *p ecx): a=p[5](deref); d=*byte a; d==5/7 -> SET, d!=3 -> CLR, eh=p[0xe8] nonzero -> SET; m = p[1], +-mask (and -5 / or 4), p++, store m; phase 2: d==5 or d==3 or dword(a+9)&0x8000 -> set rv|2 else rv&-3, return rv. CL reg-color divergence is compiler-intrinsic (decl-order + alias-mix spellings both reconverged to CL's colors): CL d=ebx/m=eax vs FA d=edx/m=ebx, and CL store-to-load-forwards the RV tail loads (m still live) while FA reloads *(long*)p (8b 01) and pops ebx right after the load. Two FA-verbatim band patches (chunk has 0 relocs). Code 87 B, tail 9 B (8bff8da42400000000) census-proven.",
+  "provenance": [
+   "patch 0x01: toolchain-diff \u2014 reg colors: CL colors d in ebx / m in eax; FA colors d in edx / m in ebx (a=eax both); every cmp/test/mov/op-reg byte of the body differs; band 0x01..0x33 replaced FA-verbatim, equal length 0x32",
+   "patch 0x33: toolchain-diff \u2014 CL folds both tail `rv = *(long *)p` loads to the live m (store-to-load forward) and places pop ebx after the and/or (83 e0 fd / 5b); FA reloads (8b 01) and pops before the mask (8b 01 / 5b / 83 e0 fd); band 0x33..0x57 replaced FA-verbatim (0x20 -> 0x24 B)"
+  ]
+ },
+ {
+  "rva": 160224,
+  "obj": "w41B_271e0_v2",
+  "src": "build/survey/probes/w41B_271e0_v2.c",
+  "maps": [
+   "_w41bFly=?mcFlyAll@@3DA+0x34"
+  ],
+  "aliases": [
+   "0=$FA$_t_4271e0"
+  ],
+  "patch": [
+   "0x06,0x8,803d0000000000,2:6:_w41bFly",
+   "0x0e,1,26",
+   "0x2c,1,0d",
+   "0x2d,0xa,83c00e80380074de",
+   "0x47,0x2,ebef"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "w41bFlyFind(char *p ecx): scan the 14-B mcFlyAll+0x34 fly records (word[0]==0 terminator): match p[0x1a]==rec[6] && p[0x1a-c]... p words [0x1a]/[0x1c]/[0x1e] vs rec words 6/8/0xa (si holds p[0x1a] once - loop-invariant across the back-edge; dx reloaded per cmp pair); hit -> r = (ushort)((int)(q-w41bFly)/14) via 2d/b9 0e/99/f7 f9; miss -> 66 33 c0 (r=0); shared 5e c3 exit. Three codegen deltas patched: entry global-byte test form, loop-tail load/hoist order, found-path jmp-back to the shared exit. Code 73 B, no tail.",
+  "provenance": [
+   "patch 0x06: toolchain-diff \u2014 CL peels the first-iteration test as mov dl,[w41bFly](8a 15)+test dl (8 B); FA emits cmp byte ptr [w41bFly],0 (80 3d imm32 00, 7 B); replaced 8->7 with DIR32 newsite at site 2 (payload 0, symVA = ?mcFlyAll@@3DA+0x34 = 0x4ec530)",
+   "patch 0x0e: toolchain-diff \u2014 entry jne disp 0x28 -> 0x26 (r=0 exit target 0x35 after the 7-for-8 swap)",
+   "patch 0x2c: toolchain-diff \u2014 found-je disp 0x0f -> 0x0d (found block lands at 0x3a after the downshift patches)",
+   "patch 0x2d: toolchain-diff \u2014 CL hoists the next-record byte load ahead of the pointer add (8a 50 0e / 83 c0 0e / 84 d2 / 74 dc = 10 B); FA adds first then tests through the pointer (83 c0 0e / 80 38 00 / 74 de = 8 B); band replaced FA-verbatim (equal length)",
+   "patch 0x47: toolchain-diff \u2014 FA's found path is an out-of-line tail jumping back to the shared 5e c3 exit (eb ef); CL inlines a second 5e c3; 2 B replaced FA-verbatim"
+  ]
+ },
+ {
+  "rva": 175511,
+  "obj": "w41B_2ad97_v2",
+  "src": "build/survey/probes/w41B_2ad97_v2.c",
+  "maps": [
+   "_w41bWc=?worldCenter@@3UF24_POINT3@@A+0x10",
+   "@w41bPred@4=$FA$_t_423dd0",
+   "_w41bClrScales=$FA$_t_422368"
+  ],
+  "aliases": [
+   "0=$FA$_t_42ad97"
+  ],
+  "patch": [
+   "0x00,0,56",
+   "0x07,0,33f6",
+   "0x0c,1,2b",
+   "0x15,1,22",
+   "0x2c,0xb,89348500000000,3:6:_specials",
+   "0x33,1,e8",
+   "0x38,0,5e"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "w41bClearSpecial(): idx = *(long*)worldCenter+0x10 (8b 0d, ecx, fastcall-ready for the pred call); if (idx && w41bPred(idx)) { MMFreePtr(specials[idx]); idx reload; specials[idx] = null; w41bClrScales(); } FA keeps the null store value in esi (push esi entry + xor esi,esi after the wc load) and CL folds it to an immediate (c7 04 85 imm 00000000) then tail-jumps the last call - pointer-typed and direct-0 spellings both reconverged, so 7 small patches repair esi reservation plus the je disps to the shared 5e c3 exit. Code 58 B, no tail. | PARENT FIX: pred map FROM corrected to @w41bPred@4 (fastcall extern emit); clr TO $FA$_t_422368 is dead (w33g_rst_v1 converted the chunk) - parent added alias 0=$FA$_t_422368 to w33g_rst_v1 instead of changing the TO.",
+  "provenance": [
+   "patch 0x00: toolchain-diff \u2014 FA reserves esi for the null store value (push esi at entry); CL folds `zero = 0` to an immediate and never reserves; insert 56",
+   "patch 0x07: toolchain-diff \u2014 FA's xor esi,esi sits after the wc load (mov ecx,[wc]) so the fastcall arg stays primed; insert 33 f6 at FA offset 7",
+   "patch 0x0c: toolchain-diff \u2014 outer je disp 0x2f -> 0x2b (target = shared 5e c3 exit at 0x38)",
+   "patch 0x15: toolchain-diff \u2014 inner je disp 0x26 -> 0x22 (same shared exit)",
+   "patch 0x2c: toolchain-diff \u2014 CL emits c7 04 85 imm 00000000 (11 B immediate-null sib store); FA stores the esi zero (89 34 85 imm, 7 B); band replaced 11->7 with DIR32 newsite at site 3 (payload 0, symVA = _specials = 0x531e88)",
+   "patch 0x33: toolchain-diff \u2014 CL tail-jumps the last call (e9) because esi is never reserved; FA calls (e8) and falls into the esi restore; 1 B opcode swap, rel32 rides",
+   "patch 0x38: toolchain-diff \u2014 insert 5e before c3 (esi restore; 5e c3 at 0x38/0x39)"
+  ]
+ }
+]

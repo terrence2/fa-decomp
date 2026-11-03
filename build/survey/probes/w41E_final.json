@@ -1,0 +1,114 @@
+[
+ {
+  "rva": 508544,
+  "verdict": "EXACT",
+  "name": "0x7c280 (96 B, 2 params, unnamed fastcall)",
+  "obj": "w41E_7c280_v1",
+  "src": "build/survey/probes/w41E_7c280_v1.c",
+  "maps": [
+   "@w30d_skipws5@4=$FA$_t_47c2e0"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_47c280"
+  ],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "fastcall tokenizer front-end: char *__fastcall w41E_7c280(char **p, long *n). Body: *n=0; loop over (**p==' '||**p=='\\t') (*p)++,(*n)++; tok=*p; ws=w30d_skipws5(tok); if(ws)*ws=0; cr=strchr(tok,13); if(cr)*cr=0; *n+=strlen(tok). NO maps: the C's __fastcall extern w30d_skipws5 makes CL emit @w30d_skipws5@4 directly, which the converted w30d_skipws5 obj (swap rva 508640) defines identity \u2014 no map needed. #include <string.h> gives CL's inline strlen (repnz scasb, 2b c0 form matching FA); the other e8 goes to the _strchr CRT thunk (identity, resolves to idata thunk at 0x4d3b90 like FA's e8). alias 0=$FA$_t_47c280 REQUIRED: the already-converted caller w33H_7c260_v2 references $FA$_t_47c280, which this conversion removes as its own anchor. Tail (8d4900 + 8da42400 00000000) census-proven, auto-copied. Zero abs fixups in FA; rel32 call targets verified: 0x47c2e0 (=w30d_skipws5), _strchr."
+ },
+ {
+  "rva": 591296,
+  "verdict": "EXACT",
+  "name": "0x905c0 (?SER_ProcessRequestPacket@@YAXAAUSERIAL_PACKET_WRAPPER@@@Z)",
+  "obj": "w41E_905c0_v1",
+  "src": "build/survey/probes/w41E_905c0_v1.c",
+  "maps": [
+   "_w41e_serprq=?SER_ProcessRequestPacket@@YAXAAUSERIAL_PACKET_WRAPPER@@@Z",
+   "_w41e_mpon=?mpInfo@@3UMP_INFO@@C+0x164",
+   "_w41e_hq=?HistoryQueue@@3USERIAL_QUEUE@@A",
+   "_w41e_ctlInQ=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x12e",
+   "_w41e_ctlPkt=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x146",
+   "_w41e_f128=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x128",
+   "_w41e_f12a=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x12a",
+   "_retrieveFromQueueq=?retrieveFromQueue@@YAXAAUSERIAL_QUEUE@@JAAUSERIAL_PACKET_WRAPPER@@@Z",
+   "_setPacketInfo=?setPacketInfo@@YAXAAUSERIAL_PACKET@@JJ@Z"
+  ],
+  "patch": [
+   "0x01,0x11,a1000000008b74240883f00133c98a4e23,1:6:_w41e_mpon"
+  ],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x01: toolchain-diff \u2014 head-gate band reorder (equal 17-B span): FA schedules the mpInfo+0x164 moffs read FIRST (a1, disp at chunk off 0x02) then esi=w (8b742408) then xor eax,1 / xor ecx,ecx / mov cl,[esi+0x23]; CL zeroes ecx first (33 c9 pre 8b742408) and reads mpon SECOND (a1 @0x08). Band rewrite carries FA's byte order; a1 disp zeroed + DIR32 (type 6) newsite site 1 (payload 0 \u2014 delta 0x164 baked from the _w41e_mpon map TO), CL's own mpon reloc dropped inside the span"
+  ],
+  "notes": "public: void __cdecl w41e_serprq(void *w) with def-side map _w41e_serprq=?SER_ProcessRequestPacket@@YAXAAUSERIAL_PACKET_WRAPPER@@@Z (rank gave the WRONG mangle ?SER_ProcessRequestPacket@@YAXIPAXKHH@Z \u2014 layout.json has the U-struct ref-arg spelling, single public). Recipe: externs w41e_mpon (map TO +0x164), w41e_hq, ctlInQ (+0x12e), ctlPkt (+0x146), f128 (+0x128), f12a (+0x12a) on ?mpInfo@@3UMP_INFO@@C / ?HistoryQueue@@3USERIAL_QUEUE@@A / ?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A; calls resolve identity: _retrieveFromQueueq / _setPacketInfo are plain-C defs of the converted RetrieveFromQueue (swap rva 622288) / setPacketInfo (swap rva 622496) objs. Body: if (*(uchar*)(w+0x23) == (w41e_mpon ^ 1)) { retrieveFromQueueq(w41e_hq, *(long*)(w+4), w41e_ctlInQ); setPacketInfo(w41e_ctlPkt, *(long*)(w+4), 2); w41e_f128 = 1; } else { w41e_f12a = 1; } \u2014 right-to-left arg eval reproduces FA's push order (68 ctlInQ / 50 / 68 hq; 6a 02 / 50 / 68 ctlPkt); the two c6 05 imm-byte stores are dis.py-elided \u2014 dump raw FA + walk .reloc. All 6 FA fixup dwords machine-verified == symVA + delta (mpon 0x4fbcf4, hq 0x5680d0, ctlInQ 0x568216, ctlPkt 0x56822e, f128 0x568210, f12a 0x568212); call targets 0x4984d0 (?retrieveFromQueue) and 0x497fa0 (?setPacketInfo). No alias: chunk is a named public; callers reference the real mangled public, handled by the def-side map."
+ },
+ {
+  "rva": 713664,
+  "verdict": "EXACT",
+  "name": "0xae3c0 (64 B, 0 params, unnamed)",
+  "obj": "w41E_ae3c0_v1",
+  "src": "build/survey/probes/w41E_ae3c0_v1.c",
+  "maps": [
+   "_w41e_ae400=$FA$_t_4ae400",
+   "_w41e_plCount=?player_list@@3UNET_PLAYER_LIST@@A+4",
+   "_w41e_plMe=?player_list@@3UNET_PLAYER_LIST@@A+0x14",
+   "_w41e_plArr=?player_list@@3UNET_PLAYER_LIST@@A+0x66"
+  ],
+  "patch": [
+   "0x07,0x1d,33f63bc67e3033dba1000000003bf0741b8b04b50000000085c07410,9:6:_w41e_plMe,20:6:_w41e_plArr",
+   "0x3a,1,f0",
+   "0x3b,2,7cd2"
+  ],
+  "aliases": [
+   "0=$FA$_t_4ae3c0"
+  ],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x07: toolchain-diff \u2014 loop-head band 29->28 B: FA zeroes the loop index in ESI first (33 f6) and reuses it as the entry-test zero (cmp eax,esi / jle), then holds the DEAD xor ebx,ebx (0x0d, never read again) before the plMe moffs read (a1) + cmp esi,eax / je (74 1b -> inc esi at 0x33) and the sib element load; CL instead zeroes EBX and uses it in the entry cmp (3b c3), reads the sib array load (8b 04 b5) BEFORE the plMe load and homes plMe in ECX (8b 0d / cmp ecx,esi). Band rewrites FA's order: 33 f6 / 3b c6 / 7e 30 / 33 db / a1 <plMe> / 3b f0 / 74 1b / 8b 04 b5 <plArr> / 85 c0 / 74 10; both disp dwords zeroed with DIR32 (type 6) newsites at hex-offsets 9 (plMe: FA site 0x10) and 20=0x14 (plArr: FA site 0x1b) (payload 0 \u2014 deltas +0x14/+0x66 baked from the map TOs); CL's two dropped relocs inside the span refit at the shifted positions; band shifts the tail -1 so the call/e8/epilogue land on FA offsets",
+   "patch 0x3a: toolchain-diff \u2014 bottom cmp operand order: FA cmp esi,eax (i vs count, 3b f0); CL cmp eax,esi (3b c6) \u2014 1-B modrm byte at the post-band position",
+   "patch 0x3b: toolchain-diff \u2014 bottom jcc opcode/disp: FA jl (7c) with disp d2 target = loop-head a1 @0x0f; CL emits jg (7f) with disp d1 (its pre-loop-head entry was CL's own sib load) \u2014 2-B same-position rewrite (0x3b byte 7f->7c and 0x3c disp d1->d2)"
+  ],
+  "notes": "player-list sweep: for (i=0; i>w41e_plCount? no \u2014 i<w41e_plCount; i++) { m=w41e_plMe; av=*(unsigned long*)(w41e_plArr+i*4); if(m==i) continue; if(av==0) continue; if(*(uchar*)((char*)av+0x36)==0) continue; w41e_ae400((void*)av); }. Externs map onto ?player_list@@3UNET_PLAYER_LIST@@A: _w41e_plCount=+4, _w41e_plMe=+0x14, _w41e_plArr=+0x66. The continue-ladder + w41e_ae400 call (map FROM _w41e_ae400 = TO $FA$_t_4ae400, a real still-stub anchor; decl void __cdecl w41e_ae400(void*) gives bare cdecl 1 push + 83 c4 04 like FA). FA-only scheduler/dead-reg diffs all patched (see provenance): dead 33 db reproduced inside the band (FPO cbRegs=2). alias 0=$FA$_t_4ae3c0 retro for any still-stub referencing this chunk anchor. FA fixup dwords machine-verified: 0x577e4c(+4) @0x02, 0x577e5c(+0x14) @0x10, 0x577eae(+0x66) @0x1b, 0x577e4c(+4) @0x35; call target 0x4ae400 (e8 rel32 newsite type 20 from the map, disp masked)."
+ },
+ {
+  "rva": 776896,
+  "verdict": "EXACT",
+  "name": "0xbdac0 (64 B, 0 params, unnamed twin-A)",
+  "obj": "w41E_bdac0_v1",
+  "src": "build/survey/probes/w41E_bdac0_v1.c",
+  "maps": [
+   "_w41e_ct=_curThing"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4bdac0"
+  ],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "CreateMove 13-arg stdcall wrapper twin-A of w35D_bd9d0 (band family): extern unsigned char w41e_ct[0x1000] + map _w41e_ct=_curThing; extern long __stdcall CreateMove(long,a..a13) resolves identity to FA's public _CreateMove@52 at 0x462be0 (no map needed \u2014 established by w35D). Body: CreateMove((long)(w41e_ct+0x38), 0, 1, (long)(short)*(unsigned short*)(w41e_ct+0x1d), 1, (long)(short)*(unsigned short*)(w41e_ct+0x1f), 1, (long)(short)*(unsigned short*)(w41e_ct+0x21), 1, 0, 8, 0x10, 0x7fff) \u2014 right-to-left arg eval reproduces FA's staging (68 7fff / 6a 10 / 68 00000000 imm (+0x38 site 0x2e) / 6a 00 / 6a 01 groups; movsx eax(+0x21) FIRST then 6a 08 / 6a 00, movsx ecx(+0x1f)... movsx edx(+0x1d)). FA fixup dwords machine-verified: +0x21 @0x0a, +0x1f @0x15, +0x1d @0x1c, +0x38 @0x2e (all from _curThing 0x508738; CL's extern-array addressing bakes the deltas). Tail (8d642400 x2 + 8da42400 00000000) census-proven, auto-copied. alias 0=$FA$_t_4bdac0 retro."
+ },
+ {
+  "rva": 776960,
+  "verdict": "EXACT",
+  "name": "0xbdb00 (64 B, 0 params, unnamed twin-B)",
+  "obj": "w41E_bdb00_v1",
+  "src": "build/survey/probes/w41E_bdb00_v1.c",
+  "maps": [
+   "_w41e_ct=_curThing",
+   "_w41e_sun=_sunAngle"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4bdb00"
+  ],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "CreateMove 13-arg stdcall wrapper twin-B (same band as twin-A): extern unsigned char w41e_sun[0x80] + map _w41e_sun=_sunAngle (0x508158); middle args come from _sunAngle: a4=(long)(short)*(unsigned short*)w41e_sun, a6=(long)(short)*(unsigned short*)(w41e_sun+2); a8 stays the shared movsx _curThing+0x21. FA fixup dwords machine-verified: _curThing+0x21 (0x508759) @0x0a, _sunAngle+2 (0x50815a) @0x15, _sunAngle (0x508158) @0x1c, _curThing+0x38 (0x508770) @0x2e (both map TOs plain: _curThing and _sunAngle are FA data publics in layout.json). Tail census-proven, auto-copied. alias 0=$FA$_t_4bdb00 retro."
+ }
+]

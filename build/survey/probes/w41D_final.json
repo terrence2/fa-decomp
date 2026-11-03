@@ -1,0 +1,56 @@
+[
+  {
+    "rva": 385504,
+    "obj": "w41D_5e1e0_v1",
+    "src": "build/survey/probes/w41D_5e1e0_v1.c",
+    "flags": "/c /O2 /Gy /G5",
+    "maps": [],
+    "patch": [],
+    "aliases": ["0=$FA$_t_45e1e0"],
+    "verdict": "EXACT",
+    "notes": "GRPSetSpacingV recipe verbatim (src/GRPSetSpacingV.c, EXACT wave-20) with callee WNGPart instead of GRPPart: extern char curThing[] / unsigned short curId (identity, no maps); void __fastcall w41D_5e1e0(short vv) { *(short*)(curThing+0xff) = vv; if (WNGPart(curId,0,0)==1) MSGSend(curId,0x8001,0,0,0x8000,8,curThing+0xff,2); } — CL schedules the store (66 89 0d from cx, fastcall param) into the push sequence exactly as FA (mov ax[66 a1 _curId]/push 0/store/push 0/push eax). Callee _WNGPart@12 and _MSGSend@32 are identity publics (3 and 8 dword stdcall args). All 4 abs fixups + 2 rel32 calls verified against FA bytes: _curId 0x4f2f24 (content 0), _curThing 0x507838 + content 0xff = 0x508837 x2, call disps -0x4b7/-0x46 3ee computed = FA. Caller probe: converted entry CTDo_wm_vspacing maps @ctVsSp@4=$FA$_t_45e1e0, so the chunk-start retro-alias 0=$FA$_t_45e1e0 is REQUIRED (also callers 0x15926/0x97585/0x9cc6d still-stub e8s).",
+    "provenance": []
+  },
+  {
+    "rva": 393728,
+    "obj": "w41D_60200_v2",
+    "src": "build/survey/probes/w41D_60200_v2.c",
+    "flags": "/c /O2 /Gy /G5",
+    "maps": [
+      "_CompareMemory_f=?CompareMemory@@YAHPBX0I@Z",
+      "_MenuCreateRemaps_f@0=?MenuCreateRemaps@@YGXXZ"
+    ],
+    "patch": [],
+    "aliases": ["0=$FA$_t_460200"],
+    "verdict": "EXACT",
+    "notes": "Plain C, no patches: extern char wingIds[] / void *curPalette[] (identity); if (CompareMemory_f(*(void**)(wingIds+0x1b8), curPalette, 0x300) != 0) { memcpy(deref, curPalette, 0x300); MenuCreateRemaps_f(); } — no d-local (v1's d-local made CL emit fa ff 5f 5e c3 residue and failed). CL loads the wingIds+0x1b8 slot per use (a1 + 8b 3d, FA's shape), pushes imm32 0x57af08 (DIR32 _curPalette content 0) and the const 0x300 memcpy inlines to f3 a5 ecx=0xc0 with mov esi/be-imm + mov edi/8b 3d order matching FA (DoFadeout recipe family). Map TOs verified: ?CompareMemory@@YAHPBX0I@Z = 0x412b80 (rel -0x4d697 from site 0x460213 = FA fffb2969), ?MenuCreateRemaps@@YGXXZ = 0x40bf70 (rel -0x504c5 = FA fffabd3b, copied-verbatim spelling from committed PilotPhoto entry). Chunk-start retro-alias 0=$FA$_t_460200 for callers 0x5feb6/0x5ff15 (?INFO2Draw@@YIXXZ, still stub).",
+    "provenance": []
+  },
+  {
+    "rva": 413440,
+    "obj": "w41D_64f00_v2",
+    "src": "build/survey/probes/w41D_64f00_v2.c",
+    "flags": "/c /O2 /Gy /G5",
+    "maps": ["_w41D_c90=$FA$_t_464c90"],
+    "patch": [],
+    "aliases": ["0=$FA$_t_464f00"],
+    "verdict": "EXACT",
+    "notes": "Plain C, no patches: extern int w41D_c90(void) (map TO $FA$_t_464c90, still-stub anchor of the sibling wrap-counter chunk 0x64c90, verified in t00054 stub syms; rel -0x276 = FA fffffd8a). int r = c90(); if (r < 0) { q = (unsigned long)(0x167 - r) / 0x168; r += (int)((q*5<<3)*9); } if (r >= 0x168) { q = (unsigned long)r / 0x168; r += (int)(-((q*5<<3)*9)); } return (r*91)*2. The explicit q*5<<3)*9 and (r*91)*2 spellings reproduce FA's lea*5/shl ax,3/lea*9 and lea[esi+esi*8]/lea[eax+eax*4]/lea[esi+ecx*2]/add eax,eax mul chains; unsigned q keeps FA's sub edx,edx/f7 f1 (CL 4.2 emits plain div for const divisors — CTEval_turnratediff recipe); the -(q*360) spelling gets neg esi-style (f7 d8/03 f0) matching block B. v1 (bare q/0x168*0x168 + r*0xb6 imul) failed. Chunk-start retro-alias 0=$FA$_t_464f00 (converted w38D_64e80_v1 maps _w38d_f00X=$FA$_t_464f00; also _CTDo_movetoalt/_CTDo_jink stub e8s).",
+    "provenance": []
+  },
+  {
+    "rva": 450224,
+    "obj": "w41D_6deb0_v1",
+    "src": "build/survey/probes/w41D_6deb0_v1.c",
+    "flags": "/c /O2 /Gy /G5",
+    "maps": [
+      "_MP_PeekByte=?MP_PeekByte@@3P6AJJ@ZA",
+      "_MP_Read=?MP_Read@@3P6AJJPAEJ@ZA"
+    ],
+    "patch": [],
+    "aliases": ["0=$FA$_t_46deb0"],
+    "verdict": "EXACT",
+    "notes": "Plain C, no patches: extern long (*MP_PeekByte)(long); extern long (*MP_Read)(long, unsigned char *, long); char __fastcall w41D_6deb0(long h) { unsigned char buf[4]; long r; while ((r = MP_PeekByte(h)) == 0) MP_Read(h, buf + 3, 1); if (r == -1) return 0; return (char)r; } — fnptr externs (w36F_ralloc recipe) give CL's call-mem ff 15 for PeekByte and mov ecx,[MP_Read]/call ecx for the Read; &buf[3] = esp+7 matches FA's lea eax,[esp+7] pre-push spelling; char return keeps FA's xor al,al-only (32 c0) -1-clamp with the pop esi/add esp,4 shared exit. Map TOs = data publics ?MP_PeekByte@@3P6AJJ@ZA 0x54dde0 / ?MP_Read@@3P6AJJPAEJ@ZA 0x54ddb0 (MP_Read spelling copied verbatim from committed w36F_ralloc_v1 entry). Chunk-start retro-alias 0=$FA$_t_46deb0 (caller ?MPReceive@@YGDXZ at 0x6bc59, still stub).",
+    "provenance": []
+  }
+]

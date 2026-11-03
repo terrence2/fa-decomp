@@ -1,0 +1,93 @@
+[
+ {
+  "verdict": "EXACT",
+  "rva": 823584,
+  "obj": "w41F_CopyDB15_v1",
+  "src": "build/survey/probes/w41F_CopyDB15_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "CopyDB15: 4x-unrolled indexed table-copy with a pusha/popa (60/61) save band - bare 32-bit pusha/popa is asm-only, so the whole body is naked asm (SetFlatColor _emit recipe for 60/61). Params (cdecl, 4 args, [ebp+8/0xc/0x10/0x14]): table base edi, dst edx, byte-index array esi, stride ecx; per element bl=*p++, row=tab+(bl<<3) (shl bx,3 keeps 16-bit index math), copies row[0],row[1] to dst[col]/dst[col+stride] with FA's own un-scheduled add/sub edx,4/ecx dance. Trailing census pad 2e 8b c0 auto-accepted."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 869152,
+  "obj": "w41F_isalpha5f_v2",
+  "src": "build/survey/probes/w41F_isalpha5f_v1.c",
+  "maps": [
+   "_ctype204=__ctype+0x204"
+  ],
+  "patch": [
+   "0,9,833d0000000001,2:6:_ctype204",
+   "0x7,0,56",
+   "0x1e,18,8b0d0000000033c08b742408668b04712503010000,2:6:__pctype",
+   "0x1d,1,15",
+   "0x33,21,85c0750983fe5f740433c05ec3b8010000005ec3"
+  ],
+  "aliases": [
+   "0=$FA$_t_4d4320"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x00: toolchain-diff - CL materializes the __ctype+0x204 MBCS-flag compare (push esi first, a1 moffs + 83 f8 cmp) while FA tests memory directly (83 3d, 9->7 B) and pushes esi AFTER the compare; DIR32 re-add _ctype204 at site 2, payload zero (delta 0x204 lives in the map TO)",
+   "patch 0x7: toolchain-diff - insert FA's push esi (56), which sits at 0x07 between the compare and the jle",
+   "patch 0x1e: toolchain-diff - CL else-branch (a1 __pctype moffs, sib 70 eax-base) -> FA 8b 0d __pctype + 33 c0 + 66 8b 04 71 (ecx base); DIR32 re-add __pctype at site 2, identity public, payload zero",
+   "patch 0x1d: toolchain-diff - jmp disp recompute after the 3-B band growth: eb 12 (CL target 0x30) -> eb 15 (FA test at 0x33)",
+   "patch 0x33: toolchain-diff - bool tail 21->20 B: CL emits je-over-ret1 + sete al for the c==0x5f accept; FA emits jne-over-ret1, cmp esi,0x5f / je, xor ret / ret1 b8 01"
+  ],
+  "notes": "_isalpha+'_' variant: MBCS-gated ctype test plus (c==0x5f) identifier accept. N-band Isctype template + extra bool tail. C: if (*(int*)ctype204 > 1) r=_isctype(c,0x103); else r=_pctype[c]&0x103; if (r) return 1; if (c==0x5f) return 1; return 0. 5 directives: head 9->7B mem-cmp (+DIR32 _ctype204 site 2, payload 0 - delta 0x204 lives in map TO), inserted push esi at 0x07, else-branch 18->21B (8b 0d __pctype + 33 c0 + sib 71 ecx-base; DIR32 re-add __pctype identity at patch site 2), eb disp 12->15 after band growth, bool tail 21->20B (FA jne-ret1 / cmp esi,5f / je / xor ret / b8 01 ret1 vs CL's je-ret1 + sete al)."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 869232,
+  "obj": "w41F_isalnum5f_v2",
+  "src": "build/survey/probes/w41F_isalnum5f_v1.c",
+  "maps": [
+   "_ctype204=__ctype+0x204"
+  ],
+  "patch": [
+   "0,9,833d0000000001,2:6:_ctype204",
+   "0x7,0,56",
+   "0x1e,18,8b0d0000000033c08b742408668b04712507010000,2:6:__pctype",
+   "0x1d,1,15",
+   "0x33,21,85c0750983fe5f740433c05ec3b8010000005ec3"
+  ],
+  "aliases": [
+   "0=$FA$_t_4d4370"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x00: toolchain-diff - CL materializes the __ctype+0x204 MBCS-flag compare (push esi first, a1 moffs + 83 f8 cmp) while FA tests memory directly (83 3d, 9->7 B) and pushes esi AFTER the compare; DIR32 re-add _ctype204 at site 2, payload zero (delta 0x204 lives in the map TO)",
+   "patch 0x7: toolchain-diff - insert FA's push esi (56), which sits at 0x07 between the compare and the jle",
+   "patch 0x1e: toolchain-diff - CL else-branch (a1 __pctype moffs, sib 70 eax-base) -> FA 8b 0d __pctype + 33 c0 + 66 8b 04 71 (ecx base); DIR32 re-add __pctype at site 2, identity public, payload zero",
+   "patch 0x1d: toolchain-diff - jmp disp recompute after the 3-B band growth: eb 12 (CL target 0x30) -> eb 15 (FA test at 0x33)",
+   "patch 0x33: toolchain-diff - bool tail 21->20 B: CL emits je-over-ret1 + sete al for the c==0x5f accept; FA emits jne-over-ret1, cmp esi,0x5f / je, xor ret / ret1 b8 01"
+  ],
+  "notes": "_isalnum+'_' variant (mask 0x107) - sibling of the 0x103 entry, identical 5 directives."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 880656,
+  "obj": "w41F_loop1_v3",
+  "src": "build/survey/probes/w41F_loop1_v1.c",
+  "maps": [
+   "_w41F_loopG=$FA$_t_4d6fc0"
+  ],
+  "patch": [
+   "0x26,6,837d00ff",
+   "0x2b,1,e8",
+   "0x1a,1,11"
+  ],
+  "aliases": [
+   "0=$FA$_t_4d7010"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x26: toolchain-diff - CL load-folds-to-test: CL loads *cnt into eax (8b 45 00) then compares (83 f8 ff, 6 B); FA tests memory directly (83 7d 00 ff cmp [ebp],-1, 4 B)",
+   "patch 0x2b: toolchain-diff - jne disp recompute after the 2-B band shrink: e6 (CL target 0x14) -> e8 (FA back-loop to mov eax,edi at 0x14)",
+   "patch 0x1a: toolchain-diff - jle disp recompute after the 2-B band shrink: 13 (CL exit target 0x2e) -> 11 (FA exit pops at 0x2c)"
+  ],
+  "notes": "retry loop around buffered-read helper $FA$_t_4d6fc0 (its EOF protocol fills *cnt with -1): while (n-- > 0) { g(a1, a3, cnt); if (*(int*)cnt == -1) break; } with all four params in callee-saved regs (esi=a1, edi=n, ebx=a3, ebp=*cnt) pushed in FA's interleaved schedule. 3 directives: load-folds-to-test mem-cmp (8b 4500/83 f8 ff 6B -> 83 7d 00 ff 4B), jne disp e6->e8, jle disp 13->11 (both recompute after the 2-B shrink). Callee resolves via map to the still-stub anchor $FA$_t_4d6fc0."
+ }
+]
