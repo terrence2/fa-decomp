@@ -1,0 +1,237 @@
+[
+ {
+  "rva": 667712,
+  "verdict": "EXACT",
+  "obj": "w44F_a3040_v6",
+  "src": "build/survey/probes/w44F_a3040_v6.c",
+  "maps": [
+   "_socket_list=?socket_list@@3USOCKET_STATE_LIST@@A",
+   "_socket_close_socket=?socket_close_socket@@YAXIG@Z",
+   "_w44F_fnA31e0=$FA$_t_4a31e0"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4a3040"
+  ],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "no patch offsets; body byte-identical as compiled (pure C, struct field spellings + memcpy)",
+   "tail: toolchain-diff census pads accepted by fitobj (6 B 8d9b00000000)"
+  ],
+  "notes": [
+   "pure C: ?socket_close_all@@YAXXZ - close active+inactive sockets, w44F_fnA31e0 call"
+  ]
+ },
+ {
+  "rva": 709840,
+  "verdict": "EXACT",
+  "obj": "w44F_ad4d0_v4",
+  "src": "build/survey/probes/w44F_ad4d0_v4.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4ad4d0"
+  ],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "no patch offsets; body byte-identical as compiled (pure C, no externs)",
+   "tail: toolchain-diff census pads accepted by fitobj (11 B 8d642400+8da42400000000)"
+  ],
+  "notes": [
+   "pure C: queue retire-at-cursor step (cursor w in slot, dead entry head, slot chain fix)"
+  ]
+ },
+ {
+  "rva": 768768,
+  "verdict": "EXACT",
+  "obj": "w44F_bbb00_v2",
+  "src": "build/survey/probes/w44F_bbb00_v2.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4bbb00"
+  ],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "no patch offsets; body byte-identical as compiled (pure C, no externs)",
+   "tail: toolchain-diff census pads accepted by fitobj (8 B 8d642400+8d642400)"
+  ],
+  "notes": [
+   "pure C: flush-on-tail writer - fwrite tail buffer, event on error path"
+  ]
+ },
+ {
+  "rva": 914656,
+  "verdict": "EXACT",
+  "obj": "w44F_df4e0_v11",
+  "src": "build/survey/probes/w44F_df4e0_v11.c",
+  "maps": [
+   "_heaplimitA=__adbgmsg+0x1074",
+   "_newmodeA=__adbgmsg+0x1080",
+   "_crtheapG=__crtheap",
+   "_heapAllocSubP=$FA$_t_4de350",
+   "_lockX=__lock",
+   "_unlockX=__unlock",
+   "_callnewhX=__callnewh",
+   "_heapAllocP=__imp__HeapAlloc"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=_calloc"
+  ],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "no patch offsets; naked __declspec(naked) whole-body transcription (171 B, zero tail) - _calloc with sub-block / osize>>4 HeapAlloc route, heap-sub-alloc slow path, and newmodeA/0x80000000 (INT_MAX) rounding band",
+   "maps: two distinct CRT dwords - compare site = _heaplimitA (__adbgmsg+0x1074, 3b 35 cmp esi,[mem]) vs newmodeA check before callnewh (__adbgmsg+0x1080, 83 3d ...00 74 14); v2-era code wrongly mapped both to heaplimitA",
+   "CL walls that forced naked: cmp [mem],reg compare sites; label sliding moved the loop label past a dead xor ebp,ebp (state-equivalent backedge) - defeated by _emit'ing the jcc bytes (_emit 0x74/_emit 0x16 after the first test ebp,ebp; _emit 0x75/_emit 0x8c for the backedge after the callnewh test)",
+   "alias: 0=_calloc (chunk 0xdf4e0 carries the real public _calloc in FA; alias re-defines it for the fitted obj)"
+  ],
+  "notes": [
+   "naked _calloc (rva 0xdf4e0): /O2 CL vs FA scheduler diffs in the sub-alloc + callnewh bands; caution: $FA$_t_4de350 anchor TO is only linkable while chunk rva 0xde350 stays a stub; if 0xde350 is converted, retro-alias the converter with $FA$_t_4de350 (HeapAllocX.c already references it as heapAllocSubX)"
+  ]
+ },
+ {
+  "rva": 929056,
+  "verdict": "EXACT",
+  "obj": "w44F_e2d20_v5",
+  "src": "build/survey/probes/w44F_e2d20_v5.c",
+  "maps": [
+   "_w44F_rchk=$FA$_t_4e2cf0"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4e2d20"
+  ],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "no patch offsets; naked whole-body transcription (102 B, zero tail) - four calls to $FA$_t_4e2cf0 (all e8 targets = VA 0x4e2cf0, chunk start; initial misindexing used mid-chunk addresses - forgot next-instr base: target = rva(e8)+5+disp)",
+   "maps: _w44F_rchk -> $FA$_t_4e2cf0 (REL32 call sites, extern int __cdecl spelling; obj FROM _w44F_rchk)",
+   "CL walls that forced naked: interleaved load-push call-arg schedule - FA reuses the arg1 pointer through the pushed register and CL from C front-loads arg1 (90-nop batched loads) using [esi+4]; p=A+1 spellings, comma-expr, and separate statements are all canon-identical"
+  ],
+  "notes": [
+   "naked e2d20 (rva 0xe2d20): net-packet queue walker, 4x rchk+enqueue; inc dword [esi+8] counters"
+  ]
+ },
+ {
+  "rva": 45952,
+  "verdict": "EXACT",
+  "obj": "w44F_b380_v1",
+  "src": "build/survey/probes/w44F_b380_v1.c",
+  "maps": [
+   "_w44f_fn2=$FA$_t_40b510",
+   "_w44f_fn3=$FA$_t_40b430",
+   "_w44f_str0=?player_list@@3UNET_PLAYER_LIST@@A+0x1d"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_40b380"
+  ],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "no patch offsets; body byte-identical as compiled (pure C)",
+   "tail: toolchain-diff census pads accepted by fitobj (9 B 8bff+8da42400000000)",
+   "maps: interior-data TO ?player_list@@3UNET_PLAYER_LIST@@A+0x1d for the 0x577e65 literal; fn2/fn3 anchors are unnamed chunk stubs at VA 0x40b510 / 0x40b430 (rva-form $FA$_t_b510 seen in an earlier probe round is NON-CANONICAL - VA form used here)"
+  ],
+  "notes": [
+   "pure C: player-found branch - pkt_send_you_can_play gate, fn2/fn3/net_print_player_found else socket_set_doa; test al,al came free from the char-return callee spelling"
+  ]
+ },
+ {
+  "rva": 70144,
+  "verdict": "EXACT",
+  "obj": "w44F_11200_v5",
+  "src": "build/survey/probes/w44F_11200_v5.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_411200"
+  ],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "no patch offsets; naked whole-body transcription (128 B, zero tail; 4 B census pad 8d642400) - descending power-of-two ladder cmp/jg/je with five shared const-return tail blocks (mov eax,N/ret) in FA block order Lr4/Lr0/Lr2/Lr3/Lr1",
+   "CL walls that forced naked: (a) nested if/else arithmetized to cmp/sub const; cmp 1; sbb eax,eax; and eax,N (+11 B) - flat sequential ifs and else-if chains byte-identical; leading <= guards fix the jg polarity/layout but land w in edx and still inline the const returns; (b) CL inlines mov+ret instead of sharing the 4-byte const-tail blocks"
+  ],
+  "notes": [
+   "naked fastcall 11200 (rva 0x11200): size-class lookup from word [ecx+0xd] (xor eax,eax+mov ax zero-extend)"
+  ]
+ },
+ {
+  "rva": 127616,
+  "verdict": "EXACT",
+  "obj": "w44F_1f280_v2",
+  "src": "build/survey/probes/w44F_1f280_v2.c",
+  "maps": [
+   "_w44f_p=?janesOnlineName@@3PADA+0xb8",
+   "_w44f_chk=$FA$_t_41f2d0"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_41f280"
+  ],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "no patch offsets; naked whole-body transcription (67 B; 13 B census pad 8d9b00000000+8da42400000000) - cursor scanner: skip ';'-gated CR/LF runs via fastcall char-predicate $FA$_t_41f2d0 (cmp cl,0xd/0xa in callee)",
+   "maps: interior-data TO ?janesOnlineName@@3PADA+0xb8 for cursor 0x524ae8 (no public at either address - delta from nearest named data public); chk anchor is the 16-B unnamed chunk at VA 0x41f2d0; earlier rva-form $FA$_t_1f2d0 probe config is NON-CANONICAL - VA form recorded here",
+   "v1 pure-C FATAL diagnosis: CL CSEs the *w44f_p derefs into a register (8a 00/3c 3b vs FA 80 38 3b cmp byte [eax],imm) and drops movsx-from-memory at the shared exit (0f be c0 vs FA 0f be 00) - unreachable from C spelling"
+  ],
+  "notes": [
+   "naked 1f280 (rva 0x1f280): do-while + inner ++cursor loop, movsx exit"
+  ]
+ },
+ {
+  "rva": 135168,
+  "verdict": "EXACT",
+  "obj": "w44F_21000_v4",
+  "src": "build/survey/probes/w44F_21000_v4.c",
+  "maps": [
+   "_w44f_fn@4=$FA$_t_421060"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_421000"
+  ],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "no patch offsets; naked whole-body transcription (96 B incl _emit'd 5-B tail pad 05 00 00 00 00 baked after the final ret) - computer-index check: if numComputers==1 ret1; if thisComputer==0 for(i=1;numComputers>i;i++) fn(i); if thisComputer<=0 ret1; r=fn(thisComputer); r>x?ret0:(r+3>=x?ret1:ret0)",
+   "maps: call target = VA 0x421060 (64-B unnamed chunk, real chunk start); fastcall FROM spelled _w44f_fn@4; globals numComputers/_thisComputer are direct FA publics (no map)",
+   "pure C walls (v1-v3): CL canonicalizes loop-bottom cmp to [mem],reg+7f/jg (FA: 3b 3d reg,[mem]+7c/jl); keeps the second _thisComputer read in ecx and reloads for the call arg (FA: eax cached, mov ecx,eax); flips tail comparands (cmp esi,eax vs FA 3b c6 cmp eax,esi); fuses r+3>=x return into setge al; interleaves pop edi/pop esi into the add/cmp/setge band; uchar fn return adds mov cl,al zero-extend (fn returns int in the FA model, cmp eax,esi raw)",
+   "earlier rva-form $FA$_t_21060 probe config is NON-CANONICAL - VA form recorded here"
+  ],
+  "notes": [
+   "naked fastcall 21000 (rva 0x21000): x in ecx cached to esi; mov al,1 / xor al,al uchar returns"
+  ]
+ },
+ {
+  "rva": 139434,
+  "verdict": "EXACT",
+  "obj": "w44F_220aa_v3",
+  "src": "build/survey/probes/w44F_220aa_v3.c",
+  "maps": [
+   "_w44f_res=?mcFlyAll@@3DA+0x20"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4220aa"
+  ],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "no patch offsets; naked whole-body transcription (106 B, zero tail) - bitmap-access setup: _SetupBitmapAccess@12(0x180,0,0) then again (0,0,0) with a register-held zero (xor ebx,ebx, push ebx x3); @MMPushAllocId@4(7); inline strcpy idiom (mov ecx,-1/sub eax,eax/lea edi,[edx+0x54]/repne scasb/not/sub edi,ecx + rep movsd/movsb, size=len+1) from _th+0x54 to literal 0x4ec520; _RMAccessHandle@8(_th+0x54,0x810c) with result stored to 0x4ec51c; @MMPopAllocId@0() no args",
+   "maps: _w44f_res -> ?mcFlyAll@@3DA+0x20 (interior-data TO for the 0x4ec51c store; 0x4ec520 dest is baked literal, no reloc); call targets are all real named publics - stdcall spellings give _SetupBitmapAccess@12/_RMAccessHandle@8 directly, fastcall gives @MMPushAllocId@4/@MMPopAllocId@0 directly (no map)",
+   "v1/v2 pure-C FATALs: CL constant-folds a zero local (6a  pushes vs FA push-reg), CSEs the +0x54 into an early add (83 c2 54 vs FA 8d 7a 54 lea + late 83 c2 54), and pushes the RM arg1 before the movsb - all invariant to spelling -> naked escape",
+   "naming: earlier w44F_220aa session note said '3 ext'; actual refs are 4 public calls + _th + the 0x4ec51c store"
+  ],
+  "notes": [
+   "naked 220aa (rva 0x220aa, mid-alignment chunk): strcpy+RMAccessHandle init band"
+  ]
+ }
+]

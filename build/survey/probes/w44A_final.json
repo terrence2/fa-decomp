@@ -1,0 +1,153 @@
+[
+ {
+  "rva": 764384,
+  "obj": "w44A_ba9e0_v1",
+  "src": "build/survey/probes/w44A_ba9e0_v1.c",
+  "maps": [
+   "_STRIPAddProc=?STRIPAddProc@@YAJXZ"
+  ],
+  "patch": [],
+  "tail": "",
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "v1 pure C: 4-case uchar dispatch returning fn pointers; return-args table; C switch order 0/3/6/7 + default return 0. Map only FROM (undecorated fn pointer emit); TO is stub-defined verbatim."
+ },
+ {
+  "rva": 52096,
+  "obj": "w44A_cb80_v3",
+  "src": "build/survey/probes/w44A_cb80_v1.c",
+  "maps": [],
+  "patch": [
+   "0,110,56a1c8814e0066be010085c07418668bd166c1ea08663bf2730866468b0085c075f385c0750433c05ec366be01008b500485d2742d6681e1ff00663bf1732766468b420485c074148b400485c0740d663bf1731066468b0085c075f38b1285d275d833c05ec38bc25ec3,2:6:?firstMenu@@3PAUMENU@@A+0x0"
+  ],
+  "tail": "",
+  "provenance": [
+   "patch 0: whole-body transplant, 112B FA chunk (106B code + 6B 8d9b00000000 pad) over 110B CL donor; newsite 2:DIR32 firstMenu+0x0 (FA baked a1 imm c8814e00, payload 0)",
+   "root cause v2 fail: si/dx reg-mirror + ret-shape + extra push ebx unsteerable at C level; phase-A for-loop spelling ballooned CL to 118B"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "v3 = w43D-style transplant of donor v1 obj (16-bit menu walk, nested phases A/B); FA pad tail left to auto-census via oldlen 110 -> new 106B code slice; newsite token must carry +0x0 (payload-zero rule) for DIR32 on transplanted imm bytes."
+ },
+ {
+  "rva": 157912,
+  "obj": "w44A_268d8_v3",
+  "src": "build/survey/probes/w44A_268d8_v1.c",
+  "maps": [],
+  "patch": [
+   "0,94,8b4c24045666be010033c08b54240c8901890266393588ad5400762a0fb7c68b048598ad5400f6400101740ff64010807402ff018038047502ff026646663b3588ad540072d65ec20800,22:6:_nextObjId+0x0,34:6:_objPtrs+0x0,64:6:_nextObjId+0x0"
+  ],
+  "tail": "",
+  "provenance": [
+   "patch 0: whole-body transplant, 74B all-code FA chunk over 94B CL donor; newsites 22/34/64 DIR32 imm starts (663935 cmp @22 _nextObjId, 8b0485 sib @34 _objPtrs, 663b35 tail cmp @64 _nextObjId), all +0x0 payload-zero",
+   "root cause: CL esi/edi late r1/r2 loads + 33db test masks + c7 imm stores unsteerable; sites verified against FA imm dwords 54ad88/54ad98/54ad88"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "v3 transplant of donor v1 obj (obj-ptr scan counting bit-0x1 + bit-0x80 + type-4 objects)."
+ },
+ {
+  "rva": 205600,
+  "obj": "w44A_32320_v1",
+  "src": "build/survey/probes/w44A_32320_v1.c",
+  "maps": [],
+  "patch": [],
+  "tail": "",
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "v1 pure C: do-while n-->0 name slot adder; slot index = entry's own count (cnt*18+4 dst, long ptr then strcpy tail), 10-max early break. No maps."
+ },
+ {
+  "rva": 286512,
+  "obj": "w44A_45f30_v1",
+  "src": "build/survey/probes/w44A_45f30_v1.c",
+  "maps": [
+   "_w44aSeqFadv=?seqFading@@3FA",
+   "_w44aTimerTr=_timerTicks",
+   "_w44aSeqIgnore=?seqIgnoreTicks@@3KA",
+   "_w44aSeqFadeStart=?seqFadeStart@@3KA",
+   "_w44aSeqFadeLen=?seqFadeLen@@3GA",
+   "_w44aFadeTail=$FA$_t_445d30"
+  ],
+  "patch": [],
+  "tail": "",
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "v1 pure C: SEQfadeout \u2014 false path memset 0x300 + G_SetPalette; true path memcpy realPalette, set fading=-1, fadeStart=timerTicks-seqIgnore, fadeLen=(unsigned short)(a1<<8)/10, tail thunk &seqFading. KEY: FA c1e008 shl eax,8 is NOT dead \u2014 feeds (a1<<8)/10; fixing that made it EXACT."
+ },
+ {
+  "rva": 308704,
+  "obj": "w44A_4b5e0_v3",
+  "src": "build/survey/probes/w44A_4b5e0_v1.c",
+  "maps": [
+   "_w44amp174=?mpInfo@@3UMP_INFO@@C+0x174",
+   "_w44amp14c=?mpInfo@@3UMP_INFO@@C+0x14c",
+   "_w44aCtrlD=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x12d",
+   "_w44aSRB=?_SER_Read@@YAJJPAEJ@Z"
+  ],
+  "patch": [
+   "7,19,33db8b742410578b7c2418553bf80f9fc333ed",
+   "56,25,85db740d85ff7e09a10000000085c074d1a00000000084c0,8:6:?mpInfo@@3UMP_INFO@@C+0x14c,17:6:?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x12d",
+   "34,1,3b"
+  ],
+  "tail": "",
+  "provenance": [
+   "patch 7: prolog reorder-band swap (equal 19B): CL 33db,57,55,33ed,8b7c241c,8b742418,3bc7,0f9cc3 -> FA 33db,8b742410,57,8b7c2418,55,3bf8,0f9fc3,33ed (param-slot order + SETG/SETL polarity)",
+   "patch 56: block-C swap 25B->24B with shift -1: CL 8b0d(6B)+a0 -> FA a1+d1(a1 imm mpInfo+0x14c site rel 8, a0 imm Ctrl+0x12d site rel 17, payloads +0x14c/+0x12d interior deltas); CL read latch order also swapped",
+   "patch 34: je disp byte 3c->3b (CL block was 1B longer pre-shift; loop-exit displacement), applied in-order before patch 56's shift (fits apply sequentially to growing buffer)"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "v3 = donor v1 C (SER_Read wrapper, mpInfo+0x174 limit latch + mpInfo+0x14c/Ctrl+0x12d checks) + 3 patches covering prolog reorder, 25->24 block swap, and 1 disp byte. Head a1 @1 and tail pads (8d642400+8d642400, 104B code) untouched."
+ },
+ {
+  "rva": 330368,
+  "obj": "w44A_50a80_v1",
+  "src": "build/survey/probes/w44A_50a80_v1.c",
+  "maps": [],
+  "patch": [],
+  "tail": "",
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "v1 pure C: twin of 32320 (same C text; only header comment differs) \u2014 chunk 0x50a80 uses identical body bytes. No maps."
+ },
+ {
+  "rva": 340240,
+  "obj": "w44A_53110_v2",
+  "src": "build/survey/probes/w44A_53110_v2.c",
+  "maps": [],
+  "patch": [],
+  "tail": "",
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "v2 pure C: HARDPtrs bay-check (id==-1 scan loop over curThingType[0xb5]); v1 fixes: dropped o1/o2 init statements (CL emitted 89 5c 24 NN stores FA lacks) and dropped (unsigned long) cast on tail compare (signed jg 7f, not ja). No maps \u2014 curThingType/HARDPtrs spellings link directly."
+ },
+ {
+  "rva": 384720,
+  "obj": "w44A_5ded0_v3",
+  "src": "build/survey/probes/w44A_5ded0_v1.c",
+  "maps": [],
+  "patch": [
+   "0,67,66a1242f4f00538ad96a006a0050e85dfeffff3c02752684db741b66a1378850008a1534885000668b0d35885000505152e89a000000a0338850005bc332c05bc3,2:6:_curId+0x0,15:20:_WNGPart@12+0x0,29:6:_curThing+0xff,35:6:_curThing+0xfc,42:6:_curThing+0xfd,50:20:_WNGFormationMove@12+0x0,55:6:_curThing+0xfb"
+  ],
+  "tail": "",
+  "provenance": [
+   "patch 0: whole-body transplant, 65B FA code slice over 67B CL donor (FA[65:80] 15B census pads left to tail check); newsites: DIR32 imm starts 2 (_curId), 29/35/42/55 (curThing+0xff/fc/fd/fb, interior deltas), REL32 e8 disp bytes 15 (_WNGPart@12) and 50 (_WNGFormationMove@12), all +0x0 payload-zero",
+   "root cause: CL head ordering 53,33c0,66a1 vs FA 66a1,53,8ad9 unsteerable even after dropping w local (v2 still diverged at byte 0); rel sites = disp-byte starts (e8@14->15, e8@49->50)"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "v3 transplant of donor v1 obj (WNGPart(curId)==2 formation-move wrapper). v2 pure-C attempt failed: CL still emits 53;33c0;66a1 head ordering."
+ },
+ {
+  "rva": 416480,
+  "obj": "w44A_65ae0_v2",
+  "src": "build/survey/probes/w44A_65ae0_v2.c",
+  "maps": [
+   "_w44aCT110=_curThing+0x110",
+   "_w44aCT110b=_curThing+0x110",
+   "_w44aSvc28=_serviceTicks+0x28"
+  ],
+  "patch": [],
+  "tail": "",
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "v2 pure C: brush-slot init \u2014 if curThing+0x110==0 MMAllocPtr(0x80,0x8000); memcpy 0x80 serviceTicks+0x28 -> it; memset it to 0. KEY: alias extern w44aCT110b mapped to same _curThing+0x110 defeats CL CSE of the reload (FA re-reads the global after the store); sizes 0x80 not 0x200 (0x20 dwords)."
+ }
+]

@@ -1,0 +1,174 @@
+[
+ {
+  "rva": 96928,
+  "name": "?KeyRudder@@YAGFG@Z",
+  "verdict": "EXACT",
+  "obj": "w44D_17aa0_v4",
+  "src": "build/survey/probes/w44D_17aa0_v2.c",
+  "maps": [],
+  "patch": [
+   "0x17,8,c705300a5400000000006633c0c3,2:6:_rudder",
+   "0x2e,10,c705300a540000ffffff,2:6:_rudder",
+   "0x45,10,c705300a540000010000,2:6:_rudder",
+   "0x53,8,c705300a5400000000006633c0c3,2:6:_rudder",
+   "0xd,1,17",
+   "0x12,1,4e"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "tail": "9-B census pad (dis-listed tail fillers)",
+  "notes": "Switch-spelling real C (fastcall WORD key, bare 'rudder'/'keyarray' spellings emit _rudder/_keyarray identity hits).  CL folded the 4 switch stores differently from FA's sequential c7 05 imm32+ret-stub band, so each store band was transplant-patched with newsite 2:6:_rudder; the two switch jcc disps (0xd,0x12) recomputed to FA targets.  Reloc parity PASS (6 abs sites _rudder x4 + _keyarray x2).  NOTE: .c header comment typo 'KeyRuddy' -> should read 'KeyRudder' when handing the src back (cosmetic only)."
+ },
+ {
+  "rva": 145939,
+  "name": null,
+  "verdict": "EXACT",
+  "obj": "w44D_23a13_v2",
+  "src": "build/survey/probes/w44D_23a13_v1.c",
+  "maps": [
+   "curW44dD=_curScreen",
+   "numW44dD=_numComputers",
+   "w44dSub21cd0=$FA$_t_421cd0",
+   "w44dSub24ae3=$FA$_t_24ae3",
+   "w44dMpSet=?MPSetWaypoints@@YIXGPAUWAYPOINT@@@Z"
+  ],
+  "patch": [
+   "0,85,83ec04895424005666833d00c351000c668bf1753ba104764e0083f801743185d2742d8d4424046a008b4c24085051e889e2ffff6685f6750c8b4c2404e88e100000668bf08b5424048bcee84dda04005e83c404c3,0xb:6:curW44dD+0x0,0x16:6:numW44dD+0x0,0x30:20:w44dSub21cd0+0x0,0x3e:20:w44dSub24ae3+0x0,0x4c:20:w44dMpSet+0x0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Full transplant (patch 0,85 = 85-B FA hex) with 5 newsites (2 DIR32 + 3 rel32).  Real C underneath: fastcall(ushort,int) guard curScreen==0x0c && numComputers!=1 && x!=0 chaining sub_421cd0(x,&slot,0) -> sub_24ae3 -> MPSetWaypoints(w,slot).  Reloc parity PASS (abs 0xb,0x16; rel32 0x30,0x3e,0x4c)."
+ },
+ {
+  "rva": 155061,
+  "name": null,
+  "verdict": "EXACT",
+  "obj": "w44D_25db5_v1",
+  "src": "build/survey/probes/w44D_25db5_v1.c",
+  "maps": [
+   "@w44dIs424cd6@4=$FA$_t_424cd6",
+   "@w44dW2S@8=?MAPWorldToScreen@@YIXPAUF24_POINT3@@PAUWORD_POINT@@@Z",
+   "objPtrs=_objPtrs"
+  ],
+  "patch": [
+   "0x0e,1,52",
+   "0x1a,21,0fb7c78d5424088b0c8598ad540083c111,0xa:6:objPtrs+0x0",
+   "0x19,1,47"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Patch-hybrid.  Real C: fastcall(ushort id, WORD_POINT *wp); gate id==0||Is424cd6(id)==0; W2S(objPtrs[id]+0x11,&out); SetColor(0x30); 5-arg stdcall PatLine(0xf0f0f0f0, wp->x+1, wp->y+2, out.x+1, out.y+2).  CL emitted a1+and+base-index instead of FA's movzx+disp32 form for objPtrs[id]+0x11 -> 17-B band transplant with 0xa:6:objPtrs+0x0 newsite; two je disps (0x0e,0x19) recomputed 0x56/0x4b -> 0x52/0x47.  Reloc parity PASS (abs 0x24 _objPtrs; rel32 0x12,0x2c,0x36,0x5d)."
+ },
+ {
+  "rva": 188528,
+  "name": "@COLAddObj@0",
+  "verdict": "EXACT",
+  "obj": "w44D_2e070_v2",
+  "src": "build/survey/probes/w44D_2e070_v1.c",
+  "maps": [
+   "curWdThing=_curThing",
+   "curWdType=_curThingType",
+   "curWdSpec=_specials",
+   "curWdId=_curId"
+  ],
+  "patch": [
+   "0,140,56a139875000a8017474a1298b5000a801746b33c08b0d701f53003bc87e1b668b35242f4f00ba40235300663932744e83c202403bc87ff3eb07668b35242f4f0081f98403000073356689344d4023530041a1298b5000890d701f5300a900804000741aa1981f53003dc2010000730e66893445a01f530040a3981f53005ec3,0x2:6:curWdThing+0x1,0xb:6:curWdType+0x9,0x17:6:curWdSpec+0xe8,0x22:6:curWdId+0x0,0x27:6:curWdSpec+0x4b8,0x3d:6:curWdId+0x0,0x4d:6:curWdSpec+0x4b8,0x53:6:curWdType+0x9,0x59:6:curWdSpec+0xe8,0x65:6:curWdSpec+0x110,0x74:6:curWdSpec+0x118,0x7a:6:curWdSpec+0x110"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Full transplant (140-B FA hex) with 12 DIR32 newsites.  Real C semantics documented in v1.c: gate curThing+1 flags&1, curThingType+9 flags&1; dup-scan WORD array specials+0x4b8 (count dword +0xe8, 900 cap unsigned) for _curId else append; then typeFlags&0x408000 -> append to specials+0x118 (count +0x110, 450 cap).  Newsite payload QA PASS n=12 (every target/payload verified against FA bytes incl. two off-by-one sites caught: 0x16->0x17 modrm eats one, 0x4c->0x4d SIB eats one, plus the second 66 8b 35 _curId load)."
+ },
+ {
+  "rva": 252256,
+  "name": "@CPAddItemToScopes@4",
+  "verdict": "EXACT",
+  "obj": "w44D_3d960_v1",
+  "src": "build/survey/probes/w44D_3d960_v1.c",
+  "maps": [
+   "targetV=?targetV@@3UVIEW_VARS@@A",
+   "ifmHandle=?ifmHandle@@3PAUT_HANDLE@@A",
+   "goalP=?goalP@@3FA",
+   "_w44dS9f0=$FA$_t_43d9f0",
+   "_w44dSCa0=$FA$_t_43dca0",
+   "_w44dSDb0=$FA$_t_43ddb0",
+   "_w44dSG@20=$FA$_t_43ded0",
+   "_w44dSH@20=$FA$_t_43ded0"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Pure real-C, zero patches.  Fastcall(WORD id in cx): three gated cdecl probe calls firing 5-arg stdcall actions with targetV/ifmHandle interior pointers; third path reads BYTE out-param b and, when set, clears goalP+0x18 AND ifmHandle+0xc8 (both stores inside if(b) \u2014 FA targets je to skip both).  Push-arg order tell: second SG call gets (...,0,1) not (...,1,0); out-param b must NOT be initialized.  Map FROMs are CL-emitted spellings: cdecl -> _name, stdcall -> _name@20.  Reloc parity PASS (8 abs incl. mangled-view-var TOs; rel32 x6)."
+ },
+ {
+  "rva": 307472,
+  "name": "?SER_EnterCriticalCodeForeground@@YAXXZ",
+  "verdict": "EXACT",
+  "obj": "w44D_4b110_v2",
+  "src": "build/survey/probes/w44D_4b110_v1.cpp",
+  "maps": [
+   "Ctrl=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A",
+   "__imp__EnterCriticalSection@4=__imp__EnterCriticalSection",
+   "__imp__Sleep@4=__imp__Sleep",
+   "__imp__LeaveCriticalSection@4=__imp__LeaveCriticalSection"
+  ],
+  "patch": [
+   "0,85,5356575568e88056008b3d18a65800ffd7a00481560084c0742a8b352ca658008b2d1ca6580033db68e8805600ffd553ffd668e8805600ffd7a00481560084c075e6eb068b2d1ca65800c605048156000168e8805600ffd55d5f5e5bc38d4900,0x5:6:Ctrl+0x0,0xb:6:__imp__EnterCriticalSection@4+0x0,0x12:6:Ctrl+0x1c,0x1c:6:__imp__Sleep@4+0x0,0x22:6:__imp__LeaveCriticalSection@4+0x0,0x29:6:Ctrl+0x0,0x33:6:Ctrl+0x0,0x3a:6:Ctrl+0x1c,0x46:6:__imp__LeaveCriticalSection@4+0x0,0x4c:6:Ctrl+0x1c,0x52:6:Ctrl+0x0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Transplant (patch 0,85 -> 96-B FA hex incl. trailing 8d 49 00 census pad) with 11 DIR32 newsites.  .cpp probe for the YAXXZ public.  Real C: EnterCriticalSection(&Ctrl); if (Ctrl[0x1c]) do { Leave; Sleep(0); Enter; } while (Ctrl[0x1c]); Ctrl[0x1c] = 1; LeaveCriticalSection(&Ctrl).  Transplant reason: imp-cache register coloring \u2014 CL hoisted all three __imp__ thunk loads and colored esi=Enter/edi=Leave/ebp=Sleep, FA colored edi=Enter/esi=Sleep/ebp=Leave with a per-path Leave reload + eb 06 loop-exit skip; all calls are indirect (ff d7/d5/d6) so no rel32 sites.  Reloc parity PASS 11/11; imp slots 4 B apart (payload +0x0 per own symVA)."
+ },
+ {
+  "rva": 331328,
+  "name": "@FMCopyAngles@4",
+  "verdict": "EXACT",
+  "obj": "w44D_50e40_v1",
+  "src": "build/survey/probes/w44D_50e40_v1.c",
+  "maps": [
+   "curThing=_curThing"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Pure real-C, zero patches \u2014 including FA's lagging-store schedule (store sinks one slot past the next arg load), which CL 4.2 reproduced natively.  Fastcall DWORD param + (unsigned char) test is the tell for test cl,cl (WORD param would give 66 85 c9).  Ternary neg spellings: 16-bit neg cx for PAToF24 arg, 32-bit neg ecx for F24ToPA arg.  Calls to @PAToF24@4/@F24ToPA@4 are emitted natively (fastcall C symbols = @name@N).  Reloc parity PASS (12 abs _curThing interiors; rel32 x6 sites 0xc/0x1d/0x31 -> PAToF24, 0x42/0x53/0x66 -> F24ToPA)."
+ },
+ {
+  "rva": 332688,
+  "name": "@FMBrakes@8",
+  "verdict": "EXACT",
+  "obj": "w44D_51390_v2",
+  "src": "build/survey/probes/w44D_51390_v1.c",
+  "maps": [
+   "curThing=_curThing",
+   "SoundOn=?SoundOn@@YGFPADFFDGFFDFFGGFEF@Z"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Pure real-C, zero patches.  Fastcall dword,dword (tests cl/dl via the dword-param+uchar-cast trick).  Flags dance at curThing+0x160: (f&4) return; if(x) f|=0x80 + stamp currentT+0xc into curThing+0x270; else f&=~0x80u.  KEY BYTE TELL: FA's and-imm is 7f ff ff ff = LE ~0x80 (clearing the brakes bit the or set) \u2014 spelling &= 0x7fffffff gives the WRONG constant; spelling & ~0x80u matches.  Nested OnTheGround double-mov ternary picks pmapCalled+0x1958/0x1964/0x1970 sound-table ptr; 15-arg stdcall SoundOn with curId (extern unsigned short) pushed as full-reg push ecx; -1 short last.  Reloc parity PASS (10 abs; rel32 0x41 _OnTheGround@0, 0x84 _SoundOn@60)."
+ },
+ {
+  "rva": 383440,
+  "name": "@GG_RestoreSurfaces@0",
+  "verdict": "EXACT",
+  "obj": "w44D_5d9d0_v2",
+  "src": "build/survey/probes/w44D_5d9d0_v1.cpp",
+  "maps": [
+   "globalPrimarySurface=_globalPrimarySurface",
+   "globalSecondarySurface=_globalSecondarySurface",
+   "grMode=_grMode",
+   "__imp__SetRect@20=__imp__SetRect",
+   "__imp__ClipCursor@4=__imp__ClipCursor",
+   "?Restore@CDirDrawSurface@@QAEDXZ=?Restore@CDirDrawSurface@@QAEHXZ"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Pure real-C, zero patches (.cpp for thiscall member mangles + fastcall public @0).  Member decl char Restore(void) makes CL test al,al (int decl gives 85 c0 != FA 84 c0); map FROM ?...@@QAEDXZ to FA's ?...@@QAEHXZ.  CL reproduced FA's 90 nop after first test and the unused push ebx/save-order esi-then-edi natively.  RECT local lands at [esp+4] naturally (same shape as 0x23a13's lea).  Reloc parity PASS 6/6 (imp IAT identities @0x3a/@0x44, grMode movsx word interiors +0xa/+0xc; rel32 x2 Restore -> 0x477700)."
+ },
+ {
+  "rva": 390240,
+  "name": "@GRPName@8",
+  "verdict": "EXACT",
+  "obj": "w44D_5f460_v1",
+  "src": "build/survey/probes/w44D_5f460_v1.c",
+  "maps": [
+   "fTypeOffsets=_fTypeOffsets",
+   "wingIds=_wingIds"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Pure real-C, zero patches, fastcall(ulong idx ecx, ulong id edx); CL reproduced the inline strcpy (repnz scasb + rep movsd/movsb with len cache) and push-order esi-then-edi natively.  LITERAL-VA RESCUE APPLIED: first pass spelled ((uchar*)0x5421c0)[idx] \u2014 byte-EXACT but the FA .reloc has a HIGHLOW at 0x37 (payload 0x5421c0 = _groupSizes base, addend 0) that the literal drops (wave-20/32 missing-fixup class); spelling groupSizes[idx] with extern unsigned char groupSizes[] gives 8a 81 modrm-81 [ecx+_groupSizes] and full 10/10 reloc parity.  Sprintf is cdecl varargs _Sprintf identity (rel32 site 0x7a)."
+ }
+]

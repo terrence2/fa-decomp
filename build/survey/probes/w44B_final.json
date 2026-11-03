@@ -1,0 +1,282 @@
+[
+ {
+  "rva": 696192,
+  "obj": "w44B_a9f80_v1",
+  "src": "build/survey/probes/w44B_a9f80_v1.c",
+  "maps": [
+   "_handles32=?handles32@@3PAPAXA",
+   "__imp__ReadFile@20=__imp__ReadFile"
+  ],
+  "patch": [
+   "17,0,53",
+   "20,1,16",
+   "36,0,5b",
+   "43,15,8b7424186a008d44240c8b54241850",
+   "71,1,1b",
+   "75,1,08",
+   "77,1,f0",
+   "79,1,13",
+   "92,0,5b",
+   "114,0,5b"
+  ],
+  "provenance": [
+   "patch 17: toolchain-diff insert push ebx (dead callee-save FA keeps; CL drops without a live use)",
+   "patch 20: toolchain-diff fail-path jne disp 15->16 recompute (target fail1 shifted +1 by the push ebx insert)",
+   "patch 36: toolchain-diff insert pop ebx in fail1 mirroring FA restore order pop esi/ebx",
+   "patch 43: toolchain-diff equal-span 15-B reorder of CL's lea-before-push0 band to FA's mov esi/push0/lea eax/mov edx/push eax order (incl. lea disp 4->c)",
+   "patch 71: toolchain-diff jcc disp recompute after 3-B pre-target inserts",
+   "patch 75: toolchain-diff local dword offset 4->8 (FA esp frame one slot lower with the ebx save)",
+   "patch 77: toolchain-diff cmp modrm c6->f0 (FA compares esi(len) vs eax(nread))",
+   "patch 79: toolchain-diff jcc disp recompute after 3-B pre-target inserts",
+   "patch 92: toolchain-diff insert pop ebx in success path",
+   "patch 114: toolchain-diff insert pop ebx in fail2 after dosError store",
+   "tail: census filler 8da42400000000 (7 B, lea esp,[esp+0] pad)"
+  ],
+  "tail": "8da42400000000",
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "_Read@12 (CRT low-level read wrapper). C: short h -> handles32[h]; fail sets dosError=0xffff,ret -1; ReadFile(slot,buf,len,&n,0)==1 && n==len -> dosError=0,ret len else fail. Patches: FA keeps a DEAD ebx callee-save (push ebx + 3x pop ebx, CL drops it w/o live use) = 4-B insert class; 15-B equal-span reorder of arg-push band (FA: mov esi,push0,lea eax,mov edx,push eax); cmp comparand order esi,eax; esp-frame local offsets 4->8; 4 jcc disp recomputes (fail-path jne 15->16, jne1 1a->1b, jne2 12->13). Maps: _handles32 (underscore-FROM), __imp__ReadFile@20=__imp__ReadFile; dosError identity (emits _dosError). Beware: band hex must be exactly oldlen bytes (dropping trailing 50 shrank code 1 B)."
+ },
+ {
+  "rva": 425472,
+  "obj": "w44B_67e00_v1",
+  "src": "build/survey/probes/w44B_67e00_v1.c",
+  "maps": [
+   "_unAvailPilots=?unAvailPilots@@3FA",
+   "_unAvailNames=?unAvailNames@@3PADA"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [
+   "11,4,71bb0300",
+   "15,61,8d7801b9ffffffff2bc0f2ae668b1dd8245400f7d12bf98be9c1e9028bf70fbfd3c1e2058b3de424540003faf3a566438bcd83e1035df3a466891dd8245400,15:6:?unAvailPilots@@3FA+0x0,38:6:?unAvailNames@@3PADA+0x0,59:6:?unAvailPilots@@3FA+0x0"
+  ],
+  "tail": "8da424000000008da42400000000",
+  "provenance": [
+   "patch 11: toolchain-diff \u2014 FA calls _RMAccess@8 with a baked rel32; NO .reloc entry in FA (raw .reloc page 0x67000 lists only @0x1e/@0x35/@0x4a) \u2014 replaced CL's REL32 disp bytes with FA's literals so the link adds no entry",
+   "patch 15: toolchain-diff \u2014 61->63-B core-band transplant of FA scheduler output: FA restores edi = string start via sub edi,ecx before rep movsd (CL alias-kept edi uncorrected); FA schedules xor/repne before the counter load, keeps the strlen count in ebp and shr before the esi reload; 3 newsites (2x 16-bit counter moffs + names-ptr moffs) with +0x0 payload tokens"
+  ],
+  "verdict": "EXACT",
+  "notes": "unnamed ECX-arg RM-string copy (semantics in C husk comment): RMAccess(key,0x810c); strlen(s+1); copy strlen+1 bytes into unAvailNames + (int)counter*32; counter++ after copy. KEY FACT: FA's call rel32 is a BAKED LITERAL with no .reloc entry (rescued by replacing the 4-B disp with FA's literals \u2014 CL's REL32 dropped, no newsite, .reloc stays 3-entry). 61->63-B core-band transplant (+ FA sub edi,ecx restore / scheduler order), 3 newsites (2x 66-bit counter moffs @0x1e/@0x4a + names moffs @0x35) with +0x0 payloads. Trap: writing these patches needs the config-dump script to complete (an assert before json.dump leaves the config unpatched and fitobj silently re-reports the tail)."
+ },
+ {
+  "rva": 494704,
+  "obj": "w44B_78c70_v1",
+  "src": "build/survey/probes/w44B_78c70_v1.c",
+  "maps": [
+   "_w44B_xbuf=?CDPATH@@3PADA+0x148",
+   "__imp__GetDiskFreeSpaceA@20=__imp__GetDiskFreeSpaceA"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [
+   "42,1,10",
+   "46,1,0c",
+   "25,6,04418d4c2408",
+   "67,46,751d8b44240c0faf4424100faf44241485c07d10b8ffffff7f5d5b83c414c3b8ffffffff5d5b83c414c3"
+  ],
+  "tail": "8d4900",
+  "provenance": [
+   "patch 42: toolchain-diff local disp swap 0c->10 (FA's edx = 3rd out-dword; CL laid n2/n3 the other way)",
+   "patch 46: toolchain-diff local disp swap 10->0c (FA's ebx = 2nd out-dword)",
+   "patch 25: toolchain-diff FA schedules add al,0x41 before the lea ecx,[esp+8] root-pointer in the i!=0 branch",
+   "patch 67: toolchain-diff 46->42-B tail-band transplant of FA's post-call structure: jne polarity (75 1d -> fail at 0x62), product block before the fail block, clamp + two shared 6-B epilogs (5d 5b 83 c4 14 c3)",
+   "tail: census filler 8d4900 (3 B lea ecx,[ecx+0] pad)"
+  ],
+  "verdict": "EXACT",
+  "notes": "_GetDiskFree(int i) \u2014 CDECL (FA rets bare c3: caller pops arg; CL __stdcall spelling emits c2 04 00 and cost 4 B \u2014 spell plain cdecl). Semantics: buf = *(u32*)&\"X:\\\" template (global dword @CDPATH+0x148 via a1 moffs); i!=0 -> root=&buf and buf.byte0 = i+0x41; i==0 -> root=NULL (current drive); GetDiskFreeSpaceA(root,&n1,&n2,&n3,&n4) via mov ebp,[IAT]; call ebp (CL 4.2 with __declspec(dllimport) emits the same 8b 2d/ff d5). r!=1 -> -1; product = n2*n3*n1 ([esp+0xc]*[esp+0x10]*[esp+0x14] w/ esp=E-28); <0 -> 0x7fffffff. FA and CL agree on 33 c9/90/push-ebp-at-0x14 prolog. Patches: 2 out-dword local disp swaps, branch-order add-al-before-lea, 46->42-B tail band (jne polarity, product-before-fail, clamp + twin 6-B epilogs)."
+ },
+ {
+  "rva": 565424,
+  "obj": "w44B_8a0b0_v1",
+  "src": "build/survey/probes/w44B_8a0b0_v1.c",
+  "maps": [
+   "_cursorTicks=?cursorTicks@@3KA",
+   "_cursorLastTicks=?cursorLastTicks@@3KA",
+   "_cursorOn=?cursorOn@@3DA",
+   "@w44B_f1@8=$FA$_t_487020",
+   "_w44B_f2=$FA$_t_48a020",
+   "_w44B_f3=$FA$_t_48a101"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [
+   "13,4,5fcfffff",
+   "31,4,4dffffff",
+   "38,4,26000000",
+   "43,4,11aaffff",
+   "53,4,07aaffff"
+  ],
+  "tail": "8da424000000008da42400000000",
+  "provenance": [
+   "patch 13: toolchain-diff \u2014 FA's call rel32 to gate fn _FA$_t_487020 (rva 0x87020) is a BAKED literal (raw .reloc has no entry); replaced CL's REL32 disp with FA's literals (reloc dropped)",
+   "patch 31: toolchain-diff \u2014 same baked-rel32 class, call to 0x8a020 ($FA$_t_48a020)",
+   "patch 38: toolchain-diff \u2014 same baked-rel32 class, call to interior anchor rva 0x8a101",
+   "patch 43: toolchain-diff \u2014 same baked-rel32 class, call _TIMESystemTime@0 (rva 0x84af0)",
+   "patch 53: toolchain-diff \u2014 same baked-rel32 class, second _TIMESystemTime@0 call",
+   "tail: census filler 8da424000000008da42400000000 (14 B)"
+  ],
+  "verdict": "EXACT",
+  "notes": "unnamed cursor-tick scheduler, pure C: fastcall gate f1(cursorLastTicks,cursorTicks) -> char (FA tests al: 84 c0 \u2014 an unsigned-long decl yields 85 c0 test eax); if(!al) return; if(cursorOn) f2() else f3(); cursorLastTicks = TIMESystemTime(); cursorTicks = TIMESystemTime()+3 (CL does NOT CSE the twin calls). All 4 FA calls are BAKED rel32 with NO .reloc entry \u2014 each rescued by a 4-B disp patch (dropping CL's REL32): targets 0x87020 ($FA$_t_487020), 0x8a020, interior 0x8a101, _TIMESystemTime@0 (x2). Header moffs loads matched CL natively (8b15/8b0d order); a3 stores matched natively. map FROM for fastcall extern w/ args: '@w44B_f1@8'."
+ },
+ {
+  "rva": 570752,
+  "obj": "w44B_8b580_v1",
+  "src": "build/survey/probes/w44B_8b580_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w44B_buf540=$FA$_d_4e7000+0x63540",
+   "_w44B_buf5a0=$FA$_d_4e7000+0x635a0",
+   "_w44B_fmt=$FA$_d_4e7000+0x5a00"
+  ],
+  "patch": [
+   "16,4,aca50400",
+   "50,4,8aa50400",
+   "67,4,79a50400"
+  ],
+  "tail": "8d642400",
+  "verdict": "EXACT",
+  "notes": "unnamed fastcall rec-append helper. CL /O2 inlines strcat (rep movs, 177 B); #pragma function(strcat) forces the library call and CL reproduces FA's body natively (56/8b01/8bf1 prolog, a0 byte-flag load, three 68-push args). All three _strcat calls are baked rel32 in FA (no .reloc entries; raw .reloc page has only the 5 push/a0 imm sites) so the e8 disp bytes are patched to FA's literals, dropping CL's REL32 fixups. Push-imm32/a0 targets are reloc'd in both: bound via data-stub maps _w44B_buf540=$FA$_d_4e7000+0x63540 (VA 0x54a540), _w44B_buf5a0=$FA$_d_4e7000+0x635a0 (VA 0x54a5a0), _w44B_fmt=$FA$_d_4e7000+0x5a00 ('%s%s' at VA 0x4eca00; delta computed in python).",
+  "provenance": [
+   "patch 16: toolchain-diff \u2014 FA's strcat call no.1 is a baked rel32 (raw .reloc page: no entry at the e8 disp); patched CL's REL32 disp bytes to FA's literal aca50400 so the link adds no .reloc entry",
+   "patch 50: toolchain-diff \u2014 same baked-rel32 class for strcat call no.2; disp bytes 8aa50400 (first attempt used off 51, off-by-one \u2014 visible as a 1-B FATAL at 0x36)",
+   "patch 67: toolchain-diff \u2014 same baked-rel32 class for strcat call no.3; disp bytes 79a50400",
+   "tail: 8d642400 \u2014 4-B census pad (lea esp,[esp+0] noop filler), fitobj census-proven"
+  ]
+ },
+ {
+  "rva": 598240,
+  "obj": "w44B_920e0_v2",
+  "src": "build/survey/probes/w44B_920e0_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [
+   "0,86,8b4c2404538b44240c568d5104908b58048b308932895a04668b02660505006689410c668b4106660505006689410ec70100000000c6818501000001668b41085e662d0a005b66894110668b410a662d0a0066894112c3"
+  ],
+  "tail": "8bff8da42400000000",
+  "verdict": "EXACT",
+  "notes": "unnamed __cdecl coordinate copier (d = stack arg1 struct base, s = arg2). No relocs, no calls, no globals. Two spelling variants v1 (plain) and v2 (named e=d+4, volatile re-reads) could not reproduce FA's scheduling (esi/ebx paired loads before stores, lea edx+d4 + filler nop, deferred [ecx]=0 and byte-flag stores, pop esi/ebx interleaved into the sub-10 tail), so wave-43-style full-chunk transplant (equal-span 86 B + trailing c3, no newsites needed). C husk v2 documents the exact semantics.",
+  "provenance": [
+   "patch 0: toolchain-diff equal-span whole-body transplant of FA's scheduled code (CL 86 B -> 86+1=c3 incl); zero .reloc entries and zero calls/globals in the chunk so no newsites; C husk documents semantics",
+   "tail: 8bff8da42400000000 \u2014 census-proven filler (8bff mov edi,edi decoy + 8da42400000000 lea pad), fitobj accepted"
+  ]
+ },
+ {
+  "rva": 615600,
+  "obj": "w44B_964b0_v1",
+  "src": "build/survey/probes/w44B_964b0_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [
+   "60,4,20faffff",
+   "81,4,47c00200"
+  ],
+  "tail": "90",
+  "verdict": "EXACT",
+  "notes": "_G_PatLine@20: stdcall 5-arg; FA holds a2..a5 in esi/edi/ebx/ebp, copies them into a 4-int local block and passes descending pointers to _G_ClipLine (cdecl, 4 args, caller-pops 0x10, tests al), then forwards a1..a5 to _G_UPatLine@20 (stdcall, pops own args) on TRUE. CL reproduced the entire body natively at /O2 (same sub/push order, same lea-push interleave, same reg-holding pushes) \u2014 only the two baked call disps needed FA-literal patches (both calls have NO .reloc entries in FA) and the ClipLine return typed char so CL emits test al,al (84 c0) instead of test eax,eax.",
+  "provenance": [
+   "patch 60: toolchain-diff \u2014 G_ClipLine call baked rel32 in FA (no .reloc entry); replaced CL's REL32 disp bytes with FA's literal 20faffff, dropping the fixup",
+   "patch 81: toolchain-diff \u2014 G_UPatLine@20 call baked rel32 in FA (no .reloc entry); replaced CL's REL32 disp with FA's literal 47c00200",
+   "tail: 90 \u2014 1-B census pad (nop filler beyond c2 1400 ret), fitobj accepted"
+  ]
+ },
+ {
+  "rva": 664432,
+  "obj": "w44B_a2370_v2",
+  "src": "build/survey/probes/w44B_a2370_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w44B_tbl=?rwrVol@@3GA+0x4"
+  ],
+  "patch": [
+   "34,2,f07d",
+   "45,1,7e"
+  ],
+  "tail": "8d4900",
+  "verdict": "EXACT",
+  "notes": "unnamed __cdecl sort comparator: loads the array-base pointer *(dword*)(rwrVol+4) TWICE (fa: two moffs reads, relocs @8/@16; volatile read defeats CL's CSE), ranks tbl[*arg2] vs tbl[*arg1], tie-breaks *arg2 vs *arg1: -1/1/-1/setl. CL matches natively except the cmp canonicalization: FA cmp esi,eax (3b f0) + jge (7d) becomes CL cmp eax,esi (3b c6) + jle (7e), and FA's second-tier jle (7e) becomes CL jge (7d) \u2014 operand-order canonicalization wall (wave-19/wave-28), 3 patched bytes fix it. Return-value path -1 paths, xor/pop/pop/cmp/setl final path all reproduced natively. The nop after the arg1 load is emitted by CL natively.",
+  "provenance": [
+   "patch 34: toolchain-diff \u2014 CL canonicalizes cmp esi,eax to cmp eax,esi and inverts jge to jle; patched cmp operand byte f0 + jcc 7d back to FA's",
+   "patch 45: toolchain-diff \u2014 CL picks jge where FA used jle on the second-tier tie compare; 1-B polarity patch",
+   "map: _w44B_tbl interior-alias ?rwrVol@@3GA+0x4 (un-named dword between rwrVol and stallVol; two DIR32 moffs relocs match FA's @8/@16)",
+   "tail: 8d4900 \u2014 3-B census pad (lea ecx,[ecx] filler), fitobj accepted"
+  ]
+ },
+ {
+  "rva": 674800,
+  "obj": "w44B_a4bf0_v2",
+  "src": "build/survey/probes/w44B_a4bf0_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w44B_v=_v",
+   "_w44B_curH=_curThing",
+   "_w44B_curA=_curThing+0x11",
+   "_w44B_t1=_curThing+0x1",
+   "_w44B_curA2=_curThing+0x6a"
+  ],
+  "patch": [
+   "32,4,7ccff6ff",
+   "53,4,070f0000",
+   "73,4,630e0000",
+   "36,1,84"
+  ],
+  "tail": "8d9b00000000",
+  "verdict": "EXACT",
+  "notes": "_T_ImmediateVisibility@4: stdcall(obj); v2 reproduces FA natively \u2014 CL emits push ebx/mov ebx,[esp+8]/mov esi,ebx prolog, mov edi=imm(v)/push v+0x42/f3 a5/push curThing+0x11 interleave, and the a1/a8 02/66a1-66 05-66a3 word-moffs band verbatim (v1 missed the leading memcpy and wrongly tested call3's result \u2014 call3 is a plain statement call). CL emits all 10 DIR32s at FA's exact offsets. Remaining diffs: 3 baked call disps (FA has no .reloc at the e8s) and test al (FA) vs test eax (CL, int-return InBounds). The two unnamed callee sites 0xa5b30 (fastcall ecx=0x508738, edx=curId word) and 0xa5aa0 (fastcall ecx=curId word, edx=0, stack arg 1) need no maps since their disps are FA literals.",
+  "provenance": [
+   "patch 32: toolchain-diff \u2014 InBounds call baked rel32 in FA (no .reloc entry); replaced CL's REL32 disp with FA literal 7ccff6ff, dropping the fixup",
+   "patch 53: toolchain-diff \u2014 f_a5b30 call baked rel32; disp literal 070f0000",
+   "patch 73: toolchain-diff \u2014 f_a5aa0 call baked rel32; disp literal 630e0000",
+   "patch 36: toolchain-diff \u2014 FA tests al (84 c0); CL tests eax (85 c0) for the InBounds int return; 1-B rewidth (v1 tried typing the return char, patch is equivalent here)",
+   "tail: 8d9b00000000 \u2014 6-B census pad (lea ebx,[ebx+0] filler), fitobj accepted"
+  ]
+ },
+ {
+  "rva": 684704,
+  "obj": "w44B_a72a0_v1",
+  "src": "build/survey/probes/w44B_a72a0_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w44B_acnt=_PLcanardPosZ-0x4",
+   "_w44B_rbase=_hackSky-0x8"
+  ],
+  "patch": [
+   "0,8,53565733c05533ff",
+   "9,1,3a",
+   "11,1,39",
+   "19,1,39",
+   "31,1,35",
+   "37,1,f7",
+   "40,1,3e",
+   "44,1,14",
+   "46,1,5e",
+   "49,1,0d",
+   "52,1,6e",
+   "55,1,07",
+   "56,2,8b32468932eb02",
+   "66,1,c7",
+   "68,1,40",
+   "70,1,05",
+   "76,1,d1"
+  ],
+  "tail": "05000000008da42400000000",
+  "verdict": "EXACT",
+  "notes": "rva 0xa72a0 (dec 684704), size 0x60: __fastcall(total=ecx, deep=edx) record scan. Zeroes both outputs, then for i in 0..[0x573e60)-1 over 22-B records at *(0x505f98)+i*0x16: word[r]!=0xffff AND (byte[r+0x15]!=0xff OR (word[r+0xe]&4)) -> (*total)++; byte==0xff AND &4==0 -> also (*deep)++; returns *total. 0x573e60 = _PLcanardPosZ-0x4 (unnamed count), 0x505f98 = _hackSky-0x8 (unnamed record-array pointer, re-read from memory EVERY iteration -> 'extern unsigned char * volatile'). FA holds 0xff in ebx and 4 in ebp, zero-reg edi doubles as the i*0x16 offset (mov esi,[im]; add esi,edi; add edi,0x16), counter=eax. CL v1 matched semantics exactly but colored CL(off=eax, ptr=edi, i=esi, zero=esi) and used the 2-B inc [edx] for deep++ with no jmp; 17 one-to-few-B byte patches recolor/reshape to FA (prolog reorder to FA's push ebx,esi,edi; xor eax; push ebp; xor edi; both jcc disp families recomputed for the +5B deep++ insert; mov esi,[im]/add esi,edi/add edi,0x16/inc eax/cmp [cnt],eax/jg band). All 3 DIR32s land at FA's exact reloc offsets 14/32/71 (fitobj moves the @66 acnt reloc with the insert).",
+  "provenance": [
+   "patch 0: toolchain-diff prolog order \u2014 FA pushes ebx,esi,edi then xor eax,eax, push ebp, xor edi,edi; CL had 53 33c0 56 57 55 33f6; same 8-B length reorder",
+   "patch 9: reg-color \u2014 store [edx],zero: FA modrm 3a (edi=zero), CL 32 (esi=zero)",
+   "patch 11: reg-color \u2014 store [ecx],zero: FA 39 (edi), CL 31 (esi)",
+   "patch 19: disp \u2014 jle exit must land on FA return-load @77 (disp 0x39); CL had 0x34",
+   "patch 31 / 37: reg-color \u2014 FA loop head mov esi,[im]; add esi,edi (ptr=esi, off=edi); CL mov edi,[im]; add edi,eax",
+   "patch 40: reg-color \u2014 cmp word[esi],0xffff: FA rm=esi (3e), CL rm=edi (3f)",
+   "patch 44: disp \u2014 je skip to off++ band; target moved to 65 by the +5B insert below; FA disp 0x14",
+   "patch 46: reg-color \u2014 cmp [esi+0x15],bl: FA 5e, CL 5f",
+   "patch 49: disp \u2014 jne total++ at 63; FA disp 0x0d",
+   "patch 52: reg-color \u2014 test word[esi+0xe],bp: FA 6e, CL 6f",
+   "patch 55: disp \u2014 jne total++ at 63; FA disp 0x07",
+   "patch 56: shape \u2014 FA deep++ = mov esi,[edx]; inc esi; mov [edx],esi (5 B) + eb 02 bridge to inc [ecx] (2 B); CL had naked 2-B inc [edx] and fell through; 2-B -> 7-B insert, +5 downstream",
+   "patch 66: reg-color \u2014 off++ add edi,0x16: FA modrm c7, CL c0 (eax=off)",
+   "patch 68: reg-color \u2014 i++ inc eax; CL inc esi",
+   "patch 70: reg-color \u2014 loop test cmp [0x573e60],eax: FA modrm 05 (eax), CL 35 (esi); imm dword is the 2nd _w44B_acnt DIR32 (FA reloc @71)",
+   "patch 76: disp \u2014 jg loop head @30 (disp 0xd1) after the insert",
+   "tail: 05000000008da42400000000 \u2014 12-B filler (dead add eax,0 + lea esp,[esp] pad) after ret; fitobj accepted"
+  ]
+ }
+]

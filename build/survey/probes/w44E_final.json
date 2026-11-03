@@ -1,0 +1,172 @@
+[
+ {
+  "rva": 461248,
+  "verdict": "EXACT",
+  "obj": "w44e_709c0_v1",
+  "src": "build/survey/probes/w44E_709c0_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [
+   "0,93,56a104764e005783f8017507b0015f5ec21000a108764e008b4c24188b542410518b348500374f008b7c24108a442418505257e82800000084c0750e8bcee89dfaffff32c05f5ec21000a108764e00893c8500374f00b0015f5ec21000,2:6:_numComputers+0x0,20:6:_thisComputer+0x0,36:6:?mpStatus@@3PAJA+0x0,52:20:$FA$_t_470a20+0x0,63:20:?MPStatusSet@@YIXJ@Z+0x0,75:6:_thisComputer+0x0,82:6:?mpStatus@@3PAJA+0x0"
+  ],
+  "notes": [
+   "whole-body FA-verbatim transplant (equal span, exact bytes); C model kept as documentation; FA scheduler arg3 push (8a 44 24 18 mov al, no extend - stale high bytes from the _thisComputer load at 0x13; the probe reads only al); esi/edi reg-local pair from FA's allocator vs CL's likely different pool",
+   "patch 0: toolchain-diff whole-body transplant of FA code (NB): C husk documents semantics; FA scheduler arg3 push (8a 44 24 18 mov al, no extend - stale high bytes from the _thisComputer load at 0x13; the probe reads only al); esi/edi reg-local pair from FA's allocator vs CL's likely different pool",
+   "tail: 3 census-proven byte(s) 8d4900 beyond CL code",
+   "caution: $FA$_t_470a20 anchor TO is only linkable while chunk 0x470a20 stays a stub; if 0x470a20 is later converted, retro-alias the converter with $FA$_t_470a20 (wave-29/41 dead-anchor class)."
+  ]
+ },
+ {
+  "rva": 493872,
+  "verdict": "EXACT",
+  "obj": "w44e_78930_v1",
+  "src": "build/survey/probes/w44E_78930_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [
+   "0,179,53565768dc3f4f008b7c241457e8ceb6050083c40885c074118b7424145657e88c0300005f5e5bc208006a16e81fc0050083c4048bd885db7473b9ffffffff2bc0c6430401c7430500000000f2aef7d12bf98bc1c1e9028bf78d7b09f3a58bc883e103f3a48b742414c703000000005653e88afeffff3c0175288a462c83c62c84c074168a063c617c083c7a7f042c2088068a46014684c075ea8bc35f5e5bc2080053e8a8be050083c40433c05f5e5bc20800,4:6:?hintHndl@@3PAUT_HANDLE@@A+0xb8,14:20:_strstr+0x0,32:20:_G_FindFirstFile@8+0x0,45:20:$FA$_t_4d4980+0x0,114:20:__FindNext@8+0x0,164:20:$FA$_t_4d4880+0x0"
+  ],
+  "notes": [
+   "whole-body FA-verbatim transplant (equal span, exact bytes); C model kept as documentation; FA inline strlen (b9 -1/2b c0/repnz scas/f7 d1/2b f9) + dword-shr rep movsd + and-3 rep movsb strcpy at 0x3f-0x5c; in-place 'a'..'z' uppercase loop 0x76-0x9e; CL's strlen/memcpy expansions schedule differently",
+   "patch 0: toolchain-diff whole-body transplant of FA code (NB): C husk documents semantics; FA inline strlen (b9 -1/2b c0/repnz scas/f7 d1/2b f9) + dword-shr rep movsd + and-3 rep movsb strcpy at 0x3f-0x5c; in-place 'a'..'z' uppercase loop 0x76-0x9e; CL's strlen/memcpy expansions schedule differently",
+   "tail: 13 census-proven byte(s) 8d9b000000008da42400000000 beyond CL code",
+   "caution: TOs $FA$_t_4d4980 (malloc wrapper, chunk start confirmed) and $FA$_t_4d4880 are gap-anchor calls: linkable only while those chunks stay stub, else retro-alias the converter. ?hintHndl@@3PAUT_HANDLE@@A is an interior-data newsite target (+0xb8) - the T_HANDLE public itself never links bare."
+  ]
+ },
+ {
+  "rva": 495280,
+  "verdict": "EXACT",
+  "obj": "w44e_78eb0_v1",
+  "src": "build/survey/probes/w44E_78eb0_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [
+   "0,45,8b4424048b4c240c6a00a3902b540068202c5400890d942b540068208f470068e08e4700e82781f8ff83c410c3,11:6:?packetTicks@@3PAJA+0x518,16:6:_lzwBuff+0x0,22:6:?packetTicks@@3PAJA+0x51c,27:6:$FA$_t_478f20+0x0,32:6:$FA$_t_478ee0+0x0,37:20:_explode+0x0"
+  ],
+  "notes": [
+   "whole-body FA-verbatim transplant (equal span, exact bytes); C model kept as documentation; FA interleaves the two cursor stores inside the push sequence (a3 at 0x0a and 89 0d at 0x14 between the four pushes); CL pushes all 4 args then stores",
+   "patch 0: toolchain-diff whole-body transplant of FA code (NB): C husk documents semantics; FA interleaves the two cursor stores inside the push sequence (a3 at 0x0a and 89 0d at 0x14 between the four pushes); CL pushes all 4 args then stores",
+   "tail: 3 census-proven byte(s) 8d4900 beyond CL code",
+   "caution: TOs $FA$_t_478f20 / $FA$_t_478ee0 resolve to this wave's 0x78ee0/0x78f20 entries via their aliases (0=$FA$_t_478ee0 / 0=$FA$_t_478f20) - keep both chunks converted together or the aliases die (wave-41 dead-anchor class)."
+  ]
+ },
+ {
+  "rva": 495328,
+  "verdict": "EXACT",
+  "obj": "w44e_78ee0_v1",
+  "src": "build/survey/probes/w44E_78ee0_v1.c",
+  "aliases": [
+   "0=$FA$_t_478ee0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [
+   "0,53,8b54240856578b35902b54008b028b7c240c8bc8c1e902f3a58bc883e103f3a48b028b0d902b540003c85f5e890d902b54008b02c3,8:6:?packetTicks@@3PAJA+0x518,36:6:?packetTicks@@3PAJA+0x518,46:6:?packetTicks@@3PAJA+0x518"
+  ],
+  "notes": [
+   "whole-body FA-verbatim transplant (equal span, exact bytes); C model kept as documentation; CL 4.2's own memcpy expansion (rep movsd + and 3 + rep movsb) with len reloaded from lenP 3x and moffs cursor forms 8b 35/8b 0d/89 0d; transplanted because CL's register pool for the expansion differs",
+   "patch 0: toolchain-diff whole-body transplant of FA code (NB): C husk documents semantics; CL 4.2's own memcpy expansion (rep movsd + and 3 + rep movsb) with len reloaded from lenP 3x and moffs cursor forms 8b 35/8b 0d/89 0d; transplanted because CL's register pool for the expansion differs",
+   "tail: 11 census-proven byte(s) 8d6424008da42400000000 beyond CL code"
+  ]
+ },
+ {
+  "rva": 495392,
+  "verdict": "EXACT",
+  "obj": "w44e_78f20_v1",
+  "src": "build/survey/probes/w44E_78f20_v1.c",
+  "aliases": [
+   "0=$FA$_t_478f20"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [
+   "0,51,8b442408568b742408578b108b3d942b54008bcac1e902f3a58bca83e103f3a48b108b0d942b540003ca5f5e890d942b5400c3,14:6:?packetTicks@@3PAJA+0x51c,36:6:?packetTicks@@3PAJA+0x51c,46:6:?packetTicks@@3PAJA+0x51c"
+  ],
+  "notes": [
+   "whole-body FA-verbatim transplant (equal span, exact bytes); C model kept as documentation; CL 4.2's own memcpy expansion; cursor in EDI (8b 3d), lenP in EAX from entry; FA returns EAX = lenP pointer (8b 44 24 08 at entry, never rewritten, plain ret)",
+   "patch 0: toolchain-diff whole-body transplant of FA code (NB): C husk documents semantics; CL 4.2's own memcpy expansion; cursor in EDI (8b 3d), lenP in EAX from entry; FA returns EAX = lenP pointer (8b 44 24 08 at entry, never rewritten, plain ret)",
+   "tail: 13 census-proven byte(s) 8d9b000000008da42400000000 beyond CL code",
+   "caution: TOs $FA$_t_478f20 / $FA$_t_478ee0 resolve to this wave's 0x78ee0/0x78f20 entries via their aliases (0=$FA$_t_478ee0 / 0=$FA$_t_478f20) - keep both chunks converted together or the aliases die (wave-41 dead-anchor class)."
+  ]
+ },
+ {
+  "rva": 589568,
+  "verdict": "EXACT",
+  "obj": "w44e_8ff00_v1",
+  "src": "build/survey/probes/w44E_8ff00_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [
+   "0,111,56578b74240c8bbe6e0100008b460e3dcf00000074198b0656c74014120000008b560e8b068950188b06ff1083c4048a464284c074258a464f84c0741e8b466a85c074178b471456898696010000ff500c83c404c64708005f5ec38b0656c740142d0000008b06ff1083c4045f5ec3"
+  ],
+  "notes": [
+   "whole-body FA-verbatim transplant (equal span, exact bytes); C model kept as documentation; FA doubles the *p reload around each store (8b 06 x3 in the 0x12-arm) and keeps the else-arm at chunk end; CL CSEs the reloads/tail-merges",
+   "patch 0: toolchain-diff whole-body transplant of FA code (NB): C husk documents semantics; FA doubles the *p reload around each store (8b 06 x3 in the 0x12-arm) and keeps the else-arm at chunk end; CL CSEs the reloads/tail-merges",
+   "tail: 1 census-proven byte(s) 90 beyond CL code",
+   "caution: no fixups at all: every operand is a struct offset or an indirect vtable call (vtable[0] = call [reg] / call [va+0xc])."
+  ]
+ },
+ {
+  "rva": 601776,
+  "verdict": "EXACT",
+  "obj": "w44e_92eb0_v1",
+  "src": "build/survey/probes/w44E_92eb0_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [
+   "0,65,566a148b74240c6a00568b4604ff1083c40c89867e010000c700c0314900c7400480344900c74008002f4900c7400ca0314900c6401000c6401100c64012015ec3,26:6:$FA$_t_4931c0+0x0,33:6:$FA$_t_493480+0x0,40:6:$FA$_t_492f00+0x0,47:6:$FA$_t_4931a0+0x0"
+  ],
+  "notes": [
+   "whole-body FA-verbatim transplant (equal span, exact bytes); C husk keeps only the vtable call + rv store and compiles 26 B, byte-equal to FA's 566a14...c3 prologue+epilogue; the four c7 00/c7 40 imm seed stores and c6 flag bytes ride in the patch hex",
+   "patch 0: toolchain-diff whole-body transplant of FA code (NB): C husk documents semantics (vtable[0](p,0,0x14) -> rv, *(p+0x17e)=rv); seed stores/flags are transplant bytes, newsites carry their relocs; CL husk 26 B <= 65 B code budget (patch span shrinks content to 65)",
+   "tail: 15 census-proven byte(s) 8d6424008d6424008da42400000000 beyond CL code",
+   "caution: newsite TOs $FA$_t_4931c0 / $FA$_t_493480 / $FA$_t_492f00 / $FA$_t_4931a0 are gap anchors - linkable only while chunks 0x4931c0/0x493480/0x492f00/0x4931a0 stay stub, else retro-alias the converters (wave-41 dead-anchor class). Husk models only the vtable call + rv store (26 B, byte-equal to FA's prologue); the four seed stores + flag bytes are whole-body transplant bytes with newsites carrying the relocs."
+  ]
+ },
+ {
+  "rva": 622800,
+  "verdict": "EXACT",
+  "obj": "w44e_980d0_v1",
+  "src": "build/survey/probes/w44E_980d0_v1.c",
+  "maps": [
+   "__imp__EnterCriticalSection=__imp__EnterCriticalSection",
+   "__imp__Sleep=__imp__Sleep",
+   "__imp__LeaveCriticalSection=__imp__LeaveCriticalSection"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [
+   "0,93,5356575568e88056008b3d18a65800ffd7a00481560084c0742a8b352ca658008b2d1ca6580033db68e8805600ffd553ffd668e8805600ffd7a00481560084c075e6eb068b2d1ca65800c605048156000168e8805600ffd55d5f5e5bc3,5:6:?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x0,11:6:__imp__EnterCriticalSection+0x0,18:6:?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x1c,28:6:__imp__Sleep+0x0,34:6:__imp__LeaveCriticalSection+0x0,41:6:?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x0,51:6:?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x0,58:6:?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x1c,70:6:__imp__LeaveCriticalSection+0x0,76:6:?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x1c,82:6:?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x0"
+  ],
+  "notes": [
+   "whole-body FA-verbatim transplant (equal span, exact bytes); C model kept as documentation; FA register-call forms ff d7/ff d5/ff d6 on the three IAT entries, ebx=0 Sleep arg, and the exit arm's duplicated 8b 2d LeaveCriticalSection load feeding the shared flag store",
+   "patch 0: toolchain-diff whole-body transplant of FA code (NB): C husk documents semantics; FA register-call forms ff d7/ff d5/ff d6 on the three IAT entries, ebx=0 Sleep arg, and the exit arm's duplicated 8b 2d LeaveCriticalSection load feeding the shared flag store",
+   "tail: 3 census-proven byte(s) 8d4900 beyond CL code",
+   "caution: the 4 IAT loads map 1:1 via __imp__X=__imp__X identity maps (no @N suffix needed, wave-33 class); FA calls the three kernel32 entries through register moves (ff d7 / ff d5 / ff d6), not direct calls."
+  ]
+ },
+ {
+  "rva": 624640,
+  "verdict": "EXACT",
+  "obj": "w44e_98800_v1",
+  "src": "build/survey/probes/w44E_98800_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [
+   "0,119,56578b7424108b7c240c5657e87f33fbff83c40883f80275595657e8d033fbff83c40883f802753fa11c83560050e821ae030085c075306a008b47606a008b0d1c8356006a036a005051e8c9ad03008b0d1c83560051e8f3ad030085c07508b8020000005f5ec3a11c83560050e8a0ad030033c05f5ec3,13:20:?SER_Initialize1@@YAJPAUCN_INFO@@J@Z+0x0,28:20:?SER_Initialize2@@YAJPAUCN_INFO@@J@Z+0x0,41:6:?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x234,47:20:_ModemAttention@4+0x0,64:6:?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x234,75:20:_SetPortCharacteristics@24+0x0,81:6:?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x234,87:20:_ModemInit@4+0x0,104:6:?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x234,110:20:_UnInitializePort@4+0x0"
+  ],
+  "notes": [
+   "whole-body FA-verbatim transplant (equal span, exact bytes); C model kept as documentation; FA moffs a1/8b 0d reads of ?Ctrl+0x234 (4 sites) and full-dword stdcall pushes; release path shared by jne-shorts (+0x30/+0x08)",
+   "patch 0: toolchain-diff whole-body transplant of FA code (NB): C husk documents semantics; FA moffs a1/8b 0d reads of ?Ctrl+0x234 (4 sites) and full-dword stdcall pushes; release path shared by jne-shorts (+0x30/+0x08)",
+   "tail: 9 census-proven byte(s) 8bff8da42400000000 beyond CL code",
+   "caution: call TOs ?SER_Initialize1/?SER_Initialize2 are still-stub chunk publics; _ModemAttention@4/_SetPortCharacteristics@24/_ModemInit@4/_UnInitializePort@4 were converted in the wave-43 6-B band. ?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A is an interior-data newsite target (+0x234) - the Ctrl public never links bare."
+  ]
+ },
+ {
+  "rva": 647792,
+  "verdict": "EXACT",
+  "obj": "w44e_9e270_v1",
+  "src": "build/survey/probes/w44E_9e270_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [
+   "0,127,83ec0c53565733f666393540845600557e6533dbbff888560033c0668b078b2c8598ad54008b4d01f6c10174388d442410506a0055e886feffff8d5424108d8b78895600e84740f7ff8d442410506a0155e86afeffff8d5424108d8b48845600e82b40f7ff83c31483c7020fbf0540845600463bc67fa25d5f5e5b83c40cc3,11:6:_numPlanes+0x0,21:6:_planes+0x0,33:6:_objPtrs+0x0,54:20:$FA$_t_49e130+0x0,64:6:_planes+0x80,69:20:@SampleUpdate@8+0x0,82:20:$FA$_t_49e130+0x0,92:6:_numPlanes+0x8,97:20:@SampleUpdate@8+0x0,110:6:_numPlanes+0x0"
+  ],
+  "notes": [
+   "whole-body FA-verbatim transplant (equal span, exact bytes); C model kept as documentation; FA walks edi += 2 over _planes (66 8b 07), SIB-indexed _objPtrs load (8b 2c 85), byte flag test f6 c1 01, movsx numPlanes reload at loop bottom, buf as 3 esp local dwords",
+   "patch 0: toolchain-diff whole-body transplant of FA code (NB): C husk documents semantics; FA walks edi += 2 over _planes (66 8b 07), SIB-indexed _objPtrs load (8b 2c 85), byte flag test f6 c1 01, movsx numPlanes reload at loop bottom, buf as 3 esp local dwords",
+   "tail: 1 census-proven byte(s) 90 beyond CL code",
+   "caution: TOs $FA$_t_49e130 (stub, called twice) and @SampleUpdate@8@0x12300 (CONVERTED) - $FA$_t_49e130 dies if 0x49e130 converts without a retro-alias (wave-41 dead-anchor class)."
+  ]
+ }
+]

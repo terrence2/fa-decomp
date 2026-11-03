@@ -1,0 +1,168 @@
+[
+ {
+  "verdict": "EXACT",
+  "rva": 160353,
+  "obj": "w44G_27261_v1",
+  "src": "build/survey/probes/w44G_27261_v1.c",
+  "maps": ["_w44G_mf=?mcFlyAll@@3DA"],
+  "patch": [],
+  "aliases": ["0=$FA$_t_427261"],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "no patch offsets; body byte-identical as compiled (naked whole-body transcription, 72 B, zero tail)",
+   "maps: _w44G_mf -> FA global ?mcFlyAll@@3DA (DIR32 moffs/imm sites 02/12/1c/28/2f/36/3d = FA reloc map, deltas +0x1fc/+0x210/+0x212 spelled OFFSET w44G_mf+0x1fc)",
+   "alias: 0=$FA$_t_427261 (chunk unnamed; fitobj default public is $FA$_span_027261, alias re-defines the group anchor for downstream fixups)"
+  ],
+  "notes": "Naked __declspec(naked) whole-body transcription (wave-19 a1-first cmp wall: FA compares cmp eax, OFFSET sym imm32-with-DIR32, unsteerable from C). MASM spellings used: cmp/mov eax, OFFSET w44G_mf+0x1fc => 3d/b8 imm with DIR32 content=delta; movzx WORD PTR [eax] => 0f b7 38; lea eax, DWORD PTR [eax+edx*2] => 8d 04 50; label jccs match FA rel8s (73/74/72/eb). Converged on variant 1."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 245808,
+  "obj": "w44G_3c030_v1",
+  "src": "build/survey/probes/w44G_3c030_v1.c",
+  "maps": ["_w44G_op=_objPtrs", "_w44G_ifs=?ifmShow@@3GA"],
+  "patch": [],
+  "aliases": ["0=$FA$_t_43c030"],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "no patch offsets; body byte-identical as compiled (naked whole-body transcription, 94 B code + _emit 8b ff tail in-body)",
+   "maps: _w44G_op -> FA global _objPtrs (DIR32 8b 0c 8d sib at site 0a, content 0); _w44G_ifs -> FA global ?ifmShow@@3GA (DIR32 f6 05 sites 27/4a + 66 85 05 site 39, content 0)",
+   "alias: 0=$FA$_t_43c030 (chunk unnamed)"
+  ],
+  "notes": "Naked transcription: p stays in ecx across unaligned dword loads [ecx+1]/[ecx+5]/[eax+9] and the word [eax+0xd]; test-mem-imm spelled test BYTE PTR w44G_ifs,0x04 => f6 05 <dir> 04, and test ax, WORD PTR w44G_ifs => 66 85 05 <dir>; sib array w44G_op[ecx*4] => 8b 0c 8d; and ecx,0xffff => 81 e1 (full imm, no imm8 shortening); setne al => 0f 95 c0. Converged on variant 1."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 335248,
+  "obj": "w44G_51d90_v1",
+  "src": "build/survey/probes/w44G_51d90_v1.c",
+  "maps": ["_w44G_ct=_curThing", "_w44G_ctt=_curThingType"],
+  "patch": [],
+  "aliases": [],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "no patch offsets; body byte-identical as compiled (naked whole-body transcription, 114 B code + 14-B double 8d a4 pad block as _emits in-body)",
+   "maps: _w44G_ct -> FA global _curThing (DIR32 8b 1d site 37 delta +0x114; 81 c1 add OFFSET site 47 delta 0); _w44G_ctt -> FA global _curThingType (DIR32 8a 0d site 13 delta +0xb5; 8b 2d site 4f delta +0xb6)"
+  ],
+  "notes": "Naked transcription of _HARDPtrs@12 (named chunk, no alias needed): ebx-accumulator walk n*17 = shl ecx,4/add ecx,eax/lea eax,[eax+eax*2]/add ecx,ebx/add ecx,&_curThing; second out-arg = lea eax,[ebp+eax*8] with ebp=[ctt+0xb6]; FPO residue nops (90 at 09/5e) carried as mnemonics; both fail paths pop 3 regs + add esp,8 + ret 0xc; double-default-arg leas 8d 74 24 10/0c with jne skip. Byte array externs (unsigned char w44G_ct[]) make sym[0x114] = byte-offset indexing -> DIR32 content = FA delta. Converged on variant 1."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 335504,
+  "obj": "w44G_51e90_v1",
+  "src": "build/survey/probes/w44G_51e90_v1.c",
+  "maps": ["_w44G_ct=_curThing", "_w44G_ctt=_curThingType"],
+  "patch": [],
+  "aliases": [],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "no patch offsets; body byte-identical as compiled (naked whole-body transcription, 86 B code + 3-B 8d 49 00 + 7-B 8d a4 pads as _emits in-body)",
+   "maps: _w44G_ct -> FA global _curThing (DIR32 8b 1d site 25 delta +0x114; 81 c1 add OFFSET site 37 delta 0); _w44G_ctt -> FA global _curThingType (DIR32 8b 2d site 3f delta +0xb6)"
+  ],
+  "notes": "Naked transcription of ?HARDPtrsFort@@YGPAXJPAPAUHARDPOINT@@PAPAUHARDPOINT_TYPE@@@Z (twin of _HARDPtrs@12 without the count guard): p2 loaded first (edx), default-arg leas for edx/esi, same n*17 walk, return *(void*)*out2 via mov eax,[ecx] with ecx reloaded from [edx]. Named chunk, no alias. Converged on variant 1."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 384096,
+  "obj": "w44G_5dc60_v1",
+  "src": "build/survey/probes/w44G_5dc60_v1.c",
+  "maps": ["_w44G_ws=_wingSizes", "_w44G_wi=_wingIds", "_w44G_op=_objPtrs"],
+  "patch": [],
+  "aliases": ["0=$FA$_t_45dc60"],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "no patch offsets; body byte-identical as compiled (naked whole-body transcription, 85 B code + 11-B census pads 8d 64 24 00 + 8d a4 24 00 00 00 00 as _emits in-body)",
+   "maps: _w44G_ws -> FA global _wingSizes (DIR32 8a 8f [ws+edi] site 0d, content 0); _w44G_wi -> FA global _wingIds (DIR32 lea esi,[wi+eax+eax*4] site 25 content 0; mov ax,[wi+ecx*2] site 50 content 0); _w44G_op -> FA global _objPtrs (DIR32 mov ebp,[op+eax*4] site 31, content 0)",
+   "alias: 0=$FA$_t_45dc60 (chunk unnamed)"
+  ],
+  "notes": "Naked transcription: sib soup preserved via array-indexed mnemonics — lea eax, DWORD PTR [edi*4] => 7-B zero-disp sib 8d 04 bd 00000000 (CL did not shorten to shl); lea esi, DWORD PTR w44G_wi[eax+eax*4] => 8d b4 80 <wi> (sib 0x80, scale-4, disp32); w44G_op[eax*4] => 8b 2c 85; WORD PTR w44G_wi[ecx*2] => 66 8b 04 4d; movsx edi,cx; result = wingIds[10*id + hitCount]. edx=counter, edi=id. Converged on variant 1."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 393792,
+  "obj": "w44G_60240_v1",
+  "src": "build/survey/probes/w44G_60240_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": ["0=$FA$_t_460240"],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "no patch offsets; code byte-identical as compiled (pure C); 14-B census tail (8d a4 24 00 00 00 00 x2) accepted by padcensus",
+   "no maps: zero abs fixups; identity externs __fastcall G_SetColor(long) => @G_SetColor@4 and __stdcall G_Rect(long,long,long,long) => _G_Rect@16 carry link-resolved REL32s at e8 sites 07/23/38",
+   "alias: 0=$FA$_t_460240 (chunk unnamed)"
+  ],
+  "notes": "PURE C EXACT (2 variants): void __stdcall w44G_60240_q(int a,int b,int c,int d){long r; G_SetColor(a); G_Rect(b, c, 0x206-b, d); r = 0x1d7-c; G_Rect(b, c+d, d, r-d);} CL matched FA's reg plan (esi=b, edi=d, ebx=c scratch, push order edi/eax/ebx/esi then e/edi/ebx/esi) verbatim. v1 fixes: (1) ret 0x10 needs __stdcall (CL cdecl emits bare c3); (2) CL folds 0x1d7-c-d as (0x1d7-d)-c, so the r tmp pins FA's (0x1d7-c)-d subtract order. Panels: G_Rect(b, c, 0x206-b, d) and G_Rect(b, c+d, d, 0x1d7-c-d)."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 463344,
+  "obj": "w44G_711f0_v1",
+  "src": "build/survey/probes/w44G_711f0_v1.c",
+  "maps": ["_w44G_nc=_numComputers", "_w44G_ser46b=$FA$_t_46b260"],
+  "patch": [],
+  "aliases": [],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "no patch offsets; body byte-identical as compiled (naked whole-body transcription, 97 B code + 15-B census pads 8d 64 24 00 x2 + 8d a4 24 00 00 00 00 as _emits in-body)",
+   "maps: _w44G_nc -> FA global _numComputers (DIR32 a1 site 04, content 0); _w44G_ser46b -> still-stub anchor $FA$_t_46b260 (REL32 e8 site 4f; t0005b.obj defines the anchor — valid while that chunk remains a stub; swap-dependency noted)",
+   "e8s at 29/56 carry mnemonic REL32s to identity fastcall externs ObjAlias path: extern void __fastcall OBJAlias(long a,void *b) => @OBJAlias@8; extern void __fastcall MPFlushAll(unsigned long a,char b) => ?MPFlushAll@@YIXD@Z"
+  ],
+  "notes": "Naked transcription of ?MPSetControl@@YGXJGD@Z (named): 8-B request struct built in locals {0x44 tag, long value @+1, ushort result @+5, char p3 @+7}; DL-param wall (FA never loads DL before the final fastcall — CL would zero it) blocks pure C. Wave-44G lesson: CL spells mov BYTE PTR [esp],0x44 as the 4-B sib-no-disp f6-form c6 04 24 44 while FA uses the disp8-zero form c6 44 24 00 44 — that instruction is re-spelled via _emit (only _emit in the body); naked-asm [esp+0]-immediate stores must be byte-checked against FA's mod forms everywhere. Converged on variant 2 (v2 = +the _emit)."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 480848,
+  "obj": "w44G_75650_v1",
+  "src": "build/survey/probes/w44G_75650_v1.c",
+  "maps": ["_w44G_impSI=__imp__SystemParametersInfoA", "_w44G_pb=?paused@@3HA"],
+  "patch": [],
+  "aliases": ["0=$FA$_t_475650"],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "no patch offsets; body byte-identical as compiled (naked whole-body transcription, 80 B code, zero tail)",
+   "maps: _w44G_impSI -> IAT slot __imp__SystemParametersInfoA (DIR32 8b 35 site 0c, content 0; bare-data spelling, no @N TO per wave-33); _w44G_pb -> FA global ?paused@@3HA (DIR32 c7 05 site 43, content 4 spelled w44G_pb[4])"
+  ],
+  "notes": "Naked transcription: imp-slot-as-data once (mov esi, DWORD PTR w44G_impSI) then two call esi (ff d6) — the FA imp-CSE reproduced exactly; second SPI call pushes (2,0,0,0x11) right-to-left; success c7 05 4f3e58 = 01000000 mem-imm store. Converged on variant 1."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 491936,
+  "obj": "w44G_781a0_v1",
+  "src": "build/survey/probes/w44G_781a0_v1.c",
+  "maps": ["_w44G_hh=?hintHndl@@3PAUT_HANDLE@@A", "_w44G_nh=?numHandles@@3JA", "_w44G_lh=?libHandle@@3PAPAUT_HANDLE@@A", "_w44G_ni=?numHints@@3JA", "_w44G_nfh=?numFreeHints@@3JA"],
+  "patch": [],
+  "aliases": [],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "no patch offsets; body byte-identical as compiled (naked whole-body transcription, 120 B code + 8-B census pads 8d 64 24 00 x2 as _emits in-body)",
+   "maps: _w44G_hh -> FA global ?hintHndl@@3PAUT_HANDLE@@A (DIR32 a0 site 02 delta +0x4, 88 1d site 1b +0x4, 8b 0d site 50, a3 site 63 delta 0); _w44G_nh -> ?numHandles@@3JA (a1 sites 15/34, a3 site 73); _w44G_lh -> ?libHandle@@3PAPAUT_HANDLE@@A (be sites 24/41); _w44G_ni -> ?numHints@@3JA (a3 site 69); _w44G_nfh -> ?numFreeHints@@3JA (a3 site 6e)",
+   "e8s at 2f/54/59 carry mnemonic REL32s to identity fastcall externs: __fastcall MMFreeHandle(void*) => @MMFreeHandle@4 (stub public), __fastcall MMCompactRAM(void) => @MMCompactRAM@0"
+  ],
+  "notes": "Naked transcription of _LibShutDown (named): FOUR a3 moffs stores spelled mov DWORD PTR w44G_ni, eax — MASM 4.2 emits the accumulator form a3 <DIR32> for reg-ax stores to direct memory (verified at 62/68/6d/72), so the interleaved pop/a3 epilogue survives verbatim; store-from-bl (mov BYTE PTR w44G_hh[4], bl => 88 1d); rep stosd f3 ab for the 0x14-dword libHandle zeroing; fastcall MMFreeHandle takes the arg in ecx with NO push (FA loads [esi]/[hh] into ecx) — naked transcription reproduces this directly, real C cannot (fastcall push/clean asymmetry). Converged on variant 1."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 668128,
+  "obj": "w44G_a31e0_v1",
+  "src": "build/survey/probes/w44G_a31e0_v1.c",
+  "maps": ["_w44G_sl=?socket_list@@3USOCKET_STATE_LIST@@A", "_w44G_close_one=$FA$_t_4a32b0"],
+  "patch": [],
+  "aliases": ["0=$FA$_t_4a31e0"],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "no patch offsets; code byte-identical as compiled (pure C); 9-B census tail (8b ff + 8d a4 24 00 00 00 00) accepted by padcensus",
+   "maps: _w44G_sl -> FA global ?socket_list@@3USOCKET_STATE_LIST@@A (DIR32 bf site 06 delta +0x424, a1 site 0b, 89 35 sites 11/17/1d, 39 35 site 3d); _w44G_close_one -> still-stub anchor $FA$_t_4a32b0 (REL32 e8 site 2f; t00092.obj defines the anchor — valid while that chunk remains a stub; swap-dependency noted)"
+  ],
+  "notes": "PURE C EXACT (2 variants): do-while so the pre-loop check reuses the pre-store load of [sl]; stores spelled *(long *)&w44G_sl[off] = i — i lives in esi so CL emits FA's 89 35 store-from-register forms (not c7 05 imm stores); count reloads inside the loop condition reproduce FA's 39 35 <sl> cmp with the reload each pass; v2 swapped i++/p+=0x32 (FA: inc esi BEFORE add edi,0x32; CL with p first emitted the two increments reversed). CL kept ebx pushed/popped even though it is dead — reg plan matched FA verbatim with zero patches."
+ }
+]

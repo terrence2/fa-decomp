@@ -1,0 +1,230 @@
+[
+ {
+  "rva": 924032,
+  "obj": "w44H_e1980_v1",
+  "src": "build/survey/probes/w44H_e1980_v1.c",
+  "maps": [],
+  "patch": [
+   "0,77,8b442408538b5c241056578b3055833b01762f8b7c2414b90a0000008bc746bd0a00000099f7f980c2308bc78856ff99f7fd8b0b8bf84985ff890b7e0583f90177d58b4424188b0889304e8a068a1188164e8801413bce72f25d5f5e5bc3"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff whole-body transplant of FA code (94 B, no extern refs, no tail): C husk documents semantics (decimal digit writer with two idiv-10 bands + in-place byte-swap reverse, pIdx cursor / pCount loop / pOut store) \u2014 CL folds to one idiv and different reg colors"
+  ],
+  "tail": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "v1 transplant (94 B, no externs): dual idiv-10 digit writer + in-place reverse",
+  "verdict": "EXACT"
+ },
+ {
+  "rva": 915808,
+  "obj": "w44H_df960_v1",
+  "src": "build/survey/probes/w44H_df960_v1.c",
+  "maps": [],
+  "patch": [
+   "0,36,83ec08c744240400000000535657558b6c24208d7d004d8bc79983e21fbb1f00000003c2c1f8058bf08bc79933c22bc223c333c22bc22bd88b44241c8d0cb0b801000000894c24108acbd3e08b4c241085017425478b44241c5750e80000000083c40885c075128b44241c5550e8000000008944241c83c408b8ffffffff8acbd3e08b4c241046210183fe037d128b44241cb9030000002bce8d3cb033c0f3ab8b4424145d5f5e5b83c408c3,92:20:__ZeroTail,110:20:__IncMan"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff whole-body transplant of FA code (172 B): C husk documents semantics (grp = man + (last>>5)*4 sign-corrected, bl = 31-(last&31), test/clear bit at grp, ZeroTail->IncMan carry dance, zero groups esi..2 via rep stosd, return man) \u2014 CL's cdq/>>5 and sign-mod shapes diverge; FA body transplanted",
+   "patch 92: rel32 newsite __ZeroTail (FA call @91; converted public per w27c entry map TO)",
+   "patch 110: rel32 newsite __IncMan (FA call @109; FA chunk-name public, TO verified verbatim like __ZeroTail)"
+  ],
+  "tail": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "v1 transplant (172 B, no tail); ZeroTail/IncMan TOs = FA chunk names __ZeroTail/__IncMan (verbatim-name convention, matching __ZeroTail map precedent; _IncManq C-spelling never used as a TO)",
+  "verdict": "EXACT"
+ },
+ {
+  "rva": 912608,
+  "obj": "w44H_dece0_v1",
+  "src": "build/survey/probes/w44H_dece0_v1.c",
+  "maps": [],
+  "patch": [
+   "0,44,8b442408535632db57a8087402b320f6c440740380cb808b7c241057ff150000000085c07518ff150000000050e80000000083c404b8ffffffff5f5e5bc383f802750580cb40eb0883f803750380cb08e80000000083f8ff8bf0751fe800000000c70018000000e8000000005fc70000000000b8ffffffff5e5bc35780cb0156e80000000083c4088bc683e0e78bcec1f80383e11fc1e102568b90000000008d04c9885c0204e80000000083c4048bc65f5e5bc3,30:6:__imp__GetFileType,40:6:__imp__GetLastError,46:20:__dosmaperr,81:20:$FA$_t_4dea00,93:20:__errno,104:20:$FA$_t_4d99c0,129:20:$FA$_t_4deb40,155:6:__crtheap+0x4,167:20:__unlock_fhandle"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff whole-body transplant of FA code (180 B over CL's 44 B): C husk documents semantics (fmode bit build from flag bytes 0x8->0x20 / (h>>8)&0x40->0x80; GetFileType==0 -> dosmaperr(GetLastError), -1; ==2 ->|0x40; ==3 ->|0x8; alloc_osfhnd()==-1 -> errno=0x18, doserrno *p=0, -1; else set_osfhnd(fh,handle), bl|=1; pio row lock: edx=pio[grp], store bl at row[4], unlock_fhandle(fh), ret fh)",
+   "patch 30: DIR32 newsite __imp__GetFileType (IAT call ff 15), payload 0",
+   "patch 40: DIR32 newsite __imp__GetLastError (IAT call ff 15), payload 0",
+   "patch 46: rel32 newsite __dosmaperr (FA call @45, converted public)",
+   "patch 81: rel32 newsite $FA$_t_4dea00 (alloc_osfhnd, still-stub interior anchor of t0098c textgroup)",
+   "patch 93: rel32 newsite __errno (FA call @92)",
+   "patch 104: rel32 newsite $FA$_t_4d99c0 (doserrno set stub \u2014 anchored by Chunk_d99c0 alias 0=$FA$_t_4d99c0)",
+   "patch 129: rel32 newsite $FA$_t_4deb40 (set_osfhnd, still-stub interior anchor)",
+   "patch 155: DIR32 newsite __crtheap+0x4 (mov edx,[eax+_pioinfo] \u2014 ioinfo row base), content 4, payload... bare newsite + addend token",
+   "patch 167: rel32 newsite __unlock_fhandle (FA call @166; UnlockFhandle converted public)"
+  ],
+  "tail": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "v1 transplant over 44-B CL husk; CRT band (__open_osfhandle); alloc_osfhnd/set_osfhnd still-stub anchors verified as interior aliases of t0098c textgroup; first build had rva 913888 (hand-decimal, wrong) \u2014 rule: rva decimals ALWAYS from layout.json",
+  "verdict": "EXACT"
+ },
+ {
+  "rva": 792096,
+  "obj": "w44H_c1620_v1",
+  "src": "build/survey/probes/w44H_c1620_v1.c",
+  "maps": [],
+  "patch": [
+   "0,58,535657be00000000bf0100000033c0668b068b148500000000857a0174298a023c0675238b420585b8a6000000741866a100000000663982e2000000750966398ae4000000741183c60a81fe0000000072bb32c05f5e5bc3b0015f5e5bc3,4:6:_ro,21:6:_objPtrs,49:6:_curId,76:6:_ro+0x6d6"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff whole-body transplant of FA code (94 B): C husk documents semantics (scan _ro[] stride 10: id=*(u16*)e; o=_objPtrs[id]; keep on (o->f_word&1)&&o->kind==6 with p=*(o+5),(p->w&1); hit iff _curId==*(u16*)(o+0xe2) && CX==*(u16*)(o+0xe4); CX set by FA caller, no in-chunk load) \u2014 CL not attempted: hand-tuned loop reg ABI",
+   "patch 5: DIR32 newsite _ro (loop base mov esi,0x53fdd0), payload 0",
+   "patch 21: DIR32 newsite _objPtrs (SIB disp32 mov edx,[eax*4+objPtrs]), payload 0",
+   "patch 49: DIR32 newsite _curId (moffs read mov ax,ds:_curId), payload 0",
+   "patch 76: DIR32 newsite _ro+0x6d6 (loop end cmp, interior addend token content 0x6d6)"
+  ],
+  "tail": [
+   "8bff"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "v1 transplant; FA compares [o+0xe4] against caller-set CX (no in-chunk load) \u2014 reg-ABI quirk documented in husk",
+  "verdict": "EXACT"
+ },
+ {
+  "rva": 704736,
+  "obj": "w44H_ac0e0_v6",
+  "src": "build/survey/probes/w44H_ac0e0_v4.c",
+  "maps": [
+   "_vdoExitCode=?vdoExitCode@@3FA"
+  ],
+  "patch": [
+   "0,143,53568b74240c575556e80000000083c4048bd883fbff750733c05d5f5e5bc353e80000000083c4048bf885ff7454ba010000008bcebd00000000e800000000663dffff668bf07416535756e80000000083c40c8be800000000fcff83c4043beb741966c70500000000040057e80000000083c40433c05d5f5e5bc38bc75d5f5e5bc333c05d66c7050000000003005f5e5bc3,10:20:_FileSize,33:20:_VDOAlloc,59:20:@LibOpen@8,76:20:_LibRead,85:20:_LibClose,109:20:_VDOFree,101:6:_vdoExitCode,136:6:_vdoExitCode"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff whole-body transplant of FA code (146 B over CL's 143 B): C husk documents the semantics (FileSize/VDOAlloc/LibOpen/LibRead/LibClose round-trip; vdoExitCode 3 alloc-fail, 4 open-or-short-read); CL differs in reg colors (n=edi/buf=ebx vs FA n=ebx/buf=edi), xor-ebp-before-mov-edx init order (FA: mov edx,1/mov ecx,esi/mov ebp,0), inline alloc-fail block vs FA's jump-to-end block, and push order at the VDOFree call site",
+   "patch 10: rel32 newsite _FileSize (FA call @0x9), payload 0 (linker recomputes disp)",
+   "patch 33: rel32 newsite _VDOAlloc (FA call @0x20), payload 0",
+   "patch 59: rel32 newsite @LibOpen@8 (FA call @0x39; still-stub public verbatim, as in src/OpenVDOFile.c), payload 0",
+   "patch 76: rel32 newsite _LibRead (FA call @0x4a), payload 0",
+   "patch 85: rel32 newsite _LibClose (FA call @0x54), payload 0",
+   "patch 101: DIR32 newsite _vdoExitCode (FA store4 @0x61 imm @0x65... imm @101), payload 0 = symVA (map _vdoExitCode=?vdoExitCode@@3FA)",
+   "patch 109: rel32 newsite _VDOFree (FA call @0x6c), payload 0",
+   "patch 136: DIR32 newsite _vdoExitCode (FA store3 @0x85 imm @136), payload 0"
+  ],
+  "tail": [
+   "8da424000000008da42400000000"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "v6 transplant over v4 C husk (v4's void*-return shape was the correct-semantics base; CL reg colors (n=edi/buf=ebx), xor-ebp-before-ba init order, inline alloc-fail block all left to the transplant; tail = 2x 8da42400000000 census pads",
+  "verdict": "EXACT"
+ },
+ {
+  "rva": 165134,
+  "obj": "w44H_2850e_v1",
+  "src": "build/survey/probes/w44H_2850e_v1.c",
+  "maps": [],
+  "patch": [
+   "0,42,66833d000000000056578bf974130fb705000000008b34850000000083c611eb26833d0000000000740e57a10000000050e89cf40600eb12a1000000008b34850000000083c602a5a5a55f5ec3,3:6:_desiredMapScale+0x4,17:6:_desiredMapScale+0x4,24:6:_objPtrs,35:6:_desiredMapScale+0x18,44:6:_desiredMapScale+0x18,50:20:_WPPos@8,57:6:?worldCenter@@3UF24_POINT3@@A+0x10,64:6:_specials"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff whole-body transplant of FA code (77 B, no tail): C husk documents semantics (u16 dispatch on _desiredMapScale+4: esi=_objPtrs[u16]+0x11 or WPPos(idx=_desiredMapScale+0x18,this) early-out or esi=_specials[worldCenter+0x10]+2; then 3x movs dwords into edi(out=ecx caller reg)) \u2014 CL's movzx type and reg dispatch diverge",
+   "patch 3/17: DIR32 newsites _desiredMapScale+0x4 (word cmp + movzx)",
+   "patch 24: DIR32 newsite _objPtrs (SIB disp32)",
+   "patch 35/44: DIR32 newsites _desiredMapScale+0x18 (dword cmp + moffs)",
+   "patch 50: rel32 newsite _WPPos@8 (FA call @49)",
+   "patch 57: DIR32 newsite ?worldCenter@@3UF24_POINT3@@A+0x10 (moffs)",
+   "patch 64: DIR32 newsite _specials (SIB disp32)"
+  ],
+  "tail": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "v1 transplant (77 B, mid-chunk fragment, no tail): u16 dispatch band; 7 abs + 1 rel newsites, all sites verified against raw dword VAs",
+  "verdict": "EXACT"
+ },
+ {
+  "rva": 150371,
+  "obj": "w44H_24b63_v1",
+  "src": "build/survey/probes/w44H_24b63_v1.c",
+  "maps": [],
+  "patch": [
+   "0,56,83ec0c8d44240056578bf15056e8000000008d7c24088bcee8000000000fb7c08bd78b0c8500000000e800000000f646010274158a4e0380f902740980f903740484c07504c64601015f5e83c40cc3,14:20:_WPPos@8,25:20:$FA$_t_424ae3,37:6:_objPtrs,42:20:@w33b_24bb2@8"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff whole-body transplant of FA code (79 B, thiscall ecx=this, tail pad none): C husk documents semantics (WPPos(this,&loc); u16 = $FA$_t_424ae3(this) movzx'd; ecx = _objPtrs[u16]; tail call next chunk @w33b_24bb2@8; if ([this+1]&2) && cl==2||cl==3||!ax -> [this+1]=1)",
+   "patch 14: rel32 newsite _WPPos@8 (FA call @13)",
+   "patch 25: rel32 newsite $FA$_t_424ae3 (still-stub anchor)",
+   "patch 38: DIR32 newsite _objPtrs (SIB disp32 mov ecx,[eax*4+_objPtrs])",
+   "patch 42: rel32 newsite @w33b_24bb2@8 (next chunk, converted fastcall public w33b_24bb2)"
+  ],
+  "tail": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "v1 transplant (79 B, thiscall ecx): 0x24bb2 converted via w33b_24bb2 fastcall '@w33b_24bb2@8' public (the $FA$_t_424bb2 anchor is dead \u2014 no converter alias); _objPtrs site zeroing must start at its own byte 37 (an off-by-one zeroing ate the following e8 once)",
+  "verdict": "EXACT"
+ },
+ {
+  "rva": 136464,
+  "obj": "w44H_21510_v1",
+  "src": "build/survey/probes/w44H_21510_v1.c",
+  "maps": [],
+  "patch": [
+   "0,148,83ec105657e800000000a0000000008b3d0000000084c07419ffd78bf0e8000000006685c0740bffd72bc63dd007000072eb8d4424085068000000006800000000e8000000008d4424086a0068ff00000050e800000000a00000000084c07419ffd78bf0e8000000006685c0750bffd72bc63dd007000072eb5f5e83c410c3,6:20:?SoundAllOff@@YIXXZ,11:6:_soundOn,17:6:__imp__timeGetTime,30:20:?SoundStatus@@YAFXZ,56:6:_defaultChatSoundName+0xc,61:6:_fortSizeIndex+0x30,66:20:_RMChangeType@12,83:20:?SoundNoMixer@@YGFPADFF@Z,88:6:_soundOn,101:20:?SoundStatus@@YAFXZ"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff whole-body transplant of FA code (127 B): C husk documents semantics (SoundAllOff; if soundOn: drain spin SoundStatus!=0 with timeGetTime delta < 2000, edi-cached IAT indirect calls; RMChangeType(0x525928, 0x4ea284, &local4); SoundNoMixer(&local, 0xff, 0); repeat drain spin) \u2014 CL's IAT call-thunk form and spin loop shape diverge",
+   "patch 6/30/101: rel32 newsites ?SoundAllOff@@YIXXZ / ?SoundStatus@@YAFXZ x2",
+   "patch 11/88: DIR32 newsites _soundOn (moffs reads)",
+   "patch 17: DIR32 newsite __imp__timeGetTime (IAT load to edi)",
+   "patch 56: DIR32 newsite _defaultChatSoundName+0xc (fmt/type arg push)",
+   "patch 61: DIR32 newsite _fortSizeIndex+0x30 (arg push)",
+   "patch 66: rel32 newsite _RMChangeType@12",
+   "patch 83: rel32 newsite ?SoundNoMixer@@YGFPADFF@Z"
+  ],
+  "tail": [
+   "90"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "v1 transplant (127 B + 90 tail): edi-cached IAT indirect timeGetTime calls in the drain spins; newsite types 6 abs / 20 rel checked one by one (first pass miscategorized the sound-call sites as DIR32)",
+  "verdict": "EXACT"
+ },
+ {
+  "rva": 80112,
+  "obj": "w44H_138f0_v1",
+  "src": "build/survey/probes/w44H_138f0_v1.c",
+  "maps": [],
+  "patch": [
+   "0,57,56a1000000005783f801747ea00000000084c074756800000000a1000000008b0c8538a24e005168000000006800000000e80000000083c410a1000000009933c22bc283e03f33c22bc283f8207c33bf00000000b9ffffffff2bc0f2aef7d12bf98bd18bf7b9ffffffffbf000000002bc0f2ae4f8bcac1e902f3a58bca83e103f3a4b8000000005f5ec333c05f5ec3,2:6:_numComputers,13:6:?chatEditing@@3DA,22:6:?chatEditing@@3DA+0x4,27:6:?adCount@@3EA+0x294,40:6:_defaultChatSoundName+0x28,45:6:_qualStatus+0x28,50:20:_Sprintf,58:6:_timerTicks,80:6:_defaultChatSoundName+0x24,107:6:_qualStatus+0x28,131:6:_qualStatus+0x28"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff whole-body transplant of FA code (143 B): C husk documents semantics (numComputers==1 / !chatEditing -> return 0; Sprintf(qualStatus+0x28, fmt defaultChatSoundName+0x28, chatEditing+4, ecx leftover, adCount+0x294); timed band (timerTicks signed-&63 >= 0x20) strlen(_defaultChatSoundName+0x24) + rep movs copy into qualStatus+0x28; return qualStatus+0x28 else 0) \u2014 FA pushes ECX as a Sprintf arg and hand-rolls scas/movs; CL diverges",
+   "patch 2: DIR32 newsite _numComputers",
+   "patch 13/22: DIR32 newsites ?chatEditing@@3DA and +0x4 arg push",
+   "patch 27: DIR32 newsite ?adCount@@3EA+0x294 (Sprintf arg base adCount chunk)",
+   "patch 40: DIR32 newsite _defaultChatSoundName+0x28 (fmt push)",
+   "patch 45/107/131: DIR32 newsites _qualStatus+0x28 (dst push, scas/movs moffs)",
+   "patch 50: rel32 newsite _Sprintf",
+   "patch 58: DIR32 newsite _timerTicks (signed-mod band)",
+   "patch 80: DIR32 newsite _defaultChatSoundName+0x24 (scas len source)"
+  ],
+  "tail": [
+   "90"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "v1 transplant (143 B + 90 tail): FA pushes ECX as a Sprintf arg; scas/movs hand-rolled bands; 0x51df78 anchored as _qualStatus+0x28 (base 0x51df50)",
+  "verdict": "EXACT"
+ },
+ {
+  "rva": 54192,
+  "obj": "w44H_d3b0_v1",
+  "src": "build/survey/probes/w44H_d3b0_v1.c",
+  "maps": [],
+  "patch": [
+   "0,39,66a100000000664066a300000000663d01007c4d66a100000000668b0d000000000fbfd166a300000000520fbfc066890d00000000508b0d00000000516a00e8000000000fbf0d000000000fbf150000000051a10000000052506a00e800000000c3,2:6:?mouseShown@@3FA,10:6:?mouseShown@@3FA,22:6:_shellMousePos,29:6:_shellMousePos+0x2,38:6:?lastMousePos@@3UWORD_POINT@@A,49:6:?lastMousePos@@3UWORD_POINT@@A+0x2,56:6:?savePointer@@3PAUT_HANDLE@@A,64:6:_G_BlitToBrush@16,71:6:_shellMousePos+0x2,78:6:_shellMousePos,84:6:?mousePointer@@3PAUT_HANDLE@@A,93:6:_G_BlitToScreen@16"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff whole-body transplant of FA code (98 B): C husk documents semantics (mouseShown++ guard <1; lastMousePos = shellMousePos both words before the first G_Blit \u2014 FA writes the .x store then re-reads +0x2 after the call; G_BlitToBrush(0, savePointer, sx, sy); G_BlitToScreen(0, mousePointer, sy2, ecx=savePointer-leftover) \u2014 FA reuses ECX set before the first call, callee preserves it)",
+   "patch 2/10: DIR32 newsites ?mouseShown@@3FA (moffs read + a3 write), payload 0",
+   "patch 22/29/71: DIR32 newsites _shellMousePos and _shellMousePos+0x2 (reads @22 @71, hidden cx load)",
+   "patch 38/49: DIR32 newsites ?lastMousePos@@3UWORD_POINT@@A +0x2 (a3 store + word read)",
+   "patch 56: DIR32 newsite ?savePointer@@3PAUT_HANDLE@@A (moffs)",
+   "patch 64: rel32 newsite _G_BlitToBrush@16 (FA call @63)",
+   "patch 78: DIR32 newsite _shellMousePos (movsx read)",
+   "patch 84: DIR32 newsite ?mousePointer@@3PAUT_HANDLE@@A (moffs)",
+   "patch 93: rel32 newsite _G_BlitToScreen@16 (FA call @92)"
+  ],
+  "tail": [
+   "8da424000000008da42400000000"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "v1 transplant (98 B code + 14-B pad): FA reuses ECX set before the first G_BlitToBrush call as the third Screen arg (callee preserves it)",
+  "verdict": "EXACT"
+ }
+]
