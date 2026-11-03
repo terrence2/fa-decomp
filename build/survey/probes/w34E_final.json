@@ -1,0 +1,33 @@
+[
+{"rva": 553616, "obj": "w34E_87290_v2", "src": "build/survey/probes/w34E_87290_v1.c", "flags": "/c /O2 /Gy /G5",
+ "maps": ["_w34E_87290@4=$FA$_t_487290"], "aliases": ["0=$FA$_t_487290"], "patch": [], "provenance": [],
+ "notes": "EXACT (stdcall void(void*), ret 4). volatile char* base + two plain if-clamps (short < 0 -> 0; short > (short)[+0xe] -> that value). CL reproduces the whole thing naturally: 8b 44 24 04 param load, 66 83 78 0c 00 cmp word[m],0 + jge, 66 c7 40 0c 00 00 zero store, 66 8b 48 0e / 66 39 48 0c (mem-vs-reg cmp) / 66 89 48 0c. No relocs, no patches. The volatile base pointer (single char* b, casts at every use) is what keeps both compares on memory operands. Emitted stdcall symbol is _w34E_87290@4 (map FROM must carry the @4: v1 map '_w34E_87290=' silently failed to match - fitobj still EXACT because the chunk has no relocs; fixed in v2)."
+},
+{"rva": 564544, "obj": "w34E_89d40_v2", "src": "build/survey/probes/w34E_89d40_v2.c", "flags": "/c /O2 /Gy /G5",
+ "maps": ["_w34E_curDlg=?curDialog@@3PAUDIALOG@@A", "_w34E_89d40=$FA$_t_489d40"],
+ "aliases": ["0=$FA$_t_489d40"], "patch": [], "provenance": [],
+ "notes": "EXACT (cdecl void(void*)) at first try of the volatile-global spelling: extern char * volatile w34E_curDlg (POINTER volatile, not pointee). Two consecutive statements p[0..1] += (short)(d+8) / p[2..3] += (short)(d+0xa) force the a1-then-8b-15 double load of ?curDialog@@3PAUDIALOG@@A. v1 (char* volatile d LOCAL) spilled the volatile local into an FPO stack slot (83 ec 04 + roundtrips) -> 0x35 B FATAL; the volatile-global form emits a1 24a45400 / 8b 4c 24 04 / 66 8b 40 08 / 66 01 01 / 8b 15 24a45400 / 66 8b 42 0a / 66 01 41 02 byte-for-byte."
+},
+{"rva": 590768, "obj": "w34E_903b0_v2", "src": "build/survey/probes/w34E_903b0_v1.c", "flags": "/c /O2 /Gy /G5",
+ "maps": ["_w34E_903b0=$FA$_t_4903b0"], "aliases": ["0=$FA$_t_4903b0"], "patch": [], "provenance": [],
+ "notes": "EXACT (cdecl void(void*), first-draft v1 src). void *t = [p+0x16e] (esi, prolog push comes AFTER the [esp+4] param load just like FA); if (uchar [p+0x42]) then call through the vtable-2 slot: single expression (*(w34E_fp *)((char*)ft + 8))(p) with ft = [p+0x196] -> CL emits push eax (arg) / mov eax,[eax+0x196] / ff 50 08 (indirect call straight from memory) / add esp,4; tail ++*(unsigned long*)(t+0xa) -> ff 46 0a inc [esi+0xa]. No relocs at all (pure offsets). typedef w34E_fp = void (__cdecl *)(void *)."
+},
+{"rva": 598992, "obj": "w34E_923d0_v2", "src": "build/survey/probes/w34E_923d0_v1.c", "flags": "/c /O2 /Gy /G5",
+ "maps": ["_w34E_joyF=_joystickFunctions",
+          "_w34E_jX=?joystickXDevice@@3KA",
+          "_w34E_jT=?joystickThrottleDevice@@3KA",
+          "_w34E_jR=?joystickRudderDevice@@3KA",
+          "_w34E_jP=?joystickPOVDevice@@3KA",
+          "_w34E_rd=?ReadDevice@@YA?AW4JOYRESULT@@K@Z"], "patch": [], "provenance": [],
+ "notes": "EXACT (fastcall void(void), C name ReadSticksRaw emits @ReadSticksRaw@0 identity - same @-mangling as @ReadJoystickButtons@0, src src/ReadJoystickButtons.c). Four if (volatile-free ulong global & 1/4/8/0x10) -> __cdecl ReadDevice(dev) calls. CL reproduces a1 moffs + a8 al-test + 74 + [a1 dev / 50 push / e8 call / 83 c4 04 / a1 flags-reload] per block; the je skips the reload (dead on fallthrough, flags unchanged without the call) exactly as FA. No volatile needed: each ReadDevice call clobbers memory, forcing the next if's reload. Masks all < 0x100 so the tests stay in al (a8 imm)."
+},
+{"rva": 623664, "obj": "w34E_98430_v2", "src": "build/survey/probes/w34E_98430_v2.c", "flags": "/c /O2 /Gy /G5",
+ "maps": ["_insertQueue=?insertQueue@@YAXAAUSERIAL_QUEUE@@AAUSERIAL_PACKET_WRAPPER@@@Z",
+          "_w34E_uqh=?updateQueueHead@@YAXAAUSERIAL_QUEUE@@J@Z"], "patch": [], "provenance": [],
+ "notes": "EXACT (cdecl void; C name insertQueue emits _insertQueue, mapped to the FA public). Structure: j = w->[4]; idx = j % q->[8]; updateQueueHead(q,j); memcpy(q->[0x14] + (idx<<4)*3, w, 0x30) -> b9 0c 00 00 00 + rep movsd inline intrinsic (extern void *memcpy(void*,const void*,unsigned) with NO map, like src/verifyPacketCRC.c); marker store *(long*)(q(tbl reloaded 8b 43 14) + (idx*48 still live in edx) + 0x10) = 1; q->head = (idx+1) % q->cap FIRST then ++q->cnt (v1's cnt-first order put 8b 4b 0c before 8d 45 01; FA hoists (idx+1) into eax BEFORE the count load - flipping the two C statement lines aligns it; the cdq/idiv for the head store is still scheduled last, after the count stores/pops). Struct SQ needs a spacer dword at +0x10 (tbl at +0x14: head/f4/cap/cnt/f10/tbl). idx is enreg'd in ebp (callee-saved, survives updateQueueHead) matching FA's push ebp slot for it."
+},
+{"rva": 689840, "obj": "w34E_a86b0_v2", "src": "build/survey/probes/w34E_a86b0_v2.c", "flags": "/c /O2 /Gy /G5",
+ "maps": ["_w34E_shapeId=?shapeId@@3GA"], "patch": [], "provenance": [],
+ "notes": "EXACT (fastcall short(int obj), C name HardpointAngle emits @HardpointAngle@4 identity; @4 = one 4-B fastcall param, no stack params). Recipe: (1) volatile short shapeId[] -> cmp word [m],0 (66 83 3d +imm8) at entry: if (!shapeId[0]) return 0 - CL leaves the 8-B return block inline after a jne+8 into the work path, and re-reads shapeId[0] with 66 8b 0d into cx for GetCurObj's arg (cross-compiland: @GetCurObj@4's own body starts with and ecx,0xffff, and CL 4.2 emits the 16-bit mov cx,[m] arg form - no movzx - against a 16-bit fastcall param). (2) curThing single byte load a0 + cmp al,2 (3c 02)/je/cmp al,4 (3c 04)/jne chain to the shared zero tail. (3) v = (unsigned char)curThingType[0xb5] -> 33 c0 / a0 (a0 moffs with the 0xb5 addend baked as DIR32 content; curThingType extern char[] identity name). (4) HARDPtrs(obj, &out, 0): lea eax,[esp+4] / 6a 00 / 50 / 56 / e8 (stdcall 3 args, char* return in eax reused for the test). (5) CRITICAL: angle must be read from the OUT LOCAL (mov eax,[esp+4] / mov si,[eax+6]) - v1 sourced it from the return pointer and CL re-parked r in eax, dropping the 8b 44 24 04 reload (4-B short, wrong disps 74 0d/75 06/jle 7e 1e + FATAL unexplained tail); with out-source the disps grow to FA's 74 11/75 0a/7e 22 and the 8b ff hotpatch pad becomes census tail. (6) angle = single shared true-tail: nested ifs with angle=0 on every exit arm merge to FA's lone 66 33 f6 at the join (success path jmps over it). (7) PutCurObj(); return angle -> 66 8b c6 mov ax,si. si holds obj (mov esi,ecx) then angle after obj's last use."
+}
+]

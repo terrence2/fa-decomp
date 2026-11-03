@@ -1,0 +1,21 @@
+[
+{"rva": 553616, "obj": "w34E_87290_v2", "src": "build/survey/probes/w34E_87290_v1.c", "flags": "/c /O2 /Gy /G5",
+ "maps": ["_w34E_87290@4=$FA$_t_487290"], "aliases": ["0=$FA$_t_487290"], "patch": [], "provenance": []},
+{"rva": 564544, "obj": "w34E_89d40_v2", "src": "build/survey/probes/w34E_89d40_v2.c", "flags": "/c /O2 /Gy /G5",
+ "maps": ["_w34E_curDlg=?curDialog@@3PAUDIALOG@@A", "_w34E_89d40=$FA$_t_489d40"],
+ "aliases": ["0=$FA$_t_489d40"], "patch": [], "provenance": []},
+{"rva": 590768, "obj": "w34E_903b0_v2", "src": "build/survey/probes/w34E_903b0_v1.c", "flags": "/c /O2 /Gy /G5",
+ "maps": ["_w34E_903b0=$FA$_t_4903b0"], "aliases": ["0=$FA$_t_4903b0"], "patch": [], "provenance": []},
+{"rva": 598992, "obj": "w34E_923d0_v2", "src": "build/survey/probes/w34E_923d0_v1.c", "flags": "/c /O2 /Gy /G5",
+ "maps": ["_w34E_joyF=_joystickFunctions",
+          "_w34E_jX=?joystickXDevice@@3KA",
+          "_w34E_jT=?joystickThrottleDevice@@3KA",
+          "_w34E_jR=?joystickRudderDevice@@3KA",
+          "_w34E_jP=?joystickPOVDevice@@3KA",
+          "_w34E_rd=?ReadDevice@@YA?AW4JOYRESULT@@K@Z"], "patch": [], "provenance": []},
+{"rva": 623664, "obj": "w34E_98430_v2", "src": "build/survey/probes/w34E_98430_v2.c", "flags": "/c /O2 /Gy /G5",
+ "maps": ["_insertQueue=?insertQueue@@YAXAAUSERIAL_QUEUE@@AAUSERIAL_PACKET_WRAPPER@@@Z",
+          "_w34E_uqh=?updateQueueHead@@YAXAAUSERIAL_QUEUE@@J@Z"], "patch": [], "provenance": []},
+{"rva": 689840, "obj": "w34E_a86b0_v2", "src": "build/survey/probes/w34E_a86b0_v2.c", "flags": "/c /O2 /Gy /G5",
+ "maps": ["_w34E_shapeId=?shapeId@@3GA"], "patch": [], "provenance": []}
+]

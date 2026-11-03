@@ -1,0 +1,121 @@
+[
+ {
+  "rva": 515952,
+  "verdict": "EXACT",
+  "name": "?InTextButton@@YIDJJ@Z",
+  "obj": "w34D_7df70_v4",
+  "src": "build/survey/probes/w34D_7df70_v1.c",
+  "maps": [
+   "_w34d_lb=_lastButton",
+   "_w34d_bb=_buttonBoxes"
+  ],
+  "patch": [
+   "0x14,11,33f63bc67e21bf00000000,7:6:_w34d_bb",
+   "0x38,2,f07c"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x14: toolchain-diff loop-init instruction order (11 B, len-equal): CL schedules the loop-invariant mov edi,offset buttonBoxes (bf) BEFORE the esi=0 setup and the jle loop header; FA loads it AFTER the jle (33f6 3bc6 7e21 then bf) - block rewritten to FA order, and the bf DIR32 imm dword (FA 0x547048 = _buttonBoxes, layout syms + .reloc 0x55d6 region verify) re-attached as newsite site 7 (imm byte offset from patch start; CL's original reloc at obj 0x15 sits inside the replaced span and is dropped)",
+   "patch 0x38: toolchain-diff cmp operand order/cond: FA compares index-vs-bound (3b f0 cmp esi,eax; 7c jl -0x1c back to loop head), CL bound-vs-index (3b c6 cmp eax,esi; 7f jg) - 2-B operand+cond byte fix, no newsites"
+  ],
+  "notes": "char __fastcall(long x, long y): FA's body reads args from ecx/edx (both FA callers at 0x4235ae/0x4676e9 emit movsx ecx/edx word loads + e8 with NO stack pushes) despite the PDB mangling ?InTextButton@@YIDJJ@Z saying cdecl - declared __fastcall; point local is FA's own 2-word struct (struct {short xx, yy;} p; word stores 66 89 4c 24 xx) with p.xx=(short)x (66 a1 param low word), loop walks buttonBoxes by 8 B: for (i = 0; i < lastButton; i++) { if (PointInBox(&p, b)) return (char)(i + 1); b += 8; } - FA enregisters lastButton in eax with per-iteration reload after the call (a1 twice, layout syms 0x546f70), returns i+1 as un-narrowed lea eax,[esi+1]. v1: 2-order/cmp diffs; v2 (for-header increment): 13 diffs; v3 (index spelling buttonBoxes+(i<<3)): only the 0x38-39 cmp pair remains; v4 = v1 src + the 2 patches above => EXACT."
+ },
+ {
+  "rva": 518496,
+  "verdict": "EXACT",
+  "name": "__SingleMission@0",
+  "obj": "w34D_7e960_v3",
+  "src": "build/survey/probes/w34D_7e960_v3.c",
+  "maps": [
+   "_w34d_litM=_pilotRanks+0x1c8",
+   "_w34d_litE=_pilotRanks+0x1a4",
+   "_SingleMission=_SingleMission@0"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "stdcall int(void): if (!doScreens) { strcpy(missionName, \"~fake.M\"); if (!LibFileExists(missionName)) ErrorExit(\"Couldn't find mission file \\\"%s.\\\"\", missionName); return 1; } return SingleMission() != 0. INVERTED-IF spelling is load-bearing: CL must emit test al,al / jne far to the doScreens body parked at chunk end (direct spelling put the sm() body inline and the strcpy out-of-line). SingleMission extern must return char (FA's compare is 3c 01 cmp AL,1 / 1b c0 sbb / 40 inc; an int-returning decl gives 83 f8 01 = +1 B). strcpy/strlen inline (f2 ae repnz scasb strlen, then rep movsd+rep movsb copy) comes from the intrinsic kept ON: declare 'char *strcpy(char *d, const char *s);' - a 'void' decl is C2371. LibFileExists fastcall extern named LibFileExists emits @LibFileExists@4 = direct public match (no map); ErrorExit cdecl (FA adds esp,8). Literals as named-extern arrays mapped to FA data: _w34d_litM -> _pilotRanks+0x1c8 (FA imm 0x4f75d0, layout syms _pilotRanks@0x4f7408 + .reloc 0x7e96c) = \"~fake.M\"; _w34d_litE -> _pilotRanks+0x1a4 (FA imm 0x4f75ac; .reloc 0x7e9a6) = \"Couldn't find mission file \\\"%s.\\\"\". PARENT NOTE: no stub group covers 0x7e960 in build/stubs/manifest.json (hole between t0006b vae and t0006c va) - this entry closes it; no $FA$_t anchors involved."
+ },
+ {
+  "rva": 518752,
+  "verdict": "EXACT",
+  "name": "__CreateProMission@0",
+  "obj": "w34D_7ea60_v3",
+  "src": "build/survey/probes/w34D_7ea60_v3.c",
+  "maps": [
+   "_w34d_litM=_pilotRanks+0x1c8",
+   "_w34d_litE=_pilotRanks+0x1a4",
+   "_w34d_mapos=$FA$_t_4225b1"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "Byte-twin of __SingleMission@0 with the doScreens-path call targeting interior $FA$_t_4225b1 (FA e8 0x47eaba -> 0x4225b1 = end of converted ?MAPOnSpecial@@YIFPAUWORD_POINT@@@Z; stub t0001d covers 0x4225b1-0x424a00 and defines the public - verified by obj strings). Map FROM _w34d_mapos (plain-C char-returning extern). Same inverted-if layout, char-return extern (3c 01 / 1b c0), intrinsic strcpy, literal maps identical to 0x7e960. PARENT NOTE: converting 0x47ea60 splits stub t0006c, which also owns $FA$_t_47eee0 (chunk 0x7eee0) - SPLIT_AT must keep that public from the remaining t0006c members."
+ },
+ {
+  "rva": 521392,
+  "verdict": "EXACT",
+  "name": "_UkraineRescued",
+  "obj": "w34D_7f4b0_v2",
+  "src": "build/survey/probes/w34D_7f4b0_v2.c",
+  "maps": [
+   "_w34d_chk=$FA$_t_47f520",
+   "_w34d_litS=_pilotRanks+0x258",
+   "_w34d_litR=_pilotRanks+0x1f0"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "void(void): if (playerDead) return; if (playerId == 0) return; if (forceVictory) return; PushCurObj(playerId); if (chk() || Percent(0x23)) DoDialogInfoBox(litS, 1); else { DoDialogInfoBox(litR, 1); playerDead = 2; } PopCurObj(). The merged-|| spelling reproduces FA's layout exactly: FA has chk-test jne + Percent-test jne BOTH to the shared out-of-line dialog block at chunk 0x47f506, else-body (with the playerDead=2 word store 66 c7 05) falling through between them, each exit tail-jmp (e9) to _PopCurObj@0. push-arg order (6a 01; 68 lit) => stdcall DoDialogInfoBox(lit, 1) with CL pushing right-to-left. PushCurObj's single param must be declared unsigned short so CL skips the zero-extension FA lacks: FA emits 66 a1 (mov ax,_playerId moffs, .reloc 0x7f4bd) then a bare 50 push - an int-param decl makes CL emit +1... wait +5 B 'and eax,0xffff' (25 ff ff 00 00, the v1 FAIL). Externs: playerDead/playerId/forceVictory = FA shorts (66 83 3d cmp-mem for playerDead, 66 a1+66 85 c0 for playerId, 8a 0d mov cl byte for forceVictory); chk = $FA$_t_47f520 (interior helper chunk 0x7f520, first byte of stub group t0006e - verified by obj strings); Percent fastcall emits @Percent@4 (FA b9 23 00 00 00 mov ecx,0x23); PopCurObj stdcall tail-jmp. Literals: litS (\"You were promptly picked up by friendly forces and returned to your ship.\") -> _pilotRanks+0x258 (FA push imm 0x4f7660; .reloc 0x7f509), litR (\"RESCAP patrols were unable to locate you.  You were reported Missing In Action, and were never found.\") -> _pilotRanks+0x1f0 (imms 0x4f75f8; .reloc 0x7f4ef, shared with _ATFRescued). dis.py ELIDES two instructions here: the chunk-start 66 83 3d cmp (playerDead) and the mid-block 66 c7 05 (playerDead = 2) - taken from raw FA bytes (.text raw = 0x400 + rva - 0x1000). PARENT NOTE: no stub group covers 0x7f4b0 (hole between t0006d vae and t0006e va) - this entry closes it; no $FA$_t anchors involved."
+ },
+ {
+  "rva": 521728,
+  "verdict": "EXACT",
+  "name": "_ATFRescued",
+  "obj": "w34D_7f600_v2",
+  "src": "build/survey/probes/w34D_7f600_v2.c",
+  "maps": [
+   "_w34d_chk=$FA$_t_47f520",
+   "_w34d_litB=_pilotRanks+0x2a4",
+   "_w34d_litR=_pilotRanks+0x1f0"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "Byte-twin of _UkraineRescued; only the shared-true-tail literal differs: litB (\"You were promptly picked up by friendly forces and returned to your base.\") -> _pilotRanks+0x2a4 (FA push imm 0x4f76ac; .reloc 0x7f659); litR identical (FA imm 0x4f75f8; .reloc 0x7f63f); chk call is rel to the SAME $FA$_t_47f520 (FA e8 at 0x47f625, negative disp). PARENT NOTE: converting 0x47f600 splits stub t0006e, which owns $FA$_t_47f520 (needed by _UkraineRescued/_ATFRescued maps and by the nameless 0x7f520 chunk itself) and $FA$_t_47f6c0 (chunk 0x7f6c0) - SPLIT_AT must keep both from the remaining t0006e members."
+ },
+ {
+  "rva": 553040,
+  "verdict": "EXACT",
+  "name": "0x87050 (32 B, 1 param, nameless)",
+  "obj": "w34D_87050_v1",
+  "src": "build/survey/probes/w34D_87050_v1.c",
+  "maps": [
+   "_w34d_cdl=?curDialog@@3PAUDIALOG@@A"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_487050"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "void __cdecl(struct {unsigned short x, y;} *pt): pt->x -= curDialog->x; pt->y -= curDialog->y; where curDialog = ?curDialog@@3PAUDIALOG@@A (map _w34d_cdl -> that public; FA a1 imm 0x54a424 at chunk 3 / 8b 15 24 a4 54 00 at chain 0x14, layout syms + .reloc; CL obj relocs at those same sites name _w34d_cdl; FA reloads the pointer TWICE - no CSE - which CL reproduces via the compiler's own alias conservatism, plain C, v1 EXACT no patches). struct w34d_dlg { char pad[8]; unsigned short x, y; } gives the word reads [eax+8]/[eax+0xa]; pt is a 2-ushort struct gives 66 29 01 / 66 29 41 02 word subs. The 90 at chunk 0x1f is census pad after ret. Alias 0=$FA$_t_487050 for the parent link per w32H/w33C nameless-chunk precedent: stub group t00074 (0x485af0-0x487070, 15 chunks) defines $FA$_t_487050 + $FA$_t_487070; the sole reference to 0x487050 is FA's e8 caller at 0x486629 (in-chunk literal rel32, no .reloc) - PARENT NOTE: mkstub SPLIT_AT must keep the other t00074 publics ($FA$_t_487070 incl.) from the remaining members."
+ }
+]

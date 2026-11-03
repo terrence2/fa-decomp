@@ -1,0 +1,150 @@
+[
+ {
+  "rva": 695792,
+  "verdict": "EXACT",
+  "name": "@Create@4 (112 B, fastcall 1 param)",
+  "obj": "w34F_create_v1",
+  "src": "build/survey/probes/w34F_create_v1.c",
+  "maps": [
+   "@w34f_create@4=@Create@4",
+   "@get16_@4=?GetHandle16@@YIFPAX@Z",
+   "__imp__CreateFileA@28=__imp__CreateFileA",
+   "__imp__CloseHandle@4=__imp__CloseHandle"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "EXACT round 1, pure C. fastcall wrapper: _w34f_create defined as unsigned short __fastcall w34f_create(const char *) (fastcall FROM '@w34f_create@4', no leading underscore). Body: push esi; if (ecx==0) {fail band}; create path stores dosError word (extern short _dosError, bare public, no map) = 0 via 66 c7 05 5c7d5700 0000; failure bands store 0xffff. CreateFileA called through IAT: extern int __stdcall CreateFileA(...7 args) + dllimport maps FROM __imp__CreateFileA@28 TO __imp__CreateFileA; args right-to-left (0,0x80,2,0,0,0xc0000000,ecx=last arg pushed as name). After call: cmp eax,-1; esi=eax; INVALID path: dosError=-1; success: ecx=eax then call __fastcall get16_ via rel32 (@get16_@4=?GetHandle16@@YIFPAX@Z), GetHandle16==0xffff -> dosError=-1 + CloseHandle(esi) via IAT 0x58a564 (__imp__CloseHandle@4 map). All 4 reloc TOs verified against FA imm bytes: ff15 @0x30 -> __imp__CreateFileA@28 0x58a56c; ff15 @0x63 -> __imp__CloseHandle@4 0x58a564; e8 @0x4e disp -403 -> 0xa9cb0 = ?GetHandle16@@YIFPAX@Z; dosError imm 0x577d5c at every c7-store. Chunk's trailing ~4 B are the next fn's movsx prolog bytes; CL reproduced to 112 B exactly (census tail = 90 only)."
+ },
+ {
+  "rva": 705376,
+  "verdict": "EXACT",
+  "name": "?DeallocVDO@@YAXPAUVDO@@PAUVDOLinkedList@@@Z (96 B, 2 params)",
+  "obj": "w34F_dealloc_final",
+  "src": "build/survey/probes/w34F_dealloc_v3.c",
+  "maps": [
+   "_w34f_dealloc=?DeallocVDO@@YAXPAUVDO@@PAUVDOLinkedList@@@Z",
+   "_w34f_dfree=?VDOFree@@YAXPAX@Z",
+   "_w34f_fnode=?FreeVDOLinkNode@@YAXPAUVDOLinkedList@@@Z"
+  ],
+  "patch": [
+   "0x3d,28,8b74240c85f67412568bc68b7608e80000000083c40485f675ee5ec3,0x0f:20:_w34f_fnode"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x3d: toolchain-diff CL loads next-node [esi+8] BEFORE pushing p and passes p in eax to the call (v1/v2/v3 all identical); FA pushes p first, keeps a dead p copy in eax (8b c6) after the push and loads [esi+8] between push and call; equal-length 28-B band replace (CL 0x3d..0x58 = FA 0x3d..0x58); CL's loop-call rel32 reloc at abs 0x4a fell inside the replaced span and was dropped; newsite 0x0f:20:_w34f_fnode (band-relative disp byte at 0x4f, payload disp dword carried 00000000; target = ?FreeVDOLinkNode@@YAXPAUVDOLinkedList@@@Z)"
+  ],
+  "notes": "C: void __cdecl w34f_dealloc(void *vdo, void *list): four field saves with early-out guards - (vdo+0xe)!=0 -> MMFreeHandle (extern void __fastcall MMFreeHandle(int): obj emits @MMFreeHandle@4, layout public is the same name at 0x435ab0, so NO map needed), (vdo+0x20) and (vdo+0x1c) -> dfree (map _w34f_dfree=?VDOFree@@YAXPAX@Z), (vdo+0x24) -> MMFreeHandle; then for (p = list; p != 0; p = next) body: next = *((char*)p+8) then FreeVDOLinkNode(p). First 0x3d bytes (prolog, all four guarded frees, the 4 call rel32 relocs at 0x0d/0x1a/0x2a/0x39) matched CL in all 3 spelling variants; single divergence = loop-body scheduling -> equal-length 28-B toolchain-diff band patch with fnode newsite. newsite target verified vs FA imm bytes: FA disp dword in the band = b0 fc ff ff = -0x350 from site -> 0xac060 = ?FreeVDOLinkNode@@YAXPAUVDOLinkedList@@@Z. Tail 7-B pad 8da42400000000 census-proven."
+ },
+ {
+  "rva": 713008,
+  "verdict": "EXACT",
+  "name": "?net_print_player_found@@YAXHPAD@Z (64 B, 2 params)",
+  "obj": "w34F_netppf_v1",
+  "src": "build/survey/probes/w34F_netppf_v1.c",
+  "maps": [
+   "_w34f_netppf=?net_print_player_found@@YAXHPAD@Z",
+   "_w34f_cb1=?callbacks@@3UCALLBACK_FUNC_LIST@@A+0xc",
+   "_w34f_cb2=?callbacks@@3UCALLBACK_FUNC_LIST@@A+0xc",
+   "_w34f_cbdat=?callbacks@@3UCALLBACK_FUNC_LIST@@A+0x8",
+   "_w34f_plist=?player_list@@3UNET_PLAYER_LIST@@A+0x66"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "EXACT round 1, pure C. C: extern CBPF w34f_cb1; extern CBPF w34f_cb2; (typedef void (__cdecl *CBPF)(void *, int, char *, char *, int)); extern void *w34f_cbdat; extern unsigned char w34f_plist[]; body: if (w34f_cb1 == 0) return; w34f_cb2(w34f_cbdat, 0, s, (char *)*(char **)(w34f_plist + p1 * 4) + 0x70, 0);. Two same-address anchors (callbacks+0xc) carried as separate externs cb1/cb2 so both the 32-bit test-load (a1) and the ff15 indirect call relocate independently. Scaled-index load 8b 04 85 <imm> (mov eax,[eax*4 + anchored]) reproduced from the pointer-add form (plist + p1*4). Anchor TOs verified vs FA imm bytes: a1 @0x00 and ff15 @0x29 -> 0x577dbc = ?callbacks@@3UCALLBACK_FUNC_LIST@@A (0x577db0) + 0xc; 8b15 @0x13 -> 0x577db8 = callbacks+0x8 (cbdat); scale load imm @0x1d -> 0x577eae = ?player_list@@3UNET_PLAYER_LIST@@A (0x577e48) + 0x66."
+ },
+ {
+  "rva": 714032,
+  "verdict": "EXACT",
+  "name": "?net_addr_equal@@YADPAUNET_ADDRESS@@0@Z (96 B, 2 params)",
+  "obj": "w34F_addreq_v6p",
+  "src": "build/survey/probes/w34F_addreq_v5.c",
+  "maps": [
+   "_w34f_addreq=?net_addr_equal@@YADPAUNET_ADDRESS@@0@Z"
+  ],
+  "patch": [
+   "0x0,25,56578b74240c8b7c2410668b06663907740532c05f5ec3",
+   "0x17,59,25ffff000083f801740a83f802741332c05f5ec38b46048b4f045f3bc80f94c05ec383c60883c708b9060000002bc0f3a674051bc083d8ff5f85c00f94c05ec3"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x0: toolchain-diff CL (v5) zero-inits eax up front (33 c0), loads esi from [esp+8] before the edi push and loads t via mov ax,[esi] then loads b's word into ecx for a 32-bit cmp; FA pushes both regs first, loads esi=[esp+0xc]/edi=[esp+0x10], t via 66 8b 06 and compares b IN MEMORY (66 39 07 cmp [edi],ax); 25->23-B replace (-2), no newsite",
+   "patch 0x17: toolchain-diff switch(t) spelling (v6) got the je-to-tail-bodies + inline ret0 shape but CL zero-widened t with an upfront 33 c0 and kept 32-bit compares without the mask; FA widens with 25 ff ff 00 00 (and eax,0ffffh) at the first 32-bit use right after the first-je block; 59->64-B replace (+5), no newsite (memcmp is inlined by CL, no internal relocs in the obj)"
+  ],
+  "notes": "C (v5 source): char __cdecl w34f_addreq(void *a, void *b): unsigned t; int m; t = *(unsigned short *)a; if (*(unsigned short *)b != t) return 0; if (t == 1) return (char)(*(int *)(b+4) == *(int *)(a+4)); if (t == 2) return (char)((m = memcmp((char *)a + 8, (char *)b + 8, 6), m == 0)); return 0;. Key spellings found while converging: (1) the 16-bit memory-compare 66 39 07 only appears with t kept small; (2) the and eax,0ffffh widening + je-into-tail-bodies + inline ret0 = the switch-over-small-family structure - the m = memcmp(), m == 0 comma spelling must stay to reproduce FA's 2b c0 / f3 a6 / 74 05 / 1b c0 / 83 d8 ff / 5f / 85 c0 / 0f 94 c0 epilog, and fam1's int-field compare must be spelled with the b-side first (CL still emits eax=[esi+4]; 8b 4f 04). Patch bands cover the two CL-vs-FA scheduler disagreements; all FA bytes in them copied verbatim with the rel disp dwords masked. Tail 8b ff + 8da42400000000 census-proven."
+ },
+ {
+  "rva": 715360,
+  "verdict": "EXACT",
+  "name": "?state_func_query_hosts@@YAXXZ (64 B, fx7? 0 params)",
+  "obj": "w34F_sfqh_v5",
+  "src": "build/survey/probes/w34F_sfqh_v5.c",
+  "maps": [
+   "_w34f_sfqh=?state_func_query_hosts@@YAXXZ",
+   "_w34f_qhcb=?callbacks@@3UCALLBACK_FUNC_LIST@@A+0x18",
+   "_w34f_qhs=?socket_list@@3USOCKET_STATE_LIST@@A+0x418",
+   "_w34f_qhp=?proto_ptr@@3PAUNET_PROTOCOL@@A"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "EXACT round 5, pure C (no patches). C: extern int timerTicks; extern int w34f_qhcb; extern void *w34f_qhs; extern void *w34f_qhp; void __cdecl w34f_sfqh(void): if (w34f_qhcb <= timerTicks) { (*(void (__cdecl **)(int,int,int))((char *)w34f_qhp + 0x4e))((int)w34f_qhs, 0, 0); w34f_qhcb = ((*(int *)((char *)w34f_qhp + 6) << 8) + timerTicks); }. Two things were load-bearing: (1) declaring the callbacks+0x18 anchor as an EXTERN INT (not void*) lets CL emit FA's in-place 39 05 cmp [mem],eax instead of load+cmp, and makes the final assignment an a3 moffs store; (2) the fn-ptr expression must NOT go through a named local (that makes CL hoist a mov - earlier v3/v4) - the double-deref mistake in v4 also produced a spurious 8b 10/8b 19 pair; the single-deref v5 spelling gives FA's push ebx / 8b 1d proto_ptr -> EBX / ff 53 4e call and the post-call re-loads in the same regs. All 3 globals + both re-loads verified vs FA imm bytes: a1 549e3c = _timerTicks; 39 05/a3 577dc8 = ?callbacks@@3UCALLBACK_FUNC_LIST@@A + 0x18; a1 5696b8 = ?socket_list@@3USOCKET_STATE_LIST@@A + 0x418; 8b 1d 577dd0 (both sites) = ?proto_ptr@@3PAUNET_PROTOCOL@@A. Tail = 90 only."
+ },
+ {
+  "rva": 723648,
+  "verdict": "EXACT",
+  "name": "_WRWeatherEffects (112 B, 4 params)",
+  "obj": "w34F_wrw_final",
+  "src": "build/survey/probes/w34F_wrw_v3.c",
+  "maps": [],
+  "patch": [
+   "0x0,39,8b4424085356578b7c24183bf87d068bc88bc78bf96a0050e8000000008bf06a0057e800000000,0x19:20:_WRGetLayer@8,0x23:20:_WRGetLayer@8",
+   "0x27,9,3bc68bc8b864000000721f",
+   "0x3c,1,1e",
+   "0x42,1,d0",
+   "0x46,1,c2",
+   "0x4e,1,ce",
+   "0x4f,1,73",
+   "0x52,1,54",
+   "0x56,1,d2",
+   "0x5a,1,49",
+   "0x5d,1,e1",
+   "0x60,1,0a"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x0: toolchain-diff CL hoists the swap temp (mov ecx,eax) ahead of the third push and loads d via [esp+0x10] before push edi; FA pushes ebx/esi/edi as a block, loads a=[esp+8]/d=[esp+0x18], swaps (ecx=eax a-t; eax=edi a=d; edi=ecx d=t) and interleaves the two call sites; 39-B equal-length band replace; CL's 2 call rel32 relocs (abs 0x19/0x23) fell inside the span (dropped); newsites 0x19:20 and 0x23:20 = _WRGetLayer@8 (stdcall extern, public name matches layout exactly; FA disps -4013/-4016 verified -> 0xaf530 both calls)",
+   "patch 0x27: toolchain-diff FA evaluates the l2-vs-l1 entry compare with l2 still in eax (3b c6), then spills l2 to ecx (8b c8) and starts m=100 in eax (b8 64 00 00 00) before the jb into the epilog-skip; CL emitted m's mov first (b9) then 3b f0 / 77 1f; 9->11-B replace (+2), no newsite",
+   "patch 0x3c: toolchain-diff sib byte: FA mov dl,[esi+ebx*1+0x14e] (8a 94 1e); CL encodes [ebx+esi*1] (8a 94 33); 1-B",
+   "patch 0x42: toolchain-diff FA cmp edx,eax (v vs m, m in eax); CL cmp edx,ecx (m in ecx); 1-B",
+   "patch 0x46: toolchain-diff FA mov eax,edx (m=v); CL mov ecx,edx; 1-B",
+   "patch 0x4e: toolchain-diff FA cmp ecx,esi (l2 vs r); CL cmp esi,eax (r vs l2, both in swapped regs); 1-B",
+   "patch 0x4f: toolchain-diff FA jae (73) on l2>=r; CL jbe (76) on r<=l2 (same predicate, FA operand order); 1-B",
+   "patch 0x52: toolchain-diff FA epilog loads p4 into edx (8b 54 24 1c); CL loads into ecx (8b 4c 24 1c); 1-B",
+   "patch 0x56: toolchain-diff FA test edx,edx (p4); CL test ecx,ecx; 1-B",
+   "patch 0x5a: toolchain-diff FA mov ecx,[ecx+0x22] (l2 field in ecx=8b 49 22); CL mov eax,[eax+0x22] (8b 40 22); 1-B",
+   "patch 0x5d: toolchain-diff FA shl ecx,0x10 (c1 e1 10); CL shl eax,0x10 (c1 e0 10); 1-B",
+   "patch 0x60: toolchain-diff FA mov [edx],ecx (89 0a); CL mov [ecx],eax (89 01); 1-B"
+  ],
+  "notes": "C (v2/v3 source): void __cdecl WRWeatherEffects(int p1, int p2, int p3, int *p4): a=p2; d=p3; if (d<a) swap; l1=WRGetLayer(a,0) __stdcall; l2=WRGetLayer(d,0); m=100; v=0; b=(unsigned char)p1; while ((unsigned long)l1 <= (unsigned long)l2) { v=(unsigned char)*(l1+0x14e+b); if (v<m) m=v; l1=(char*)l1+0x160; } if (p4) *p4 = *(int *)(l2+0x22) << 0x10;. 3 spelling variants all produced the same CL shape: CL swaps the (l2,m) register pair vs FA (l2=eax/m=ecx vs FA l2=ecx/m=eax), orders the entry band differently, and swaps base/index in the elem sib; after 2 rounds of steering attempts the equal-length toolchain-diff bands + ten 1-B reg-encoding fixes converge exactly. FA structure verified: 3 reg-arg pair compare (3b f8/jge), swap movs, both WRGetLayer call disps verified -> 0xaf530, xor ebx + mov bl,[esp+0x10] (b=p1 byte) outside loop, loop top 33 d2 + 8a 94 1e <0x14e> load, cmp v,m signed jge, latch cmp ecx,esi/73 backedge to 0x38, epilog through [l2+0x22] shl 0x10 store into *p4. Tail pads 8d642400 + 8da42400000000 census-proven."
+ }
+]

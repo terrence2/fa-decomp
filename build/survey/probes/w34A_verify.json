@@ -1,0 +1,91 @@
+[
+ {
+  "rva": 543440,
+  "obj": "w34A_84ad0_v1",
+  "src": "build/survey/probes/w34A_84ad0_v1.c",
+  "maps": [
+   "_w34_cA=$FA$rdata0+0x3bc",
+   "_w34_cB=$FA$rdata0+0x3c4"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_484ad0"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 670864,
+  "obj": "w34A_a3c90_v1",
+  "src": "build/survey/probes/w34A_a3c90_v1.c",
+  "maps": [
+   "_w34_fix=?fixupShape@@3DA"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4a3c90"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 807724,
+  "obj": "w34A_c532c_v3",
+  "src": "build/survey/probes/w34A_c532c_v3.c",
+  "maps": [
+   "_w34_dvTab=_DecompressVideoImage@20+0x88"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 866704,
+  "obj": "w34A_d3990_v3",
+  "src": "build/survey/probes/w34A_d3990_v3.c",
+  "maps": [],
+  "patch": [
+   "0xa,4,3bfe760f",
+   "0x19,4,3bfe77f1"
+  ],
+  "aliases": [
+   "0=$FA$_t_4d3990"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 888176,
+  "obj": "w34A_d8d70_v8",
+  "src": "build/survey/probes/w34A_d8d70_v8.c",
+  "maps": [],
+  "patch": [
+   "0xc,2,751b",
+   "0xe,6,83781003",
+   "0x12,2,7515",
+   "0x14,9,81781420059319",
+   "0x1b,2,750c",
+   "0x1d,5,83781c00"
+  ],
+  "aliases": [
+   "0=$FA$_t_4d8d70"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 888864,
+  "obj": "w34A_d9020_v7",
+  "src": "build/survey/probes/w34A_d9020_v7.c",
+  "maps": [],
+  "patch": [
+   "0x4,1,",
+   "0x4,0,56",
+   "0x9,1,",
+   "0xb,3,",
+   "0xd,0,8b7204",
+   "0x14,3,8b0c31",
+   "0x20,1,"
+  ],
+  "aliases": [
+   "0=$FA$_t_4d9020"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ }
+]

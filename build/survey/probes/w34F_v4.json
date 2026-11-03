@@ -1,0 +1,11 @@
+[
+{"rva": 714032, "obj": "w34F_addreq_v4", "src": "build/survey/probes/w34F_addreq_v4.c",
+ "maps": ["_w34f_addreq=?net_addr_equal@@YADPAUNET_ADDRESS@@0@Z"],
+ "patch": [], "aliases": [], "span": null, "tail": null, "flags": "/c /O2 /Gy /G5"},
+{"rva": 715360, "obj": "w34F_sfqh_v4", "src": "build/survey/probes/w34F_sfqh_v4.c",
+ "maps": ["_w34f_sfqh=?state_func_query_hosts@@YAXXZ",
+          "_w34f_qhcb=?callbacks@@3UCALLBACK_FUNC_LIST@@A+0x18",
+          "_w34f_qhs=?socket_list@@3USOCKET_STATE_LIST@@A+0x418",
+          "_w34f_qhp=?proto_ptr@@3PAUNET_PROTOCOL@@A"],
+ "patch": [], "aliases": [], "span": null, "tail": null, "flags": "/c /O2 /Gy /G5"}
+]

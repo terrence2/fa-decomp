@@ -1,0 +1,70 @@
+[
+ {
+  "rva": 338608,
+  "obj": "w34C_glp_v1",
+  "src": "build/survey/probes/w34C_glp_v1.c",
+  "maps": [
+   "_w34c_tcnt=_curThingType+0xb5",
+   "_w34c_hp@12=_HARDPtrs@12"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 454768,
+  "obj": "w34C_paused_v1",
+  "src": "build/survey/probes/w34C_paused_v1.c",
+  "maps": [
+   "_w34c_thisC=_thisComputer",
+   "_w34c_pkt=?packetTicks@@3PAJA+0x4d8",
+   "_w34c_snd@16=$FA$_t_46b260",
+   "@w34c_flush@4=?MPFlushAll@@YIXD@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 455168,
+  "obj": "w34C_eject_v1",
+  "src": "build/survey/probes/w34C_eject_v1.c",
+  "maps": [
+   "@w34c_objal@8=@OBJAlias@8",
+   "_w34c_snd@16=$FA$_t_46b260"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 459664,
+  "obj": "w34C_kill_v1",
+  "src": "build/survey/probes/w34C_kill_v1.c",
+  "maps": [
+   "@w34c_objal@8=@OBJAlias@8",
+   "_w34c_snd@16=$FA$_t_46b260"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 489328,
+  "obj": "w34C_lock_v1",
+  "src": "build/survey/probes/w34C_lock_v1.cpp",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 494960,
+  "obj": "w34C_find_v1",
+  "src": "build/survey/probes/w34C_find_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ }
+]

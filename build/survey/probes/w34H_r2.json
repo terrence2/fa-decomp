@@ -1,0 +1,17 @@
+[
+ {"rva": 914128, "obj": "w34H_df2d0_v1", "src": "build/survey/probes/w34H_df2d0_v1.c",
+  "maps": ["_w34h_cxr=?__CxxRestoreUnhandledExceptionFilter@@YAXXZ",
+           "_w34h_cxu=?__CxxUnhandledExceptionFilter@@YGJPAU_EXCEPTION_POINTERS@@@Z",
+           "_w34h_atexitq=_atexit",
+           "__imp__w34h_suefq@4=__imp__SetUnhandledExceptionFilter",
+           "_w34h_dbaseLow=?dbaseLow@@3PAEA"],
+  "patch": [], "aliases": ["0=$FA$_t_4df2d0"], "span": "", "tail": "", "flags": "/c /O2 /Gy /G5"},
+ {"rva": 935008, "obj": "w34H_e4460_v1", "src": "build/survey/probes/w34H_e4460_v1.c",
+  "maps": ["_lock=__lock", "_towupper_lk=__towupper_lk", "_unlock=__unlock",
+           "_ctype=__ctype", "_nstream=__nstream"],
+  "patch": [], "aliases": [], "span": "", "tail": "", "flags": "/c /O2 /Gy /G5"},
+ {"rva": 71808, "obj": "w34H_11880_v2", "src": "build/survey/probes/w34H_11880_v2.c",
+  "maps": [],
+  "patch": ["0x7,3,8d442400", "0x2d,3,668b4c2400", "0x4b,3,6689442400"],
+  "aliases": [], "span": "", "tail": "", "flags": "/c /O2 /Gy /G5"}
+]

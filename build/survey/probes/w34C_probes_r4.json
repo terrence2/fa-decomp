@@ -1,0 +1,52 @@
+[
+ {
+  "rva": 338608,
+  "obj": "w34C_glp_v4",
+  "src": "build/survey/probes/w34C_glp_v4.c",
+  "maps": [
+   "_w34c_tcnt=_curThingType+0xb5",
+   "_w34c_hp@12=_HARDPtrs@12"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 494960,
+  "obj": "w34C_find_v3",
+  "src": "build/survey/probes/w34C_find_v3.c",
+  "maps": [
+   "_imp__FindNextFileA=__imp__FindNextFileA"
+  ],
+  "patch": [
+   "0x0,7,5356578b7c2410",
+   "0x7,2,85ff",
+   "0x13,4,8b742414",
+   "0x17,2,85f6",
+   "0x23,24,568b07508b1de0a45800ffd385c0750832c05f5e5bc20800,6:6:_imp__FindNextFileA",
+   "0x3b,2,8b06",
+   "0x41,1,56",
+   "0x42,2,8b07",
+   "0x53,6,8a462c83c62c",
+   "0x5d,2,8a06",
+   "0x61,2,7c08",
+   "0x65,2,7f04",
+   "0x69,2,8806",
+   "0x6b,3,8a4601"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 489328,
+  "obj": "w34C_lock_v3",
+  "src": "build/survey/probes/w34C_lock_v3.cpp",
+  "maps": [],
+  "patch": [
+   "0x23,34,33c98b44241483f8017505b9010000008d7e086a008b44241451578b1a5052ff5364",
+   "0x47,25,750fc74674010000008bc75f5e5bc2080033c05f5e5bc20800"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ }
+]

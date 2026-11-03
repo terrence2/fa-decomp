@@ -1,0 +1,4 @@
+[
+{"rva": 518496, "obj": "w34D_7e960_v3", "src": "build/survey/probes/w34D_7e960_v3.c", "maps": ["_w34d_litM=_pilotRanks+0x1c8", "_w34d_litE=_pilotRanks+0x1a4"], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+{"rva": 518752, "obj": "w34D_7ea60_v3", "src": "build/survey/probes/w34D_7ea60_v3.c", "maps": ["_w34d_litM=_pilotRanks+0x1c8", "_w34d_litE=_pilotRanks+0x1a4"], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"}
+]

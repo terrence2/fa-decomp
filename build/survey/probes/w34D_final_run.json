@@ -1,0 +1,8 @@
+[
+{"rva": 515952, "obj": "w34D_7df70_v4", "src": "build/survey/probes/w34D_7df70_v1.c", "maps": ["_w34d_lb=_lastButton", "_w34d_bb=_buttonBoxes"], "patch": ["0x14,11,33f63bc67e21bf00000000,7:6:_w34d_bb", "0x38,2,f07c"], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+{"rva": 518496, "obj": "w34D_7e960_v3", "src": "build/survey/probes/w34D_7e960_v3.c", "maps": ["_w34d_litM=_pilotRanks+0x1c8", "_w34d_litE=_pilotRanks+0x1a4"], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+{"rva": 518752, "obj": "w34D_7ea60_v3", "src": "build/survey/probes/w34D_7ea60_v3.c", "maps": ["_w34d_litM=_pilotRanks+0x1c8", "_w34d_litE=_pilotRanks+0x1a4", "_w34d_mapos=$FA$_t_4225b1"], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+{"rva": 521392, "obj": "w34D_7f4b0_v2", "src": "build/survey/probes/w34D_7f4b0_v2.c", "maps": ["_w34d_chk=$FA$_t_47f520", "_w34d_litS=_pilotRanks+0x258", "_w34d_litR=_pilotRanks+0x1f0"], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+{"rva": 521728, "obj": "w34D_7f600_v2", "src": "build/survey/probes/w34D_7f600_v2.c", "maps": ["_w34d_chk=$FA$_t_47f520", "_w34d_litB=_pilotRanks+0x2a4", "_w34d_litR=_pilotRanks+0x1f0"], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+{"rva": 553040, "obj": "w34D_87050_v1", "src": "build/survey/probes/w34D_87050_v1.c", "maps": ["_w34d_cdl=?curDialog@@3PAUDIALOG@@A"], "patch": [], "aliases": ["0=$FA$_t_487050"], "flags": "/c /O2 /Gy /G5"}
+]

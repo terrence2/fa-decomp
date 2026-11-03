@@ -1,0 +1,140 @@
+[
+ {
+  "rva": 338608,
+  "obj": "w34C_glp_v4",
+  "src": "build/survey/probes/w34C_glp_v4.c",
+  "maps": [
+   "_w34c_tcnt=_curThingType+0xb5",
+   "_w34c_hp@12=_HARDPtrs@12"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "?HARDGunLoadPercent@@YIXH@Z \u2014 void __fastcall f(long pct). EXACT on v4 with NO patch. Recipe: (1) FA reads the count byte as a0 (moffs A-form) twice (loop head 0x4 and latch 0x6b) \u2014 extern unsigned char w34c_tcnt = _curThingType+0xb5 (interior symbol 0x508bd5, interior offset only reachable through the map) and CL emits both a0s with sites 0x4/0x6a; (2) the HARDPtrs@12 call stays on CL's own stdcall extern (fastcall caller ignores it); (3) t6 = (unsigned long)w34c_hp(i,&p,0) \u2014 CL keeps t6 in eax for test eax,eax / mov cl,[eax] / mov eax,[eax+0xa6]/test cl,80. THE WIDE-MASK LEMMA (v2 fail -> v4 win): the 0x7fff guard must be computed in LONG arithmetic so CL emits 32-bit and eax,0x7fff (25 ff 7f 00 00) + 32-bit cmp eax,0x7fff (3d ff 7f 00 00) \u2014 spelling the mask on the 16-bit w (v1/v2) emits 16-bit 66 25/66 3d and a compensating and eax,0xffff (25 ff ff 00 00) that FA never has and patches cannot align (v2 was +3 B over FA code 0x7b). v4 spells w2 = w & 0x7fff; dv = 100; if (w2 != 0x7fff) *q = (w2*pct/dv) | (w & 0x8000); which gives the whole tail band exactly: mov ax,cx-class copy (8b c1, 2 B), 25/3d guards, and cx,0x8000 (66 81 e1 00 80), mov ebp,0x64 (bd 64 00 00 00) BEFORE the imul (the / dv division \u2014 plain /100 materialized late in v2), imul eax,esi, cdq 99 (v1's unsigned (w&0x7fff)*pct gave sub edx,edx/idiv \u2014 keep w2 signed long), idiv ebp, or ax,cx, mov [ebx],ax \u2014 q=ebx (FA uses ebx for the pointer, not the short: v2's q=ebx/w=cx only fell out once w was declared BEFORE q), w=cx, w2/dv scratch, i=edi (xor edi,edi BEFORE the tcnt test \u2014 i=0 spelled first), pct=esi (8b f1). Loop is do..while(w34c_tcnt > i) with the latch cmp eax,edi/jg back to a0#1. Tail 05 00 00 00 00 = census-proven, auto-accepted. No newsites; sites 0x4/0x1d/0x6a are CL's own relocs (a0#2 shifted -1 in v3 but the 2-B mov fixed in v4 brings it back to 0x6a = FA 0x6b's disp position... final .text site 0x6a holds the disp \u2014 masked + relocated by CL's own record)."
+ },
+ {
+  "rva": 454768,
+  "obj": "w34C_paused_v2",
+  "src": "build/survey/probes/w34C_paused_v2.c",
+  "maps": [
+   "_w34c_thisC=_thisComputer",
+   "_w34c_pkt=?packetTicks@@3PAJA+0x4d8",
+   "_w34c_snd@16=$FA$_t_46b260",
+   "@w34c_flush@4=?MPFlushAll@@YIXD@Z"
+  ],
+  "patch": [
+   "0xd,21,8ad9742e8d4424066a01885c240b6a02c644240e11"
+  ],
+  "provenance": [
+   "patch 0xd: toolchain-diff \u2014 CL schedules the msg[3]=f store and the msg[2]=0x11 store before the id/len argument pushes (88 4c 24 07 + c6 44 24 0a 11 both land before 6a 02); FA interleaves them between the pushes: 8a d9 (mov bl,cl = f) before the je, 88 5c 24 0b stores msg[3]=f AFTER push 1 (6a 01), c6 44 24 0e 11 stores msg[2]=0x11 AFTER push 2 (6a 02) \u2014 the interleaved esp-relative store idiom, unreachable through C spellings because CL's scheduler both hoists the stores and needs msg[3] via the bl copy. Equal-length 21-B band rewrite of CL 0xd..0x21 = FA 0xd..0x21; the band is self-contained (je 74 2e targets 0x3f = fa pop ebx; call/abs/mov sites at 0x26/0x30/0x35/0x3b all lie OUTSIDE the band and ride CL's own relocs).",
+   "tail: toolchain-diff \u2014 FA carries 12 B of census pad tail beyond the code (05 00 00 00 00 + 8d a4 24 00 00 00 00); census-proven, auto-accepted by fitobj."
+  ],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "?MPSetPaused@@YIXD@Z \u2014 void __fastcall f(char flag). C recipe (v2): unsigned char msg[4]; char f = flag BEFORE the numComputers guard (FA: 8a d9 mov bl,cl under the 90/53 pad+nop prefix); if (numComputers != 1) \u2014 the guard is a1 + cmp eax,1 + je (a1 site 0x4 = _numComputers rides CL's own reloc; FA's 90 nop at 0xb falls out of the /Gy comdat padding). Body: msg[3]=f; msg[2]=0x11; w34c_snd(0xffffffff,msg+2,2,1) \u2014 right-to-left pushes (6a 01 id / 6a 02 len / 50 buf / 6a ff dest) ride the still-stub map _w34c_snd@16=$FA$_t_46b260 (FA call 1 target 0x46b260, stub group t0005b); msg[2]=0x11 spelled AFTER the store of msg[3] in C to place the c6 44 24 0a 11 correctly; w34c_flush(1) = ?MPFlushAll@@YIXD@Z via fastcall map @w34c_flush@4 (b9 01 00 00 00 = mov ecx,1 fastcall load); w34c_pkt[w34c_thisC] = (unsigned char)f \u2014 a1 _thisComputer (site 0x35 = 0x4e7608) + 88 98 /disp (site 0x3b = 0x542b50 = ?packetTicks@@3PAJA+0x4d8 interior \u2014 array-extern uint8 spelling, the w33C packetBytes pattern). After the 21-B patch all other bytes are CL's own judge-passing output; ret path 5b/83 c4 04/c3 \u2713; tail 12 B census."
+ },
+ {
+  "rva": 455168,
+  "obj": "w34C_eject_v1",
+  "src": "build/survey/probes/w34C_eject_v1.c",
+  "maps": [
+   "@w34c_objal@8=@OBJAlias@8",
+   "_w34c_snd@16=$FA$_t_46b260"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "?MPEjectAdd@@YIXGG@Z \u2014 void __fastcall f(unsigned short a1, unsigned short a2). EXACT on v1, NO patch. FA keeps both fastcall params in registers per the si-param idiom: a1 stays in cx (the first 66 8b f2-class param), a2 in dx?? \u2014 actually FA: the params are consumed as unsigned short fastcall args (mangled GG); the C simply takes (unsigned short, unsigned short) and CL emits 66-size handling with a1 in cx. Body: extern int numComputers (guard); msg[8] on stack; msg[0]=0x18; objal = OBJAlias via @w34c_objal@8=@OBJAlias@8 (fastcall map with the @8 \u2014 fastcall FROM spelling emits bare, TO keeps mangled @OBJAlias@8 from layout syms 0x48f620); *(unsigned short*)(msg+1) = w34c_objal(a1,1); *(ush*)(msg+3) = w34c_objal(a2,1); w34c_snd(0xffffffffL, msg, 5, 1) \u2014 4 pushes right-to-left, call site 0x41 = $FA$_t_46b260 (still-stub t0005b). Tail 05 00 00 00 00 = census-proven."
+ },
+ {
+  "rva": 459664,
+  "obj": "w34C_kill_v1",
+  "src": "build/survey/probes/w34C_kill_v1.c",
+  "maps": [
+   "@w34c_objal@8=@OBJAlias@8",
+   "_w34c_snd@16=$FA$_t_46b260"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "?MPKillStats@@YIXGG@Z \u2014 void __fastcall f(unsigned short, unsigned short). EXACT on v1, NO patch. Same recipe as ?MPEjectAdd (twin body): numComputers guard, msg[0]=0x2d, two @OBJAlias@8 fastcall calls into msg+1/msg+3, w34c_snd(0xffffffffL,msg,5,1) via $FA$_t_46b260 (call site 0x41). Tail 05 00 00 00 00 = census-proven."
+ },
+ {
+  "rva": 489328,
+  "obj": "w34C_lock_v3",
+  "src": "build/survey/probes/w34C_lock_v3.cpp",
+  "maps": [],
+  "patch": [
+   "0x23,34,33c98b44241483f8017505b9010000008d7e086a008b44241451578b1a5052ff5364",
+   "0x47,25,750fc74674010000008bc75f5e5bc2080033c05f5e5bc20800"
+  ],
+  "provenance": [
+   "patch 0x23: toolchain-diff \u2014 CL hoists the vt pointer load (mov ebx,[edx]) to before the fl scan and re-reads the flags param into ecx/b8-style; FA's layout is: 33 c9 (fl=0 into ecx), mov eax,[esp+0x14] (flags into eax), 83 f8 01/75 05/b9 01 00 00 00 (branchy if flags==1 fl=1 into ECX), lea edi,[esi+8] (out), 6a 00 (ev), re-read 8b 44 24 14 (rect after one push, hence disp 0x14 not 0x1c), push ecx (fl pushed last from the fl register \u2014 no push for it in the CL sense), push edi (out), 8b 1a (vt load INSIDE the call-prep), push eax (rect), push edx (this), ff 53 64. Equal-length 34-B band (FA 0x23..0x44) \u2014 FA has no free-standing vt load (its 2 B budget is spent on early fl/flags) so band lengths match only as a whole band.",
+   "patch 0x47: toolchain-diff \u2014 CL spells the HRESULT test je + separate xor-path (74 08 / then the locked=1 store inside the fast path); FA spells jne-into-fail (75 0f targets the second 33 c0 5f 5e 5b c2 08 00 at 0x58) with the success path straight-line (c7 46 74 01 00 00 00; 8b c7; 5f 5e 5b; c2 08 00), placing the post-call return-0 block AFTER the ret. Equal-length 25-B band rewrite of FA 0x47..0x5f.",
+   "tail: toolchain-diff \u2014 none (FA chunk is pure code, 0x60 B, no tail pad)."
+  ],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "?Lock@CDirDrawSurface@@QAEPAU_DDSURFACEDESC@@PAUtagRECT@@H@Z \u2014 genuine C++ thiscall member fn (.cpp, w31E_SP recipe). Class layout matched with explicit padding: iface @+0 (mov edx,[ecx] in prolog), 4-B pad, _DDSURFACEDESC desc @+8 (0x6c pad struct), long locked @+0x74 (the c7 46 74 01 00 00 00 = locked=1 on COM-success \u2014 the dis listing elides this, byte source). COM stub table DDIFVt with 25 void* entries then the Lock entry at +0x64; the stub's return type must be LONG (85 c0 test eax,eax \u2014 an unsigned-char stub made CL emit 84 c0 in v2). Register plan that fell out of v3's C (no named out local, &desc directly in the call): edx=ifp, esi=this (8b f1), edi=out (8d 7e 08), bx=vt (8b 1a inside the band), all matching FA. The remaining two bands are toolchain-diff: the vt-hoist/branchy-fl-scan interleave (34 B) and the jne-vs-je fail-path inversion with the trailing return-0 block (25 B). No relocations at all (no external refs) \u2014 patches are pure content, self-contained jcc targets."
+ },
+ {
+  "rva": 494960,
+  "obj": "w34C_find_v3",
+  "src": "build/survey/probes/w34C_find_v3.c",
+  "maps": [
+   "_imp__FindNextFileA=__imp__FindNextFileA"
+  ],
+  "patch": [
+   "0x0,7,5356578b7c2410",
+   "0x7,2,85ff",
+   "0x13,4,8b742414",
+   "0x17,2,85f6",
+   "0x23,24,568b07508b1d00000000ffd385c0750832c05f5e5bc20800,6:6:_imp__FindNextFileA",
+   "0x3b,2,8b06",
+   "0x41,1,56",
+   "0x42,2,8b07",
+   "0x53,6,8a462c83c62c",
+   "0x5d,2,8a06",
+   "0x61,2,7c08",
+   "0x65,2,7f04",
+   "0x69,2,8806",
+   "0x6b,3,8a4601",
+   "0x6e,1,46"
+  ],
+  "provenance": [
+   "patch 0x0: toolchain-diff \u2014 reg-assignment band: FA enregs p1 in EDI with all three callee-saves pushed at the prolog (53 56 57 8b 7c 24 10); CL enregs p1 in ESI (8b 74 24 0c) and pushes edi lazily at 0x6. 7-B equal-length prolog rewrite.",
+   "patch 0x7: toolchain-diff \u2014 test edi,edi (85 ff) follows the reg-assignment band.",
+   "patch 0x13: toolchain-diff \u2014 same reg-assignment class: FA enregs p2 in ESI (8b 74 24 14); CL emitted p2 in EDI (8b 7c 24 14).",
+   "patch 0x17: toolchain-diff \u2014 test esi,esi (85 f6).",
+   "patch 0x23: toolchain-diff \u2014 FA's first call prep interleaves the imp-slot load after the pushes (56; 8b 07 = deref *p1 into eax; 50; 8b 1d; ff d3) and spells the result test test eax,eax (85 c0); CL loads the imp slot early (8b 1d at 0x23), pushes regs (57 56), and spells test al,al (84 c0). 24-B equal-length band rewrite of FA 0x23..0x3a with newsite 6:6:_imp__FindNextFileA \u2014 the FA imp disp site (FA 0x29) sits at patch-relative 0x6; CL's own imp reloc lies inside the band (CL 0x25) and is dropped, the newsite re-adds the DIR32 at the FA position (type 6). Map _imp__FindNextFileA=__imp__FindNextFileA points the extern at the idata IAT-slot public (idata spells it WITHOUT the @8; the FA exe symbol is __imp__FindNextFileA@8 at 0x58a4e0).",
+   "patch 0x3b: toolchain-diff \u2014 while-condition data deref: FA mov eax,[esi] (8b 06, data in esi); CL [edi].",
+   "patch 0x41: toolchain-diff \u2014 loop-call push of data: FA 56 (esi); CL 57 (edi).",
+   "patch 0x42: toolchain-diff \u2014 loop-call *p1 deref: FA 8b 07 (edi \u2014 p1 in edi); CL 8b 06 (esi).",
+   "patch 0x53: toolchain-diff \u2014 lowercase loop starts from data: FA 8a 46 2c/83 c6 2c (esi); CL 8a 47 2c/83 c7 2c (edi).",
+   "patch 0x5d: toolchain-diff \u2014 8a 06 (esi).",
+   "patch 0x61: toolchain-diff \u2014 jl disp: FA jumps PAST the store when al<0x61 (7c 08 targets the 8a 46 01 reload at 0x6b); CL only skips the sub (7c 06 targets the 88 07 store at 0x65) \u2014 semantic layout of the guard, same width.",
+   "patch 0x65: toolchain-diff \u2014 jg disp matching FA's store-in-guard layout (7f 04).",
+   "patch 0x69: toolchain-diff \u2014 store 88 06 (esi).",
+   "patch 0x6b: toolchain-diff \u2014 reload 8a 46 01 (esi).",
+   "patch 0x6e: toolchain-diff \u2014 inc esi (46) matches FA; CL spells 47 (edi) \u2014 the final reg-assignment byte."
+  ],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "_G_FindNextFile@8 \u2014 unsigned char __stdcall f(void **find, void *data). SEMANTICS (both dis + FA bytes): find is a POINTER to the find handle \u2014 the call is cb(*find, data), re-dereferenced per call (FA: mov eax,[edi]; push eax at both call preps). Flow: if (find==0) return 0; if (data==0) return 0; cb = IAT[__imp__FindNextFileA@8] (loaded once into ebx via 8b 1d moffs, call via ff d3); if (!cb(*find,data)) return 0; while (data->dwFileAttributes & 0x10) { if (cb(*find,data) != 1) return 0; } \u2014 the first-call test is test eax,eax (85 c0) while the loop test is 3c 01 (cmp al,1) since the stub returns unsigned char; then the lowercase loop: c = data[0x2c]; s = (char*)data+0x2c; if (c) do { c=*s; if (0x61<=c && c<=0x7a) c-=0x20; *s=c; c=s[1]; s++; } while (c); return 1. CL v3 (deref + 0x7b length) matches FA structurally everywhere except the p1/p2 enreg assignment (FA: p1->edi, p2->esi; CL: p1->esi, p2->edi \u2014 byte patches across 14 bands, all equal-length, no length change) and the imp-site position (newsite). All 15 jcc-disp/jl-polarity/site bands provenance'd above. Tail 05 00 00 00 00 = census-proven."
+ }
+]

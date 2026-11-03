@@ -1,0 +1,8 @@
+[
+ {"rva": 888176, "obj": "w34A_d8d70_v5", "src": "build/survey/probes/w34A_d8d70_v2.c",
+  "maps": [],
+  "patch": ["0xc,2,751b", "0xe,6,83781003", "0x12,9,81781420059319750c", "0x1d,7,83781c007506"],
+  "aliases": ["0=$FA$_t_4d8d70"], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 888864, "obj": "w34A_d9020_v5", "src": "build/survey/probes/w34A_d9020_v5.c",
+  "maps": [], "patch": [], "aliases": ["0=$FA$_t_4d9020"], "flags": "/c /O2 /Gy /G5"}
+]

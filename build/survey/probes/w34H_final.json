@@ -1,0 +1,123 @@
+[
+ {
+  "rva": 51344,
+  "verdict": "EXACT",
+  "name": "0xc890 (48 B, 0 params, unnamed)",
+  "obj": "w34H_c890_v2",
+  "src": "build/survey/probes/w34H_c890_v2.c",
+  "maps": [
+   "_w34h_smHide@0=?ShellHideMouse@@YGXXZ",
+   "_w34h_smShow@0=?ShellShowMouse@@YGXXZ",
+   "_w34h_cc80=$FA$_t_40cc80",
+   "_invertItemBrushq=?invertItemBrush@@3PAUT_HANDLE@@A"
+  ],
+  "patch": [],
+  "aliases": ["0=$FA$_t_40c890"],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "Unnamed void cdecl cleanup: ShellHideMouse(); call stub $FA$_t_40cc80; ShellShowMouse(); MMFreeHandle(invertItemBrush) via mov ecx,[sym]; then mov dword [invertItemBrush],0; ret. C++-mangled Shell* publics need maps FROM the CL stdcall spellings _w34h_smHide@0/_w34h_smShow@0 (map TO must be the exact ?Shell*@@YGXXZ mangling); MMFreeHandle is fastcall (@MMFreeHandle@4, direct C emission, ecx=global) so no map. Stub $FA$_t_40cc80 still lives in t00009. Content 0 addends verified: FA imm 0x4e81f8 == ?invertItemBrush@@3PAUT_HANDLE@@A symVA at both sites (mov ecx + mov imm32). alias 0=$FA$_t_40c890: unnamed chunk -> define the anchor (convention; no known consumers grep'd). No patches."
+ },
+ {
+  "rva": 71808,
+  "verdict": "EXACT",
+  "name": "_AngleOffNose@4 (112 B, 1 param)",
+  "obj": "w34H_11880_v2",
+  "src": "build/survey/probes/w34H_11880_v2.c",
+  "maps": [],
+  "patch": ["0x7,3,8d442400", "0x2d,4,668b4c2400", "0x4b,4,6689442400"],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x7: toolchain-diff CL encodes lea eax,[esp] disp-less (8d0424) while FA keeps the [esp+0x0] disp-8 form (8d442400); 1-B disp-byte insert, no newsite",
+   "patch 0x2d: toolchain-diff CL encodes mov cx,[esp] rm-less (66 8b 0c 24, after patch 0x7 shifted CL's 0x2c) while FA keeps 66 8b 4c 24 00; 1-B disp-byte insert, no newsite",
+   "patch 0x4b: toolchain-diff CL encodes mov [esp],ax rm-less (66 89 04 24, after both prior inserts) while FA keeps 66 89 44 24 00; 1-B disp-byte insert, no newsite"
+  ],
+  "notes": "stdcall short(1 ptr arg) ret 0x4: Angles(curThing+0x11, p, &s2, &s1) (args right-to-left: &s1=[esp+0] first push, push imm32 OFFSET curThing+0x11 = _curThing+0x11); then s2 = Abs(s2 - *(short*)(curThing+0x1d)); s1 = Abs(s1 - *(short*)(curThing+0x1f)); return max (short in ax; cmp cx,dx / jg keeps cx). NAKED-ASM route (v1 C FAILed on CL's disp-less [esp] encodings and reordering); v1 not carried. Direct C emissions: _Angles@16 stdcall and @Abs@4 fastcall (fastcall srcs emit @name@N, no leading underscore) - no maps; _curThing from extern char curThing[]. All 3 abs TOs verified content=addend: 0x508749/0x508755/0x508757 = _curThing(0x508738)+0x11/0x1d/0x1f. Patch offsets 0x2d/0x4b are post-earlier-patch coordinates (apply order matters). Tail = census 8d642400+8d642400+8da42400000000 (15 B)."
+ },
+ {
+  "rva": 935680,
+  "verdict": "EXACT",
+  "name": "__msize (102 B, 1 param)",
+  "obj": "w34H_e4700_v1",
+  "src": "build/survey/probes/w34H_e4700_v1.c",
+  "maps": [
+   "_lock=__lock",
+   "_unlock=__unlock",
+   "_hpq1=$FA$_t_4de2a0",
+   "_crtheap=__crtheap",
+   "_impHeapSize=__imp__HeapSize"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "int _msize(void* p) (C fn named _msize so CL emits __msize): lock(9); FA lea's &local0 ([esp+0xc]) / &local1 ([esp+0x10]) and reloads p=[esp+0x18] BEFORE the add esp,4 that cleans the lock call; rel32 call to still-stub $FA$_t_4de2a0(p,&l0,&l1) add esp,0xc; nonzero: bl=block byte (push 9 before mov bl), unlock(9) then shl ebx,4; else unlock(9), a1 mov eax,[__crtheap], push p/0/heap, ff 15 IAT call. Whole-body naked-asm (CL's C route interleaves lea/cleaup differently). TOs verified: _crtheap symVA 0x588c6c == FA imm (content 0); __imp__HeapSize (NO @12 - idata public per wave-33 rule) == FA IAT imm 0x58a5d8; $FA$_t_4de2a0 stub t000ea still alive. No patches."
+ },
+ {
+  "rva": 935008,
+  "verdict": "EXACT",
+  "name": "_towupper (117 B, 1 param)",
+  "obj": "w34H_e4460_v1",
+  "src": "build/survey/probes/w34H_e4460_v1.c",
+  "maps": [
+   "_lock=__lock",
+   "_towupper_lk=__towupper_lk",
+   "_unlock=__unlock",
+   "_ctype=__ctype",
+   "_nstream=__nstream"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "tolower wave-33 sibling, word-typed: int towupper(int) naked-asm whole-body (same global-cmp-embedded prolog + counter-dance wall). Fast path WORD compares cmp ax,61h/7ah with jb/ja (unsigned) then WORD sub ax,20h; slow path cmp [nstream+4]->je fresh (esi=0, inc [nstream+8]) else push 13h/mov esi,1/call __lock; 16-bit result carried di,ax; esi-steared tails: unlock branch does mov ax,di BEFORE add esp,4 (FA schedules the cleanup after the reload - v1 had it reversed, the only 6-B diff); free branch mov ax,di/dec [nstream+8]; shared pop edi/pop esi/ret at chunk end reached by fast-path jb/ja too. TOs verified: __ctype+0x388 (0x51a170+0x388=0x51a4f8), __nstream+4/+8 (0x589d80+); __towupper_lk stub t000fa still alive, same pattern as wave-33's __tolower_lk TO. No patches."
+ },
+ {
+  "rva": 914128,
+  "verdict": "EXACT",
+  "name": "0xdf2d0 (30 B, 0 params, unnamed)",
+  "obj": "w34H_df2d0_v1",
+  "src": "build/survey/probes/w34H_df2d0_v1.c",
+  "maps": [
+   "_w34h_cxr=?__CxxRestoreUnhandledExceptionFilter@@YAXXZ",
+   "_w34h_cxu=?__CxxUnhandledExceptionFilter@@YGJPAU_EXCEPTION_POINTERS@@@Z",
+   "_w34h_atexitq=_atexit",
+   "__imp__w34h_suefq@4=__imp__SetUnhandledExceptionFilter",
+   "_w34h_dbaseLow=?dbaseLow@@3PAEA"
+  ],
+  "patch": [],
+  "aliases": ["0=$FA$_t_4df2d0"],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "C route (no asm): w34h_atexitq((EXF)w34h_cxr); *(long*)(w34h_dbaseLow+0x2874) = w34h_suefq(w34h_cxu); - emits push OFFSET/call _atexit/add esp,4/push OFFSET/ff 15 IAT/a3 mov ds:[+0x2874],eax/ret = 30 B. KEY: suefq must be __declspec(dllimport) __stdcall (v1 __cdecl emitted direct e8 + add esp,4 = 0x20 B OVER the chunk); stdcall dllimport emits call dword ptr [__imp__w34h_suefq@4] with NO cleanup, and the wave-33 map shape FROM __imp__X@N TO __imp__SetUnhandledExceptionFilter (no @N). Push-offset externs declared as extern char[] (addresses taken only). a3 store addend 0x2874 baked by MASM, verified: ?dbaseLow@@3PAEA(symVA 0x586330)+0x2874 = FA imm 0x588ba4. PARENT WARN: src/Chunk_df2c0.c (5-B e9 thunk) maps df2c0T -> $FA$_t_4df2d0; this conversion removes the stub that defined it, so alias 0=$FA$_t_4df2d0 is carried HERE (retro-check Chunk_df2c0's swap entry stays resolvable against this alias)."
+ },
+ {
+  "rva": 863644,
+  "verdict": "EXACT",
+  "name": "__compute_viewer_dot_product (76 B, 0 params)",
+  "obj": "w34H_d2d9c_v1",
+  "src": "build/survey/probes/w34H_d2d9c_v1.c",
+  "maps": [
+   "_viewer_x=viewer_x",
+   "_viewer_y=viewer_y",
+   "_viewer_z=viewer_z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "Register-ABI helper (VM/BX-convention wall): the two pointer pseudoparams live in edi (dst words) and ebx (base words) and pass through imul to the edx:eax return - C cannot read edi/ebx args, so this burned the one naked-asm escape. void __declspec(naked) _compute_viewer_dot_product (leading-underscore C ident -> CL double-underscore emission __compute_viewer_dot_product = FA public). imul ecx after sar ecx,1; shl eax,0x10; adc-pair adds. 3 abs moffs sub eax,[sym] ride CL asm-reloc DIR32s: TOs viewer_x/y/z (bare spelling per dis.py/site annotation), content 0 verified == FA imm 0x513bce/d2/d6 == symVA. No patches."
+ }
+]

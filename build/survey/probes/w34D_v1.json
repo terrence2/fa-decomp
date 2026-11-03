@@ -1,0 +1,8 @@
+[
+{"rva": 515952, "obj": "w34D_7df70_v1", "src": "build/survey/probes/w34D_7df70_v1.c", "maps": [], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+{"rva": 518496, "obj": "w34D_7e960_v1", "src": "build/survey/probes/w34D_7e960_v1.c", "maps": [], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+{"rva": 518752, "obj": "w34D_7ea60_v1", "src": "build/survey/probes/w34D_7ea60_v1.c", "maps": [], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+{"rva": 521392, "obj": "w34D_7f4b0_v1", "src": "build/survey/probes/w34D_7f4b0_v1.c", "maps": [], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+{"rva": 521728, "obj": "w34D_7f600_v1", "src": "build/survey/probes/w34D_7f600_v1.c", "maps": [], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+{"rva": 553040, "obj": "w34D_87050_v1", "src": "build/survey/probes/w34D_87050_v1.c", "maps": [], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"}
+]

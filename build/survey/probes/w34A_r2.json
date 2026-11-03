@@ -1,0 +1,14 @@
+[
+ {"rva": 807724, "obj": "w34A_c532c_v2", "src": "build/survey/probes/w34A_c532c_v2.c",
+  "maps": ["_w34_dvTab=_DecompressVideoImage@20+0x88"],
+  "patch": [], "aliases": [], "flags": "/c /Od /Gy /G5"},
+ {"rva": 807724, "obj": "w34A_c532c_v3", "src": "build/survey/probes/w34A_c532c_v3.c",
+  "maps": ["_w34_dvTab=_DecompressVideoImage@20+0x88"],
+  "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 866704, "obj": "w34A_d3990_v2", "src": "build/survey/probes/w34A_d3990_v2.c",
+  "maps": [], "patch": [], "aliases": ["0=$FA$_t_4d3990"], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 888176, "obj": "w34A_d8d70_v2", "src": "build/survey/probes/w34A_d8d70_v2.c",
+  "maps": [], "patch": [], "aliases": ["0=$FA$_t_4d8d70"], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 888864, "obj": "w34A_d9020_v2", "src": "build/survey/probes/w34A_d9020_v2.c",
+  "maps": [], "patch": [], "aliases": ["0=$FA$_t_4d9020"], "flags": "/c /O2 /Gy /G5"}
+]

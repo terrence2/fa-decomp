@@ -1,0 +1,98 @@
+[
+ {
+  "rva": 543440,
+  "verdict": "EXACT",
+  "obj": "w34A_84ad0_v1",
+  "src": "build/survey/probes/w34A_84ad0_v1.c",
+  "maps": ["_w34_cA=$FA$rdata0+0x3bc", "_w34_cB=$FA$rdata0+0x3c4"],
+  "patch": [],
+  "aliases": ["0=$FA$_t_484ad0"],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "EXACT first probe, no patches. void w34_84ad0(void){ *(double*)((char*)&timerTicks+4) = *(double*)&w34_cA / *(double*)&w34_cB; } - FA's fld m64 / fdiv m64 / fstp m64 / ret (19 B code) falls out of CL directly; the 13-B census pad (8d9b00000000+8da42400000000) auto-proven. Constants kept OFF the obj .rdata by extern-int + maps to $FA$rdata0 anchors: +0x3bc = 86400000.0, +0x3c4 = 1572480.0 (quotient 55.0; FA does NOT fold to one constant - two rdata loads, so do not pre-divide in C). Store target = _timerTicks+0x4 map-free: bare 'timerTicks' emits _timerTicks and the C's +4 becomes the DIR32 addend (FA imm 0x549e40 = 0x549e3c+4 verified). alias 0=$FA$_t_484ad0 required: replaced stub t00072 defines that public and src/w30a_84ac0_v1.c maps w30a_fwdad0=$FA$_t_484ad0 - WARN PARENT: that existing entry's map now resolves against THIS obj's alias (same VA, still fine)."
+ },
+ {
+  "rva": 670864,
+  "verdict": "EXACT",
+  "obj": "w34A_a3c90_v1",
+  "src": "build/survey/probes/w34A_a3c90_v1.c",
+  "maps": ["_w34_fix=?fixupShape@@3DA"],
+  "patch": [],
+  "aliases": ["0=$FA$_t_4a3c90"],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "EXACT first probe, no patches. int __fastcall w34_a3c90(int a, int b){ int r = RMFind(a); return SMCallByName(0, (int)((char*)&w34_fix+0x34), RMType(a), r, b); } - CL evaluates the 5 cdecl args right-to-left so the two pre-arg pushes (b=edi, r=RMFind result) land on the stack BEFORE the RMType(a) call exactly like FA's interleave at 0x4a3c9b..0x4a3c9f; callee epilog add esp,0x14 / pop edi / pop esi / ret matches. RMFind/RMType are FA-internal still-stub publics with fastcall mangling (@RMFind@4, @RMType@4) - map-free, bare C spellings emit them; SMCallByName emits _SMCallByName (0x469740, layout public). map _w34_fix=?fixupShape@@3DA: C's +0x34 is the CL DIR32 addend, FA imm 0x505f44 = 0x505f10+0x34 verified. alias 0=$FA$_t_4a3c90 (replaced stub t00093 public; grep of all stubs/src found no other references - dead-anchor safety alias). 9-B census pad auto-proven."
+ },
+ {
+  "rva": 807724,
+  "verdict": "EXACT",
+  "obj": "w34A_c532c_v3",
+  "src": "build/survey/probes/w34A_c532c_v3.c",
+  "maps": ["_w34_dvTab=_DecompressVideoImage@20+0x88"],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "WRMonoPalette@12 stdcall(char* p, int n, int t) via the ONE inline-asm escape hatch. FA's body is a 16-bit register machine no C spelling reproduces (v1 /O2 short-vars = 0x7d B > 0x58 chunk: CL re-allocates through eax with and $0xffff00ff masks and 16-bit imul si/cx; v2 /Od twin = 0x10e B; both FATAL over-long). v3: __declspec(naked) __stdcall + body verbatim in __asm (push ebp/mov ebp,esp/push ebx/push edi; mov edi,[ebp+8]; mov ecx,[ebp+0xc]; mov ebp,[ebp+0x10]; L_body: movzx bx,[edi] / add bl,[edi+1] / add bl,[edi+2] / movzx ebx,bl / mov bl,w34_dvTab[ebx] / neg bx / 3 unrolled channels (movzx ax,[edi+i] / add ax,bx / imul bp / sub [edi+i],ah) / add edi,3 / loop L_body / pops / ret 0xc). mov bl,w34_dvTab[ebx] emits _w34_dvTab disp32 -> map TO _DecompressVideoImage@20+0x88 (FA imm 0x4c5110 = 0x4c5088+0x88 verified; _DecompressVideoImage@20 is a layout public). Trailing FA int3 (chunk byte 0x57) census-proven filler. src's function spelling 'WRMonoPalette' emits _WRMonoPalette@12 itself (no leading underscore written)."
+ },
+ {
+  "rva": 866704,
+  "verdict": "EXACT",
+  "obj": "w34A_d3990_v3",
+  "src": "build/survey/probes/w34A_d3990_v3.c",
+  "maps": [],
+  "patch": ["0xa,4,3bfe760f", "0x19,4,3bfe77f1"],
+  "aliases": ["0=$FA$_t_4d3990"],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0xa (cmp edi,esi; jbe skip): toolchain-diff - CL 4.2 canonicalizes pointer relational operand order to cmp iter,bound; jae (3b f7 73 0f) for BOTH (unsigned)lo<(unsigned)hi and (unsigned)hi>(unsigned)lo spellings (wave-28 canonicalization wall family); FA's CRT writer emitted cmp bound,iter; jbe (3b fe 76 0f). Equal 4-B length, same relation, displacement byte unchanged, no relocs.",
+   "patch 0x19 (loop-back cmp edi,esi; ja): toolchain-diff - same canonicalization for the do-while tail test: CL 3b f7 72 f1 -> FA 3b fe 77 f1. Equal 4-B length, same relation, displacement unchanged, no relocs."
+  ],
+  "notes": "CRT _initterm spelling: void __cdecl w34_d3990(long **lo, long **hi){ if ((unsigned long)hi > (unsigned long)lo) do { void *fn = *lo; if (fn != 0) ((void (__cdecl *)(void))fn)(); ++lo; } while ((unsigned long)hi > (unsigned long)lo); } - CL matches push esi/push edi, the arg reloads ([esp+0x10]/[esp+0xc] post-push), mov eax,[esi]/test/je +2/ff d0 call, add esi,4, and the pop edi/pop esi/ret epilog byte-for-byte; only the two cmp/jcc pairs need the operand-order patches above (identical bytes otherwise: v2 hi>lo spelling produced the identical canonicalized output as lo<hi). Patches are equal-length plain code, no relocs (all compares are register/imm). alias 0=$FA$_t_4d3990 required (replaced stub t000c9 public; grep found no other refs in stubs/src)."
+ },
+ {
+  "rva": 888176,
+  "verdict": "EXACT",
+  "obj": "w34A_d8d70_v8",
+  "src": "build/survey/probes/w34A_d8d70_v8.c",
+  "maps": [],
+  "patch": ["0xc,2,751b", "0xe,6,83781003", "0x12,2,7515", "0x14,9,81781420059319", "0x1b,2,750c", "0x1d,5,83781c00"],
+  "aliases": ["0=$FA$_t_4d8d70"],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0xc (jne tail disp 0x20->0x1b): toolchain-diff - CL's own fail-tail sits 5 B lower than FA's after the mem-cmp folds below; byte rewrite of the jne displacement to FA's shared xor/ret exit (target 0x29), 2-B, equal length, delta 0, no relocs.",
+   "patch 0xe (8b 48 10 / 83 f9 03 -> 83 78 10 03): toolchain-diff - CL 4.2 loads the displaced field into ecx before the compare (mov ecx,[eax+0x10]; cmp ecx,3) through the && chain; FA compares the MEMORY operand directly (cmp dword [eax+0x10],3). 6-B -> 4-B fold, no relocs.",
+   "patch 0x12 (75 18 -> 75 15): toolchain-diff - jne displacement fix to FA's shared exit after patch 0xe's -2 B shift; 2-B, delta 0, no relocs.",
+   "patch 0x14 (8b 48 14 / 81 f9 20 05 93 19 -> 81 78 14 20 05 93 19): toolchain-diff - same reg-load vs mem-cmp fold for the magic dword 0x19930520; 9-B -> 7-B, no relocs.",
+   "patch 0x1b (75 0d -> 75 0c): toolchain-diff - jne displacement fix after the -4 B cumulative shifts; 2-B, delta 0, no relocs.",
+   "patch 0x1d (8b 48 1c / 85 c9 -> 83 78 1c 00): toolchain-diff - CL's mov+test for er[7]==0 vs FA's direct cmp dword [eax+0x1c],0; 5-B -> 4-B, no relocs."
+  ],
+  "notes": "MS C++ exception filter, &&-chain positive spelling (v8 src = v2/v4 C; early-return and volatile spellings produced identical reg-load codegen - 3 variants each hit the same wall): int w34A_d8d70(long **pp){ long *er = *pp; return er[0] == 0xe06d7363 && er[4] == 3 && er[5] == 0x19930520 && er[7] == 0; } - structure EXACT as compiled (mov eax,[esp+4]/mov eax,[eax]; cmp [eax],imm32; chain of cmps; mov eax,1/ret; xor eax,eax/ret), but CL reg-caches fields 2-4 through the && short-circuit (mov ecx,[...]+cmp reg,imm / mov+test for the ==0) while FA's CL emitted direct memory compares with displaced operands; six patches fold the reg-loads back into FA's memory forms and re-pin the four jne displacements to FA's shared failing tail (patch list in provenance, sequential offsets, final code 0x2c = FA's 44 B exactly). Patches are plain code, no relocs in the chunk, no newsites needed. This matches dis.py's elided-instruction trap: the 81 78 14 magic cmp (7 B) between the +0x10 and ah checks came from raw FA bytes, not dis.py. alias 0=$FA$_t_4d8d70 required (replaced stub t000db public; grep found no other refs in stubs/src)."
+ },
+ {
+  "rva": 888864,
+  "verdict": "EXACT",
+  "obj": "w34A_d9020_v7",
+  "src": "build/survey/probes/w34A_d9020_v7.c",
+  "maps": [],
+  "patch": ["0x4,1,", "0x4,0,56", "0x9,1,", "0xb,3,", "0xd,0,8b7204", "0x14,3,8b0c31", "0x20,1,"],
+  "aliases": ["0=$FA$_t_4d9020"],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x4 (delete push ebx): toolchain-diff - CL unconditionally saves ebx (53) for this shape across five distinct C spellings (locals, casts, volatile, parameter types all identical codegen); FA saves only esi. 1-B delete, plain code, no relocs.",
+   "patch 0x4 (insert push esi 56): toolchain-diff - FA loads arg1 (a) into ecx AFTER push esi (mov ecx,[esp+8] post-push) while CL pushes its ebx first and then esi; moving FA's push esi to offset 4 restores FA's [esp+8] offset semantics; 1-B insert, plain code.",
+   "patch 0x9 (delete CL's old push esi): toolchain-diff - removes CL's own push esi now redundant after the insert above; 1-B delete.",
+   "patch 0xb (delete mov esi,[edx+4]): toolchain-diff - CL 4.2 hoists the t[1] load past the add (add eax,ecx) - 5 spellings all emitted mov esi,[edx+4] BEFORE add eax,ecx / test esi,esi; FA's order is t[0], += a, THEN t[1]. 3-B delete.",
+   "patch 0xd (insert mov esi,[edx+4] 8b7204): toolchain-diff - re-inserts the t[1] load at FA's position: after add eax,ecx, before test esi,esi; 3-B plain insert, no relocs.",
+   "patch 0x14 (8b 0c 0e -> 8b 0c 31): toolchain-diff - sib-byte base reg: CL encodes the *(long*)((char*)a+n) load as [esi+ecx*1] (base = the byte-offset reg); FA's writer used base = pointer reg, index = offset ([ecx+esi*1]); same bytes 8b 0c in both. 3-B, delta 0, no relocs.",
+   "patch 0x20 (delete pop ebx): toolchain-diff - pairs with the push ebx delete; 1-B delete; final code 0x21 = FA's 33 B exactly."
+  ],
+  "notes": "CRT-band pointer-chase (debug-heap block sum): long w34A_d9020(long *a, long *t){ long r, n; r = t[0]; r += (long)a; n = t[1]; if (n >= 0) { r += *(long*)((char*)*(long*)((char*)a + n) + t[2]); r += n; } return r; } - CL matched this byte-for-byte EXCEPT five scheduling/encoding deltas that survived all five spellings (extra push ebx/pop ebx from an unused save, t[1]-load hoist across the add, and the sib base/reg swap), so the winner is the pure C with 7 equal-relation byte patches listed in provenance (final bytes pre-verified equal to FA raw bytes before judging; no relocs in chunk, no newsites). Note the a+n access is BYTE-scaled (FA sib *1), NOT a[n] - v1's long* indexing emitted esi*4 and read the wrong fields. alias 0=$FA$_t_4d9020 required (replaced stub t000db public; grep found no other refs in stubs/src)."
+ }
+]
