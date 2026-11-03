@@ -1,0 +1,40 @@
+[
+ {
+  "verdict": "EXACT",
+  "rva": 740288,
+  "obj": "w42F_b4bc0_v1",
+  "src": "build/survey/probes/w42F_b4bc0_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "@G_TextureFlip@12 0xb4bc0 (112 B, no tail pad): fastcall (ecx=tbl, edx=n, [ebp+8]=arr, ret 4). Whole-body naked-asm transcription (w41F CopyDB15 recipe) - closes the wave-37 batch-H band (13 C/asm-tail variants left it KEEP-ASM). FA body: FP frame push ebp/sub esp,8; a1 moffs load of _cb + explicit nop at +0xb; [ebp-4]=edx / [ebp-8]=ecx spills interleaved with push ebx/esi/edi; top=(cb->w6-1)<<16 / bot=(tbl->w6-1)<<16; edx=+0x14 byte-stride walker vs edi element counter, stores at [arr+i*0x14+4] and [arr+i*0x14+0x10]; then _emit 0x60 pusha band, callee _G__Texture is asm-internal-convention (esi=tbl, eax=n, ebx=arr), _emit 0x61 popa, pop edi/esi/ebx, mov esp,ebp/pop ebp, ret 4. pusha/popa spelled _emit 0x60/0x61 to dodge the 66 60/61 pusha trap (wave 18). Zero patches; fixups DIR32 _cb @+0x7 (content 0 -> FA 0x4fcefc identity, matches FA .reloc 0x4b4bc7) + REL32 _G__Texture @+0x62 (content 0 -> FA disp 0x125c2, no .reloc HIGHLOW on either side). Emitted public @G_TextureFlip@12 = layout chunk name verbatim."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 645936,
+  "obj": "w42F_9db30_v1",
+  "src": "build/survey/probes/w42F_9db30_v1.c",
+  "maps": [
+   "_PLANEAddProc=?PLANEAddProc@@YAJXZ",
+   "_PLANEMoveProc=?PLANEMoveProc@@YAXD@Z"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "_PLANEProc 0x9db30 (96 B incl. its own .text jump table, FPO frameless): the GVProc/EJECTProc handler-resolver dispatcher family (w16b_2 recipe) - pure C, zero patches, landed EXACT on probe 1. C: long PLANEProc(unsigned char c) switch(c) with cases 0/2/3/6/7 returning (long)PLANEAddProc/PLANEMoveProc/PLANEEventProc/PLANESayProc/PLANECommentProc and the after-switch `return (long)GVProc(c);` as the shared default+c1/4/5 arm; CL 4.2 emits FA's xor ecx,ecx/mov al,[esp+4]/mov cl,al uchar-param plan, cmp ecx,7/ja, the ff 24 8d INLINE .text jump table at +0x3c (HARDStoreWeight precedent - 8 dwords, dup arm table[1]=[4]=[5]=def-block label), and the 5 b8<imm>;ret arm blocks in FA's order. Fixups verified: 5 DIR32 externs at +0x1f/+0x25/+0x2b/+0x31/+0x37 (mapped 2 + 3 identity _PLANEEventProc/_PLANESayProc/_PLANECommentProc, all still stubs) + 8 table dwords on internal $L labels whose defs match FA's table contents exactly ($L92=+0x14, $L95=+0x1e, $L96=+0x24, $L97=+0x2a, $L98=+0x30, $L99=+0x36, $L103=+0x3c) + REL32 _GVProc identity. 4-B lea esp,[esp+0] census tail auto-accepted. C fn named PLANEProc (emits _PLANEProc = chunk name; naming it _PLANEProc emitted __PLANEProc)."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 868368,
+  "obj": "w42F_d4010_v2",
+  "src": "build/survey/probes/w42F_d4010_v2.c",
+  "maps": [
+   "_strchr=_strchr+0x6"
+  ],
+  "patch": [],
+  "provenance": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "_strstr 0xd4010 (128 B, no tail pad, no FPO): FA's _strstr is an Intel-style optimized CRT copy (2-char head preload f0=dl/f1=dh, 1-char-needle case tail-jumps mid-body into _strchr+0x6 with ch already in AL and [esp+4]=haystack, 2-wide peeled scan with a pair-walk needle loop walking ecx the needle + esi the haystack + edi the match candidate, dead ebx push kept). NOT the naive VC4.2 CRT strstr (w38H v3 = 0x5b B, 0x27 unexplained tail) and not reachable in C (w38H v2 = 0xa6, v4 = 0x85; the mid-function ext jmp has no C shape; cdecl 2-arg returns emit call+ret per wave-6 d129, never a bare jmp). CL 4.2 re-optimizes REAL inline asm at /O2 (restructured the labeled control flow) and always emits 6-B long-form jcc at /Od, so the body is a raw _emit transcription of FA's 128 chunk bytes (CopyDB15/SetFlatColor _emit recipe) - bytes 0x00..0x6d and 0x73..0x7f emitted literal, with a real `jmp strchr` at 0x6e so the REL32 fixup is genuine; map TO _strchr+0x6 (= 0x4d3b96, verified: FA disp 0xfffffb13 over site 0x4d407f, link final = symVA+0x6+content-(site+4)) bakes addend 6 into the disp content at fit (content dword = 00000006) - delta in the map TO, payload 0. REL32 fixups create no HIGHLOW .reloc entry (FA also has none), so .reloc is untouched. C fn named strstr -> emits _strstr (chunk name identity); _strchr itself is still a stub, and any future _strchr conversion must keep its +6 byte as FA's push ebx loop-head (its +0..+5 xor eax,eax/mov al,[esp+8] ch-load is the skipped prologue)."
+ }
+]

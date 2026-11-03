@@ -1,0 +1,102 @@
+[
+ {
+  "rva": 34496,
+  "obj": "w42A_initmove_v1",
+  "src": "build/survey/probes/w42A_initmove_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "fastcall short param (y), zero directives on round 1. Recipe: y=0x10000 staged; s=angle short param spilled to 16-bit si (66 8b f1, wave-6/30 band); stores into extern char unitRight[]/unitUp[] reproduced naturally (68 push imm + 89 0d disp + a3 moffs), the unitRight+8/unitUp+8 sub-stores via displaced a3 (addend 8); two Rotate2 calls (fastcall self-ref/_Rotate2@8 identity); d=*(short*)(_grMode+6) via 0f bf movsx with addend-6 DIR32; each (x<<8)+0x80)/d via c1 e0 08 + 05 imm32 (0x80 not imm8-signed) + 99 cdq/f7 f9; pop esi sits mid-schedule between shl and 2nd add, CL reproduced naturally. 6-B census pad 8d9b00000000 auto-accept. Chunk has real layout name @InitScreenMove@4 (fastcall mangle = chunk public, no alias needed); 5 external callers (0x408790/0x409762/0x43fe81/0x43fec0/0x44032d) all still-stub chunks referencing the public. Fitted DIR32 fixup sites match FA .reloc (2 extra obj type-20 REL32 call dwords add no .reloc entries)"
+ },
+ {
+  "rva": 131840,
+  "obj": "w42A_zap_v2",
+  "src": "build/survey/probes/w42A_zap_v2.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_420300"
+  ],
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "cdecl-free stdcall @4 scan loop. Recipe: decl/statement order i-FIRST (long i; long *p; ... i=0; p=fortPlayers) forces CL to emit 33 c9 (i in ECX) then ba <imm _fortPlayers> (p init into EDX) matching FA; v1 (p-first) emitted b9 imm + 33 d2. *p==id compare 3b d8; miss path 83 c2 04 + 41; bound spelled p >= (long *)&fortSizeIndex emits 81 fa <imm> (DIR32, identity public _fortSizeIndex 0x5258f8, addend 0); hit path fortPlayers[i]=-1 via sib base-removed c7 04 8d (dest=EAX content, index i) + payload ffffffff; ret c2 04 00. 15-B census pad auto. Alias 0=$FA$_t_420300 retro-defines the anchor: sole external caller 0x41fd5c (still-stub chunk _FortMission@4) calls through the $FA$_t_420300 anchor. Fitted DIR32 sites {0x4,0x18,0x25} match FA .reloc exactly"
+ },
+ {
+  "rva": 138448,
+  "obj": "w42A_seek_v1",
+  "src": "build/survey/probes/w42A_seek_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_421cd0"
+  ],
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "stdcall @12 frameless scan: two independent do-while walk loops (walk1 over q[-0x44] via 8a 48 bc + 83 e8 44, walk2 over q[+0x44] via 8a 50 44 + 83 c0 44), each tested as flag (f6 c1/f6 c2 imm) with one-jcc exits (75 0b / 74 f5, do-while double-read shape); arg3 arg2 null-guard stores 85 c9/jz 74 02/89 01 and 85 c0/jz 74 02/89 08; c2 0c 00. Round 1 EXACT, no patches; zero relocs on BOTH sides (no absolute references in the body). 15 external callers (0x42231f..0x426147) all still-stub unnamed chunks - alias 0=$FA$_t_421cd0 retro-defines the anchor they call through"
+ },
+ {
+  "rva": 157488,
+  "obj": "w42A_thing_v1",
+  "src": "build/survey/probes/w42A_thing_v1.c",
+  "maps": [
+   "@w42A_slotcopy@8=$FA$_t_426785"
+  ],
+  "patch": [
+   "0xf,9,803d0000000004,2:6:_curThing",
+   "0x2b,0xf,803d000000000466c7461600087406,2:6:_curThing"
+  ],
+  "provenance": [
+   "patch 0xf: toolchain-diff - CL load-then-test (mov cl,[curThing] 8a0d imm + cmp cl,4 80f9, 9 B) vs FA cmp byte[curThing],4 direct (80 3d imm 04, 7 B, -2 B); DIR32 newsite at site 2 payload zero, identity public _curThing; downstream jne/jge disps need no recompute (uniform -2 shift)",
+   "patch 0x2b: toolchain-diff - CL schedules the 0x800 store between load and cmp (mov al,[curThing] a0 imm + mov word 0x800 + cmp al,4 3c04 + je, 15 B) vs FA cmp byte[curThing],4 direct + mov word 0x800 + je (equal 15 B); DIR32 newsite at site 2; equal length so no disp recomputes"
+  ],
+  "aliases": [
+   "0=$FA$_t_426730"
+  ],
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "fastcall this-like char* self scan (e=w42A_thing+... e=self+0x12; v=(short)COCornerSpeed() in ax; *(short*)e=v; then curThing==4&&v<0x54 -> *e=0x54; byte stores c6 46 14 01 / c6 46 15 00; if((int)_curThing==4)? 0x800 : 0x100 word store at self+0x16; *(short*)(self+0x18)=0; slotcopy(self,2) tail call e8 03 00 00 00). Helper slotcopy is interior of still-stub span 0x426785 (other external caller 0x426fea) - map @w42A_slotcopy@8=$FA$_t_426785 (fastcall FROM, no underscore, matches obj emitted external symbol). Sole external caller 0x4265c0 still-stub - alias 0=$FA$_t_426730 retro-defines anchor. 2 mem-cmp patches fix the only CL diffs: test-1 load-then-test->direct 80 3d (-2 B, no disp recomputes) and test-2 CL schedules 0x800 store between load and cmp->direct+store+je (equal 15 B); newsite site = PATCH-RELATIVE 2:6:_curThing (identity public _curThing 0x508738, payload zero). Fitted DIR32 sites {0x11,0x2d} match FA .reloc exactly; fitted length 85 B, no census pad needed PARENT FIX: provenance off tokens -> verbatim 0xf/0x2b."
+ },
+ {
+  "rva": 187504,
+  "obj": "w42A_cdi_v1",
+  "src": "build/survey/probes/w42A_cdi_v1.c",
+  "maps": [
+   "_w42A_q=$FA$_t_42dcf0"
+  ],
+  "patch": [
+   "0x22,1,74",
+   "0x29,1,f6",
+   "0x42,1,ff",
+   "0x46,1,2d",
+   "0x49,1,f6",
+   "0x4e,1,c6",
+   "0x50,1,c7",
+   "0x52,1,16",
+   "0x53,19,8d4302508a430125ff00ffff5055",
+   "0x6f,1,47",
+   "0x73,1,d3"
+  ],
+  "provenance": [
+   "patch 0x22: toolchain-diff - CL spilled num to edi (66 8b 7c 24 18) vs FA esi (66 8b 74 24 18); modrm 7c->74",
+   "patch 0x29: toolchain-diff - CL test di,di vs FA test si,si (block-1 num test); modrm ff->f6",
+   "patch 0x42: toolchain-diff - CL i in esi (xor esi,esi 33 f6) vs FA edi (33 ff); modrm f6->ff",
+   "patch 0x46: toolchain-diff - je disp: pre-band target was +0x79 (CL); after the -5 B band shrink FA exit target is +0x74; disp 32->2d",
+   "patch 0x49: toolchain-diff - CL loop-top test di,di vs FA test si,si; modrm ff->f6",
+   "patch 0x4e: toolchain-diff - CL movsx eax,di vs FA movsx eax,si (num==i compare operand); modrm c7->c6",
+   "patch 0x50: toolchain-diff - CL cmp eax,esi (i in esi) vs FA cmp eax,edi; modrm c6->c7",
+   "patch 0x52: toolchain-diff - jne disp: after -5 B band shrink the inner-loop head target moves +0x6e->+0x69; disp 1b->16",
+   "patch 0x53: toolchain-diff - CL staged-or arg2 (lea ecx,[ebx+2]; xor eax,eax; push ecx; mov al,[ebx+1]; and ecx,0xffff0000 81e1; or eax,ecx 0bc1; push eax; push ebp = 19 B) vs FA lea eax,[ebx+2]; push eax; mov al,[ebx+1]; and eax,0xffff00ff 25; push eax; push ebp (14 B, -5 B)",
+   "patch 0x6f: toolchain-diff - after -5 B band shrink: inc esi->edi (i in edi) modrm 46->47",
+   "patch 0x73: toolchain-diff - after -5 B band shrink: jne disp to loop top +0x47: ce->d3"
+  ],
+  "aliases": [],
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "stdcall @8 (unsigned short col, short num): rec=(char*)_objPtrs[col] (8b 0c 85 sib, base-removed, index=widened col, DIR32 _objPtrs addend 0); r=(char*)_COLGetInfo@4(*(long*)(rec+5)); if(num<0) w42A_q(col,0xf,r+4); p2=r loop: c=[p2+0x10], p2+=0x10, c&0x80 do-while; inner if(num<0||num==i) w42A_q(col, arg2=(e&0xffff0000)|[p2+1], (char*)(p2+2)). Helper w42A_q = still-stub interior chunk 0x42dcf0 whose 2 in-image call sites are BOTH inside cdi itself - map _w42A_q=$FA$_t_42dcf0 (cdecl bare FROM matches obj emitted external). No in-image callers or data refs touch 0x42dc70 - alias 0=?COLDrawInfo@@YGXGF@Z retro-defines the decor chunk-name public (FA.lib callers resolve it). Natural-C spelling variants v2a/v2b did NOT move CL's reg plan (num edi/i esi, store-before-cmp staging) - patches are the stable solution per w41C rmseq precedent: 6 one-byte modrm reg-color patches + 2 jcc disp recomputes (post-band-shrink) + 19->14 B staged-or arg2 band shrink; patch 0x46/0x52/0x6f/0x73 disps are downstream consequences of the 0x53 band. Fitted DIR32 site {0x13} matches FA .reloc exactly (3 extra type-20 REL32 call dwords add no .reloc entries); fitted length 123 B + 5-B census pad 0500000000 PARENT FIX: removed redundant alias 0=@COLDrawInfo public \u2014 mkstub auto-defines decor chunk-name publics; second def = self-collision."
+ }
+]

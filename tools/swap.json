@@ -19526,5 +19526,529 @@
    "patch 0x38: toolchain-diff \u2014 insert 5e before c3 (esi restore; 5e c3 at 0x38/0x39)"
   ],
   "notes": "w41bClearSpecial(): idx = *(long*)worldCenter+0x10 (8b 0d, ecx, fastcall-ready for the pred call); if (idx && w41bPred(idx)) { MMFreePtr(specials[idx]); idx reload; specials[idx] = null; w41bClrScales(); } FA keeps the null store value in esi (push esi entry + xor esi,esi after the wc load) and CL folds it to an immediate (c7 04 85 imm 00000000) then tail-jumps the last call - pointer-typed and direct-0 spellings both reconverged, so 7 small patches repair esi reservation plus the je disps to the shared 5e c3 exit. Code 58 B, no tail."
+ },
+ {
+  "obj": "w42A_initmove_v1",
+  "src": "build/survey/probes/w42A_initmove_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 34496,
+  "notes": "fastcall short param (y), zero directives on round 1. Recipe: y=0x10000 staged; s=angle short param spilled to 16-bit si (66 8b f1, wave-6/30 band); stores into extern char unitRight[]/unitUp[] reproduced naturally (68 push imm + 89 0d disp + a3 moffs), the unitRight+8/unitUp+8 sub-stores via displaced a3 (addend 8); two Rotate2 calls (fastcall self-ref/_Rotate2@8 identity); d=*(short*)(_grMode+6) via 0f bf movsx with addend-6 DIR32; each (x<<8)+0x80)/d via c1 e0 08 + 05 imm32 (0x80 not imm8-signed) + 99 cdq/f7 f9; pop esi sits mid-schedule between shl and 2nd add, CL reproduced naturally. 6-B census pad 8d9b00000000 auto-accept. Chunk has real layout name @InitScreenMove@4 (fastcall mangle = chunk public, no alias needed); 5 external callers (0x408790/0x409762/0x43fe81/0x43fec0/0x44032d) all still-stub chunks referencing the public. Fitted DIR32 fixup sites match FA .reloc (2 extra obj type-20 REL32 call dwords add no .reloc entries)"
+ },
+ {
+  "obj": "w42A_zap_v2",
+  "src": "build/survey/probes/w42A_zap_v2.c",
+  "aliases": [
+   "0=$FA$_t_420300"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 131840,
+  "notes": "cdecl-free stdcall @4 scan loop. Recipe: decl/statement order i-FIRST (long i; long *p; ... i=0; p=fortPlayers) forces CL to emit 33 c9 (i in ECX) then ba <imm _fortPlayers> (p init into EDX) matching FA; v1 (p-first) emitted b9 imm + 33 d2. *p==id compare 3b d8; miss path 83 c2 04 + 41; bound spelled p >= (long *)&fortSizeIndex emits 81 fa <imm> (DIR32, identity public _fortSizeIndex 0x5258f8, addend 0); hit path fortPlayers[i]=-1 via sib base-removed c7 04 8d (dest=EAX content, index i) + payload ffffffff; ret c2 04 00. 15-B census pad auto. Alias 0=$FA$_t_420300 retro-defines the anchor: sole external caller 0x41fd5c (still-stub chunk _FortMission@4) calls through the $FA$_t_420300 anchor. Fitted DIR32 sites {0x4,0x18,0x25} match FA .reloc exactly"
+ },
+ {
+  "obj": "w42A_seek_v1",
+  "src": "build/survey/probes/w42A_seek_v1.c",
+  "aliases": [
+   "0=$FA$_t_421cd0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 138448,
+  "notes": "stdcall @12 frameless scan: two independent do-while walk loops (walk1 over q[-0x44] via 8a 48 bc + 83 e8 44, walk2 over q[+0x44] via 8a 50 44 + 83 c0 44), each tested as flag (f6 c1/f6 c2 imm) with one-jcc exits (75 0b / 74 f5, do-while double-read shape); arg3 arg2 null-guard stores 85 c9/jz 74 02/89 01 and 85 c0/jz 74 02/89 08; c2 0c 00. Round 1 EXACT, no patches; zero relocs on BOTH sides (no absolute references in the body). 15 external callers (0x42231f..0x426147) all still-stub unnamed chunks - alias 0=$FA$_t_421cd0 retro-defines the anchor they call through"
+ },
+ {
+  "obj": "w42A_thing_v1",
+  "src": "build/survey/probes/w42A_thing_v1.c",
+  "maps": [
+   "@w42A_slotcopy@8=$FA$_t_426785"
+  ],
+  "patch": [
+   "0xf,9,803d0000000004,2:6:_curThing",
+   "0x2b,0xf,803d000000000466c7461600087406,2:6:_curThing"
+  ],
+  "aliases": [
+   "0=$FA$_t_426730"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 157488,
+  "provenance": [
+   "patch 0xf: toolchain-diff - CL load-then-test (mov cl,[curThing] 8a0d imm + cmp cl,4 80f9, 9 B) vs FA cmp byte[curThing],4 direct (80 3d imm 04, 7 B, -2 B); DIR32 newsite at site 2 payload zero, identity public _curThing; downstream jne/jge disps need no recompute (uniform -2 shift)",
+   "patch 0x2b: toolchain-diff - CL schedules the 0x800 store between load and cmp (mov al,[curThing] a0 imm + mov word 0x800 + cmp al,4 3c04 + je, 15 B) vs FA cmp byte[curThing],4 direct + mov word 0x800 + je (equal 15 B); DIR32 newsite at site 2; equal length so no disp recomputes",
+   "parent fix: provenance off tokens 0x0f/0x2b -> verbatim keys 0xf/0x2b (wave-40/41 verbatim rule, strike 3)"
+  ],
+  "notes": "fastcall this-like char* self scan (e=w42A_thing+... e=self+0x12; v=(short)COCornerSpeed() in ax; *(short*)e=v; then curThing==4&&v<0x54 -> *e=0x54; byte stores c6 46 14 01 / c6 46 15 00; if((int)_curThing==4)? 0x800 : 0x100 word store at self+0x16; *(short*)(self+0x18)=0; slotcopy(self,2) tail call e8 03 00 00 00). Helper slotcopy is interior of still-stub span 0x426785 (other external caller 0x426fea) - map @w42A_slotcopy@8=$FA$_t_426785 (fastcall FROM, no underscore, matches obj emitted external symbol). Sole external caller 0x4265c0 still-stub - alias 0=$FA$_t_426730 retro-defines anchor. 2 mem-cmp patches fix the only CL diffs: test-1 load-then-test->direct 80 3d (-2 B, no disp recomputes) and test-2 CL schedules 0x800 store between load and cmp->direct+store+je (equal 15 B); newsite site = PATCH-RELATIVE 2:6:_curThing (identity public _curThing 0x508738, payload zero). Fitted DIR32 sites {0x11,0x2d} match FA .reloc exactly; fitted length 85 B, no census pad needed"
+ },
+ {
+  "obj": "w42A_cdi_v1",
+  "src": "build/survey/probes/w42A_cdi_v1.c",
+  "maps": [
+   "_w42A_q=$FA$_t_42dcf0"
+  ],
+  "patch": [
+   "0x22,1,74",
+   "0x29,1,f6",
+   "0x42,1,ff",
+   "0x46,1,2d",
+   "0x49,1,f6",
+   "0x4e,1,c6",
+   "0x50,1,c7",
+   "0x52,1,16",
+   "0x53,19,8d4302508a430125ff00ffff5055",
+   "0x6f,1,47",
+   "0x73,1,d3"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 187504,
+  "provenance": [
+   "patch 0x22: toolchain-diff - CL spilled num to edi (66 8b 7c 24 18) vs FA esi (66 8b 74 24 18); modrm 7c->74",
+   "patch 0x29: toolchain-diff - CL test di,di vs FA test si,si (block-1 num test); modrm ff->f6",
+   "patch 0x42: toolchain-diff - CL i in esi (xor esi,esi 33 f6) vs FA edi (33 ff); modrm f6->ff",
+   "patch 0x46: toolchain-diff - je disp: pre-band target was +0x79 (CL); after the -5 B band shrink FA exit target is +0x74; disp 32->2d",
+   "patch 0x49: toolchain-diff - CL loop-top test di,di vs FA test si,si; modrm ff->f6",
+   "patch 0x4e: toolchain-diff - CL movsx eax,di vs FA movsx eax,si (num==i compare operand); modrm c7->c6",
+   "patch 0x50: toolchain-diff - CL cmp eax,esi (i in esi) vs FA cmp eax,edi; modrm c6->c7",
+   "patch 0x52: toolchain-diff - jne disp: after -5 B band shrink the inner-loop head target moves +0x6e->+0x69; disp 1b->16",
+   "patch 0x53: toolchain-diff - CL staged-or arg2 (lea ecx,[ebx+2]; xor eax,eax; push ecx; mov al,[ebx+1]; and ecx,0xffff0000 81e1; or eax,ecx 0bc1; push eax; push ebp = 19 B) vs FA lea eax,[ebx+2]; push eax; mov al,[ebx+1]; and eax,0xffff00ff 25; push eax; push ebp (14 B, -5 B)",
+   "patch 0x6f: toolchain-diff - after -5 B band shrink: inc esi->edi (i in edi) modrm 46->47",
+   "patch 0x73: toolchain-diff - after -5 B band shrink: jne disp to loop top +0x47: ce->d3",
+   "parent fix: removed redundant alias 0=?COLDrawInfo@@YGXGF@Z \u2014 mkstub already auto-defines the decor chunk-name public (c[name][1:] alias), a second def made the fit obj collide with itself (LNK2005 both names f0069b)"
+  ],
+  "notes": "stdcall @8 (unsigned short col, short num): rec=(char*)_objPtrs[col] (8b 0c 85 sib, base-removed, index=widened col, DIR32 _objPtrs addend 0); r=(char*)_COLGetInfo@4(*(long*)(rec+5)); if(num<0) w42A_q(col,0xf,r+4); p2=r loop: c=[p2+0x10], p2+=0x10, c&0x80 do-while; inner if(num<0||num==i) w42A_q(col, arg2=(e&0xffff0000)|[p2+1], (char*)(p2+2)). Helper w42A_q = still-stub interior chunk 0x42dcf0 whose 2 in-image call sites are BOTH inside cdi itself - map _w42A_q=$FA$_t_42dcf0 (cdecl bare FROM matches obj emitted external). No in-image callers or data refs touch 0x42dc70 - alias 0=?COLDrawInfo@@YGXGF@Z retro-defines the decor chunk-name public (FA.lib callers resolve it). Natural-C spelling variants v2a/v2b did NOT move CL's reg plan (num edi/i esi, store-before-cmp staging) - patches are the stable solution per w41C rmseq precedent: 6 one-byte modrm reg-color patches + 2 jcc disp recomputes (post-band-shrink) + 19->14 B staged-or arg2 band shrink; patch 0x46/0x52/0x6f/0x73 disps are downstream consequences of the 0x53 band. Fitted DIR32 site {0x13} matches FA .reloc exactly (3 extra type-20 REL32 call dwords add no .reloc entries); fitted length 123 B + 5-B census pad 0500000000"
+ },
+ {
+  "obj": "w42B_roget_v5",
+  "src": "build/survey/probes/w42B_roget_v5.c",
+  "maps": [
+   "_w42b_uf4x=?SC_uf4@@3KA+0x4",
+   "_w42b_roEnd=_ro+0x6d6"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 307264,
+  "notes": "_ROGet@8 (128 B = 121 code + 7-B census pad 8da42400000000). Recipe: declare the returned slot as `unsigned long w` (NOT ushort) so `w = *(unsigned short *)r` loads xor eax/eax + mov ax,[edx] (32-bit zero-extended view) and objPtrs[w] sibs via EAX (8b 1c 85) with NO mask copy; w must be DEAD after the sib (return = `*(unsigned short *)r` re-deref, NOT the variable) which frees EAX so the currentTime load emits 66 a1 moffs AX-cache and the flag param reads mov al,[esp+0x10] (clobbering ax, then the found path reloads mov ax,[edx] before ret 8). Loop = do{...}while(r < _ro+0x6d6) with the xor eax reload inside the loop head (jb loops back to the xor); mask test = *(long *)((char *)objPtrs[w] + 1) & 1 (test [ebx+1],ecx with mov ecx,1 hoisted before the loop, reusing the dead ?SC_uf4+0x4 limit reg). FA's dead ebp save (55 prolog / 5d pops) is reproduced by CL itself for free (w32-dead spelling) \u2014 no patch needed. Alternative spellings w42B_roget_v6/v7/v8 (scalar ct extern / declared op local) also EXACT byte-identical; v5 kept as winner (2 maps only). No 0= aliases: FA's 3 e8 callers into ROGet (@EJECTAdd@4 @0x68b7b, _MANAdd@24 @0x7bd8b, _PROJAdd@40 @0xbceaa) are rel32 self-resolvers, and 0 data VA references exist."
+ },
+ {
+  "obj": "w42B_pktnew_v2",
+  "src": "build/survey/probes/w42B_pktnew_v2.c",
+  "maps": [
+   "_pkt_set_header=?pkt_set_header@@YAXHPAUNET_PKT@@H@Z"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 379984,
+  "notes": "?pkt_build_new_player (112 B incl 11-B census pad 8d642400+8da42400000000). Recipe: after pkt_set_header(-1, pkt, 3) and the word store *(ushort*)(pkt+4)=id, write the 14-byte NET_ADDRESS copy through a declared cursor local `char *d = pkt + 6` with four offset stores *(ulong*)d / *(ulong*)(d+4) / *(ulong*)(d+8) / *(ushort*)(d+0xc) \u2014 CL then materializes lea edx,[ebx+0x6] once and stores through [edx+0/4/8/0xc] with scratch rotation dword0=eax (8b 01/89 02), dword1=ebp (8b 69 04/89 6a 04), dword2=esi (8b 71 08/89 72 08), word=ax (66 8b 41 0c/66 89 42 0c). strcpy intrinsic tail: mov edi,[esp+0x1c] hoisted between dword0/1 stores; count staged via mov edx,ecx (8b d1) and reloaded mov ecx,edx (8b ca); 5d pop ebp scheduled between the reload and and ecx,3 (matches FA). No strcpy symbol reference emitted (fully inlined) \u2014 only map needed = _pkt_set_header."
+ },
+ {
+  "obj": "w42B_pktlost_v2",
+  "src": "build/survey/probes/w42B_pktlost_v2.c",
+  "maps": [
+   "_pkt_set_header=?pkt_set_header@@YAXHPAUNET_PKT@@H@Z"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 380096,
+  "notes": "?pkt_build_lost_player \u2014 byte twin of pktnew_v2 with header type 0x15 (6a 15). Same cursor + scratch-rotation recipe."
+ },
+ {
+  "obj": "w42B_tgta_v2",
+  "src": "build/survey/probes/w42B_tgta_v2.c",
+  "maps": [
+   "_w26_svcGate=_serviceTicks+0x20",
+   "_w26_svcTick=_serviceTicks+0xf4",
+   "_w26_curThing11=_curThing+0x11",
+   "_AnglesOffNoseQ@16=_AnglesOffNose@16",
+   "@AbsQ@4=@Abs@4"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 410784,
+  "notes": "_CTEval_tgtaspectangle (160 B). CTEval_tgtfacing (wave-26c) gate structure + 16-bit idiv recipe (q=0xb6 / 0f bf c0 movsx). KEY lever: locals esp-slot assignment \u2014 v1 with decls (t0, t1, q, m) put CL's t0 at [esp+2] (FA wants t0 at [esp+0]); declaring t1 FIRST (v2: t1, t0, q, m) flips the two &t-slot leas and every [esp]<>[esp+2] access to FA's assignment \u2014 10 single-byte diffs all vanished. Map spellings = w26c family (svcGate/svcTick/curThing11 + _AnglesOffNoseQ@16 + @AbsQ@4 fastcall bare form)."
+ },
+ {
+  "obj": "w42B_mtalt_v2",
+  "src": "build/survey/probes/w42B_mtalt_v2.c",
+  "maps": [
+   "_w42b_f00=$FA$_t_464f00",
+   "_w42b_c90=$FA$_t_464c90",
+   "_w42b_fc0=$FA$_t_464fc0",
+   "_w42b_fa0=$FA$_t_464fa0",
+   "_MVRMoveToAltQ@24=_MVRMoveToAlt@24"
+  ],
+  "patch": [
+   "0x13,2,8bd8",
+   "0x1a,4,3bc37f09",
+   "0x23,6,3bc37d028bd8",
+   "0x2e,3,668bf8",
+   "0x4e,1,57",
+   "0x51,1,53"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 413664,
+  "provenance": [
+   "patch 0x13: toolchain-diff reg color: CL materializes b (c90<<8) in EDI (8b f8), FA in EBX (8b d8); replaced 2 B",
+   "patch 0x1a: toolchain-diff cmp orientation + polarity of the u1 clamp test: CL cmp edi,eax / jl (3b c7 7c 09), FA cmp eax,ebx / jg (3b c3 7f 09); replaced 4 B (no rel8 change: both +0x09 into the shared mov ebx/edi,eax)",
+   "patch 0x23: toolchain-diff cmp orientation + polarity of the u2 min test + the shared set: CL cmp edi,eax / jle / mov edi,eax (3b c7 7e 02 8b f8), FA cmp eax,ebx / jge / mov ebx,eax (3b c3 7d 02 8b d8); replaced 6 B",
+   "patch 0x2e: toolchain-diff reg color: d (fc0 result) in EBX is CL's home (66 8b d8 mov bx,ax), FA's is EDI (66 8b f8 mov di,ax); replaced 3 B",
+   "patch 0x4e: toolchain-diff arg5 push color: push d via ebx (53) in CL, via edi (57) in FA; replaced 1 B",
+   "patch 0x51: toolchain-diff arg2 push color: push b via edi (57) in CL, via ebx (53) in FA; replaced 1 B"
+  ],
+  "notes": "_CTDo_movetoalt (128 B = 125 code + 3-B census pad 8d4900). C shape: a=(ushort)f00(); b=c90<<8; signed-long clamp if(u1>_ctt+0x75 max)/else if(u2<... min) via *(long*)(curThingType+0x75/0x79); d=(ushort)fc0(); e=fa0(); gate serviceTicks[0xec] return; MVRMoveToAlt stdcall 6 args with shorts pushed raw; then word-zero stores st+0x100 and st+0xfc (66 c7 05), mov eax,1 + byte stores st+0xf0/st+0xf8 (a2). Signedness of the clamp decls (long u1/u2/b) is REQUIRED for FA's jg(7f)/jge(7d) \u2014 unsigned gives CL ja(77)/jae(73). CL's saved-pool assignment stayed by touch order (a,b,d) -> (esi,edi,ebx) regardless of decl order (v2 tried decls (a,d,b,e)) and the cmp orientation canonicalizes reg-first (cmp b,u1 / jl / jle) while FA has load-first (cmp u1,b / jg / jge) \u2014 the w38D _CTDo_move sibling precedent: reg color + orientation not steerable, patch the band. Patches below are pure byte-swaps (no length change, no fixup touched). ANCHOR LIVENESS: maps TO $FA$_t_464f00 (kept alive by w41D_64f00_v2's converter alias 0=$FA$_t_464f00), $FA$_t_464c90, $FA$_t_464fa0, $FA$_t_464fc0 (chunks 0x464c90/464fa0/464fc0 still stubs today; if a parallel batch converts one it must carry its own 0=$FA$_t_<hex> alias). No 0= alias needed for mtalt itself: 0 data VA references."
+ },
+ {
+  "obj": "w42C_findfirst_v2",
+  "src": "build/survey/probes/w42C_findfirst_v2.c",
+  "maps": [
+   "__imp__FindFirstFileA@8=__imp__FindFirstFileA",
+   "__imp__FindNextFileA@8=__imp__FindNextFileA",
+   "__imp__FindClose@4=__imp__FindClose",
+   "_w42c_malloc=$FA$_t_4d4980"
+  ],
+  "patch": [
+   "0x6b,43,803f0074cf8a0f80f9617c0a80f97a7f0580e920880f8a4f014784c975e75f5e5bc2080090"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 494816,
+  "provenance": [
+   "patch 0x6b: toolchain-diff \u2014 band 43->37 replaces CL's duplicated FindClose+return-0 exit per branch (exit blocks folded back into the found-name loop) with FA's single cmp byte [edi],0 / je / lowercase-caps loop / ret / 90 tail; end of band is FA code end 0x8d + census pad."
+  ],
+  "notes": "Chunk _G_FindFirstFile@8 @0x78ce0 (144 B), stdcall 2 args, returns long (the malloc'd 22-B struct). Natural C: dllimport stdcall FindFirstFileA (unsigned long) / FindNextFileA (unsigned char return \u2014 gives FA's 3c 01 compare naturally) / FindClose; malloc wrapper is the unnamed chunk at rva 0x4d4980, still stub -> map TO anchor $FA$_t_4d4980 addend 0 (its e8 disp verified: FA 0x54bc05). FA quirk: empty-name path (first byte 0) returns 0 WITHOUT FindClose \u2014 spelled as early return before the FindClose call. Imp maps follow the @N-has-no-def rule (idata defines undecorated __imp__X only). Link-verified 4/4 DIR32 sites + final imms == FA, e8 target OK; census tail auto (90)."
+ },
+ {
+  "obj": "w42C_addstore_v3",
+  "src": "build/survey/probes/w42C_addstore_v3.c",
+  "maps": [
+   "_w42c_cp=_campaignPilot+0x1c60"
+  ],
+  "patch": [
+   "0x0,17,535657be000000005533db8b7c241833ed,4:6:_w42c_cp",
+   "0x13,1,6e",
+   "0x17,2,5657",
+   "0x26,1,c6",
+   "0x3c,1,29",
+   "0x4b,35,668b4e0e6681f9ff7f74378b4424145d6603c15f6689460e5e5bc3",
+   "0x66,28,b9ffffffff2bc0f2aef7d12bf98bc1c1e9028bf78bfaf3a58bc883e103f3a4",
+   "0x85,13,8b4c241466894a0e5d5f5e5bc3"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 520992,
+  "provenance": [
+   "patch 0x0: toolchain-diff \u2014 17-B head band: FA pushes 53 56 57 / bf <imm> / 55 33 db / 8b 7c 24 18 / 33 ed; CL's bf payload (baked 0x4f6778 literal) zeroed and re-attached via newsite 2->0x4 DIR32 _w42c_cp; DELTA RULE: newsite payload = 0, delta 0x1c60 lives in the map TO _campaignPilot+0x1c60 (fitobj bakes it into every _w42c_cp content; final imm 0x4f6778 == FA, double-add class avoided).",
+   "patch 0x13: toolchain-diff \u2014 1-B modrm reg byte 46->6e: FA's walker lives in esi with the compare against r->name; CL picked edi (register-pool flip from the v3 `long i, j, n` decls).",
+   "patch 0x17: toolchain-diff \u2014 2-B push pair 57 56->56 57: FA pushes the two regs in the opposite order (save/restore order swapped with the pool flip).",
+   "patch 0x26: toolchain-diff \u2014 1-B jcc displacement byte (loop-1 back-edge stride differs by 1 byte after the 0x17 push-order swap).",
+   "patch 0x3c: toolchain-diff \u2014 1-B jcc displacement byte (loop-2 walker init distance).",
+   "patch 0x4b: toolchain-diff \u2014 found-path band 35->27: FA's short-circuit len==0x7fff guard + len=v+old + return-v sequence dropped by CL; replaced with FA bytes verbatim (66 8b 4e 0e / 66 81 f9 ff 7f / 74 37 / 8b 44 24 14 / 5d / 66 03 c1 / 5f / 66 89 46 0e / 5e / 5b / c3).",
+   "patch 0x66: toolchain-diff \u2014 copy-strlen/memcpy band 28->31: CL's inlined repnz scasb strlen + inline memcpy lost FA's 2b f9 / 8b f7 pointer-restore pair (register-pool flip moved both pointers); band re-adds them (inline strlen + 66/32-bit spill-free memcpy, FA byte-exact).",
+   "patch 0x85: toolchain-diff \u2014 copy-exit band 13->13: FA's 8b 4c 24 14 / 66 89 4a 0e / 5d / 5f / 5e / 5b / c3 has the 5d (pop ebp) AFTER the 66 89 copy-exit store; CL interleaved differently; store-source ecx = strlen+1 comes from the C returning n on the copy path."
+  ],
+  "notes": "Chunk _AddCampaignStore @0x7f320 (160 B), cdecl 2 args (long v, char *name), returns long. extern stricmp (only the first walk's call site is a real e8 to _stricmp 0x4d59e0 \u2014 disp verified); struct w42c_rec {char name[14]; short len;}. Store = _campaignPilot+0x1c60 (FA bf imm 0x4f6778; delta 0x1c60 in map TO). Loops: loop-1 walks 0x32 entries @ stride 0x10 matching len==0 && stricmp==0 (goto found); loop-2 walks the whole table and `return j` (j=0x32 at exit \u2014 CL kept the counter, no const reload needed). Found path: new len = (short)(v+old); 0x3c01 (v==0x7fff clamp order 39->3b class) handled by band. Copy path: inline strlen +1, inline memcpy, return len. Link-verified 2/2 DIR32 sites (0x4 newsite + 0x2f walker) with final imms == FA; type-20 _stricmp disp OK. Census tail 14 B (8da42400000000 x2) auto-accepted, no provenance needed."
+ },
+ {
+  "obj": "w42C_getmillis_v2",
+  "src": "build/survey/probes/w42C_getmillis_v2.c",
+  "maps": [
+   "_w42c_sleep=?noTimerSleep@@3JA",
+   "_w42c_curT=_currentT",
+   "__imp__QueryPerformanceCounter@4=__imp__QueryPerformanceCounter"
+  ],
+  "patch": [
+   "0xf,1,13",
+   "0x10,5,8b0d08000000,2:6:_w42c_sleep",
+   "0x17,1,c9"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 544208,
+  "provenance": [
+   "patch 0xf: toolchain-diff \u2014 jne displacement byte 15->13 (FA's zero-check block is 2 B shorter; CL framed an extra byte).",
+   "patch 0x10: toolchain-diff \u2014 CL's a1 moffs (mov eax,[moffs], 5 B) -> FA's 8b 0d form (6 B, second+ global reload); newsite 2->0x12 DIR32 _w42c_sleep with payload 08000000 (content 8 = _currentT-relative +8; final imm 0x4f8320 = ?noTimerSleep@@3JA+8 == FA byte-verified; anchor 0x4f8318 base, addend 0).",
+   "patch 0x17: toolchain-diff \u2014 1-B test/je band byte (85 c9 / je form vs CL's shortened framing after the 6-B reload)."
+  ],
+  "notes": "Chunk _TIMEGetMillis @0x84dd0 (112 B), cdecl 0 params, returns long. __int64 (NOT long long \u2014 C2632) delta*1000/div math -> CRT publics __allmul (rva 0x4d4d40) and __alldiv (0x4d4c90); REAL PUBLICS so no maps needed; both e8 disps verified vs FA. `(long)` cast of the __int64 quotient skips the edx clear, matching FA. Map _w42c_curT=_currentT: C indexes w42c_curT[8] so CL DIR32 content = 8 (FA imm 0x549e20) and w42c_curT[0xc] content 0xc \u2014 but the 0x4 a1 uses content 0 (base read) \u2014 contents verified byte-for-byte. 7/7 FA fixup sites match fit obj (types 6) with final imms == FA. No tail (fpo-less 112-B chunk fully covered by CL code)."
+ },
+ {
+  "obj": "w42C_settimerint_v2",
+  "src": "build/survey/probes/w42C_settimerint_v2.c",
+  "maps": [
+   "_w42c_sleep=?noTimerSleep@@3JA",
+   "_w42c_curT8=_currentT+0x8",
+   "_w42c_timerTicks=_timerTicks",
+   "_w42c_lastTicks=_lastTicks",
+   "_w42c_hTimeThread=_hTimeThread",
+   "_w42c_dwTimeThreadID=_dwTimeThreadID",
+   "_w42c_StartThread@4=?StartTimeThread@@YAKPAK@Z",
+   "__imp__QueryPerformanceFrequency@4=__imp__QueryPerformanceFrequency",
+   "__imp__QueryPerformanceCounter@4=__imp__QueryPerformanceCounter",
+   "__imp__CreateThread@24=__imp__CreateThread"
+  ],
+  "patch": [
+   "0x14,1,17",
+   "0x15,5,8b0d08000000,2:6:_w42c_sleep",
+   "0x1c,1,c9"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 544576,
+  "provenance": [
+   "patch 0x14: toolchain-diff \u2014 jne displacement byte 15->17 (FA's zero-check block is 2 B longer here than CL's a1-form code it replaces).",
+   "patch 0x15: toolchain-diff \u2014 CL's a1 moffs (5 B) -> FA's 8b 0d form (6 B); newsite 2->0x17 DIR32 _w42c_sleep payload 08000000 (final imm 0x4f8320 == FA byte-verified).",
+   "patch 0x1c: toolchain-diff \u2014 1-B test/je band byte (same a1->8b0d length-shift compensation as 0x10 band)."
+  ],
+  "notes": "Chunk _InstallTimerInt @0x84f40 (96 B), cdecl 0 params, void. QueryPerformanceFrequency/Counter + CreateThread dllimport stdcall; thread proc extern unsigned long __stdcall w42c_StartThread(unsigned long) -> map TO ?StartTimeThread@@YAKPAK@Z (rva 0x84fa0, still stub, def=1 register arg). Data globals mapped to _timerTicks (0x549e3c), _lastTicks (0x549e90), _hTimeThread (0x4f3e40), _dwTimeThreadID (0x4f3e44); FA's 68 4f3e44 push (lpThreadId) is natural CL content-0 via map (not a .rdata literal \u2014 it IS the data public). _currentT+0x8 delta lives in the map TO (_currentT+0x8) with clean refs. 13/13 FA fixup sites types+final imms all match; _ErrorExit e8 verified. __int64 not long long (C2632). Tail census 2 B (8bff) auto-accepted, no provenance needed."
+ },
+ {
+  "obj": "w42C_93480_v1",
+  "src": "build/survey/probes/w42C_93480_v1.c",
+  "patch": [
+   "0x0e,6,c70000000000,2:6:$FA$_t_4931c0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 603264,
+  "provenance": [
+   "patch 0x0e: toolchain-diff \u2014 c7 00 <vtable literal> store: CL baked the literal 0x4931c0 with NO fixup (missing-HIGHLOW class); payload zeroed and DIR32 newsite re-attached at 2->0x10 to $FA$_t_4931c0 (vtable anchor chunk 0x931c0, still stub, addend 0); FA fixup chunk+0x10 t3 verified: final imm 0x4931c0 == symVA + content 0.",
+   "parent fix: chunk-start anchor $FA$_t_493480 referenced by still-stub t004f3.obj (0x92eb0) \u2014 added retro-alias 0=$FA$_t_493480 (wave-29/30 retro-alias class); batch C checked .reloc fixups, not stub symbol refs"
+  ],
+  "notes": "Unnamed chunk @0x93480 (80 B, anchor $FA$_t_493480), cdecl 1 param (void *p), unit-table callback: t = *(long**)(p+0x17e); *t = &vtable_4931c0 (c7 imm via newsite); bytes +0x10/+0x11/+0x12 = 0/0/1; ((fnptr*)(*(long**)p))[4](p) (ff 53 10 cdecl fnptr table call); m = *(long**)(p+0x182); (*(fnptr)m)(p); *(long*)(p+0x82) = 0. Natural C elsewhere; typedef void (__cdecl *fn)(void *). Anchor-removal check done: converting this chunk removes $FA$_t_493480 from t00082.obj \u2014 FA has NO external fixups into [0x93480,0x934d0) except its own chunk-internal 0x93490 site, so no retro-alias needed. Census tail 13 B (8d9b00000000+8da42400000000) auto-accepted, no provenance needed.",
+  "aliases": [
+   "0=$FA$_t_493480"
+  ]
+ },
+ {
+  "obj": "w42D_tcpsave_v2",
+  "src": "build/survey/probes/w42D_tcpsave_v1.c",
+  "maps": [
+   "_w42D_tcpSave=?tcp_save_settings@@YAXPAUNET_PROTOCOL@@PAUCN_INFO@@@Z",
+   "_tcpSv0=?tcp_settings@@3UCN_INFO_TCP@@A",
+   "_tcpSvW=?tcp_settings@@3UCN_INFO_TCP@@A+0x8",
+   "_tcpSvB=?tcp_settings@@3UCN_INFO_TCP@@A+0xa",
+   "_w42D_tcpF=$FA$_t_4a8fe0",
+   "_w42D_tcpG=$FA$_t_4a9030"
+  ],
+  "patch": [
+   "0x4,36,535681c1b00d0000ba000000008b0189028b5904895a048b4908894a08,9:6:_tcpSv0",
+   "0x40,1,0c",
+   "0x5d,0,5b"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 691232,
+  "provenance": [
+   "patch 0x4: toolchain-diff \u2014 copy band 36->29 B: CL pushes esi after the [esp+8] load and copies the three tcp_settings dwords via eax/edx/ecx with ds-absolute stores (mov eax,[ecx+0xdb0]/add ecx,0xdb0/mov ds:0,eax; mov edx,[ecx+4]/mov ds:4,edx; mov ecx,[ecx+8]/mov ds:8,ecx); FA pushes ebx FIRST then esi and materializes a base cache (add ecx,0xdb0; mov edx,tcp_settings DIR32 newsite site 9 = ba's imm32 dword inside the new hex, payload zero, bare-base map TO) and stores through it: mov [edx],eax / mov ebx,[ecx+4]/mov [edx+4],ebx / mov ecx,[ecx+8]/mov [edx+8],ecx",
+   "patch 0x40: toolchain-diff \u2014 with push ebx alive through the post-copy band the param read 8b 44 24 08 -> 8b 44 24 0c (single disp byte 08 -> 0c)",
+   "patch 0x5d: toolchain-diff \u2014 insert FA's pop ebx (5b) matching the added push ebx before the pop esi/ret tail"
+  ],
+  "notes": "?tcp_save_settings@@YAXPAUNET_PROTOCOL@@PAUCN_INFO@@@Z @ 0xa8c20 (96 B = 95 code + 1-B census pad, 90): entry public = layout chunk name verbatim. C: copy tcp_settings[0..2] dwords from proto->tcp block (base at +0xdb0), then if tcp_settings.word[0]==0 store 0x6ff; then if tcp_settings.byte[0xa]!=0 call the +0x14 handler twice (w42D_tcpF/w42D_tcpG = still-stub anchors $FA$_t_4a8fe0/$FA$_t_4a9030, REL32 via CL call sites). CL v1 copy band used ds-absolute stores and one saved reg (esi); FA's EBX-base cache band won via patch P1 (reg color not steerable from the spelling: CL 4.2 keeps the ds-forms). Map TOs +0x8/-+0xa delta baking verified against FA imm bytes: 0x577d48 (base), 0x577d50 (+0x8), 0x577d52 (+0xa); FA .reloc HIGHLOWs at within-chunk 0xd/0x24/0x2e/0x35/0x58 all present with matching imm dwords. NOTE: an earlier EXACT variant of this record carried newsite 8:6 \u2014 off-by-one (site 8 = the ba opcode, not its imm); fixed to 9:6 and re-verified (wave-33 class)."
+ },
+ {
+  "obj": "w42D_sersend_v2",
+  "src": "build/survey/probes/w42D_sersend_v1.c",
+  "maps": [
+   "_w42D_sersend=?SER_SendBytes@@YAXPAEJ@Z",
+   "_serGate2d=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x12d",
+   "_serQDepth=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x22",
+   "_serWr=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x26",
+   "_serTx=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x2a"
+  ],
+  "patch": [
+   "0x6,15,84c074378b74240ca100000000,9:6:_serQDepth",
+   "0x13,2,2bc6",
+   "0x15,19,568b4c240ca30000000051a100000000050000000050,6:6:_serQDepth,12:6:_serWr,17:6:_serTx",
+   "0x33,12,8b0d0000000003ce890d00000000,2:6:_serWr,10:6:_serWr",
+   "0x41,1,"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 692288,
+  "provenance": [
+   "patch 0x6: toolchain-diff \u2014 gate band 15->13 B: CL pushes edi and loads the q-n difference into edi (mov edi,serQDepth/... mov esi,[esp+0x10]) before the memmove args; FA uses only esi (param n loaded first: mov esi,[esp+0xc]) and computes the difference in caller-saved eax (a1 moffs); the a1 serQDepth load carries DIR32 newsite site 9 (disp dword inside the new hex; payload zero, delta 0x22 lives in the map TO)",
+   "patch 0x13: toolchain-diff \u2014 modrm-only: CL sub edi,esi -> FA sub eax,esi (2b fe -> 2b c6)",
+   "patch 0x15: toolchain-diff \u2014 memmove arg band 19->22 B: FA interleaves the d-arg computation with the pushes (push esi(n)/mov ecx,[esp+0xc](buf)/a3 serQDepth,eax(v store!)/push ecx/a1 serWr/add eax,serTx-addr (05 imm-form)/push eax) whereas CL kept the v store AFTER the call (mov ds:0,edi@0x32); newsites: a3 serQDepth disp at site 6, a1 serWr at site 12, 05-imm serTx at site 17 (all payload zero, deltas +0x22/+0x26/+0x2a in the map TOs)",
+   "patch 0x33: toolchain-diff \u2014 serWr update 12->14 B: CL keeps RMW 01 35 (add [serWr],esi) after the ds-absolute v store; FA does load/add/store through reused ecx (8b 0d serWr / 03 ce / 89 0d serWr); two DIR32 newsites at sites 2 and 10 (the 8b 0d / 89 0d disp dwords)",
+   "patch 0x41: toolchain-diff \u2014 delete the 5f (pop edi): FA's frame never saves edi (only esi matches the pushes)"
+  ],
+  "notes": "?SER_SendBytes@@YAXPAEJ@Z @ 0xa9040 (80 B = 67 code + 13-B census pad 8d9b00000000 8da42400000000): C = if (!gate byte at Ctrl+0x12d) return; v = serQDepth(Ctrl+0x22) - n; d = serWr(Ctrl+0x26) + (long)&serTx(Ctrl+0x2a); memmove((void*)d, buf, n); serQDepth = v; serWr = serWr + n. FA's scheduler: n in saved esi, everything else caller-saved (eax/ecx), v stored interleaved INTO the arg-push sequence, serWr update via load/add/store; CL kept a second saved reg (edi) and RMW forms. Every FA imm verified against map-baked addends: 0x568215 (+0x12d), 0x56810a (+0x22) at sites 0xf and 0x1b, 0x56810e (+0x26) at 0x21/0x26/0x35/0x3d, 0x568112 (+0x2a) at the 05-imm site; _memmove REL32 resolves to FA pub 0x4d6c50 (disp 0x2abe0, no loader fixup on call sites). FA .reloc HIGHLOW set matches the seven DIR32 sites exactly."
+ },
+ {
+  "obj": "w42D_vdofrom_v2",
+  "src": "build/survey/probes/w42D_vdofrom_v2.c",
+  "maps": [
+   "_w42D_vdofrom=?VDOfromVDOHEADER@@YADPAUVDO@@PAUVDOHEADER@@@Z",
+   "_vdoExitCode=?vdoExitCode@@3FA"
+  ],
+  "patch": [
+   "0x52,14,6689561a668b5f1a66c746060000"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 704976,
+  "provenance": [
+   "patch 0x52: toolchain-diff \u2014 same-span 14-B reorder of the tail field band: CL schedule = 66 89 46 1a? \u2014 actually CL@0x52..0x5f = (66 8b 5f 1a)(66 c7 46 06 00 00)(66 89 5e 18) with the vd[0x1a] store elsewhere; FA band = 66 89 56 1a (store vd[0x1a]=dx first) / 66 8b 5f 1a (load bx=vh[0x1a]) / 66 c7 46 06 00 00 (vd[6]=0), keeping vd[0x18]'s store + the exitCode je outside the span; jcc-free, both 14 B"
+  ],
+  "notes": "?VDOfromVDOHEADER@@YADPAUVDO@@PAUVDOHEADER@@@Z @ 0xac1d0 (128 B = 123 code + 5-B census pad 05 00000000). C: c=vh[9] -> vd[0xc]; vd[0..2]=vh[0x12]; vd[2]=vh[0x14]; vd[4]=0x100/(char)vh[8]; vd[8]=vh[0x10]; vd[0xa]=vh[0xe]; vd[0xb]=vh[0xf]; vd[0x16]=vh[0x18]; vd[0x1a]=vh[0x1c]; vd[6]=0; vd[0x18]=vh[0x1a]; if (c) vdoExitCode=5; return vd[0xc]==0. The v2 restructure moved the exitcode store to FA's position (after the vd[0x18] copy, 66 c7 05 imm-32 form with je disp 09) leaving one 14-B reorder for the 16-bit tail stores/loads. The 05 00000000 tail pad is a census-proven composition (padcensus VOCAB). Single fixup: DIR32 ?vdoExitCode@@3FA at 0x69 = FA imm 0x577da8 with FA .reloc HIGHLOW at 0xac239. Everything else byte-identical from the C spelling."
+ },
+ {
+  "obj": "w42D_netread_v6",
+  "src": "build/survey/probes/w42D_netread_v6.c",
+  "maps": [
+   "_w42D_netReadAvail=?NET_ReadAvail@@YAJJJ@Z",
+   "_w42D_ws0=?ws@@3U_winsock_funcs@@A",
+   "_w42D_valP=?validate_player@@YAPAU_player_info@@J@Z"
+  ],
+  "patch": [
+   "0x6,9,5633db573ac3557466",
+   "0x1f,1,55",
+   "0x20,104,8ba8a25400008bb09e540000059e5400008b7c24183bee742d33d23bdf7d278d0c6d000000008d0cc903c838512674083851277503035922458b48083bcd7f0233ed3bee75d533c05d3bdf0f9cc04823c75f5e5bc3b8ffffffff5d5f5e5bc390"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 709952,
+  "provenance": [
+   "patch 0x6: toolchain-diff \u2014 prologue band 9 B: FA zeroes acc in ebx BETWEEN push esi and push edi (33 db) and folds the gate-byte test into cmp al,bl (3a c3 \u2014 bl is the just-zeroed acc, so the test semantics are unchanged) then push ebp + je 0x66; CL pushed all four saved regs contiguously then xor esi,esi + test al,al + je 0x71",
+   "patch 0x1f: toolchain-diff \u2014 je (p==0) disp recompute after the prologue band: 5e -> 55 (FA's fail block sits at 0x75)",
+   "patch 0x20: toolchain-diff \u2014 body transplant 104->96 B: CL's register schedule (acc=esi, e=ebx, m=ecx, c address-hoisted via lea) is unreproducible by decl-order steering (volatile c-load still leaves an lea+reg-load pair), so the band is transplanted to FA bytes: i=ebp/e=esi loads, d MATERIALIZED in eax (add eax,0x549e \u2014 the v6 source reuses p for d so the +0x54a2/+0x549e loads and the add all address the same base), m=edi from [esp+0x18], z=0 kept in edx (dl as the 38 51 26/27 cmp operand vs CL's folded 80 79 xx 00 imm form), record base ecx (8d 0c 6d / 8d 0c c9 / 03 c8 \u2014 3 B add vs CL's strength-reduced lea disp32), acc add 03 59 22 in ebx, count c re-read IN LOOP (8b 48 08 / 3b cd / 7f 02 \u2014 CL RLE-hoists it), back-edge cmp ebp,esi / jne -0x2b to 0x3b, end-calc xor eax,eax / pop ebp / cmp ebx,edi / setl al / dec / and eax,edi / pops edi,esi,ebx / ret; fail b8 ffffffff / pops ebp,edi,esi,ebx / ret + 1-B 90 pad. No dropped fixups: the ws DIR32 (site 0x2) and valP REL32 (site 0x15) sit before 0x20 and are untouched"
+  ],
+  "notes": "?NET_ReadAvail@@YAJJJ@Z @ 0xad540 (128 B = 127 code + 90). C: if (!*(unsigned char*)w42D_ws0) return -1; p = validate_player(p1); if (!p) return -1; i=*(long*)(p+0x54a2); e=*(long*)(p+0x549e); p+=0x549e (d reuse \u2014 REQUIRED so CL materializes add eax,0x549e instead of folding the offset into 6-B leas); m=p2; while (i!=e) { if (acc<m) { read record i*18 fields +0x26/+0x27 vs 0, skip or acc+=+0x22 dword }; i++; if (*(long*)(p+8) <= i) i=0; }; r = ((acc<m)-1)&m. Do-while spelling with latch goto. KEY SOURCE-LEVEL TRICK: reusing p for d (p += 0x549e) converts CL's folded [reg+0x549e-i*18-class] leas into FA's add-eax record form; the volatile c-load defeated the value-hoist but not the address-hoist (moot after the transplant). FA imm verified: ws 0x577dd8 @0x2 (DIR32, FA fixup present), validate_player REL32 disp 0xce7 -> 0x4ae240 (no loader fixup, as for all e8 sites)."
+ },
+ {
+  "obj": "w42D_bufput_v2",
+  "src": "build/survey/probes/w42D_bufput_v1.c",
+  "maps": [
+   "_w42D_bpflush=$FA$_t_4d64c0"
+  ],
+  "patch": [
+   "0x8,38,89420478138b028a4c240488088b0a33c08a0141890aeb0e8b4c24045251e80000000083c408,31:20:_w42D_bpflush",
+   "0x3e,5,ff00"
+  ],
+  "aliases": [
+   "0=$FA$_t_4d6fc0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 880576,
+  "provenance": [
+   "patch 0x8: toolchain-diff \u2014 block reorder 38 B, same-span: CL orders dec/jns-INTO-BODY with the flush block FIRST (jns 0x1a skips it; body stores the new count 89 42 04 late, after the cl load) and jmps back to the tail; FA stores the decremented count EARLY (89 42 04) then js 0x20 into the flush block placed at the END (8b 4c 24 04 / push edx / push ecx / call flush / add esp,8), body runs directly after the js fall-through. The old call's REL32 (dropped by the span) is re-added as newsite site 31 (disp dword at the new e8+1) type 20 to $FA$_t_4d64c0, payload zero",
+   "patch 0x3e: toolchain-diff \u2014 tail deref-increment: CL mov ecx,[eax]/inc ecx/mov [eax],ecx (5 B) -> FA inc DWORD PTR [eax] (ff 00, RMW 2 B, -3 B, no fixup; also drops CL's redundant clobber-free RMW) \u2014 net length 68->65 = FA exactly, no tail pad"
+  ],
+  "notes": "unnamed buffered-putc helper @ 0xd6fc0 (65 B, no pad): C = eax=bp->w4-1; if >=0 { bp->w4=eax; eax=bp->w0; cl=[esp+4]; *[eax]=cl; *bp->w0 += 1 (FA: 8b 02 / 8a 4c 24 04 / 88 08 / 8b 0a / 33 c0 / 8a 01 / 41 / 89 0a); }; cmp eax,-1; if (ret==0) *(long*)[esp+0xc]=-1 else ++*(long*)[esp+0xc]; flush path (count<0): buf_flush(bp, buf) via $FA$_t_4d64c0 anchor. FA has ZERO loader fixups in this chunk \u2014 the only fixup is the call REL32 (re-added by newsite). INTEROP: keeps the $FA$_t_4d6fc0 anchor defined for w41F_loop1_v3 (alias 0=...). INTEROP (MANDATORY): aliases 0=$FA$_t_4d6fc0 keeps the stub anchor of the freshly-converted helper defined \u2014 required by w41F_loop1_v3's map _w41F_loopG=$FA$_t_4d6fc0; fit obj defines $FA$_t_4d6fc0 + $FA$_span_0d6fc0."
+ },
+ {
+  "obj": "w42E_d7050_v4",
+  "src": "build/survey/probes/w42E_d7050_v4.c",
+  "maps": [
+   "_w42E_putcl=$FA$_t_4d6fc0"
+  ],
+  "patch": [
+   "0x19,2,7e17",
+   "0x2c,8,837d00ff75e2"
+  ],
+  "aliases": [
+   "0=$FA$_t_4d7050"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 880720,
+  "provenance": [
+   "patch 0x19: toolchain-diff \u2014 CL jle loop-exit disp 0x19 vs FA 0x17: patch 0x2c (count-gate shrink) pulls FA's whole tail 2 B back, CL's literal disp byte still encodes the pre-shrink span; 1-B disp edit 19->17 (7e 17 byte-exact)",
+   "patch 0x2c: toolchain-diff \u2014 CL spells the *count == -1 gate as mov eax,[ebp]+cmp eax,0xff(imm8=-1)+jne (8 B: 8b 45 00 83 f8 ff 75 e0) vs FA cmp [ebp],-1 (83 7d 00 ff) with disp e2; 8->6-B replace, byte-exact FA tail (75 e2 5d 5f 5e 5b c3) follows"
+  ],
+  "notes": "EXACT R3. Chunk 0xd7050 (55 B, all code, unnamed): multi-char put loop \u2014 while (n-- > 0) { putc_lk(*p++, strm, count); if (*count == -1) break; } with (char *p = esi, long n = edi[dec'd in place], void *strm = ebx, long *count = ebp) frameless. v1 got head+body+epilogue byte-identical from plain C (v2's separate-statement spelling was WORSE: 56 B, reg diffs). Only 2 toolchain diffs, both patched: the count gate's dead load (CL hoists *count into eax before cmp; cmp [ebp],-1 is 2 B shorter) and the jle exit disp. Callee 0xd6fc0 = still-stub, mapped via _w42E_putcl=$FA$_t_4d6fc0; call e8 disp is linker-computed (masked), call reloc outside both patch spans survives. Chosen spelling that matters: 'while (n-- > 0)' with break \u2014 matches the wave-6 idiom."
+ },
+ {
+  "obj": "w42E_lock_v6",
+  "src": "build/survey/probes/w42E_lock_v2.c",
+  "maps": [
+   "__imp__InitializeCriticalSection@4=__imp__InitializeCriticalSection",
+   "__imp__EnterCriticalSection@4=__imp__EnterCriticalSection",
+   "__locktable=__locktable"
+  ],
+  "patch": [
+   "0x0,25,558b4424088bec56578d3c8500000000833f007546,12:6:__locktable",
+   "0x39,6,833f0056",
+   "0x66,1,5d"
+  ],
+  "aliases": [
+   "0=$FA$_t_4d7170"
+  ],
+  "tail": "cccccccc",
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 881008,
+  "provenance": [
+   "patch 0x0: toolchain-diff \u2014 CL frameless head (mov eax,[esp+4]; push ebx/esi/edi; hoisted mov ecx,[eax*4+d32]+test ecx,ecx; lea edi; 25 B) vs FA push ebp/mov ebp,esp frame + push esi,edi + single lea edi,[eax*4+__locktable] + cmp [edi],0 + jne 0x46 (21 B); 25->21-B hand-written FA head band; decl-order flip (lockptr declared first) already gave FA's esi=lockptr/edi=p body colors; lea disp dword newsite DIR32 symVA=__locktable payload delta 0 (CL's mov-reloc at 0xa and lea-reloc at 0x11 both killed by span; only the lea's disp is real)",
+   "patch 0x39: toolchain-diff \u2014 CL mov eax,[edi]+test eax,eax+90 (6 B) vs FA cmp [edi],0 83 3f 00 (4 B) before push esi of the double-checked-init branch; 6->4-B, dead-test removed; also -2 to offset the patch-0x0 head growth so CL hits FA's 104 B exactly (110-4-2)",
+   "patch 0x66: toolchain-diff \u2014 pop ebx (5b, CL frameless push pair) vs FA pop ebp (5d, matches the push ebp prolog); 1-B",
+   "tail: toolchain-diff \u2014 FA tail-pad 8 cc (census filler) after the pop-band shrink; parent-added provenance line (audit FAIL class)"
+  ],
+  "notes": "EXACT R4. __lock (MS CRT mlock.c double-checked init): if (*(&_locktable[locknum]) == 0) { lockptr=malloc(0x18); if(!lockptr) _amsg_exit(0x11); _lock(0x11); if (*p == 0) { InitializeCriticalSection(lockptr); *p = lockptr; } else free(lockptr); _unlock(0x11); } EnterCriticalSection(*p);. Body regs/color: locknum=eax(arg), p=edi, lockptr=esi. Round-1 (/O2, p-declared-first) had CL colors SWAPPED (p=esi/lockptr=edi) and a frameless head; decl flip (v2, lockptr first) fixed every body byte and gave the lea sib free \u2014 remaining 3 diffs patched (head band, dead test, pop). v3 (long*-scaled spelling) and /Oy- twins (v4: 114 B, v3/v5 same wall shape) were unneeded. Maps: imp @4 slots need __imp__X@4=__imp__X (2 mapped, layout has none else); _locktable=__locktable (CL emits _locktable from extern void *_locktable[]); _malloc/_free/__amsg_exit(0x11)/__unlock/__lock(self, recursion) resolve against real FA publics (all verified in layout.json); FA public __lock is at this very chunk (0xd7170) so obj public __lock lands directly. Patch-site tokens MUST be decimal (site '0c' -> parser ValueError; use 12). PARENT FIX: map FROM _locktable -> __locktable (C src spelling emits double underscore; wave-41 class)."
+ },
+ {
+  "obj": "w42E_ld12_v1",
+  "src": "build/survey/probes/w42E_ld12_v1.c",
+  "aliases": [
+   "0=$FA$_t_4dfd20"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 916768,
+  "notes": "EXACT R1, zero-patch. __ld12told(src12, dst10): 12-B long double -> 10-B with round/overflow fixup. Chunk contains MS CRT long-double packer tables (LONGDBL.ASM family, per-source asm) \u2014 solved with a single __declspec(naked) __cdecl function whose __asm block is the FA-verbatim instruction sequence (arg1=ecx via mov ecx,[esp+4] \u2014 __fastcall-in-register spelling kept because FA loads arg1 through ecx), ending with the FA tail incl fwait-family opcodes and 3-byte cc pad; CL obj content landed 129 B byte-exact including the cc pad composition. extern long __cdecl _RoundMan(long *buf, long bits) call (emits __RoundMan, real FA public at 0x4df960, verified) \u2014 no maps. Call disps linker-computed (masked). Consumed by converted src/w31a_atoldbl_v1.c via map _ld12told=__ld12told. Rule of note: the naked-asm escape hatch (397-file precedent) is the correct route whenever the source is hand-scheduler asm, not C."
+ },
+ {
+  "obj": "w42E_e1ed0_v1",
+  "src": "build/survey/probes/w42E_e1ed0_v1.c",
+  "maps": [
+   "_w42E_int2str=$FA$_t_4e1f10"
+  ],
+  "aliases": [
+   "0=$FA$_t_4e1ed0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 925392,
+  "notes": "EXACT R1, zero-patch. itoa-family 3-arg cdecl wrapper (unamed 60 B): char *neg_precalc(long val, char *str, long radix) { if (radix == 10 && val < 0) { int2str(val, str, radix, 1); } else { int2str(val, str, radix, 0); } return str; } \u2014 the shared int2str core at 0xe1f10 remains a still-stub (also consumed by converted src/Ltoa.c + src/ultoa.c via the same $FA$_t_4e1f10 anchor), so map _w42E_int2str=$FA$_t_4e1f10 + alias 0=$FA$_t_4e1ed0 for back-references. C's short-circuit && with two int2str calls spelled as an if/else gave FA's exact branch layout on the first compile."
+ },
+ {
+  "obj": "w42E_towup_v5",
+  "src": "build/survey/probes/w42E_towup_v2.c",
+  "maps": [
+   "_w42E_c388=__ctype+0x388",
+   "_w42E_widemap=$FA$_t_4d7c80"
+  ],
+  "patch": [
+   "0x15,10,833d8803000000751f,2:6:__ctype",
+   "0x45,1,1c",
+   "0x55,6,",
+   "0x69,1,4c",
+   "0x6f,0,8b1588030000,2:6:__ctype",
+   "0x77,1,51",
+   "0x7d,1,52"
+  ],
+  "aliases": [
+   "0=$FA$_t_4e44e0"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 935136,
+  "provenance": [
+   "patch 0x15: toolchain-diff \u2014 CL spells the table-nonzero gate as mov ecx,[d32]+test ecx,ecx+jne (10 B: 8b 0d .. 85 c9 75 1f) vs FA cmp dword [__ctype+0x388],0 (83 3d, 7 B) + 75 1f; 10->9-B replace with the FA jne carried in-band; disp dword newsite DIR32 symVA=__ctype payload delta 0x388 (CL's own a1-style load reloc killed by span)",
+   "patch 0x45: toolchain-diff \u2014 jae disp recompute for the c < 0x100 bound: CL 0x22 (spans the 6-B global reload deleted by patch 0x55) vs FA 0x1c; 1-B",
+   "patch 0x55: toolchain-diff \u2014 CL hoisted SECOND w42E_c388 load (8b 0d d32, 6 B) to immediately after the iswctype call site (eax-test scheduling); FA re-tests the call's eax (85 c0) and loads the table ONCE more at the wide-call site (8b 15); 6->0-B delete (both loads' byte budget identical, only position differs)",
+   "patch 0x69: toolchain-diff \u2014 &tmp staging into the arg-push block: CL lea edx,[esp+0xc] (8d 54) vs FA lea ecx,[esp+0xc] (8d 4c) after the block moved; 1-B modrm edit",
+   "patch 0x6f: toolchain-diff \u2014 FA's tbl load 8b 15 d32 sits between push eax (&c) and push 1 in the arg schedule, CL had no load there (pushes edx); 6-B insert with newsite DIR32 symVA=__ctype payload delta 0x388 at site 2; equalizes the last +6",
+   "patch 0x77: toolchain-diff \u2014 arg staging reg swap from the 8b 15 block move: FA push ecx (&tmp) where CL push edx; 1-B",
+   "patch 0x7d: toolchain-diff \u2014 FA push edx (tbl) after the 68 00020000 push where CL push ecx; 1-B (completes the same staging swap; the e8 call is linker-computed/masked)",
+   "parent fix: state word root-caused -> toolchain-diff (root-caused requires the patch to be GONE; this is a live 6->0 delete)"
+  ],
+  "notes": "EXACT R5. __towupper_lk(c) (MS CRT WCTYPE file \u2014 CRT band): unsigned short __cdecl _towupper_lk(unsigned short c) { unsigned short tmp; if (c == 0xFFFF) return c; if (w42E_c388 == 0) { if (c >= 'a' && c <= 'z') c -= 0x20; return c; } if (c < 0x100) { if (!iswctype(*(int *)&c, 2)) return c; } if (w42E_widemap((void *)w42E_c388, 0x200, &c, 1, &tmp, 1, 0) == 0) return c; return tmp; } with w42E_c388 mapped to interior data __ctype+0x388 (wave-35 interior-data TO). Key C steers: (1) iswctype arg must be sliced *(int *)&c \u2014 CL's ushort->int conversion emits and eax,0xffff (+5 B) otherwise; (2) multi-call polarity spelled if (f(...) == 0) return c; return tmp; so CL emits 85 c0 75 09 + [return-c block] + [return-tmp block] in FA's byte order (v1's if (f) return tmp; return c; made CL thread je + swapped return blocks \u2014 polarity tell); (3) spelling the table as the mapped dword public killed the mask/and at the call arg. Remaining 7 patches are pure scheduler staging (the 6-B load move dominates). _iswctype and __ctype resolve to real FA publics; 0xe4580-bound wide map is the still-stub $FA$_t_4d7c80 via _w42E_widemap. Maps verified: FA disp f8a45100 = __ctype(0x51a170)+0x388 = 0x51a4f8 \u2713. NOTE: the fit-judged r4 entry omitted the _w42E_widemap map (fits mask call dwords) \u2014 the r5 entry here re-ran with the complete map set and EXACT's, so both fit AND link are covered."
+ },
+ {
+  "obj": "w42F_b4bc0_v1",
+  "src": "build/survey/probes/w42F_b4bc0_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 740288,
+  "notes": "@G_TextureFlip@12 0xb4bc0 (112 B, no tail pad): fastcall (ecx=tbl, edx=n, [ebp+8]=arr, ret 4). Whole-body naked-asm transcription (w41F CopyDB15 recipe) - closes the wave-37 batch-H band (13 C/asm-tail variants left it KEEP-ASM). FA body: FP frame push ebp/sub esp,8; a1 moffs load of _cb + explicit nop at +0xb; [ebp-4]=edx / [ebp-8]=ecx spills interleaved with push ebx/esi/edi; top=(cb->w6-1)<<16 / bot=(tbl->w6-1)<<16; edx=+0x14 byte-stride walker vs edi element counter, stores at [arr+i*0x14+4] and [arr+i*0x14+0x10]; then _emit 0x60 pusha band, callee _G__Texture is asm-internal-convention (esi=tbl, eax=n, ebx=arr), _emit 0x61 popa, pop edi/esi/ebx, mov esp,ebp/pop ebp, ret 4. pusha/popa spelled _emit 0x60/0x61 to dodge the 66 60/61 pusha trap (wave 18). Zero patches; fixups DIR32 _cb @+0x7 (content 0 -> FA 0x4fcefc identity, matches FA .reloc 0x4b4bc7) + REL32 _G__Texture @+0x62 (content 0 -> FA disp 0x125c2, no .reloc HIGHLOW on either side). Emitted public @G_TextureFlip@12 = layout chunk name verbatim."
+ },
+ {
+  "obj": "w42F_9db30_v1",
+  "src": "build/survey/probes/w42F_9db30_v1.c",
+  "maps": [
+   "_PLANEAddProc=?PLANEAddProc@@YAJXZ",
+   "_PLANEMoveProc=?PLANEMoveProc@@YAXD@Z"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 645936,
+  "notes": "_PLANEProc 0x9db30 (96 B incl. its own .text jump table, FPO frameless): the GVProc/EJECTProc handler-resolver dispatcher family (w16b_2 recipe) - pure C, zero patches, landed EXACT on probe 1. C: long PLANEProc(unsigned char c) switch(c) with cases 0/2/3/6/7 returning (long)PLANEAddProc/PLANEMoveProc/PLANEEventProc/PLANESayProc/PLANECommentProc and the after-switch `return (long)GVProc(c);` as the shared default+c1/4/5 arm; CL 4.2 emits FA's xor ecx,ecx/mov al,[esp+4]/mov cl,al uchar-param plan, cmp ecx,7/ja, the ff 24 8d INLINE .text jump table at +0x3c (HARDStoreWeight precedent - 8 dwords, dup arm table[1]=[4]=[5]=def-block label), and the 5 b8<imm>;ret arm blocks in FA's order. Fixups verified: 5 DIR32 externs at +0x1f/+0x25/+0x2b/+0x31/+0x37 (mapped 2 + 3 identity _PLANEEventProc/_PLANESayProc/_PLANECommentProc, all still stubs) + 8 table dwords on internal $L labels whose defs match FA's table contents exactly ($L92=+0x14, $L95=+0x1e, $L96=+0x24, $L97=+0x2a, $L98=+0x30, $L99=+0x36, $L103=+0x3c) + REL32 _GVProc identity. 4-B lea esp,[esp+0] census tail auto-accepted. C fn named PLANEProc (emits _PLANEProc = chunk name; naming it _PLANEProc emitted __PLANEProc)."
+ },
+ {
+  "obj": "w42F_d4010_v2",
+  "src": "build/survey/probes/w42F_d4010_v2.c",
+  "maps": [
+   "_strchr=_strchr+0x6"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "rva": 868368,
+  "notes": "_strstr 0xd4010 (128 B, no tail pad, no FPO): FA's _strstr is an Intel-style optimized CRT copy (2-char head preload f0=dl/f1=dh, 1-char-needle case tail-jumps mid-body into _strchr+0x6 with ch already in AL and [esp+4]=haystack, 2-wide peeled scan with a pair-walk needle loop walking ecx the needle + esi the haystack + edi the match candidate, dead ebx push kept). NOT the naive VC4.2 CRT strstr (w38H v3 = 0x5b B, 0x27 unexplained tail) and not reachable in C (w38H v2 = 0xa6, v4 = 0x85; the mid-function ext jmp has no C shape; cdecl 2-arg returns emit call+ret per wave-6 d129, never a bare jmp). CL 4.2 re-optimizes REAL inline asm at /O2 (restructured the labeled control flow) and always emits 6-B long-form jcc at /Od, so the body is a raw _emit transcription of FA's 128 chunk bytes (CopyDB15/SetFlatColor _emit recipe) - bytes 0x00..0x6d and 0x73..0x7f emitted literal, with a real `jmp strchr` at 0x6e so the REL32 fixup is genuine; map TO _strchr+0x6 (= 0x4d3b96, verified: FA disp 0xfffffb13 over site 0x4d407f, link final = symVA+0x6+content-(site+4)) bakes addend 6 into the disp content at fit (content dword = 00000006) - delta in the map TO, payload 0. REL32 fixups create no HIGHLOW .reloc entry (FA also has none), so .reloc is untouched. C fn named strstr -> emits _strstr (chunk name identity); _strchr itself is still a stub, and any future _strchr conversion must keep its +6 byte as FA's push ebx loop-head (its +0..+5 xor eax,eax/mov al,[esp+8] ch-load is the skipped prologue)."
  }
 ]

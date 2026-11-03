@@ -1,0 +1,129 @@
+[
+ {
+  "verdict": "EXACT",
+  "rva": 691232,
+  "obj": "w42D_tcpsave_v2",
+  "src": "build/survey/probes/w42D_tcpsave_v1.c",
+  "maps": [
+   "_w42D_tcpSave=?tcp_save_settings@@YAXPAUNET_PROTOCOL@@PAUCN_INFO@@@Z",
+   "_tcpSv0=?tcp_settings@@3UCN_INFO_TCP@@A",
+   "_tcpSvW=?tcp_settings@@3UCN_INFO_TCP@@A+0x8",
+   "_tcpSvB=?tcp_settings@@3UCN_INFO_TCP@@A+0xa",
+   "_w42D_tcpF=$FA$_t_4a8fe0",
+   "_w42D_tcpG=$FA$_t_4a9030"
+  ],
+  "patch": [
+   "0x4,36,535681c1b00d0000ba000000008b0189028b5904895a048b4908894a08,9:6:_tcpSv0",
+   "0x40,1,0c",
+   "0x5d,0,5b"
+  ],
+  "aliases": [],
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x4: toolchain-diff \u2014 copy band 36->29 B: CL pushes esi after the [esp+8] load and copies the three tcp_settings dwords via eax/edx/ecx with ds-absolute stores (mov eax,[ecx+0xdb0]/add ecx,0xdb0/mov ds:0,eax; mov edx,[ecx+4]/mov ds:4,edx; mov ecx,[ecx+8]/mov ds:8,ecx); FA pushes ebx FIRST then esi and materializes a base cache (add ecx,0xdb0; mov edx,tcp_settings DIR32 newsite site 9 = ba's imm32 dword inside the new hex, payload zero, bare-base map TO) and stores through it: mov [edx],eax / mov ebx,[ecx+4]/mov [edx+4],ebx / mov ecx,[ecx+8]/mov [edx+8],ecx",
+   "patch 0x40: toolchain-diff \u2014 with push ebx alive through the post-copy band the param read 8b 44 24 08 -> 8b 44 24 0c (single disp byte 08 -> 0c)",
+   "patch 0x5d: toolchain-diff \u2014 insert FA's pop ebx (5b) matching the added push ebx before the pop esi/ret tail"
+  ],
+  "notes": "?tcp_save_settings@@YAXPAUNET_PROTOCOL@@PAUCN_INFO@@@Z @ 0xa8c20 (96 B = 95 code + 1-B census pad, 90): entry public = layout chunk name verbatim. C: copy tcp_settings[0..2] dwords from proto->tcp block (base at +0xdb0), then if tcp_settings.word[0]==0 store 0x6ff; then if tcp_settings.byte[0xa]!=0 call the +0x14 handler twice (w42D_tcpF/w42D_tcpG = still-stub anchors $FA$_t_4a8fe0/$FA$_t_4a9030, REL32 via CL call sites). CL v1 copy band used ds-absolute stores and one saved reg (esi); FA's EBX-base cache band won via patch P1 (reg color not steerable from the spelling: CL 4.2 keeps the ds-forms). Map TOs +0x8/-+0xa delta baking verified against FA imm bytes: 0x577d48 (base), 0x577d50 (+0x8), 0x577d52 (+0xa); FA .reloc HIGHLOWs at within-chunk 0xd/0x24/0x2e/0x35/0x58 all present with matching imm dwords. NOTE: an earlier EXACT variant of this record carried newsite 8:6 \u2014 off-by-one (site 8 = the ba opcode, not its imm); fixed to 9:6 and re-verified (wave-33 class)."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 692288,
+  "obj": "w42D_sersend_v2",
+  "src": "build/survey/probes/w42D_sersend_v1.c",
+  "maps": [
+   "_w42D_sersend=?SER_SendBytes@@YAXPAEJ@Z",
+   "_serGate2d=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x12d",
+   "_serQDepth=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x22",
+   "_serWr=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x26",
+   "_serTx=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x2a"
+  ],
+  "patch": [
+   "0x6,15,84c074378b74240ca100000000,9:6:_serQDepth",
+   "0x13,2,2bc6",
+   "0x15,19,568b4c240ca30000000051a100000000050000000050,6:6:_serQDepth,12:6:_serWr,17:6:_serTx",
+   "0x33,12,8b0d0000000003ce890d00000000,2:6:_serWr,10:6:_serWr",
+   "0x41,1,"
+  ],
+  "aliases": [],
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x6: toolchain-diff \u2014 gate band 15->13 B: CL pushes edi and loads the q-n difference into edi (mov edi,serQDepth/... mov esi,[esp+0x10]) before the memmove args; FA uses only esi (param n loaded first: mov esi,[esp+0xc]) and computes the difference in caller-saved eax (a1 moffs); the a1 serQDepth load carries DIR32 newsite site 9 (disp dword inside the new hex; payload zero, delta 0x22 lives in the map TO)",
+   "patch 0x13: toolchain-diff \u2014 modrm-only: CL sub edi,esi -> FA sub eax,esi (2b fe -> 2b c6)",
+   "patch 0x15: toolchain-diff \u2014 memmove arg band 19->22 B: FA interleaves the d-arg computation with the pushes (push esi(n)/mov ecx,[esp+0xc](buf)/a3 serQDepth,eax(v store!)/push ecx/a1 serWr/add eax,serTx-addr (05 imm-form)/push eax) whereas CL kept the v store AFTER the call (mov ds:0,edi@0x32); newsites: a3 serQDepth disp at site 6, a1 serWr at site 12, 05-imm serTx at site 17 (all payload zero, deltas +0x22/+0x26/+0x2a in the map TOs)",
+   "patch 0x33: toolchain-diff \u2014 serWr update 12->14 B: CL keeps RMW 01 35 (add [serWr],esi) after the ds-absolute v store; FA does load/add/store through reused ecx (8b 0d serWr / 03 ce / 89 0d serWr); two DIR32 newsites at sites 2 and 10 (the 8b 0d / 89 0d disp dwords)",
+   "patch 0x41: toolchain-diff \u2014 delete the 5f (pop edi): FA's frame never saves edi (only esi matches the pushes)"
+  ],
+  "notes": "?SER_SendBytes@@YAXPAEJ@Z @ 0xa9040 (80 B = 67 code + 13-B census pad 8d9b00000000 8da42400000000): C = if (!gate byte at Ctrl+0x12d) return; v = serQDepth(Ctrl+0x22) - n; d = serWr(Ctrl+0x26) + (long)&serTx(Ctrl+0x2a); memmove((void*)d, buf, n); serQDepth = v; serWr = serWr + n. FA's scheduler: n in saved esi, everything else caller-saved (eax/ecx), v stored interleaved INTO the arg-push sequence, serWr update via load/add/store; CL kept a second saved reg (edi) and RMW forms. Every FA imm verified against map-baked addends: 0x568215 (+0x12d), 0x56810a (+0x22) at sites 0xf and 0x1b, 0x56810e (+0x26) at 0x21/0x26/0x35/0x3d, 0x568112 (+0x2a) at the 05-imm site; _memmove REL32 resolves to FA pub 0x4d6c50 (disp 0x2abe0, no loader fixup on call sites). FA .reloc HIGHLOW set matches the seven DIR32 sites exactly."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 704976,
+  "obj": "w42D_vdofrom_v2",
+  "src": "build/survey/probes/w42D_vdofrom_v2.c",
+  "maps": [
+   "_w42D_vdofrom=?VDOfromVDOHEADER@@YADPAUVDO@@PAUVDOHEADER@@@Z",
+   "_vdoExitCode=?vdoExitCode@@3FA"
+  ],
+  "patch": [
+   "0x52,14,6689561a668b5f1a66c746060000"
+  ],
+  "aliases": [],
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x52: toolchain-diff \u2014 same-span 14-B reorder of the tail field band: CL schedule = 66 89 46 1a? \u2014 actually CL@0x52..0x5f = (66 8b 5f 1a)(66 c7 46 06 00 00)(66 89 5e 18) with the vd[0x1a] store elsewhere; FA band = 66 89 56 1a (store vd[0x1a]=dx first) / 66 8b 5f 1a (load bx=vh[0x1a]) / 66 c7 46 06 00 00 (vd[6]=0), keeping vd[0x18]'s store + the exitCode je outside the span; jcc-free, both 14 B"
+  ],
+  "notes": "?VDOfromVDOHEADER@@YADPAUVDO@@PAUVDOHEADER@@@Z @ 0xac1d0 (128 B = 123 code + 5-B census pad 05 00000000). C: c=vh[9] -> vd[0xc]; vd[0..2]=vh[0x12]; vd[2]=vh[0x14]; vd[4]=0x100/(char)vh[8]; vd[8]=vh[0x10]; vd[0xa]=vh[0xe]; vd[0xb]=vh[0xf]; vd[0x16]=vh[0x18]; vd[0x1a]=vh[0x1c]; vd[6]=0; vd[0x18]=vh[0x1a]; if (c) vdoExitCode=5; return vd[0xc]==0. The v2 restructure moved the exitcode store to FA's position (after the vd[0x18] copy, 66 c7 05 imm-32 form with je disp 09) leaving one 14-B reorder for the 16-bit tail stores/loads. The 05 00000000 tail pad is a census-proven composition (padcensus VOCAB). Single fixup: DIR32 ?vdoExitCode@@3FA at 0x69 = FA imm 0x577da8 with FA .reloc HIGHLOW at 0xac239. Everything else byte-identical from the C spelling."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 709952,
+  "obj": "w42D_netread_v6",
+  "src": "build/survey/probes/w42D_netread_v6.c",
+  "maps": [
+   "_w42D_netReadAvail=?NET_ReadAvail@@YAJJJ@Z",
+   "_w42D_ws0=?ws@@3U_winsock_funcs@@A",
+   "_w42D_valP=?validate_player@@YAPAU_player_info@@J@Z"
+  ],
+  "patch": [
+   "0x6,9,5633db573ac3557466",
+   "0x1f,1,55",
+   "0x20,104,8ba8a25400008bb09e540000059e5400008b7c24183bee742d33d23bdf7d278d0c6d000000008d0cc903c838512674083851277503035922458b48083bcd7f0233ed3bee75d533c05d3bdf0f9cc04823c75f5e5bc3b8ffffffff5d5f5e5bc390"
+  ],
+  "aliases": [],
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x6: toolchain-diff \u2014 prologue band 9 B: FA zeroes acc in ebx BETWEEN push esi and push edi (33 db) and folds the gate-byte test into cmp al,bl (3a c3 \u2014 bl is the just-zeroed acc, so the test semantics are unchanged) then push ebp + je 0x66; CL pushed all four saved regs contiguously then xor esi,esi + test al,al + je 0x71",
+   "patch 0x1f: toolchain-diff \u2014 je (p==0) disp recompute after the prologue band: 5e -> 55 (FA's fail block sits at 0x75)",
+   "patch 0x20: toolchain-diff \u2014 body transplant 104->96 B: CL's register schedule (acc=esi, e=ebx, m=ecx, c address-hoisted via lea) is unreproducible by decl-order steering (volatile c-load still leaves an lea+reg-load pair), so the band is transplanted to FA bytes: i=ebp/e=esi loads, d MATERIALIZED in eax (add eax,0x549e \u2014 the v6 source reuses p for d so the +0x54a2/+0x549e loads and the add all address the same base), m=edi from [esp+0x18], z=0 kept in edx (dl as the 38 51 26/27 cmp operand vs CL's folded 80 79 xx 00 imm form), record base ecx (8d 0c 6d / 8d 0c c9 / 03 c8 \u2014 3 B add vs CL's strength-reduced lea disp32), acc add 03 59 22 in ebx, count c re-read IN LOOP (8b 48 08 / 3b cd / 7f 02 \u2014 CL RLE-hoists it), back-edge cmp ebp,esi / jne -0x2b to 0x3b, end-calc xor eax,eax / pop ebp / cmp ebx,edi / setl al / dec / and eax,edi / pops edi,esi,ebx / ret; fail b8 ffffffff / pops ebp,edi,esi,ebx / ret + 1-B 90 pad. No dropped fixups: the ws DIR32 (site 0x2) and valP REL32 (site 0x15) sit before 0x20 and are untouched"
+  ],
+  "notes": "?NET_ReadAvail@@YAJJJ@Z @ 0xad540 (128 B = 127 code + 90). C: if (!*(unsigned char*)w42D_ws0) return -1; p = validate_player(p1); if (!p) return -1; i=*(long*)(p+0x54a2); e=*(long*)(p+0x549e); p+=0x549e (d reuse \u2014 REQUIRED so CL materializes add eax,0x549e instead of folding the offset into 6-B leas); m=p2; while (i!=e) { if (acc<m) { read record i*18 fields +0x26/+0x27 vs 0, skip or acc+=+0x22 dword }; i++; if (*(long*)(p+8) <= i) i=0; }; r = ((acc<m)-1)&m. Do-while spelling with latch goto. KEY SOURCE-LEVEL TRICK: reusing p for d (p += 0x549e) converts CL's folded [reg+0x549e-i*18-class] leas into FA's add-eax record form; the volatile c-load defeated the value-hoist but not the address-hoist (moot after the transplant). FA imm verified: ws 0x577dd8 @0x2 (DIR32, FA fixup present), validate_player REL32 disp 0xce7 -> 0x4ae240 (no loader fixup, as for all e8 sites)."
+ },
+ {
+  "verdict": "EXACT",
+  "rva": 880576,
+  "obj": "w42D_bufput_v2",
+  "src": "build/survey/probes/w42D_bufput_v1.c",
+  "maps": [
+   "_w42D_bpflush=$FA$_t_4d64c0"
+  ],
+  "aliases": [
+   "0=$FA$_t_4d6fc0"
+  ],
+  "patch": [
+   "0x8,38,89420478138b028a4c240488088b0a33c08a0141890aeb0e8b4c24045251e80000000083c408,31:20:_w42D_bpflush",
+   "0x3e,5,ff00"
+  ],
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x8: toolchain-diff \u2014 block reorder 38 B, same-span: CL orders dec/jns-INTO-BODY with the flush block FIRST (jns 0x1a skips it; body stores the new count 89 42 04 late, after the cl load) and jmps back to the tail; FA stores the decremented count EARLY (89 42 04) then js 0x20 into the flush block placed at the END (8b 4c 24 04 / push edx / push ecx / call flush / add esp,8), body runs directly after the js fall-through. The old call's REL32 (dropped by the span) is re-added as newsite site 31 (disp dword at the new e8+1) type 20 to $FA$_t_4d64c0, payload zero",
+   "patch 0x3e: toolchain-diff \u2014 tail deref-increment: CL mov ecx,[eax]/inc ecx/mov [eax],ecx (5 B) -> FA inc DWORD PTR [eax] (ff 00, RMW 2 B, -3 B, no fixup; also drops CL's redundant clobber-free RMW) \u2014 net length 68->65 = FA exactly, no tail pad"
+  ],
+  "notes": "unnamed buffered-putc helper @ 0xd6fc0 (65 B, no pad): C = eax=bp->w4-1; if >=0 { bp->w4=eax; eax=bp->w0; cl=[esp+4]; *[eax]=cl; *bp->w0 += 1 (FA: 8b 02 / 8a 4c 24 04 / 88 08 / 8b 0a / 33 c0 / 8a 01 / 41 / 89 0a); }; cmp eax,-1; if (ret==0) *(long*)[esp+0xc]=-1 else ++*(long*)[esp+0xc]; flush path (count<0): buf_flush(bp, buf) via $FA$_t_4d64c0 anchor. FA has ZERO loader fixups in this chunk \u2014 the only fixup is the call REL32 (re-added by newsite). INTEROP: keeps the $FA$_t_4d6fc0 anchor defined for w41F_loop1_v3 (alias 0=...). INTEROP (MANDATORY): aliases 0=$FA$_t_4d6fc0 keeps the stub anchor of the freshly-converted helper defined \u2014 required by w41F_loop1_v3's map _w41F_loopG=$FA$_t_4d6fc0; fit obj defines $FA$_t_4d6fc0 + $FA$_span_0d6fc0."
+ }
+]
