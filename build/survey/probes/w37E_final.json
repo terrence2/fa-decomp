@@ -1,0 +1,99 @@
+[
+ {
+  "rva": 645744,
+  "obj": "w37E_9da70_v2",
+  "src": "build/survey/probes/w37E_9da70_v2.c",
+  "maps": [
+   "_PLANEAddProc=?PLANEAddProc@@YAJXZ"
+  ],
+  "patch": [
+   "0x26,2,ca72"
+  ],
+  "provenance": [
+   "patch 0x26: toolchain-diff — FA's do-while latch compares the scan pointer first (3b ca = cmp ecx,edx) and branches forward-polarity jb (72); CL 4.2 canonicalizes the pointer compare to the operand-swapped cmp edx,ecx (3b d1) with opposite-polarity ja (77). Equal 2-B rewrite (0x26..0x27) of the identical loop condition (loop taken iff p<e); plain bytes, third byte 0x28 (ee) identical, no reloc in span. The v1 spelling (while (p < planes + numPlanes)) gave the same canonicalization, so this is a CL-4.2 compare-order/branch-polarity wall, not a source-shape issue."
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "PLANEAddProc (plane-scan adder for _curId). Pure C: short* scan over _planes up to planes+numPlanes; hit -> return 0; full (numPlanes >= 0x3c) -> return 1; else *e = curId, numPlanes++, return 0. Key spellings: guard ordered 'if (numPlanes >= 0x3c) return 1;' AFTER the loop so CL inlines the return-1 arm like FA's post-loop arm (v1's else-shaped guard kept a 23-B diff); keep the latch in its own while (p < e) and use short* (not long*) so the increments are 2-B. One 2-B patch at the latch (FA cmp p,e / jb vs CL's canonicalized cmp e,p / ja) + def-rename map _PLANEAddProc=?PLANEAddProc@@YAJXZ; the three data externs (_numPlanes/_planes/_curId) need NO maps (identity, CL 's match FA publics)."
+ },
+ {
+  "rva": 906352,
+  "obj": "w37E_dd470_v11",
+  "src": "build/survey/probes/w37E_dd470_v11.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_4dd470"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Digit-strip/semicolon-delete string filter (dd twin A). CL 4.2 WALL: FA's body has three separate exits, a doubled latch test after each s++ (cmp [edx],0 / jne back) and a shared pop ebx/ret tail; /O2 C spellings always merge tails + hoist the post-inc load, /O1 spellings flip RA to push esi + xor edx,edx + dl-compares (tried v1-v4 across /O2, /Od, /O1+/G5, /O1). Converged with the whole-body __declspec(naked) __asm escape hatch emitting FA's bytes 1:1 (67 B, 0 relocs). Recipe: edx = s; ebx save; digit arm (0x30..0x39) subtracts 0x30 and stores; 0x3b arm shifts the string left with lea ecx,[eax+1] copy loop in eax/ecx/bl; else arm just inc edx; each loop-continue point re-tests cmp byte ptr [edx],0 and je falls through to Ld_exit2 = the else branch's final pop ebx/ret, so the standalone exit block must NOT exist as separate text -- label the last tail Ld_exit2 and have the entry je target it. Alias 0=$FA$_t_4dd470 (unnamed stub chunk, label defined by this same obj)."
+ },
+ {
+  "rva": 907008,
+  "obj": "w37E_dd700_v11",
+  "src": "build/survey/probes/w37E_dd700_v11.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_4dd700"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Byte-identical twin of 0x906352 (same 67 B body, same digit-strip/semicolon-delete filter). Same naked-asm recipe with the shared Ld_exit2 tail: label the LAST pop ebx/ret as Ld_exit2 and point the entry je at it (v10's separate Ld_exit block cost exactly 2 B). Alias 0=$FA$_t_4dd700."
+ },
+ {
+  "rva": 279632,
+  "obj": "w37E_44450_v2",
+  "src": "build/survey/probes/w37E_44450_v2.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_444450"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "vtable-dispatched state setter. Pure C, no patches: bounds-test long at a1+0xe (x < 0xc8 || x > 0xd2); inside, write 0x12 to *(long*)((char*)*(long**)a1 + 0x14), copy the bound long, then call the object's fn table slot 0 ((**a1)(a1)); return unsigned char at *(long**)(a1+0x17e) + 0x11. TRAP: write offsets with char* casts -- *(long*)(*(long**)a1 + 0x14) scales by 4 (pointer arithmetic on long*) and emitted [eax+0x50]. v1->v2 fix was exactly that. Alias 0=$FA$_t_444450."
+ },
+ {
+  "rva": 279696,
+  "obj": "w37E_44490_v1",
+  "src": "build/survey/probes/w37E_44490_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_444490"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Twin of 0x279632, pure C first try: bounds 0xca..0xd2, same 0x12/bound-long vtable writes, return byte at *(long**)(a1+0x17e) + 0x10. char* casts for all byte offsets. Alias 0=$FA$_t_444490."
+ },
+ {
+  "rva": 574128,
+  "obj": "w37E_8c2b0_v1",
+  "src": "build/survey/probes/w37E_8c2b0_v1.c",
+  "maps": [
+   "@w37e_rand@4=@Rand@4",
+   "@w37e_t48b580@4=$FA$_t_48b580"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_48c2b0"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Randomized-pick helper (shuffle target select), plain C __fastcall 3-arg (s, t, n; n stack param => @12) on FIRST try. d = t ? (unsigned)t[1] % n : w37e_rand(n) (n <= 1 short-circuits); s += d*8 (8-B struct stride, plain pointer scale); then w37e_t48b580(s). Maps (fastcall mangle @N counts ALL params, reg + stack): @w37e_rand@4=@Rand@4 (TO 0x455910 verified from FA call rel32: 0x48c2d4-0x369c4) and @w37e_t48b580@4=$FA$_t_48b580 (TO 0x48b580 verified: 0x48c2e1-0xd61; $FA$_t_48b580 still defined by stub t0007b per strings check). fitobj masks reloc'd dwords so EXACT does not prove these -- both call TOs hand-verified against the FA imm bytes. Alias 0=$FA$_t_48c2b0; tail key proved via census (no manual tail needed)."
+ }
+]

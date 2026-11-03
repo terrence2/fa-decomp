@@ -1,0 +1,164 @@
+[
+ {
+  "rva": 188864,
+  "verdict": "EXACT",
+  "obj": "w37B_2e1c0_v3",
+  "src": "build/survey/probes/w37B_2e1c0_v3.c",
+  "maps": [
+   "@w37b_qfmtX@8=$FA$_t_42e250"
+  ],
+  "patch": [
+   "0x03,16,894c2404535657558bf28d54241333ff",
+   "0x25,1,de",
+   "0x4f,6,ba0100000047",
+   "0x5f,1,ff",
+   "0x61,1,d7",
+   "0x65,1,14",
+   "0x6e,1,13",
+   "0x82,0,8da424000000008da42400000000"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "@QuickMultiButtonText@8 (144 B = 130 code + 14 lea-pad). Void fn: p=psav=qfmtX(mv,&q.flag); walk the string list with inline strcmp (FA's 2-at-a-time loop: 8b d1/8b de copies, sbb-pair 1b c0/83 d8 ff) counting NextString steps; final QuickMultiButton(fmt,i) then if(q.flag) MMFreePtr(psav). CL 4.2 compiles this shape to a 130-B body byte-identical to FA except for reg-plan/slot diffs that are NOT steer-able by decl order (tested v2 vs v3: identical prologue): FA uses i=EDI/list=ESI with the xor AFTER the q lea, fmt slot=[esp+0x4], q flag=[esp+0x13]; CL uses i=ESI/list=EDI, xor BEFORE the lea, fmt slot=[esp+0x0], q flag=[esp+0x17]. Recipe: spell strcmp/NextString/(i++,1) as in wave 32c; let CL build the body; patch the two reg identities (list-copies 8b fa->8b f2 + 8b df->8b de; i's four sites 33 f6/46/33 f6/8b d6 -> 33 ff/47(ba-first-order)/33 ff/8b d7, all equal-length), the two slot disps (fmt store 0->4, fmt load 0x10->0x14, flag lea+read 0x17->0x13), and append FA's 2x 8d a4 24 00 00 00 00 pad. Call targets resolved in FA: fmtfn e8@0x13 -> 0x42e250, NextString e8@0x55 -> 0x11dc0, QuickMultiButton e8@0x66 -> 0x42e1b0, MMFreePtr e8@0x75 -> 0x435b70.",
+  "provenance": [
+   "patch 0x03: toolchain-diff CL slot/reg plan: FA = store 89 4c 24 04 (fmt@[esp+4]), pushes 53 56 57 55, list->esi 8b f2, lea q [esp+0x13], then xor edi 33 ff; CL = fmt@store [esp+0], list->edi, xor esi, lea [esp+0x17], xor/lea in swapped order (equal 16 B)",
+   "patch 0x25: toolchain-diff loop list-copy modrm: CL 8b df (list in edi) vs FA 8b de (list in esi)",
+   "patch 0x4f: toolchain-diff FA order ba 01 00 00 00 then 47 (inc edi); CL 46 then ba (inc esi); equal 6 B",
+   "patch 0x5f: toolchain-diff i=0 clear reg: CL 33 f6 (esi) vs FA 33 ff (edi)",
+   "patch 0x61: toolchain-diff final mov edx,i: CL 8b d6 vs FA 8b d7",
+   "patch 0x65: toolchain-diff fmt reload disp: CL 8b 4c 24 10 vs FA 8b 4c 24 14",
+   "patch 0x6e: toolchain-diff flag load 8a 44 24 17 -> 8a 44 24 13 (q on slot0 in FA)",
+   "patch 0x82: toolchain-diff FA pads 14 B: 2x census lea 8d a4 24 00 00 00 00 after the final c3; CL emits no pad",
+   "map/alias:link fix: fastcall src emits @w37b_qfmtX@8; TO = FA text stub $FA$_t_42e250 (real FNMAKE-like stub at FA rva 0x2e250, present in mswap.rsp)."
+  ],
+  "aliases": []
+ },
+ {
+  "rva": 312624,
+  "verdict": "EXACT",
+  "obj": "w37B_4c530_v3",
+  "src": "build/survey/probes/w37B_4c530_v3.c",
+  "maps": [
+   "@w37b_ffmtX@8=$FA$_t_44c5c0"
+  ],
+  "patch": [
+   "0x03,27,535657558a028bfa8be984c0746f8d54241333f6e8000000008bc8,0x15:20:@w37b_ffmtX@8",
+   "0x1e,4,89442414",
+   "0x55,6,ba0100000046",
+   "0x68,4,8bcd",
+   "0x72,1,13",
+   "0x76,1,09",
+   "0x77,2,8b4c2414",
+   "0x88,0,8d6424008d642400"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "@FortMultiButtonText2@8 (136 B + 8 lea-pad). Twin of 2e1c0 with an early return: if(*list==0) return; then the same qfmtX-walk, final FortMultiButton2(mv,i), if(q.flag) MMFreePtr(fmt). Here FA is the mirror of 2e1c0: mv in EBP (8b e9), psav in slot [esp+0x14] (store 89 44 24 14 after the fmtfn call), i=ESI (33 f6 after the lea), list=EDI, q at slot0 flag [esp+0x13]; CL spins mv into a slot at entry (89 4c 24 00) and holds psav in ebp. Since CL=FA code length both 136, patches are mostly equal-length: head span 0x03..0x1e swaps to FA's 27-B prologue order (pushes 53 56 57 55 / 8a 02 / 8b fa / 8b e9 / 84 c0 / 74 6f / 8d 54 24 13 / 33 f6 / e8 rel / 8b c8), the dropped fmtfn-call reloc re-anchored with newsite 0x17:20:@w37b_ffmtX@8 (payload zeros, link writes rel32); psav-store 8b e8 -> 89 44 24 14 (equal 4 B at 0x1e); ba/46 order; fort arg1 8b 4c 24 10 -> 8b cd (mv from ebp); flag 0x17->0x13; je 07->09 (follows mmfree-arg form); psav-load 8b cd -> 8b 4c 24 14 (+2, balanced by patch-3 \u22122); 8-B pad tail. FA call targets: fmtfn e8@0x17 -> 0x44c5c0, NextString e8@0x5b -> 0x11dc0, FortMultiButton2 e8@0x68 -> 0x44c520, MMFreePtr e8@0x7b -> 0x435b70.",
+  "provenance": [
+   "patch 0x03: toolchain-diff FA prologue: mv in EBP (8b e9), psav NOT stored at entry, i-init after the q lea; CL = mv spill [esp+0], 3+1 pushes, i-init before the test; equal 27 B; the CL fmtfn-call reloc @0x1a falls in-span and is re-anchored with newsite site=0x17 type 20 (rel32, payload 74 00 00 00 masked)",
+   "patch 0x1e: toolchain-diff psav spill shape: CL 8b e8 (mov ebp,eax) vs FA 89 44 24 14 (mov [esp+0x14],eax); equal 4 B",
+   "patch 0x55: toolchain-diff FA order ba 01 00 00 00 then 46 (inc esi); CL 46 then ba; equal 6 B",
+   "patch 0x68: toolchain-diff FortMultiButton2 arg1: CL reloads mv from slot 8b 4c 24 10; FA has mv live in ebp 8b cd (4->2)",
+   "patch 0x72: toolchain-diff flag load 8a 44 24 17 -> 8a 44 24 13 (q on slot0 in FA, mirror of 2e1c0)",
+   "patch 0x76: toolchain-diff je disp 07 -> 09 (the mmfree-arg form below grows the block by 2 in FA)",
+   "patch 0x77: toolchain-diff psav-load: CL 8b cd (ebp) vs FA 8b 4c 24 14 (slot) (2->4, net balances patch 0x68)",
+   "patch 0x88: toolchain-diff FA pads 8 B: 2x census lea 8d 64 24 00 after the final c3; CL emits no pad",
+   "map/alias:link fix: fastcall src emits @w37b_ffmtX@8; TO = FA text stub $FA$_t_44c5c0 (FA rva 0x4c5c0, in mswap.rsp)."
+  ],
+  "aliases": []
+ },
+ {
+  "rva": 137216,
+  "verdict": "EXACT",
+  "obj": "w37B_21800_v2",
+  "src": "build/survey/probes/w37B_21800_v2.c",
+  "maps": [
+   "_w37b_zcntX=?cobraData@@3UGlobalData@@A+0xc1c0",
+   "_w37b_zones=?cobraData@@3UGlobalData@@A+0xc1c8",
+   "_w37b_ct9X=_curThing+0x9",
+   "_w37b_ct11X=_curThing+0x11",
+   "@w37b_zfnX@4=$FA$_t_421880"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "patch": [
+   "0x53,3,",
+   "0x5a,5,8d148083c62e8bc8",
+   "0x2d,1,25",
+   "0x34,1,1e",
+   "0x43,1,0f",
+   "0x7a,0,8d9b00000000"
+  ],
+  "notes": "_ZONEForGV@0 (128 B = 122 code + 6 lea-pad). Scan loop: for p=zones (cobraData+0xc1c0 count * 46 stride): if(!zfn(p)) continue; if(p[0xc]!=4) continue; if((p[0x27]^curThing[9])&0x80) continue; if(InBounds3(&curThing[0x11],p)) return p. Three CL-vs-FA diffs only. (1) Reg trick: extern char OBJECT passed as &var -> CL emits FA's 56 68 imm32 push-offset form for the InBounds3 arg1 (plain extern pointer value would emit a1 imm + 50, 1 B longer). (2) FA's bottom block schedules lea edx,[eax*2] / add esi,0x2e p+=46 / mov ecx,eax BEFORE the movsx (CL keeps its own order) \u2014 3B delete + 8B reorder patch. (3) 3 jcc disp fixes + 6-B tail pad. FA targets: zfn e8@0x25 -> 0x421880, InBounds3 e8@0x4a -> 0x11bd0; imms: zcnt 0x531af8 (both sites), zones 0x531b00 (both), ct9 0x508741, ct11 0x508749 \u2014 all layout-verified.",
+  "provenance": [
+   "patch 0x53: toolchain-diff FA bottom block deletes CL's add esi,0x2e here (FA schedules it after the multiply, see patch 0x5a)",
+   "patch 0x5a: toolchain-diff FA bottom block: lea edx,[eax*2] 8d 14 80 / add esi,0x2e 83 c6 2e / mov ecx,eax 8b c8 (CL had mov ecx,eax and the +46 earlier); 5->8 B, jcc disps below shift automatically",
+   "patch 0x2d: toolchain-diff je disp (p[0xc]!=4 continue) -> 25 after the bottom-block move",
+   "patch 0x34: toolchain-diff je disp (0x80 xor continue) -> 1e",
+   "patch 0x43: toolchain-diff je disp (InBounds3 miss continue) -> 0f",
+   "patch 0x7a: toolchain-diff FA pads 6 B with census lea 8d 9b 00 00 00 00 after the final ret; CL emits no pad",
+   "map/alias:link fix: fastcall src emits @w37b_zfnX@4; TO = FA text stub $FA$_t_421880 (FA rva 0x21880, in mswap.rsp); static globals anchored to cobraData/_curThing layout publics."
+  ],
+  "aliases": []
+ },
+ {
+  "rva": 472720,
+  "verdict": "EXACT",
+  "obj": "w37B_73690_v2",
+  "src": "build/survey/probes/w37B_73690_v2.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "@AmmoForClass@4 (128 B, EXACT with zero patches, round 2). Pure C: need computed from mask (0xc000 -> 0x10000; 0x3fff |= 0x20000), v=0x7fffffff sentinel, then loop HARDFindStore(&v,7,0xff) -> -1 return 0 -> HARDPtrs(p,&a,&b); check *(short*)(a+4) > 0, !(b & 2), return 1 iff need & *(long*)(p+0xa6). Key spellings vs v1: retval-reassignment p = HARDPtrs(p, &a, &b) keeps rec in EAX with no ebx spill; FA passes a/b BY ADDRESS so declare them plain void* locals and hand &a,&b. FA targets: HARDFindStore e8@0x35 -> 0x525a0, HARDPtrs e8@0x4a -> 0x51d90; no data imms.",
+  "provenance": [
+   "whole-body: pure C, CL 4.2 = FA's compiler, byte-identical with no patches and no maps"
+  ]
+ },
+ {
+  "rva": 487328,
+  "verdict": "EXACT",
+  "obj": "w37B_76fa0_v2",
+  "src": "build/survey/probes/w37B_76fa0_v2.c",
+  "maps": [
+   "_w37b_ct34X=_curThing+0x34",
+   "_w37b_ttA5X=_curThingType+0x105",
+   "_w37b_ttA7X=_curThingType+0x107",
+   "_w37b_tt5dX=_curThingType+0x5d"
+  ],
+  "patch": [
+   "0x19,5,c1fe088bd6",
+   "0x73,0,8d9b000000008da42400000000"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "_COTurnRate@0 (128 B = 115 code + 13 lea-pad, EXACT round 4). Live-across-call staging is the whole trick: sh = curThing[0x34] local held in esi so CL emits push esi / mov esi,[ct34] BEFORE COBrv / sar after / mov edx,esi; then F24ToPA(GToTurn(...)) & 0xffff; curThing==6 arm is a je-chain switch over PROJEngineState with the 3 short-circuit epilogues. CL's only code diff = the sar/edx order (FA: sar esi,8 then mov edx,esi; CL: mov edx,esi then sar edx,8) \u2014 equal 5 B swap. Plus FA's 13-B tail (8d 9b 00 00 00 00 + 8d a4 24 00 00 00 00 \u2014 note the 7-B second filler; a 12-B first attempt fails 'unexplained tail bytes'). FA imms: curThing 0x508738 (both a0 loads), ct34 0x50876c, ttA5 0x508c25, ttA7 0x508c27, tt5d 0x508b7d; targets: COBrv e8@0x10 -> 0x76da0, GToTurn e8@0x1e -> 0x75970, F24ToPA e8@0x25 -> 0xc29d0, PROJEngineState e8@0x3a -> 0xbd510 \u2014 all layout publics.",
+  "provenance": [
+   "patch 0x19: toolchain-diff CL order mov edx,esi / sar edx,8 vs FA sar esi,8 / mov edx,esi; equal 5 B (8b d6 c1 fa 08 -> c1 fe 08 8b d6)",
+   "patch 0x73: toolchain-diff FA pads 13 B: census lea 8d 9b 00 00 00 00 followed by the 7-B 8d a4 24 00 00 00 00 after the final ret; CL emits no pad"
+  ]
+ },
+ {
+  "rva": 524048,
+  "verdict": "EXACT",
+  "obj": "w37B_7ff10_v1",
+  "src": "build/survey/probes/w37B_7ff10_v1.c",
+  "maps": [
+   "_w37b_selX=_selectedTypeName+0x10",
+   "_mmAllocId=?mmAllocId@@3EA",
+   "_MPMissionShutdown@0=?MPMissionShutdown@@YGXXZ",
+   "@SoundAllOff@0=?SoundAllOff@@YIXXZ",
+   "@w37b_msinitX@4=$FA$_t_40e1c0"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "_MISSIONShutdown@0 (128 B, EXACT with zero patches, round 1). Pure C, stdcall(void), no frame: if(selectedTypeName[0x10]) { =0; the 14-call shutdown train; fastcall msinitX(mainV) via mov ecx,_mainV; if(missionName[0]) RMFree(missionName) push-offset form; RMFreeAllId(1) push; MMFreeAllId(1) mov ecx=1; mmAllocId=0. } The a0 load/mov al tests and the bare ret come free from spelling the two flag bytes as extern chars. FA imms verified: selX 0x4f71b8 (a0@c6 05 both = _selectedTypeName 0x4f71a8+0x10), mainV 0x4e7630, missionName 0x4f7108 (a0+68 push forms), mmAllocId 0x533a7c; call targets e8@0x10..0x6b = 0xb0a70 WRShutdown, 0xc2350 T_Shutdown, 0xc2100 T_ShutdownDatabase, 0x8f420 OBJShutdown, 0xe1c0 msinit stub, 0x66d0 HUDShutdown, 0x63e40 CTShutdown, 0x6b6c0 MPMissionShutdown, 0x33870 SoundAllOff, 0x8b4a0 SAYShutdown, 0x9e2f0 StreamersShutdown, 0xa3b80 RMFree, 0xa3c00 RMFreeAllId, 0x35cf0 MMFreeAllId \u2014 all layout publics except the FA stub.",
+  "provenance": [
+   "whole-body: pure C, CL 4.2 = FA's compiler, byte-identical with no patches; call-train stdcall spellings emit FA's exact push/call order"
+  ]
+ }
+]

@@ -1,0 +1,139 @@
+[
+ {
+  "rva": 670592,
+  "verdict": "EXACT",
+  "name": "_RMFree@4 (0xa3b80, 0x70 code + 14 B census pad, stdcall void(char*); resource-manager free by name)",
+  "obj": "w37H_a3b80_v2",
+  "src": "build/survey/probes/w37H_a3b80_v2.c",
+  "maps": [
+   "_w37h_resFlag=?resList@@3PAURES_LIST@@A+0x67ec",
+   "_w37h_fixStr=?fixupShape@@3DA+0x2c",
+   "_RMUnlocate@4=?RMUnlocate@@YGXPAD@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": [
+   "Struct W37H_RES { char p[0xe]; unsigned char flg; char hd[4]; } places flg at +0x0f and hd at +0x10, matching FA's unaligned field offsets (char-array members + cast reads, wave-32 pad class).",
+   "Body: h=RMFind(name); if (!h) return; if (h->flg & 1) { resFlag=0; SMCallByName(&buf[3], &fixStr, RMType(h), h); if (buf[3]==0) { if (h->flg & 2) MMFreeHandle(*(unsigned long*)h->hd); else MMFreePtr(*(unsigned long*)h->hd); } resFlag=1; } RMUnlocate(name);",
+   "Shared-true-tail bool idiom: (v==0)||(v==3) and the two ifs share one epilogue; do NOT use if/else (it duplicates the epilogue). uchar bool b materializes in BL (b3 00/b3 01, 84 db test).",
+   "Maps: resList+0x67ec=0x505f0c, fixupShape+0x2c=0x505f3c, RMUnlocate=FA mangled-public rename. MMFreeHandle/MMFreePtr/RMFind/RMType/SMCallByName need no map (CL names == FA publics).",
+   "v1 failed on +0x10-vs-+0xf field alignment (char[4] hd + cast read fix). Tail = census pad only; fitobj EXACT with tail=''."
+  ]
+ },
+ {
+  "rva": 806928,
+  "verdict": "EXACT",
+  "name": "_DoNibble (0xc5010, 120 B, from first round; naked-asm converter chunk)",
+  "obj": "w37H_c5010_v1",
+  "src": "build/survey/probes/w37H_c5010_v1.c",
+  "maps": [
+   "_DoNibble=DoNibble"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": [
+   "Naked-asm escape route from round 1 (converter chunk: FA bytes emitted raw in __asm with _emit as needed). _DoNibble=DoNibble map because FA public is undecorated DoNibble while CL emits _DoNibble.",
+   "TAIL: none (chunk has no census pad). PARENT: chunk in stub t000??; check split when integrating."
+  ]
+ },
+ {
+  "rva": 517520,
+  "verdict": "EXACT",
+  "name": "?CN_SetFactoryDefaults@@YAXPAUCN_INFO@@@Z (0x7e590, 0x6c code + 3 B census pad 8d4900, cdecl void(CN_INFO*); zero+init CN_INFO, 0x377 rep stosd)",
+  "obj": "w37H_7e590_v2",
+  "src": "build/survey/probes/w37H_7e590_v2.c",
+  "maps": [
+   "_w37h_jol=?janesOnlineName@@3PADA",
+   "_CN_SetFactoryDefaults=?CN_SetFactoryDefaults@@YAXPAUCN_INFO@@@Z",
+   "_NetSetFactoryTCP=?NetSetFactoryTCP@@YAXPAUCN_INFO_TCP@@@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": [
+   "sizeof trick drives the rep stosd count: struct W37H_CN is laid out so sizeof == 0xDDC, giving CL 10h*0x377+... -> rep stosd ecx=0x377 (fillers must be zero so the trailing 3B of the block stay zero). Fields f0=3, f64=0, fbc=8, f60=0xa assigned in FA's emit order (mov [ebx],3; [ebx+0x64]; [ebx+0xbc]; [ebx+0x60]).",
+   "lea eax,[ebx+0xdb0]; push; call NetSetFactoryTCP. Then `if (w37h_jol[0]) strcpy((char*)c + 4, w37h_jol);` reproduces FA's test al,al / je + bf janesOnlineName / strlen (b9 -1; 2b c0; f2 ae; f7 d1; 2b f9) / c1 e9 02 rep movsd + f3 a4 tail-copy sequence.",
+   "// #include <string.h> pulls MSVCRT str* inline chain that folds to FA's libcq strlen+rep movs spelling. CN_SetFactoryDefaults map for the caller-facing FA mangled name (extern C function in a .cpp).",
+   "v1 failed: memset count 0x378 (pad2 0xcf0 wrong by one dword) and missing jit-string guard. Fix = pad2[0xcf0] + the jol guard."
+  ]
+ },
+ {
+  "rva": 622528,
+  "verdict": "EXACT",
+  "name": "?computePacketCRC@@YAKAAUSERIAL_PACKET@@@Z (0x97fc0, 0x61 code + 15 B census pad 8d642400+8da42400000000, stdcall-ish ulong(SERIAL_PACKET*); CRC16 over packet with s1/sA save-restore)",
+  "obj": "w37H_97fc0_v2",
+  "src": "build/survey/probes/w37H_97fc0_v2.c",
+  "maps": [
+   "_computePacketCRC=?computePacketCRC@@YAKAAUSERIAL_PACKET@@@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": [
+   "Body: v=p->f0&3; b=(v==0)||(v==3); s1=p->f1; sa=p->fA; p->f1=0xff; if (b) p->fA=0xff; crc=CdrvCrc16(0x18,p)&0xffff; p->f1=s1; if (b) p->fA=sa; if (!b) crc&=0xff; return crc;",
+   "Shared-true-tail idiom again: (v==0)||(v==3) compiles as je/jne join with mov bl,1 in the middle (FA-identical); b declared unsigned char so bool materializes in BL (b3 xx, 84 db tests), matching FA test bl,bl / je shapes.",
+   "s1/sa as unsigned char locals spill to [esp+0xa]/[esp+0xb] in FA order (sub esp,4 frame). CdrvCrc16 declared extern unsigned long __stdcall CdrvCrc16(unsigned long, void*); call matches FAs push esi / push 0x18 / call with @8 stack cleanup.",
+   "W37H_SP { uchar f0; uchar f1; uchar p2[8]; uchar fA; uchar pad[0x14]; } - unaligned +0xa field via char-pads; tail = census pad only.",
+   "v1 failed on bool in EDI (crc's xor spilled) - uchar b declaration fixed."
+  ]
+ },
+ {
+  "rva": 740288,
+  "verdict": "KEEP-ASM",
+  "name": "@G_TextureFlip@12 (0xb4bc0, 0x70 exactly, no tail; fastcall void(CB*, ulong n, element* p); flips x/z toward top/bot, then G__Texture(ap,cnt,p))",
+  "obj": "",
+  "src": "",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": [
+   "NEAR MISS (10 variants, best = w37H_b4bc0_v7 at 0x6d = FA minus 3): v7 (cnt=n; ap=a FIRST, packed-struct member reads cb->f6/a->f6, p[i].x/p[i].z element loop, pushad/popad asm block) reproduces FA 0x00-0x15 byte-for-byte: a1 <cb> @0x06; 90 @0x0b; 89 55 fc (cnt spill) @0x0c; 53/56 @0x10; 89 4d f8 (ap spill) @0x11; 57 @0x14; PLUS FA's same-reg kill form 8b 49 06 (mov ecx,[ecx+6]) for the bot deref - the /G5 lazy-spill-before-clobber cascade that pulls the ap spill into the fill band. The inline-asm tail (60 8b 75 f8 8b 45 fc 8b 5d 08 e8 <G__Texture> 61 5f 5e 5b 8b e5 5d c2 04 00) is FA-identical from v3 on (wave-18 pusha trap: spell pushad/popad, never pusha/popa).",
+   "REMAINING WALL - register-allocation/scheduler tie not steerable from C: FA wants top->ESI (8b 70 06), LSR byte-index->EDX (33 d2; add edx,0x14; addressing [eax+edx*1+4]), loop counter i->EDI (33 ff; inc edi), deref-emit order top-then-bot interleaved (8b 70 06 4e 8b 49 06 c1 e6 10 49 c1 e1 10), and the entry test as mov ebx,[ebp-4]; cmp ebx,edx; jle (8b 5d fc 3b da 7e 29, +3 B: cnt reloaded from its slot because the LSR's zeroing has recycled n's EDX). All 10 variants give the rotation top->EDI, i->ESI, LSR->EBX with 85 d2 entry test. Tried: element loop vs explicit idx local (v8, idx-form loses the same-reg bot!), cast reads vs packed members (pack(1) RE-proved to give the same-reg kill form - v7), C-order top/bot swap (v9 regresses a1 to 0x0d), decl order of i, 0<(long)cnt reversed guard, separate rem local for guard, split chain (top=cb->f6; top--; top<<=0x10 - no scheduler change). The v7 3-byte shortfall is exactly the entry-test reload, downstream of LSR=EDX arg-reuse.",
+   "Recommend KEEP-ASM with the v7 body as the base if this chunk is ever revisited, or a naked-asm full-body route as in w36H_2254d (the _emit route would nail all four register targets deterministically).",
+   "Maps at converging time: cb=_cb via _cb=?cb@@... needs FA public check; G__Texture=0x4c71e8 (CL name G__Texture). No relocs other than the a1 <cb> DIR32 and the e8 call."
+  ],
+  "reason": "Register-allocation/scheduler tie not steerable from C. Best variant w37H_b4bc0_v7 = 0x6d vs FA 0x70: reproduces the whole 0x00-0x15 prolog band (a1 <cb> @0x06; 90; 89 55 fc; 53/56; 89 4d f8; 57) and FA's same-reg bot deref 8b 49 06, and the inline-asm tail is byte-identical, but FA's loop registers (top->ESI 8b 70 06, byte-index LSR->EDX 33 d2, counter i->EDI 33 ff) and entry test (mov ebx,[ebp-4]; cmp ebx,edx; jle = 8b 5d fc 3b da 7e 29, cnt reloaded because the LSR zeroing recycled n's EDX) all rotate to top->EDI / i->ESI / LSR->EBX with 85 d2 in every C spelling tried (10 variants: element loop, explicit idx byte form, cast vs packed(1) member reads, C-order top/bot swap, decl order, reversed guard 0<(long)cnt, separate rem guard local, split top/bot chains). The 3-byte shortfall is exactly the entry-test reload, downstream of LSR=EDX arg-reuse."
+ },
+ {
+  "rva": 692096,
+  "verdict": "EXACT",
+  "name": "?tcpbuildaddress@@YADPAUNET_PROTOCOL@@PAUCN_INFO@@PAUNET_ADDRESS@@@Z (0xa8f80, 0x57 code + 9 B census pad 8bff+8da42400000000, cdecl char(UNet_protocol*, CN_INFO*, UNet_address*); copy tcp port settings from CN_INFO into address struct)",
+  "obj": "w37H_a8f80_v2",
+  "src": "build/survey/probes/w37H_a8f80_v2.c",
+  "maps": [
+   "_tcpbuildaddress=?tcpbuildaddress@@YADPAUNET_PROTOCOL@@PAUCN_INFO@@PAUNET_ADDRESS@@@Z",
+   "_tcp_settings=?tcp_settings@@3UCN_INFO_TCP@@A"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": [
+   "Same-reg kill forms are the load-bearing spellings: `*(W37H_TP3*)&tcp_settings = *(W37H_TP3*)((char*)c + 0xdb0);` (W37H_TP3 = struct { unsigned long a0, a4, a8; }) emits lea ecx,[esi+0xdb0] (same-reg kill of the c arg) + mov eax,[ecx] / mov [edi],eax / mov ebx,[ecx+4] / mov [edi+4],ebx / mov ecx,[ecx+8] / mov [edi+8],ecx triple (3-dword struct assign - the arg-reuse/CSE cascade).",
+   "Port read = 16-BIT load: `w = *(unsigned short*)((char*)c + 0xdb8); if (w == 0) ... else ...` gives mov ax,[esi+0xdb8]; test ax,ax / jne; fast path b0 01 5f 66 c7 42 02 ff 06 5e 5b c3 vs slow path 66 89 42 02 5f b0 01 5e 5b c3 - the w2 = 0x6ff constant written as 66 c7 42 02 ff 06 (imm sign-extends) matches FA.",
+   "d->w0 = 1 first statement (66 c7 02 01 00) then d->d4 = *(unsigned long*)((char*)c + 0xdc6); char-cast read needed - unaligned +0xdc6. d-based stores = UNW (mov [edx+4],eax with a1/bf moffs for tcp_settings: bf <tcp_settings@rva> fills + 90.)",
+   "Return 1 via b0 01. Tail = census pad only (the FA tail 8bff + 8da42400000000 was judged by fitobj as pad composition, tail='' accepted).",
+   "v1 failed on: absolute mov stores to tcp_settings, wrong f76 offset (0xe28 vs 0xdc6), missing same-reg kills. PARENT: chunk in stub t000?? (check at split time)."
+  ]
+ }
+]

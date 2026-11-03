@@ -1,0 +1,135 @@
+[
+ {
+  "rva": 597536,
+  "verdict": "EXACT",
+  "name": "0x91e20 (50 B code + 14 B census pad, cdecl int(char*); two zero-scan loops over 4 then 6 bytes)",
+  "obj": "w37F_91e20_v2pt",
+  "src": "build/survey/probes/w37F_91e20_v2.c",
+  "maps": [],
+  "patch": [
+   "0x9,1,01",
+   "0x1a,1,01"
+  ],
+  "aliases": [
+   "0=$FA$_t_491e20"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x9: toolchain-diff \u2014 SIB base/index re-encode (wave-17 sib-45 class): FA encodes the byte load as [ecx+eax*1] (sib 01, base=ECX pointer, index=EAX i); CL 4.2 canonicalizes the equivalent [eax+ecx*1] (sib 08, base=EAX). Same instruction, 1-B sib swap, plain bytes, no reloc in span.",
+   "patch 0x1a: toolchain-diff \u2014 same SIB re-encode on the second loop's load mov bl,[ecx+eax*1+0x4] (sib 08 -> 01). Plain bytes, no reloc in span."
+  ],
+  "notes": "char-return width lever (wave-17 return-width): `char w37f_91e20(char *p)` makes all three exits emit byte-width code \u2014 mov al,1 (b0 01) / xor al,al (32 c0) \u2014 which plain `int` gets wrong (b8 01000000 / 33 c0, +3 B shifts the tails and the census pad no longer tiles). Body: for (i=0;i<4;i++) if (p[i]) return 0; for (i=0;i<6;i++) if (p[i+4]) return 0; return 1; CL reproduces FA's do-while rotation of both loops, the mov dl/bl byte tests, the xor edx,edx dead-init before loop 2, AND the duplicated ret0 tails (one per loop). 0 relocs; maps/patch-free except the 2 SIB bytes. Tail = census-proven 8da42400000000+8da42400000000 (2x7 B). PARENT: chunk sits in stub t00080.obj (0x491e20-0x4923d0) \u2014 SPLIT_AT must keep t00080's other publics (see build/stubs/t00080.obj symtab: ?connected_state_callback@@YAXPAXW4NET_CONNECTED_STATE@@@Z, ?players_box_add@@YAXPAXW4PLAYER_ACTION@@PADPAUNET_ADDRESS@@J@Z, ?players_box_connected_state_callback@@YAXPAXW4NET_CONNECTED_STATE@@@Z, @ReadSticksRaw@0). Caller (FA scan): ?RunIPXOptionsDialog@@YAXPAUCN_INFO@@PAD@Z rel-call at its +0x2ce -> 0x491e20; alias '0=$FA$_t_491e20' lets its map TO resolve."
+ },
+ {
+  "rva": 598176,
+  "verdict": "EXACT",
+  "name": "0x920a0 (58 B code + 14 B census pad, cdecl void(char*); G_SetColor(94) + G_Box(4 short fields) + flag store + tail call)",
+  "obj": "w37F_920a0_v1",
+  "src": "build/survey/probes/w37F_920a0_v1.c",
+  "maps": [
+   "_w37f_92140=$FA$_t_492140"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4920a0"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "EXACT plain C, one attempt. externs at top: `void __fastcall G_SetColor(int)` (emits @G_SetColor@4 identity, FA public @0x4957b0), `void __stdcall G_Box(int,int,int,int)` (emits _G_Box@16 identity, FA public @0x495ec0), `void __cdecl w37f_92140(void*)` mapped _w37f_92140=$FA$_t_492140 (still-stub t00080.obj defines that anchor). Body: G_SetColor(94); G_Box(*(short*)(s+4), *(short*)(s+6), *(short*)(s+8), *(short*)(s+0xa)); s[0x185]=1; w37f_92140(s); \u2014 CL reproduces FA's right-to-left arg staging exactly (movsx eax=+0xa, ecx=+8 first, two pushes, then movsx edx=+6, eax=+4, two pushes) AND the esp-relative ordering (mov esi,[esp+8] must come AFTER the G_SetColor call because the load is esp-relative across a call; CL keeps it there on its own). Signed short loads = movsx because fields are short. CALLER-CAUGHT-BYTES: dis.py's listing ELIDED `c6 86 85 01 00 00 01` (mov BYTE PTR [esi+0x185],0x1) between the _G_Box call and push esi (wave-24 hidden-instr trap) \u2014 found in raw FA bytes (FA/FA.EXE off 0x400+rva-0x1000) and restored via `*(s + 0x185) = 1`. FA call disp bytes verified: 0x3705 -> 0x4957b0, 0x3df8 -> 0x495ec0, 0x6b -> 0x492140. Tail = census-proven 8d9b00000000. PARENT: chunk in stub t00080.obj (see 0x91e20 notes for split); caller (FA scan): ?doConfigurationScreen@@YAXJP6AXPAUCN_INFO@@PAD@Z@@... chunk 0x908a0 rel-calls 0x4920a0 at +0x3cd; alias '0=$FA$_t_4920a0' resolves its TO."
+ },
+ {
+  "rva": 727984,
+  "verdict": "EXACT",
+  "name": "0xb1bb0 (58 B code + 14 B census pad, cdecl void(void*); 2x callee(o,i) for i=1,0 then callee(o,[o+4],0x50), [o+4]=0, callee(o))",
+  "obj": "w37F_b1bb0_v1",
+  "src": "build/survey/probes/w37F_b1bb0_v1.c",
+  "maps": [
+   "_w37f_b1aa0=$FA$_t_4b1aa0",
+   "_w37f_83f90=$FA$_t_443f90",
+   "_w37f_84000=$FA$_t_444000"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4b1bb0"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "EXACT plain C, one attempt. externs at top (all __cdecl \u2014 FA does caller-cleanup at every site: add esp,8/0xc/4): w37f_b1aa0(void*,int), w37f_83f90(void*,int,int), w37f_84000(void*). Body: i=1; do { w37f_b1aa0(o,i); } while (--i >= 0); w37f_83f90(o, *(int*)((char*)o+4), 0x50); *(int*)((char*)o+4)=0; w37f_84000(o); \u2014 CL reproduces FA's bottom-tested jns loop (dec esi), the push-i-then-push-o arg order, and the interleaved push-0x50-then-load-[edi+4] staging. CALLER-CAUGHT-BYTES: dis.py's listing ELIDED `c7 47 04 00 00 00 00` (mov DWORD PTR [edi+4],0) between the w37f_83f90 and w37f_84000 calls (wave-24 hidden-instr trap) \u2014 found in raw FA bytes and restored via the [o+4]=0 statement. MAP TOs verified against FA call disp arithmetic (EXACT masks these dwords): 0x4b1aa0 (anchor in still-stub t000a6.obj, disp -0x122), 0x443f90 and 0x444000 (anchors in still-stub t00032.obj covering 0x443dc0-0x4441f0, disps -0x6dc44 / -0x6dbe4). Tail = census-proven 8d9b00000000. PARENT: chunk in stub t000a6.obj (0x4b11d0-0x4b1d00) \u2014 note its other publics when splitting."
+ },
+ {
+  "rva": 735904,
+  "verdict": "EXACT",
+  "name": "0xb3aa0 (49 B code + 15 B census pad, cdecl void(char*); zero 3 dwords of arg + 3 fields through *(long*)(arg+0x182), re-read each time)",
+  "obj": "w37F_b3aa0_v1",
+  "src": "build/survey/probes/w37F_b3aa0_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4b3aa0"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "EXACT plain C, one attempt, ZERO patches. Reload-forcing lever: FA re-loads *(long*)(p+0x182) before EACH of the three writes (mov eax,[edx+0x182] x3) \u2014 plain C would CSE the load; spelling the read as `*(long volatile *)(p + 0x182)` at each of the three statements forces a fresh load per use (volatile defeats CSE). Body: z=0; a=(char*)*(long volatile*)(p+0x182); *(long*)(p+0xba)=z; *(long*)(p+0x72)=z; *(long*)(p+0x16a)=z; *(a+0x50)=(char)z; a=reload; *(a+0x51)=(char)z; a=reload; *(long*)(a+0x56)=z; \u2014 CL reproduces the interleaving (load eax BEFORE the three [edx] stores), the cl-carrying byte stores (88 48 50/51, from (char)z in ECX), and the disp32-vs-disp8 modrm choices ([edx+0xba]/[edx+0x16a] get 89 8a imm32, [edx+0x72] gets 89 4a imm8, [eax+0x56] gets 89 48). 0 relocs. Tail = census-proven 8d642400+8d642400+8da42400000000 (15 B). PARENT/NO-STUB ANOMALY: chunk 0x4b3aa0-0x4b3ae0 is covered by NO stub group (gap between t000a7.obj end 0x4b3aa0 and t000a8.obj start 0x4b3ae0) and $FA$_t_4b3aa0 exists in NO build/stubs/*.obj \u2014 dis.py tags the only FA caller chunk 0xb1e30 (also uncovered, 'human-coin gap anchor' band) which rel-calls 0x4b3aa0 at its +0x76 AND stores 0x4b3aa0 as an abs vtable dword at +0x1f; alias '0=$FA$_t_4b3aa0' makes THIS obj define that public so the caller's future TOs resolve. Parent must reconcile the gap-anchor bookkeeping (caller chunk 0xb1e30 also has $FA$_t_4b2330/$FA$_t_4b23f0/$FA$_t_4b3a10 gap anchors)."
+ },
+ {
+  "rva": 131904,
+  "verdict": "EXACT",
+  "name": "0x20340 (39 B code + 9 B census pad, stdcall int(long); find-dword-index over _fortPlayers, walk ends at &_fortSizeIndex)",
+  "obj": "w37F_20340_v2pt",
+  "src": "build/survey/probes/w37F_20340_v2.c",
+  "maps": [
+   "__fortPlayers=_fortPlayers",
+   "__fortSizeIndex=_fortSizeIndex"
+  ],
+  "patch": [
+   "0x3,1,b9",
+   "0x9,1,54",
+   "0xd,1,19",
+   "0xf,1,da",
+   "0x13,1,c1",
+   "0x17,1,f9"
+  ],
+  "aliases": [
+   "0=$FA$_t_420340"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x3: toolchain-diff \u2014 reg-color sweep (wave-32c class), 6x 1-B modrm re-encodes, stable across 3 loop shapes (v2/v3/v4) so not source-steerable: CL puts the walked pointer p in EDX and the key id in ECX; FA's compile had p in ECX (mov ecx,imm = 9 vs ba) and id in EDX.",
+   "patch 0x9: toolchain-diff \u2014 same reg-color sweep: FA mov edx,[esp+8] (modrm 54) vs CL mov ecx,[esp+8] (modrm 4c).",
+   "patch 0xd: toolchain-diff \u2014 same sweep: FA mov ebx,[ecx] (modrm 19) vs CL mov ebx,[edx] (modrm 1a).",
+   "patch 0xf: toolchain-diff \u2014 same sweep: FA cmp ebx,edx (3b da) vs CL cmp ebx,ecx (3b ca).",
+   "patch 0x13: toolchain-diff \u2014 same sweep: FA add ecx,0x4 (modrm c1) vs CL add edx,0x4 (modrm c2).",
+   "patch 0x17: toolchain-diff \u2014 same sweep: FA cmp ecx,imm32 (81 f9) vs CL cmp edx,imm32 (81 fa)."
+  ],
+  "notes": "do-while pointer walk: p = (long*)&_fortPlayers; i = 0; do { if (*p == id) return i; p++; i++; } while (p < &_fortSizeIndex); return -1; \u2014 FA cmp's the ARRAY-END via the address of the next global _fortSizeIndex (cmp ecx,imm reloc'd on _fortSizeIndex, addend 0; _fortPlayers @0x5258d8 + 8 dwords ends at 0x5258f8 = &_fortSizeIndex, both verified in build/layout.json 'syms'). Map-FREE by name (w30c precedent): CL's DIR32 sites reference externs _fortPlayers/_fortSizeIndex spelled without leading underscore; FA publics carry the same names \u2014 identity resolves at link. All 6 patches are plain modrm/opcode bytes 1 B each, no reloc in any span, and FA's imm dwords (d8585200 / f8585200) match FA raw bytes byte-for-byte (verify-imm-bytes rule). FA add ecx,4 THEN inc eax order reproduced by C `p++; i++;` (v2); v4 tried i++/p++ -> 11 diffs (CL reorders both), so decl/statement order p-then-i is load-bearing. Tail = census-proven 8bff+8da42400000000. PARENT: chunk in stub t0001a.obj; caller (FA scan): _FortMission@4 chunk 0x1f6a0 rel-calls 0x420340 at +0x5bd; alias '0=$FA$_t_420340' resolves its TO."
+ },
+ {
+  "rva": 898672,
+  "verdict": "EXACT",
+  "name": "0xdb670 (47 B, 0 pad, cdecl void*(int key, void* base); do-while scan of 12-B entries with branchless sbb/and select \u2014 XcptActTab lookup, CRT band)",
+  "obj": "w37F_db670_v6",
+  "src": "build/survey/probes/w37F_db670_v6.c",
+  "maps": [
+   "___XcptActTabCount=__XcptActTabCount"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4db670"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy",
+  "provenance": [],
+  "notes": "FLAG DEVIATION is the whole discovery: same C compiled with the default /c /O2 /Gy /G5 comes out 0x35 B (CL pushes EBX+EBP and materializes 2 temps) / with /Od 0x62 B; WITHOUT /G5 (`/c /O2 /Gy`) CL reproduces FA's single-temp ECX plan byte-for-byte 47 B EXACT on the first try. So this CRT-band chunk's FA compile was NOT /G5 \u2014 consistent with the CRT-band patch-hybrid history (wave-34). Do NOT 'fix' the flags back to default for this entry. Body: p=d; do { if (*(int*)p == key) break; p += 12; } while ((char*)d + 12 * __XcptActTabCount > p); if ((unsigned)(*(int*)p - key) < 1U) return p; return 0; \u2014 the (unsigned)(x) < 1U ternary compiles to FA's branchless tail (sub eax,edx / cmp eax,1 / sbb eax,eax / and eax,esi \u2014 cookbook sbb-select); the count is re-read inside the loop condition each iteration (FA recomputes d + 12*cnt in ECX chain: 8b 0d / 8d 0c 49 / 8d 0c 88 / 3b ce / ja); the do-while's memory-operand compare (39 16 cmp [esi],edx) falls out on its own. Map-free: extern __XcptActTabCount identity (FA public @0x51abe4, verified against FA imm bytes e4ab5100; src spelled WITHOUT leading underscore so CL emits the same __XcptActTabCount). PARENT: chunk in stub t000e2.obj; caller (FA scan): __XcptFilter chunk 0xdb520 rel-calls 0x4db670 at +0x14; alias '0=$FA$_t_4db670' resolves its TO."
+ }
+]

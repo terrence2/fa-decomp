@@ -1,0 +1,155 @@
+[
+ {
+  "rva": 630160,
+  "verdict": "EXACT",
+  "name": "?WriteModemEntry@@YAXPAU_iobuf@@PAUModemStrings@@@Z (96 B, cdecl void(FILE*, ModemStrings*), census tail 8d642400+8da42400000000)",
+  "obj": "w37D_w99d90_v1",
+  "src": "build/survey/probes/w37D_w99d90_v1.c",
+  "maps": [
+   "_WriteModemEntry=?WriteModemEntry@@YAXPAU_iobuf@@PAUModemStrings@@@Z",
+   "_w37d_fmt0=_mouseButtons+0x4b4",
+   "_w37d_fmt1=_mouseButtons+0x4ac"
+  ],
+  "patch": [
+   "0x11,10,33db680000000083c554,3:6:_w37d_fmt0"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x11: toolchain-diff - arg-push scheduling: FA emits xor ebx,ebx (i=0) right after the push 34/push ms/push 34 run and add ebp,0x54 AFTER the fmt push; CL 4.2 emits add ebp,0x54 first, then the fmt push, then i=0. Equal 10-B rearrangement (33 db | 68 <fmt> | 83 c5 54 both sides); the fmt0 DIR32 reloc rides the span so re-attach at the new imm site (span offset 3 = 0x14), payload/addend unchanged (FA 0x4fd448 = _mouseButtons+0x4b4).",
+   "patch 0x11 provenance re-verified against raw FA bytes at 0x499da1-0x499dab: xor ebx,ebx at FA+0x11, fmt push at FA+0x13, add ebp,0x54 at FA+0x18."
+  ],
+  "notes": "Plain C, EXACT. fprintf is FA's real _fprintf public (0x4d5ce0, no map needed - identity); strlen inlines to FA's exact 8b fd/b9 ffffffff/2b c0/f2 ae/f7 d1/49 scasb sequence when <string.h> is included. Both literal format strings are interior data of FA's _mouseButtons object (FA 0x4fd448/+0x4b4, 0x4fd440/+0x4ac) - declare extern char arrays w37d_fmt0/w37d_fmt1 and use interior-delta maps (wave-34 lit class); do NOT let CL emit its own .rdata strings. Call shapes: fprintf(f, fmt0, 34, ms, 34) (5 args, add esp,0x14) and fprintf(f, fmt1, 'a'+i, p) (4 args, add esp,0x10); loop walks ms+0x54 with +0x50 stride for 9 rows, printing only strlen(p)!=0 rows, index letter lea eax,[ebx+0x61]. Single reg-plan patch (arg-push scheduling swap of i=0/add ebp,0x54 around the fmt push). Tail = census-proven 11-B pad, auto-appended by fitobj."
+ },
+ {
+  "rva": 826372,
+  "verdict": "EXACT",
+  "name": "SetShading (92 B, dead-code helper; args arrive in EAX/EBX/ECX, result to AX for SetShadingTable)",
+  "obj": "w37D_cc9c04_v1",
+  "src": "build/survey/probes/w37D_cc9c04_v1.c",
+  "maps": [
+   "_w37d_ls0=_objLightSource+0x0",
+   "_w37d_ls1=_objLightSource+0x2",
+   "_w37d_ls2=_objLightSource+0x4",
+   "_w37d_setsh=SetShadingTable",
+   "_SetShading=SetShading"
+  ],
+  "patch": [
+   "0x0,2,",
+   "0x5a,2,"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x0: toolchain-diff - CL inline-asm auto-save: with a full-body __asm block touching esi/edi, CL 4.2 pushes esi+edi (56 57) before the asm's own push edx/ebp/edi/esi (FA order 52 55 57 56); delete the 2-B auto-save (no relocs in the span; the 3 movsx DIR32 relocs sit after it and shift -2 automatically).",
+   "patch 0x5a: toolchain-diff - matching CL auto-epilogue 5f 5e after the asm's pop esi/edi/ebp/edx; delete, leaving FA's single 5e 5f 5d 5a + ret at 0x5a. Offsets post-0x0-deletion shift -2 (all code after 0x2)."
+  ],
+  "notes": "Full-body inline-asm (v1 + 2 delete patches), EXACT. Route rationale: FA's chunk is unreferenced in FA (no e8/e9/abs refs in any .text or data section - scanner sweep), a register-arg helper whose inputs arrive in EAX/EBX/ECX (BX/EAX reg convention - no C signature exists), so the body is a single __asm block; CL adds no prologue of its own except the auto-saved esi+edi pair (deleted by patch). Body reproduces FA exactly: movsx ebp,WORD PTR <word-typed externs> (0f bf 2d moffs via interior maps _objLightSource+0/2/4), imul ebp (f7 ed), shrd eax,edx,0Fh (0f ac d0 0f), add edi pairs, sar edi,7, mov ax,di (66 8b c7), cmp ax,0FF01h (66 3d - MASM keeps the 3d form; -255 low clamp), jge/mov ax,0FF01h/jmp, cmp ax,00FFh (66 3d), jle/mov ax,00FFh, call w37d_setsh. End the asm block with the pops; CL's emitted ret lands where FA's is. Map _w37d_setsh=SetShadingTable (public name verbatim from t000b7.obj - note FA publics for asin/SetShadingTable-class names have NO leading underscore, unlike _fprintf/_Collision@56). Map _SetShading=SetShading (layout public spelled without underscore). Census 90 pad auto."
+ },
+ {
+  "rva": 188432,
+  "verdict": "EXACT",
+  "name": "@COLTerrainBlocking@4 (80 B, fastcall int(int); ECX arg; passes a word arg to _Collision@56 in DX)",
+  "obj": "w37D_d2e010_v1",
+  "src": "build/survey/probes/w37D_d2e010_v1.c",
+  "maps": [
+   "_w37d_thType=_curThing+0x9",
+   "_w37d_curIdW=_curId",
+   "_w37d_ct11=_curThing+0x11",
+   "_w37d_curb=_curThing+0x0",
+   "_w37d_col14@56=_Collision@56"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "Full-body inline-asm, EXACT on first probe, zero patches. Route rationale: _Collision@56 (still-stub, group t00022.obj) takes its 13th arg in DX - _Collision@56 reads word[esp+0x38] only into dx... verified: Collision's dx load at its own 0x4b3e1 is followed by edx=0x7fffffff; the word flows onward through Collision's own dx usage - so the caller-side mov dx,_curId (66 8b 15) is NOT C-expressible and CL cannot emit it; whole function is one __asm block with the FA push order verbatim (push 0 twice after each lea, 0x201, ecx(this+0x11), 0x508749= &_curThing+0x11, eax(the al byte load _curThing+9), 0x508738, edx). MASM forms: mov al,BYTE PTR w37d_thType -> a0 moffs 5-B; mov dx,WORD PTR w37d_curIdW -> 66 8b 15; push OFFSET <extern> -> 68 imm32; 6a 00 short push 0; push 201h -> 68. Hidden-instr trap: dis.py ELIDES the tail cmp - the bytes 66 81 7c 24 02 ff ff 00 00 (o16 cmp word[esp+2],0FFFFh, 9-B imm32 form) are in the raw hex; the asm spelling cmp WORD PTR [esp+2], 0FFFFh encoded them identically (no fold to 66 83). Tail = sete cl/mov al,cl/add esp,10h then plain C fastcall ret (CL emits c3 after the block; take the ret OUT of the asm block). int return in AL, upper EAX left holding Collision's return - matches FA. Byte type externs: w37d_thType (byte at _curThing+0x9), w37d_curIdW (word at _curId), w37d_ct11 (byte at _curThing+0x11 - only its ADDRESS is used, via push OFFSET), w37d_curb (byte at _curThing+0x0 - address taken). The 74-byte _w37d_col14 extern decl (14-arg stdcall) is NOT needed here - the call inside asm resolves via the w37d_col14 extern name; keep it in the final wiring (map _w37d_col14@56=_Collision@56). The 14-arg call target: source extern `long __stdcall w37d_col14(...)` decorates to _w37d_col14@56, mapped to FA's public _Collision@56 (name verbatim from t00022.obj stub; layout name ?_Collision@@YGHZZ... - map to the stub public). fitobj judged EXACT with the map in the config (map only remaps the undefined external; bytes unchanged)."
+ },
+ {
+  "rva": 308816,
+  "verdict": "EXACT",
+  "name": "?SER_ReadAvail@@YAJJJ@Z (80 B, cdecl long(long,long,long); only a2 used; 4-B census tail 8d642400)",
+  "obj": "w37D_e4b650_v1",
+  "src": "build/survey/probes/w37D_e4b650_v1.c",
+  "maps": [
+   "_w37d_serGate=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x12d",
+   "_w37d_inLen=?InPacket@@3USERIAL_PACKET_WRAPPER@@A+0x14",
+   "_w37d_ctrlTail=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x198",
+   "_w37d_ctrlHead=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x19c",
+   "_w37d_serEnter=?SER_EnterCriticalCodeForeground@@YAXXZ",
+   "_w37d_serLeave=?SER_LeaveCriticalCodeForeground@@YAXXZ",
+   "_SER_ReadAvail=?SER_ReadAvail@@YAJJJ@Z"
+  ],
+  "patch": [
+   "0x0,9,53a0000000005684c057,2:6:_w37d_serGate",
+   "0xb,1,06",
+   "0x10,0,5b",
+   "0x3b,1,14",
+   "0x3d,1,1c",
+   "0x3f,2,8d041e",
+   "0x4a,0,5b"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x0 (9->10 B): toolchain-diff - register plan + prologue schedule: FA saves EBX first (53) and streams the gate byte-load between the callee-saves (53 / a0+imm / 56 / test / 57 / jne); CL keeps EBX out of the plan and pushes ESI before the load (56 / a0+imm / 57 / test). Equal+1 rearrangement; the gate DIR32 reloc re-attached at the new imm site (span offset 2 = a0 imm), payload _w37d_serGate unchanged.",
+   "patch 0xb: toolchain-diff - jne rel8 displacement: FA 75 06 vs CL 75 05 (CL's early-ret epilogue is one pop shorter pre-patches); target re-lands on the mov esi,0x14.",
+   "patch 0x10 (ins 5b): toolchain-diff - early-ret epilogue: FA pops edi,esi,ebx (5f 5e 5b c3); CL has no EBX in plan (5f 5e c3); insert 5b.",
+   "patch 0x3b: toolchain-diff - min-clamp operand load: FA mov ecx,[esp+0x14] (3 saved regs rebases a2); CL [esp+0x10]; 1-B disp fix.",
+   "patch 0x3d: toolchain-diff - FA materializes the (d<<2)*5 product into EBX (lea ebx,[edi+edi*4]); CL folds into the result reg; 1-B modrm 04->1c.",
+   "patch 0x3f (2->3 B): toolchain-diff - result add: FA lea eax,[esi+ebx] (8d 04 1e) for x+m; CL folded into add eax,esi (03 c6); replaced by the 3-B lea.",
+   "patch 0x4a (ins 5b): toolchain-diff - final epilogue: FA pop edi,esi,ebx + ret; insert 5b before the ret."
+  ],
+  "notes": "Plain C (v1) + 7-patch reg-plan/schedule hybrid, EXACT - 3 C variants tried (v1 two-step (d<<2)*5 with locals x/d; v2 separate m temp; v3 = v1 + patches). C semantics EXACT in CL: a0 moffs byte read of the 0x12d Ctrl byte + test al,al early-out; mov esi,0x14 / a1 moffs InPacket+0x14 / 2b f0 for x = 0x14 - inLen; diff = head(0x19c) - tail(0x198) computed between the Enter/Leave calls (EDI survives across the Leave call, shl edi,2 AFTER Leave); (d<<2)*5 spelled with the shift FIRST ( shl edi,2 + lea *5); min with a2 via if (x > b) x = b (cmp eax,ecx/jle/mov). Mangled struct globals ?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A and ?InPacket@@3USERIAL_PACKET_WRAPPER@@A carried by interior-delta maps on byte/word/dword-typed externs (byte scalar extern reproduces the a0 moffs form); function map _SER_ReadAvail=?SER_ReadAvail@@YAJJJ@Z (C ident emits _SER_ReadAvail). Census 4-B pad auto."
+ },
+ {
+  "rva": 459936,
+  "verdict": "EXACT",
+  "name": "?MPStatusSet@@YIXJ@Z (80 B, fastcall void(long); 15-B census tail)",
+  "obj": "w37D_f704a0_v1",
+  "src": "build/survey/probes/w37D_f704a0_v1.c",
+  "maps": [
+   "_w37d_mps=?mpStatus@@3PAJA",
+   "_w37d_thisComputer=_thisComputer",
+   "_w37d_numComputers=_numComputers",
+   "_w37d_mppush@16=$FA$_t_46b260",
+   "@w37d_mpflush@4=?MPFlushAll@@YIXD@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "Plain C, EXACT on first probe, zero patches. Recipe: __fastcall void(long) spelling emits FA's @MPStatusSet@4-class public (map to the mangled layout name); the mpStatus store is OUTSIDE the if - FA's bytes have cmp edx,1 THEN the mpStatus[thisComputer] store THEN je, i.e. the store is unconditional and CL 4.2 slots it between the condition cmp and the jne (load _thisComputer first via a1 moffs, then numComputers, then the store). Body: char buf[8]; *(long*)(buf+1)=s; buf[0]=0x42 ('B') - int store FIRST then the byte store (FA order); w37d_mppush(-1,buf,5,1) evaluates/pushes right-to-left reproducing push 1 / mov [esp+5],ecx / push 5 / mov byte [esp+8],42h / push eax(&buf via lea eax,[esp+0]) / push -1 / call / no arg-pop (stdcall, extern decl __stdcall -> _w37d_mppush@16 TO $FA$_t_46b260, still-stub anchor verified in build/stubs/t0005b.obj); w37d_mpflush(1) fastcall char arg -> mov ecx,1 / call (map @w37d_mpflush@4=?MPFlushAll@@YIXD@Z). if (numComputers != 1) je -> add esp,8/ret. Tail = census-proven 15-B pad (two 8d642400 + 8da42400000000), auto-appended by fitobj."
+ },
+ {
+  "rva": 460016,
+  "verdict": "EXACT",
+  "name": "?MPStatusToDrawSet@@YIXJ@Z (80 B, fastcall void(long); 15-B census tail)",
+  "obj": "w37D_g704f0_v1",
+  "src": "build/survey/probes/w37D_g704f0_v1.c",
+  "maps": [
+   "_w37d_mpd=?mpStatusToDraw@@3PAJA",
+   "_w37d_thisComputer=_thisComputer",
+   "_w37d_numComputers=_numComputers",
+   "_w37d_mppush@16=$FA$_t_46b260",
+   "@w37d_mpflush@4=?MPFlushAll@@YIXD@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "Plain C, EXACT on first probe, zero patches. Byte-twin of MPStatusSet (0x704a0) with packet type byte 'C' (0x43) instead of 'B' and target array ?mpStatusToDraw@@3PAJA (0x4f3720) instead of ?mpStatus@@3PAJA (0x4f3700). Same recipe: unconditional mpStatusToDraw[thisComputer]=s outside the if; int store then byte store into char buf[8]; w37d_mppush(-1,buf,5,1) stdcall to still-stub anchor $FA$_t_46b260 (verified in build/stubs/t0005b.obj); w37d_mpflush(1) fastcall; census 15-B tail pad auto."
+ }
+]

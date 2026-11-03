@@ -1,0 +1,156 @@
+[
+ {
+  "rva": 885264,
+  "verdict": "EXACT",
+  "name": "__close_lk (137 B, fpo/esp frameless; 0-B tail)",
+  "obj": "w37A_d8210_v1",
+  "src": "build/survey/probes/w37A_d8210_v1.c",
+  "maps": [
+   "__w37a_fhl=__crtheap+0x4",
+   "__imp__CloseHandle@4=__imp__CloseHandle",
+   "__imp__GetLastError@0=__imp__GetLastError"
+  ],
+  "patch": [
+   "0x6d,22,c1e60283e0e7c1f8035f8b88000000008d04f65ec64401040033c0c3,12:6:__w37a_fhl"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x6d: toolchain-diff \u2014 FA's ioinfo-row/tail block differs from CL-4.2: FA computes grp with the shl esi,2 + lea esi,[esi+esi*8] idiom (esi = idx/4 row word; lea *9 then sar 3 folded by the shift pair) interleaved with the pops (5f/5e), where CL emitted a shift-heavy xor-based form; 22->28 B, plus row[idx+4]=0 store spelling (c6 44 01 04 00 = [edx+eax*1+4]). Newsite DIR32 at band+12 (abs 0x79) to __w37a_fhl; FA imm at that site = 0x588c70 = VA(__crtheap 0x588c6c)+0x4, band dword content zeroed so symVA+0x4 addend bake resolves it (wave-35 interior-data TO+delta rule)."
+  ],
+  "notes": "Plain C, no naked asm: (fh==1||fh==2) && same-handle shortcut via (_get_osfhandle(2)==_get_osfhandle(1)), CloseHandle gate, _free_osfhnd, _dosmaperr on error, then the ioinfo free-bit store: grp=(fh&~0x18)>>3; idx=(fh&0x1f)<<2; row=*(char**)(fhLockBase+grp); row[idx+4]=0. Only divergence = the 22-B tail band patched to FA's idiom with jcc-disp recompute-free placement (no branches inside band). Calls/maps: __get_osfhandle/__free_osfhnd/__dosmaperr (0x4d9930 converted) are real publics, no map; CloseHandle/GetLastError via __declspec(dllimport) -> __imp__X@N (FA imp thunks ds:0x58a564/0x58a66c). Verified: FA imm @0x79 = __crtheap+0x4."
+ },
+ {
+  "rva": 892736,
+  "verdict": "EXACT",
+  "name": "__read (120 B, fpo/esp; 0-B tail)",
+  "obj": "w37A_d9f40_v1",
+  "src": "build/survey/probes/w37A_d9f40_v1.c",
+  "maps": [
+   "__w37a_fhl=__crtheap+0x4",
+   "__imp__CloseHandle@4=__imp__CloseHandle",
+   "__imp__GetLastError@0=__imp__GetLastError"
+  ],
+  "patch": [
+   "0x0,15,56578b74240c3b3500000000734c,8:6:__nhandle",
+   "0x1b,12,c1e1028b90000000008d04c9f644020401,5:6:__w37a_fhl"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x0: toolchain-diff \u2014 FA prolog pushes only esi/edi and loads fh from [esp+0xc] then does the mem-first cmp mem,__nhandle (3b 35 imm32, jb 4c); CL emitted a 15-B prolog band with the cmp in reg-first form. Replaced 15->14 B; newsite DIR32 at band+8 (abs 0x8) to __nhandle (FA imm 0x588d70 = __nhandle VA).",
+   "patch 0x1b: toolchain-diff \u2014 FA's grp/idx band uses and eax,0xffffffe7 + and ecx,0x1f + sar eax,3 + shl ecx,2 (c1 e1 02) + mov edx,[eax+0x588c70] + lea eax,[ecx+ecx*8] + test byte [edx+eax+4],1, where CL emitted a different scheduling; 12->17 B; newsite DIR32 at band+5 (abs 0x20) to __w37a_fhl (=__crtheap+0x4; FA imm 0x588c70)."
+  ],
+  "notes": "Plain C: bounds-check fh against _nhandle, ioinfo free-bit test ((fh&~0x18)>>3 / (fh&0x1f)<<2 / fhLockBase row / row[idx+4]&1), _lock_fhandle/_read_lk/_unlock_fhandle, error path *_errno()=9 / *_w37a_doserrno()=0 / return -1. Maps: __w37a_fhl=__crtheap+0x4 (C ident _w37a_fhl emits double underscore); __w37a_doserrno=$FA$_t_4d99c0 (still-stub public, rel call @FA 0x5a-band). __nhandle/__lock_fhandle/__unlock_fhandle/__read_lk/__errno real publics, no map. Verified: FA imm @0x8 = 0x588d70 (__nhandle), @0x20 = 0x588c70 (__crtheap+0x4)."
+ },
+ {
+  "rva": 893424,
+  "verdict": "EXACT",
+  "name": "__write (120 B, fpo/esp; 0-B tail)",
+  "obj": "w37A_da1f0_v1",
+  "src": "build/survey/probes/w37A_da1f0_v1.c",
+  "maps": [
+   "__w37a_fhl=__crtheap+0x4",
+   "__imp__CloseHandle@4=__imp__CloseHandle",
+   "__imp__GetLastError@0=__imp__GetLastError"
+  ],
+  "patch": [
+   "0x0,15,56578b74240c393500000000764c,8:6:__nhandle",
+   "0x1b,12,c1e1028b90000000008d04c9f644020401,5:6:__w37a_fhl"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x0: toolchain-diff \u2014 same FA prolog band as __read but with FA's reg-first cmp [esi] vs mem form spelled mem-first (39 35 imm32, jbe 4c); 15->14 B; newsite DIR32 at band+8 (abs 0x8) to __nhandle (FA imm 0x588d70).",
+   "patch 0x1b: toolchain-diff \u2014 __write's grp/idx band, FA scheduling identical to __read's (shl ecx,2 / mov edx,[eax+0x588c70] / lea eax,[ecx+ecx*8] / test byte [edx+eax+4],1); 12->17 B; newsite DIR32 at band+5 (abs 0x20) to __w37a_fhl (=__crtheap+0x4; FA imm 0x588c70)."
+  ],
+  "notes": "Same shape as __read (bound check, ioinfo free-bit test, _lock_fhandle/_write_lk/_unlock_fhandle, *_errno()=9 / *_w37a_doserrno()=0 / -1). Note the mem-vs-reg cmp polarity tell: __read uses 3b 35 (jb), __write uses 39 35 (jbe) \u2014 copy FA's form per entry. Verified: FA imm @0x8 = 0x588d70 (__nhandle), @0x20 = 0x588c70 (__crtheap+0x4), rel calls __lock_fhandle/__write_lk/__unlock_fhandle/__errno/$FA$_t_4d99c0 all match dis.py preview."
+ },
+ {
+  "rva": 889728,
+  "verdict": "EXACT",
+  "name": "__ms_p5_test_fdiv (79 B, naked asm x87 FDIV probe; 0-B tail)",
+  "obj": "w37A_d9380_v2",
+  "src": "build/survey/probes/w37A_d9380_v2.c",
+  "maps": [
+   "__w37a_fhl=__crtheap+0x4",
+   "__imp__CloseHandle@4=__imp__CloseHandle",
+   "__imp__GetLastError@0=__imp__GetLastError"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "Whole-body __declspec(naked) inline asm (x87 control-word wall class: FA hand-tests the FDIV result so CL's 4.2 constant-folding path can't reproduce it). v1 failed only on MASM short-forming the three [esp+0] disp-0 references (c7 04 24 / dd 04 24 / dc 2c 24) where FA keeps the SIB disp-0 forms (c7 44 24 00 / dd 44 24 00 / dc 6c 24 00); v2 emits those three instructions (mov [esp],0xc0000000 / fld qword [esp] / fsubr qword [esp]) as raw _emit bytes. No relocs. All 79 bytes are compiler-visible bytes and EXACT implies they match FA exactly."
+ },
+ {
+  "rva": 99696,
+  "verdict": "EXACT",
+  "name": "@MSGMultiGet@4 (138 B code + 6 B census pad; fastcall)",
+  "obj": "w37A_18570_v2",
+  "src": "build/survey/probes/w37A_18570_v2.c",
+  "maps": [
+   "__w37a_fhl=__crtheap+0x4",
+   "__imp__CloseHandle@4=__imp__CloseHandle",
+   "__imp__GetLastError@0=__imp__GetLastError"
+  ],
+  "patch": [
+   "0x0,39,56baf000000057b8ffff000066394206741181c2d500000081fac864000072ec5f5ec3,2:6:?lastWeaponButton@@3DA,26:6:?lastWeaponButton@@3DA",
+   "0x23,46,8bfa8bf1b935000000f3a5a4668b72046681fe038072076681fe0b8076468bc625ffff00008b0c8500000000,40:6:_objPtrs",
+   "0x4f,55,8b4101a801742ba802742d33c0668b416833c9668b0d00000000413bc17e1956e800000000e800000000e8000000005f5ec366c74206ffff5f5ec3,22:6:_currentT,33:20:_PushCurObj@4,38:20:_ImmediateService@0,43:20:_PopCurObj@0"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x0: toolchain-diff \u2014 FA prolog is push esi; mov edx,imm32(0x51e5f0); push edi; mov eax,0xffff; loop cmp [edx+6],ax (66 39 42 06) / je 11 / add edx,0xd5 / cmp edx,imm32 / jb ec / pop edi / pop esi / ret, while CL kept p in ebx (saved ebx too, 3 extra pop ebx) and staged q in edx. Band is 39->35 B; newsite DIR32 at band+2 (abs 0x2) to ?lastWeaponButton@@3DA with content dword 0xf0 (the &lastWeaponButton+0xf0 addend kept in content, wave-33/34 rule); newsite DIR32 at band+26 (abs 0x1a) to ?lastWeaponButton@@3DA content 0x64c8 (lim = &lastWeaponButton+0x64c8 = 0x5249c8, matches FA imm c8495200).",
+   "patch 0x23: toolchain-diff \u2014 FA found-block: mov edi,edx / mov esi,ecx / mov ecx,0x35 / rep movsd / movsb / mov si,[edx+4] (66 8b 72 04) / 16-bit cmps (66 81 fe 0380 / 0b80) vs CL's 8b fb / 8b f2 / extra add edx,0xd5 (the q++ CL charged an add for; FA's movs already advanced esi) / 33 c0 sched / mov ax,[ebx+4] / 66 3d 16-bit-less compare forms. Same-length band rewrite 46->44 B; newsite DIR32 at band+40 (abs 0x4b) to _objPtrs content 0 (FA imm 0x54ad98).",
+   "patch 0x4f: toolchain-diff \u2014 FA tail block order: test al,1 / je 2b (restore at END) / test al,2 / je 2d / xor eax,eax / mov ax,[ecx+0x68] / xor ecx,ecx / mov cx,[currentT] (66 8b 0d) / inc ax / cmp eax,ecx (3b c1, 32-bit) / jbe 19 / push esi (FA re-pushes q+213 = PushCurObj arg) / calls x3 / pop edi / pop esi / ret (own ret @0x7e) / restore mov [edx+6],0xffff (66 c7 42 06) / shared out ret @0x87. CL had the restore mid-flow with jne polarity and a mem-first jbe. Band 55->59 B; newsite DIR32 at band+22 (abs 0x65) to _currentT content 0 (FA imm 0x549e18); newsite REL32 at band+33/38/43 (disp bytes of the e8 calls, payload zeroed, wave-33 rule) to _PushCurObj@4 / _ImmediateService@0 / _PopCurObj@0 - verified against FA disps bc950400/87920400/f2950400 -> 0x461ba0/0x461870/0x461be0."
+  ],
+  "notes": "Plain C fastcall: do-while scan of the 213-B queue slots from &lastWeaponButton+0xf0 to +0x64c8 on the free flag [p+6]==0xffff; on hit *p = *q++ (213-B struct rep movsd+movsb, movs advances esi so q++ rides it); type = *(ushort*)(p+4); skip if 0x8003<=t<=0x800b; else cls=_objPtrs[t], f=*(long*)(cls+1); if(!(f&1)) restore-and-out; if(!(f&2)) out; n=*(ushort*)(cls+0x68), cur=currentT+1, n<=cur -> out; else PushCurObj((unsigned long)q)/ImmediateService()/PopCurObj(). FA pushes esi = post-movs q+213 (PushCurObj only tests the 16-bit type word, which the low half of esi=type stage carries: mov si,[edx+4] re-stages type into esi after the copy). Patch bands are FA-byte pastes; the C's semantic layout (slot=own p+6 field offsets restore) matters only for CL to not diverge in shape. Real publics used directly as newsite symbols (?lastWeaponButton@@3DA, _objPtrs, _currentT, _PushCurObj@4, _ImmediateService@0, _PopCurObj@0), zero maps."
+ },
+ {
+  "rva": 178272,
+  "verdict": "EXACT",
+  "name": "@COLSetAngle@8 (129 B code + 15 B census pad; fastcall)",
+  "obj": "w37A_2b860_v2",
+  "src": "build/survey/probes/w37A_2b860_v2.c",
+  "maps": [
+   "__w37a_fhl=__crtheap+0x4",
+   "__imp__CloseHandle@4=__imp__CloseHandle",
+   "__imp__GetLastError@0=__imp__GetLastError"
+  ],
+  "patch": [
+   "0x3,25,8d442404535657558bfa8bf150668b078d4c2416662b065150",
+   "0x2d,1,46",
+   "0x33,29,f7fdc7442414ff7f00008be80fbf5c24120fbf46040fafc399f77c2414",
+   "0x55,1,6f",
+   "0x59,1,46",
+   "0x6a,1,46",
+   "0x77,1,6f"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x3: toolchain-diff \u2014 FA prolog computes &s (lea eax,[esp+4]) before the 4 saved-reg pushes (ebx/esi/edi/ebp) then pushes arg2 early, stages t = dst[0]-src[0] as mov ax,[edi]; sub ax,[esi] (dst in EDI, src in ESI) after the pushes, and pushes arg3 (&c = [esp+0x16]) late; CL emitted the pushes first, both reg copies dst->esi/src->edi, arg2 pushed mid-body and t staged in CX. Same-length 25->25 B rewrite.",
+   "patch 0x2d: toolchain-diff \u2014 single modrm byte: FA reads src[1] via [esi+2] (46) where CL v2's reg plan put src in edi ([edi+2] = 47).",
+   "patch 0x33: toolchain-diff \u2014 FA schedules the c=0x7fff dword store (c7 44 24 14 ff 7f 00 00) immediately after the first idiv ebp (0x7fff kept in callee-saved ebp from pre-call) and before mov ebp,eax, while CL emitted the store just before the second idiv. Same-length 29->29 B reorder band.",
+   "patch 0x55: toolchain-diff \u2014 single modrm byte: FA's dst[1] store is [edi+2] (6f); CL's dst landed in esi (6e).",
+   "patch 0x59: toolchain-diff \u2014 single modrm byte: FA reads src[2] via [esi+4] (46); CL had [edi+4] (47).",
+   "patch 0x6a: toolchain-diff \u2014 single modrm byte: FA reads src[1] via [esi+2] (46); CL had [edi+2] (47).",
+   "patch 0x77: toolchain-diff \u2014 single modrm byte: FA's dst[2] store is [edi+4] (6f); CL had [esi+4] (6e)."
+  ],
+  "notes": "Plain C fastcall COLSetAngle(short *src /*ecx*/, short *dst /*edx*/): t = (short)(dst[0]-src[0]) (16-bit sub); GRSinCos(t, &s, &c) with s an INT local (&s pushed early at [esp+4]=f0+4) and c the SHORT at f0+2 whose WORD is the GRSinCos arg3 write; the rotation terms divide by variables, not literals: first by ebp (0x7fff loaded pre-call, callee-saved through the call), then s's dword slot after s = 0x7fff (idiv [esp+0x14] mem form), then mov ecx,0x7fff / idiv ecx re-staged. dst[1] = (short)(src[1]*(short)s/0x7fff + src[2]*c/0x7fff); dst[2] = (short)(src[2]*(short)s/0x7fff - src[1]*c/0x7fff). Single reloc: rel call _GRSinCos@12 (FA e8 c2670a00 -> 0x4d2048, real public, no map)."
+ }
+]

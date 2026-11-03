@@ -1,0 +1,170 @@
+[
+ {
+  "rva": 923840,
+  "verdict": "EXACT",
+  "obj": "w37G_e18c0_v2pt",
+  "src": "build/survey/probes/w37G_e18c0_v2.c",
+  "maps": [
+   "_wingSizes=_groupSizes",
+   "_wingIds=_groupIds"
+  ],
+  "patch": [
+   "0x09,2,741c",
+   "0x17,2,740e",
+   "0x28,2,75ec",
+   "0x1e,5,ff02"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [],
+  "notes": "Unnamed 42-B chunk (layout name '', __cdecl 3-arg helper, no census deco pad). Spelling: void w37gCopyChar(char *src, char **dst, int *cnt): if(*cnt){do{ c=*src; if(c==0) break; **dst=c; ++*dst; src++; (*cnt)--; }while(*cnt);}. CL 4.2 matches FA except: (a) ++*dst - CL 4.2 cannot inc-mem a dword pointed by a pointer-valued arg; it spills 8b 02/40/89 02 (load/inc/store, 5 B) where FA has inc dword [edx] ff 02 (2 B) - fixed by the 5->2 B patch 0x1e; (b) the three jcc disps shrink by 3 across the removal: entry je (74 15->74 1c), loop je (74 11->74 0e), loop jne (75 e9->75 ec). Applied in order with the removal LAST so 0x28 coordinates stay in pre-removal space. FA tail c3 at 0x29-0x29; FA has no deco pad here. If the stub group t000f4 anchors at this chunk, integration needs alias '0=$FA$_t_e18c0' (chunk is unnamed, span self-anchor class from wave 30).",
+  "provenance": [
+   "patch 0x09: toolchain-diff entry je disp: CL 74 15 (ret path 0x20) vs FA 74 1c (ret path 0x27); 3-B delta from the dst-inc spill CL makes at 0x1e",
+   "patch 0x17: toolchain-diff loop je (c==0 break) disp: CL 74 11 vs FA 74 0e",
+   "patch 0x28: toolchain-diff loop jne disp: CL 75 e9 vs FA 75 ec",
+   "patch 0x1e: toolchain-diff ++*dst: CL 8b 02 40 89 02 (load/inc/store, 5 B) vs FA inc dword [edx] ff 02 (2 B); equal semantics, removal 5->2"
+  ]
+ },
+ {
+  "rva": 337984,
+  "verdict": "EXACT",
+  "obj": "w37G_52840_v2",
+  "src": "build/survey/probes/w37G_52840_v2.c",
+  "maps": [
+   "_wingSizes=_groupSizes",
+   "_wingIds=_groupIds"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [],
+  "notes": "_HARDUnrotatedHardPos@12 (128 B, 119 code + 9-B census deco 8b ff 8d a4 24 00 00 00 00). Void __stdcall fn: three st->out writes from (short)(hard+@+2/+4/+6)<<8, then if(*(uchar*)hard & 4): obj=*st; div = (obj && *(uchar*)obj==7) ? obj[0xf0] : 1; w=(short)st[1]; if(((long)w/div)&1) out[0]=-out[0]; if(gamePrefs & 8) if(w37G_ctde & 0x40) out[0]=-out[0]. Two byte-natural wins: (1) the div-2-vs-div-4 branch folds into FA's exact shape with the plain if/else spelling; (2) gamePrefs loads as a1 moffs (a1 f8 76 4e 00) and w37G_ctde as a1 moffs too. w37G_ctde = _curThing+0xde (0x508816) via map - exterior typed unsigned long so the test compiles as a8 40 (al) not a8 32-bit. Zero patches: one spelling round produced the whole body byte-identical.",
+  "provenance": [
+   "map: w37G_ctde is not a FA public: TO = _curThing (real public from layout.json) + delta 0xde baked by the map engine; verified against FA imm bytes at the a1 moffs reload"
+  ]
+ },
+ {
+  "rva": 384320,
+  "verdict": "EXACT",
+  "obj": "w37G_5dd40_v4",
+  "src": "build/survey/probes/w37G_5dd40_v4.c",
+  "maps": [
+   "_wingSizes=_groupSizes",
+   "_wingIds=_groupIds"
+  ],
+  "patch": [
+   "0x00,9,5633d2668b74240857",
+   "0x18,1,11",
+   "0x22,1,30",
+   "0x2c,1,c2",
+   "0x30,1,fa"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [],
+  "notes": "_WNGPart@12 (128 B, 119 code + 9-B census deco). char __stdcall WNGPart(short part, int *p1, int *p2): for (off=0, g=0; off<100; off+=10, g++): n=wingSizes[g]; if (--n >= 0 (cast long, jns)): p=(short*)&wingIds[2*(off+n)]; do-while (n>=0): if(*p==part){ if(p1) *p1=g; if(p2) *p2=n; return 2+((n<1)?-1:0); } p--, n--. Not-found tail: *p1=-1, *p2=-1 (with the p2!=0 guards), return 0. The sbb-ternary lever (w36G note, applied): n typed unsigned long with (long) casts on the >=0 tests so the return materializes as FA's cmp ecx,1 / sbb al,al / add al,2 tail with FA's deferred-pop order (5f/5e around it) - v4 wins with ZERO tail patches, vs v3a (signed n, setl tail) which needed a 15-B tail patch. Signed off + off<100 gives FA's jl 7c form (unsigned off would emit jb 72). Remaining diffs are a reg-plan swap only: CL homes off=ESI/part=DX; FA homes off=EDX/part=SI. Semantic safety: signed-vs-unsigned here is cosmetic (off in 0..100, n in 0..255; the (long) casts restore signed tests; sbb al,al with n unsigned gives exactly CF=(n<u1)=n==0, i.e. return 2 iff n>=1, 1 iff n==0 = FA's semantics).",
+  "provenance": [
+   "patch 0x00: toolchain-diff prologue reg-plan: CL = mov dx,[esp+4] (part=dx), push esi, push edi, xor esi (off=esi), xor edi; FA = push esi, xor edx (off=edx), mov si,[esp+8] (part=si after +1 push), push edi; equal 9 B",
+   "patch 0x18: toolchain-diff lea eax,[ecx*2+esi] sib 31 -> FA [ecx*2+edx] sib 11 (off esi->edx)",
+   "patch 0x22: toolchain-diff cmp [eax],dx modrm 10 -> FA cmp [eax],si modrm 30 (part dx->si)",
+   "patch 0x2c: toolchain-diff add esi,0xa -> FA add edx,0xa (off esi->edx)",
+   "patch 0x30: toolchain-diff cmp esi,0x64 -> FA cmp edx,0x64 (off esi->edx)"
+  ]
+ },
+ {
+  "rva": 387696,
+  "verdict": "EXACT",
+  "obj": "w37G_5ea70_v4",
+  "src": "build/survey/probes/w37G_5ea70_v4.c",
+  "maps": [
+   "_wingSizes=_groupSizes",
+   "_wingIds=_groupIds"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [],
+  "notes": "_GRPPart@12 (128 B, 119 code + 9-B census deco). Same body shape as _WNGPart (the pair differ only in the table publics and no prologue diff). EXACT with ZERO patches: unsigned-wingSizes extern plan (CL homes off=ESI = FA's ESI here, part=DX = FA's DX) plus the same sbb-ternary lever (unsigned n + (long) casts + return 2+((n<1)?-1:0)) reproduces FA's found-tail pop edi / cmp ecx,1 / sbb al,al / pop esi / add al,2 / ret @0x6b-0x76 and the deco byte-for-byte. The v3a signed-n spelling instead emitted a 15-B setl tail (b0 02 5f 5e 83 f9 01 0f 9c c1 2a c1 c2 0c 00) needing patches; v4 is fully natural. GRP map TOs: _wingSizes=0x5421b0, _groupIds=0x5420e8 (bare-name publics, no maps needed).",
+  "provenance": []
+ },
+ {
+  "rva": 538416,
+  "verdict": "EXACT",
+  "obj": "w37G_83730_v2pt",
+  "src": "build/survey/probes/w37G_83730_v2.c",
+  "maps": [
+   "_wingSizes=_groupSizes",
+   "_wingIds=_groupIds"
+  ],
+  "patch": [
+   "0x00,12,53565733db66bf01005533ed",
+   "0x0e,1,3d",
+   "0x1a,1,c7",
+   "0x2b,1,f0",
+   "0x3c,1,43",
+   "0x50,1,43",
+   "0x5f,2,6647",
+   "0x63,1,3d",
+   "0x6b,1,eb",
+   "0x6f,1,db",
+   "0x84,0,05000000008da42400000000"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [],
+  "notes": "_MISSIONFortDestroyedByFort@4 (144 B, 132 code + 12-B census tail 05 00 00 00 00 8d a4 24 00 00 00 00). char __stdcall (ulong mask): loops objPtrs[i] for i=1..nextObjId-1; flags=*(ulong*)(obj+1); if (flags&mask) && *(uchar*)obj!=4: if (flags&0x800000) { count++; (flags&1 ? (Alive(obj)==0) : destroyed++) } else if (flags&0x80) same; end: destroyed==count && count!=0 -> 1. Two structural levers: (a) the 0x800000/0x80 branch pair must be the goto-spelling (if (flags & 0x800000) {...count path...} else if (flags & 0x80) {...}) - CL fuses it into FA's a9 00 00 80 00 / 74 10 / a8 01 / 74 1d form plus the shared count++ tail; the duplicated-block spelling was NOT needed here; (b) Alive() calls are plain text calls with FA's rel32s at 0x42-0x45 (to 0x5ec..Alive 0xfffeff9a -> FA 0x4ed00?) and 0x54-0x58, masked as relocs. Body byte layout matches FA out of 0x0e; the 11 patches cover: the i/count home swap (CL i=BX/count=DI vs FA i=DI/count=BX, destroyed=EBP both) - prologue reorder (12 B), cmp modrms 1d->3d at both loop-exit tests, 8b c3->8b c7 zero-extend load, test 85 c6->85 f0 (mask/flags operand order), inc edi->inc ebx at the two count++ sites (0x3c, 0x50), i++ 66 43->66 47, cmp edi,ebp->cmp ebx,ebp at the destroyed==count test, test edi,edi->test ebx,ebx before return 0, and the 12-B deco insert. Semantic safety: count/i home swap is pure register assignment - same values, same 16-bit half reads (mov eax,i / and eax,0xffff kept), CF/SF behavior unchanged.",
+  "provenance": [
+   "patch 0x00: toolchain-diff prologue: CL = push ebx, push esi, mov bx,1 (i=ebx), push edi, push ebp, xor edi (count), xor ebp (destroyed); FA = push ebx,esi,edi, xor ebx (count), mov di,1 (i=edi), push ebp, xor ebp (destroyed); equal 12 B",
+   "patch 0x0e: toolchain-diff entry cmp nextObjId,i modrm: CL 66 39 1d ([ebx]) vs FA 66 39 3d ([edi]) (i ebx->edi)",
+   "patch 0x1a: toolchain-diff zero-extend load of i: CL 8b c3 (mov eax,ebx) vs FA 8b c7 (mov eax,edi)",
+   "patch 0x2b: toolchain-diff flags&mask test modrm order: CL test esi,eax (85 c6) vs FA test eax,esi (85 f0), flags=eax both, mask esi both after operand reorder",
+   "patch 0x3c: toolchain-diff count++ #1: CL inc edi (47) vs FA inc ebx (43) (count edi->ebx)",
+   "patch 0x50: toolchain-diff count++ #2: CL inc edi (47) vs FA inc ebx (43)",
+   "patch 0x5f: toolchain-diff i++ 16-bit inc: CL 64-bit movs inc bx (66 43) vs FA inc di (66 47)",
+   "patch 0x63: toolchain-diff bottom cmp nextObjId,i modrm: CL 1d ([ebx]) vs FA 3d ([edi])",
+   "patch 0x6b: toolchain-diff destroyed==count cmp: CL 3b ef (cmp edi,ebp) vs FA 3b eb (cmp ebx,ebp) (count edi->ebx)",
+   "patch 0x6f: toolchain-diff count==0 test: CL 85 ff (test edi,edi) vs FA 85 db (test ebx,ebx)",
+   "patch 0x84: toolchain-diff FA 12-B census deco 05 00 00 00 00 + 8d a4 24 00 00 00 00 after the final c2 04 00; CL emits no pad"
+  ]
+ },
+ {
+  "rva": 538560,
+  "verdict": "EXACT",
+  "obj": "w37G_837c0_v2pt2",
+  "src": "build/survey/probes/w37G_837c0_v2.c",
+  "maps": [
+   "_wingSizes=_groupSizes",
+   "_wingIds=_groupIds"
+  ],
+  "patch": [
+   "0x01,4,565733db",
+   "0x14,1,4c",
+   "0x15,1,ba",
+   "0x1e,2,d3e2",
+   "0x32,1,c2",
+   "0x34,1,21",
+   "0x39,1,1c",
+   "0x3a,7,a9000080007504a8807411",
+   "0x52,2,2bd8",
+   "0x54,2,03dd",
+   "0x5f,2,77bf",
+   "0x72,1,e3",
+   "0x78,1,9b",
+   "0x84,0,05000000008da42400000000"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "aliases": [],
+  "notes": "_MISSIONFortStatus@4 (144 B, 132 code + 12-B census tail). long __stdcall (uchar mtype): i=1..nextObjId-1 over objPtrs; mask=0x1000000<<mtype; flags&mask, objbyte!=4; if (flags&0x800000) or (flags&0x80): hpPtr=*(ulong*)(obj+5); hp=(short)(hpPtr+0x49); cur=(short)(obj+0xe); total+=hp; sum2=sum2-cur+hp; end: total==0 -> -1; else 100*sum2/total. The 0x800000/0x80 branch pair MUST be the goto-spelling (if (flags & 0x800000) goto hp; if (!(flags & 0x80)) goto bottom; hp: one shared hp block) - CL then fuses both tests into FA's a9 00 00 80 00 / 75 04 / a8 80 / 74 11 form. The duplicated-block spelling (v3) does the opposite of GRP-style merging here: it schedules a short body with the tail region beyond CL code (FATAL short) - goto spelling is the only body that matches. Remaining diffs are the sum2/mask home swap (CL sum2=EDX,mask=EBX vs FA sum2=EBX,mask=EDX; hp=EBP, cur=EAX, total=ESI, i=EDI all match FA) - 10 fixed bytes + the un-fusion insert + deco insert; the insert first expands 7->11 B at 0x3a (a9 80 00 80 00 74 11 -> a9 00 00 80 00 75 04 a8 80 74 11), then all downstream patches use post-insert coordinates (verified against real CL bytes at 0x4e/0x50: 2b d0/03 d5 -> 0x52/0x54 post-insert). Patches apply in listed order (fitobj sequential semantics). Semantic safety: the insert only re-splits the fused test into FA's two tests - identical predicates; home swap is pure register assignment.",
+  "provenance": [
+   "patch 0x01: toolchain-diff prologue: CL = push ebx, xor edx (mask=edx), push esi, push edi; FA = push ebx,esi,edi, xor ebx (sum2=ebx); equal 4 B",
+   "patch 0x14: toolchain-diff entry jbe disp: CL 76 48 vs FA 76 4c (total-test sits 4 B later after the un-fusion insert)",
+   "patch 0x15: toolchain-diff mask shl-operand: CL mov ebx,1 (bb) vs FA mov edx,1 (ba); the d3 e2 shl fix below completes the mask reg move ebx->edx",
+   "patch 0x1e: toolchain-diff shl modrm: CL d3 e3 (shl ebx,cl) vs FA d3 e2 (shl edx,cl) (mask ebx->edx)",
+   "patch 0x32: toolchain-diff flags&mask test modrm: CL test eax,ebx (85 c3) vs FA test eax,edx (85 c2)",
+   "patch 0x34: toolchain-diff entry je disp: CL 74 1d vs FA 74 21 (both to the bottom i++; block sits 4 B later post-insert)",
+   "patch 0x39: toolchain-diff objbyte!=4 je disp: CL 74 18 vs FA 74 1c (to top-of-else 4 B later post-insert)",
+   "patch 0x3a: toolchain-diff CL fused test a9 80 00 80 00 74 11 (7 B) expanded to FA's two-test form a9 00 00 80 00 75 04 a8 80 74 11 (11 B, insert) - same predicates: test 0x808000/jne+4 past the second test falls to the hp block; test al,0x80/je bottom",
+   "patch 0x52: toolchain-diff sum2 -= cur: CL 2b d0 (sub edx,eax) vs FA 2b d8 (sub ebx,eax) (sum2 edx->ebx); post-insert coords",
+   "patch 0x54: toolchain-diff sum2 += hp: CL 03 d5 (add edx,ebp) vs FA 03 dd (add ebx,ebp); post-insert",
+   "patch 0x5f: toolchain-diff loop-back ja disp: CL 77 c3 vs FA 77 bf (4-B insert shift); post-insert",
+   "patch 0x72: toolchain-diff 100*sum2 shl modrm: CL c1 e2 (shl edx) vs FA c1 e3 (shl ebx) (sum2); post-insert",
+   "patch 0x78: toolchain-diff cdq-prep lea modrm: CL 8d 04 92 ([edx*4]) vs FA 8d 04 9b ([ebx*4]) (sum2); post-insert",
+   "patch 0x84: toolchain-diff FA 12-B census deco 05 00 00 00 00 + 8d a4 24 00 00 00 00 after the final c2 04 00; CL emits no pad"
+  ]
+ }
+]
