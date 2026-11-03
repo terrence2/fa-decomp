@@ -1,12 +1,12 @@
 [
  {
-  "rva": "0xb06c0",
+  "rva": 722624,
   "obj": "WRFog",
   "src": "src/WRFogLayerUpdate.c",
   "maps": []
  },
  {
-  "rva": "0x9b1f0",
+  "rva": 635376,
   "obj": "Stall",
   "src": "src/StallSpeed.c",
   "maps": [
@@ -14,13 +14,13 @@
   ]
  },
  {
-  "rva": "0x11780",
+  "rva": 71552,
   "obj": "WordToString",
   "src": "src/WordToString.c",
   "maps": []
  },
  {
-  "rva": "0x87610",
+  "rva": 554512,
   "obj": "DlgSel",
   "src": "src/DialogSelectItem.c",
   "maps": [
@@ -32,7 +32,7 @@
   ]
  },
  {
-  "rva": "0xb5130",
+  "rva": 741680,
   "obj": "CarefulDiv",
   "src": "src/carefulDiv.c",
   "maps": [
@@ -43,7 +43,7 @@
   ]
  },
  {
-  "rva": "0x78b50",
+  "rva": 494416,
   "obj": "LibRead",
   "src": "src/LibRead.c",
   "maps": [
@@ -62,7 +62,7 @@
   ]
  },
  {
-  "rva": "0x35e50",
+  "rva": 220752,
   "obj": "StartGameThread",
   "src": "src/StartGameThread.c",
   "span": "0x80",
@@ -84,25 +84,25 @@
   ]
  },
  {
-  "rva": "0xd3970",
+  "rva": 866672,
   "obj": "LockExit",
   "src": "src/lockexit.c",
   "maps": []
  },
  {
-  "rva": "0xd3980",
+  "rva": 866688,
   "obj": "UnlockExit",
   "src": "src/unlockexit.c",
   "maps": []
  },
  {
-  "rva": "0xd99b0",
+  "rva": 891312,
   "obj": "Errno",
   "src": "src/errno.c",
   "maps": []
  },
  {
-  "rva": "0xd3890",
+  "rva": 866448,
   "obj": "CExit",
   "src": "src/cexit.c",
   "maps": [
@@ -110,103 +110,103 @@
   ]
  },
  {
-  "rva": "0xd9e20",
+  "rva": 892448,
   "obj": "GetMbcp",
   "src": "src/getmbcp.c",
   "maps": []
  },
  {
-  "rva": "0xddfc0",
+  "rva": 909248,
   "obj": "GetSbhThreshold",
   "src": "src/getsbhthreshold.c",
   "maps": []
  },
  {
-  "rva": "0xe1ec0",
+  "rva": 925376,
   "obj": "Localeconv",
   "src": "src/localeconv.c",
   "maps": []
  },
  {
-  "rva": "0x117b0",
+  "rva": 71600,
   "obj": "LibraryStartup",
   "src": "src/librarystartup.c",
   "maps": []
  },
  {
-  "rva": "0x35ce0",
+  "rva": 220384,
   "obj": "MMCompactRAM",
   "src": "src/mmcompactram.c",
   "maps": []
  },
  {
-  "rva": "0x35aa0",
+  "rva": 219808,
   "obj": "MMAllocPtr",
   "src": "src/mmallocptr.c",
   "maps": []
  },
  {
-  "rva": "0x35c00",
+  "rva": 220160,
   "obj": "MMReallocPtr",
   "src": "src/mmreallocptr.c",
   "maps": []
  },
  {
-  "rva": "0x35d40",
+  "rva": 220480,
   "obj": "MMLock",
   "src": "src/mmlock.c",
   "maps": []
  },
  {
-  "rva": "0x35d50",
+  "rva": 220496,
   "obj": "MMLockW",
   "src": "src/mmlockw.c",
   "maps": []
  },
  {
-  "rva": "0x35d90",
+  "rva": 220560,
   "obj": "MMUnlock",
   "src": "src/mmunlock.c",
   "maps": []
  },
  {
-  "rva": "0x35da0",
+  "rva": 220576,
   "obj": "MMAccessR",
   "src": "src/mmaccessr.c",
   "maps": []
  },
  {
-  "rva": "0x35db0",
+  "rva": 220592,
   "obj": "MMAccessW",
   "src": "src/mmaccessw.c",
   "maps": []
  },
  {
-  "rva": "0x558f0",
+  "rva": 350448,
   "obj": "Rand16",
   "src": "src/rand16.c",
   "maps": []
  },
  {
-  "rva": "0x55900",
+  "rva": 350464,
   "obj": "Rand8",
   "src": "src/rand8.c",
   "maps": []
  },
  {
-  "rva": "0x55910",
+  "rva": 350480,
   "obj": "Rand",
   "src": "src/rand.c",
   "maps": []
  },
  {
-  "rva": "0x12730",
+  "rva": 75568,
   "obj": "PrintShapeName",
   "src": "src/printshapename.c",
   "maps": []
  },
  {
-  "rva": "0x1e420",
+  "rva": 123936,
   "obj": "WriteConfig",
   "src": "src/writeconfig.c",
   "maps": [
@@ -214,115 +214,115 @@
   ]
  },
  {
-  "rva": "0x49730",
+  "rva": 300848,
   "obj": "InstallErrorExit",
   "src": "src/installerrorexit.c",
   "maps": []
  },
  {
-  "rva": "0x5d730",
+  "rva": 382768,
   "obj": "GGGetSubmodes",
   "src": "src/gggetsubmodes.c",
   "maps": []
  },
  {
-  "rva": "0x5d740",
+  "rva": 382784,
   "obj": "GGGetSubmodeName",
   "src": "src/gggetsubmodename.c",
   "maps": []
  },
  {
-  "rva": "0x64600",
+  "rva": 411136,
   "obj": "CTEval_maxspeed",
   "src": "src/cteval_maxspeed.c",
   "maps": []
  },
  {
-  "rva": "0x64640",
+  "rva": 411200,
   "obj": "CTEval_twr",
   "src": "src/cteval_twr.c",
   "maps": []
  },
  {
-  "rva": "0x64590",
+  "rva": 411024,
   "obj": "CTEval_minspeed",
   "src": "src/cteval_minspeed.c",
   "maps": []
  },
  {
-  "rva": "0x645b0",
+  "rva": 411056,
   "obj": "CTEval_cornerspeed",
   "src": "src/cteval_cornerspeed.c",
   "maps": []
  },
  {
-  "rva": "0x645c0",
+  "rva": 411072,
   "obj": "CTEval_corner",
   "src": "src/cteval_corner.c",
   "maps": []
  },
  {
-  "rva": "0x645e0",
+  "rva": 411104,
   "obj": "CTEval_maxrudderh",
   "src": "src/cteval_maxrudderh.c",
   "maps": []
  },
  {
-  "rva": "0x645f0",
+  "rva": 411120,
   "obj": "CTEval_maxrudderp",
   "src": "src/cteval_maxrudderp.c",
   "maps": []
  },
  {
-  "rva": "0x64870",
+  "rva": 411760,
   "obj": "CTEval_cloudalt",
   "src": "src/cteval_cloudalt.c",
   "maps": []
  },
  {
-  "rva": "0x63e40",
+  "rva": 409152,
   "obj": "CTShutdown",
   "src": "src/ctshutdown.c",
   "maps": []
  },
  {
-  "rva": "0x61b90",
+  "rva": 400272,
   "obj": "PutCurObj2",
   "src": "src/putcurobj2.c",
   "maps": []
  },
  {
-  "rva": "0x641b0",
+  "rva": 410032,
   "obj": "CTEval_tgtisship",
   "src": "src/cteval_tgtisship.c",
   "maps": []
  },
  {
-  "rva": "0x641c0",
+  "rva": 410048,
   "obj": "CTEval_tgtissam",
   "src": "src/cteval_tgtissam.c",
   "maps": []
  },
  {
-  "rva": "0x64240",
+  "rva": 410176,
   "obj": "CTEval_bestrange",
   "src": "src/cteval_bestrange.c",
   "maps": []
  },
  {
-  "rva": "0x64680",
+  "rva": 411264,
   "obj": "CTEval_turnrate",
   "src": "src/cteval_turnrate.c",
   "maps": []
  },
  {
-  "rva": "0x64950",
+  "rva": 411984,
   "obj": "CTEval_any",
   "src": "src/cteval_any.c",
   "maps": []
  },
  {
-  "rva": "0x65480",
+  "rva": 414848,
   "obj": "CTDo_homepos",
   "src": "src/ctdo_homepos.c",
   "maps": [
@@ -330,7 +330,7 @@
   ]
  },
  {
-  "rva": "0x655a0",
+  "rva": 415136,
   "obj": "CTDo_uhomepos",
   "src": "src/ctdo_uhomepos.c",
   "maps": [
@@ -338,19 +338,19 @@
   ]
  },
  {
-  "rva": "0x62e80",
+  "rva": 405120,
   "obj": "WriteCmdBufMove",
   "src": "src/writecmdbufmove.c",
   "maps": []
  },
  {
-  "rva": "0x62e90",
+  "rva": 405136,
   "obj": "WriteCmdBufEnd",
   "src": "src/writecmdbufend.c",
   "maps": []
  },
  {
-  "rva": "0x8b230",
+  "rva": 569904,
   "obj": "DisableActionButton",
   "src": "src/disableactionbutton.c",
   "maps": [],
@@ -362,13 +362,13 @@
   ]
  },
  {
-  "rva": "0x8b240",
+  "rva": 569920,
   "obj": "EnableActionButton",
   "src": "src/enableactionbutton.c",
   "maps": []
  },
  {
-  "rva": "0x8b2a0",
+  "rva": 570016,
   "obj": "DialogItemIsEnabled",
   "src": "src/dialogitemisenabled.c",
   "maps": [],
@@ -381,25 +381,25 @@
   ]
  },
  {
-  "rva": "0x68b20",
+  "rva": 428832,
   "obj": "EJECTRemove",
   "src": "src/ejectremove.c",
   "maps": []
  },
  {
-  "rva": "0x7f5e0",
+  "rva": 521696,
   "obj": "KurileRescued",
   "src": "src/kurilerescued.c",
   "maps": []
  },
  {
-  "rva": "0x7f5f0",
+  "rva": 521712,
   "obj": "VietnamRescued",
   "src": "src/vietnamrescued.c",
   "maps": []
  },
  {
-  "rva": "0x7f6b0",
+  "rva": 521904,
   "obj": "UkraineQuit",
   "src": "src/ukrainequit.c",
   "maps": [
@@ -407,7 +407,7 @@
   ]
  },
  {
-  "rva": "0x7f780",
+  "rva": 522112,
   "obj": "KurileQuit",
   "src": "src/kurilequit.c",
   "maps": [
@@ -415,7 +415,7 @@
   ]
  },
  {
-  "rva": "0x7f790",
+  "rva": 522128,
   "obj": "VietnamQuit",
   "src": "src/vietnamquit.c",
   "maps": [
@@ -423,19 +423,19 @@
   ]
  },
  {
-  "rva": "0x82930",
+  "rva": 534832,
   "obj": "VietnamMedals",
   "src": "src/vietnammedals.c",
   "maps": []
  },
  {
-  "rva": "0x82940",
+  "rva": 534848,
   "obj": "VietnamPromotions",
   "src": "src/vietnampromotions.c",
   "maps": []
  },
  {
-  "rva": "0x7f050",
+  "rva": 520272,
   "obj": "MISSIONInit1",
   "src": "src/missioninit1.c",
   "maps": [
@@ -443,7 +443,7 @@
   ]
  },
  {
-  "rva": "0x7f060",
+  "rva": 520288,
   "obj": "MISSIONInit2",
   "src": "src/missioninit2.c",
   "maps": [
@@ -451,97 +451,97 @@
   ]
  },
  {
-  "rva": "0x7f070",
+  "rva": 520304,
   "obj": "MISSIONInit3",
   "src": "src/missioninit3.c",
   "maps": []
  },
  {
-  "rva": "0x96550",
+  "rva": 615760,
   "obj": "GFlush",
   "src": "src/gflush.c",
   "maps": []
  },
  {
-  "rva": "0x8b4a0",
+  "rva": 570528,
   "obj": "SAYShutdown",
   "src": "src/sayshutdown.c",
   "maps": []
  },
  {
-  "rva": "0x96b60",
+  "rva": 617312,
   "obj": "GLoadDriver",
   "src": "src/gloaddriver.c",
   "maps": []
  },
  {
-  "rva": "0x96b70",
+  "rva": 617328,
   "obj": "GUnloadDriver",
   "src": "src/gunloaddriver.c",
   "maps": []
  },
  {
-  "rva": "0x97d70",
+  "rva": 621936,
   "obj": "MOUSECenter",
   "src": "src/mousecenter.c",
   "maps": []
  },
  {
-  "rva": "0xa3700",
+  "rva": 669440,
   "obj": "RMType",
   "src": "src/rmtype.c",
   "maps": []
  },
  {
-  "rva": "0x35d60",
+  "rva": 220512,
   "obj": "MMLockR",
   "src": "src/mmlockr.c",
   "maps": []
  },
  {
-  "rva": "0x641d0",
+  "rva": 410064,
   "obj": "CTEval_tgtisaaa",
   "src": "src/cteval_tgtisaaa.c",
   "maps": []
  },
  {
-  "rva": "0x646b0",
+  "rva": 411312,
   "obj": "CTEval_turnradius",
   "src": "src/cteval_turnradius.c",
   "maps": []
  },
  {
-  "rva": "0x7ead0",
+  "rva": 518864,
   "obj": "AircraftReference",
   "src": "src/aircraftreference.c",
   "maps": []
  },
  {
-  "rva": "0x7eae0",
+  "rva": 518880,
   "obj": "ViewPilots",
   "src": "src/viewpilots.c",
   "maps": []
  },
  {
-  "rva": "0xb49c0",
+  "rva": 739776,
   "obj": "GColorStringHeight",
   "src": "src/gcolorstringheight.c",
   "maps": []
  },
  {
-  "rva": "0xc2110",
+  "rva": 794896,
   "obj": "TInit",
   "src": "src/tinit.c",
   "maps": []
  },
  {
-  "rva": "0xd9360",
+  "rva": 889696,
   "obj": "setdefaultprecision",
   "src": "src/setdefaultprecision.c",
   "maps": []
  },
  {
-  "rva": "0x63fe0",
+  "rva": 409568,
   "obj": "CTEval_time",
   "src": "src/cteval_time.c",
   "maps": [],
@@ -553,7 +553,7 @@
   ]
  },
  {
-  "rva": "0x63ff0",
+  "rva": 409584,
   "obj": "CTEval_do_nothing",
   "src": "src/cteval_donotthing.c",
   "maps": [],
@@ -565,145 +565,145 @@
   ]
  },
  {
-  "rva": "0x64000",
+  "rva": 409600,
   "obj": "CTEval_do_evade",
   "src": "src/cteval_doevade.c",
   "maps": []
  },
  {
-  "rva": "0x64010",
+  "rva": 409616,
   "obj": "CTEval_do_attack",
   "src": "src/cteval_doattack.c",
   "maps": []
  },
  {
-  "rva": "0x64020",
+  "rva": 409632,
   "obj": "CTEval_do_radar_launch",
   "src": "src/cteval_doradarlaunch.c",
   "maps": []
  },
  {
-  "rva": "0x64030",
+  "rva": 409648,
   "obj": "CTEval_do_ir_launch",
   "src": "src/cteval_doirlaunch.c",
   "maps": []
  },
  {
-  "rva": "0x64040",
+  "rva": 409664,
   "obj": "CTEval_do_hit",
   "src": "src/cteval_dohit.c",
   "maps": []
  },
  {
-  "rva": "0x64250",
+  "rva": 410192,
   "obj": "CTEval_bestrangediff",
   "src": "src/cteval_bestrangediff.c",
   "maps": []
  },
  {
-  "rva": "0x64260",
+  "rva": 410208,
   "obj": "CTEval_radar",
   "src": "src/cteval_radar.c",
   "maps": []
  },
  {
-  "rva": "0x642a0",
+  "rva": 410272,
   "obj": "CTEval_ir",
   "src": "src/cteval_ir.c",
   "maps": []
  },
  {
-  "rva": "0x64560",
+  "rva": 410976,
   "obj": "CTEval_speed",
   "src": "src/cteval_speed.c",
   "maps": []
  },
  {
-  "rva": "0x64770",
+  "rva": 411504,
   "obj": "CTEval_minalt",
   "src": "src/cteval_minalt.c",
   "maps": []
  },
  {
-  "rva": "0x64880",
+  "rva": 411776,
   "obj": "CTEval_skill",
   "src": "src/cteval_skill.c",
   "maps": []
  },
  {
-  "rva": "0x64bb0",
+  "rva": 412592,
   "obj": "CTEval_wm_hspacing_is",
   "src": "src/cteval_wmhspacing.c",
   "maps": []
  },
  {
-  "rva": "0x64bc0",
+  "rva": 412608,
   "obj": "CTEval_wm_vspacing_is",
   "src": "src/cteval_wmvspacing.c",
   "maps": []
  },
  {
-  "rva": "0x64bd0",
+  "rva": 412624,
   "obj": "CTEval_wm_formation_is",
   "src": "src/cteval_wmform.c",
   "maps": []
  },
  {
-  "rva": "0x64be0",
+  "rva": 412640,
   "obj": "CTEval_wm_control_is",
   "src": "src/cteval_wmcontrol.c",
   "maps": []
  },
  {
-  "rva": "0x645a0",
+  "rva": 411040,
   "obj": "CTEval_minspeeddiff",
   "src": "src/cteval_minspeeddiff.c",
   "maps": []
  },
  {
-  "rva": "0x645d0",
+  "rva": 411088,
   "obj": "CTEval_cornerspeeddiff",
   "src": "src/cteval_cornerspeeddiff.c",
   "maps": []
  },
  {
-  "rva": "0x64610",
+  "rva": 411152,
   "obj": "CTEval_maxspeeddiff",
   "src": "src/cteval_maxspeeddiff.c",
   "maps": []
  },
  {
-  "rva": "0x64650",
+  "rva": 411216,
   "obj": "CTEval_twrdiff",
   "src": "src/cteval_twrdiff.c",
   "maps": []
  },
  {
-  "rva": "0x646c0",
+  "rva": 411328,
   "obj": "CTEval_turnradiusdiff",
   "src": "src/cteval_turnradiusdiff.c",
   "maps": []
  },
  {
-  "rva": "0x11380",
+  "rva": 70528,
   "obj": "GetKeyFlags",
   "src": "src/gkeyflags.c",
   "maps": []
  },
  {
-  "rva": "0x49a40",
+  "rva": 301632,
   "obj": "ErrorExitNoMem",
   "src": "src/errorexitnomem.c",
   "maps": []
  },
  {
-  "rva": "0x51d80",
+  "rva": 335232,
   "obj": "FMBayIsOpen",
   "src": "src/fmbayisopen.c",
   "maps": []
  },
  {
-  "rva": "0x217b0",
+  "rva": 137136,
   "obj": "ZONEInit",
   "src": "src/zoneinit.c",
   "maps": [
@@ -711,13 +711,13 @@
   ]
  },
  {
-  "rva": "0x557e0",
+  "rva": 350176,
   "obj": "InitRand",
   "src": "src/initrand.c",
   "maps": []
  },
  {
-  "rva": "0x870e0",
+  "rva": 553184,
   "obj": "DialogWhatItem",
   "src": "src/dialogwhatitem.c",
   "maps": [
@@ -725,7 +725,7 @@
   ]
  },
  {
-  "rva": "0x8b2b0",
+  "rva": 570032,
   "obj": "LimitEditFieldLength",
   "src": "src/limiteditfieldlength.c",
   "maps": [
@@ -733,43 +733,43 @@
   ]
  },
  {
-  "rva": "0xd3da0",
+  "rva": 867744,
   "obj": "tolower",
   "src": "src/tolower.c",
   "maps": []
  },
  {
-  "rva": "0xd43c0",
+  "rva": 869312,
   "obj": "toupper",
   "src": "src/toupper.c",
   "maps": []
  },
  {
-  "rva": "0xd4b50",
+  "rva": 871248,
   "obj": "labs",
   "src": "src/labs.c",
   "maps": []
  },
  {
-  "rva": "0x8f3a0",
+  "rva": 586656,
   "obj": "OBJGet",
   "src": "src/OBJGet.c",
   "maps": []
  },
  {
-  "rva": "0x95460",
+  "rva": 611424,
   "obj": "G_FlipY",
   "src": "src/G_FlipY.c",
   "maps": []
  },
  {
-  "rva": "0x95610",
+  "rva": 611856,
   "obj": "G_SetBitmap",
   "src": "src/G_SetBitmap.c",
   "maps": []
  },
  {
-  "rva": "0x967d0",
+  "rva": 616400,
   "obj": "G_SetFont",
   "src": "src/G_SetFont.c",
   "maps": [
@@ -777,7 +777,7 @@
   ]
  },
  {
-  "rva": "0x96b50",
+  "rva": 617296,
   "obj": "G_StringHeight",
   "src": "src/G_StringHeight.c",
   "maps": [
@@ -785,19 +785,19 @@
   ]
  },
  {
-  "rva": "0x9b530",
+  "rva": 636208,
   "obj": "PLANEInit",
   "src": "src/PLANEInit.c",
   "maps": []
  },
  {
-  "rva": "0xb0a90",
+  "rva": 723600,
   "obj": "WRInt",
   "src": "src/WRInt.c",
   "maps": []
  },
  {
-  "rva": "0xd3a90",
+  "rva": 866960,
   "obj": "atoi",
   "src": "src/atoi.c",
   "maps": [
@@ -805,13 +805,13 @@
   ]
  },
  {
-  "rva": "0xd5c20",
+  "rva": 875552,
   "obj": "srand",
   "src": "src/srand.c",
   "maps": []
  },
  {
-  "rva": "0xdfa30",
+  "rva": 916016,
   "obj": "FillZeroMan",
   "src": "src/FillZeroMan.c",
   "maps": [],
@@ -823,7 +823,7 @@
   ]
  },
  {
-  "rva": "0xe3d40",
+  "rva": 933184,
   "obj": "tzset",
   "src": "src/tzset.c",
   "maps": [
@@ -831,7 +831,7 @@
   ]
  },
  {
-  "rva": "0xa54d0",
+  "rva": 677072,
   "obj": "T_InitFarmProc",
   "src": "src/T_InitFarmProc.c",
   "maps": [
@@ -839,7 +839,7 @@
   ]
  },
  {
-  "rva": "0xa5a00",
+  "rva": 678400,
   "obj": "T_InitCloudProc",
   "src": "src/T_InitCloudProc.c",
   "maps": [
@@ -847,55 +847,55 @@
   ]
  },
  {
-  "rva": "0x117c0",
+  "rva": 71616,
   "obj": "LibraryShutdown",
   "src": "src/LibraryShutdown.c",
   "maps": []
  },
  {
-  "rva": "0x61b80",
+  "rva": 400256,
   "obj": "GetCurObj2",
   "src": "src/GetCurObj2.c",
   "maps": []
  },
  {
-  "rva": "0x7ea40",
+  "rva": 518720,
   "obj": "CreateFortMission",
   "src": "src/CreateFortMission.c",
   "maps": []
  },
  {
-  "rva": "0x7ea50",
+  "rva": 518736,
   "obj": "CreateFortMission2",
   "src": "src/CreateFortMission2.c",
   "maps": []
  },
  {
-  "rva": "0xa40c0",
+  "rva": 671936,
   "obj": "SetupPT",
   "src": "src/SetupPT.c",
   "maps": []
  },
  {
-  "rva": "0xa40d0",
+  "rva": 671952,
   "obj": "SetupJT",
   "src": "src/SetupJT.c",
   "maps": []
  },
  {
-  "rva": "0xa7ba0",
+  "rva": 687008,
   "obj": "T_HorizonProc",
   "src": "src/T_HorizonProc.c",
   "maps": []
  },
  {
-  "rva": "0xbb200",
+  "rva": 766464,
   "obj": "unknown_divide_error",
   "src": "src/unknown_divide_error.c",
   "maps": []
  },
  {
-  "rva": "0xd3850",
+  "rva": 866384,
   "obj": "exit",
   "src": "src/exit.c",
   "maps": [
@@ -903,7 +903,7 @@
   ]
  },
  {
-  "rva": "0xd3870",
+  "rva": 866416,
   "obj": "exitcrt",
   "src": "src/exitcrt.c",
   "maps": [
@@ -911,7 +911,7 @@
   ]
  },
  {
-  "rva": "0xdb6a0",
+  "rva": 898720,
   "obj": "ismbbkalnum",
   "src": "src/ismbbkalnum.c",
   "maps": [
@@ -919,7 +919,7 @@
   ]
  },
  {
-  "rva": "0xdb6c0",
+  "rva": 898752,
   "obj": "ismbbkprint",
   "src": "src/ismbbkprint.c",
   "maps": [
@@ -927,7 +927,7 @@
   ]
  },
  {
-  "rva": "0xdb6e0",
+  "rva": 898784,
   "obj": "ismbbkpunct",
   "src": "src/ismbbkpunct.c",
   "maps": [
@@ -935,7 +935,7 @@
   ]
  },
  {
-  "rva": "0xdb700",
+  "rva": 898816,
   "obj": "ismbbalnum",
   "src": "src/ismbbalnum.c",
   "maps": [
@@ -943,7 +943,7 @@
   ]
  },
  {
-  "rva": "0xdb720",
+  "rva": 898848,
   "obj": "ismbbalpha",
   "src": "src/ismbbalpha.c",
   "maps": [
@@ -951,7 +951,7 @@
   ]
  },
  {
-  "rva": "0xdb7c0",
+  "rva": 899008,
   "obj": "ismbbtrail",
   "src": "src/ismbbtrail.c",
   "maps": [
@@ -959,7 +959,7 @@
   ]
  },
  {
-  "rva": "0xe27c0",
+  "rva": 927680,
   "obj": "atexit",
   "src": "src/atexit.c",
   "maps": [
@@ -973,7 +973,7 @@
   ]
  },
  {
-  "rva": "0xe2820",
+  "rva": 927776,
   "obj": "abort",
   "src": "src/abort.c",
   "maps": [
@@ -981,31 +981,31 @@
   ]
  },
  {
-  "rva": "0x11b70",
+  "rva": 72560,
   "obj": "FeetToNM",
   "src": "src/FeetToNM.c",
   "maps": []
  },
  {
-  "rva": "0x11ee0",
+  "rva": 73440,
   "obj": "Strend",
   "src": "src/Strend.c",
   "maps": []
  },
  {
-  "rva": "0x122e0",
+  "rva": 74464,
   "obj": "SampleShutdown",
   "src": "src/SampleShutdown.c",
   "maps": []
  },
  {
-  "rva": "0x127a0",
+  "rva": 75680,
   "obj": "ObjRadius",
   "src": "src/ObjRadius.c",
   "maps": []
  },
  {
-  "rva": "0x1f370",
+  "rva": 127856,
   "obj": "FortMultiButton",
   "src": "src/FortMultiButton.c",
   "maps": [
@@ -1014,7 +1014,7 @@
   ]
  },
  {
-  "rva": "0x4c520",
+  "rva": 312608,
   "obj": "FortMultiButton2",
   "src": "src/FortMultiButton2.c",
   "maps": [
@@ -1023,7 +1023,7 @@
   ]
  },
  {
-  "rva": "0x2e1b0",
+  "rva": 188848,
   "obj": "QuickMultiButton",
   "src": "src/QuickMultiButton.c",
   "maps": [
@@ -1032,7 +1032,7 @@
   ]
  },
  {
-  "rva": "0x214f0",
+  "rva": 136432,
   "obj": "StopCobraSound",
   "src": "src/StopCobraSound.c",
   "maps": [
@@ -1041,7 +1041,7 @@
   ]
  },
  {
-  "rva": "0x2e060",
+  "rva": 188512,
   "obj": "COLInit",
   "src": "src/COLInit.c",
   "maps": [
@@ -1049,19 +1049,19 @@
   ]
  },
  {
-  "rva": "0x35b70",
+  "rva": 220016,
   "obj": "MMFreePtr",
   "src": "src/MMFreePtr.c",
   "maps": []
  },
  {
-  "rva": "0x35d20",
+  "rva": 220448,
   "obj": "MMHandleLen",
   "src": "src/MMHandleLen.c",
   "maps": []
  },
  {
-  "rva": "0x3d880",
+  "rva": 252032,
   "obj": "CPToggleHistory",
   "src": "src/CPToggleHistory.c",
   "maps": [
@@ -1075,13 +1075,13 @@
   ]
  },
  {
-  "rva": "0x557c0",
+  "rva": 350144,
   "obj": "Percent",
   "src": "src/Percent.c",
   "maps": []
  },
  {
-  "rva": "0x69f80",
+  "rva": 434048,
   "obj": "WritePalette",
   "src": "src/WritePalette.c",
   "maps": [
@@ -1089,13 +1089,13 @@
   ]
  },
  {
-  "rva": "0x76d20",
+  "rva": 486688,
   "obj": "COMaxSpeed",
   "src": "src/COMaxSpeed.c",
   "maps": []
  },
  {
-  "rva": "0x7eaf0",
+  "rva": 518896,
   "obj": "StartCampaign",
   "src": "src/StartCampaign.c",
   "maps": [
@@ -1104,7 +1104,7 @@
   ]
  },
  {
-  "rva": "0x7eb10",
+  "rva": 518928,
   "obj": "ContinueCampaign",
   "src": "src/ContinueCampaign.c",
   "maps": [
@@ -1112,13 +1112,13 @@
   ]
  },
  {
-  "rva": "0x84be0",
+  "rva": 543712,
   "obj": "TIMERestart",
   "src": "src/TIMERestart.c",
   "maps": []
  },
  {
-  "rva": "0x87880",
+  "rva": 555136,
   "obj": "Info2640Preload",
   "src": "src/Info2640Preload.c",
   "maps": [
@@ -1128,37 +1128,37 @@
   ]
  },
  {
-  "rva": "0x35e00",
+  "rva": 220672,
   "obj": "MMByteAt",
   "src": "src/MMByteAt.c",
   "maps": []
  },
  {
-  "rva": "0x35e10",
+  "rva": 220688,
   "obj": "MMWordAt",
   "src": "src/MMWordAt.c",
   "maps": []
  },
  {
-  "rva": "0x35e20",
+  "rva": 220704,
   "obj": "MMUWordAt",
   "src": "src/MMUWordAt.c",
   "maps": []
  },
  {
-  "rva": "0x35e30",
+  "rva": 220720,
   "obj": "MMLongAt",
   "src": "src/MMLongAt.c",
   "maps": []
  },
  {
-  "rva": "0x35e40",
+  "rva": 220736,
   "obj": "MMULongAt",
   "src": "src/MMULongAt.c",
   "maps": []
  },
  {
-  "rva": "0xd9130",
+  "rva": 889136,
   "obj": "XcptInitPtd",
   "src": "src/XcptInitPtd.c",
   "maps": [
@@ -1166,13 +1166,13 @@
   ]
  },
  {
-  "rva": "0xd94d0",
+  "rva": 890064,
   "obj": "StatusPositive",
   "src": "src/StatusPositive.c",
   "maps": []
  },
  {
-  "rva": "0xdb740",
+  "rva": 898880,
   "obj": "ISMBBGraph",
   "src": "src/ISMBBGraph.c",
   "maps": [
@@ -1180,7 +1180,7 @@
   ]
  },
  {
-  "rva": "0xdb760",
+  "rva": 898912,
   "obj": "ISMBBPrint",
   "src": "src/ISMBBPrint.c",
   "maps": [
@@ -1188,7 +1188,7 @@
   ]
  },
  {
-  "rva": "0xdb780",
+  "rva": 898944,
   "obj": "ISMBBPunct",
   "src": "src/ISMBBPunct.c",
   "maps": [
@@ -1196,7 +1196,7 @@
   ]
  },
  {
-  "rva": "0xdb7a0",
+  "rva": 898976,
   "obj": "ISMBBLead",
   "src": "src/ISMBBLead.c",
   "maps": [
@@ -1204,7 +1204,7 @@
   ]
  },
  {
-  "rva": "0x878a0",
+  "rva": 555168,
   "obj": "Info640Preload",
   "src": "src/Info640Preload.c",
   "maps": [
@@ -1214,7 +1214,7 @@
   ]
  },
  {
-  "rva": "0x878f0",
+  "rva": 555248,
   "obj": "SndPrefPreload",
   "src": "src/SndPrefPreload.c",
   "maps": [
@@ -1224,7 +1224,7 @@
   ]
  },
  {
-  "rva": "0x87910",
+  "rva": 555280,
   "obj": "ChoosePreload",
   "src": "src/ChoosePreload.c",
   "maps": [
@@ -1234,7 +1234,7 @@
   ]
  },
  {
-  "rva": "0xaa240",
+  "rva": 696896,
   "obj": "ClearCachedFilenames",
   "src": "src/ClearCachedFilenames.c",
   "maps": [
@@ -1242,13 +1242,13 @@
   ]
  },
  {
-  "rva": "0x96540",
+  "rva": 615744,
   "obj": "G_SetScaleMax",
   "src": "src/G_SetScaleMax.c",
   "maps": []
  },
  {
-  "rva": "0x96660",
+  "rva": 616032,
   "obj": "G_SPolygonFlip",
   "src": "src/G_SPolygonFlip.c",
   "maps": [],
@@ -1265,7 +1265,7 @@
   ]
  },
  {
-  "rva": "0x96680",
+  "rva": 616064,
   "obj": "G_SUPolygonFlip",
   "src": "src/G_SUPolygonFlip.c",
   "maps": [
@@ -1273,19 +1273,19 @@
   ]
  },
  {
-  "rva": "0x9b1d0",
+  "rva": 635344,
   "obj": "TakeoffSpeed",
   "src": "src/TakeoffSpeed.c",
   "maps": []
  },
  {
-  "rva": "0xc2100",
+  "rva": 794880,
   "obj": "T_ShutdownDatabase",
   "src": "src/T_ShutdownDatabase.c",
   "maps": []
  },
  {
-  "rva": "0xdf610",
+  "rva": 914960,
   "obj": "Statusfp",
   "src": "src/Statusfp.c",
   "maps": [
@@ -1293,7 +1293,7 @@
   ]
  },
  {
-  "rva": "0xdf630",
+  "rva": 914992,
   "obj": "Clearfp",
   "src": "src/Clearfp.c",
   "maps": [
@@ -1301,13 +1301,13 @@
   ]
  },
  {
-  "rva": "0xe0be0",
+  "rva": 920544,
   "obj": "Wcslen",
   "src": "src/Wcslen.c",
   "maps": []
  },
  {
-  "rva": "0x12eb0",
+  "rva": 77488,
   "obj": "CHATInit",
   "src": "src/CHATInit.c",
   "maps": [
@@ -1317,13 +1317,13 @@
   ]
  },
  {
-  "rva": "0x21e40",
+  "rva": 138816,
   "obj": "MAPSetSide",
   "src": "src/MAPSetSide.c",
   "maps": []
  },
  {
-  "rva": "0x5da40",
+  "rva": 383552,
   "obj": "GG_WaitRetrace",
   "src": "src/GG_WaitRetrace.cpp",
   "maps": [
@@ -1331,7 +1331,7 @@
   ]
  },
  {
-  "rva": "0x5da70",
+  "rva": 383600,
   "obj": "GG_VideoModesAvailable",
   "src": "src/GG_VideoModesAvailable.c",
   "maps": [
@@ -1340,7 +1340,7 @@
   ]
  },
  {
-  "rva": "0x62ea0",
+  "rva": 405152,
   "obj": "FinishCmdBuf",
   "src": "src/FinishCmdBuf.c",
   "maps": [
@@ -1348,7 +1348,7 @@
   ]
  },
  {
-  "rva": "0x63060",
+  "rva": 405600,
   "obj": "MaskEvents",
   "src": "src/MaskEvents.c",
   "maps": [
@@ -1362,31 +1362,31 @@
   ]
  },
  {
-  "rva": "0x64150",
+  "rva": 409936,
   "obj": "CTEval_tgtisfighter",
   "src": "src/CTEval_tgtisfighter.c",
   "maps": []
  },
  {
-  "rva": "0x64170",
+  "rva": 409968,
   "obj": "CTEval_tgtisbomber",
   "src": "src/CTEval_tgtisbomber.c",
   "maps": []
  },
  {
-  "rva": "0x64190",
+  "rva": 410000,
   "obj": "CTEval_tgtisplane",
   "src": "src/CTEval_tgtisplane.c",
   "maps": []
  },
  {
-  "rva": "0x64200",
+  "rva": 410112,
   "obj": "CTEval_maxrange",
   "src": "src/CTEval_maxrange.c",
   "maps": []
  },
  {
-  "rva": "0x64540",
+  "rva": 410944,
   "obj": "CTEval_canclimb",
   "src": "src/CTEval_canclimb.c",
   "maps": [
@@ -1394,7 +1394,7 @@
   ]
  },
  {
-  "rva": "0x64620",
+  "rva": 411168,
   "obj": "CTEval_betterspeed",
   "src": "src/CTEval_betterspeed.c",
   "maps": [
@@ -1402,7 +1402,7 @@
   ]
  },
  {
-  "rva": "0x64660",
+  "rva": 411232,
   "obj": "CTEval_bettertwr",
   "src": "src/CTEval_bettertwr.c",
   "maps": [
@@ -1410,7 +1410,7 @@
   ]
  },
  {
-  "rva": "0x64690",
+  "rva": 411280,
   "obj": "CTEval_turnratediff",
   "src": "src/CTEval_turnratediff.c",
   "maps": [
@@ -1418,19 +1418,19 @@
   ]
  },
  {
-  "rva": "0x648d0",
+  "rva": 411856,
   "obj": "CTEval_p",
   "src": "src/CTEval_p.c",
   "maps": []
  },
  {
-  "rva": "0x648f0",
+  "rva": 411888,
   "obj": "CTEval_b",
   "src": "src/CTEval_b.c",
   "maps": []
  },
  {
-  "rva": "0x64c10",
+  "rva": 412688,
   "obj": "CTDo_restart",
   "src": "src/CTDo_restart.c",
   "maps": [
@@ -1438,7 +1438,7 @@
   ]
  },
  {
-  "rva": "0x79540",
+  "rva": 496960,
   "obj": "ShutdownGraphicsSystem",
   "src": "src/ShutdownGraphicsSystem.c",
   "maps": [
@@ -1448,13 +1448,13 @@
   ]
  },
  {
-  "rva": "0x7f300",
+  "rva": 520960,
   "obj": "UkraineAddA7",
   "src": "src/UkraineAddA7.c",
   "maps": []
  },
  {
-  "rva": "0x87400",
+  "rva": 553984,
   "obj": "DialogGetPtr",
   "src": "src/DialogGetPtr.c",
   "maps": [
@@ -1462,13 +1462,13 @@
   ]
  },
  {
-  "rva": "0x95720",
+  "rva": 612128,
   "obj": "G_SetFullClipBox",
   "src": "src/G_SetFullClipBox.c",
   "maps": []
  },
  {
-  "rva": "0x95880",
+  "rva": 612480,
   "obj": "G_GetPoint",
   "src": "src/G_GetPoint.c",
   "maps": [],
@@ -1480,25 +1480,25 @@
   ]
  },
  {
-  "rva": "0x966a0",
+  "rva": 616096,
   "obj": "G_PointFlip",
   "src": "src/G_PointFlip.c",
   "maps": []
  },
  {
-  "rva": "0x966c0",
+  "rva": 616128,
   "obj": "G_UPointFlip",
   "src": "src/G_UPointFlip.c",
   "maps": []
  },
  {
-  "rva": "0x97b00",
+  "rva": 621312,
   "obj": "WPDoingWaypoints",
   "src": "src/WPDoingWaypoints.c",
   "maps": []
  },
  {
-  "rva": "0xaa260",
+  "rva": 696928,
   "obj": "GetExecutablePath",
   "src": "src/GetExecutablePath.c",
   "maps": [
@@ -1506,25 +1506,25 @@
   ]
  },
  {
-  "rva": "0xaf4f0",
+  "rva": 718064,
   "obj": "ChangeTint",
   "src": "src/ChangeTint.c",
   "maps": []
  },
  {
-  "rva": "0xb0aa0",
+  "rva": 723616,
   "obj": "WRForcePaletteUpdate",
   "src": "src/WRForcePaletteUpdate.c",
   "maps": []
  },
  {
-  "rva": "0xc23d0",
+  "rva": 795600,
   "obj": "T_StopAdding",
   "src": "src/T_StopAdding.c",
   "maps": []
  },
  {
-  "rva": "0xd9290",
+  "rva": 889488,
   "obj": "malloc",
   "src": "src/malloc.c",
   "maps": [
@@ -1533,7 +1533,7 @@
   ]
  },
  {
-  "rva": "0xdfa40",
+  "rva": 916032,
   "obj": "IsZeroMan",
   "src": "src/IsZeroMan.c",
   "maps": [],
@@ -1546,13 +1546,13 @@
   ]
  },
  {
-  "rva": "0xe4600",
+  "rva": 935424,
   "obj": "is_wctype",
   "src": "src/is_wctype.c",
   "maps": []
  },
  {
-  "rva": "0xa40a0",
+  "rva": 671904,
   "obj": "SetupNT",
   "src": "src/SetupNT.c",
   "maps": [
@@ -1560,7 +1560,7 @@
   ]
  },
  {
-  "rva": "0xd3ff0",
+  "rva": 868336,
   "obj": "fopen",
   "src": "src/fopen.c",
   "maps": [
@@ -1568,7 +1568,7 @@
   ]
  },
  {
-  "rva": "0xd5c30",
+  "rva": 875568,
   "obj": "RandCRT",
   "src": "src/RandCRT.c",
   "maps": [
@@ -1576,7 +1576,7 @@
   ]
  },
  {
-  "rva": "0xe0f0",
+  "rva": 57584,
   "obj": "VIEWImmediateVisibility",
   "src": "src/VIEWImmediateVisibility.c",
   "maps": [
@@ -1584,37 +1584,37 @@
   ]
  },
  {
-  "rva": "0x11dc0",
+  "rva": 73152,
   "obj": "NextString",
   "src": "src/NextString.c",
   "maps": []
  },
  {
-  "rva": "0x12510",
+  "rva": 75024,
   "obj": "SpeedOfSound",
   "src": "src/SpeedOfSound.c",
   "maps": []
  },
  {
-  "rva": "0x14180",
+  "rva": 82304,
   "obj": "SetPlayerContact",
   "src": "src/SetPlayerContact.c",
   "maps": []
  },
  {
-  "rva": "0x16200",
+  "rva": 90624,
   "obj": "ForceAutopilot",
   "src": "src/ForceAutopilot.c",
   "maps": []
  },
  {
-  "rva": "0x16220",
+  "rva": 90656,
   "obj": "RestoreAutopilot",
   "src": "src/RestoreAutopilot.c",
   "maps": []
  },
  {
-  "rva": "0x1d470",
+  "rva": 119920,
   "obj": "FreeNames",
   "src": "src/FreeNames.c",
   "maps": [
@@ -1622,7 +1622,7 @@
   ]
  },
  {
-  "rva": "0x330f0",
+  "rva": 209136,
   "obj": "BasicSound",
   "src": "src/BasicSound.c",
   "maps": [
@@ -1630,7 +1630,7 @@
   ]
  },
  {
-  "rva": "0x52e90",
+  "rva": 339600,
   "obj": "HARDResourceName",
   "src": "src/HARDResourceName.c",
   "maps": [
@@ -1638,7 +1638,7 @@
   ]
  },
  {
-  "rva": "0x61870",
+  "rva": 399472,
   "obj": "ImmediateService",
   "src": "src/ImmediateService.c",
   "maps": [
@@ -1648,31 +1648,31 @@
   ]
  },
  {
-  "rva": "0x62d80",
+  "rva": 404864,
   "obj": "ObjPlusAngleParm",
   "src": "src/ObjPlusAngleParm.c",
   "maps": []
  },
  {
-  "rva": "0x62e60",
+  "rva": 405088,
   "obj": "WriteCmdBufProcptr",
   "src": "src/WriteCmdBufProcptr.c",
   "maps": []
  },
  {
-  "rva": "0x63e20",
+  "rva": 409120,
   "obj": "CTInit",
   "src": "src/CTInit.c",
   "maps": []
  },
  {
-  "rva": "0x641e0",
+  "rva": 410080,
   "obj": "CTEval_tgthumancontrol",
   "src": "src/CTEval_tgthumancontrol.c",
   "maps": []
  },
  {
-  "rva": "0x64220",
+  "rva": 410144,
   "obj": "CTEval_maxrangediff",
   "src": "src/CTEval_maxrangediff.c",
   "maps": [
@@ -1680,55 +1680,55 @@
   ]
  },
  {
-  "rva": "0x643e0",
+  "rva": 410592,
   "obj": "CTEval_disttotgt",
   "src": "src/CTEval_disttotgt.c",
   "maps": []
  },
  {
-  "rva": "0x64570",
+  "rva": 410992,
   "obj": "CTEval_speeddiff",
   "src": "src/CTEval_speeddiff.c",
   "maps": []
  },
  {
-  "rva": "0x64700",
+  "rva": 411392,
   "obj": "CTEval_altdiff",
   "src": "src/CTEval_altdiff.c",
   "maps": []
  },
  {
-  "rva": "0x64750",
+  "rva": 411472,
   "obj": "CTEval_maxaltdiff",
   "src": "src/CTEval_maxaltdiff.c",
   "maps": []
  },
  {
-  "rva": "0x64780",
+  "rva": 411520,
   "obj": "CTEval_minaltdiff",
   "src": "src/CTEval_minaltdiff.c",
   "maps": []
  },
  {
-  "rva": "0x64910",
+  "rva": 411920,
   "obj": "CTEval_hdiff",
   "src": "src/CTEval_hdiff.c",
   "maps": []
  },
  {
-  "rva": "0x64930",
+  "rva": 411952,
   "obj": "CTEval_pdiff",
   "src": "src/CTEval_pdiff.c",
   "maps": []
  },
  {
-  "rva": "0x69690",
+  "rva": 431760,
   "obj": "SMShutdown",
   "src": "src/SMShutdown.c",
   "maps": []
  },
  {
-  "rva": "0x757c0",
+  "rva": 481216,
   "obj": "WrapHB",
   "src": "src/WrapHB.c",
   "maps": [],
@@ -1740,7 +1740,7 @@
   ]
  },
  {
-  "rva": "0x757f0",
+  "rva": 481264,
   "obj": "WrapP",
   "src": "src/WrapP.c",
   "maps": [],
@@ -1752,13 +1752,13 @@
   ]
  },
  {
-  "rva": "0x79ed0",
+  "rva": 499408,
   "obj": "FMResetTV",
   "src": "src/FMResetTV.c",
   "maps": []
  },
  {
-  "rva": "0x7f130",
+  "rva": 520496,
   "obj": "LoadCampaignProc",
   "src": "src/LoadCampaignProc.c",
   "maps": [
@@ -1766,19 +1766,19 @@
   ]
  },
  {
-  "rva": "0x7f280",
+  "rva": 520832,
   "obj": "CampaignPlanesLeft",
   "src": "src/CampaignPlanesLeft.c",
   "maps": []
  },
  {
-  "rva": "0x84db0",
+  "rva": 544176,
   "obj": "TIMESetCompression",
   "src": "src/TIMESetCompression.c",
   "maps": []
  },
  {
-  "rva": "0x84ef0",
+  "rva": 544496,
   "obj": "FPSPrint",
   "src": "src/FPSPrint.c",
   "maps": [
@@ -1788,7 +1788,7 @@
   ]
  },
  {
-  "rva": "0x878c0",
+  "rva": 555200,
   "obj": "GrafPrefPreload",
   "src": "src/GrafPrefPreload.c",
   "maps": [
@@ -1801,7 +1801,7 @@
   ]
  },
  {
-  "rva": "0x87930",
+  "rva": 555312,
   "obj": "MultiPreload",
   "src": "src/MultiPreload.c",
   "maps": [
@@ -1811,7 +1811,7 @@
   ]
  },
  {
-  "rva": "0x8f930",
+  "rva": 588080,
   "obj": "OBJNextAliasForMulti",
   "src": "src/OBJNextAliasForMulti.c",
   "maps": [
@@ -1819,7 +1819,7 @@
   ]
  },
  {
-  "rva": "0x96510",
+  "rva": 615696,
   "obj": "G_DrawYLR",
   "src": "src/G_DrawYLR.c",
   "maps": [],
@@ -1834,19 +1834,19 @@
   ]
  },
  {
-  "rva": "0x9e710",
+  "rva": 648976,
   "obj": "DoFadeout",
   "src": "src/DoFadeout.c",
   "maps": []
  },
  {
-  "rva": "0xa2810",
+  "rva": 665616,
   "obj": "CanReplay",
   "src": "src/CanReplay.c",
   "maps": []
  },
  {
-  "rva": "0xaa110",
+  "rva": 696592,
   "obj": "Rename",
   "src": "src/Rename.c",
   "maps": [
@@ -1854,19 +1854,19 @@
   ]
  },
  {
-  "rva": "0xb4990",
+  "rva": 739728,
   "obj": "G_ColorStringWidth",
   "src": "src/G_ColorStringWidth.c",
   "maps": []
  },
  {
-  "rva": "0xb6b80",
+  "rva": 748416,
   "obj": "APInit",
   "src": "src/APInit.c",
   "maps": []
  },
  {
-  "rva": "0xddfd0",
+  "rva": 909264,
   "obj": "set_sbh_threshold",
   "src": "src/set_sbh_threshold.c",
   "maps": [
@@ -1874,7 +1874,7 @@
   ]
  },
  {
-  "rva": "0xdf690",
+  "rva": 915088,
   "obj": "controlfp",
   "src": "src/controlfp.c",
   "maps": [
@@ -1882,7 +1882,7 @@
   ]
  },
  {
-  "rva": "0x78bf0",
+  "rva": 494576,
   "obj": "LibClose",
   "src": "src/LibClose.c",
   "maps": [
@@ -1890,7 +1890,7 @@
   ]
  },
  {
-  "rva": "0xd5de0",
+  "rva": 876000,
   "obj": "getenv",
   "src": "src/getenv.c",
   "maps": [
@@ -1900,7 +1900,7 @@
   ]
  },
  {
-  "rva": "0xd72e0",
+  "rva": 881376,
   "obj": "lockerr_exit",
   "src": "src/lockerr_exit.c",
   "maps": [],
@@ -1912,7 +1912,7 @@
   ]
  },
  {
-  "rva": "0xdf5c0",
+  "rva": 914880,
   "obj": "query_new_handler",
   "src": "src/query_new_handler.c",
   "maps": [
@@ -1920,13 +1920,13 @@
   ]
  },
  {
-  "rva": "0xdfa10",
+  "rva": 915984,
   "obj": "CopyMan",
   "src": "src/CopyMan.c",
   "maps": []
  },
  {
-  "rva": "0xe4040",
+  "rva": 933952,
   "obj": "isindst",
   "src": "src/isindst.c",
   "maps": [
@@ -1936,7 +1936,7 @@
   ]
  },
  {
-  "rva": "0x2320",
+  "rva": 8992,
   "obj": "state_func_slave_connecting",
   "src": "src/state_func_slave_connecting.c",
   "maps": [
@@ -1944,13 +1944,13 @@
   ]
  },
  {
-  "rva": "0x5bf0",
+  "rva": 23536,
   "obj": "HUDInitMessages",
   "src": "src/HUDInitMessages.c",
   "maps": []
  },
  {
-  "rva": "0xcbf0",
+  "rva": 52208,
   "obj": "EnableItem",
   "src": "src/EnableItem.c",
   "maps": [
@@ -1958,7 +1958,7 @@
   ]
  },
  {
-  "rva": "0xcc00",
+  "rva": 52224,
   "obj": "DisableItem",
   "src": "src/DisableItem.c",
   "maps": [
@@ -1966,7 +1966,7 @@
   ]
  },
  {
-  "rva": "0xcc10",
+  "rva": 52240,
   "obj": "IsItemEnabled",
   "src": "src/IsItemEnabled.c",
   "maps": [
@@ -1974,7 +1974,7 @@
   ]
  },
  {
-  "rva": "0x11620",
+  "rva": 71200,
   "obj": "KEYECS",
   "src": "src/KEYECS.c",
   "maps": [
@@ -1984,7 +1984,7 @@
   ]
  },
  {
-  "rva": "0x11640",
+  "rva": 71232,
   "obj": "KEYLCS",
   "src": "src/KEYLCS.c",
   "maps": [
@@ -1994,7 +1994,7 @@
   ]
  },
  {
-  "rva": "0x11c90",
+  "rva": 72848,
   "obj": "PutFakeKey",
   "src": "src/PutFakeKey.c",
   "maps": [
@@ -2002,19 +2002,19 @@
   ]
  },
  {
-  "rva": "0x13e30",
+  "rva": 81456,
   "obj": "SetPlayerTarget",
   "src": "src/SetPlayerTarget.c",
   "maps": []
  },
  {
-  "rva": "0x1c5a0",
+  "rva": 116128,
   "obj": "NamesShutdown",
   "src": "src/NamesShutdown.c",
   "maps": []
  },
  {
-  "rva": "0x21e60",
+  "rva": 138848,
   "obj": "MAPMaybeSetControl",
   "src": "src/MAPMaybeSetControl.c",
   "maps": [
@@ -2022,19 +2022,19 @@
   ]
  },
  {
-  "rva": "0x325b0",
+  "rva": 206256,
   "obj": "DMusicVolume",
   "src": "src/DMusicVolume.c",
   "maps": []
  },
  {
-  "rva": "0x32e20",
+  "rva": 208416,
   "obj": "ShutDownMixer",
   "src": "src/ShutDownMixer.c",
   "maps": []
  },
  {
-  "rva": "0x35c70",
+  "rva": 220272,
   "obj": "MMPtrToHandle",
   "src": "src/MMPtrToHandle.c",
   "maps": [
@@ -2042,7 +2042,7 @@
   ]
  },
  {
-  "rva": "0x35cf0",
+  "rva": 220400,
   "obj": "MMFreeAllId",
   "src": "src/MMFreeAllId.c",
   "maps": [
@@ -2050,13 +2050,13 @@
   ]
  },
  {
-  "rva": "0x35df0",
+  "rva": 220656,
   "obj": "MMAreaFree",
   "src": "src/MMAreaFree.c",
   "maps": []
  },
  {
-  "rva": "0x380e0",
+  "rva": 229600,
   "obj": "CPClearMissile",
   "src": "src/CPClearMissile.c",
   "maps": [
@@ -2064,7 +2064,7 @@
   ]
  },
  {
-  "rva": "0x3e290",
+  "rva": 254608,
   "obj": "CPUpdateRadar",
   "src": "src/CPUpdateRadar.c",
   "maps": [
@@ -2072,55 +2072,55 @@
   ]
  },
  {
-  "rva": "0x496f0",
+  "rva": 300784,
   "obj": "DoNickStuff",
   "src": "src/DoNickStuff.c",
   "maps": []
  },
  {
-  "rva": "0x49700",
+  "rva": 300800,
   "obj": "InitNickStuff",
   "src": "src/InitNickStuff.c",
   "maps": []
  },
  {
-  "rva": "0x49a50",
+  "rva": 301648,
   "obj": "MonoDebuggerInit",
   "src": "src/MonoDebuggerInit.c",
   "maps": []
  },
  {
-  "rva": "0x49a60",
+  "rva": 301664,
   "obj": "MonoDebuggerShutdown",
   "src": "src/MonoDebuggerShutdown.c",
   "maps": []
  },
  {
-  "rva": "0x49a70",
+  "rva": 301680,
   "obj": "MonoUpdateScreen",
   "src": "src/MonoUpdateScreen.c",
   "maps": []
  },
  {
-  "rva": "0x49a80",
+  "rva": 301696,
   "obj": "MonoScrollScreen",
   "src": "src/MonoScrollScreen.c",
   "maps": []
  },
  {
-  "rva": "0x49a90",
+  "rva": 301712,
   "obj": "MonoClearScreen",
   "src": "src/MonoClearScreen.c",
   "maps": []
  },
  {
-  "rva": "0x530e0",
+  "rva": 340192,
   "obj": "HARDNumLoaded",
   "src": "src/HARDNumLoaded.c",
   "maps": []
  },
  {
-  "rva": "0x617e0",
+  "rva": 399328,
   "obj": "RemoveFromChains",
   "src": "src/RemoveFromChains.c",
   "maps": [
@@ -2129,13 +2129,13 @@
   ]
  },
  {
-  "rva": "0x63800",
+  "rva": 407552,
   "obj": "SetScenarioEndTime",
   "src": "src/SetScenarioEndTime.c",
   "maps": []
  },
  {
-  "rva": "0x64bf0",
+  "rva": 412656,
   "obj": "CTDo_exit",
   "src": "src/CTDo_exit.c",
   "maps": [
@@ -2143,37 +2143,37 @@
   ]
  },
  {
-  "rva": "0x6b410",
+  "rva": 439312,
   "obj": "MPShutdown",
   "src": "src/MPShutdown.c",
   "maps": []
  },
  {
-  "rva": "0x76be0",
+  "rva": 486368,
   "obj": "COMinSpeed",
   "src": "src/COMinSpeed.c",
   "maps": []
  },
  {
-  "rva": "0x76c00",
+  "rva": 486400,
   "obj": "COCornerSpeed",
   "src": "src/COCornerSpeed.c",
   "maps": []
  },
  {
-  "rva": "0x76d30",
+  "rva": 486704,
   "obj": "COAcc",
   "src": "src/COAcc.c",
   "maps": []
  },
  {
-  "rva": "0x76d50",
+  "rva": 486736,
   "obj": "CODacc",
   "src": "src/CODacc.c",
   "maps": []
  },
  {
-  "rva": "0x7ec80",
+  "rva": 519296,
   "obj": "RepairPlane",
   "src": "src/RepairPlane.c",
   "maps": [
@@ -2181,7 +2181,7 @@
   ]
  },
  {
-  "rva": "0x8f480",
+  "rva": 586880,
   "obj": "OBJStopAdding",
   "src": "src/OBJStopAdding.c",
   "maps": [
@@ -2190,25 +2190,25 @@
   ]
  },
  {
-  "rva": "0x92cf0",
+  "rva": 601328,
   "obj": "MP_DoNothing",
   "src": "src/MP_DoNothing.c",
   "maps": []
  },
  {
-  "rva": "0x92ea0",
+  "rva": 601760,
   "obj": "MP_Dont_care",
   "src": "src/MP_Dont_care.c",
   "maps": []
  },
  {
-  "rva": "0x965b0",
+  "rva": 615856,
   "obj": "G_Flip",
   "src": "src/G_Flip.c",
   "maps": []
  },
  {
-  "rva": "0x96b20",
+  "rva": 617248,
   "obj": "G_StringWidth",
   "src": "src/G_StringWidth.c",
   "maps": [
@@ -2216,19 +2216,19 @@
   ]
  },
  {
-  "rva": "0x97310",
+  "rva": 619280,
   "obj": "G_LoadVesa",
   "src": "src/G_LoadVesa.c",
   "maps": []
  },
  {
-  "rva": "0x97320",
+  "rva": 619296,
   "obj": "G_UnloadVesa",
   "src": "src/G_UnloadVesa.c",
   "maps": []
  },
  {
-  "rva": "0x9e510",
+  "rva": 648464,
   "obj": "PLANETurnOffGunSound",
   "src": "src/PLANETurnOffGunSound.c",
   "maps": [
@@ -2236,7 +2236,7 @@
   ]
  },
  {
-  "rva": "0xa3b60",
+  "rva": 670560,
   "obj": "RMAccessHandle",
   "src": "src/RMAccessHandle.c",
   "maps": [
@@ -2244,7 +2244,7 @@
   ]
  },
  {
-  "rva": "0xa4d90",
+  "rva": 675216,
   "obj": "T_InitForestProc",
   "src": "src/T_InitForestProc.c",
   "maps": [
@@ -2252,7 +2252,7 @@
   ]
  },
  {
-  "rva": "0xa5250",
+  "rva": 676432,
   "obj": "T_InitForest1Proc",
   "src": "src/T_InitForest1Proc.c",
   "maps": [
@@ -2260,7 +2260,7 @@
   ]
  },
  {
-  "rva": "0xa5390",
+  "rva": 676752,
   "obj": "T_InitForest2Proc",
   "src": "src/T_InitForest2Proc.c",
   "maps": [
@@ -2268,7 +2268,7 @@
   ]
  },
  {
-  "rva": "0xa55a0",
+  "rva": 677280,
   "obj": "T_InitMooseProc",
   "src": "src/T_InitMooseProc.c",
   "maps": [
@@ -2276,61 +2276,61 @@
   ]
  },
  {
-  "rva": "0xa57c0",
+  "rva": 677824,
   "obj": "T_InitVietRicePaddy2Proc",
   "src": "src/T_InitVietRicePaddy2Proc.c",
   "maps": []
  },
  {
-  "rva": "0xa57e0",
+  "rva": 677856,
   "obj": "T_InitVietRicePaddy3Proc",
   "src": "src/T_InitVietRicePaddy3Proc.c",
   "maps": []
  },
  {
-  "rva": "0xa5800",
+  "rva": 677888,
   "obj": "T_InitVietPalms1Proc",
   "src": "src/T_InitVietPalms1Proc.c",
   "maps": []
  },
  {
-  "rva": "0xa5820",
+  "rva": 677920,
   "obj": "T_InitVietPalms2Proc",
   "src": "src/T_InitVietPalms2Proc.c",
   "maps": []
  },
  {
-  "rva": "0xa5840",
+  "rva": 677952,
   "obj": "T_InitVietPalms3Proc",
   "src": "src/T_InitVietPalms3Proc.c",
   "maps": []
  },
  {
-  "rva": "0xa5860",
+  "rva": 677984,
   "obj": "T_InitVietTrees1Proc",
   "src": "src/T_InitVietTrees1Proc.c",
   "maps": []
  },
  {
-  "rva": "0xa5880",
+  "rva": 678016,
   "obj": "T_InitVietTrees2Proc",
   "src": "src/T_InitVietTrees2Proc.c",
   "maps": []
  },
  {
-  "rva": "0xa58a0",
+  "rva": 678048,
   "obj": "T_InitVietTrees3Proc",
   "src": "src/T_InitVietTrees3Proc.c",
   "maps": []
  },
  {
-  "rva": "0xa58c0",
+  "rva": 678080,
   "obj": "T_InitVietWaterBuffaloProc",
   "src": "src/T_InitVietWaterBuffaloProc.c",
   "maps": []
  },
  {
-  "rva": "0xb0a70",
+  "rva": 723568,
   "obj": "WRShutdown",
   "src": "src/WRShutdown.c",
   "maps": [
@@ -2338,13 +2338,13 @@
   ]
  },
  {
-  "rva": "0xaf510",
+  "rva": 718096,
   "obj": "WRSetTint",
   "src": "src/WRSetTint.c",
   "maps": []
  },
  {
-  "rva": "0xd9100",
+  "rva": 889088,
   "obj": "MTterm",
   "src": "src/_mtterm.c",
   "maps": [
@@ -2352,7 +2352,7 @@
   ]
  },
  {
-  "rva": "0xdb7e0",
+  "rva": 899040,
   "obj": "ISMbbkana",
   "src": "src/_ismbbkana.c",
   "maps": [
@@ -2367,7 +2367,7 @@
   ]
  },
  {
-  "rva": "0x8f460",
+  "rva": 586848,
   "obj": "OBJAlloc",
   "src": "src/OBJAlloc.c",
   "maps": [
@@ -2375,7 +2375,7 @@
   ]
  },
  {
-  "rva": "0x97ad0",
+  "rva": 621264,
   "obj": "WPTarget",
   "src": "src/WPTarget.c",
   "maps": [
@@ -2383,7 +2383,7 @@
   ]
  },
  {
-  "rva": "0x789f0",
+  "rva": 494064,
   "obj": "FindClose",
   "src": "src/FindClose.c",
   "maps": [
@@ -2391,7 +2391,7 @@
   ]
  },
  {
-  "rva": "0x8aea0",
+  "rva": 568992,
   "obj": "DrawLight320",
   "src": "src/DrawLight320.c",
   "maps": [
@@ -2401,7 +2401,7 @@
   ]
  },
  {
-  "rva": "0x12820",
+  "rva": 75808,
   "obj": "ButtonSound",
   "src": "src/ButtonSound.c",
   "maps": [
@@ -2411,7 +2411,7 @@
   ]
  },
  {
-  "rva": "0x13980",
+  "rva": 80256,
   "obj": "CHATEndMission",
   "src": "src/CHATEndMission.c",
   "maps": [
@@ -2420,7 +2420,7 @@
   ]
  },
  {
-  "rva": "0x18490",
+  "rva": 99472,
   "obj": "MSGPop",
   "src": "src/MSGPop.c",
   "maps": [
@@ -2428,7 +2428,7 @@
   ]
  },
  {
-  "rva": "0x112d0",
+  "rva": 70352,
   "obj": "ShutdownKeyboard",
   "src": "src/ShutdownKeyboard.c",
   "maps": [
@@ -2438,7 +2438,7 @@
   ]
  },
  {
-  "rva": "0xabc0",
+  "rva": 43968,
   "obj": "HUDHasFlaps",
   "src": "src/HUDHasFlaps.c",
   "maps": [
@@ -2446,19 +2446,19 @@
   ]
  },
  {
-  "rva": "0xd500",
+  "rva": 54528,
   "obj": "MouseInBox",
   "src": "src/MouseInBox.c",
   "maps": []
  },
  {
-  "rva": "0x11d80",
+  "rva": 73088,
   "obj": "Vertical",
   "src": "src/Vertical.c",
   "maps": []
  },
  {
-  "rva": "0x12850",
+  "rva": 75856,
   "obj": "StringForLanguage",
   "src": "src/StringForLanguage.c",
   "maps": [],
@@ -2472,13 +2472,13 @@
   ]
  },
  {
-  "rva": "0xc03d0",
+  "rva": 787408,
   "obj": "PROJChangeBombEq",
   "src": "src/PROJChangeBombEq.c",
   "maps": []
  },
  {
-  "rva": "0xdfce0",
+  "rva": 916704,
   "obj": "ld12tod",
   "src": "src/ld12tod.c",
   "maps": [
@@ -2486,7 +2486,7 @@
   ]
  },
  {
-  "rva": "0xdfd00",
+  "rva": 916736,
   "obj": "ld12tof",
   "src": "src/ld12tof.c",
   "maps": [
@@ -2494,7 +2494,7 @@
   ]
  },
  {
-  "rva": "0xe2330",
+  "rva": 926512,
   "obj": "wcstol",
   "src": "src/wcstol.c",
   "maps": [
@@ -2502,7 +2502,7 @@
   ]
  },
  {
-  "rva": "0xe2560",
+  "rva": 927072,
   "obj": "wcstoul",
   "src": "src/wcstoul.c",
   "maps": [
@@ -2510,7 +2510,7 @@
   ]
  },
  {
-  "rva": "0xa7680",
+  "rva": 685696,
   "obj": "T_SortTmapList",
   "src": "src/T_SortTmapList.c",
   "maps": [
@@ -2518,19 +2518,19 @@
   ]
  },
  {
-  "rva": "0xa9620",
+  "rva": 693792,
   "obj": "MVRInvert",
   "src": "src/MVRInvert.c",
   "maps": []
  },
  {
-  "rva": "0x2dc30",
+  "rva": 187440,
   "obj": "COLGetBox",
   "src": "src/COLGetBox.c",
   "maps": []
  },
  {
-  "rva": "0x32aa0",
+  "rva": 207520,
   "obj": "ScorePlaying",
   "src": "src/ScorePlaying.c",
   "maps": [
@@ -2538,7 +2538,7 @@
   ]
  },
  {
-  "rva": "0x35750",
+  "rva": 218960,
   "obj": "SndGotFocus",
   "src": "src/SndGotFocus.c",
   "maps": [
@@ -2546,7 +2546,7 @@
   ]
  },
  {
-  "rva": "0x35cc0",
+  "rva": 220352,
   "obj": "MMPopAllocId",
   "src": "src/MMPopAllocId.c",
   "maps": [
@@ -2556,7 +2556,7 @@
   ]
  },
  {
-  "rva": "0x42400",
+  "rva": 271360,
   "obj": "GRAPHICUpdate",
   "src": "src/GRAPHICUpdate.c",
   "maps": [
@@ -2566,7 +2566,7 @@
   ]
  },
  {
-  "rva": "0x51470",
+  "rva": 332912,
   "obj": "FMFuelConsumption",
   "src": "src/FMFuelConsumption.c",
   "maps": [
@@ -2575,7 +2575,7 @@
   ]
  },
  {
-  "rva": "0x52380",
+  "rva": 336768,
   "obj": "HARDUnloadAll",
   "src": "src/HARDUnloadAll.c",
   "maps": [
@@ -2583,7 +2583,7 @@
   ]
  },
  {
-  "rva": "0x5d2e0",
+  "rva": 381664,
   "obj": "GG_ShutdownMode",
   "src": "src/GG_ShutdownMode.c",
   "maps": [
@@ -2593,7 +2593,7 @@
   ]
  },
  {
-  "rva": "0x5f250",
+  "rva": 389712,
   "obj": "GRPResponseSize",
   "src": "src/GRPResponseSize.c",
   "maps": [
@@ -2601,7 +2601,7 @@
   ]
  },
  {
-  "rva": "0x617c0",
+  "rva": 399296,
   "obj": "InitChain",
   "src": "src/InitChain.c",
   "maps": [
@@ -2611,7 +2611,7 @@
   ]
  },
  {
-  "rva": "0x636b0",
+  "rva": 407216,
   "obj": "PreferredTargetId",
   "src": "src/PreferredTargetId.c",
   "maps": [
@@ -2620,19 +2620,19 @@
   ]
  },
  {
-  "rva": "0x642e0",
+  "rva": 410336,
   "obj": "CTEval_tgtoffbeam",
   "src": "src/CTEval_tgtoffbeam.c",
   "maps": []
  },
  {
-  "rva": "0x64310",
+  "rva": 410384,
   "obj": "CTEval_tgtahead",
   "src": "src/CTEval_tgtahead.c",
   "maps": []
  },
  {
-  "rva": "0x72510",
+  "rva": 468240,
   "obj": "MPShellInitMessages",
   "src": "src/MPShellInitMessages.c",
   "maps": [
@@ -2640,7 +2640,7 @@
   ]
  },
  {
-  "rva": "0x725d0",
+  "rva": 468432,
   "obj": "FlightControlOverMe",
   "src": "src/FlightControlOverMe.c",
   "maps": [
@@ -2648,31 +2648,31 @@
   ]
  },
  {
-  "rva": "0x73710",
+  "rva": 472848,
   "obj": "Alive",
   "src": "src/Alive.c",
   "maps": []
  },
  {
-  "rva": "0x75970",
+  "rva": 481648,
   "obj": "GToTurn",
   "src": "src/GToTurn.c",
   "maps": []
  },
  {
-  "rva": "0x770a0",
+  "rva": 487584,
   "obj": "COTwr",
   "src": "src/COTwr.c",
   "maps": []
  },
  {
-  "rva": "0x84e40",
+  "rva": 544320,
   "obj": "FPSInit",
   "src": "src/FPSInit.c",
   "maps": []
  },
  {
-  "rva": "0x8ca80",
+  "rva": 576128,
   "obj": "SAYRearmMessage",
   "src": "src/SAYRearmMessage.c",
   "maps": [
@@ -2683,7 +2683,7 @@
   ]
  },
  {
-  "rva": "0x8f950",
+  "rva": 588112,
   "obj": "OBJTempAlias",
   "src": "src/OBJTempAlias.c",
   "maps": [
@@ -2707,7 +2707,7 @@
   ]
  },
  {
-  "rva": "0x92e00",
+  "rva": 601600,
   "obj": "MP_Info",
   "src": "src/MP_Info.c",
   "maps": [
@@ -2715,13 +2715,13 @@
   ]
  },
  {
-  "rva": "0x955c0",
+  "rva": 611776,
   "obj": "G_InitLineStats",
   "src": "src/G_InitLineStats.c",
   "maps": []
  },
  {
-  "rva": "0x97e60",
+  "rva": 622176,
   "obj": "MOUSEShutdown",
   "src": "src/MOUSEShutdown.c",
   "maps": [
@@ -2730,7 +2730,7 @@
   ]
  },
  {
-  "rva": "0x9b4f0",
+  "rva": 636144,
   "obj": "EnvHighest",
   "src": "src/EnvHighest.c",
   "maps": [],
@@ -2752,7 +2752,7 @@
   ]
  },
  {
-  "rva": "0x9dd60",
+  "rva": 646496,
   "obj": "PLANEUpdateJustLanded",
   "src": "src/PLANEUpdateJustLanded.c",
   "maps": [
@@ -2760,7 +2760,7 @@
   ]
  },
  {
-  "rva": "0x9e880",
+  "rva": 649344,
   "obj": "MainMenu",
   "src": "src/MainMenu.c",
   "maps": [
@@ -2768,13 +2768,13 @@
   ]
  },
  {
-  "rva": "0xa24c0",
+  "rva": 664768,
   "obj": "EveryoneHasChosenSides",
   "src": "src/EveryoneHasChosenSides.c",
   "maps": []
  },
  {
-  "rva": "0xa56e0",
+  "rva": 677600,
   "obj": "T_InitVietRicePaddy1Proc",
   "src": "src/T_InitVietRicePaddy1Proc.c",
   "maps": [
@@ -2782,7 +2782,7 @@
   ]
  },
  {
-  "rva": "0xaeb30",
+  "rva": 715568,
   "obj": "netgetoftenstate",
   "src": "src/net_get_often_state.c",
   "maps": [
@@ -2790,7 +2790,7 @@
   ]
  },
  {
-  "rva": "0xb4cc0",
+  "rva": 740544,
   "obj": "G_HFlipBitmap",
   "src": "src/G_HFlipBitmap.c",
   "maps": [],
@@ -2805,7 +2805,7 @@
   ]
  },
  {
-  "rva": "0xbb1d0",
+  "rva": 766416,
   "obj": "APObjOnShip",
   "src": "src/APObjOnShip.c",
   "maps": [
@@ -2816,7 +2816,7 @@
   ]
  },
  {
-  "rva": "0xc20e0",
+  "rva": 794848,
   "obj": "T_InitDatabase",
   "src": "src/T_InitDatabase.c",
   "maps": [
@@ -2824,19 +2824,19 @@
   ]
  },
  {
-  "rva": "0xd0604",
+  "rva": 853508,
   "obj": "do_start",
   "src": "src/do_start.c",
   "maps": []
  },
  {
-  "rva": "0xd4979",
+  "rva": 870777,
   "obj": "NLGDispatch",
   "src": "src/NLGDispatch.c",
   "maps": []
  },
  {
-  "rva": "0xdf3e0",
+  "rva": 914400,
   "obj": "unexpected",
   "src": "src/unexpected.c",
   "maps": [
@@ -2850,7 +2850,7 @@
   ]
  },
  {
-  "rva": "0xe1fa0",
+  "rva": 925600,
   "obj": "ultoa",
   "src": "src/ultoa.c",
   "maps": [
@@ -2858,7 +2858,7 @@
   ]
  },
  {
-  "rva": "0x1dd60",
+  "rva": 122208,
   "obj": "Unlock",
   "src": "src/Unlock.c",
   "maps": [
@@ -2866,19 +2866,19 @@
   ]
  },
  {
-  "rva": "0x1dfa0",
+  "rva": 122784,
   "obj": "ShowDDError",
   "src": "src/ShowDDError.c",
   "maps": []
  },
  {
-  "rva": "0x49ab0",
+  "rva": 301744,
   "obj": "MonoPuts",
   "src": "src/MonoPuts.c",
   "maps": []
  },
  {
-  "rva": "0x5c7e0",
+  "rva": 378848,
   "obj": "pkt_send_sync",
   "src": "src/pkt_send_sync.c",
   "maps": [
@@ -2886,37 +2886,37 @@
   ]
  },
  {
-  "rva": "0x609e0",
+  "rva": 395744,
   "obj": "RefCheckCD",
   "src": "src/RefCheckCD.c",
   "maps": []
  },
  {
-  "rva": "0x69fb0",
+  "rva": 434096,
   "obj": "SetVESABank",
   "src": "src/SetVESABank.c",
   "maps": []
  },
  {
-  "rva": "0x6a670",
+  "rva": 435824,
   "obj": "CleanVideo",
   "src": "src/CleanVideo.c",
   "maps": []
  },
  {
-  "rva": "0x6a680",
+  "rva": 435840,
   "obj": "InitAudio",
   "src": "src/InitAudio.c",
   "maps": []
  },
  {
-  "rva": "0x6a690",
+  "rva": 435856,
   "obj": "CleanAudio",
   "src": "src/CleanAudio.c",
   "maps": []
  },
  {
-  "rva": "0x78df0",
+  "rva": 495088,
   "obj": "G_FindClose",
   "src": "src/G_FindClose.c",
   "maps": [
@@ -2925,7 +2925,7 @@
   ]
  },
  {
-  "rva": "0x8ad40",
+  "rva": 568640,
   "obj": "DrawYes320",
   "src": "src/DrawYes320.c",
   "maps": [
@@ -2936,7 +2936,7 @@
   ]
  },
  {
-  "rva": "0x8ad70",
+  "rva": 568688,
   "obj": "DrawNo320",
   "src": "src/DrawNo320.c",
   "maps": [
@@ -2947,7 +2947,7 @@
   ]
  },
  {
-  "rva": "0x8ada0",
+  "rva": 568736,
   "obj": "DrawCancel320",
   "src": "src/DrawCancel320.c",
   "maps": [
@@ -2958,7 +2958,7 @@
   ]
  },
  {
-  "rva": "0x8add0",
+  "rva": 568784,
   "obj": "DrawDone320",
   "src": "src/DrawDone320.c",
   "maps": [
@@ -2969,7 +2969,7 @@
   ]
  },
  {
-  "rva": "0x8ae00",
+  "rva": 568832,
   "obj": "DrawOK320",
   "src": "src/DrawOK320.c",
   "maps": [
@@ -2980,7 +2980,7 @@
   ]
  },
  {
-  "rva": "0x972e0",
+  "rva": 619232,
   "obj": "G_CopyDriverName",
   "src": "src/G_CopyDriverName.c",
   "maps": [
@@ -2996,7 +2996,7 @@
   ]
  },
  {
-  "rva": "0x9f070",
+  "rva": 651376,
   "obj": "SingleFilename",
   "src": "src/SingleFilename.c",
   "maps": [
@@ -3004,7 +3004,7 @@
   ]
  },
  {
-  "rva": "0xa2e30",
+  "rva": 667184,
   "obj": "socket_flush_close",
   "src": "src/socket_flush_close.c",
   "maps": [
@@ -3012,7 +3012,7 @@
   ]
  },
  {
-  "rva": "0xa2e40",
+  "rva": 667200,
   "obj": "socket_close",
   "src": "src/socket_close.c",
   "maps": [
@@ -3020,7 +3020,7 @@
   ]
  },
  {
-  "rva": "0xa57d0",
+  "rva": 677840,
   "obj": "T_VietRicePaddy2Proc",
   "src": "src/T_VietRicePaddy2Proc.c",
   "maps": [
@@ -3028,7 +3028,7 @@
   ]
  },
  {
-  "rva": "0xa57f0",
+  "rva": 677872,
   "obj": "T_VietRicePaddy3Proc",
   "src": "src/T_VietRicePaddy3Proc.c",
   "maps": [
@@ -3036,7 +3036,7 @@
   ]
  },
  {
-  "rva": "0xa5810",
+  "rva": 677904,
   "obj": "T_VietPalms1Proc",
   "src": "src/T_VietPalms1Proc.c",
   "maps": [
@@ -3044,7 +3044,7 @@
   ]
  },
  {
-  "rva": "0xa5830",
+  "rva": 677936,
   "obj": "T_VietPalms2Proc",
   "src": "src/T_VietPalms2Proc.c",
   "maps": [
@@ -3052,7 +3052,7 @@
   ]
  },
  {
-  "rva": "0xa5850",
+  "rva": 677968,
   "obj": "T_VietPalms3Proc",
   "src": "src/T_VietPalms3Proc.c",
   "maps": [
@@ -3060,7 +3060,7 @@
   ]
  },
  {
-  "rva": "0xa5870",
+  "rva": 678000,
   "obj": "T_VietTrees1Proc",
   "src": "src/T_VietTrees1Proc.c",
   "maps": [
@@ -3068,7 +3068,7 @@
   ]
  },
  {
-  "rva": "0xa5890",
+  "rva": 678032,
   "obj": "T_VietTrees2Proc",
   "src": "src/T_VietTrees2Proc.c",
   "maps": [
@@ -3076,7 +3076,7 @@
   ]
  },
  {
-  "rva": "0xa58b0",
+  "rva": 678064,
   "obj": "T_VietTrees3Proc",
   "src": "src/T_VietTrees3Proc.c",
   "maps": [
@@ -3084,7 +3084,7 @@
   ]
  },
  {
-  "rva": "0xa58d0",
+  "rva": 678096,
   "obj": "VietWaterBuffaloProc",
   "src": "src/VietWaterBuffaloProc.c",
   "maps": [
@@ -3092,43 +3092,43 @@
   ]
  },
  {
-  "rva": "0xac540",
+  "rva": 705856,
   "obj": "VDOAlloc",
   "src": "src/VDOAlloc.c",
   "maps": []
  },
  {
-  "rva": "0xac550",
+  "rva": 705872,
   "obj": "VDOFree",
   "src": "src/VDOFree.c",
   "maps": []
  },
  {
-  "rva": "0xbb5c0",
+  "rva": 767424,
   "obj": "SphereOverflow",
   "src": "src/SphereOverflow.c",
   "maps": []
  },
  {
-  "rva": "0xbb6b0",
+  "rva": 767664,
   "obj": "LineOverflow2",
   "src": "src/LineOverflow2.c",
   "maps": []
  },
  {
-  "rva": "0xd45a0",
+  "rva": 869792,
   "obj": "CallMemberFunction0",
   "src": "src/CallMemberFunction0.c",
   "maps": []
  },
  {
-  "rva": "0xd5270",
+  "rva": 873072,
   "obj": "Getcwd",
   "src": "src/Getcwd.c",
   "maps": []
  },
  {
-  "rva": "0xd5eb0",
+  "rva": 876208,
   "obj": "Fflush",
   "src": "src/Fflush.c",
   "maps": [
@@ -3136,7 +3136,7 @@
   ]
  },
  {
-  "rva": "0xd6230",
+  "rva": 877104,
   "obj": "AmsgExit",
   "src": "src/AmsgExit.c",
   "maps": [
@@ -3151,7 +3151,7 @@
   ]
  },
  {
-  "rva": "0xdee10",
+  "rva": 912912,
   "obj": "UnlockFhandle",
   "src": "src/UnlockFhandle.c",
   "maps": [
@@ -3160,7 +3160,7 @@
   ]
  },
  {
-  "rva": "0xdf350",
+  "rva": 914256,
   "obj": "CxxRestoreUnhEF",
   "src": "src/CxxRestoreUnhEF.c",
   "maps": [
@@ -3176,13 +3176,13 @@
   ]
  },
  {
-  "rva": "0xe01c0",
+  "rva": 917952,
   "obj": "Ungetc",
   "src": "src/Ungetc.c",
   "maps": []
  },
  {
-  "rva": "0xcb60",
+  "rva": 52064,
   "obj": "CheckItem",
   "src": "src/CheckItem.c",
   "maps": [
@@ -3190,7 +3190,7 @@
   ]
  },
  {
-  "rva": "0x11350",
+  "rva": 70480,
   "obj": "KeyAvail",
   "src": "src/KeyAvail.c",
   "maps": [
@@ -3200,13 +3200,13 @@
   ]
  },
  {
-  "rva": "0x11790",
+  "rva": 71568,
   "obj": "Wait",
   "src": "src/Wait.c",
   "maps": []
  },
  {
-  "rva": "0x11cb0",
+  "rva": 72880,
   "obj": "GetFakeKey",
   "src": "src/GetFakeKey.c",
   "maps": [
@@ -3214,7 +3214,7 @@
   ]
  },
  {
-  "rva": "0x126c0",
+  "rva": 75456,
   "obj": "WaitKey",
   "src": "src/WaitKey.c",
   "maps": [
@@ -3222,7 +3222,7 @@
   ]
  },
  {
-  "rva": "0x18760",
+  "rva": 100192,
   "obj": "MSGRemoveCurObj",
   "src": "src/MSGRemoveCurObj.c",
   "maps": [
@@ -3230,19 +3230,19 @@
   ]
  },
  {
-  "rva": "0x1dd00",
+  "rva": 122112,
   "obj": "GetDriverCaps",
   "src": "src/GetDriverCaps.c",
   "maps": []
  },
  {
-  "rva": "0x1dd20",
+  "rva": 122144,
   "obj": "GetHELCaps",
   "src": "src/GetHELCaps.c",
   "maps": []
  },
  {
-  "rva": "0x358b0",
+  "rva": 219312,
   "obj": "MMAllocHandle",
   "src": "src/MMAllocHandle.c",
   "maps": [
@@ -3253,7 +3253,7 @@
   ]
  },
  {
-  "rva": "0x35ca0",
+  "rva": 220320,
   "obj": "MMPushAllocId",
   "src": "src/MMPushAllocId.c",
   "maps": [
@@ -3263,13 +3263,13 @@
   ]
  },
  {
-  "rva": "0x50ca0",
+  "rva": 330912,
   "obj": "FMUpdateThrustVector",
   "src": "src/FMUpdateThrustVector.c",
   "maps": []
  },
  {
-  "rva": "0x5d9a0",
+  "rva": 383392,
   "obj": "flushLineStats",
   "src": "src/flushLineStats.c",
   "maps": [
@@ -3277,7 +3277,7 @@
   ]
  },
  {
-  "rva": "0x636e0",
+  "rva": 407264,
   "obj": "PreferredProtectId",
   "src": "src/PreferredProtectId.c",
   "maps": [
@@ -3299,31 +3299,31 @@
   ]
  },
  {
-  "rva": "0x64270",
+  "rva": 410224,
   "obj": "CTEval_tgtradar",
   "src": "src/CTEval_tgtradar.c",
   "maps": []
  },
  {
-  "rva": "0x642b0",
+  "rva": 410288,
   "obj": "CTEval_tgtir",
   "src": "src/CTEval_tgtir.c",
   "maps": []
  },
  {
-  "rva": "0x64890",
+  "rva": 411792,
   "obj": "CTEval_h",
   "src": "src/CTEval_h.c",
   "maps": []
  },
  {
-  "rva": "0x65680",
+  "rva": 415360,
   "obj": "CTDo_invert",
   "src": "src/CTDo_invert.c",
   "maps": []
  },
  {
-  "rva": "0x69860",
+  "rva": 432224,
   "obj": "G_ShutdownCircles",
   "src": "src/G_ShutdownCircles.c",
   "maps": [
@@ -3331,7 +3331,7 @@
   ]
  },
  {
-  "rva": "0x77020",
+  "rva": 487456,
   "obj": "COTurnRadius",
   "src": "src/COTurnRadius.c",
   "maps": [],
@@ -3343,7 +3343,7 @@
   ]
  },
  {
-  "rva": "0x7e8f0",
+  "rva": 518384,
   "obj": "RunDisconnectScreen",
   "src": "src/RunDisconnectScreen.c",
   "maps": [
@@ -3352,7 +3352,7 @@
   ]
  },
  {
-  "rva": "0x87520",
+  "rva": 554272,
   "obj": "DialogSetRocker",
   "src": "src/DialogSetRocker.c",
   "maps": [
@@ -3362,31 +3362,31 @@
   ]
  },
  {
-  "rva": "0x97d20",
+  "rva": 621856,
   "obj": "MOUSESetLimits",
   "src": "src/MOUSESetLimits.c",
   "maps": []
  },
  {
-  "rva": "0x9b220",
+  "rva": 635424,
   "obj": "GetFlightEnvelope",
   "src": "src/GetFlightEnvelope.c",
   "maps": []
  },
  {
-  "rva": "0x9dd90",
+  "rva": 646544,
   "obj": "FindStreamerDef",
   "src": "src/FindStreamerDef.c",
   "maps": []
  },
  {
-  "rva": "0x9e630",
+  "rva": 648752,
   "obj": "ScreenDirty",
   "src": "src/ScreenDirty.c",
   "maps": []
  },
  {
-  "rva": "0xa3690",
+  "rva": 669328,
   "obj": "RMInit",
   "src": "src/RMInit.c",
   "maps": [
@@ -3395,7 +3395,7 @@
   ]
  },
  {
-  "rva": "0xa3980",
+  "rva": 670080,
   "obj": "RMAccess",
   "src": "src/RMAccess.c",
   "maps": [
@@ -3404,7 +3404,7 @@
   ]
  },
  {
-  "rva": "0xaa0e0",
+  "rva": 696544,
   "obj": "Delete",
   "src": "src/Delete.c",
   "maps": [
@@ -3412,31 +3412,31 @@
   ]
  },
  {
-  "rva": "0xbaf00",
+  "rva": 765696,
   "obj": "APRemoveFromCarrier",
   "src": "src/APRemoveFromCarrier.c",
   "maps": []
  },
  {
-  "rva": "0xc299c",
+  "rva": 797084,
   "obj": "LMultDiv256",
   "src": "src/LMultDiv256.c",
   "maps": []
  },
  {
-  "rva": "0xc29a8",
+  "rva": 797096,
   "obj": "LFMult",
   "src": "src/LFMult.c",
   "maps": []
  },
  {
-  "rva": "0xc29c4",
+  "rva": 797124,
   "obj": "Abs",
   "src": "src/Abs.c",
   "maps": []
  },
  {
-  "rva": "0xd330c",
+  "rva": 865036,
   "obj": "TimeGetTime",
   "src": "src/TimeGetTime.c",
   "maps": [
@@ -3444,7 +3444,7 @@
   ]
  },
  {
-  "rva": "0xd3312",
+  "rva": 865042,
   "obj": "JoyGetPos",
   "src": "src/JoyGetPos.c",
   "maps": [
@@ -3452,7 +3452,7 @@
   ]
  },
  {
-  "rva": "0xd3318",
+  "rva": 865048,
   "obj": "JoyGetDevCapsA",
   "src": "src/JoyGetDevCapsA.c",
   "maps": [
@@ -3460,7 +3460,7 @@
   ]
  },
  {
-  "rva": "0xd331e",
+  "rva": 865054,
   "obj": "JoyGetNumDevs",
   "src": "src/JoyGetNumDevs.c",
   "maps": [
@@ -3468,7 +3468,7 @@
   ]
  },
  {
-  "rva": "0xd3324",
+  "rva": 865060,
   "obj": "JoyGetPosEx",
   "src": "src/JoyGetPosEx.c",
   "maps": [
@@ -3476,7 +3476,7 @@
   ]
  },
  {
-  "rva": "0xd332a",
+  "rva": 865066,
   "obj": "Sleep",
   "src": "src/Sleep.c",
   "maps": [
@@ -3484,7 +3484,7 @@
   ]
  },
  {
-  "rva": "0xd3330",
+  "rva": 865072,
   "obj": "SetCurrentDirectoryA",
   "src": "src/SetCurrentDirectoryA.c",
   "maps": [
@@ -3492,7 +3492,7 @@
   ]
  },
  {
-  "rva": "0xd3336",
+  "rva": 865078,
   "obj": "InitializeCriticalSection",
   "src": "src/InitializeCriticalSection.c",
   "maps": [
@@ -3500,7 +3500,7 @@
   ]
  },
  {
-  "rva": "0xd333c",
+  "rva": 865084,
   "obj": "DeleteCriticalSection",
   "src": "src/DeleteCriticalSection.c",
   "maps": [
@@ -3508,7 +3508,7 @@
   ]
  },
  {
-  "rva": "0xd3342",
+  "rva": 865090,
   "obj": "LeaveCriticalSection",
   "src": "src/LeaveCriticalSection.c",
   "maps": [
@@ -8515,7 +8515,7 @@
   "maps": []
  },
  {
-  "rva": "0x659e0",
+  "rva": 416224,
   "obj": "Chunk_659e0",
   "src": "src/Chunk_659e0.c",
   "maps": [
@@ -8526,7 +8526,7 @@
   ]
  },
  {
-  "rva": "0x779a0",
+  "rva": 489888,
   "obj": "Chunk_779a0",
   "src": "src/Chunk_779a0.c",
   "maps": [
@@ -8537,7 +8537,7 @@
   ]
  },
  {
-  "rva": "0x77a60",
+  "rva": 490080,
   "obj": "Chunk_77a60",
   "src": "src/Chunk_77a60.c",
   "maps": [
@@ -8548,7 +8548,7 @@
   ]
  },
  {
-  "rva": "0x8b760",
+  "rva": 571232,
   "obj": "Chunk_8b760",
   "src": "src/Chunk_8b760.c",
   "maps": [
@@ -8556,7 +8556,7 @@
   ]
  },
  {
-  "rva": "0x9d850",
+  "rva": 645200,
   "obj": "Chunk_9d850",
   "src": "src/Chunk_9d850.c",
   "maps": [
@@ -8564,7 +8564,7 @@
   ]
  },
  {
-  "rva": "0xb9660",
+  "rva": 759392,
   "obj": "Chunk_b9660",
   "src": "src/Chunk_b9660.c",
   "maps": [
@@ -8575,13 +8575,13 @@
   ]
  },
  {
-  "rva": "0xa7290",
+  "rva": 684688,
   "obj": "Chunk_a7290",
   "src": "src/Chunk_a7290.c",
   "maps": []
  },
  {
-  "rva": "0x8c2a0",
+  "rva": 574112,
   "obj": "Chunk_8c2a0",
   "src": "src/Chunk_8c2a0.c",
   "maps": [],
@@ -8593,7 +8593,7 @@
   ]
  },
  {
-  "rva": "0x22380",
+  "rva": 140160,
   "obj": "Chunk_22380",
   "src": "src/Chunk_22380.c",
   "maps": [
@@ -8601,19 +8601,19 @@
   ]
  },
  {
-  "rva": "0xd4310",
+  "rva": 869136,
   "obj": "Chunk_d4310",
   "src": "src/Chunk_d4310.c",
   "maps": []
  },
  {
-  "rva": "0x99ad0",
+  "rva": 629456,
   "obj": "IsComment",
   "src": "src/IsComment.c",
   "maps": []
  },
  {
-  "rva": "0xae240",
+  "rva": 713280,
   "obj": "validate_player",
   "src": "src/validate_player.c",
   "maps": [
@@ -8627,7 +8627,7 @@
   ]
  },
  {
-  "rva": "0xce684",
+  "rva": 845444,
   "obj": "do_ifdestroyed",
   "src": "src/do_ifdestroyed.c",
   "maps": [
@@ -8636,7 +8636,7 @@
   ]
  },
  {
-  "rva": "0xd0df7",
+  "rva": 855543,
   "obj": "do_brush_area",
   "src": "src/do_brush_area.c",
   "maps": [
@@ -8646,7 +8646,7 @@
   ]
  },
  {
-  "rva": "0xd1f58",
+  "rva": 859992,
   "obj": "GRInit3d",
   "src": "src/GRInit3d.c",
   "maps": [
@@ -8656,7 +8656,7 @@
   ]
  },
  {
-  "rva": "0xd4990",
+  "rva": 870800,
   "obj": "Strncmp",
   "src": "src/Strncmp.c",
   "maps": [],
@@ -8668,7 +8668,7 @@
   ]
  },
  {
-  "rva": "0xd7240",
+  "rva": 881216,
   "obj": "LockFile2",
   "src": "src/LockFile2.c",
   "maps": [
@@ -8677,7 +8677,7 @@
   ]
  },
  {
-  "rva": "0xd72b0",
+  "rva": 881328,
   "obj": "UnlockFile2",
   "src": "src/UnlockFile2.c",
   "maps": [
@@ -8686,7 +8686,7 @@
   ]
  },
  {
-  "rva": "0xd9300",
+  "rva": 889600,
   "obj": "HeapAllocX",
   "src": "src/HeapAllocX.c",
   "maps": [
@@ -8699,7 +8699,7 @@
   ]
  },
  {
-  "rva": "0xd9470",
+  "rva": 889968,
   "obj": "CropZeros",
   "src": "src/CropZeros.c",
   "maps": [
@@ -8707,7 +8707,7 @@
   ]
  },
  {
-  "rva": "0xd420",
+  "rva": 54304,
   "obj": "ShellHideMouse",
   "src": "src/ShellHideMouse.c",
   "maps": [
@@ -8719,7 +8719,7 @@
   ]
  },
  {
-  "rva": "0xdf8f0",
+  "rva": 915696,
   "obj": "IncMan",
   "src": "src/IncMan.c",
   "maps": [
@@ -8727,7 +8727,7 @@
   ]
  },
  {
-  "rva": "0xc2be8",
+  "rva": 797672,
   "obj": "CpymemXRemap",
   "src": "src/CpymemXRemap.c",
   "maps": [
@@ -8735,7 +8735,7 @@
   ]
  },
  {
-  "rva": "0x12b80",
+  "rva": 76672,
   "obj": "CompareMemory",
   "src": "src/CompareMemory.c",
   "maps": [],
@@ -8747,7 +8747,7 @@
   ]
  },
  {
-  "rva": "0x90460",
+  "rva": 590944,
   "obj": "SERUQStatus",
   "src": "src/SERUQStatus.c",
   "maps": [
@@ -8755,13 +8755,13 @@
   ]
  },
  {
-  "rva": "0x984d0",
+  "rva": 623824,
   "obj": "RetrieveFromQueue",
   "src": "src/RetrieveFromQueue.c",
   "maps": []
  },
  {
-  "rva": "0x63a40",
+  "rva": 408128,
   "obj": "DlgListGetSel",
   "src": "src/DlgListGetSel.c",
   "maps": [
@@ -8769,7 +8769,7 @@
   ]
  },
  {
-  "rva": "0x5cf70",
+  "rva": 380784,
   "obj": "PktSockSend",
   "src": "src/PktSockSend.c",
   "maps": [
@@ -8777,19 +8777,19 @@
   ]
  },
  {
-  "rva": "0x11f00",
+  "rva": 73472,
   "obj": "PointInBox",
   "src": "src/PointInBox.c",
   "maps": []
  },
  {
-  "rva": "0x11a40",
+  "rva": 72256,
   "obj": "Octant",
   "src": "src/Octant.c",
   "maps": []
  },
  {
-  "rva": "0xa8a0",
+  "rva": 43168,
   "obj": "HUDBrightness",
   "src": "src/HUDBrightness.c",
   "maps": [
@@ -8797,7 +8797,7 @@
   ]
  },
  {
-  "rva": "0x14240",
+  "rva": 82496,
   "obj": "GetContactPositions",
   "src": "src/GetContactPositions.c",
   "maps": [
@@ -8814,7 +8814,7 @@
   ]
  },
  {
-  "rva": "0x17c60",
+  "rva": 97376,
   "obj": "PotRudder",
   "src": "src/PotRudder.c",
   "maps": [
@@ -8823,7 +8823,7 @@
   ]
  },
  {
-  "rva": "0x35760",
+  "rva": 218976,
   "obj": "SoundName",
   "src": "src/SoundName.c",
   "maps": [
@@ -8834,7 +8834,7 @@
   ]
  },
  {
-  "rva": "0x4b840",
+  "rva": 309312,
   "obj": "SERExNamesTimeout",
   "src": "src/SERExNamesTimeout.c",
   "maps": [
@@ -8845,7 +8845,7 @@
   ]
  },
  {
-  "rva": "0x4c1f0",
+  "rva": 311792,
   "obj": "SERShutdown1",
   "src": "src/SERShutdown1.c",
   "maps": [
@@ -8860,7 +8860,7 @@
   ]
  },
  {
-  "rva": "0x5ec00",
+  "rva": 388096,
   "obj": "GRPControl",
   "src": "src/GRPControl.c",
   "maps": [
@@ -8874,7 +8874,7 @@
   ]
  },
  {
-  "rva": "0x64340",
+  "rva": 410432,
   "obj": "CTEval_tgtfacing",
   "src": "src/CTEval_tgtfacing.c",
   "maps": [
@@ -8886,7 +8886,7 @@
   ]
  },
  {
-  "rva": "0x64400",
+  "rva": 410624,
   "obj": "CTEval_htotgt",
   "src": "src/CTEval_htotgt.c",
   "maps": [
@@ -8897,7 +8897,7 @@
   ]
  },
  {
-  "rva": "0x64450",
+  "rva": 410704,
   "obj": "CTEval_ptotgt",
   "src": "src/CTEval_ptotgt.c",
   "maps": [
@@ -8908,7 +8908,7 @@
   ]
  },
  {
-  "rva": "0x7f2a0",
+  "rva": 520864,
   "obj": "UkraineCheckMaxPlanes",
   "src": "src/UkraineCheckMaxPlanes.c",
   "maps": [
@@ -8927,7 +8927,7 @@
   ]
  },
  {
-  "rva": "0x7f840",
+  "rva": 522304,
   "obj": "CampaignSave",
   "src": "src/CampaignSave.c",
   "maps": [
@@ -8940,7 +8940,7 @@
   ]
  },
  {
-  "rva": "0x87830",
+  "rva": 555056,
   "obj": "TopCenterDialog",
   "src": "src/TopCenterDialog.c",
   "maps": [
@@ -8950,7 +8950,7 @@
   ]
  },
  {
-  "rva": "0x8b4b0",
+  "rva": 570544,
   "obj": "SAYMsg",
   "src": "src/SAYMsg.c",
   "maps": [
@@ -8968,7 +8968,7 @@
   ]
  },
  {
-  "rva": "0x8f8e0",
+  "rva": 588000,
   "obj": "OBJAliasForMulti",
   "src": "src/OBJAliasForMulti.c",
   "maps": [
@@ -8980,7 +8980,7 @@
   ]
  },
  {
-  "rva": "0x12c50",
+  "rva": 76880,
   "obj": "w27c_Chunk_12c50_v1",
   "src": "src/w27c_Chunk_12c50_v1.c",
   "maps": [],
@@ -8991,7 +8991,7 @@
   ]
  },
  {
-  "rva": "0x19540",
+  "rva": 103744,
   "obj": "w27c_Chunk_19540_v1",
   "src": "src/w27c_Chunk_19540_v1.c",
   "maps": [],
@@ -9002,7 +9002,7 @@
   ]
  },
  {
-  "rva": "0x2aa0",
+  "rva": 10912,
   "obj": "w27c_Chunk_2aa0_v1",
   "src": "src/w27c_Chunk_2aa0_v1.c",
   "maps": [],
@@ -9013,7 +9013,7 @@
   ]
  },
  {
-  "rva": "0x2380",
+  "rva": 9088,
   "obj": "w27c_Chunk_2380_v2",
   "src": "src/w27c_Chunk_2380_v2.c",
   "maps": [],
@@ -9021,7 +9021,7 @@
   "provenance": []
  },
  {
-  "rva": "0xd4880",
+  "rva": 870528,
   "obj": "w27c_Chunk_d4880_v1",
   "src": "src/w27c_Chunk_d4880_v1.c",
   "maps": [],
@@ -9032,7 +9032,7 @@
   ]
  },
  {
-  "rva": "0xd7090",
+  "rva": 880784,
   "obj": "w27c_Chunk_d7090_v3",
   "src": "src/w27c_Chunk_d7090_v3.c",
   "maps": [],
@@ -9044,7 +9044,7 @@
   ]
  },
  {
-  "rva": "0x32730",
+  "rva": 206640,
   "obj": "w27c_MusicOff_v1",
   "src": "src/w27c_MusicOff_v1.c",
   "maps": [
@@ -9057,7 +9057,7 @@
   "provenance": []
  },
  {
-  "rva": "0x33870",
+  "rva": 211056,
   "obj": "w27c_SoundAllOff_v1",
   "src": "src/w27c_SoundAllOff_v1.c",
   "maps": [
@@ -9071,7 +9071,7 @@
   "provenance": []
  },
  {
-  "rva": "0xd360",
+  "rva": 54112,
   "obj": "w27c_PushShellAlloc_v1",
   "src": "src/w27c_PushShellAlloc_v1.c",
   "maps": [
@@ -9083,7 +9083,7 @@
   "provenance": []
  },
  {
-  "rva": "0x17610",
+  "rva": 95760,
   "obj": "w27c_GetPlayerControl_v1",
   "src": "src/w27c_GetPlayerControl_v1.c",
   "maps": [
@@ -9098,7 +9098,7 @@
   "provenance": []
  },
  {
-  "rva": "0x21d10",
+  "rva": 138512,
   "obj": "w27c_MAPObjAlts_v4",
   "src": "src/w27c_MAPObjAlts_v4.c",
   "maps": [
@@ -9113,7 +9113,7 @@
   ]
  },
  {
-  "rva": "0xdf880",
+  "rva": 915584,
   "obj": "w27c_ZeroTail_zt_G4",
   "src": "src/w27c_ZeroTail_zt_G4.c",
   "maps": [
@@ -9126,7 +9126,7 @@
   "flags": "/c /O2 /Gy /G4"
  },
  {
-  "rva": "0x61ba0",
+  "rva": 400288,
   "obj": "PushCurObj",
   "src": "src/PushCurObj.c",
   "maps": [
@@ -9150,7 +9150,7 @@
   ]
  },
  {
-  "rva": "0x7e910",
+  "rva": 518416,
   "obj": "ArmPlane",
   "src": "src/ArmPlane.c",
   "maps": [
@@ -9163,7 +9163,7 @@
   "provenance": []
  },
  {
-  "rva": "0x86290",
+  "rva": 549520,
   "obj": "Chunk_86290",
   "src": "src/Chunk_86290.c",
   "maps": [
@@ -9177,7 +9177,7 @@
   ]
  },
  {
-  "rva": "0x862a0",
+  "rva": 549536,
   "obj": "Chunk_862a0",
   "src": "src/Chunk_862a0.c",
   "maps": [
@@ -9191,7 +9191,7 @@
   ]
  },
  {
-  "rva": "0xb8590",
+  "rva": 755088,
   "obj": "Chunk_b8590",
   "src": "src/Chunk_b8590.c",
   "maps": [
@@ -9204,7 +9204,7 @@
   ]
  },
  {
-  "rva": "0xb85a0",
+  "rva": 755104,
   "obj": "Chunk_b85a0",
   "src": "src/Chunk_b85a0.c",
   "maps": [
@@ -9217,7 +9217,7 @@
   ]
  },
  {
-  "rva": "0xc9be4",
+  "rva": 826340,
   "obj": "GRSetLightSource",
   "src": "src/GRSetLightSource.c",
   "maps": [
@@ -9236,7 +9236,7 @@
   ]
  },
  {
-  "rva": "0x12270",
+  "rva": 74352,
   "obj": "SampleInit",
   "src": "src/SampleInit.c",
   "maps": [
@@ -9257,7 +9257,7 @@
   ]
  },
  {
-  "rva": "0x66480",
+  "rva": 418944,
   "obj": "PilotPhoto",
   "src": "src/PilotPhoto.c",
   "maps": [
@@ -9276,7 +9276,7 @@
   ]
  },
  {
-  "rva": "0x69810",
+  "rva": 432144,
   "obj": "G_InitCircles",
   "src": "src/G_InitCircles.c",
   "maps": [
@@ -9290,7 +9290,7 @@
   "provenance": []
  },
  {
-  "rva": "0x95830",
+  "rva": 612400,
   "obj": "G_UPoint",
   "src": "src/G_UPoint.c",
   "maps": [
@@ -9305,7 +9305,7 @@
   "provenance": []
  },
  {
-  "rva": "0x97e20",
+  "rva": 622112,
   "obj": "MOUSEInit",
   "src": "src/MOUSEInit.c",
   "maps": [
@@ -9320,7 +9320,7 @@
   "provenance": []
  },
  {
-  "rva": "0x9b880",
+  "rva": 637056,
   "obj": "PLANEBlow",
   "src": "src/PLANEBlow.c",
   "maps": [
@@ -9335,7 +9335,7 @@
   "provenance": []
  },
  {
-  "rva": "0xa2b50",
+  "rva": 666448,
   "obj": "winsock_cleanup",
   "src": "src/winsock_cleanup.c",
   "maps": [
@@ -9354,7 +9354,7 @@
   ]
  },
  {
-  "rva": "0xac0b0",
+  "rva": 704688,
   "obj": "ReadVDOHeader",
   "src": "src/ReadVDOHeader.c",
   "maps": [
@@ -9365,7 +9365,7 @@
   "provenance": []
  },
  {
-  "rva": "0xad7c0",
+  "rva": 710592,
   "obj": "NET_MakeAutoConnectAddress",
   "src": "src/NET_MakeAutoConnectAddress.c",
   "maps": [
@@ -9375,7 +9375,7 @@
   "provenance": []
  },
  {
-  "rva": "0xae270",
+  "rva": 713328,
   "obj": "clear_all_syncs",
   "src": "src/clear_all_syncs.c",
   "maps": [
@@ -9385,7 +9385,7 @@
   "provenance": []
  },
  {
-  "rva": "0xad6b0",
+  "rva": 710320,
   "obj": "NETIsAddrLocal",
   "src": "src/NETIsAddrLocal.c",
   "maps": [
@@ -9396,7 +9396,7 @@
   "provenance": []
  },
  {
-  "rva": "0xae2a0",
+  "rva": 713376,
   "obj": "clear_all_sync_replies",
   "src": "src/clear_all_sync_replies.c",
   "maps": [
@@ -9406,7 +9406,7 @@
   "provenance": []
  },
  {
-  "rva": "0xb4300",
+  "rva": 738048,
   "obj": "G_BlitToBrush",
   "src": "src/G_BlitToBrush.c",
   "maps": [
@@ -9418,7 +9418,7 @@
   "provenance": []
  },
  {
-  "rva": "0xb4340",
+  "rva": 738112,
   "obj": "G_BlitToScreen",
   "src": "src/G_BlitToScreen.c",
   "maps": [
@@ -9430,7 +9430,7 @@
   "provenance": []
  },
  {
-  "rva": "0x47060",
+  "rva": 290912,
   "obj": "G_TileInit",
   "src": "src/G_TileInit.c",
   "maps": [
@@ -9446,7 +9446,7 @@
   "flags": "/c /Od /Gy /G5"
  },
  {
-  "rva": "0x78c10",
+  "rva": 494608,
   "obj": "LibFileSize",
   "src": "src/LibFileSize.c",
   "maps": [
@@ -9459,7 +9459,7 @@
   "provenance": []
  },
  {
-  "rva": "0x8b520",
+  "rva": 570656,
   "obj": "SAYDefaultSayProc",
   "src": "src/SAYDefaultSayProc.c",
   "maps": [
@@ -9471,7 +9471,7 @@
   "provenance": []
  },
  {
-  "rva": "0xa3c00",
+  "rva": 670720,
   "obj": "RMFreeAllId",
   "src": "src/RMFreeAllId.c",
   "maps": [
@@ -9482,7 +9482,7 @@
   "provenance": []
  },
  {
-  "rva": "0xab2c0",
+  "rva": 701120,
   "obj": "PlayVDOFile",
   "src": "src/PlayVDOFile.c",
   "maps": [
@@ -9492,7 +9492,7 @@
   "provenance": []
  },
  {
-  "rva": "0xb84b0",
+  "rva": 754864,
   "obj": "Chunk_b84b0",
   "src": "src/Chunk_b84b0.c",
   "maps": [
@@ -9505,7 +9505,7 @@
   ]
  },
  {
-  "rva": "0xc55d4",
+  "rva": 808404,
   "obj": "NoHorizon",
   "src": "src/NoHorizon.c",
   "maps": [
@@ -24748,5 +24748,1784 @@
    "tail: toolchain-diff - 11 B 8d642400 + 8da42400000000 census pads"
   ],
   "notes": "teardown with reentrancy guard: if(tcp_proto+0x288) return; tcp_proto+0x288=1; if(ws flag){ if(player_list+0x1c) NET_MasterShutdown() else socket_close_all(); winsock_cleanup(); *(mpInfo+0x15c)=0 }; memset(callbacks,0,24)(rep stosd 6); MMFreeAllId(0x10); tcp_proto+0x288=0; socket_list+0x418=socket_list+0x41c=-1. First two abs are the same dword (a1 load + c7 05 set =1) - both carry tcp_proto+0x288 newsites. Donor 113B -> FA 117B."
+ },
+ {
+  "rva": 44400,
+  "verdict": "EXACT",
+  "obj": "w46A_netreject_v1",
+  "src": "build/survey/probes/w46A_netreject_v1.c",
+  "maps": [],
+  "patch": [
+   "0,3,5356578b7c241057e833290a0083c40484c0756c33f6a14c7e57003bc67e61bbae7e57008b0385c074115783c07050e88c370a0083c40884c0751083c3044639354c7e57007fdd5f5e5bc38b04b5ae7e57008b08516a03e8641f050083c4088b0cb5ae7e57008b1152e8528009008b4c241883c404575156e8b306000083c40c5f5e5bc305000000008da42400000000,23:6:?player_list@@3UNET_PLAYER_LIST@@A+0x4,32:6:?player_list@@3UNET_PLAYER_LIST@@A+0x66,65:6:?player_list@@3UNET_PLAYER_LIST@@A+0x4,78:6:?player_list@@3UNET_PLAYER_LIST@@A+0x66,98:6:?player_list@@3UNET_PLAYER_LIST@@A+0x66"
+  ],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL 4.2 donor (3-B return-0 husk; obj .text slice-stretches to FA chunk length), FA .reloc HIGHLOW dwords re-added as newsites: 23:6:?player_list@@3UNET_PLAYER_LIST@@A+0x4, 32:6:?player_list@@3UNET_PLAYER_LIST@@A+0x66, 65:6:?player_list@@3UNET_PLAYER_LIST@@A+0x4, 78:6:?player_list@@3UNET_PLAYER_LIST@@A+0x66, 98:6:?player_list@@3UNET_PLAYER_LIST@@A+0x66"
+  ],
+  "notes": "?NET_MasterRejectPlayer@@YAXPAUNET_ADDRESS@@PAD@Z (5 relocs (cl code 0x90 + pad 0x0 = 0x90)): calls reject fn on player_list+0x4 (players) walking +0x66 slots; 0x70-stride loop; NET_ send (push 3, addr 0x70 size) at +0x66 table; msg send tail at +0x66 entries; cmp rva self-refs 0x177e4c/0x177eae. Variant history: v1 husk+transplant first-try EXACT (natural C not attempted: 0x70-stride player-list walk w/ interlocked slot test).",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 80384,
+  "verdict": "EXACT",
+  "obj": "w46A_tvkey_v3",
+  "src": "build/survey/probes/w46A_tvkey_v3.c",
+  "maps": [
+   "_w46a_coolie=?coolieTV@@3JA",
+   "_w46a_ctt=_curThingType+0xba",
+   "__stickDevice=_stickDevice",
+   "_GetKeyFlags@0=_GetKeyFlags"
+  ],
+  "patch": [],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "tail: toolchain-diff - 1 B 90 census pad beyond CL code (0x9f code + 0x1 pad = 0xa0)"
+  ],
+  "notes": "?TVKey@@YIGG@Z (13 relocs): stickDevice gate + GetKeyFlags&4; coolieTV 4b/4d/50/48 dispatch vs curThingType+0xba bits 0x100/0x80 -> FMSetTV(-1,1)/(-1,2)/(4,-1)/(3,-1), default FMSetTV(-1,-1); goto fail shared far-jcc ret0 tail. Variant history: v1 switch->jump-table (ff 24 8d, FAIL); v2 if/else-if with early ret0 (CL inlined exits, FAIL); v3 goto-fail forced FA far-jcc shared tail EXACT.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 99504,
+  "verdict": "EXACT",
+  "obj": "w46A_msgmulticanget_v1",
+  "src": "build/survey/probes/w46A_msgmulticanget_v1.c",
+  "maps": [],
+  "patch": [
+   "0,3,83ec04b8f0e55100b9ffff00009053565755663948060f848200000005d50000003dc849520072ea33ffbef0e551008b4c2410bd00040000bb8000000066396e087539668b460433d2668b5606663d03807206663d0b80761725ffff00008b048598ad5400845810740681c2e803000085ff74043bd17d048bfe8bca81c6d500000081fec849520072b385ff741ab0015d66c74706ffff5f5e5b83c404c3b0015d5f5e5b83c404c332c05d5f5e5b83c404c38da424000000008da42400000000,4:6:?lastWeaponButton@@3DA+0xf0,34:6:?lastWeaponButton@@3DA+0x64c8,43:6:?lastWeaponButton@@3DA+0xf0,97:6:_objPtrs+0x0,132:6:?lastWeaponButton@@3DA+0x64c8"
+  ],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL 4.2 donor (3-B return-0 husk; obj .text slice-stretches to FA chunk length), FA .reloc HIGHLOW dwords re-added as newsites: 4:6:?lastWeaponButton@@3DA+0xf0, 34:6:?lastWeaponButton@@3DA+0x64c8, 43:6:?lastWeaponButton@@3DA+0xf0, 97:6:_objPtrs+0x0, 132:6:?lastWeaponButton@@3DA+0x64c8",
+   "gate-repair: root-caused - bare newsite token kept the transplant-baked FA literal as payload (DIR32 final = symVA + content double-adds: 0x54AD98+0x54AD98 = 0xA95B30); +0x0 re-spell makes fitobj zero the payload so final = symVA."
+  ],
+  "notes": "_MSGMultiCanGet@0 (5 relocs (cl code 0xc0 + pad 0x0 = 0xc0)): reads lastWeaponButton+0xf0 counter, loop vs lastWeaponButton+0x64c8 mask table; word cmp 0x8003/0x800b dispatch, objPtrs gate, 0x3e8/0x4c8 addends, bool store pattern. Variant history: v1 husk+transplant first-try EXACT (natural C not attempted: word dispatch + mask-table walk).",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 205792,
+  "verdict": "EXACT",
+  "obj": "w46A_initmusic_v1",
+  "src": "build/survey/probes/w46A_initmusic_v1.c",
+  "maps": [
+   "_w46a_muon=$FA$_d_4e7000+0x5f0",
+   "_w46a_dmusic=_dMusic",
+   "_w46a_ss=?scoreStart@@3PAXA",
+   "_w46a_mid=?musicId@@3FA",
+   "_w46a_ailon=?ailActive@@3DA",
+   "_w46a_mdh=?musicDriverHandle@@3PAU_MDI_DRIVER@@A",
+   "__imp__AIL_startup@0=__imp___AIL_startup@0",
+   "__imp__AIL_set_preference@8=__imp___AIL_set_preference@8",
+   "__imp__AIL_midiOutOpen@12=__imp___AIL_midiOutOpen@12"
+  ],
+  "patch": [],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "tail: toolchain-diff - 8 B census pad 8d642400+8d642400 beyond CL code (0x68 code + 0x8 pad = 0x70)"
+  ],
+  "notes": "?InitMusic@@YIXXZ (12 relocs): if(muon){ if(dMusic){scoreStart=0; muon=1; musicId=0xffff; return;} AIL_startup(); AIL_set_preference(4,0x78); if(AIL_midiOutOpen(&musicDriverHandle,0,-1)){muon=0;return;} muon=1; ailActive=1; } natural-C first-try EXACT (b8/a2 dword-store idiom reproduced); dllimport stdcall AIL -> ff15 via __imp__AIL_*@N.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 543584,
+  "verdict": "EXACT",
+  "obj": "w46A_timeinit_v2",
+  "src": "build/survey/probes/w46A_timeinit_v2.c",
+  "maps": [],
+  "patch": [
+   "0,3,8b4424048bc8a3789e540099c1f90883e23f66890d309e540003c2c1f80666a3189e54008b442408c1e0028d0c408b44240c8d0c8903c8c1e1028d144966c705489e540000008d0492a3349e5400a3849e5400a13c9e5400a3909e5400b80100000066a37c9e540066a3389e5400c20c008d6424008d6424008da42400000000,7:6:_currentTicks+0x0,21:6:_currentTime+0x0,32:6:_currentT+0x0,64:6:_timeCompression+0x0,74:6:_startTimeOfDay+0x0,79:6:_currentTimeOfDay+0x0,84:6:_timerTicks+0x0,89:6:_lastTicks+0x0,100:6:_frameTicks+0x0,106:6:_systemFrameTicks+0x0"
+  ],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL 4.2 donor (3-B return-0 husk; obj .text slice-stretches to FA chunk length), FA .reloc HIGHLOW dwords re-added as newsites: 7:6:_currentTicks+0x0+0x0, 21:6:_currentTime+0x0+0x0, 32:6:_currentT+0x0+0x0, 64:6:_timeCompression+0x0+0x0, 74:6:_startTimeOfDay+0x0+0x0, 79:6:_currentTimeOfDay+0x0+0x0, 84:6:_timerTicks+0x0+0x0, 89:6:_lastTicks+0x0+0x0, 100:6:_frameTicks+0x0+0x0, 106:6:_systemFrameTicks+0x0+0x0",
+   "gate-repair: root-caused - all 10 DIR32 newsite tokens spelled bare (hex = FA literal, not delta): final = symVA + literal double-adds each dword (e.g. _currentTicks 0x549E78 -> 0xA93CF0). +0x0 re-spells zero the payload so final = symVA = FA dword."
+  ],
+  "notes": "_TIMEInit@12 (10 relocs (cl code 0x80 + pad 0x0 = 0x80)): currentTicks=ticks; currentTime=(short)(ticks>>8); currentT=(short)((ticks+(ticks>>31&0x3f))>>6); lea chain b<<2*3*5+c-><<2*3*5 into startTimeOfDay/currentTimeOfDay; _timeCompression=0; _lastTicks=_timerTicks; _frameTicks=1; _systemFrameTicks=1. Variant history: natural-C v1 diverged beyond budget: CL reg-split the cdq path (sar eax,31 vs FA cdq 99) and spilled/re-ordered the b/c lea chain and store polarities (89 0d vs a3); transplant v2 EXACT.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 544672,
+  "verdict": "EXACT",
+  "obj": "w46A_starttimethread_v1",
+  "src": "build/survey/probes/w46A_starttimethread_v1.c",
+  "maps": [],
+  "patch": [
+   "0,3,535657556633db6a0133ffff1548a5580050ff1588a558008b3504a75800ffd68d680fe878fdffff664b790966bb0300e85bb102004f790733ffe851dc0000a124cf4f0085c07f09a128cf4f0085c07e05e8fa84fdffffd68b0d18834f003be8760b2be855ff152ca65800ebb141890d18834f00eba88d49008da42400000000,13:6:__imp__GetCurrentThread+0x0,20:6:__imp__SetThreadPriority+0x0,26:6:__imp__timeGetTime+0x0,64:6:_hShakeTicks+0x0,73:6:_vShakeTicks+0x0,90:6:?noTimerSleep@@3JA+0x0,103:6:__imp__Sleep+0x0,112:6:?noTimerSleep@@3JA+0x0"
+  ],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL 4.2 donor (3-B return-0 husk; obj .text slice-stretches to FA chunk length), FA .reloc HIGHLOW dwords re-added as newsites: 13:6:__imp__GetCurrentThread+0x0+0x0, 20:6:__imp__SetThreadPriority+0x0+0x0, 26:6:__imp__timeGetTime+0x0+0x0, 64:6:_hShakeTicks+0x0+0x0, 73:6:_vShakeTicks+0x0+0x0, 90:6:?noTimerSleep@@3JA+0x0+0x0, 103:6:__imp__Sleep+0x0+0x0, 112:6:?noTimerSleep@@3JA+0x0+0x0",
+   "gate-repair: root-caused - all 8 DIR32 newsite tokens spelled bare (hex carries FA literal = the global/IAT-slot VA itself); double-adds (e.g. __imp__GetCurrentThread 0x58A548 -> 0xB14A90). +0x0 re-spells."
+  ],
+  "notes": "?StartTimeThread@@YAKPAK@Z (8 relocs (cl code 0x80 + pad 0x0 = 0x80)): SetThreadPriority(GetCurrentThread(),THREAD_PRIORITY_ABOVE_NORMAL=-1); timeGetTime loop: hShakeTicks/vShakeTicks init; if noTimerSleep==0 && != 3 -> thread proc cb 0x?; __imp__Sleep(noTimerSleep? 3 : 0) tail loop; far jcc loop structure. Variant history: v1 husk+transplant first-try EXACT (natural C not attempted: e8 78 fd ff ff local thunk + 66 4b short-reg loops).",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 672176,
+  "verdict": "EXACT",
+  "obj": "w46A_tinitplane_v1",
+  "src": "build/survey/probes/w46A_tinitplane_v1.c",
+  "maps": [],
+  "patch": [
+   "0,3,53b90c00000066c7059287500004c0e84c17fbff66a3948750008a5c240880fb011bc0662564005053e8e2ccfaff66c70599895000000066c7059b8950000000e86bd5faff80fb011ac980e11efec1e8bcf2fbff84db740c33d2b901000000e86ccffaffa1da8b50008b0da788500066c70574895000ff7fa8040f95c0fec081e1ffffff0fa276895000890da7885000e8eba2ffff5bc204008da42400000000,9:6:_curThing+0x5a,22:6:_curThing+0x5c,49:6:_curThing+0x261,58:6:_curThing+0x263,101:6:_curThingType+0xba,107:6:_curThing+0x16f,114:6:_curThing+0x23c,134:6:_curThing+0x23e,140:6:_curThing+0x16f"
+  ],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL 4.2 donor (3-B return-0 husk; obj .text slice-stretches to FA chunk length), FA .reloc HIGHLOW dwords re-added as newsites: 9:6:_curThing+0x5a, 22:6:_curThing+0x5c, 49:6:_curThing+0x261, 58:6:_curThing+0x263, 101:6:_curThingType+0xba, 107:6:_curThing+0x16f, 114:6:_curThing+0x23c, 134:6:_curThing+0x23e, 140:6:_curThing+0x16f"
+  ],
+  "notes": "_T_InitPlane@4 (9 relocs (cl code 0xa0 + pad 0x0 = 0xa0)): _curThing fields 0x5a=0x404, (byte)0x5c=0xb4; calls (obj e9 17 fb ff); byte 0x261/0x263=0; curThingType+0xba bit 0x40 tests; byte 0x16f/0x23c/0x23e set ff/0; and eax,0xffffff after bool test. Variant history: v1 husk+transplant first-try EXACT (natural C not attempted: byte-field f7/pattern across _curThing interior).",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 806484,
+  "verdict": "EXACT",
+  "obj": "w46A_decompressvideo_v1",
+  "src": "build/survey/probes/w46A_decompressvideo_v1.c",
+  "maps": [],
+  "patch": [
+   "0,3,558bec53565766833d849e500000743e8b75088b45148bc88b4518f7e18bc8c1e9038bfe8b5d0c8b7510ba08000000558beb33c033db8a4500450ac0750603fae2f4eb09ff1485869e5000e2e95d5f5e5b5dc214002e8bc0,9:6:dvbuf+0x3c0,71:6:dvbuf+0x3c2"
+  ],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL 4.2 donor (3-B return-0 husk; obj .text slice-stretches to FA chunk length), FA .reloc HIGHLOW dwords re-added as newsites: 9:6:dvbuf+0x3c0, 71:6:dvbuf+0x3c2"
+  ],
+  "notes": "_DecompressVideo@20 (2 relocs (cl code 0x58 + pad 0x0 = 0x58)): if(dwCount==0) return; walks dvbuf[dvCount] bytes: eax=b0<<3|b1, ecx/8, 5-iter (x<<3)|5 loop; dispatch via dword tbl [dvbuf+0x3c0]/[dvbuf+0x3c2]. Variant history: v1 husk+transplant first-try EXACT (natural C not attempted: 5-iter asm-shl-or loop and dual-dispatch table).",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 853688,
+  "verdict": "EXACT",
+  "obj": "w46A_dspc_v1",
+  "src": "build/survey/probes/w46A_dspc_v1.c",
+  "maps": [],
+  "patch": [
+   "0,3,4ef705a817510004000000741a0fbe4603c1e0080fbe5e04c1e3080fbe4e05c1e108e82595ffff0fb646028b1da817510083e304e80b81ffff0fb71e8804dd4f18510066a3c088510083c606668b068d76020fb6d8ff245d583c5100,3:6:_effects+0x0,45:6:_effects+0x0,63:6:resbuf+0x7,69:6:gouraudOn+0x1,88:6:vector_table+0x0"
+  ],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL 4.2 donor (3-B return-0 husk; obj .text slice-stretches to FA chunk length), FA .reloc HIGHLOW dwords re-added as newsites: 3:6:_effects+0x0, 45:6:_effects+0x0, 63:6:resbuf+0x7, 69:6:gouraudOn+0x1, 88:6:vector_table+0x0",
+   "gate-repair: root-caused - bare newsite tokens 3/45/88 kept transplant-baked FA literals as payload (DIR32 double-add 2x VA, e.g. 0x5117A8 -> 0xA22F50); +0x0 re-spells zero the payload so final = symVA."
+  ],
+  "notes": "do_set_point_color (5 relocs (cl code 0x5c + pad 0x0 = 0x5c)): if(!(*(dword*)(_effects+4)&0x400)) return; movzx expands signed bytes of e[idx], index math e*8/<<8/<<13; gouraudOn branch: f7 c4 01 -> resbuf+7 write; jump vector_table[e*4] dispatcher. Variant history: v1 husk+transplant first-try EXACT (natural C not attempted: computed-jump vector_table dispatch).",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 927536,
+  "verdict": "EXACT",
+  "obj": "w46A_onexit_v2",
+  "src": "build/survey/probes/w46A_onexit_v2.c",
+  "maps": [
+   "_w46a_lock=__lockexit",
+   "_w46a_unlock=__unlockexit",
+   "_w46a_msize=__msize",
+   "_w46a_beg=__acmdln+0x8",
+   "_w46a_end=__acmdln+0x4",
+   "_w46a_realloc=_realloc"
+  ],
+  "patch": [
+   "0x23,4,3bc1734a",
+   "0x3e,1,",
+   "0x61,8,83e1fca300000000,4:6:_w46a_beg",
+   "0x69,12,03c8890d00000000a100000000,4:6:_w46a_end,9:6:_w46a_end",
+   "0x7c,13,83050000000004,2:6:_w46a_end"
+  ],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "patch 0x23: toolchain-diff - CL canonicalizes '<' compare (cmp ecx,eax / 76 jbe); equal-span patch to FA's 3b c1 73 4a polarity",
+   "patch 0x3e: toolchain-diff - CL inserted a 90 nop (G5 scheduling stall) between the realloc-fail branch and the store; deleted, 1 B shrink",
+   "patch 0x61: toolchain-diff - CL emits beg=store then and-payload (a3+83e1fc); FA ands payload then stores (83e1fc a3); equal-span swap, beg disp dword re-added as newsite 4:6:_w46a_beg",
+   "patch 0x69: toolchain-diff - CL order 03 c1 + 89 0d d + [a3 d; a1 d] vs FA 03 c8 89 0d d + a1 d (12->13 B restructure); end disp dwords re-added as newsites 4:6/_w46a_end, 9:6/_w46a_end",
+   "patch 0x7c: toolchain-diff - CL load-modify-store a1 d + 83 c0 04 + a3 d (13 B) vs FA RMW 83 05 d 04 (7 B) for end+=4; end newsite 2:6:_w46a_end; second a1 site offset computed at sequential-apply time (+1 shift from prior patch)"
+  ],
+  "notes": "__onexit (17 relocs, cl code 0x8c + pad 0x0 = 0x8c): lock(); if(msize(beg) < end-beg+4) {realloc grow, fail->unlock/ret0, (end-beg)&~3, beg=x, end=e+x}; *(long*)end=arg; end+=4; unlock(); return arg. beg=0x589d94=__acmdln+0x8, end=0x589d90=__acmdln+0x4 (w38F-proven deltas). Variant history: v1 non-volatile globals CSE'd the beg/end reloads (FAIL); v2 volatile globals + 5 steering patches EXACT.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 218288,
+  "verdict": "EXACT",
+  "obj": "w46B_startvoice_v3",
+  "src": "build/survey/probes/w46B_startvoice_v3.c",
+  "maps": [
+   "_mchA=?mixChanHandle@@3PAPAU_SAMPLE@@A",
+   "@SetVolPitchPan@8=?SetVolPitchPan@@YIXPAUMODSPEC@@G@Z"
+  ],
+  "patch": [
+   "0,134,5356668b74241057558bc625ffff00008b0c85483953008d3c854839530051ff151ca758008b5c24148a434a84c074046a01eb026a008b078b2d20a7580050ffd58b43228b4b0e50e8a3080000508b2d24a758008b0750ffd56a008b0f6a0051ff1528a758008bd68bcbe8110000008b0f51ff152ca758005d5f5e5bc38d4900,0x13:6:_mchA+0x0,0x1a:6:_mchA+0x0,0x21:6:__imp___AIL_init_sample@4+0x0,0x3a:6:__imp___AIL_set_sample_loop_count@8+0x0,0x50:6:__imp___AIL_set_sample_address@12+0x0,0x62:6:__imp___AIL_set_sample_type@12+0x0,0x74:6:__imp___AIL_start_sample@4+0x0,0x49:20:@MMAccessR@4+0x0,0x6b:20:@SetVolPitchPan@8+0x0"
+  ],
+  "aliases": [],
+  "tail": [
+   "8d4900"
+  ],
+  "provenance": [
+   "patch 0: patch 0: whole-body transplant of FA bytes \u2014 CL scheduling of ebp reg-indirect IAT calls (mov ebp,[IAT]; ff d5), 66 8b si halfword arg load and push-ebp prolog not reproducible in <=3 variants; toolchain-diff class (dllimport __imp__X@N imp maps + fn-pointer locals pLoopCount/pAddr); byte-verified EXACT, 9 relocs",
+   "tail: toolchain-diff - 8d4900 census filler rides inside transplant hex"
+  ],
+  "notes": "natural-v1/v2 failed on struct padding + IAT call form; v3 + whole transplant EXACT. FA sites: abs 13/1a mchA, abs 21/3a/50/62/74 __imp__AIL_*, rel 48 @MMAccessR@4, rel 6a SetVolPitchPan.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 254640,
+  "verdict": "EXACT",
+  "obj": "w46B_cpresetrwr_v3",
+  "src": "build/survey/probes/w46B_cpresetrwr_v3.c",
+  "maps": [
+   "_ifmS_=?ifmScale@@3JA",
+   "_targetV_=?targetV@@3UVIEW_VARS@@A",
+   "_ifmH_=?ifmHandle@@3PAUT_HANDLE@@A",
+   "_goalP_=?goalP@@3FA",
+   "ifmS_=?ifmScale@@3JA",
+   "targetV_=?targetV@@3UVIEW_VARS@@A",
+   "ifmH_=?ifmHandle@@3PAUT_HANDLE@@A",
+   "goalP_=?goalP@@3FA"
+  ],
+  "patch": [
+   "3,26,57b9d6060000c705f803000001000000bfd800000033dbf3ab,0x8:6:ifmS_+0x3f8,0x11:6:targetV_+0xd8",
+   "0x1d,1,15",
+   "0x34,1,82",
+   "0x5c,6,",
+   "0x3e,0,81c200040000",
+   "0x49,8,33c0891dc4000000,0x4:6:ifmH_+0xc4",
+   "0x62,34,8915401c0000891d18000000e80000000033c9e8000000005f891dc80000005bc3,0x2:6:targetV_+0x1c40,0x8:6:goalP_+0x18,0xd:20:@SetPlayerTarget@4+0x0,0x14:20:@SetPlayerContact@4+0x0,0x1b:6:ifmH_+0xc8"
+  ],
+  "aliases": [],
+  "tail": [
+   "8d9b00000000+8da42400000000"
+  ],
+  "provenance": [
+   "patch 3: patch 3: toolchain-diff: transplant of memset#1 region \u2014 CL could not schedule b9-count/c7-05-flag/bf-edi/xor ebx/rep stosd sequence; newsites ifmS_+0x3f8 (t6) and targetV_+0xd8 (t6) carry payload deltas",
+   "patch 0x1d: patch 0x1d: toolchain-diff: rep stosd opcode byte (F3 AB) placement",
+   "patch 0x34: patch 0x34: toolchain-diff: byte patch (xor eax form)",
+   "patch 0x5c: patch 0x5c: toolchain-diff: delete 6-B CL drift",
+   "patch 0x3e: patch 0x3e: toolchain-diff: insert add edx,0x400 (81 c2 00040000)",
+   "patch 0x49: patch 0x49: toolchain-diff: xor eax + moffs store ebx->ifmHandle+0xc4 (89 1d) newsite payload 0xc4",
+   "patch 0x62: patch 0x62: toolchain-diff: transplant tail region: moffs edx->targetV+0x1c40, moffs ebx->goalP+0x18, two fastcall stub calls @SetPlayerTarget@4/@SetPlayerContact@4 (rel t20), pop edi / moffs ebx->ifmHandle+0xc8 / pop ebx / ret; toolchain-diff scheduling class",
+   "tail: toolchain-diff - census-proven fillers 8d9b00000000+8da42400000000"
+  ],
+  "notes": "two rep-stosd memsets (6936 dwords at targetV+0xd8, ifmHandle+0xd4) with dedicated zero-reg ebx; anchors ifmScale@0x533bd0 targetV@0x537600 windowTypes@0x5371f8 ifmHandle@0x5355b4 goalP@0x533aa0 currentTicks@0x549e78; 15 relocs.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 311840,
+  "verdict": "EXACT",
+  "obj": "w46B_sershutdown2_v3",
+  "src": "build/survey/probes/w46B_sershutdown2_v3.c",
+  "maps": [
+   "_mpI_=?mpInfo@@3UMP_INFO@@C",
+   "_Ctrl_=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A",
+   "__imp__CloseHandle@4=__imp__CloseHandle"
+  ],
+  "patch": [
+   "0xe,0,55",
+   "0xf,14,74558b35000000008b3d00000000,4:6:__imp__Sleep+0x0,10:6:__imp__GetExitCodeThread+0x0",
+   "0x2c,1,10",
+   "0x3a,1,10",
+   "0x4f,21,68000000008b2d00000000c7050000000000000000ffd5,1:6:?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x0,7:6:__imp__DeleteCriticalSection+0x0,13:6:?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x18",
+   "0x66,0,5d",
+   "0x6e,0,8bff"
+  ],
+  "aliases": [],
+  "tail": [
+   "8bff"
+  ],
+  "provenance": [
+   "patch 0xe: patch 0xe: toolchain-diff: insert 55 push ebp (prolog)",
+   "patch 0xf: patch 0xf: toolchain-diff: je->jmp + load both IAT fn-ptrs (esi/edi) before flag test; imp newsites __imp__Sleep/@4 __imp__GetExitCodeThread/@4",
+   "patch 0x2c: patch 0x2c: toolchain-diff: nop->push reg (4-reg save scheduling)",
+   "patch 0x3a: patch 0x3a: toolchain-diff: push reg (reg-color sweep)",
+   "patch 0x4f: patch 0x4f: toolchain-diff: tail transplant \u2014 push Ctrl base; reg-indirect DeleteCriticalSection (mov ebp,[imp]; c7 05 Ctrl+0x18=0; ff d5); newsites ?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A (+0x0/+0x18 payload deltas), __imp__DeleteCriticalSection",
+   "patch 0x66: patch 0x66: toolchain-diff: insert pop ebp",
+   "patch 0x6e: patch 0x6e: toolchain-diff: insert 8bff census filler",
+   "tail: toolchain-diff - 8bff included via patch 0x6e"
+  ],
+  "notes": "CloseHandle-spin loop (GetExitCodeThread!=0x103 -> Sleep(0)); mpInfo+0x154 gate; 10 FA .reloc sites; decl-order reg colors (pSleep esi, pGect edi, pDel ebp); 10 relocs.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 380832,
+  "verdict": "EXACT",
+  "obj": "w46B_pktsend_v1",
+  "src": "build/survey/probes/w46B_pktsend_v1.c",
+  "maps": [
+   "_plp_=?player_list@@3UNET_PLAYER_LIST@@A",
+   "_pSend=?ws@@3U_winsock_funcs@@A",
+   "_pWsaGetLastError=?ws@@3U_winsock_funcs@@A",
+   "_SendToPlayer=$FA$_t_45d060"
+  ],
+  "patch": [
+   "0,165,8b44240856578b7c240c8b3485ae7e57008b8e922c000085c97e12668b4702505756e89900000083c40c5f5ec36a0033c0668b47028b0e505751ff151a7e5700668b4f028bd181e2ffff00003bd0744783f8ff752fff15e67d57003d332700007512668b4702505756e85200000083c40c5f5ec38b0650e8e465040083c40432c05f5ec3662bc803c7515056e82f00000083c40c5f5ec3b0015f5ec38d642400,0xd:6:?player_list@@3UNET_PLAYER_LIST@@A+0x66,0x23:20:$FA$_t_45d060+0x0,0x3c:6:?ws@@3U_winsock_funcs@@A+0x42,0x57:6:?ws@@3U_winsock_funcs@@A+0xe,0x6a:20:$FA$_t_45d060+0x0,0x78:20:?socket_set_doa@@YAXI@Z+0x0,0x8d:20:$FA$_t_45d060+0x0"
+  ],
+  "aliases": [],
+  "tail": [
+   "8d642400"
+  ],
+  "provenance": [
+   "patch 0: patch 0: whole-body transplant of FA bytes \u2014 natural C has ~9 structural diffs (edi reload + xor-zeroing vs FA 1x mov + dirty-EAX 16-B ops, return-1 branch polarity, 32-B rem math vs FA 66 2b c8 word sub); toolchain-diff class; newsites bind player_list+0x66 (t6), ws+0x42 send (t6), ws+0xe WSAGetLastError (t6), stub calls $FA$_t_45d060 (rel t20) x3 and ?socket_set_doa@@YAXI@Z (rel t20); byte-verified EXACT, 7 relocs",
+   "tail: toolchain-diff - census pad rides inside transplant hex"
+  ],
+  "notes": "fast path SendToPlayer(pl,pkt,w); slow: send() via ws+0x42, 0x2733 WSAEWOULDBLOCK retry via SendToPlayer, socket_set_doa else; w==sent->1; partial -> pkt+sent.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 463552,
+  "verdict": "EXACT",
+  "obj": "w46B_mpchangeplane_v1",
+  "src": "build/survey/probes/w46B_mpchangeplane_v1.c",
+  "maps": [
+   "_MPBroadcast@16=$FA$_t_46b260",
+   "@MPFlushAll@4=?MPFlushAll@@YIXD@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "tail": [
+   "8d642400"
+  ],
+  "provenance": [
+   "tail: toolchain-diff - census-proven filler 8d642400"
+  ],
+  "notes": "NATURAL EXACT on first compile, zero patches: numComputers!=1 -> buf[0]=0x46, OBJAlias(u,1)->buf[1..2], strcpy(buf+3,name), MPBroadcast(-1,buf,16,1) via stub $FA$_t_46b260, MPFlushAll(0) fastcall; FA's rep-movsd/push scheduling reproduced by CL; 4 relocs.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 489488,
+  "verdict": "EXACT",
+  "obj": "w46B_cdsblit_v1",
+  "src": "build/survey/probes/w46B_cdsblit_v1.c",
+  "maps": [],
+  "patch": [
+   "0,128,53568b118bf185d2750ab8054000805e5bc210008b4c241085c9750ab8054000805e5bc210008b467483f801750ab8054000805e5bc210008a86f40000003c01753e8b560485d2750ab8054000805e5bc210008b4424186a008b5c241850538b02518b4c241c5152ff501485c075298b066a018b186a0050ff532c5e5bc210008b4424186a008b5c241850538b02518b4c241c5152ff50145e5bc21000"
+  ],
+  "aliases": [],
+  "tail": [
+   "8d4900"
+  ],
+  "provenance": [
+   "patch 0: patch 0: whole-body transplant of FA bytes \u2014 chunk has ZERO FA .reloc sites (all COM vtable dispatch, no globals); compilable semantic husk documents the four E_FAIL (0x80004005) guards, ths->bF4 receiver selection, vtable Blt slot +0x14 and slot +0x2c; toolchain-diff - transplant bytes == FA verbatim",
+   "tail: toolchain-diff - 8d4900 census filler inside transplant hex"
+  ],
+  "notes": "zero relocs; husk-only semantics (thiscall QAE, J ret, ret 0x10); byte-verified EXACT.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 495456,
+  "verdict": "EXACT",
+  "obj": "w46B_libseek_v1",
+  "src": "build/survey/probes/w46B_libseek_v1.c",
+  "maps": [
+   "_libRecArr=?libAccess@@3PAULIBACCESS@@A"
+  ],
+  "patch": [
+   "0,158,5356668b74240c57664e78066683fe0a7c0d6810404f00e8c407fdff83c4040fbfc68d0c408b048da02b54008d348d0000000085c0740d68e03f4f00e89f07fdff83c40433d28b0d243f4f00e88fcdfbff8b96a42b54008bbea82b54008bcac1e2032bd18d0c9203c18b0d243f4f008b501b8b581f03fa03dae8b2cdfbff3bfb7c0833c05f5e5bc208008b4424145f8986a82b54005e5bc208008d9b00000000,0x13:6:?hintHndl@@3PAUT_HANDLE@@A+0xec,0x28:6:?libAccess@@3PAULIBACCESS@@A+0x0,0x38:6:?hintHndl@@3PAUT_HANDLE@@A+0xbc,0x48:6:?hintHndl@@3PAUT_HANDLE@@A+0x0,0x53:6:?libAccess@@3PAULIBACCESS@@A+0x4,0x59:6:?libAccess@@3PAULIBACCESS@@A+0x8,0x6b:6:?hintHndl@@3PAUT_HANDLE@@A+0x0,0x91:6:?libAccess@@3PAULIBACCESS@@A+0x8,0x18:20:_ErrorExit+0x0,0x3d:20:_ErrorExit+0x0,0x4d:20:@MMLock@8+0x0,0x7a:20:@MMUnlock@4+0x0"
+  ],
+  "aliases": [],
+  "tail": [
+   "8d9b00000000"
+  ],
+  "provenance": [
+   "patch 0: patch 0: whole-body transplant of FA bytes \u2014 12-byte record scheme + x35 stride math (shl3 -1 => *7, lea *4+ => *35) and fastcall MMLock/MMLock not reproducible in <=3 C variants; transplant with 12 newsites: 8 abs (?hintHndl@@3PAUT_HANDLE@@A +0xec/+0xbc error-string interiors, ?libAccess@@3PAULIBACCESS@@A +0x0/+0x4/+0x8) and 4 rel (_ErrorExit x2, @MMLock@8, @MMUnlock@4); toolchain-diff class; byte-verified EXACT, 12 relocs",
+   "tail: toolchain-diff - 8d9b00000000 census filler inside transplant hex"
+  ],
+  "notes": "16-B recIdx validation 1..10, MMLock/MMLock fastcalls, cur>=limit returns 0 else stores pos.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 546704,
+  "verdict": "EXACT",
+  "obj": "w46B_sapbcast_v2",
+  "src": "build/survey/probes/w46B_sapbcast_v2.c",
+  "maps": [
+   "_convert_addr_usnf2ipx=?convert_addr_usnf2ipx@@YAXPAUsockaddr_ipx@@PAUNET_ADDRESS@@@Z",
+   "_sapbcast=$FA$_t_4857f0"
+  ],
+  "patch": [
+   "0x9,41,752866c7442400060066c744240c04528d442406c744240200000000c700ffffffff66c74004ffffeb0e"
+  ],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "patch 0x9: patch 0x9: toolchain-diff: CL reordered the five sockaddr_ipx field stores (4-B stores first) and used direct disps instead of FA's lea eax,[esp+6] reg stores for the node fill \u2014 CL 4.2 store-scheduling toolchain-diff class; patch replaces jne+init+jmp block 41->42 B (shift-free downstream, relocs auto-shifted); byte-verified EXACT",
+   "tail: toolchain-diff - none"
+  ],
+  "notes": "natural C otherwise EXACT: mov ecx arg2 pre-sub test, else-init AF_IPX sockaddr (family=6/socket=0x5204/net=0/node ff*6), convert_addr_usnf2ipx public + helper $FA$_t_4857f0 (a,&sa,2,str,cancel); 2 relocs.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 617344,
+  "verdict": "EXACT",
+  "obj": "w46B_gvisible_v1",
+  "src": "build/survey/probes/w46B_gvisible_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "tail": [
+   "8da42400000000+8da42400000000"
+  ],
+  "provenance": [
+   "tail: toolchain-diff - census-proven fillers 8da42400000000 x2"
+  ],
+  "notes": "NATURAL EXACT on first compile, zero patches, zero maps: pts[5i]/[5i+1] sar-16 loads, wrap index (i-n==-1)?0:i+1 via cmp -1/lea pattern, G_ClipLine(&x1,&y1,&x2,&y2) identity public, sub esp BEFORE 4 reg pushes; 1 reloc (rel @0x6a _G_ClipLine).",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 635472,
+  "verdict": "EXACT",
+  "obj": "w46B_flenv_v2",
+  "src": "build/survey/probes/w46B_flenv_v2.c",
+  "maps": [
+   "_curT=_curThing"
+  ],
+  "patch": [
+   "0x0f,2,8bf0",
+   "0x11,2,85f6",
+   "0x20,2,8b1d",
+   "0x2c,2,c1fb",
+   "0x41,1,56",
+   "0x51,1,4e",
+   "0x58,1,56",
+   "0x5c,1,c2",
+   "0x5e,1,10",
+   "0x63,2,3bc3",
+   "0x65,1,7e",
+   "0x76,2,3bc3",
+   "0x78,1,7f",
+   "0x8a,3,5e3bc3",
+   "0x8e,1,9f"
+  ],
+  "aliases": [],
+  "tail": [
+   "0500000000"
+  ],
+  "provenance": [
+   "patch 0x0f: patch 0x0f: toolchain-diff: reg-color env ebx->esi (mov esi,eax)",
+   "patch 0x11: patch 0x11: toolchain-diff: reg-color test esi,esi",
+   "patch 0x20: patch 0x20: toolchain-diff: reg-color max_ esi->ebx (mov ebx,[moffs])",
+   "patch 0x2c: patch 0x2c: toolchain-diff: reg-color sar ebx,8",
+   "patch 0x41: patch 0x41: toolchain-diff: reg-color push esi (env) at EnvelopeSpeedLimits call",
+   "patch 0x51: patch 0x51: toolchain-diff: reg-color movsx rm [esi+6]",
+   "patch 0x58: patch 0x58: toolchain-diff: reg-color cmp rm [esi+edx*2+0xa]",
+   "patch 0x5c: patch 0x5c: toolchain-diff: setl temp dl vs CL bl (env low byte)",
+   "patch 0x5e: patch 0x5e: toolchain-diff: mov [arg2],dl reg byte",
+   "patch 0x63: patch 0x63: toolchain-diff: cmp eax,ebx vs canonicalized cmp esi,eax; jle vs jge (wave-28 CL cmp-canonicalization wall)",
+   "patch 0x65: patch 0x65: toolchain-diff: same cmp-canonicalization class as patch 0x63: jle polarity byte",
+   "patch 0x76: patch 0x76: toolchain-diff: cmp eax,ebx / jg polarity",
+   "patch 0x78: patch 0x78: toolchain-diff: same cmp-canonicalization class as patch 0x76: jg polarity byte",
+   "patch 0x8a: patch 0x8a: toolchain-diff: pop esi moved before cmp (FA epilog schedule) + cmp operand order",
+   "patch 0x8e: patch 0x8e: toolchain-diff: setg vs setl polarity (c>max_ ternary 0/2)",
+   "tail: toolchain-diff - census-proven filler 0500000000"
+  ],
+  "notes": "fastcall GetFlightEnvelope(ecx=thing) + stdcall EnvelopeSpeedLimits@16 (env,&a,&c,&b); _curThing+0x34/+0x15 interior moffs (DIR32 payloads 0x34/0x15); 15-patch reg-color+cmp-polarity sweep; v1 fastcall/stdcall decls removed push/pop arg + add esp; 4 relocs.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 288576,
+  "verdict": "EXACT",
+  "obj": "w46C_seqwait_v1",
+  "src": "build/survey/probes/w46C_seqwait_v1.c",
+  "maps": [
+   "_SEQwait_q=_SEQwait",
+   "_w46c_strn=?valkyriesScore@@3DA+0x7dc",
+   "_w46c_curseq=?curSeq@@3FA",
+   "_w46c_seqf=?seqList@@3PAUSEQUENCE@@A+0x3",
+   "_w46c_seqh=?seqList@@3PAUSEQUENCE@@A+0x14",
+   "_w46c_seqv=?seqList@@3PAUSEQUENCE@@A+0x20"
+  ],
+  "patch": [],
+  "aliases": [],
+  "tail": [
+   "8da42400000000"
+  ],
+  "provenance": [
+   "tail: toolchain-diff - census filler 8da42400000000 (7 B); 6 relocs",
+   "gate-repair: root-caused - map row _w46c_strn interior delta wrong: FA dword at chunk off 0x11 = 0x4F0EDC = valkyriesScore(0x4F0700) + 0x7dc; row said +0x5dc (built 0x4F0CDC). Delta corrected to 0x7dc."
+  ],
+  "notes": "_SEQwait (192 B) naked transcription: inline-doubled compare against \"all\" (sbb eax,eax/sbb eax,-1 result), equal -> set seqList[7*curSeq]+3 flag; else walk +0x14 list (next +0xe) and store node[+0xa] into +0x20 slot. KEY FIX: FA's second compare loop RE-ENTERS at mov bl,[eax] (label Lc2a) not the loop top that reloads eax/ecx \u2014 jne Lc2a steering. W46C8 char[8] array externs give the scale-8 [eax*8] indexing. 0x46640.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 336816,
+  "verdict": "EXACT",
+  "obj": "w46C_hardbestseekers_v1",
+  "src": "build/survey/probes/w46C_hardbestseekers_v1.c",
+  "maps": [],
+  "patch": [
+   "115,27,33c98a48088d14498b2c968d0c968b5017c1fa1085ed0fbfd2740a"
+  ],
+  "aliases": [],
+  "tail": [
+   "8da42400000000"
+  ],
+  "provenance": [
+   "patch 115: toolchain-diff equal-span (27 B) block reorder + recolor: CL schedules the [item+0x17] hv load before the [item+8] byte/index loads regardless of source order; FA 33 c9 8a 48 08 8d 14 49 8b 2c 96 8d 0c 96 8b 50 17 c1 fa 10 85 ed 0f bf d2 74 0a (index in edx) vs CL (index in ebp); both blocks same length, 1 patch",
+   "tail: toolchain-diff - FA census pad 8da42400000000 beyond chunk code, census composition copied verbatim"
+  ],
+  "notes": "@HARDBestSeekers@12 (208 B) fastcall(ecx p0 byte, edx dest, stack p2 byte) natural C: rep-stosd zero of 5x12-B dest records, HARDFindStore@12/_HARDPtrs@12 ring scan (cursor local init 0x7fffffff, address-taken -> CL reloads [esp+0x10] matching FA), per-type-7 +0xac offset, keeps min hv (short of [item+0x17]>>16) per slot hb=(uchar)[item+8]; d->val compare (long)(unsigned short) <= (long)hv spelling gives xor ebp/mov bp/cmp ebp,edx FA form. Callee maps identity. Census filler per batch (see span). 0x523b0.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 587728,
+  "verdict": "EXACT",
+  "obj": "w46C_objaliasall_v1",
+  "src": "build/survey/probes/w46C_objaliasall_v1.c",
+  "maps": [],
+  "patch": [
+   "148,1,39",
+   "154,1,77"
+  ],
+  "aliases": [],
+  "tail": [
+   "8d4900+8da42400000000"
+  ],
+  "provenance": [
+   "patch 148: toolchain-diff loop-tail cmp opcode: FA 39 (cmp [reg],reg) vs CL 83 38 (cmpl imm 0) at walk-terminator; 1-B",
+   "patch 154: toolchain-diff jb->ja polarity at w<nextObjId tail cmp; 1-B",
+   "tail: toolchain-diff - census fillers 8d4900 + 8da42400000000 (10 B); 5 relocs"
+  ],
+  "notes": "_OBJAliasAll@12 (176 B) stdcall(byte,word,word) natural C with packed structs: sub esp,4 word-local w; walk objPtrs[1..nextObjId-1] (mov eax,[esp+0x12] / and 0xffff / [eax*4+disp] load), filter flag&1 types 2/4, re-alias pref via _OBJAliasPreferred@16 and walk +0xe8/0x44-stride records via _OBJAliasWaypoint@16. KEY: #pragma pack(1) + typed field derefs (obj->type/sub->f0/obj->flag/obj->pref) produce FA's disp8-00 forms (8a 45 00, f6 45 00 02) and exact reg colors (si=a1, bl=a0, di=a2, ebp walker). 0x8f7d0.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 648576,
+  "verdict": "EXACT",
+  "obj": "w46C_makenamesforlist_v4",
+  "src": "build/survey/probes/w46C_makenamesforlist_v4.c",
+  "maps": [],
+  "patch": [
+   "17,6,3bc27e2633db",
+   "56,2,d17c",
+   "74,4,33db33f6"
+  ],
+  "aliases": [],
+  "tail": [
+   "8d642400"
+  ],
+  "provenance": [
+   "patch 17: toolchain-diff 6-B equal-span reorder (cmp edx,eax/jle+0x26/xor ebx,ebx vs CL xor-first/cmp/jle+0x24); v4 decl-order steering (i,sum,stride) got the loop body right, head band patched",
+   "patch 56: toolchain-diff comparand-order canonicalization: FA 3b d1 (cmp edx,ecx)+7c dc (jl back) vs CL 3b ca+7f dc (jg back); 2-B equal-span, same target",
+   "patch 74: toolchain-diff 4-B equal-span reg-init swap (FA 33db33f6 vs CL 33f633db)",
+   "tail: toolchain-diff - census filler 8d642400 (4 B); cl code 0xac + pad 0x4 = 0xb0, 9 relocs"
+  ],
+  "notes": "_MakeNamesForList@0 (176 B) natural C: two strlen-scan loops over _items (+0x11 name, 0x30 stride) building a 176-B concatenated name table, then _MMAllocPtr@8 (fastcall identity) + doubled memmove copy loop. decl-order steering (v1->v4) fixed esi/ebx/ebp reg colors; src address spelled twice so FA reloads _items for memmove. 0x49e580. Externs all identity publics (_numItems 0x5249d8, _items 0x4ea9f8, @MMAllocPtr@8, _memmove).",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 648800,
+  "verdict": "EXACT",
+  "obj": "w46C_dialogfadeout_v1",
+  "src": "build/survey/probes/w46C_dialogfadeout_v1.c",
+  "maps": [
+   "_w46c_gw=_grMode+0xa",
+   "_w46c_gh=_grMode+0xc"
+  ],
+  "patch": [],
+  "aliases": [],
+  "tail": [
+   "8d642400"
+  ],
+  "provenance": [
+   "tail: toolchain-diff - census filler 8d642400 (4 B); cl code 0xac + pad 0x4 = 0xb0, 16 relocs; zero CODE diffs outside reloc windows (raw-obj classification)"
+  ],
+  "notes": "_DialogFadeout@0 (176 B) natural C, no patches: per-tick fade of curPalette toward black (rep movsd struct assign, scaled level, WRBlackenPalette@12 + G_SetPalette@16 until level saturates 0x100), clears fadePalette (rep stosd), flushes. FPO esp, cbRegs=3 ebx/esi. w46c_gw/gh = _grMode+0xa/+0xc word dims; fastcall externs mangle identity (@WRInt@4/@G_SetColor@4/@G_Flush@4). 0x49e660.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 668208,
+  "verdict": "EXACT",
+  "obj": "w46C_sockbuildwfds_v3",
+  "src": "build/survey/probes/w46C_sockbuildwfds_v3.cpp",
+  "maps": [
+   "_w46c_sln=?socket_list@@3USOCKET_STATE_LIST@@A+0x0",
+   "_w46c_slcnt=?socket_list@@3USOCKET_STATE_LIST@@A+0x210",
+   "_w46c_slfd=?socket_list@@3USOCKET_STATE_LIST@@A+0x214",
+   "_w46c_slit=?socket_list@@3USOCKET_STATE_LIST@@A+0x424",
+   "_w46c_ptab=?player_list@@3UNET_PLAYER_LIST@@A+0x66"
+  ],
+  "patch": [
+   "0x69,2,3915",
+   "0x6f,2,7faf"
+  ],
+  "aliases": [],
+  "tail": [
+   "8d642400+8da42400000000"
+  ],
+  "provenance": [
+   "patch 0x69: toolchain-diff comparand-order canonicalization: FA 39 15 [socket_list] (cmp [mem],edx)+jl vs CL 3b 3d (cmp edx,[mem])+jg; 2-B equal-span",
+   "patch 0x6f: toolchain-diff same cmp-operand-order pair (FA 39 3d+jl 7faf vs CL 3b; 2-B span)",
+   "tail: toolchain-diff - census fillers 8d642400 + 8da42400000000 (11 B); cl code 0x75 + pad 0xb = 0x80, 10 relocs"
+  ],
+  "notes": "?socket_build_write_fds@@YAXXZ (128 B) C++ (.cpp keeps undecorated name): rebuilds socket_state_list fd array \u2014 walks socket_list records, filters connected fds via player_list[idx]+0x2c92 level > 0, compacts into +0x214 and sets +0x210 count; e=e walk cursor over +0x424 sentinel. Three map-renamed interior anchors of ?socket_list@@... (+0x0/+0x210/+0x214/+0x424) and one of ?player_list@@... (+0x66). 0x4a3230. W46CSOCK_PAD 0x2c92 typedef absorbs the big struct offset.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 678416,
+  "verdict": "EXACT",
+  "obj": "w46C_cloudproc_v1",
+  "src": "build/survey/probes/w46C_cloudproc_v1.c",
+  "maps": [
+   "_w46c_tcq=?T_CloudProc@@YAXJ@Z",
+   "_w46c_cldv=_cloudAlt",
+   "_w46c_recs0=_cloudAlt+0x14",
+   "_w46c_cldp=_cloudAlt+0x14",
+   "_w46c_md=_v+0x8c",
+   "_w46c_cfn1@40=$FA$_t_4a4f00",
+   "_w46c_cfn2@44=$FA$_t_4a4fa0"
+  ],
+  "patch": [
+   "28,9,8b0d747b500083c01a,2:6:_cloudAlt+0x0"
+  ],
+  "aliases": [],
+  "tail": [
+   "8bff"
+  ],
+  "provenance": [
+   "patch 28: toolchain-diff CL scheduler emits loop add before the volatile value load (FA 8b 0d [cloudAlt] first, add eax,0x1a second; CL reversed); equal-span 9-B patch; CL's DIR32 at disp 31 falls in span -> newsite site:6:_cloudAlt (payload 74 7b 50 00 = FA imm verified from layout sym _cloudAlt @0x507b74)",
+   "tail: toolchain-diff - FA census pad 8bff beyond chunk code, census composition copied verbatim",
+   "gate-repair: root-caused - newsite token spelled 31 patch-relative (= abs 0x3b, off-by-one: disp starts 2 B after patch 8b 0d, not 3); it moved the _cloudAlt fixup onto the push 0x6802 site and dropped FA .reloc HIGHLOW 0xA5A2E. Now patch-rel 2 (= disp 0x1e) with +0x0 payload."
+  ],
+  "notes": "?T_CloudProc@@YAXJ@Z (144 B) cdecl(long) natural C: head *(long*)_cloudAlt test -> ret; walk the 0x1a-stride record list at _cloudAlt+0x14 (terminator field0==0), storing (*_cloudAlt)<<8 into each record+0x10 (volatile forces the per-iteration [cloudAlt] reload FA does); dispatch *(short*)(_v+0x8c) >= 2 -> stub fn1(10 args) else fn2(11 args), both __stdcall (ret 0x28/0x2c verified from FA tails), mapped to stub publics $FA$_t_4a4f00/$FA$_t_4a4fa0 (v40F/w40G stub-map convention). Branch order if(md>=2){fn1;return;} fn2 reproduced FA layout+7c polarity exactly on v2 (v1's inverted if left blocks swapped). 0xa5a10, code 0x8e + 8bff pad.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 797188,
+  "verdict": "EXACT",
+  "obj": "w46C_rotate2_v1",
+  "src": "build/survey/probes/w46C_rotate2_v1.c",
+  "maps": [
+   "_Rotate2_q=_Rotate2@8",
+   "_w46c_g1=_curThingType+0x32c",
+   "_w46c_g2=_curThingType+0x330",
+   "_w46c_g3=_curThingType+0x338",
+   "_sincosHelper=sincos"
+  ],
+  "patch": [],
+  "aliases": [],
+  "tail": [
+   "90"
+  ],
+  "provenance": [
+   "tail: toolchain-diff - census filler 90 (1 B); cl code 0x77 + pad 0x1 = 0x78, 10 relocs; zero CODE diffs"
+  ],
+  "notes": "_Rotate2@8 (120 B) stdcall ret 8 naked transcription: loads arg2 (short angle) into ebx, calls register-ABI helper sincos (angle in bx; sin->ax, cos->ebx; GRSinCos.c/_sincosHelper=sincos map precedent, w33F notes), stores movsx'd results to interior anchors _curThingType+0x32c/0x330, then rotates (*p,p[+8]) via imul-mem/shrd 15 fixed-point. CL inline assembler reproduced a1/a3 moffs forms for mov eax,[g3]/mov [g1],eax verbatim (zero patches). 0xc2a04.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 866224,
+  "verdict": "EXACT",
+  "obj": "w46C_sprintf_v1",
+  "src": "build/survey/probes/w46C_sprintf_v1.c",
+  "maps": [
+   "_sprintf_q=_sprintf",
+   "_w46c_out=$FA$_t_4d6610",
+   "_w46c_term=$FA$_t_4d64c0"
+  ],
+  "patch": [],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "tail: toolchain-diff - none \u2014 code 0x67 (103 B) exact, 0 pad"
+  ],
+  "notes": "_sprintf (103 B) CRT cdecl sprintf naked transcription: 32-B frame, {out,limit=0x7fffffff} control block + 0x42 flag / va_list locals, calls the 2466-B formatter stub (cdecl 3 args, add esp,0xc) then decls the limit; js -> terminator stub2(0,&out) path; else NULs *out and returns bytes written. Callees are unnamed CRT-internal stubs -> $FA$_t_4d6610/$FA$_t_4d64c0 maps. Zero code diffs vs FA (only the two e8 sites). 0xd37b0.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 875328,
+  "verdict": "EXACT",
+  "obj": "w46C_strcat_v1",
+  "src": "build/survey/probes/w46C_strcat_v1.c",
+  "maps": [
+   "_strcat_q=_strcat"
+  ],
+  "patch": [],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "tail: toolchain-diff - none \u2014 16-aligned code end, 0 pad, no relocs (all jmps internal)"
+  ],
+  "notes": "_strcat (224 B) CRT, full naked transcription (sibling recipe) \u2014 dst dword scan 0x7efefeff/0x81010100 with byte-exit lea edi variants, src copy byte-head/dword-body, NUL-store ret blocks. KEY FIX: CL block-reorders the dword store block after the scan loop when left as real asm (wave-42) -> hybrid _emit 0xeb/0x05 for the jmp + _emit the 5 store bytes with a real label Ldloop2 for back-references. 0xd5b40.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 71632,
+  "verdict": "EXACT",
+  "obj": "w46D_angles_v2",
+  "src": "build/survey/probes/w46D_angles_v2.c",
+  "maps": [
+   "_w46d_angles_q@16=_Angles@16"
+  ],
+  "patch": [
+   "0,185,8b4c24088b54240483ec088d44240056505152e8000000008b74241885f674120fbf5424080fbf4c2404e8000000006689068b74241c85f6746b66837c240400750b8b4c2408e800000000eb2a66837c240800750b8b4c2404e800000000eb170fbf4c24080fbf4424040fafc90fafc003c8e80000000066894424040fbf4c24060fbf542404e800000000668906663dfc3f7e0566c706fc3f66813e04c07d0566c70604c05e83c408c210008d642400,20:20:_GetWordPointDelta@12+0x0,43:20:@ArcTan@8+0x0,71:20:@Abs@4+0x0,90:20:@Abs@4+0x0,115:20:@Sqrt@4+0x0,135:20:@ArcTan@8+0x0"
+  ],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over 185 B CL donor (fits in one band; newsites from FA .reloc dword sites + .text e8 rel32 scan, site=disp-byte, payload zeroed)"
+  ],
+  "notes": "_Angles@16: GetWordPointDelta then ArcTan into o1; o2: a==0 -> Abs(cd), c==0 -> Abs(ab), else Sqrt(c*c+a*a), second ArcTan, clamp +/-0x3ffc. 6 rel32 newsites, zero dword sites: GetWordPointDelta@12, ArcTan@8 x2, Abs@4 x2, Sqrt@4. Transplant after 2 CL compile variants: CL 4.2 walls = struct-arg stack-passing for fastcall Abs (FA passes 4-byte structs in ecx), sbb-folding of the clamp ternary chain, jl-polarity canonicalization on cmp reg,[glob]. (src w46D_angles_v2.c reproduces w46D_angles_v2.obj .text verbatim under /c /O2 /Gy /G5)",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 139310,
+  "verdict": "EXACT",
+  "obj": "w46D_mapdrawbg_v1",
+  "src": "build/survey/probes/w46D_mapdrawbg_v1.cpp",
+  "maps": [
+   "_w46d_t114=$FA$_t_422114",
+   "_w46d_t0aa=$FA$_t_4220aa",
+   "w46d_t114=$FA$_t_422114",
+   "w46d_t0aa=$FA$_t_4220aa"
+  ],
+  "patch": [
+   "0,129,558bec83ec0856e800000000baff7f00008bcae8000000008d55fc8b0d0000000083c161e8000000008d55f88b0d0000000083c16de800000000a100000000f64011107405e8000000000fbf4dfe0fbf45fa2bc140500fbf75f80fbf45fc2bc64050518b0d00000000e8000000008bd68bc8e8000000005e8be55dc3,8:20:w46d_t114+0x0,20:20:@G_SetScaleMax@8+0x0,29:6:_th+0x0,37:20:?MAPWorldToScreen@@YIXPAUF24_POINT3@@PAUWORD_POINT@@@Z+0x0,46:6:_th+0x0,54:20:?MAPWorldToScreen@@YIXPAUF24_POINT3@@PAUWORD_POINT@@@Z+0x0,59:6:?mcFlyAll@@3DA+0x20,70:20:w46d_t0aa+0x0,101:6:?mcFlyAll@@3DA+0x20,106:20:@MMAccessR@4+0x0,115:20:@G_Scale@20+0x0"
+  ],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over 129 B CL donor (fits in one band; newsites from FA .reloc dword sites + .text e8 rel32 scan, site=disp-byte, payload zeroed)"
+  ],
+  "notes": "?MAPDrawBG@@YGXXZ (name-identical): G_SetScaleMax(0x7fff), 2x MAPWorldToScreen(_th, dy/dx pairs), mcFlyAll+0x20 byte gate -> t114 stub call, G_Scale + MMAccessR tail. 11 newsites: 4 dword (_th x2, mcFlyAll+0x20 x2) + 7 rel32 (t114, G_SetScaleMax@8, WorldToScreen x2, t0aa, MMAccessR@4, G_Scale@20). The two t-targets are still stub chunks (no swap.json entries for 0x22114/0x220aa as of 2026-11-03) so map TOs $FA$_t_422114/$FA$_t_4220aa are valid link anchors (wave-29/45 rule).",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 206448,
+  "verdict": "EXACT",
+  "obj": "w46D_musicvol_v2",
+  "src": "build/survey/probes/w46D_musicvol_v2.cpp",
+  "maps": [
+   "__imp__w46d_lck@0=__imp___AIL_lock@0",
+   "__imp__w46d_smv@8=__imp___AIL_set_XMIDI_master_volume@8",
+   "_w46d_ulk9=__imp___AIL_unlock@0",
+   "_w46d_sflag=$FA$rdata0+0x259c",
+   "?w46d_sflag@@3EA=$FA$rdata0+0x259c",
+   "?w46d_ulk9@@3P6GXXZA=__imp___AIL_unlock@0"
+  ],
+  "patch": [],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "tail: toolchain-diff - 0xd census pad beyond CL code (0x83 code + 0xd pad = 0x90)",
+   "gate-repair: root-caused - $FA$rdata0 resolves VA 0x4E5054 (0x400000+0xe5054); sflag site FA VA = 0x4E75F0; map delta 0x259c (0x75f0 was subtracted from a wrong 0x4E0000 base)."
+  ],
+  "notes": "?MusicVolume@@YIXG@Z: vol gate on _soundOn byte (a0 movzx tail via sflag delta map); set_XMIDI_master_volume(4, musicVolume*128/100) inside AIL_lock/unlock pair. v2 EXACT after swapping statement order so mvi assignment is emitted before the musicVolume store - CL 4.2 scheduler hoists operand setup across the store in source order.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 208304,
+  "verdict": "EXACT",
+  "obj": "w46D_shutsnd_v1",
+  "src": "build/survey/probes/w46D_shutsnd_v1.cpp",
+  "maps": [
+   "__imp__AIL_shutdown@0=__imp___AIL_shutdown@0",
+   "__imp__AIL_stop_timer@4=__imp___AIL_stop_timer@4",
+   "__imp__AIL_waveOutClose@4=__imp___AIL_waveOutClose@4"
+  ],
+  "patch": [
+   "0,110,53a00000000084c07463c6050000000000a10000000085c0741150ff1500000000c7050000000000000000a10000000085c07539a10000000085c0741150ff1500000000c7050000000000000000a10000000085c07516a00000000084c0740dff1500000000c60500000000005bc390,2:6:_soundOn+0x0,12:6:_soundOn+0x0,18:6:?soundDriverHandle@@3PAU_DIG_DRIVER@@A+0x0,29:6:__imp__AIL_waveOutClose@4+0x0,35:6:?soundDriverHandle@@3PAU_DIG_DRIVER@@A+0x0,44:6:?musicDriverHandle@@3PAU_MDI_DRIVER@@A+0x0,53:6:?timerHandle@@3JA+0x0,64:6:__imp__AIL_stop_timer@4+0x0,70:6:?timerHandle@@3JA+0x0,79:6:?musicDriverHandle@@3PAU_MDI_DRIVER@@A+0x0,88:6:?ailActive@@3DA+0x0,98:6:__imp__AIL_shutdown@0+0x0,104:6:?ailActive@@3DA+0x0"
+  ],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over 110 B CL donor (fits in one band; newsites from FA .reloc dword sites + .text e8 rel32 scan, site=disp-byte, payload zeroed)",
+   "tail: toolchain-diff - c390 (2 B beyond 112 B FA code, census-ret) included in patch span"
+  ],
+  "notes": "?ShutDownSndDriver@@YIXXZ (name-identical): _soundOn gate, AIL_waveOutClose(soundDriverHandle), musicDriverHandle store, AIL_stop_timer(timerHandle), ailActive false gates, __imp__AIL_shutdown. 13 newsites: 6 dword (2x soundOn, 2x soundDriverHandle, musicDriverHandle, timerHandle, 2x ailActive) + 3 imp DIR32 + 4 dword (2 musicDriverHandle, timerHandle, ailActive). Tail c390 census-ret included in span.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 311616,
+  "verdict": "EXACT",
+  "obj": "w46D_serinit_v1",
+  "src": "build/survey/probes/w46D_serinit_v1.cpp",
+  "maps": [
+   "_w46d_uip@4=_UnInitializePort@4",
+   "_w46d_ssdn=?SER_Shutdown@@YAXXZ",
+   "_w46d_sokx=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x234",
+   "?w46d_sokx@@3KA=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x234",
+   "?w46d_uip@@YGXPAX@Z=_UnInitializePort@4",
+   "?w46d_ssdn@@YAXXZ=?SER_Shutdown@@YAXXZ"
+  ],
+  "patch": [],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "tail: toolchain-diff - 6 B census pad 8d9b00000000 (0xaa code + 0x6 pad = 0xb0)"
+  ],
+  "notes": "?SER_Initialize@@YAJPAUCN_INFO@@J@Z native compile EXACT v1: port-struct validation, Ctrl+0x234 ok-flag, UnInitializePort fallback + SER_Shutdown teardown path, returns fd handle.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 330752,
+  "verdict": "EXACT",
+  "obj": "w46D_wingsweep_v1",
+  "src": "build/survey/probes/w46D_wingsweep_v1.c",
+  "maps": [
+   "_w46d_wsweep_q@0=_FMUpdateWingSweep@0"
+  ],
+  "patch": [
+   "0,112,83ec105356578b3d00000000e800000000c1e0088bf0e800000000c1e0082bc6998bc883e20303c2c1f8028d1c068bc1992bc2d1f803c63bdf7e1066c7050000000000005f5e5b83c410c33bf87d352bc32bfb89442410897c2414c7442418ff7f00008b442418f76c2414f77c24108944240c8b44240c5f66a3000000005e5b83c410c366c70500000000ff7f5f5e5b83c410c305000000008da42400000000,8:6:_curThing+0x34,13:20:_COMinSpeed@0+0x0,23:20:_COMaxSpeed@0+0x0,62:6:_curThing+0x1a1,122:6:_curThing+0x1a1,135:6:_curThing+0x1a1"
+  ],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over 112 B CL donor (fits in one band; newsites from FA .reloc dword sites + .text e8 rel32 scan, site=disp-byte, payload zeroed)",
+   "tail: toolchain-diff - 8da42400000000 (7 B census pad) included in patch span"
+  ],
+  "notes": "_FMUpdateWingSweep@0: cur=_curThing+0x34; lo=COMinSpeed()<<8, hi=(COMaxSpeed()<<8)-lo; q=lo+hi/4, m=lo+hi/2; early-outs set _curThing+0x1a1 = 0 / 0x7fff, else 0x7fff*(cur-q)/(m-q). 6 newsites: 4 dword (_curThing+0x34, a3 stores +0x1a1 x3) + 2 rel32 (COMinSpeed@0, COMaxSpeed@0). Tail 8da42400000000 census pad in span.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 339936,
+  "verdict": "EXACT",
+  "obj": "w46D_restoreload_v1",
+  "src": "build/survey/probes/w46D_restoreload_v1.c",
+  "maps": [
+   "_w46d_rhl_q@0=_HARDRestoreHumanLoad@0"
+  ],
+  "patch": [
+   "0,169,53a100000000565733f63bc67e19668b1500000000b900000000663911740883c102463bf07cf3a0000000003c04750c8b04b500000000a30000000033ffa00000000084c0745a8d047500000000c1e602908d0c40908d0476908d9c89000000008db480000000008b0e85c9741866833b007412e8000000000fbf0b515057e800000000eb0933d28bcfe80000000083c30283c6044733c0a0000000003bc77fc75f5e5bc38d6424008da42400000000,2:6:_rudder+0x870,17:6:_curId+0x0,22:6:_rudder+0x298,40:6:_curThing+0x0,51:6:_rudder+0x2a8,56:6:_curThing+0x1fc,63:6:_curThingType+0xb5,93:6:_rudder+0x878,100:6:_rudder+0xb8,117:20:@HARDResourceName@4+0x20,128:20:_HARDLoad@12+0x0,139:20:@HARDUnload@8+0x0,153:6:_curThingType+0xb5"
+  ],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over 169 B CL donor (fits in one band; newsites from FA .reloc dword sites + .text e8 rel32 scan, site=disp-byte, payload zeroed)",
+   "tail: toolchain-diff - 8d9b00000000+8da42400000000 (13 B census pads) included in patch span"
+  ],
+  "notes": "_HARDRestoreHumanLoad@0: loadout scan _rudder+0x870/_rudder+0x298 vs _curId; if _curThing==4 store _rudder+0x2a8[i] -> _curThing+0x1fc; weapon loop over _rudder+0x878/_rudder+0xb8*15: HARDLoad(i, HARDResourceName(dp), wp) / HARDUnload. 13 newsites: 8 dword (rudder+0x870/+0x298, _curId, _curThing a0/a3 pair, _rudder+0x2a8, +0x1fc, _curThingType+0xb5 x2, _rudder+0x878, _rudder+0xb8 - 13 total incl idx loads) + 3 rel32: HARDResourceName interior target 0x452eb0 spelled @HARDResourceName@4+0x20 (nearest pub 0x452e90), _HARDLoad@12, @HARDUnload@8. One negative-target e8 (o=100) rejected as false positive. Tail 8d9b00000000+8da42400000000 pads in span.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 340400,
+  "verdict": "EXACT",
+  "obj": "w46D_rearmtest_v1",
+  "src": "build/survey/probes/w46D_rearmtest_v1.c",
+  "maps": [
+   "_w46d_rmt_q@0=_HARDRearmTest@0"
+  ],
+  "patch": [
+   "0,177,5333d256a100000000573bc27e1db800000000668b0d00000000663908740c83c002423b15000000007ce833f6a00000000084c074768d045500000000c1e202908d0c40908d0452908dbc89000000008d9c80000000008b0385c0743466833f00742e8a08ba0200000080f90775058b4805eb038b4801e8000000000fbf0f515056e80000000084c0740fb0015f5e5bc333d28bcee80000000083c70283c3044633c0a0000000003bc67fab32c05f5e5bc38da424000000008da42400000000,5:6:_rudder+0x870,15:6:_rudder+0x298,22:6:_playerId+0x0,37:6:_rudder+0x870,46:6:_curThingType+0xb5,76:6:_rudder+0x878,83:6:_rudder+0xb8,120:20:@NextString@8+0x0,131:20:_HARDUsedWeapons@12+0x0,150:20:@HARDUnload@8+0x0,164:6:_curThingType+0xb5"
+  ],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over 177 B CL donor (fits in one band; newsites from FA .reloc dword sites + .text e8 rel32 scan, site=disp-byte, payload zeroed)",
+   "tail: toolchain-diff - 2x 8da42400000000 (14 B census pads) included in patch span"
+  ],
+  "notes": "_HARDRearmTest@0: same loadout scan vs _playerId; weapon loop (_rudder+0x878/_rudder+0xb8*15): dp!=0&&wp!=0 -> c=[dp]==7?5:1 byte-pick, NextString(c==7?+5:+1) -> HARDUsedWeapons(j,...) return 1; else HARDUnload(j,0). 11 newsites: 8 dword (rudder+0x870 x2, +0x298, _playerId, _curThingType+0xb5 x2, _rudder+0x878, _rudder+0xb8) + 3 rel32 (@NextString@8, _HARDUsedWeapons@12, @HARDUnload@8). Two negative-target e8 (o=42, o=83) rejected as false positives. Tail 2x 8da42400000000 census pads in span.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 439856,
+  "verdict": "EXACT",
+  "obj": "w46D_mpminit2_v1",
+  "src": "build/survey/probes/w46D_mpminit2_v1.cpp",
+  "maps": [],
+  "patch": [
+   "0,137,56a1000000005783f8017473a10000000085c07507e800000000eb0aa100000000a300000000b800000000bf00000000b908000000c70000000000c740040000000033c0f3abbf00000000b908000000f3ab66be01006639350000000076208bce6646e8000000006a006a00e800000000e8000000006639350000000077e05f5ec38da424000000008da42400000000,2:6:_numComputers+0x0,13:6:_thisComputer+0x0,22:20:?MPSendPrefs@@YGXXZ+0x0,29:6:_gamePrefs+0x0,34:6:?packetTicksAdjust@@3PAJA+0x20,39:6:?packetTicks@@3PAJA+0x4d8,44:6:?packetTicks@@3PAJA+0x0,71:6:?packetTicksAdjust@@3PAJA+0x0,89:6:_nextObjId+0x0,100:20:@GetCurObj@4+0x0,109:20:?MPPrepareForInterp@@YGXPAUANGLE@@J@Z+0x0,114:20:@PutCurObj@0+0x0,121:6:_nextObjId+0x0"
+  ],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over 137 B CL donor (fits in one band; newsites from FA .reloc dword sites + .text e8 rel32 scan, site=disp-byte, payload zeroed)",
+   "tail: toolchain-diff - 2x 8da42400000000 (14 B census pads) included in patch span"
+  ],
+  "notes": "?MPMissionInit2@@YGXXZ (name-identical): numComputers==1 early-out; !thisComputer -> MPSendPrefs else packetTicksAdjust+0x20=gamePrefs; packetTicks+0x4d8/+0x20/+0 zero stores + 32 B (8 dword) memsets x2; loop nextObjId: GetCurObj/MPPrepareForInterp(0,0)/PutCurObj. 13 newsites: 8 dword (numComputers, thisComputer, gamePrefs, packetTicksAdjust+0x20/+0x0, packetTicks+0x4d8/+0x0, nextObjId x2) + 4 rel32 (MPSendPrefs, GetCurObj@4, MPPrepareForInterp, PutCurObj@0) + nextObjId cmpw 66 39 35. Tail 2x 8da42400000000 census pads in span.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 920736,
+  "verdict": "EXACT",
+  "obj": "w46D_getdays_v1",
+  "src": "build/survey/probes/w46D_getdays_v1.c",
+  "maps": [
+   "_w46d_getdays_q=__Getdays",
+   "_w46d_tbl=__newmode+0xfc"
+  ],
+  "patch": [
+   "59,158,8d6c29ff83c50203f5ff4c241075d04656e89f85ffff8944241483c40485c0747d8bd0bd07000000c6023a428b3bb9ffffffff2bc0f2aef7d12bf98bc1c1e9028bf78bfaf3a58bc883e103f3a48bfab9ffffffff2bc0f2aef7d18d5411ffb9ffffffffc6023a422bc08b7b1cf2aef7d12bf98bc1c1e9028bf78bfaf3a58bc883e103f3a48bfab9ffffffff2bc0f2aef7d183c3048d5411ff4d,18:20:_malloc+0x0"
+  ],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "patch 59: toolchain-diff - middle-band transplant of FA code 0x3b..0xd4 (153 B) over CL 59..217 (158 B); CL head (a1 __newmode+0xfc moffs, DIR32 site off 2) and CL tail kept outside the patch; _malloc e8 re-sited at patch-rel 18",
+   "tail: toolchain-diff - CL code 0xe5 = 234 -> 229 B, matches FA; no census pad beyond code",
+   "gate-repair: root-caused - bare REL32 token kept the baked FA disp as payload (REL32 final = symVA + payload - (site+4) double-adds the disp: built 0xFFFF0B3E = 2x 0xFFFF859F); +0x0 zeroes payload so final = FA disp."
+  ],
+  "notes": "__Getdays (cdecl): month-length table walk over __newmode+0xfc; malloc(4) buffer, strncpy ':42' sentinel + rep-stos/f3a4 fills per branch (leap-year 29 day fixup), returns buffer. Minimal-patch route: 224/229 B real-compile EXACT head+tail kept, only the rep-stos middle band replaced with FA bytes.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 380608,
+  "verdict": "EXACT",
+  "obj": "w46E_pktbpi_t",
+  "src": "build/survey/probes/w46E_pktbpi_t_v1.cpp",
+  "maps": [],
+  "patch": [
+   "0,1,8b442408535625ffff00008b5c240c575550536affe8660100008b4c242883c40c8b01666bc0386605040083c308660143fa33ed8b01668943fc8b5118668953fe3969047e63baae7e57008b0a85c9744b8a413684c074448b417083c17089038b71048973048b7908897b08668b410cb9ffffffff6689430c8b3a83c7082bc0f2aef7d12bf98bc1c1e9028bf78d7b0e83c338f3a58bc883e103f3a48b44241c83c204453968047fa25d5f5e5bc3,71:6:?player_list@@3UNET_PLAYER_LIST@@A+0x66,22:20:?pkt_set_header@@YAXHPAUNET_PKT@@H@Z+0x0"
+  ],
+  "aliases": [],
+  "tail": [
+   "8bff"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL donor (fits in one band; obj .text slice-shrinks to FA code length), FA census pad tail left outside the patch span",
+   "tail: toolchain-diff 8bff 2-B mov edi,edi census pad, fitobj accepted",
+   "gate-repair: root-caused - REL32 newsite site token pointed at the e8 opcode byte; fitobj zeroed the opcode into the disp area and the linker wrote the disp one byte early (e8 eaten, disp = FA+1). Site moved +1 to the disp byte; transplant hex already carries the e8."
+  ],
+  "notes": "cdbp frame: pkt_set_header(-1, pkt, (u16)arg0); packet len field += (u16)[list->id]*0x38+4; stores id/count; loop over ?player_list@@...A+0x66 chain (0x577eae): copies player block (3 dwords + word + inline-strlen name copy via rep movsd/movsb), stride 0x38 per entry. 1 DIR32, 1 REL32.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 404656,
+  "verdict": "EXACT",
+  "obj": "w46E_CreateMoveGoal_t",
+  "src": "build/survey/probes/w46E_CreateMoveGoal_t_v1.c",
+  "maps": [
+   "$FA$_t_462d50=?PilotFindFile@@YIDF@Z+0x4"
+  ],
+  "patch": [
+   "0,3,53568b5c24148d43fc83f8047759ff2485382d46008b4c241c8b74240cc1f9100fbfc9eb4a8b4c241c8b74240cc1f908eb3dbb070000008b4c241c81f9ff7f00007409c1e102eb048b4c241c8b74240c81fe708750007517e8430000008bc881e1ffff0000eb088b74240c8b4c241c8b5424188b4424100ad38854061866894c461a5e5bc2140090c52c4600d52c4600d52c4600f82c4600e22c4600,17:6:_CreateMoveGoal@20+0x88,82:6:_curThing+0x38,136:6:_CreateMoveGoal@20+0x15,140:6:_CreateMoveGoal@20+0x25,144:6:_CreateMoveGoal@20+0x25,148:6:_CreateMoveGoal@20+0x48,152:6:_CreateMoveGoal@20+0x32,88:20:$FA$_t_462d50+0x0"
+  ],
+  "aliases": [],
+  "tail": [
+   "8d642400"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL donor (fits in one band; obj .text slice-shrinks to FA code length), FA census pad tail left outside the patch span",
+   "tail: toolchain-diff 8d642400 4-B lea esp,[esp+0] census pad, fitobj accepted"
+  ],
+  "notes": "stdcall move-goal packer: switch(b-4) jmp [self table 0x88] (case0: cx=(short)(d>>16); case1: cx=d>>8 arith; case2: e=7, cx = d==0x7fff ? d : d*4; case3: cx=d); cross-checks esi against _curThing+0x38 -> cx = (u16)$FA$_t_462d50(ebx=esi fastcall); dst: B[a+c+0x18] |= bl, W[a*2+0x1a] = cx; ret 0x14. 7 DIR32 (self table+0x88 site, _curThing+0x38), 1 REL32.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 457648,
+  "verdict": "EXACT",
+  "obj": "w46E_MPGASD_t",
+  "src": "build/survey/probes/w46E_MPGASD_t_v1.cpp",
+  "maps": [],
+  "patch": [
+   "0,3,83ec10a104764e0083f801905374578b4c24188d542405c6442404208b018b59048b49088902895a04894a08668b4c241c6685c97411ba01000000e830fa01006689442411eb0766c744241100008a4424206a018d4c24086a108844241b516affe84ab6ffff5b83c410c20c00,4:6:_numComputers+0x0,60:20:@OBJAlias@8+0x0,98:20:$FA$_t_46b260+0x0"
+  ],
+  "aliases": [],
+  "tail": [
+   "8d4900"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL donor (fits in one band; obj .text slice-shrinks to FA code length), FA census pad tail left outside the patch span",
+   "tail: toolchain-diff 8d4900 3-B lea ecx,[ecx+0] census pad, fitobj accepted",
+   "gate-repair: root-caused - REL32 newsite site tokens at e8 opcode bytes (same class as 0x7c2); sites moved +1 to the disp bytes."
+  ],
+  "notes": "early-out _numComputers==1; packs 12-B unsigned-char struct at esp+4 = {pt->x,pt->y,pt->z, (short)g ? OBJAlias(1,g) : 0, c}; calls $FA$_t_46b260 (cdecl 4-arg stub, FA double-clean: callee ret 0x10 AND caller add esp,0x10 before ret 0xc). 1 DIR32, 2 REL32.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 495136,
+  "verdict": "EXACT",
+  "obj": "w46E_GetDosFileTime_t",
+  "src": "build/survey/probes/w46E_GetDosFileTime_t_v1.c",
+  "maps": [],
+  "patch": [
+   "0,3,83ec1053565732db558bfa6a006a006a036a006a01680000008051ff156ca5580083f8ff8bf0750cb0015d5f5e5b83c410c204008d4424108b2ddca45800506a006a0056ffd585c0742b8d4424188d4c2410508b2dd8a4580051ffd585c074158b4424248d4c2418508b1dd4a458005751ffd38ad856ff1564a558008ac35d5f5e5b83c410c20400,29:6:__imp__CreateFileA+0x0,58:6:__imp__GetFileTime+0x0,85:6:__imp__FileTimeToLocalFileTime+0x0,107:6:__imp__FileTimeToDosDateTime+0x0,120:6:__imp__CloseHandle+0x0"
+  ],
+  "aliases": [],
+  "tail": [
+   "8d642400+8d642400"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL donor (fits in one band; obj .text slice-shrinks to FA code length), FA census pad tail left outside the patch span",
+   "tail: toolchain-diff 8d642400+8d642400 8-B lea esp,[esp+0] x2 census pads, fitobj accepted"
+  ],
+  "notes": "fastcall@12 dos-file-timestamp: CreateFileA(ecx, 0x80000000, 1, NULL, 3, 0, NULL) via ff15; INVALID -> al=1 ret 4; GetFileTime then FileTimeToLocalFileTime then FileTimeToDosDateTime(&lft, edx, &ft) each reloaded from IAT into reg (call ebp/ebx); CloseHandle(ff15); return bl. 5 DIR32 all IAT (__imp__CreateFileA@28 / GetFileTime@16 / FileTimeToLocalFileTime@8 / FileTimeToDosDateTime@12 / CloseHandle@4).",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 507824,
+  "verdict": "EXACT",
+  "obj": "w46E_MANRunAway_t",
+  "src": "build/survey/probes/w46E_MANRunAway_t_v1.c",
+  "maps": [],
+  "patch": [
+   "0,1,83ec0c56578bc18bf14e85c00f8e8100000033ffb9a00f0000e84299fdff8b0d49875000897c240c0fbfc02dd0070000c1e00803c1b9a00f000089442408e81d99fdff0fbfc02dd00700008b0d51875000c1e00803c1b93c00000089442410e8fc98fdff8d4c24088a15418750000fbfc083c03c50516849875000a108764e00526824414f0050e834fdffff8bce4e85c97f815f5e83c40cc3,32:6:_curThing+0x11,77:6:_curThing+0x19,106:6:_curThing+0x9,119:6:_curThing+0x11,124:6:_thisComputer+0x0,130:6:?stallWarnSnd@@3FA+0x34,26:20:@Rand@4+0x0,63:20:@Rand@4+0x0,96:20:@Rand@4+0x0,136:20:_MANAdd@24+0x0"
+  ],
+  "aliases": [],
+  "tail": [
+   "8da42400000000"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL donor (fits in one band; obj .text slice-shrinks to FA code length), FA census pad tail left outside the patch span",
+   "tail: toolchain-diff 8da42400000000 7-B lea esp,[esp+0] census pad, fitobj accepted",
+   "gate-repair: root-caused - REL32 newsite site tokens at e8 opcode bytes (same class as 0x7c2); sites moved +1 to the disp bytes."
+  ],
+  "notes": "thiscall spawn-N MAN calls (ecx=count): do { pt = {(short)Rand(4000)-2000<<8 curThing+0x11, 0, curThing+0x19 + (short)Rand(4000)-2000<<8}; MANAdd(_thisComputer, ?stallWarnSnd@@3FA+0x34, byte _curThing+0x9, &_curThing+0x11, pt, (short)Rand(60)+60); } while (ecx); 6 interior _curThing VA sites + _thisComputer + ?stallWarnSnd@@3FA+0x34 (DIR32), 3 @Rand@4 + _MANAdd@24 (REL32).",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 554320,
+  "verdict": "EXACT",
+  "obj": "w46E_DlgSetVal_t",
+  "src": "build/survey/probes/w46E_DlgSetVal_t_v1.c",
+  "maps": [],
+  "patch": [
+   "0,1,56e80a5ef8ff8b4c2408e8a1feffff8bf0668b0625ff7f000083f8087773ff2485e8754800668b44240c8b4c24106689460e8b54241466894e108b4424186689561266894614eb3a8a44240c884616eb31668b44240c8b4c24106689461a66894e1eeb1e668b44240c566689460ce8cdfcffff56e8f7fcffffeb078a44240c88461ea040a4540084c0750656e8afefffffe8aa5df8ff5ec375754800e1754800d275480098754800a1754800e1754800e1754800b4754800cb754800,33:6:_DialogSetValue+0x98,131:6:_firstDraw+0x0,152:6:_DialogSetValue+0x25,156:6:_DialogSetValue+0x91,160:6:_DialogSetValue+0x82,164:6:_DialogSetValue+0x48,168:6:_DialogSetValue+0x51,172:6:_DialogSetValue+0x91,176:6:_DialogSetValue+0x91,180:6:_DialogSetValue+0x64,184:6:_DialogSetValue+0x7b,2:20:?PushShellAlloc@@YGXXZ+0x0,11:20:@DialogGetPtr@4+0x0,111:20:$FA$_t_487290+0x0,117:20:$FA$_t_4872c0+0x0,141:20:?DialogDraw@@YGXPAX@Z+0x0,146:20:?PopShellAlloc@@YGXXZ+0x0"
+  ],
+  "aliases": [],
+  "tail": [
+   "8d642400"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL donor (fits in one band; obj .text slice-shrinks to FA code length), FA census pad tail left outside the patch span",
+   "tail: toolchain-diff 8d642400 4-B lea esp,[esp+0] census pad, fitobj accepted",
+   "gate-repair: root-caused - REL32 newsite site tokens at e8 opcode bytes (same class as 0x7c2); sites moved +1 to the disp bytes."
+  ],
+  "notes": "cdecl dialog field-setter: PushShellAlloc; esi=DialogGetPtr(dp); t=(u16)[esi]&0x7fff; switch jmp [table +0x98] (9 dwords, all self-intern: case0 W[0xe]/[0x10]/[0x12]/[0x14]=v/a/b/c; case2 common; case3 B[0x16]=v; case4 W[0x1a]/[0x1e]; case7 W[0xc]=v + $FA$_t_487290(esi) + $FA$_t_4872c0(esi); case8 B[0x1e]=v; cases1/5/6 -> PopShellAlloc direct); common: if (!_firstDraw) DialogDraw(esi); PopShellAlloc. 11 DIR32 (self table + jmp base 0x98 + _firstDraw), 6 REL32.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 613264,
+  "verdict": "EXACT",
+  "obj": "w46E_GUvline_t",
+  "src": "build/survey/probes/w46E_GUvline_t_v1.c",
+  "maps": [],
+  "patch": [
+   "0,3,53a1fcce4f008b54240c56578b4802558b580a0fafca03cb8b4424148d3c01a06c33550084c075238b74241c3bf27c4c8bc62bc2408a0d68335500880f8b1dfcce4f00037b024875eceb31a06c3355008b74241c3c0175243bf27c208bce2bca4133c08b1d148455008a078a041888078b2dfcce4f00037d024975e52bf28dba40bb500046b8ffffffff8bcec1e902f3ab8bce5d83e103f3aa5f5e5bc20c00,2:6:_cb+0x0,32:6:_cFillType+0x0,55:6:_cColor+0x0,63:6:_cb+0x0,76:6:_cFillType+0x0,101:6:?cRemapTable@@3PAEA+0x0,114:6:_cb+0x0,128:6:_lineStats+0x0"
+  ],
+  "aliases": [],
+  "tail": [
+   "90"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL donor (fits in one band; obj .text slice-shrinks to FA code length), FA census pad tail left outside the patch span",
+   "tail: toolchain-diff 90 1-B nop census pad, fitobj accepted"
+  ],
+  "notes": "stdcall uv-line fill: x = *(int*)(_cb+2)*arg0 + *(int*)(_cb+0xa) (imul), edi =&x+arg1; if (!_cFillType && arg2>=arg0) fill *edi=_cColor, edi+=*(int*)(_cb+2) with _cb RELOADED per iter; elif _cFillType==1 && arg2>=arg0 fill *edi=cRemapTable[*edi] with _cb reloaded per iter; then memset(&_lineStats[arg0], 0xff, unsigned(arg2-arg0+1)) via rep stosd/stosb (lea edi,[edx+0x50bb40] = _lineStats DIR32). 8 DIR32, no REL32.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 704432,
+  "verdict": "EXACT",
+  "obj": "w46E_NewVDOLinkNode_t",
+  "src": "build/survey/probes/w46E_NewVDOLinkNode_t_v1.cpp",
+  "maps": [],
+  "patch": [
+   "0,3,5356576a0ce88605000083c4048bd885db0f84850000006880000000e86f05000083c4048bd0890385d274568b7c2410b9ffffffff2bc0f2aef7d12bf98bc1c1e9028bf78bfaf3a58bc883e103f3a48b4c241451e8d700000083c40489430485c0740d8bc35fc74308000000005e5bc353e83a00000083c40433db8bc3905f5e5bc353e82800000083c40433db66c705a87d570003008bc35f5e5bc38bc35f66c705a87d570003005e5bc3,144:6:?vdoExitCode@@3FA+0x0,162:6:?vdoExitCode@@3FA+0x0,6:20:?VDOAlloc@@YAPAXK@Z+0x0,29:20:?VDOAlloc@@YAPAXK@Z+0x0,85:20:?ReadFrameSizesFile@@YAPAKPAD@Z+0x0,114:20:?FreeVDOLinkNode@@YAXPAUVDOLinkedList@@@Z+0x0,132:20:?FreeVDOLinkNode@@YAXPAUVDOLinkedList@@@Z+0x0"
+  ],
+  "aliases": [],
+  "tail": [
+   "0500000000"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL donor (fits in one band; obj .text slice-shrinks to FA code length), FA census pad tail left outside the patch span",
+   "tail: toolchain-diff 0500000000 5-B add eax,0 census pad, fitobj accepted",
+   "gate-repair: root-caused - REL32 newsite site tokens at e8 opcode bytes (same class as 0x7c2); sites moved +1 to the disp bytes."
+  ],
+  "notes": "VDOAlloc(12) node + VDOAlloc(128) name buffer with inline strlen+copy (repnz scasb / not ecx / rep movsd+movsb), ReadFrameSizesFile into node+4; on NULL allocations: FreeVDOLinkNode(node), node=NULL, vdoExitCode 3-byte writes in cold gap blocks (abs 0x90/0xa2 = ?vdoExitCode@@3FA). 2 DIR32, 5 REL32.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 706064,
+  "verdict": "EXACT",
+  "obj": "w46E_VDOCompareBitmaps_t",
+  "src": "build/survey/probes/w46E_VDOCompareBitmaps_t_v1.cpp",
+  "maps": [],
+  "patch": [
+   "0,3,55ba010000008bec83ec14538b4d08c745f8000000005657e82397f8ff8bf0ba010000008b4d0ce81497f8ff8b4e0a894dec8b400a8945f08b56068955f48b4e02894dfc608b75ec8b7df08b45108b5df48b4dfcc1e9025657f3a77407b2ffff45f8eb02b2008810405f5e037dfc0375fc4b74188b551481faea03000075d2037dfc0375fcc60000404b75c5618b45f85f5e5b8be55dc3,25:20:@MMLockW@8+0x0,40:20:@MMLockW@8+0x0"
+  ],
+  "aliases": [],
+  "tail": [
+   "8bff+8da42400000000"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL donor (fits in one band; obj .text slice-shrinks to FA code length), FA census pad tail left outside the patch span",
+   "tail: toolchain-diff 8bff+8da42400000000 9-B mov edi,edi + lea esp,[esp+0] census pads, fitobj accepted",
+   "gate-repair: root-caused - REL32 newsite site tokens at e8 opcode bytes (same class as 0x7c2); sites moved +1 to the disp bytes."
+  ],
+  "notes": "cdecl bitmap compare, ebp frame: MMLockW(a,1)/MMLockW(b,1) (fastcall reg pair); caches h0/h1/stride/pitch to locals -0x14/-0x10/-0xc/-0x4; pusha/popa inline-asm loop: rows (ebx=h0) times repz cmpsd (ecx=pitch>>2) + byte loop; *dst++ = mismatch?0xff:0 per pitch dword, inc [ebp-8] on mismatch with dl=255/0; extra *dst++=0 separator row when rows==0x3ea; returns [ebp-8]. 2 REL32 @MMLockW@8.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 853780,
+  "verdict": "EXACT",
+  "obj": "w46E_dsg_t",
+  "src": "build/survey/probes/w46E_dsg_t_v1.c",
+  "maps": [],
+  "patch": [
+   "0,1,668b068d76020fbfc0bb01000000e8f5fefffff705a817510001000000741dc605bf88510001c705ec17510060664900c705f017510080664900eb1bc605bf88510000c705ec175100e0654900c705f017510020664900668b068d76020fb6d8ff245d583c5100,21:6:_effects+0x0,33:6:gouraudOn+0x0,40:6:ppolygon+0x0,44:6:@G_SPolygonFlip@8+0x0,50:6:ppolygon+0x4,54:6:@G_SUPolygonFlip@8+0x0,62:6:gouraudOn+0x0,69:6:ppolygon+0x0,73:6:@G_PolygonFlip@8+0x0,79:6:ppolygon+0x4,83:6:@G_UPolygonFlip@8+0x0,99:6:vector_table+0x0,15:20:do_collision_info+0x14"
+  ],
+  "aliases": [],
+  "tail": [
+   "90"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL donor (fits in one band; obj .text slice-shrinks to FA code length), FA census pad tail left outside the patch span",
+   "tail: toolchain-diff 90 1-B nop census pad, fitobj accepted",
+   "gate-repair: root-caused - REL32 newsite site 14 pointed at the e8 opcode byte (disp at 15); e8 was zeroed into the disp area and the linker resolved one byte early (disp FA+1). Site moved to disp byte 15; +0x14 delta unchanged (symVA + 0x14 = FA target, verified: built = symVA+0x14-(site-1+4) = FA+1 exactly)."
+  ],
+  "notes": "cdecl interpreter op-handler (esi=stream): op=(short)*esi++ (esi+=2); ebx=1; do_collision_info (call do_collision_info+0x14); if (_effects & 1) { gouraudOn=1; ppolygon=@G_SPolygonFlip@8; *(int*)(ppolygon+4)=@G_SUPolygonFlip@8; } else { gouraudOn=0; ppolygon=@G_PolygonFlip@8; *(int*)(ppolygon+4)=@G_UPolygonFlip@8; }; next: bx=(uch)op; jmp [ebx*2+vector_table] (ff245d, table imm NOT reloc'd in FA). 12 DIR32 + 1 REL32 with +0x14 interior delta (no nonzero-delta REL32 precedent in swap.json \u2014 GATE will arbitrate). The 'undecorated public' wall dissolved: transplant re-names the section symbol to the bare public (same mechanism as $FA$_t_ spans; refs in d00b37/t007fc resolve).",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 62512,
+  "verdict": "EXACT",
+  "obj": "w46F_damage2_t",
+  "src": "build/survey/probes/w46F_damage2_t.c",
+  "maps": [],
+  "patch": [
+   "0,38,66a1ccc2510083ec046685c05356570f848b0000008d4c240c6a005150e8eee8040084c0746433f68b44240c8a88b021540084c97454bb80000000bf000004008b44240c8d0c808d144e668b0c55d0215400e8e9250500841d488750007515093d3987500066a1698b50006603c066a34687500046e8962605008b4c240c33c08a81b02154003bc67fb6668b0dccc25100e8aa250500e815000000e8702605005f5e5b83c404c3,2:6:_playerId+0x0,46:6:_wingSizes+0x0,78:6:_wingIds+0x0,89:6:_curThing+0x10,97:6:_curThing+0x1,103:6:_curThingType+0x49,112:6:_curThing+0xe,130:6:_wingSizes+0x0,141:6:_playerId+0x0"
+  ],
+  "aliases": [],
+  "tail": [
+   "8bff",
+   "8da42400000000"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - transplant (allowed fallback) - _DAMAGEInit2@0 is the wing-table double loop (wingSizes/wingIds indexed via _playerId and _curThingType fields); prep judged the a1-first cmp family unsteerable and no natural-C probe iterations were spent.  Nine abs fixups: _playerId x2, _wingSizes x2, _wingIds, _curThing+0x10/+0x1/+0xe, _curThingType+0x49.  Census tail 8bff+8da42400000000.",
+   "tail: toolchain-diff - FA carries the 9-B census pad tail 8b ff (mov edi,edi) + 8d a4 24 00 00 00 00 (lea esp,[esp+0]) beyond the chunk code; census-proven and copied verbatim by the fitobj rebuild.",
+   "CL husk output is discarded by the fitobj rebuild; the husk exists only to keep a .text section alive."
+  ],
+  "notes": "whole-body transplant; mask-verified: fit .text (code 167 B + pad) == FA chunk 176 B, 0 non-reloc diffs, 9 newsite fixup(s)",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 186576,
+  "verdict": "EXACT",
+  "obj": "w46F_colflat_v1",
+  "src": "build/survey/probes/w46F_colflat_v1.c",
+  "maps": [],
+  "patch": [
+   "0,180,53a134235300562bc857558bfa8b52043bd10f8c800000008b4424143948047c0932c05d5f5e5bc208003bd17c6a8bd98b4424142bda8b68042bea85db7d04f7dbf7dd81fbc80000007f0881fdc80000007e06d1fbd1fdebea85ed743b8b378b4424148b002bc60fafc399f7fd03c68b7424188906894e048b4f088b4424148b40082bc10fafc399f7fd03c15d5f894608b0015e5bc208008b7424188b0789068b57048956048b5f08895e08394e047d03894e04b0015d5f5e5bc20800,2:6:_specials+0x4ac"
+  ],
+  "aliases": [],
+  "tail": [
+   "8d4900"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA ?COLFlatGround@@YIDJPAUF24_POINT3@@00@Z code bytes.  v1 natural C matched the prologue and both p->y tests byte-for-byte but hit two walls: (1) load-folds-to-test defeat - FA folds the a->y test into cmp [eax+4],ecx (39 48 04) and reloads a->y into ebp for the dy computation, while our CL keeps a->y in ebp across the test (8b 68 04 / 3b cd); (2) FA ships three b001/pops/ret-8 epilogues (return-0 path, interp path with pop ebp/pop edi scheduled before the final b->z store, copyout path) while our CL merges the two return-1 paths into one shared tail.  One abs fixup (+2 moffs _specials+0x4ac); 3-B census tail 8d4900.",
+   "tail: toolchain-diff - FA carries the 3-B census pad tail 8d 49 00 (lea ecx,[ecx+0]) beyond the chunk code; census-proven and copied verbatim by the fitobj rebuild."
+  ],
+  "notes": "whole-body transplant; mask-verified: fit .text (code 189 B + pad) == FA chunk 192 B, 0 non-reloc diffs, 1 newsite fixup(s)",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 301456,
+  "verdict": "EXACT",
+  "obj": "w46F_gameclean_t",
+  "src": "build/survey/probes/w46F_gameclean_t.c",
+  "maps": [],
+  "patch": [
+   "0,38,53e87a1a0200e875940400e8c0e404006a00e8197efcff83c404a0f4754e0084c07405e8f893feffa0f0754e0084c07405e88a8afeffe855bb0400a118ab4e0085c074208b807c02000085c07406508b00ff504c8b0d18ab4e00e8d141fdffe85c3bfdff6a00a1383e4f0050ff1598a65800a0700f4f0084c0741b6810200100a1383e4f00685c134f0068700f4f0050ff1590a65800e8959c0500e860fc0100e83bbefeff5bc3,27:6:_soundOn+0x0,41:6:$FA$_d_4e7000+0x5f0,60:6:?m_singleton@CDirDraw@@1PAV1@A+0x0,86:6:?m_singleton@CDirDraw@@1PAV1@A+0x0,103:6:_hWndMain+0x0,110:6:__imp__ShowWindow+0x0,115:6:_pmapCalled+0x14,129:6:_hWndMain+0x0,134:6:_pmapCalled+0x400,139:6:_pmapCalled+0x14,146:6:__imp__MessageBoxA+0x0"
+  ],
+  "aliases": [],
+  "tail": [
+   "8bff",
+   "8da42400000000"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - transplant (allowed fallback) - _GameCleanup@0 mixes ShowWindow/MessageBoxA import calls, the CDirDraw singleton pointer pair, _soundOn, _hWndMain x2 and _pmapCalled field writes; prep judged them import/ABI-heavy and went straight to the husk.  Import newsite TOs are UNDECORATED __imp__ShowWindow / __imp__MessageBoxA; the singleton pair anchors to ?m_singleton@CDirDraw@@1PAV1@A; the _pmapCalled offsets +0x14/+0x400 ride the payload deltas.  Census tail 8bff+8da42400000000.",
+   "tail: toolchain-diff - FA carries the 9-B census pad tail 8b ff (mov edi,edi) + 8d a4 24 00 00 00 00 (lea esp,[esp+0]) beyond the chunk code; census-proven and copied verbatim by the fitobj rebuild.",
+   "CL husk output is discarded by the fitobj rebuild; the husk exists only to keep a .text section alive."
+  ],
+  "notes": "whole-body transplant; mask-verified: fit .text (code 167 B + pad) == FA chunk 176 B, 0 non-reloc diffs, 11 newsite fixup(s)",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 330464,
+  "verdict": "EXACT",
+  "obj": "w46F_gearpitch_t",
+  "src": "build/survey/probes/w46F_gearpitch_t.c",
+  "maps": [],
+  "patch": [
+   "0,38,53a1a788500056a840577460e8af0bfcff84c074578b3d6c875000e8d0a60400c1ff088bf08bc8c1f9022bf13bc6743c3bf77e048bfeeb063bc77d028bf8668bc8662bcf0fbfd1668b0d608c50006669c9b6000fbfd9662bc60fafd30fbfc88bc299f7f966a340895000eb0966c7054089500000000fbf05c82354008bc88d14c08d04d18d04802bc18d048099668b0d3e89500081e2ff00000003c2c1f808668b154089500050e8540bfcff66a33e8950005f5e5bc3,2:6:_curThing+0x16f,23:6:_curThing+0x34,74:6:_curThingType+0x140,102:6:_curThing+0x208,111:6:_curThing+0x208,120:6:_serviceTicks+0x0,144:6:_curThing+0x206,162:6:_curThing+0x208,174:6:_curThing+0x206"
+  ],
+  "aliases": [],
+  "tail": [
+   "8d4900",
+   "8da42400000000"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - transplant (allowed fallback) - _FMUpdateGearPitch@0 demoted at prep: the word-math core (imul cx,cx,0xb6; _serviceTicks movsx word with cdq/and edx,0xff/add/sar 8 rounding for (_serviceTicks*364*1820)>>8) needs the TurnTowardAngle fastcall short-arg forms (mov cx / mov dx without the garbage-upper extension) that CL cannot emit from clean C - the custom reg-arg ABI wall - plus the TakeoffSpeed clamp interplay.  No natural-C probe iterations spent.  Nine abs fixups (_curThing fields x6, _curThingType+0x140, _serviceTicks).  Census tail 8d4900+8da42400000000.",
+   "tail: toolchain-diff - FA carries the 10-B census pad tail 8d 49 00 (lea ecx,[ecx+0]) + 8d a4 24 00 00 00 00 (lea esp,[esp+0]) beyond the chunk code; census-proven and copied verbatim by the fitobj rebuild.",
+   "CL husk output is discarded by the fitobj rebuild; the husk exists only to keep a .text section alive."
+  ],
+  "notes": "whole-body transplant; mask-verified: fit .text (code 182 B + pad) == FA chunk 192 B, 0 non-reloc diffs, 9 newsite fixup(s)",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 339040,
+  "verdict": "EXACT",
+  "obj": "w46F_hardunl_v3",
+  "src": "build/survey/probes/w46F_hardunl_v3.c",
+  "maps": [
+   "__curThingType=_curThingType",
+   "__curThing=_curThing"
+  ],
+  "patch": [],
+  "aliases": [],
+  "tail": [
+   "0500000000",
+   "8da42400000000"
+  ],
+  "provenance": [
+   "tail: toolchain-diff - FA carries the 12-B census pad tail 05 00 00 00 00 (add $0,eax junk) + 8d a4 24 00 00 00 00 (lea esp,[esp+0]) beyond the chunk code; census-proven (padcensus composition) and copied verbatim by the fitobj rebuild.",
+   "patch 0x0: toolchain-diff - natural-C EXACT after 3 iterations.  v1 deltas (found in the FA decode): the HARD callees are stdcall (FA relies on callee cleanup for _HARDPtrs@12/_HARDCanLoad@8/_HARDLoad@12 and no stack for the @NextString@8 fastcall) where the v1 externs were cdecl and CL emitted add-esp caller cleanups; the w==0 default reload reads L2 (FA mov [esp+0x14] after the stdcall-cleanup HARDCanLoad: slot B); the gated multiply multiplies by *(short*)(rec+0xaa) while CT_DE only gates (test ecx,edi); and the two early-exit tests must be else-chained (FA negates them and jumps to the increment+test tail) so the continues do not skip i++.  v2 additionally needed i=0 before the guard (xor esi,esi lands before the CTT_B5 test) and the loop as for(;;){...i++; if((int)CTT_B5 <= i) break;} so no first-check fuses into the guard and the tail is inc esi; xor eax,eax; a0 moffs; 3b c6; 0f 8f back to the leas."
+  ],
+  "notes": "natural C, 196 B CL code + 12-B proven tail; 7 fixups all from the CL obj itself (3 abs moffs CTT_B5/CT_DE + 4 rel32 calls); no map, no patch",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 341424,
+  "verdict": "EXACT",
+  "obj": "w46F_hardrearm_t",
+  "src": "build/survey/probes/w46F_hardrearm_t.c",
+  "maps": [],
+  "patch": [
+   "0,38,5333d25632db57b9380a540033ff8bc1668b35242f4f00663930740b83c0024783ff067cebeb02b30184db750c83c10c4281f9980a540072d333f6a0d58b500084c074798d04528d0c478d144d00000000c1e1028d04528dbc80000d54008d04498d9c80981354008b0385c0743466833f00742e8a08ba0200000080f90775058b4805eb038b4801e883e7fbff0fbf0f515056e8e8fcffff84c0740fb0015f5e5bc333d28bcee8b5e7ffff83c70283c3044633c0a0d58b50003bc67fab32c05f5e5bc3,8:6:_rudder+0x8,19:6:_curId+0x0,51:6:_rudder+0x68,60:6:_curThingType+0xb5,90:6:_rudder+0x2d0,100:6:_rudder+0x968,181:6:_curThingType+0xb5"
+  ],
+  "aliases": [],
+  "tail": [
+   "8d9b00000000",
+   "8da42400000000"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - transplant (allowed fallback) - _HARDRearmFortTest@0 prep-demoted as a gap-chunk band with _rudder field stores (968-byte-stride family) and the _curId / _curThingType gates; straight to husk (no natural-C probe iterations spent).  Seven abs fixups: _rudder+0x8/+0x68/+0x2d0/+0x968, _curId, _curThingType+0xb5 x2.  Census tail 8d9b00000000+8da42400000000.",
+   "tail: toolchain-diff - FA carries the 13-B census pad tail 8d 9b 00 00 00 00 (lea ebx,[ebx+0]) + 8d a4 24 00 00 00 00 (lea esp,[esp+0]) beyond the chunk code; census-proven and copied verbatim by the fitobj rebuild.",
+   "CL husk output is discarded by the fitobj rebuild; the husk exists only to keep a .text section alive."
+  ],
+  "notes": "whole-body transplant; mask-verified: fit .text (code 195 B + pad) == FA chunk 208 B, 0 non-reloc diffs, 7 newsite fixup(s)",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 387824,
+  "verdict": "EXACT",
+  "obj": "w46F_grpwing_t",
+  "src": "build/survey/probes/w46F_grpwing_t.c",
+  "maps": [],
+  "patch": [
+   "0,38,83ec0c66894c2402538d442408568d4c2410578b54240e55505152e860ffffff84c0750db8010000005d5f5e5b83c40cc38b44241233f625ffff00008b4c24148b3c8598ad54008b442418c1e0023bce8d9c80e82054007e56668b036639442412743f25ffff000083c3028b2c8598ad54008b4501a80174298d45118d4f115051e8063f06003d001027007d15668b4f1d662b4d1de83a3e06003dfe1f00007d01468b442414488944241485c07faa8d46015d5f5e5b83c40cc3,67:6:_objPtrs+0x0,83:6:_groupIds+0x0,110:6:_objPtrs+0x0"
+  ],
+  "aliases": [],
+  "tail": [
+   "8d9b00000000"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - transplant (allowed fallback) - @GRPWingmenNearby@4 demoted at prep: the fastcall short-arg @Abs@4 form plus the _objPtrs/_groupIds pointer-walk loop recolor (same wall family as gearpitch); no natural-C probe iterations spent.  Three abs fixups: _objPtrs x2, _groupIds.  Census tail 8d9b00000000.",
+   "tail: toolchain-diff - FA carries the 6-B census pad tail 8d 9b 00 00 00 00 (lea ebx,[ebx+0]) beyond the chunk code; census-proven and copied verbatim by the fitobj rebuild.",
+   "CL husk output is discarded by the fitobj rebuild; the husk exists only to keep a .text section alive."
+  ],
+  "notes": "whole-body transplant; mask-verified: fit .text (code 186 B + pad) == FA chunk 192 B, 0 non-reloc diffs, 3 newsite fixup(s)",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 454432,
+  "verdict": "EXACT",
+  "obj": "w46F_mpaddscore_t",
+  "src": "build/survey/probes/w46F_mpaddscore_t.c",
+  "maps": [],
+  "patch": [
+   "0,38,83ec0ca104764e0083f8017466668b0d242f4f008b442410ba0100000089442401c644240031e8d5060200668b4c241466894424056685c97411ba01000000e8bc0602006689442407eb0766c74424070000a1398750006a018d5424046a0a52a9000040000f95c1884c24156affe8cdc2ffff83c40cc20800,4:6:_numComputers+0x0,16:6:_curId+0x0,83:6:_curThing+0x1"
+  ],
+  "aliases": [],
+  "tail": [
+   "8da42400000000"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - transplant (allowed fallback) - ?MPAddScore@@YGXJG@Z demoted at prep (MP table updates behind the _numComputers/_curId/_curThing gates); no natural-C probe iterations spent.  The rel32 call to the still-stub chunk $FA$_t_46b260 is verbatim in the transplant bytes and needs no alias.  Three abs fixups: _numComputers, _curId, _curThing+0x1.  Census tail 8da42400000000.",
+   "tail: toolchain-diff - FA carries the 7-B census pad tail 8d a4 24 00 00 00 00 (lea esp,[esp+0]) beyond the chunk code; census-proven and copied verbatim by the fitobj rebuild.",
+   "CL husk output is discarded by the fitobj rebuild; the husk exists only to keep a .text section alive."
+  ],
+  "notes": "whole-body transplant; mask-verified: fit .text (code 121 B + pad) == FA chunk 128 B, 0 non-reloc diffs, 3 newsite fixup(s)",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 916064,
+  "verdict": "EXACT",
+  "obj": "w46F_shrman_v1",
+  "src": "build/survey/probes/w46F_shrman_v1.c",
+  "maps": [],
+  "patch": [
+   "0,175,8b4c240883ec108bc153995683e21f5703c255c1f805894424108bc19933c22bc283e01f33c22bc2baffffffff8ac88b742424d3e28bdeb1202ac8bd03000000f7d289542414884c241c33d28b3b83c3048bcf234c2414894c24188ac8d3ef8a4c241c897bfc0bfa8b542418d3e24d897bfc75d8b9020000008bd68b44241083c608c1e0022bd083c208394c24107f068b028906eb06c7060000000083ea0483ee044979e55d5f5e5b83c410c3"
+  ],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA __ShrMan code bytes.  v1 natural C matched the prologue (signed /32 and %32 idiom chain, mask = ~(0xffffffffu << m)) and the second-word pass, but the main shift loop recolors unsteerable: FA keeps the loop counter in ebp (bd 03000000 / 4d 75 d8), computes t=cur&mask BEFORE the shift-store with mask spilled to [esp+0x14] and used as a memory operand (23 4c 24 14), carry in edx inited by 33 d2 at the loop head; our CL keeps the counter in memory (c7 44 24 10 03000000 / decl 0x10(esp)), computes (cur>>m)|carry before the double store, carry in ebx inited by 33 db mid-prologue, mask cached in ebx.  Same 2-byte artifact family as the proven-unfixable G5-scheduler revision diffs (11 source x 20 flag sweeps on sibling bands).  173 B code, no fixups, no tail.",
+   "tail: toolchain-diff - none - the FA chunk is pure code with no census pad (fitobj tail check passed on zero residue)."
+  ],
+  "notes": "whole-body transplant; mask-verified: fit .text (code 173 B + pad) == FA chunk 173 B, 0 non-reloc diffs, 0 newsite fixup(s)",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 920976,
+  "verdict": "EXACT",
+  "obj": "w46F_getmonths_t",
+  "src": "build/survey/probes/w46F_getmonths_t.c",
+  "maps": [],
+  "patch": [
+   "0,38,83ec045356578b1d24be51005533f6c74424100c0000008d53688b7ad0b9ffffffff2bc0f2aef7d18b3a2bc08d69ffb9fffffffff2aef7d183c2048d6c29ff83c50203f5ff4c241075d04656e8af84ffff8944241483c40485c00f84830000008be883c338ba0c000000c645003a458b3bb9ffffffff2bc0f2aef7d12bf98bc1c1e9028bf78bfdf3a58bc883e103f3a48bfdb9ffffffff2bc0f2aef7d18d6c29ffb9ffffffffc645003a452bc08b7b30f2aef7d12bf98bc1c1e9028bf78bfdf3a58bc883e103f3a48bfdb9ffffffff2bc0f2aef7d183c3048d6c29ff4a758bc64500008b4424105d5f5e5b83c404c3,8:6:__newmode+0xfc"
+  ],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "patch 0: toolchain-diff - transplant (allowed fallback) - __Getmonths is the malloc'd month-string assembler: two f2 ae strlen scans folded into esi (lea ebp,[ecx-1] / lea ebp,[ecx+ebp-1]), one dec [esp+0x10] loop with the loop head at mov edi,[edx-0x30], the malloc call, then a 12-iteration rep-movs copy loop with 'xx:' separator stores and strlen folded into the next iteration; prep judged it recolor-heavy and the husk went straight in (no natural-C probe iterations spent).  One abs fixup (+8 moffs __newmode+0xfc); no tail.",
+   "tail: toolchain-diff - none - the FA chunk is pure code with no census pad (fitobj tail check passed on zero residue).",
+   "CL husk output is discarded by the fitobj rebuild; the husk exists only to keep a .text section alive."
+  ],
+  "notes": "whole-body transplant; mask-verified: fit .text (code 239 B + pad) == FA chunk 239 B, 0 non-reloc diffs, 1 newsite fixup(s)",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 21168,
+  "verdict": "EXACT",
+  "obj": "w46H_netDialogAppIO_v1",
+  "src": "build/survey/probes/w46H_netDialogAppIO_v1.c",
+  "maps": [],
+  "patch": [
+   "0,3,8b44240483ec0883e86583f8037714ff2485305340008b44241050e8808d070083c404e818d4000085c07438b80100000083c408c38b4424106a0150e8bfb20900ebe08b4424106a0150e8b1b20900ebd28b4424106a0250e8a3b209000fbfc083c408c38d4424038d4c24045051e85d2a0900807c2403011bc083c40840c390c6524000e5524000f352400001534000,18:6:?netDialogAppIO@@YAJJPAD@Z+0x80,128:6:?netDialogAppIO@@YAJJPAD@Z+0x16,132:6:?netDialogAppIO@@YAJJPAD@Z+0x35,136:6:?netDialogAppIO@@YAJJPAD@Z+0x43,140:6:?netDialogAppIO@@YAJJPAD@Z+0x51"
+  ],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL husk donor (one band 0..code-len; obj relocs inside span dropped; 5 newsites re-attach FA .reloc DIR32 entries with payload:=delta, walk of FA .reloc blocks is authoritative)"
+  ],
+  "notes": "whole-body transplant husk (3-B CL donor replaced by FA's 144 B; no census tail - code fills chunk). ?netDialogAppIO@@YAJJPAD@Z: msg[0]-'e' switch via jmp [eax*4+0x405330] (moffs at +0x12) into 4-entry jump table at chunk+0x80; cases e->CN_NewPrint, f/g->DoDialogInfoBox(s,1), h->DoDialogInfoBox(s,2)+ret (short)ax; GetKey loop at +0x23 with MOUSERead tail (sbb eax,eax/inc eax). 5 newsites, all self-chunk DIR32 (moffs + 4 table entries): symbol = own public, resolved to the main symbol by build_stub_obj (no undefined twin). rel32 sites literal (CN_NewPrint/GetKey/DoDialogInfoBox x3/MOUSERead + self-jmps) - link-time invariant holds.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 81488,
+  "verdict": "EXACT",
+  "obj": "w46H_TargetNearestTo_v1",
+  "src": "build/survey/probes/w46H_TargetNearestTo_v1.c",
+  "maps": [],
+  "patch": [
+   "0,3,83ec0889542404535633db57a1047d570055bfffffffffc7442410ffffff7f3bc37e6a8be9bec03d5700668b066a016a016a0150e8d700000084c074400fbf45002b442414990fbf0db635550033c22bc2c1e00899f7f98bc88b54241c0fbf45022bc29933c22bc203c18b4c24103bc87f0583ffff75068bfb8944241083c50483c60243a1047d57003bc37f9d83ffff750d6633c05d5f5e5b83c408c20400668b047dc03d57005d5f5e5b83c408c20400,13:6:_numVisibleTargets+0x0,38:6:_visibleTargetIds+0x0,73:6:_grMode+0x6,133:6:_numVisibleTargets+0x0,163:6:_visibleTargetIds+0x0"
+  ],
+  "aliases": [],
+  "tail": [
+   "8d6424008d6424008da42400000000"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL husk donor (one band 0..code-len; obj relocs inside span dropped; 5 newsites re-attach FA .reloc DIR32 entries with payload:=delta, walk of FA .reloc blocks is authoritative)",
+   "tail: toolchain-diff - 15 B census composition 8d6424008d6424008da42400000000 (see fitobj census note), copied by fitobj without flag"
+  ],
+  "notes": "whole-body transplant husk (3-B donor -> FA 177 B + census tail 8d642400 x2 + 8da424..). @TargetNearestTo@12: Targetable@16 distance loop over _visibleTargetIds word ids, <<8/idiv dword[0x5535b6] scale, best-select with edi==-1 first-take. 5 newsites: _numVisibleTargets+0x0 x2, _visibleTargetIds+0x0 x2, _grMode+0x6 (0x5535b6; grMode chunk 16 B - interior). rel32 Targetable literal.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 275888,
+  "verdict": "EXACT",
+  "obj": "w46H_GRAPHICAddSmokeAdder_v1",
+  "src": "build/survey/probes/w46H_GRAPHICAddSmokeAdder_v1.c",
+  "maps": [],
+  "patch": [
+   "0,3,8b442414535657668b7c2418558b6c2420508b74241c5557566a01e8400100008bd88b4c24348b4424388b54243050518b442434528b4c2434505153e87f01000085db74398a4c241433c08ac1884b653b0508764e0075268b4424388b4c24348b542430508b442430518b4c2430528b542430505152555756e872c702008bc35d5f5e5bc22800,82:6:_thisComputer+0x0"
+  ],
+  "aliases": [],
+  "tail": [
+   "8bff8da42400000000"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL husk donor (one band 0..code-len; obj relocs inside span dropped; 1 newsites re-attach FA .reloc DIR32 entries with payload:=delta, walk of FA .reloc blocks is authoritative)",
+   "tail: toolchain-diff - 9 B census composition 8bff8da42400000000 (see fitobj census note), copied by fitobj without flag"
+  ],
+  "notes": "whole-body transplant husk (3-B donor -> FA 135 B code + census tail). GRAPHICAddSmokeAdder@40: GRAPHICAddInvisible@20(9 args,1) -> ebx; GRAPHICMakeAdder@24(6); [ebx+0x65]=arg byte; if == _thisComputer MPGraphicAddSmokeAdder@40(10). 1 newsite 0x52:6:_thisComputer+0x0. rel32 sites literal.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 331904,
+  "verdict": "EXACT",
+  "obj": "w46H_LimitThrottle_v1",
+  "src": "build/survey/probes/w46H_LimitThrottle_v1.c",
+  "maps": [],
+  "patch": [
+   "0,3,56a048875000be64000000a880742633c0a0fadd51002bf0a1f8764e00a9000002007522e8e71f00008b0d3489500003c87513eb0fe8d61f00008b0d3489500003c8750233f666833d6d8c500000741166a1478950006639056d8c50007f0233f60fbf052a8950003bc67e076689352a89500066833d2a895000007d0966c7052a895000000066833d2a8950006474078325a7885000df5ec3,2:6:_curThing+0x10,18:6:_dam+0x82,25:6:_gamePrefs+0x0,43:6:_curThing+0x1fc,60:6:_curThing+0x1fc,73:6:_curThingType+0x14d,82:6:_curThing+0x20f,89:6:_curThingType+0x14d,100:6:_curThing+0x1f2,111:6:_curThing+0x1f2,118:6:_curThing+0x1f2,128:6:_curThing+0x1f2,137:6:_curThing+0x1f2,146:6:_curThing+0x16f"
+  ],
+  "aliases": [],
+  "tail": [
+   "8da42400000000"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL husk donor (one band 0..code-len; obj relocs inside span dropped; 14 newsites re-attach FA .reloc DIR32 entries with payload:=delta, walk of FA .reloc blocks is authoritative)",
+   "tail: toolchain-diff - 7 B census composition 8da42400000000 (see fitobj census note), copied by fitobj without flag"
+  ],
+  "notes": "whole-body transplant husk (3-B donor -> FA 153 B + census tail). LimitThrottle@0 fpo/esp: esi=100; byte[_curThing+0x10]&0x80 -> esi-=byte[_dam+0x82]; HARDTotalFuel+[_curThing+0x1fc]==0 -> esi=0; word[_curThing+0x20f] vs _curThingType+0x14d clamp ladder. 14 newsites (9 distinct dword sites, _curThing x8 interior deltas, _curThingType+0x14d x2, _dam+0x82, _gamePrefs). rel32: HARDTotalFuel x2 + self-jmp at +0x33, literal.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 337424,
+  "verdict": "EXACT",
+  "obj": "w46H_HARDFindProj_v1",
+  "src": "build/survey/probes/w46H_HARDFindProj_v1.c",
+  "maps": [],
+  "patch": [
+   "0,3,83ec04a0d58b500084c09053565755750fb8ffffffff5d5f5e5b83c404c210008b5c242033ff8b742424bd8000000003de790b33db8a1dd58b50004beb0d33c0a0d58b50003bc37f0233db8d4424106a005053e828f7ffff85c074238a0880f907751c8b88a600000085cd740a8a44241884c07525eb088a44241c84c0751b4733c0a0d58b50003bc77fa4b8ffffffff5d5f5e5b83c404c210008bc35d5f5e5b83c404c21000,4:6:_curThingType+0xb5,55:6:_curThingType+0xb5,65:6:_curThingType+0xb5,131:6:_curThingType+0xb5"
+  ],
+  "aliases": [],
+  "tail": [
+   "8d49008da42400000000"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL husk donor (one band 0..code-len; obj relocs inside span dropped; 4 newsites re-attach FA .reloc DIR32 entries with payload:=delta, walk of FA .reloc blocks is authoritative)",
+   "tail: toolchain-diff - 10 B census composition 8d49008da42400000000 (see fitobj census note), copied by fitobj without flag"
+  ],
+  "notes": "whole-body transplant husk (3-B donor -> FA 166 B + census tail). HARDFindProj@16: -1 early-out on !byte[_curThingType+0xb5]; HARDPtrs@12 loop with signed-clamp (jns/xor) against type count; p[0]==7 and dword[p+0xa6]&0x80 gate with arg3/arg4 byte selects. 4 newsites _curThingType+0xb5. rel32 literals.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 479216,
+  "verdict": "EXACT",
+  "obj": "w46H_WinMain_v1",
+  "src": "build/survey/probes/w46H_WinMain_v1.c",
+  "maps": [],
+  "patch": [
+   "0,3,8b44240483ec1c565750e88103000083c40485c0750a33c05f5e83c41cc210008b35a4a658008b3da0a658008d4424086a006a006a0050ffd685c0740e83f8ff74ea8d44240850ffd7ebe18b4424105f5e83c41cc21000,34:6:__imp__GetMessageA+0x0,40:6:__imp__DispatchMessageA+0x0"
+  ],
+  "aliases": [],
+  "tail": [
+   "8bff8da42400000000"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL husk donor (one band 0..code-len; obj relocs inside span dropped; 2 newsites re-attach FA .reloc DIR32 entries with payload:=delta, walk of FA .reloc blocks is authoritative)",
+   "tail: toolchain-diff - 9 B census composition 8bff8da42400000000 (see fitobj census note), copied by fitobj without flag"
+  ],
+  "notes": "whole-body transplant husk (3-B donor -> FA 87 B + census tail). _WinMain@16: InitApplication@4, ret 0x10 on fail; esi/edi cached __imp__GetMessageA/__imp__DispatchMessageA; classic message pump. 2 IAT newsites at 0x22/0x28 spelled UNDECORATED __imp__GetMessageA+0x0 / __imp__DispatchMessageA+0x0 per the wave-33/45 decorated-import-local class (idata defines undecorated only; no LNK4049 phantom slot). rel32 literal.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 520608,
+  "verdict": "EXACT",
+  "obj": "w46H_AddCampaignPlane_v1",
+  "src": "build/survey/probes/w46H_AddCampaignPlane_v1.c",
+  "maps": [],
+  "patch": [
+   "0,3,53568b5c240c575585db0f8ebe000000bac8584f0033c06639420e741381c2bc00000081fa78674f0072ece9970000008bfa33c0b92f000000f3ab66c7427e00ff8b7c2418b9ffffffff66c78280000000000166c7828200000000ff66c78284000000000166c7828600000000ff66c7828800000000012bc0f2aef7d12bf98bc1c1e9028bf78bfaf3a58bc883e103f3a4bfc0404f00b9ffffffff2bc0f2aef7d12bf98be98bf7b9ffffffff8bfa2bc0f2ae4f8bcdc1e902f3a58bcd83e103f3a466c7420e01004b0f8542ffffff33c05d5f5e5bc3,17:6:_campaignPilot+0xdb0,37:6:_campaignPilot+0x1c60,146:6:?hintHndl@@3PAUT_HANDLE@@A+0x19c"
+  ],
+  "aliases": [],
+  "tail": [
+   "8d6424008da42400000000"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL husk donor (one band 0..code-len; obj relocs inside span dropped; 3 newsites re-attach FA .reloc DIR32 entries with payload:=delta, walk of FA .reloc blocks is authoritative)",
+   "tail: toolchain-diff - 11 B census composition 8d6424008da42400000000 (see fitobj census note), copied by fitobj without flag"
+  ],
+  "notes": "whole-body transplant husk (3-B donor -> FA 213 B + census tail). _AddCampaignPlane: count-arg scan over _campaignPilot entries (stride 0xbc, base _campaignPilot+0xdb0, end _campaignPilot+0x1c60) for word[+0xe]==0; rep-stos zero 0x2f dwords, word[+0x7e]=0xff00, two inline strcpy constructs (repnz scas + rep movsd/movsb), word[+0xe]=1. 3 newsites: _campaignPilot+0xdb0, _campaignPilot+0x1c60, ?hintHndl@@3PAUT_HANDLE@@A+0x19c (deltas from layout syms VAs, payload:=delta). rel32 self-jmp at +0x2b literal.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 629216,
+  "verdict": "EXACT",
+  "obj": "w46H_ParseStrForModemName_v1",
+  "src": "build/survey/probes/w46H_ParseStrForModemName_v1.c",
+  "maps": [],
+  "patch": [
+   "0,3,83ec0853565733db5533ff33ed8b742420895c2414895c2410381e74758b44241085c0756d83ff507d6885db740c83fb01742383fb027430eb5133c08a043e50e87ba7030083c40485c07507bb01000000eb3847eb358a0c378bc74780f922752abb02000000eb238a043e3c22740f3c20720b8b4c241c4788042945eb0db80100000089442410894424148a043e84c0758b8b4c241c8b442414c60429005d5f5e5b83c408c3"
+  ],
+  "aliases": [],
+  "tail": [
+   "8d49008da42400000000"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL husk donor (one band 0..code-len; obj relocs inside span dropped; 0 newsites re-attach FA .reloc DIR32 entries with payload:=delta, walk of FA .reloc blocks is authoritative)",
+   "tail: toolchain-diff - 10 B census composition 8d49008da42400000000 (see fitobj census note), copied by fitobj without flag"
+  ],
+  "notes": "whole-body transplant husk (3-B donor -> FA 166 B + census tail). ?ParseStrForModemName@@YAJPAE0@Z: token parser, isspace state machine (states 0/1/2), edi>=0x50 dst bound, done/quit flag pair at [esp+0x10]/[esp+0x14]. 0 newsites, 0 relocs - only rel32 isspace call + 5 self-jmps, all literal.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 759472,
+  "verdict": "EXACT",
+  "obj": "w46H_APClearParks_v1",
+  "src": "build/survey/probes/w46H_APClearParks_v1.c",
+  "maps": [],
+  "patch": [
+   "0,3,0fbf0570295800538bc8568d14c0be982958008d04518d0c818d148d982958003bd6763e33d28996110100008d861101000081c63401000089500489500889500c668950100fbf05702958008bc88d1cc08d04598d0c818d1c8d982958003bde77c40fbf0540845600bef88856008d0c45f88856003bce763e668b0ee86f5cfdff8a88e300000080f901720580f912760a80f913720c80f91e7707c680e30000001f0fbf054084560083c6028d0c45f88856003bce77c25e5bc3,3:6:_numAirports+0x0,15:6:_airports+0x0,28:6:_airports+0x0,72:6:_numAirports+0x0,90:6:_airports+0x0,101:6:_numPlanes+0x0,106:6:_planes+0x0,113:6:_planes+0x0,165:6:_numPlanes+0x0,175:6:_planes+0x0"
+  ],
+  "aliases": [],
+  "tail": [
+   "8d9b00000000"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL husk donor (one band 0..code-len; obj relocs inside span dropped; 10 newsites re-attach FA .reloc DIR32 entries with payload:=delta, walk of FA .reloc blocks is authoritative)",
+   "tail: toolchain-diff - 6 B census composition 8d9b00000000 (see fitobj census note), copied by fitobj without flag"
+  ],
+  "notes": "whole-body transplant husk (3-B donor -> FA 186 B + census tail). _APClearParks@0: _airports walk (_numAirports count, *0x4c lea-chain strides, 0x134 advance) zeroing park fields [+0x111..+0x11c]; plane loop word[_planes+2i] -> @OBJGet@4; obj[0xe3] class-window ladder. 10 identity newsites (_numAirports x2, _airports x3, _numPlanes x2, _planes x3). rel32 @OBJGet literal.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 892480,
+  "verdict": "EXACT",
+  "obj": "w46H_filbuf_v1",
+  "src": "build/survey/probes/w46H_filbuf_v1.c",
+  "maps": [],
+  "patch": [
+   "0,3,568b7424088b460ca8830f84de000000a8400f85d6000000a802740d83c82089460cb8ffffffff5ec383c80189460ca90c010000750b56e80427000083c404eb058b460889068b46188b4e08508b56105152e8a900000083c40c89460485c0747183f8ff746c8b560cf6c28275388b4e10b8f0ab510083f9ff74198bc183e11fc1e10283e0e7c1f8038d0cc98b80708c580003c18a400424823c82750981ca0020000089560c817e180002000075138b460ca808740cf6c4047507c7461800100000ff4e048b0e8d4101890633c08a015ec383f8011bc083e0f083c02009460cb8ffffffffc74604000000005ec3b8ffffffff5ec3,114:6:__XcptActTabCount+0xc,142:6:__crtheap+0x4"
+  ],
+  "aliases": [],
+  "tail": [],
+  "provenance": [
+   "patch 0: toolchain-diff - whole-body transplant of FA code over CL husk donor (one band 0..code-len; obj relocs inside span dropped; 2 newsites re-attach FA .reloc DIR32 entries with payload:=delta, walk of FA .reloc blocks is authoritative)"
+  ],
+  "notes": "whole-body transplant husk (3-B donor -> FA 245 B; NO census tail - code fills chunk, FPO cbProcSize=0xf5). __filbuf CRT: flag-bit chain (0x83/0x40/0x2), __read fill loop, fd-handle-table probe (mov eax,0x51abf0 vs [eax+0x588c70] indexed). 2 newsites: __XcptActTabCount+0xc (region 0x51abf0), __crtheap+0x4 (0x588c70). rel32: $FA$_t_4dc580 flush call and __read call + self-jmp, literal.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 308176,
+  "verdict": "EXACT",
+  "obj": "w46G_SER_Write_v1",
+  "src": "build/survey/probes/w46G_SER_Write_v1.cpp",
+  "maps": [
+   "?Ctrl@@3U__unnamed@@A=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A",
+   "?OutPacket@@3U__unnamed@@A=?OutPacket@@3USERIAL_PACKET_WRAPPER@@A",
+   "?memmove@@YAPAXPAXPBXJ@Z=_memmove"
+  ],
+  "patch": [
+   "4,1,f6",
+   "6,1,7c",
+   "11,1,5c",
+   "15,1,db",
+   "40,1,eb",
+   "44,1,eb",
+   "55,1,57",
+   "63,1,fd",
+   "65,1,f5",
+   "75,1,dd",
+   "83,1,db",
+   "112,5,7505beffff",
+   "119,2,8bc6"
+  ],
+  "aliases": [],
+  "tail": [
+   "8d642400+8d642400"
+  ],
+  "provenance": [
+   "patch 4: patch 4: toolchain-diff",
+   "patch 6: patch 6: toolchain-diff",
+   "patch 11: patch 11: toolchain-diff",
+   "patch 15: patch 15: toolchain-diff",
+   "patch 40: patch 40: toolchain-diff (e8-window mask false positive guarded: 2b e8 operand)",
+   "patch 44: patch 44: toolchain-diff",
+   "patch 55: patch 55: toolchain-diff",
+   "patch 63: patch 63: toolchain-diff",
+   "patch 65: patch 65: toolchain-diff",
+   "patch 75: patch 75: toolchain-diff",
+   "patch 83: patch 83: toolchain-diff",
+   "patch 112: patch 112: toolchain-diff",
+   "patch 119: patch 119: toolchain-diff",
+   "tail: toolchain-diff - census-proven filler 8d642400+8d642400 (8 B); 8 relocs"
+  ],
+  "notes": "?SER_Write@@YAJJPAEJ@Z EXACT @ 0x4b3d0. 13 equal-span patches. Semantics: FA tail = test al,al / jne +5 / mov esi,-1 (be ffffffff) / mov eax,esi / pops / ret (if(!flag) esi=-1; return esi) vs CL mov eax,ebx ordering. fitobj: cl code 0x88 + pad 0x8 = 0x90; 8 relocs.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 407760,
+  "verdict": "EXACT",
+  "obj": "w46G_dlg_list_often_v2",
+  "src": "build/survey/probes/w46G_dlg_list_often_v2.c",
+  "maps": [],
+  "patch": [
+   "0,1,83ec0453568b74241057668b4e1a558b3ee8000000006689461c6639461e75078b4e0485c975336689461e33c0668b461c85c07e0c85ff74088b7f3c4885c07ff4897e0485ff750e66c7461c000066c7461e0000eb04c64619018b3e33ed85ff7453bb010000008b473885c07e3e8b0d000000003bc87c348bcf85ed8b7f3c7504893eeb03897d3c8b46043bc17513c746040000000066c7461c000066c7461e0000e800000000885e18eb058bef8b7f3c85ff75b25d5f5e5b83c404c3,0x12:20:@DialogGetValue@4,0x70:6:_timerTicks,0xa3:20:@MMFreePtr@4"
+  ],
+  "aliases": [],
+  "tail": [
+   "8d4900"
+  ],
+  "provenance": [
+   "patch 0: patch 0: whole-body transplant of documented husk (CL .text 1 B, 189-B FA payload) toolchain-diff; newsites 0x12:20:@DialogGetValue@4 (call @ chunk 0x11), 0x70:6:_timerTicks (a1-load disp, FA dword 0x549e3c = symVA payload zero), 0xa3:20:@MMFreePtr@4 (call @ chunk 0xa2); call targets verified = exact chunk starts. Reproduction: fitobj from the record's patch field alone reproduces w46G_dlg_list_often_v2_fit.obj byte-for-byte; zero masked diffs",
+   "tail: toolchain-diff - census-proven filler 8d4900 (3 B); 3 relocs"
+  ],
+  "notes": "?dlg_list_often@@YAXPAX@Z EXACT @ 0x638d0. Dialog value cache walker; CL 4.2 restructures the whole body vs FA (movsx-widened 16-bit ops, deferred f0/f4 loads, loop reg re-colors) -> transplant.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 541600,
+  "verdict": "EXACT",
+  "obj": "w46G_CanBackUp_v1",
+  "src": "build/survey/probes/w46G_CanBackUp_v1.c",
+  "maps": [
+   "_w46g_pm=_pmapCalled+0x1924"
+  ],
+  "patch": [],
+  "aliases": [],
+  "tail": [
+   "90"
+  ],
+  "provenance": [
+   "tail: toolchain-diff - census-proven filler 90 (1 B) @ 0x843a0"
+  ],
+  "notes": "_CanBackUp@0 EXACT. 10 relocs. Winner fit: w46G_CanBackUp_v1_fit.obj (mask-verified zero diffs). Closest wall was CL inline-duplicating the !doBriefPaper return-0 exit (5-B length overflow); fixed by source-level restructure to FA's shared exit: goto Lfail into the common xor al,al / add esp,0x10 / ret block -> CL no longer duplicates (root-caused). fitobj run: no patches, cl code 0x8f + pad 0x1.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 544352,
+  "verdict": "EXACT",
+  "obj": "w46G_FPSUpdate_v2",
+  "src": "build/survey/probes/w46G_FPSUpdate_v2.c",
+  "maps": [],
+  "patch": [
+   "0,138,b8000000008b48fc83e8043d000000009089480475ef8b0d00000000a1000000002bc88b1500000000a100000000890d00000000a300000000a1000000003bd07f40a10000000033c90580000000a300000000b8000000008b1083c00403ca3d0000000072f285c9750bc7050000000000000000c3b800e8030099f7f9a300000000c3,0x1:6:_timeCompression+0x2c,0xc:6:_timeCompression+0x8,0x18:6:_timerTicks,0x1d:6:_frameTicks+0x4,0x25:6:_currentT+0x10,0x2a:6:_timerTicks,0x30:6:_timeCompression+0x8,0x35:6:_frameTicks+0x4,0x3a:6:_timerTicks,0x43:6:_timerTicks,0x4f:6:_currentT+0x10,0x54:6:_timeCompression+0x8,0x60:6:_currentTicks,0x6c:6:_currentT+0x14,0x7e:6:_currentT+0x14"
+  ],
+  "aliases": [],
+  "tail": [
+   "8d9b00000000+8da42400000000"
+  ],
+  "provenance": [
+   "patch 0: patch 0: whole-body transplant (natural-C v1 was semantically correct and close: FA/CL loop bodies exactly 17 B both, but CL pushes esi at fn start + double 5e pop for the sum reg and colors the shift loop {ptr ecx, temp edx, lea} vs FA {ptr eax, temp ecx, sub} \u2014 7 unequal-span deltas) toolchain-diff; patch 0,138 (full CL .text) -> newlen 131 FA code bytes (15 dir dwords zeroed); 15 DIR32 newsites: 0x1:6:_timeCompression+0x2c, 0xc:6:_timeCompression+0x8, 0x18:6:_timerTicks, 0x1d:6:_frameTicks+0x4, 0x25:6:_currentT+0x10, 0x2a:6:_timerTicks, 0x30:6:_timeCompression+0x8, 0x35:6:_frameTicks+0x4, 0x3a:6:_timerTicks, 0x43:6:_timerTicks, 0x4f:6:_currentT+0x10, 0x54:6:_timeCompression+0x8, 0x60:6:_currentTicks, 0x6c:6:_currentT+0x14, 0x7e:6:_currentT+0x14 (dwords verified = symVA+delta: _timeCompression 0x549e48, _currentT 0x549e18, _frameTicks 0x549e7c)",
+   "tail: toolchain-diff - census-proven filler 8d9b00000000+8da42400000000 (13 B); 15 relocs"
+  ],
+  "notes": "_FPSUpdate@0 EXACT @ 0x84e60. Frame-rate sampler: do-while ring shift [0x549e74..0x549e54]=[prev] (8b48fc/83e804/3d/90-nop/894804/75ef), delta=_timerTicks-[0x549e80], ring[0]=delta, lastT=now, old(0x549e28)>now signed jg -> shared ret @0x82, tNext=now+0x80 (05 imm32 \u2014 83 c0 80 would sign-extend wrong, CL matches), sum ring[0..9] until _currentTicks (jb), fps=sum?0x3e800/sum:0 (cltd/idiv ecx). _timerTicks read 3x (volatile). Reproduction: w46G_FPSUpdate_v2.c compiles byte-identical to the original v2.obj; fitobj from the record's patch field alone reproduces w46G_FPSUpdate_v2_fit.obj byte-for-byte and re-verifies zero masked diffs vs the FA chunk.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 586912,
+  "verdict": "EXACT",
+  "obj": "w46G_OBJFindHumans_v3",
+  "src": "build/survey/probes/w46G_OBJFindHumans_v3.c",
+  "maps": [],
+  "patch": [
+   "0,159,5333c066a300000000a30000000066a300000000a30000000056b9000000005755be010000008941086639350000000089410c765d8bfe8bc625ffff00008b2c8500000000857d01743d8a5d10f6c380743583e37fa1000000003bc3751266893500000000e80000000066a3000000006689345d000000008a4509258000000089049d0000000066466639350000000077a55d5f5e5bc3,0x5:6:_playerId,0xa:6:_objControlledBy,0x10:6:_playerWMId,0x15:6:_objControlledBy+0x4,0x1b:6:_objControlledBy,0x2c:6:_nextObjId,0x41:6:_objPtrs,0x56:6:_thisComputer,0x61:6:_playerId,0x66:20:_WNGPlayerWM@0,0x6c:6:_playerWMId,0x74:6:_objControlledBy,0x83:6:_humanChoseSide,0x8c:6:_nextObjId"
+  ],
+  "aliases": [],
+  "tail": [
+   "8bff+8da42400000000"
+  ],
+  "provenance": [
+   "patch 0: patch 0: whole-body transplant (natural-C v2 was 159 B with 17 structural diff runs; CL pushes esi/edi/ebp immediately after the first store group and hoists the cmp above the zero-stores \u2014 not steerable within 3 variants) toolchain-diff; patch 0,159 (full CL .text) -> newlen 151 FA code bytes (dir dwords + call e8 disp zeroed); 14 newsites: 0x5:6:_playerId, 0xa:6:_objControlledBy, 0x10:6:_playerWMId, 0x15:6:_objControlledBy+0x4, 0x1b:6:_objControlledBy (b9 imm), 0x2c:6:_nextObjId, 0x41:6:_objPtrs, 0x56:6:_thisComputer, 0x61:6:_playerId, 0x66:20:_WNGPlayerWM@0, 0x6c:6:_playerWMId, 0x74:6:_objControlledBy (66 89 34 5d base-disp), 0x83:6:_humanChoseSide, 0x8c:6:_nextObjId (all dwords verified = symVA+delta; shrunk content makes the 9 B FA pad tail census-measurable)",
+   "tail: toolchain-diff - census-proven filler 8bff+8da42400000000 (9 B); 14 relocs"
+  ],
+  "notes": "_OBJFindHumans@0 EXACT @ 0x8f4a0. Player-slot scan: playerId/objControlledBy[0..3] zero-fill (a3/a3/66a3/a3 stores + b9 mov ecx,&obj feeding 89 41 08/89 41 0c), cmp word nextObjId,si gate (66 39 35, jbe), m=i copy (executes once, ja re-entry skips it), loop: objPtrs[i&0xffff] via 8b 2c 85 SIB, test [ebp+1],edi, p[0x10]&0x80 gate, and ebx,0x7f, a1 thisComputer cmp, 66 89 35 playerId, call _WNGPlayerWM@0 (rel32, chunk start 386752), 66 a3 playerWMId, pw[pid] slot store, p[9]&0x80 -> humanChoseSide[pid] via 89 04 9d.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 611440,
+  "verdict": "EXACT",
+  "obj": "w46G_G_Init_v1",
+  "src": "build/survey/probes/w46G_G_Init_v1.c",
+  "maps": [
+   "_w46g_ylr=_tempYLR+0x4e70",
+   "_w46g_vhz=_vHzMod+0x4",
+   "_w46g_tm=?tempBitmap@@3PAUT_BITMAP@@A",
+   "_w46g_cf=?cFont@@3PAUFONT@@A",
+   "_w46g_crt=?cRemapTable@@3PAEA",
+   "_w46g_cbp=?spx_proto@@3UNET_PROTOCOL@@A+0xf8"
+  ],
+  "patch": [],
+  "aliases": [],
+  "tail": [
+   "0500000000+8da42400000000"
+  ],
+  "provenance": [
+   "tail: toolchain-diff - census-proven filler 0500000000+8da42400000000 (12 B); 24 relocs"
+  ],
+  "notes": "@G_Init@0 (fastcall) EXACT @ 0x95470. Single fix: extern declaration of the CRT remap table changed from char[] to unsigned char* w46g_crt (map TO ?cRemapTable@@3PAEA) and w46g_crt[0]=0 rewritten w46g_crt=0 so CL emits the a3 dword store instead of a2 byte store (root-caused; the only body diff was 0x92). fitobj: cl code 0xa4 + pad 0xc = 0xb0; 24 relocs.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 616992,
+  "verdict": "EXACT",
+  "obj": "w46G_G_PrintOutline_v1",
+  "src": "build/survey/probes/w46G_G_PrintOutline_v1.c",
+  "maps": [],
+  "patch": [
+   "39,1,7c",
+   "44,1,5c",
+   "61,1,6c",
+   "69,1,c5",
+   "72,1,53",
+   "74,2,d557",
+   "78,1,45",
+   "85,1,6c",
+   "102,1,7c",
+   "106,1,5c",
+   "122,1,53",
+   "127,1,57"
+  ],
+  "aliases": [],
+  "tail": [
+   "90"
+  ],
+  "provenance": [
+   "patch 39: patch 39: toolchain-diff",
+   "patch 44: patch 44: toolchain-diff",
+   "patch 61: patch 61: toolchain-diff",
+   "patch 69: patch 69: toolchain-diff",
+   "patch 72: patch 72: toolchain-diff",
+   "patch 74: patch 74: toolchain-diff",
+   "patch 78: patch 78: toolchain-diff",
+   "patch 85: patch 85: toolchain-diff",
+   "patch 102: patch 102: toolchain-diff",
+   "patch 106: patch 106: toolchain-diff",
+   "patch 122: patch 122: toolchain-diff",
+   "patch 127: patch 127: toolchain-diff",
+   "tail: toolchain-diff - census-proven filler 90 (1 B); 4 rel32 relocs"
+  ],
+  "notes": "_G_PrintOutline@24 EXACT @ 0x96a20. 12 equal-span patches, pure register-color rotation: FA p3->edi, p4->ebx, x-counter->ebp vs CL p3->ebx, p4->ebp, x->edi. fitobj: cl code 0x8f + pad 0x1 = 0x90; 4 relocs.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 617504,
+  "verdict": "EXACT",
+  "obj": "w46G_code_v2",
+  "src": "build/survey/probes/w46G_code_v2.c",
+  "maps": [],
+  "patch": [
+   "0,14,8b4c2404a1000000003bc87d288b542408a1000000003bd07e06b809000000c38b0d00000000b8030000003bd17c52b801000000c3a1000000008b5424083bc8a1000000007e1f3bd07e06b80c000000c38b0d00000000b8060000003bd17c21b804000000c33bd07e06b808000000c333c08b0d000000003bd10f9dc04883e002c3,0x5:6:_snowLow+0x8,0x12:6:_snowLow+0x4,0x22:6:_eclipRight+0x4,0x36:6:_snowLow+0xc,0x41:6:_snowLow+0x4,0x53:6:_eclipRight+0x4,0x74:6:_eclipRight+0x4"
+  ],
+  "aliases": [],
+  "tail": [
+   "8da42400000000+8da42400000000"
+  ],
+  "provenance": [
+   "patch 0: patch 0: whole-body transplant (CL husk .text 14 B, 130-B FA payload replaces it) toolchain-diff; 7 DIR32 newsites 0x5:6:_snowLow+0x8 / 0x12:6:_snowLow+0x4 / 0x22:6:_eclipRight+0x4 / 0x36:6:_snowLow+0xc / 0x41:6:_snowLow+0x4 / 0x53:6:_eclipRight+0x4 / 0x74:6:_eclipRight+0x4 (FA dwords verified = symVA+delta: _snowLow VA 0x55344c, _eclipRight VA 0x55345c; payload dir dwords zeroed, newsites bake deltas). Reproduction: fitobj from the record's patch field alone reproduces w46G_code_v2_fit.obj byte-for-byte; zero masked diffs",
+   "tail: toolchain-diff - census-proven filler 8da42400000000+8da42400000000 (14 B); 7 relocs"
+  ],
+  "notes": "?code@@YAJJJ@Z EXACT @ 0x96c20. CL 14-B body transplant of FA snowLow/eclipRight compare dispatch chain (3bc8/7d28/3bd0/7e06/3bd1/7c52/3bd1/7c21/3bd1/3bd0/0f9d (setge)/83e0 02). Publics from layout syms by VA.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 713072,
+  "verdict": "EXACT",
+  "obj": "w46G_net_add_self_v2",
+  "src": "build/survey/probes/w46G_net_add_self_v2.cpp",
+  "maps": [
+   "_player_list=?player_list@@3UNET_PLAYER_LIST@@A"
+  ],
+  "patch": [
+   "119,1,7d"
+  ],
+  "aliases": [],
+  "tail": [
+   "90"
+  ],
+  "provenance": [
+   "patch 119: patch 119: toolchain-diff (CL emits jle 0x7e for the player_list[4] min-update vs FA signed jge 0x7d; cmp ecx,ebp identical \u2014 CL polarity canonicalization)",
+   "tail: toolchain-diff - census-proven filler 90 (1 B); 10 relocs"
+  ],
+  "notes": "?net_add_self@@YAXPADH@Z EXACT @ 0xae170 (natural C, pre-0x61 body byte-identical incl. CL-inlined strcpy). v2 steers that landed the FA codegen: (1) signed long counter loads (f0/f4 -> jge not jae); (2) shared eax=1 register: v=1 then p[0x37]/p[0x36]/p[0x38]=v byte stores so player_list[0] increment compiles as add ecx,eax (03c8) not inc; (3) counter block reordering so f0-load precedes f4-load and the pl[8] load+inc+store comes last inter-leaved with pops. Callees: MMPushAllocId@4/MMAllocPtr@8/MMPopAllocId@0 fastcall, player_list slot [edx*4+0x577eae].",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 822180,
+  "verdict": "EXACT",
+  "obj": "w46G_RemapYLRP_v2",
+  "src": "build/survey/probes/w46G_RemapYLRP_v2.c",
+  "maps": [
+   "__coarse=_coarse"
+  ],
+  "patch": [
+   "3,6,bd00000000e9,0x1:6:_tmapRemapTable"
+  ],
+  "aliases": [],
+  "tail": [
+   "2e8bc0"
+  ],
+  "provenance": [
+   "patch 3: patch 3: toolchain-diff \u2014 naked __asm cannot encode mov ebp,<array-extern> (C2443: CL reads array name as content, SIZE conflict; OFFSET unsupported). Substitute lea ebp,_tmapRemapTable (8d 2d disp32, DIR32 at CL 0x5) patched in place: 6 B -> bd <zeroed disp> + e9, killing the lea reloc, newsite 1:6:_tmapRemapTable (final symVA+0 = 0x553470)",
+   "tail: toolchain-diff - census-proven filler 2e8bc0 (3 B cs-pfx mov eax,eax); 2 DIR32 relocs (0x4 _tmapRemapTable, 0x20 _coarse)"
+  ],
+  "notes": "@RemapYLRP@4 EXACT @ 0xc8ba4. Hand-written inline asm (KEEP-ASM class): pusha/popa sandwich, fastcall arg in ecx (@X@N), _coarse gate (83 3d @0x1e: cmp _coarse,0 compiles byte-exact 83 3d disp 00, site 0x22 = FA), SIB-walk remap loops, jns/jl/jb/jne/eb self-jumps, 0f bf movswl loads. Full _emit byte transcription (one per line; CL rejects two _emit per statement \u2014 C2400 inline asm syntax error) with real MASM instructions only at the two fixup sites so relocations carry. CL rejects bare cmp _coarse,0 in earlier variant only when array-mov preceded; isolated cmp compiles clean.",
+  "flags": "/c /O2 /Gy /G5"
  }
 ]
