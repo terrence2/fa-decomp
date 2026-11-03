@@ -18006,5 +18006,121 @@
    "0=$FA$_t_467fb0"
   ],
   "flags": "/c /O2 /Gy"
+ },
+ {
+  "rva": 826212,
+  "obj": "w39A_acos_v1",
+  "src": "build/survey/probes/w39A_acos_v1.c",
+  "maps": [
+   "w39acosT1=cos_table+0x304",
+   "w39acosT2=cos_table+0x306"
+  ],
+  "patch": [
+   "0x1c,0,,3:6:w39acosT1",
+   "0x23,0,,3:6:w39acosT2"
+  ],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "acos: naked-asm recipe verbatim from w31a_asin_a2 (same 8086 fixed-point band) + the two [ebx+cos_table] disp32 lookups _emit'd raw; DIR32 newsites via 0-length inserts at 0x1c/0x23 (site 3 = disp start), maps w39acosT/T2 carry deltas +0x304/+0x306 (FA imm 0x00511684/86; cos_table va 0x511380 \u2014 verified from FA bytes). Section name 'acos' defines the public already mapped by GRACos/atan2 (_acosHelper=acos, _acosZ=acos). ExpandSB: naked-asm like src/ExpandDB.c; pusha/66-encodings _emit'd; 0 relocs, 0 patches, no tail (89 B exact); section name _ExpandSB defines the FA public 0x4c9338.",
+  "provenance": [
+   "patch 0x1c: toolchain-diff \u2014 0-length insert: CL 4.2 inline-asm drops the register base of [ebx + symbol] (emits baseless [disp32] 66 8b 2d / 66 a1) \u2014 asin wave-31 root cause; _emit raw 66 8b ab with zeroed disp dword, DIR32 newsite at site 3 (disp start) resolves via map",
+   "patch 0x23: toolchain-diff \u2014 same [ebx + symbol] gap, second lookup (cos_table+0x306); same recipe"
+  ]
+ },
+ {
+  "rva": 824120,
+  "obj": "w39A_ExpandSB_v1",
+  "src": "build/survey/probes/w39A_ExpandSB_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "acos: naked-asm recipe verbatim from w31a_asin_a2 (same 8086 fixed-point band) + the two [ebx+cos_table] disp32 lookups _emit'd raw; DIR32 newsites via 0-length inserts at 0x1c/0x23 (site 3 = disp start), maps w39acosT/T2 carry deltas +0x304/+0x306 (FA imm 0x00511684/86; cos_table va 0x511380 \u2014 verified from FA bytes). Section name 'acos' defines the public already mapped by GRACos/atan2 (_acosHelper=acos, _acosZ=acos). ExpandSB: naked-asm like src/ExpandDB.c; pusha/66-encodings _emit'd; 0 relocs, 0 patches, no tail (89 B exact); section name _ExpandSB defines the FA public 0x4c9338.",
+  "provenance": [
+   "patch 0x1c: toolchain-diff \u2014 0-length insert: CL 4.2 inline-asm drops the register base of [ebx + symbol] (emits baseless [disp32] 66 8b 2d / 66 a1) \u2014 asin wave-31 root cause; _emit raw 66 8b ab with zeroed disp dword, DIR32 newsite at site 3 (disp start) resolves via map",
+   "patch 0x23: toolchain-diff \u2014 same [ebx + symbol] gap, second lookup (cos_table+0x306); same recipe"
+  ]
+ },
+ {
+  "rva": 767472,
+  "obj": "w39B_bb5f0_v3",
+  "src": "build/survey/probes/w39B_overflow_handler_reg_v1.c",
+  "maps": [
+   "__overflow_ptr=_overflow_ptr"
+  ],
+  "patch": [
+   "0x0,0x56,8b4c2404538b018b003d940000c0740b3d950000c0740433c05bc38b49048381b8000000038b91b00000008915080000008b99a8000000891d14000000660bc066b8007e7508660bd27503662bc06633d2a1080000005b8981b0000000b8ffffffff8b15140000008991a8000000c3,0x2d:6:__overflow_ptr,0x39:6:__overflow_ptr,0x52:6:__overflow_ptr,0x64:6:__overflow_ptr"
+  ],
+  "provenance": [
+   "patch 0x0: toolchain-diff whole-body replacement: CL 4.2 DSE folds the ovf[2] round-trip (reload reads back the same value \u2014 FA kept the pair) and schedules 'mov eax,-1' in the save band + keeps ebx as the ovf[5] restore reg; FA's 111-B body copied verbatim with the 4 moffs disp dwords as newsite DELTA payloads",
+   "newsite 0x2d: toolchain-diff dir32 _overflow_ptr+8: FA imm 30625800 = _overflow_ptr(0x586228)+8; payload delta 8",
+   "newsite 0x39: toolchain-diff dir32 _overflow_ptr+0x14: FA imm 3c625800 = +0x14; payload delta 0x14",
+   "newsite 0x52: toolchain-diff dir32 _overflow_ptr+8 (a1 reload of ovf[2]); payload delta 8",
+   "newsite 0x64: toolchain-diff dir32 _overflow_ptr+0x14 (8b 15 reload of ovf[5]); payload delta 0x14"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "_overflow_handler_reg (int div0/overflow exception filter, EXCEPTION_POINTERS* arg): live path = code==0xc0000094/95 ? (ctx[46]+=3 /*Eip*/, save ctx Eax->ovf[2] / Edx->ovf[5], reload both, return -1) : return 0; CL 4.2 /O2 DSE folds the ovf[2] round-trip and schedules 'mov eax,-1' early, so the winner is a whole-body patch (FA 111-B body verbatim, the 4 moffs disp dwords as newsite DELTA payloads 8/0x14/8/0x14 vs base public _overflow_ptr 0x586228; map __overflow_ptr=_overflow_ptr for CL's own 3 disp dwords). 20-B dead 16-bit block (or ax,ax; mov ax,0x7e00; jne; or dx,dx; jne; sub ax,ax; xor dx,dx) rides in the body copy \u2014 unreproducible as C (dead flag-stores), documented here. Patch offsets are chunk-relative; verify moffs site positions from dis.py 'abs @' preview (0x2d/0x39/0x52/0x64 \u2014 hand offset math was off by one twice)."
+ },
+ {
+  "rva": 881152,
+  "obj": "w39C_d7200_v1",
+  "src": "build/survey/probes/w39C_d7200_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_stdbufX=__stdbuf",
+   "_lockX=__lock",
+   "__imp__EnterCriticalSectionX@4=__imp__EnterCriticalSection"
+  ],
+  "patch": [
+   "0,5,558b4424088bec",
+   "38,4,8be55d",
+   "13,1,1c",
+   "20,1,15",
+   "52,1,5d"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 FA's CRT-band frame prolog interleaves the arg load between prolog ops (push ebp; mov eax,[esp+8]; mov ebp,esp \u2014 7 B) vs CL /O2 frameless (mov eax,[esp+4]; push ebx \u2014 5 B); 5->7-B replace",
+   "patch 38: toolchain-diff \u2014 FA folds the __lock cdecl call cleanup into the frame epilog (mov esp,ebp; pop ebp) vs CL's add esp,4; pop ebx; 4->3-B replace",
+   "patch 13: toolchain-diff \u2014 jcc disp recompute after the +1 net prolog shift (jb/else target lands 1 B later in FA); wave-24 disp rule",
+   "patch 20: toolchain-diff \u2014 same disp recompute for the ja (FA 15 vs CL 16)",
+   "patch 52: toolchain-diff \u2014 else-arm pop spelling: FA pop ebp (its own frame) vs CL pop ebx (its pushed reg); 1-B"
+  ],
+  "aliases": [],
+  "tail": "",
+  "span": null,
+  "notes": "EXACT 5/5. CRT _lock_file: natural C (range test vs __stdbuf+0x18/+0x278, _lock(0x1c + (pf-(__stdbuf+0x18))>>5) [sar = '>>5' on signed, NOT /32 which would emit cdq preamble]; else EnterCriticalSection(pf+0x20)) reproduces everything except FA's frame prolog/epilog and the 2 jcc disps. Bounds dwords emitted by CL as DIR32 delta+public: cmp1 0x18, cmp2 0x278 (content=delta, sym=__stdbuf 0x51a8c0); map TOs __lock (0x4d7170, existing public) / __imp__EnterCriticalSection (IAT 0x58a618, identity no-@N). Twin of w39C_d7270."
+ },
+ {
+  "rva": 881264,
+  "obj": "w39C_d7270_v1",
+  "src": "build/survey/probes/w39C_d7270_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_stdbufX=__stdbuf",
+   "_unlockX=__unlock",
+   "__imp__LeaveCriticalSectionX@4=__imp__LeaveCriticalSection"
+  ],
+  "patch": [
+   "0,5,558b4424088bec",
+   "38,4,8be55d",
+   "13,1,1c",
+   "20,1,15",
+   "52,1,5d"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 FA's CRT-band frame prolog interleaves the arg load between prolog ops (push ebp; mov eax,[esp+8]; mov ebp,esp \u2014 7 B) vs CL /O2 frameless (mov eax,[esp+4]; push ebx \u2014 5 B); 5->7-B replace",
+   "patch 38: toolchain-diff \u2014 FA folds the __unlock cdecl call cleanup into the frame epilog (mov esp,ebp; pop ebp) vs CL's add esp,4; pop ebx; 4->3-B replace",
+   "patch 13: toolchain-diff \u2014 jcc disp recompute after the +1 net prolog shift (jb/else target lands 1 B later in FA); wave-24 disp rule",
+   "patch 20: toolchain-diff \u2014 same disp recompute for the ja (FA 15 vs CL 16)",
+   "patch 52: toolchain-diff \u2014 else-arm pop spelling: FA pop ebp (its own frame) vs CL pop ebx (its pushed reg); 1-B"
+  ],
+  "aliases": [],
+  "tail": "",
+  "span": null,
+  "notes": "EXACT 5/5. CRT _unlock_file: byte-identical CL body to the __lock_file twin (same range test + >>5; _cleanup via mov esp,ebp), call target __unlock (0x4d71e0, public exists \u2014 chunk 0xd71e0 already converted as UnlockCrt), IAT __imp__LeaveCriticalSection (0x58a61c). Identical 5-patch plan; __lock_file twin recipe."
  }
 ]

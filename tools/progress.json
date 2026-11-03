@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 1612,
- "chunks_done": 1612,
- "bytes_done": 71111,
+ "done": 1617,
+ "chunks_done": 1617,
+ "bytes_done": 71515,
  "bytes_total": 933612,
- "bytes_pct": 7.62,
+ "bytes_pct": 7.66,
  "waves": [
   {
    "date": "2026-11-01",
@@ -1847,6 +1847,17 @@
     "0xdebf0",
     "0xe27e0",
     "0xe2c90"
+   ]
+  },
+  {
+   "date": "2026-11-03",
+   "note": "wave 39: survey-closeout general decompile, 5 entries (1610->1615, GATE 1 PASS)",
+   "rvas": [
+    "0xbb5f0",
+    "0xc9338",
+    "0xc9b64",
+    "0xd7200",
+    "0xd7270"
    ]
   }
  ],

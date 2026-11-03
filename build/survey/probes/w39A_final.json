@@ -1,0 +1,40 @@
+[
+ {
+  "rva": 826212,
+  "obj": "w39A_acos_v1",
+  "src": "build/survey/probes/w39A_acos_v1.c",
+  "maps": [
+   "w39acosT1=cos_table+0x304",
+   "w39acosT2=cos_table+0x306"
+  ],
+  "patch": [
+   "0x1c,0,,3:6:w39acosT1",
+   "0x23,0,,3:6:w39acosT2"
+  ],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "acos: naked-asm recipe verbatim from w31a_asin_a2 (same 8086 fixed-point band) + the two [ebx+cos_table] disp32 lookups _emit'd raw; DIR32 newsites via 0-length inserts at 0x1c/0x23 (site 3 = disp start), maps w39acosT/T2 carry deltas +0x304/+0x306 (FA imm 0x00511684/86; cos_table va 0x511380 \u2014 verified from FA bytes). Section name 'acos' defines the public already mapped by GRACos/atan2 (_acosHelper=acos, _acosZ=acos). ExpandSB: naked-asm like src/ExpandDB.c; pusha/66-encodings _emit'd; 0 relocs, 0 patches, no tail (89 B exact); section name _ExpandSB defines the FA public 0x4c9338.",
+  "provenance": [
+   "patch 0x1c: toolchain-diff \u2014 0-length insert: CL 4.2 inline-asm drops the register base of [ebx + symbol] (emits baseless [disp32] 66 8b 2d / 66 a1) \u2014 asin wave-31 root cause; _emit raw 66 8b ab with zeroed disp dword, DIR32 newsite at site 3 (disp start) resolves via map",
+   "patch 0x23: toolchain-diff \u2014 same [ebx + symbol] gap, second lookup (cos_table+0x306); same recipe"
+  ]
+ },
+ {
+  "rva": 824120,
+  "obj": "w39A_ExpandSB_v1",
+  "src": "build/survey/probes/w39A_ExpandSB_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "acos: naked-asm recipe verbatim from w31a_asin_a2 (same 8086 fixed-point band) + the two [ebx+cos_table] disp32 lookups _emit'd raw; DIR32 newsites via 0-length inserts at 0x1c/0x23 (site 3 = disp start), maps w39acosT/T2 carry deltas +0x304/+0x306 (FA imm 0x00511684/86; cos_table va 0x511380 \u2014 verified from FA bytes). Section name 'acos' defines the public already mapped by GRACos/atan2 (_acosHelper=acos, _acosZ=acos). ExpandSB: naked-asm like src/ExpandDB.c; pusha/66-encodings _emit'd; 0 relocs, 0 patches, no tail (89 B exact); section name _ExpandSB defines the FA public 0x4c9338.",
+  "provenance": [
+   "patch 0x1c: toolchain-diff \u2014 0-length insert: CL 4.2 inline-asm drops the register base of [ebx + symbol] (emits baseless [disp32] 66 8b 2d / 66 a1) \u2014 asin wave-31 root cause; _emit raw 66 8b ab with zeroed disp dword, DIR32 newsite at site 3 (disp start) resolves via map",
+   "patch 0x23: toolchain-diff \u2014 same [ebx + symbol] gap, second lookup (cos_table+0x306); same recipe"
+  ]
+ }
+]

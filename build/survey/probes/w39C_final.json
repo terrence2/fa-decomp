@@ -1,0 +1,30 @@
+[
+ {"rva": 881152, "obj": "w39C_d7200_v1", "src": "build/survey/probes/w39C_d7200_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": ["_stdbufX=__stdbuf", "_lockX=__lock",
+           "__imp__EnterCriticalSectionX@4=__imp__EnterCriticalSection"],
+  "patch": ["0,5,558b4424088bec", "38,4,8be55d", "13,1,1c", "20,1,15", "52,1,5d"],
+  "provenance": [
+   "patch 0: toolchain-diff — FA's CRT-band frame prolog interleaves the arg load between prolog ops (push ebp; mov eax,[esp+8]; mov ebp,esp — 7 B) vs CL /O2 frameless (mov eax,[esp+4]; push ebx — 5 B); 5->7-B replace",
+   "patch 38: toolchain-diff — FA folds the __lock cdecl call cleanup into the frame epilog (mov esp,ebp; pop ebp) vs CL's add esp,4; pop ebx; 4->3-B replace",
+   "patch 13: toolchain-diff — jcc disp recompute after the +1 net prolog shift (jb/else target lands 1 B later in FA); wave-24 disp rule",
+   "patch 20: toolchain-diff — same disp recompute for the ja (FA 15 vs CL 16)",
+   "patch 52: toolchain-diff — else-arm pop spelling: FA pop ebp (its own frame) vs CL pop ebx (its pushed reg); 1-B"
+  ],
+  "aliases": [], "tail": "", "span": null,
+  "notes": "EXACT 5/5. CRT _lock_file: natural C (range test vs __stdbuf+0x18/+0x278, _lock(0x1c + (pf-(__stdbuf+0x18))>>5) [sar = '>>5' on signed, NOT /32 which would emit cdq preamble]; else EnterCriticalSection(pf+0x20)) reproduces everything except FA's frame prolog/epilog and the 2 jcc disps. Bounds dwords emitted by CL as DIR32 delta+public: cmp1 0x18, cmp2 0x278 (content=delta, sym=__stdbuf 0x51a8c0); map TOs __lock (0x4d7170, existing public) / __imp__EnterCriticalSection (IAT 0x58a618, identity no-@N). Twin of w39C_d7270."},
+ {"rva": 881264, "obj": "w39C_d7270_v1", "src": "build/survey/probes/w39C_d7270_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": ["_stdbufX=__stdbuf", "_unlockX=__unlock",
+           "__imp__LeaveCriticalSectionX@4=__imp__LeaveCriticalSection"],
+  "patch": ["0,5,558b4424088bec", "38,4,8be55d", "13,1,1c", "20,1,15", "52,1,5d"],
+  "provenance": [
+   "patch 0: toolchain-diff — FA's CRT-band frame prolog interleaves the arg load between prolog ops (push ebp; mov eax,[esp+8]; mov ebp,esp — 7 B) vs CL /O2 frameless (mov eax,[esp+4]; push ebx — 5 B); 5->7-B replace",
+   "patch 38: toolchain-diff — FA folds the __unlock cdecl call cleanup into the frame epilog (mov esp,ebp; pop ebp) vs CL's add esp,4; pop ebx; 4->3-B replace",
+   "patch 13: toolchain-diff — jcc disp recompute after the +1 net prolog shift (jb/else target lands 1 B later in FA); wave-24 disp rule",
+   "patch 20: toolchain-diff — same disp recompute for the ja (FA 15 vs CL 16)",
+   "patch 52: toolchain-diff — else-arm pop spelling: FA pop ebp (its own frame) vs CL pop ebx (its pushed reg); 1-B"
+  ],
+  "aliases": [], "tail": "", "span": null,
+  "notes": "EXACT 5/5. CRT _unlock_file: byte-identical CL body to the __lock_file twin (same range test + >>5; _cleanup via mov esp,ebp), call target __unlock (0x4d71e0, public exists — chunk 0xd71e0 already converted as UnlockCrt), IAT __imp__LeaveCriticalSection (0x58a61c). Identical 5-patch plan; __lock_file twin recipe."}
+]

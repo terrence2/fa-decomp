@@ -1,0 +1,27 @@
+[
+ {
+  "rva": 767472,
+  "obj": "w39B_bb5f0_v3",
+  "src": "build/survey/probes/w39B_overflow_handler_reg_v1.c",
+  "maps": [
+   "__overflow_ptr=_overflow_ptr"
+  ],
+  "patch": [
+   "0x0,0x56,8b4c2404538b018b003d940000c0740b3d950000c0740433c05bc38b49048381b8000000038b91b00000008915080000008b99a8000000891d14000000660bc066b8007e7508660bd27503662bc06633d2a1080000005b8981b0000000b8ffffffff8b15140000008991a8000000c3,0x2d:6:__overflow_ptr,0x39:6:__overflow_ptr,0x52:6:__overflow_ptr,0x64:6:__overflow_ptr"
+  ],
+  "provenance": [
+   "patch 0x0: toolchain-diff whole-body replacement: CL 4.2 DSE folds the ovf[2] round-trip (reload reads back the same value \u2014 FA kept the pair) and schedules 'mov eax,-1' in the save band + keeps ebx as the ovf[5] restore reg; FA's 111-B body copied verbatim with the 4 moffs disp dwords as newsite DELTA payloads",
+   "newsite 0x2d: toolchain-diff dir32 _overflow_ptr+8: FA imm 30625800 = _overflow_ptr(0x586228)+8; payload delta 8",
+   "newsite 0x39: toolchain-diff dir32 _overflow_ptr+0x14: FA imm 3c625800 = +0x14; payload delta 0x14",
+   "newsite 0x52: toolchain-diff dir32 _overflow_ptr+8 (a1 reload of ovf[2]); payload delta 8",
+   "newsite 0x64: toolchain-diff dir32 _overflow_ptr+0x14 (8b 15 reload of ovf[5]); payload delta 0x14"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "_overflow_handler_reg (int div0/overflow exception filter, EXCEPTION_POINTERS* arg): live path = code==0xc0000094/95 ? (ctx[46]+=3 /*Eip*/, save ctx Eax->ovf[2] / Edx->ovf[5], reload both, return -1) : return 0; CL 4.2 /O2 DSE folds the ovf[2] round-trip and schedules 'mov eax,-1' early, so the winner is a whole-body patch (FA 111-B body verbatim, the 4 moffs disp dwords as newsite DELTA payloads 8/0x14/8/0x14 vs base public _overflow_ptr 0x586228; map __overflow_ptr=_overflow_ptr for CL's own 3 disp dwords). 20-B dead 16-bit block (or ax,ax; mov ax,0x7e00; jne; or dx,dx; jne; sub ax,ax; xor dx,dx) rides in the body copy \u2014 unreproducible as C (dead flag-stores), documented here. Patch offsets are chunk-relative; verify moffs site positions from dis.py 'abs @' preview (0x2d/0x39/0x52/0x64 \u2014 hand offset math was off by one twice)."
+ },
+ {
+  "rva": 830316,
+  "verdict": "KEEP-ASM",
+  "reason": "load_xlate_rotate_pnt (0x4cab6c, 59 B) is an interior basic-block slice, not a function: no ret and no prolog anywhere in the chunk (bytes verified raw: ends 'add esi,0x6' and flows cross-chunk from check_flat (829540+776=0xcab6c start) into mxmul (0xcaba7)). Pattern is 16-bit: cl=*[three_d_globals_start+2]; ax=[esi];shl ax,cl;ax-=__xv (66 2b 05 moffs), then +2/-__zv, +4/-__yv, esi+=6 \u2014 a loop body of the 3D-math band. Slice-level C impossible (a compiled C unit needs ret/frame); converting it requires the whole-span function (check_flat/load_xlate_rotate_pnt/mxmul band, >2.4 KB total). Deferred."
+ }
+]

@@ -1,0 +1,11 @@
+[
+ {"rva": 157573,
+  "verdict": "KEEP-ASM",
+  "reason": "CSE/fusion wall (fa-survey-tier0 16-bit-slot + CSE walls; ALSO already judged KEEP-ASM in wave 32 after 7 spellings, see build/survey/probes/w32D_final.json). FA spells: imul edx,edx,0xe / add edx,imm (mcFlyAll+0x34 base) / 3 x (66 8b 42 off / 66 89 ax -> WORD [ecx+0x1a..1e]) / 8a 52 0c / 88 51 20 / ret (40 B). CL 4.2 /O2 /Gy /G5 strength-reduces idx*14 into a lea chain (lea eax,[edx*8+imm]; push ecx; sub eax,edx...) and CSE-fuses the first row load into mov bx,[eax*4+imm32] scale addressing (53-55 B). Wave 39 fresh probes: v1 typed-pointer field-copy, v2 volatile-pointer staging - both reconverge to the identical fused 55-B form. No contiguous C-matching span to patch; wall stands."},
+ {"rva": 870544,
+  "verdict": "KEEP-ASM",
+  "reason": "SEH wall (plan class 6, confirmed on dis.py): __global_unwind2 = RtlUnwind@16 wrapper (push regs; push 0,0; push 0x4d48a8 handler; push [ebp+8]; call _RtlUnwind@16; pop band) PLUS an inline second block at +0x20 (0x4d48b0: mov ecx,[esp+4]; mov eax,1; je; mov eax,[esp+8]; mov edx,[esp+0x10]; mov [edx],eax; mov eax,3; ret) - the __NLG/handler data block that __local_unwind2's abs fixup (0x4d48b0) points at. CRT SEH runtime helper; FA's VC4.2 runtime codegen is not reproducible by steering CL C. Existing stub already byte-exact (gate passes)."},
+ {"rva": 870610,
+  "verdict": "KEEP-ASM",
+  "reason": "SEH wall (plan class 6, confirmed on dis.py): __local_unwind2 = exception-walk loop (mov eax,[esp+0x10] frame ptr; push; push -2; push 0x4d48b0 = __global_unwind2+0x20 interior anchor; loads ebx=regblk+8 / esi=trylevel; while esi!=-1 and != target: lea esi,[esi*3] triple table walk; cmp [ebx+esi*4+4],0; __NLG_Notify(0x101, funcptr); call DWORD PTR [ebx+esi*4+8] indirect dispatcher). SEH scoping machinery with an interior gap-anchor map TO; not steerable in CL C by plan policy. Existing stub already byte-exact."}
+]
