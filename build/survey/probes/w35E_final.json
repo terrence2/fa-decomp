@@ -1,0 +1,80 @@
+[
+ {
+  "rva": 9008,
+  "obj": "w35E_2330_v1",
+  "src": "build/survey/probes/w35E_2330_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_402330"
+  ],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "EXACT first probe. 48-B chunk (0x2330): 34 B code + 14 B census pad (8da42400000000 x2, auto-proven, no tail key). void w35_2330(long *p){ long t = timerTicks + 0x400; p[2] = t; if (((char*)p)[0x1a] == 0) p[1] = 4; } - bare C 'timerTicks' emits _timerTicks (0x549e3c layout public), FA imm identity 0x549e3c verified, map-free. CL reproduced the a1 moffs load / add ecx,0x400 / mov [eax+8]/ mov dl,[eax+1a]/ test dl,dl/ jne over the c7 40 04 04 00 00 00 store verbatim. alias 0=$FA$_t_402330 required: still-stub chunks 0x1b20 (?slave_events@@YADIJHPAUsocket_state@@@Z) and 0x2390 carry rel32 fixups to VA 0x402330 (FA scan); replacement removes the stub t00001 extent that defined it."
+ },
+ {
+  "rva": 897664,
+  "obj": "w35E_db280_v1",
+  "src": "build/survey/probes/w35E_db280_v1.c",
+  "maps": [
+   "_nextw=$FA$_t_4db230"
+  ],
+  "patch": [
+   "0xb,7,57ff06e8",
+   "0x24,1,e6"
+  ],
+  "aliases": [
+   "0=$FA$_t_4db280"
+  ],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0xb: toolchain-diff - CL materializes ++*cnt as the mov eax,[esi]/inc eax/mov [esi],eax RMW trio (8b 06 / 40 / 89 06, 7 B with the call opcode in the span); FA spells the 1-B mem-inc ff 06 (loop head = re-push edi at 0x0b). Region replaced with FA's 57 ff 06 e8; CL's own REL32 disp bytes shift -3 with the span so no newsite is needed - link-computed disp -0x63 = FA e8 9d ff ff ff (target 0x4db230 = $FA$_t_4db230) verified.",
+   "patch 0x24: toolchain-diff - jcc disp recompute after the -3 span shift (wave-24 rule): CL's jne disp 0xe3 was encoded against its own loop head; FA's loop head sits 3 B later so disp must be 0xe6 (single patched byte at 0x24)."
+  ],
+  "notes": "EXACT via 2 patches. 43-B chunk (0xdb280), no tail. int w35_db280(int *cnt, int arg){ int c; do { ++*cnt; c = nextw(arg); } while (isspace(c)); return c; } - do-while loop whose head re-pushes the arg each iteration, isspace via identity _isspace (0x4d41a0, converted chunk, map-free). map _nextw=$FA$_t_4db230: the callee chunk rva 0xdb230 is ALREADY CONVERTED (tools/swap.json w32A_db230_v1, rva 897584) - its fitobj obj defines $FA$_span_0db230, NOT $FA$_t_4db230 - WARN PARENT: the parent must add retro-alias \"0=$FA$_t_4db230\" to the w32A_db230_v1 entry (w31H_92360 / w34b_3e230 precedent) or change this map TO to $FA$_span_0db230. alias 0=$FA$_t_4db280: still-stub __input (0x4da550) carries rel32 fixups at 0xda5c7/0xda78e to VA 0x4db280."
+ },
+ {
+  "rva": 914160,
+  "obj": "w35E_df2f0_v6",
+  "src": "build/survey/probes/w35E_df2f0_v6.c",
+  "maps": [
+   "_w35_term@0=?terminate@@YAXXZ",
+   "_w35_vexec=?_ValidateExecute@@YAHP6GHXZ@Z",
+   "_w35_pfval=?dbaseLow@@3PAEA+0x2874",
+   "_w35_pfv2=?dbaseLow@@3PAEA+0x2874",
+   "__imp__w35_pf@4=?dbaseLow@@3PAEA+0x2874"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G4",
+  "provenance": [],
+  "notes": "EXACT v6, no patches, flags /c /O2 /Gy /G4 (the wave-27 /G4 flip was load-bearing: with /G5 CL materializes both EXCEPTION_RECORD field compares as mov-reg/cmp-reg, with /G4 it keeps FA's 83 78 10 03 and 81 78 14 20 05 93 19 mem-cmp forms). ?__CxxUnhandledExceptionFilter@@YGJPAU_EXCEPTION_POINTERS@@@Z: C++-exception probe (code 0xe06d7363, NumberParameters 3, info[0] 0x19930520) -> ?terminate@@YAXXZ + return 1; else dispatch through the global filter slot 0x588ba4 = ?dbaseLow@@3PAEA(0x586330)+0x2874 (all three TO/deltas verified against FA imm bytes: cmp [g],0 at 0x2c, a1 at 0x35, ff 15 at 0x48). Slot spelled THREE ways so CL cannot CSE: w35_pfval (83 3d cmp/imm form), w35_pfv2 (a1 moffs arg load), and __declspec(dllimport) __stdcall w35_pf for the ff 15 indirect call (map FROM __imp__w35_pf@4). The filter call's return value propagates (return w35_pf(ep) - FA's ret 4 keeps the callee's eax; the 33 c0 tail is only for the two early-outs). No patch/tail (88 B all code). Chunk name emits the mangled public itself (fitobj from layout), so wave-34H's merged w34H_df2d0_v1 map TO _w34h_cxu=?__CxxUnhandledExceptionFilter@@... keeps resolving. no abs/rel32 FA references to 0x4df2f0 (checked .reloc scan) - no anchor alias needed."
+ },
+ {
+  "rva": 929232,
+  "obj": "w35E_e2dd0_v9",
+  "src": "build/survey/probes/w35E_e2dd0_v9.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4e2dd0"
+  ],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "EXACT via the ONE inline-asm escape hatch (wave-34 naked-asm precedent). 54-B chunk (0xe2dd0), no tail, no relocs. 96-bit >>1 across three dwords: FA keeps the pairwise and+shl carry form (83 e2 01 / c1 e2 1f; 83 e7 01 / c1 e7 1f) and a late p[0] load. CL 4.2 algebraically folds (x&1)<<31 -> shl-only in EVERY spelling tried (v1-v8: direct, 3-statement named staging, signed long carries, /O2 /Gy /G5, /G4, /Os, /O1, and an unsigned __int64 q>>1 route that instead emitted __allshl/__aullshr helper calls) - fold wall, so the body is __declspec(naked) __asm verbatim; shr-by-1 needs the c1-form long encoding (c1 e9 01 / c1 e8 01) spelled as _emit triples because inline asm shortens count-1 shr to d1. Body: push esi/edi; mov esi,[esp+0ch]; hi/mid loads, and+shl carries, store hi>>1, mid>>1|hi-carry, late p[0] load, lo>>1|mid-carry, pop edi, store, pop esi, ret. alias 0=$FA$_t_4e2dd0: still-stub chunks 0xe36a0 (_$I10_OUTPUT) and 0xe4770 carry rel32 fixups to VA 0x4e2dd0 (only shl,0x1f occurrence in FA .text - a $I10_OUTPUT-adjacent helper, CRT band)."
+ },
+ {
+  "rva": 4469,
+  "verdict": "KEEP-ASM",
+  "reason": "Pure int3 filler gap chunk (11 x 0xcc, no code, no FPO, no name; inside stub t00000 span [0x401000,0x4016b7) but its bytes survive unchanged in any merge). No C conversion exists for an all-0xcc chunk; no .reloc or rel32 reference anywhere (FA scan) - leave the stub/original bytes."
+ },
+ {
+  "rva": 5815,
+  "verdict": "KEEP-ASM",
+  "reason": "Pure int3 filler gap chunk (9 x 0xcc, no code, no FPO, no name; NOT covered by any stub group - it is the 7-B gap between t00000 vae 0x4016b7 and t00001 va 0x4016c0, so FA's own bytes simply stay). No .reloc or rel32 reference anywhere (FA scan) - nothing to convert."
+ }
+]

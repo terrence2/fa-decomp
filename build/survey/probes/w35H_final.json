@@ -1,0 +1,105 @@
+[
+ {
+  "rva": 454240,
+  "verdict": "EXACT",
+  "name": "?MPRemoveCurObj@@YGXXZ (80 B, 0 params, stdcall void(void); 13 B tail)",
+  "obj": "w35H_6ee60_v2",
+  "src": "build/survey/probes/w35H_6ee60_v2.c",
+  "maps": [
+   "_w35h_p46@16=$FA$_t_46b260",
+   "_MPRemoveCurObj@0=?MPRemoveCurObj@@YGXXZ"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "MP-multicast gate: return if numComputers==1 or (curThing[0x10]&0x7f)!=thisComputer; else build the 9-B msg {13h @0, word *(u16*)(curThing+0x74) @1} and call $FA$_t_46b260(0xFFFFFFFF, &msg, 3, 1). $FA$_t_46b260 is a STILL-STUB anchor (group t0005b covers VA 0x46b260 = rva 0x6b260, chunk rets c2 10 00 -> stdcall @16; callee pops all 16 arg bytes; caller add esp,4 cleans only its own sub-esp-4 local) -> map FROM _w35h_p46@16. Plain C route won EXACT: CL reproduced FA's push-interleaved msg build from the char buf[4] spelling (naked-asm v1 also EXACT; v2 picked, source stays C). _MPRemoveCurObj@0=?MPRemoveCurObj@@YGXXZ is the def-rename for external callers (caller at rva 0x619ff, converted chunk). No patches; no aliases (chunk named)."
+ },
+ {
+  "rva": 463456,
+  "verdict": "EXACT",
+  "name": "?MPRequestControl@@YIXG@Z (96 B, 1 param, fastcall void(ushort); no tail)",
+  "obj": "w35H_71260_v3",
+  "src": "build/survey/probes/w35H_71260_v3.c",
+  "maps": [
+   "_w35h_p46@16=$FA$_t_46b260",
+   "@w35h_mpflush@4=?MPFlushAll@@YIXD@Z",
+   "@MPRequestControl@4=?MPRequestControl@@YIXG@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "MP-multicast of a 4-B msg {0x45 @0, word @1}: early out if numComputers==1; if thisComputer==0 -> MAPMaybeSetControl(0,p) and dup epilogue (fastcall: mov edx,ecx / xor ecx,ecx), else msg[0]=0x45, word = OBJAlias(p,1) or 0, then $FA$_t_46b260(0,&msg,3,1) + MPFlushAll(0). Naked-asm escape (only route): v1's two diffs were FA's redundant disp8 forms at code 0x23 (mov BYTE PTR [esp],45h = c6 44 24 00 45 vs CL's optimal c6 04 24 45) and 0x45 (lea eax,[esp] = 8d 44 24 00 vs CL's 8d 04 24) -- v3 forces both with _emit sequences (no patches, no shift); with lengths restored MASM's own je/jmp distances land on FA's values. C route v2 diverged (22 B, CL scheduler interleaves the msg write differently). Maps: _w35h_p46@16=$FA$_t_46b260 (same still-stub anchor as 6ee60); @w35h_mpflush@4=?MPFlushAll@@YIXD@Z (fastcall C spelling -> C++-mangled FA public, ?MPFlushAll@@YIXD@Z rets plain c3 = 0 stack bytes); @MPRequestControl@4=?MPRequestControl@@YIXG@Z is the def-rename (fastcall decl emits @MPRequestControl@4; caller at rva 0x27903 inside still-stub t00020). MAPMaybeSetControl/OBJAlias are identity (FA exposes the C-decor names @MAPMaybeSetControl@8/@OBJAlias@8 directly). No patches."
+ },
+ {
+  "rva": 489216,
+  "verdict": "EXACT",
+  "name": "?Restore@CDirDrawSurface@@QAEHXZ (112 B, thiscall int(void); no tail)",
+  "obj": "w35H_77700_v1",
+  "src": "build/survey/probes/w35H_77700_v1.cpp",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "Genuine C++ thiscall member fn (w31E/w34C recipe) -- identity maps, no patch. COM body: if iface==0 return 0; vt[i] -> RestoreFn(iface) at vt+0x6c (returns 0 -> return 1); dd=this+0x80, 0 -> return 0; vt2=*(dd), GetDDFn(dd,&idd) at vt+0x90 (nonzero -> return 0); then Destroy(); return Create(idd, &desc). idd is left UNINITIALIZED (FA has no zero-store before the lea; the source declares it uninitialized too). The 4-B sub-esp local IS idd (FA reads it back via mov ecx,[esp+4] after Destroy). Destroy (?Destroy@CDirDrawSurface@@QAEXXZ @ 0x778d0) and Create (?Create@...@@QAEHPAUIDirectDraw@@PAU_DDSURFACEDESC@@@Z @ 0x773f0) are real FA named publics in still-stub t00065 -- the .cpp's class-scope member decls mangle to exactly those names, so no maps. FA e8 targets verified from bytes (0x778d0, 0x773f0). No patches."
+ },
+ {
+  "rva": 499184,
+  "verdict": "EXACT",
+  "name": "_GetGround@0 (80 B, 0 params, stdcall; no tail)",
+  "obj": "w35H_79df0_v1",
+  "src": "build/survey/probes/w35H_79df0_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "Naked-asm escape (only viable route): T_Info's arg1 is push ecx = the 16-bit [curId] load with GARBAGE high half (66 8b 0d keeps ecx's upper dword) -- unreachable from C without an extra movzx that shifts codes. Body: onTheGround = OnTheGround() (byte in AL, FA keeps a2 byte-moffs); groundAngle = *(u16*)(curThing+0x1d) (66 a1 moffs CL emitted WITH the +0x1d content addend); T_Info(curId-word-in-ecx, curThing, curThing+0x11, &groundAngle, &groundSea, 1); groundY = T_Info's eax return; then PAToF24() called with NO pushed arg despite @4 -- callee reads its fastcall arg already loaded in ecx (cx = word at groundAngle+2, FA off 0x39); groundPitch = return. All three callees are identity C-decorated FA publics: _OnTheGround@0 (0x116a0), _T_Info@24 (0xa8970), @PAToF24@4 (0xc29e8) -- MASM emitted exactly those decorations, so no maps. MASM emitted moffs (a1/a2/a3/66a1/66a3) forms including symbol+disp with baked addends, matching FA. Callers t00064 (_CheckLanding@0) / t00068 (_FMAircraftSetup@0) reference _GetGround@0 - identity def. No patches."
+ },
+ {
+  "rva": 522384,
+  "verdict": "EXACT",
+  "name": "_CampaignOff (80 B, 0 params, cdecl void(void); 1 B tail)",
+  "obj": "w35H_7f890_v1",
+  "src": "build/survey/probes/w35H_7f890_v1.c",
+  "maps": [
+   "_w35h_cfp=?campaignProc@@3P6AFJ@ZA"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "C route with the w30g staged-zero trick: staged char/short/ulong zero locals so CL emits the register-store chain (33 c9 / 66 89 0d / 88 0d) instead of C6 05/C7 05 imm forms. Body: RMFree(&campaignFile) (push OFFSET campaignFile = 68 dir32; _RMFree@4 @ 0xa3b80 identity), then zero w35h_cfp (the ?campaignProc@@3P6AFJ@ZA pointer at 0x4f7190 -- map FROM _w35h_cfp, mangle verified from FA bytes 89 0d 90 71 4f 00) and campaignPilot+0xdae/0xdac (words), +0xd7f/+0xd8c, campaignFile, pilotName, campaignName (bytes), campaignPlane = 0xffffffff (C7 05), missionName. Tail = 1-B census-proven filler 90 (auto-copied, no --tail-accept). Def symbol _CampaignOff = FA name (cdecl, no @N) -- identity. No patches."
+ },
+ {
+  "rva": 523840,
+  "verdict": "EXACT",
+  "name": "unnamed chunk (32 B, 1 param, stdcall int(long) via anchor $FA$_t_47fe40; no tail)",
+  "obj": "w35H_7fe40_v2",
+  "src": "build/survey/probes/w35H_7fe40_v2.c",
+  "maps": [
+   "_w35h_cfp=?campaignProc@@3P6AFJ@ZA"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_47fe40"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "C route won EXACT (naked-asm v1 also EXACT; v2 picked, source stays C). Body: campaignFailures = *(long*)(campaignPilot+0x1f88) (a1 moffs with +0x1f88 content addend baked, matches FA); p = *(long*)(esp+8) after the saved-reg slot shifts it; call [campaignProc] = ff 15 indir (w35h_cfp -> ?campaignProc@@3P6AFJ@ZA map; ptr to __cdecl fn(long)->short, caller cleans via add esp,4); return (long)result (movsx eax,ax). CL 4.2 emitted the FA's odd push ebx/pop ebx for the C stdcall prolog itself -- byte-identical without any escape. REQUIRED alias 0=$FA$_t_47fe40 (unnamed chunk; the anchor has 9 callers, all inside still-stub-covered _CallCampaignProc@4's chunk -- t0006f.obj and g0000_$47f960.obj both reference $FA$_t_47fe40; the name must land on this fitted obj). Chunk function is NOT the real FA public _CallCampaignProc@4 (that lives at 0x47f960) -- source name CallCampaignFailureC is internal-only, harmless. No patches."
+ }
+]

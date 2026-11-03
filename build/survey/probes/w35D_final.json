@@ -1,0 +1,98 @@
+[
+ {
+  "rva": 889168,
+  "verdict": "EXACT",
+  "name": "__getptd (111 B, 0 params)",
+  "obj": "w35D_d9150_v6",
+  "src": "build/survey/probes/w35D_d9150_v6.c",
+  "maps": [
+   "_impGetLastError=__imp__GetLastError",
+   "_impTlsGetValue=__imp__TlsGetValue",
+   "_impTlsSetValue=__imp__TlsSetValue",
+   "_impGetCurrentThreadId=__imp__GetCurrentThreadId",
+   "_impSetLastError=__imp__SetLastError",
+   "_tlsind=__ctype+0x3b0",
+   "_calloc=_calloc",
+   "_amsg_exit=__amsg_exit",
+   "___initptd=__initptd"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "Whole-body naked asm (the one allowed escape): CRT TLS-getptd with 6 imp calls. Maps: _impX=__imp__X for each of the 5 IAT ff 15 slots (GetLastError 0x58a66c / TlsGetValue 0x58a684 / TlsSetValue 0x58a670 / GetCurrentThreadId 0x58a53c / SetLastError 0x58a680; asm externs void* impX[]; payload dwords 0, TOs from FA .reloc 0xd9154/0xd9162/0xd9187/0xd919a/0xd91b6 \u2014 NOTE FA has NO relocs at 0xd915c/0xd9176/0xd918c (a1/89 07/8b c7 own-code dwords, not reloc sites; FA ext_fx 5 counts only the 5 imp slots... layout ext_fx=7) \u2014 verified via fitobj reloc count 10 == FA count. _tlsind=$FA$_t_51a520 for the a1-moffs TLS-index moffs reads at 0xd915a/0xd917f (FA imms 0x51a520, .reloc 0xd9180; 0x51a520 = __ctype+0x3b0 \u2014 NOT a layout symbol; TO via the data stub-alias anchor). _calloc=_calloc (FA rel32 0xe86b63 \u2192 _calloc 0x4df4e0, layout public); _initptd=$FA$_t_4d9130 (stub-public for the NEXT chunk 0x4d9130 __initptd, FA rel32 0xe89bffffff \u2192 0x4d9130; stub t000dc starts exactly at 0x4d9130); _amsg_exit=__amsg_exit (FA rel32 0xe880d0ffff \u2192 0x4d6230 __amsg_exit; the C-ident amsg_exit emits _amsg_exit, mapped to FA's public \u2014 per the wave-34 extern-decor rule the bare-C-ident spelling avoids a non-emittable map). The C-ident _getptd emits the obj public __getptd = FA's exact name (no map). __getptd's FA public is referenced by STILL-CONVERTED entries (src/Chunk_e2ce0.c + src/Chunk_d99c0.c declare _getptd) \u2014 my obj now DEFINES __getptd for them; PARENT: their _getptd calls should now resolve to this chunk (the old stub-link edge dies with SPLIT_AT). .reloc: exactly FA's 10 DIR32 entries (5 imp @N slots + 3 __ctype+0x3b0 moffs + 0x4d9130/0x4d9927-adjacent data). PARENT: stub t000dc (0x4d9130-0x4d9300) SPLIT_AT must keep its other publics; no $FA$_t anchor needed for THIS chunk start (0x4d9150 is not a group boundary). Flags /O2 /Gy /G5."
+ },
+ {
+  "rva": 891136,
+  "verdict": "EXACT",
+  "name": "0xd9900 (43 B, 2 params, nameless)",
+  "obj": "w35D_d9900_v1",
+  "src": "build/survey/probes/w35D_d9900_v1.c",
+  "maps": [
+   "_memmove=_memmove"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4d9900"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "void __cdecl(unsigned char *dst, void *src) \u2014 the _strcpy-with-memmove gadget. THE ONE-ASM BAND IS LOAD-BEARING (v2 vs v1): CL cannot emit FA's repnz scasb strlen with args preloaded into esi BEFORE the 74 1e entry branch and with the repnz scasb on edx after; FA order is: 56 57 / 8b742410 (src) / 85f6 / 741e / 8b5424 0c (dst) / b9f7ffffff (ecx -1) / 8bfa (edi=edx) / 2bc0 (xor eax) / f2ae (repnz scasb len(dst)) / f7d1 (not ecx => len+1) / 51 (push len+1) / 52 (push dst) / add edx,esi (dst+len(dst)) / 52 (push dst+len) / e8 (rel32 -> _memmove, no reloc) / 83c40c / 5e 5f c3 + 4x cc pad. Maps: _memmove=_memmove (stub-public for the 0x4d3c50 memmove gap chunk; FA rel32 disp 0xffffa32b == _memmove(0x4d3c50)-0x4d9925 verified == CL's). Alias 0=$FA$_t_4d9900 per the nameless-chunk precedent (stub group t000de's SPLIT_AT keeps other $FA$_t_4d9xxx publics from the remaining members). .reloc: 1 DIR32? \u2014 FA has ZERO .reloc in this chunk (memmove is rel32 in-payload-only) and CL's fits at 1 reloc site (fitobj masks the e8 disp dword); the e8's payload needs the FA disp ZEROED only via map (FA's disp = -0x5cd5 vs CL's own 0-relative \u2014 link fixes it). Flags /O2 /Gy /G5."
+ },
+ {
+  "rva": 776656,
+  "verdict": "EXACT",
+  "name": "0xbd9d0 (48 B, 0 params, unnamed)",
+  "obj": "w35D_bd9d0_v3",
+  "src": "build/survey/probes/w35D_bd9d0_v3.c",
+  "maps": [
+   "_w35d_ct=_curThing"
+  ],
+  "patch": [
+   "0x2c,3,"
+  ],
+  "aliases": [
+   "0=$FA$_t_4bd9d0"
+  ],
+  "span": "",
+  "tail": "--tail-accept (c38d4900; residue band 4 B: c3 + 3-B census-proven 8d4900)",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x2c: toolchain-diff 3-B trailing trim: CL appends 33 c0 c3 (xor eax,eax; ret) after the call (the void-caller tail with a bogus eax-zero); FA has bare c3. Equal-length 3-B trim, no relocs, shaves the 47-B CL obj to FA's 0x2c; remaining 4-B tail c38d4900 = FA's own ret + census-proven 8d4900 (lea ecx,[ecx+0], 125 sites per tools/padcensus) + 1-B 00 filler (tail-accept, residue)."
+  ],
+  "notes": "unsigned long __cdecl(void): CreateMove((long)(curThing+0x38), 0, 4, (long)*(unsigned short *)(void *)((char *)curThing + 0xe4), 4, 0, 1, 0, 1, 0, 8, 0x10, 0x7fff); return 0; \u2014 plain C 13-arg __stdcall expr reproduces FA's whole staging byte-for-step (68 7fff / 6a 10 / 6a 08 / 6a 00 / 6a 01 group-1 first, then 33 c0/66 a1 [ct+0xe4] moffs load (reloc'd dword 0x50881c == _curThing+0xe4, .reloc 0xbd9e1), then 6a 00/6a 01/6a 00/6a 04/50/6a 04/6a 00/68 [ct+0x38] group-2 (reloc'd 0x508770 == _curThing+0x38, .reloc 0xbd9f3), then e8 _CreateMove@52 (no reloc; C stdcall 13-arg spelling @CreateMove@52? \u2014 the obj emits _CreateMove@52 bare, matching FA's public; no map needed). Maps: _w35d_ct=_curThing (FA's public from layout; the C-ident w35d_ct emits _w35d_ct; the addend pairs 0xe4 / 0x38 come from the C (ct+0xe4 / ct+0x38)). .reloc: 2 DIR32 sites (FA ext_fx 2). Alias 0=$FA$_t_4bd9d0 per the nameless-chunk w34H/w32H precedent: stub t000af covers 0xbd9d0 in-group; the sole .text references to 0xbd9d0 come from FA call sites rel32 to the stub group (PARENT: stub t000af SPLIT_AT must keep the other t000af publics). Flags /O2 /Gy /G5."
+ },
+ {
+  "rva": 785664,
+  "verdict": "KEEP-ASM",
+  "reason": "reg-plan + arg-reg-ABI wall (fa-survey reg-plan class). The 0xbfd00 fragment's three inputs arrive in registers (ecx->a=[ecx+0x126] word, edx->b=[edx+0xf5] byte, esi unconverted) with 0 stack params (FPO cdwParams=0) and 0 .text rel32 refs to 0x4bfd00 (the whole .text scan: 0) \u2014 the fragment sits between the 0xbfc30 chunk and @PROJLaunchDevice@4 (fallthrough chain, no entry-point edges from converted or stub groups). CL 4.2 cannot express a register-param state (no callee ABI puts a 3rd param in esi) or the 66 8b 81 (mov ax,[ecx+0x126]) / 8a 9a (mov bl,[edx+0xf5]) / 3b d8 (cmp ebx,eax) / 77 07 / b8 64 (return 100) / c1 e0 02 / 8d 0c 80 / 8d 04 89 / 99 / f7 fb / 83 f8 32 / 7f 04 / 33 c0 / 5b c3 / 8d 04 45 9c f2 ff ff / 5b c3 / 05 00000000 shape from C: the 6 probes (fastcall/L/S/L + 2 order-flips of the a/b decls, both idiv- and mul-based, plus a third with a b>0 guard) converge to CL's movzx/movsx forms (e.g. 0f b6 82 f5...) not FA's 8a 9a 1-B-zero-extend form, and the a-word (66 8b 81) is a moffs-class [reg] read CL reproduces as 0f b7. Probe set: w35D_bfd00_v1/v2/v3 + 6 r2/r3 probes (all no/FATAL tail). 0x515838 (the b byte slot) is not a layout symbol, only a data-region imm; the b-byte slot imm 0x515838-0x51586c is a layout-symbol-resolvable TO pair but the shape wall stands."
+ },
+ {
+  "rva": 806484,
+  "verdict": "KEEP-ASM",
+  "reason": "asm-loop-band + MASM-encoding wall (fa-survey MASM-class; the ONE inline-asm escape burned, still over). FA's body = 55/8bec/53/56/57 / (8-B hidden band 66 83 3d [0x509e84] 00 00 / 74 3e) / 8b 75 08 / 8b 45 14 / 8b c8 / 8b 45 18 / f7 e1 / 8b c8 / c1 e9 03 / 8b fe / 8b 5d 0c / 8b 75 10 / ba 08 00 00 00 / 55 / 8b eb / 33 c0 / 33 db / 8a 45 00 / 45 / 0a c0 / 75 06 / 03 fa / e2 f4 / eb 09 / ff 14 85 86 9e 50 00 / e2 e9 / 5d / 5f / 5e / 5b / 5d / c2 14 00 + 3-B cs mov eax,eax pad. The loop band (0x33-0x4d) uses BOTH loop ecx (the only loop) and the eax/4/rep-form; CL cannot reproduce it (v1 27-B over; v2 39-B over; v3 compile fails; v4 with whole-body asm emits the band 25 B -> STILL 6 B over; probe w35D_c4e54_v4 obj 0x57 B). The ff 14 85 dword 0x509e86 (jump through a dword-ptr[base+idx] table) is the same-band's dword table \u2014 the FA band's only remaining MASM form. Probe set: w35D_c4e54_v1/v2/v3/v4 (all no/FATAL). The one asm escape is used in v4 but the body-band shape is 6 B over FA's band even at its closest spelling."
+ },
+ {
+  "rva": 845484,
+  "verdict": "EXACT",
+  "name": "do_no_overlap (72 B, 0 params, frameless)",
+  "obj": "w35D_ce6ac_v8",
+  "src": "build/survey/probes/w35D_ce6ac_v8.c",
+  "maps": [
+   "_w35d_no_overlap=_no_overlap",
+   "_w35d_detail=_detail",
+   "_w35d_vector_table=vector_table"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "Whole-body naked asm (the one allowed escape), ZERO patches, exact at 72 B / 4 relocs. The winning spellings (the 4 MASM forms CL needs): (1) movzx ebx, al NOT movzx bx, al \u2014 FA encodes 0f b6 d8, the 3-B NO-66 Z-extension; spelling the 16-B form makes CL emit 66 0f b6 d8 (+1 B each, x2 sites); (2) movsx ecx, ax NOT movsx cx, ax \u2014 FA 0f bf c8 (no 66); (3) jmp dword ptr [w35d_vector_table + ebx*2] \u2014 FA's sib-45 form ff 24 5d = [disp32 + ebx*2]: 0x5d = scale 01 (x2), index EDI? NO \u2014 index bits 5:3 of 0x5d = 011 = EBX; CL emits the identical sib only with the ebx*2 spelling (edi*2 gives 7d). The movzx ebx,al immediately before each jump IS the table index \u2014 ebx*2 is the semantic dispatch, not a coincidence; (4) cmp word ptr [w35d_detail], ax for FA's 66 39 05 (mem-first with ax; the 0-imm spelling 66 39 05 <imm> form is wrong). Maps: the 3 extern tokens -> FA's layout publics; the two disp dwords (0x513c58 vt table, 0x5117a6 detail) come from the map TOs, payload dwords 0. .reloc: exactly FA's 4 DIR32 sites (0x8, 0x18, 0x2e, 0x42). The chunk is the esi-stream VM dispatch tail \u2014 its register inputs (esi/ebx/ax state) come from the caller's band, preserved because it is a naked function and the C never touches those registers. Probe set: w35D_ce6ac_v1-v6 (no), v7 (sib 7d \u2014 edi*2 misread, 2-B miss), v8 EXACT (ebx*2). NO tail-accept needed: FA's last band 8b c0 (mov eax,eax) = CL's own 3-B mov eax, eax line, 72 B total. Function has a REAL public (_do_no_overlap) so no alias needed."
+ }
+]

@@ -1,0 +1,118 @@
+[
+  {
+    "rva": 433840,
+    "verdict": "EXACT",
+    "name": "?net_test_start_latency_test@@YAXH@Z (80 B, 1 param)",
+    "obj": "w35B_69eb0_v2",
+    "src": "build/survey/probes/w35B_69eb0_v2.c",
+    "maps": [
+      "_plx=?player_list@@3UNET_PLAYER_LIST@@A",
+      "_ntst_cali=$FA$_t_469f00",
+      "_impQPF=__imp__QueryPerformanceFrequency"
+    ],
+    "patch": [],
+    "aliases": [],
+    "span": "",
+    "tail": "",
+    "flags": "/c /O2 /Gy /G5",
+    "provenance": [],
+    "notes": "Whole-body NAKED-ASM: push ebx/esi; esi=p; THREE scaled-index loads mov eax,plx[esi*4+66h] (MASM bakes the +0x66 into the disp32 addend - fitted reloc content 0x00000066, FA disp 0x577eae == player_list(0x577e48)+0x66 at all 3 sites); first load +0x54 push + ff 15 imp call via impQPF[] map (__imp__QueryPerformanceFrequency, kernel32 - NO @N; FA IAT imm 0x58a52c). v1 pure C got the 3 sib loads right but CL xor'd ecx for the two zero stores (89 48 64 reg-stores) and DCE'd FA's dead `add eax,0x64`, so the middle (push esi; mov [eax+0x64],0; mov [eax+0x68],0; add eax,0x64 - all c7-imm 7-B stores, add is dead: the next load overwrites eax) only assembles by hand; v2 v1 not carried. Tail call ntst_cali(p) is rel32 (payload 0) mapped TO $FA$_t_469f00 = the 128-B unnamed chunk at rva 0x69f00, STILL A STUB (group t00059, 0x69690-0x69f80) - dependency: that stub group must stay until its own conversion. FA code 73 B + census pad 7 B (8da42400000000)."
+  },
+  {
+    "rva": 481104,
+    "verdict": "EXACT",
+    "name": "_LimitFromLowSpeed@12 (112 B, 3 params)",
+    "obj": "w35B_75750_v1",
+    "src": "build/survey/probes/w35B_75750_v1.c",
+    "maps": [
+      "_ct34=_curThing+0x34",
+      "_oneGStallSpeed=?oneGStallSpeed@@3JA"
+    ],
+    "patch": [],
+    "aliases": [],
+    "span": "",
+    "tail": "",
+    "flags": "/c /O2 /Gy /G5",
+    "provenance": [],
+    "notes": "Whole-body NAKED-ASM (v1 first try after one 1-B fix: FA's first param load is mov edi,[esp+0x18] = d, NOT [esp+0x12]). Semantics: *a-=d; *b-=d; L=(*(long*)(curThing+0x34))>>8 truncated toward 0 (sar/cdq/xor/sub); div=200*oneGStallSpeed/100 kept as lea 5x/lea 25x/shl 3 + cdq/idiv ebp(100) - CL 4.2's C route magic-multiplies the const /100 (a wall), MASM spells idiv literally; if div>L: *a=*a*L/div; *b=*b*L/div (imul+cdq+idiv ebp, ebp CSEs the divisor); then *a+=d; *b+=d with FA's pops interleaved (pop ebp / pop edi / pop esi / pop ebx between the stores); stdcall ret 0xc. Reg plan = FA's: ecx/esi a/b pointers, edi=d, ebx=L. TOs verified: _ct34 map addend 0x34 (fitted a1 content 0x00000034 -> _curThing(0x508738)+0x34 = FA imm 0x50876c); oneGStallSpeed content 0 (FA imm 0x546f54). Tail = census 0500000000 (5 B)."
+  },
+  {
+    "rva": 538992,
+    "verdict": "EXACT",
+    "name": "0x83970 (64 B, unnamed, 0 params - fastcall vector add)",
+    "obj": "w35B_83970_v1",
+    "src": "build/survey/probes/w35B_83970_v1.c",
+    "maps": [],
+    "patch": [],
+    "aliases": ["0=$FA$_t_483970"],
+    "span": "",
+    "tail": "",
+    "flags": "/c /O2 /Gy /G5",
+    "provenance": [],
+    "notes": "Pure C, zero externs, zero relocs, EXACT first try: void __fastcall w35b_vadd(long *c, long *d) { c[0]+=d[0]; c[1]+=d[1]; c[2]+=d[2]; c[4]+=d[4]; c[3]+=d[3]; } - the +0x10 block is emitted BEFORE the +0xc block (FA emission order), so the c[4] statement precedes c[3] in the source; CL reproduced FA's full reg plan (ebx/esi/edi/ebp all saved) exactly. Unnamed chunk -> alias 0=$FA$_t_483970 defines the anchor (convention; grep of tools/swap.json + all probe configs found NO consumers referencing $FA$_t_483970 yet). C fn name arbitrary (fitobj names the obj from the FA chunk; unnamed chunks get $FA$_span-name only when unaliased - the alias covers it)."
+  },
+  {
+    "rva": 613424,
+    "verdict": "EXACT",
+    "name": "_G_Vline@12 (96 B, 3 params)",
+    "obj": "w35B_95c30_v3",
+    "src": "build/survey/probes/w35B_95c30_v1.c",
+    "maps": [],
+    "patch": [
+      "0x0c,3,3bc67f",
+      "0x15,3,3bc67c",
+      "0x19,4,8b5c2418",
+      "0x1d,4,8b7c2414",
+      "0x2f,2,3bc7",
+      "0x3a,4,3bc37d02"
+    ],
+    "aliases": [],
+    "span": "",
+    "tail": "",
+    "flags": "/c /O2 /Gy /G5",
+    "provenance": [
+      "patch 0x0c: toolchain-diff CL emits cmp y(esi),clipLeft(eax)+jl (3b f0 7c) for the reg-vs-reloaded-global guard while FA compares the global's eax first with jg (3b c6 7f); 3-B operand+jcc swap, no newsite",
+      "patch 0x15: toolchain-diff second guard, same class: CL 3b f0 7f -> FA 3b c6 7c; no newsite",
+      "patch 0x19: toolchain-diff FA loads ebx (x) with [esp+0x18] FIRST then edi (y2) [esp+0x14]; CL (decl-order steering, both orders tried) always loads edi's var first - 4-B load-order swap, no newsite",
+      "patch 0x1d: toolchain-diff complement of 0x19: mov edi,[esp+0x14]; no newsite",
+      "patch 0x2f: toolchain-diff clipTop clamp cmp operand order: CL 3b f8 (cmp t,clipTop) -> FA 3b c7 (cmp eax(clipTop),t); jle 7e matches unchanged; 2-B operand swap, no newsite",
+      "patch 0x3a: toolchain-diff clipBottom clamp: CL 3b d8 7e -> FA 3b c3 7d (cmp eax(clipBottom),b + jge); 4-B (cmp+jcc) swap, no newsite"
+    ],
+    "notes": "Pure C structure EXACT-matched everything else on v1: void __stdcall G_Vline(long y, long y2, long x) with clipLeft/clipRight/clipTop/clipBottom a1-moffs guard/clamp tests, min-clamps, the x<y2 PrintShapeName() debug guard, and the b>=t G_UVline(y,t,b) call - all 6 abs TOs identity (_clipLeft 0x553370 etc., syms publics, no maps needed) and both rel calls identity (_PrintShapeName@0 = src/printshapename.c converted; _G_UVline@12 still stub group t0008?? - TO is the mangled public the stub defines). The 6 patches are all CL-vs-FA operand/jcc/load-order swaps (see provenance); semantics unchanged by construction and re-verified against FA bytes. v2 (reg-first guard spelling + b-first decls) did NOT help - CL put the guard compare y-first regardless and flipped the b/t colors - carried v3 = v1 + patches instead. FA code 82 B + double census pad (8da42400000000 x2, 14 B)."
+  },
+  {
+    "rva": 645120,
+    "verdict": "EXACT",
+    "name": "0x9d800 (48 B, unnamed, 0 params - curThing+0xe3 byte select)",
+    "obj": "w35B_9d800_v2",
+    "src": "build/survey/probes/w35B_9d800_v2.c",
+    "maps": ["_curE3=_curThing+0xe3"],
+    "patch": [],
+    "aliases": ["0=$FA$_t_49d800"],
+    "span": "",
+    "tail": "",
+    "flags": "/c /O2 /Gy /G5",
+    "provenance": [],
+    "notes": "Merged ||-chain recipe: unsigned char __cdecl w35b_state(void) with v=curE3[0]; if (v >= 1 && v <= 0x12) return 0; (block1 byte-EXACT in v1 already: cmp al,1/jb + cmp al,12h/ja + xor al,al/ret); then v=curE3[0] (FA's explicit 2nd a0 reload) and the 4-condition || chain if (v < 0x13 || v > 0x1e || v == 0x13 || v == 0x14) return 1; return 0; -> CL emits FA's exact jb 0f/ja 0b/je 07/je 03 chain to the SHARED true-tail b0 01/ret placed at chunk offset 0x28 AFTER block2's own xor/ret. v1 (separate non-merged ifs) restructured into sete + 3 extra reloads - merged chain was the fix. Map TO _curThing+0xe3 addend verified: FA imm 0x50881b == _curThing(0x508738)+0xe3, both a0 sites content 0 + 0xe3. Unnamed chunk -> alias 0=$FA$_t_49d800 (convention; no consumers grep'd). Semantics: returns 0 for state in [1,0x12] U [0x15,0x1e], else 1. Tail = census 0500000000 (5 B)."
+  },
+  {
+    "rva": 668912,
+    "verdict": "EXACT",
+    "name": "?socket_get_fds@@YAXPAUfd_set@@00@Z (64 B, 3 params)",
+    "obj": "w35B_a34f0_v1",
+    "src": "build/survey/probes/w35B_a34f0_v1.c",
+    "maps": [
+      "_sgf_h=$FA$_t_4a3530",
+      "_sgf_a8=?socket_list@@3USOCKET_STATE_LIST@@A+0x8",
+      "_sgf_w210=?socket_list@@3USOCKET_STATE_LIST@@A+0x210",
+      "_sgf_e10c=?socket_list@@3USOCKET_STATE_LIST@@A+0x10c"
+    ],
+    "patch": [],
+    "aliases": [],
+    "span": "",
+    "tail": "",
+    "flags": "/c /O2 /Gy /G5",
+    "provenance": [],
+    "notes": "Pure C EXACT first try: three cdecl helper calls sgf_h(r, a8); sgf_h(w, w210); sgf_h(e, e10c) (caller cleans: the mov eax,[esp+0x10]/[esp+0x14] re-reads AFTER each call + add esp,8 came out exactly FA's way - the helper args are reloaded per call site naturally since each is used right after its call). Imm args are socket_list INTERIOR pointers -> extern char arrays sgf_a8/sgf_w210/sgf_e10c + map TO addends +0x8/+0x210/+0x10c; fitted relocs are push-imm68 DIR32 with content 0, deltas live in the maps (FA imms 0x5692a8/0x5694b0/0x5693ac == socket_list(0x5692a0)+8/+210/+10c verified). Helper TO $FA$_t_4a3530 = 48-B unnamed chunk at rva 0xa3530, STILL A STUB (group t00092) - dependency; all 3 calls rel32 payload 0. Pad = 8bff + 8da42400000000 (9 B)."
+  }
+]

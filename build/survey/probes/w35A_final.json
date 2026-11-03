@@ -1,0 +1,110 @@
+[
+ {
+  "rva": 101136,
+  "verdict": "EXACT",
+  "obj": "w35A_18b10_v1",
+  "src": "build/survey/probes/w35A_18b10_v1.c",
+  "maps": [
+   "_w35a18b10=$FA$_t_418b10"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_418b10"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "Pure C, first probe, no patches. void cdecl 4-param setter: *(long*)arg4 = arg3 -> CL emits mov eax,[esp+0xc] / mov ecx,[esp+0x10] / mov [ecx],eax / ret (11 B) + census tail 0500000000 (5 B), 0 relocs. Nameless-chunk self-anchor alias 0=$FA$_t_418b10 per w33C convention (only the map-less alias; no external consumers of $FA$_t_418b10 found in tools/swap.json + src/)."
+ },
+ {
+  "rva": 101152,
+  "verdict": "EXACT",
+  "obj": "w35A_18b20_v1",
+  "src": "build/survey/probes/w35A_18b20_v1.c",
+  "maps": [
+   "_w35a18b20=$FA$_t_418b20"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_418b20"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "Pure C, first probe, no patches. void cdecl 4-param zeroer: *(long*)arg4 = 0 -> CL emits mov eax,[esp+0x10] / mov dword ptr [eax],0 / ret (7 B) + census tail 0500000000 (5 B), 0 relocs. CL picked EAX for the pointer here (0x43fb0 sibling picked ECX only because arg2 fed a fastcall). Nameless self-anchor alias 0=$FA$_t_418b20, no known consumers."
+ },
+ {
+  "rva": 205072,
+  "verdict": "EXACT",
+  "obj": "w35A_32110_v12",
+  "src": "build/survey/probes/w35A_32110_v12.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_432110"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "NAKED-ASM whole-body (CL-remat wall). Semantics: returns (char)1 iff numComputers<=0 or no humanChoseSide cell is nonzero (al-only ret). 11 straight-C/unsigned spellings tried (v1-v11): CL 4.2 ALWAYS rematerializes/copy-folds the numComputers limit into mem-fused cmp [g],reg (39 05) or test/je zero-fold in the latch, and its decl-order reg layout puts the counter in EAX - FA has the limit CACHED via a1 [numComputers] -> EAX + cmp eax,ecx (3b c1 jle guard / 7f f2 jg latch), counter in ECX, pointer in EDX (mov edx,offset hss SUNK PAST the guard), cell temp in EBX (53 push prolog). Sibling src/EveryoneHasChosenSides.c (0xa24c0) hit the identical wall and went naked-asm - same escape used here. Identity asm refs emit _numComputers (rel @0x4) and _humanChoseSide (rel @0xd) DIR32 with content 0 = FA imms 0x4e7604/0x51c2d8, NO maps. 39 B code + census tail 8bff+8da42400000000 (9 B). Nameless self-anchor alias 0=$FA$_t_432110, no known consumers (grep'd tools/swap.json + src/)."
+ },
+ {
+  "rva": 278464,
+  "verdict": "EXACT",
+  "obj": "w35A_43fc0_v1",
+  "src": "build/survey/probes/w35A_43fc0_v1.c",
+  "maps": [
+   "_w35a43fc0=$FA$_t_443fc0"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_443fc0"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "Pure C, first probe, no patches. long cdecl 4-param return-arg3 -> CL emits mov eax,[esp+0xc] / ret (5 B) + census tail 8d642400+8da42400000000 (11 B), 0 relocs. 0x43f90/0x43fb0 (w33B/w33C) byte-twin band. Nameless self-anchor alias 0=$FA$_t_443fc0, no known consumers."
+ },
+ {
+  "rva": 386336,
+  "verdict": "EXACT",
+  "obj": "w35A_5e520_v1",
+  "src": "build/survey/probes/w35A_5e520_v1.c",
+  "maps": [
+   "_w35a5e520=$FA$_t_45e520",
+   "_w35a_thing=_curThing"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_45e520"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "Pure C, first probe, no patches. long cdecl(void): p = *(long*)(curThing+0xe8); if (!p) return 100; c = *(char*)p; if (c & 8) return 1; if (c & 0x10) return 2; return 100. KEY IDIOM: CL 4.2 DOES emit the A1 moffs form (a1 20 88 50 00, 5 B) for interior-offset global loads *(long*)(thing+0xe8) - with the +0xe8 delta BAKED AS CONTENT addend in the disp dword (CL imm 0xe8; FA imm 0x508820 = _curThing 0x507838 + 0xe8), so map TO is PLAIN _curThing (using the TO+delta syntax would double the addend, wave-34 class). Verified both a1 sites: dir32 @0x1 and @0x10 to _curThing, content addend 0xe8. The (c&0x10) tail came out exactly as FA's neg-mask fusion (and al,10x / cmp al,1 / 1b c0 sbb / 83 e0 62 / 83 c0 02) from the plain if-chain spelling. 45 B code + census tail 8d4900 (3 B). Nameless self-anchor alias 0=$FA$_t_45e520, no known consumers."
+ },
+ {
+  "rva": 413536,
+  "verdict": "EXACT",
+  "obj": "w35A_64f60_v1",
+  "src": "build/survey/probes/w35A_64f60_v1.c",
+  "maps": [
+   "_w35a_ctget=$FA$_t_464c90",
+   "_w35a64f60=$FA$_t_464f60"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_464f60"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "Pure C, first probe, no patches. long cdecl(void): t = T464c90(); if (t != 0x7fffffff) { if (t > 180) t = 180; if (t < -180) t = -180; t = t * 182; } return t. CL reproduces FA's clamp chain (cmp eax,0xb4/7e + cmp eax,0xffffff4c/7e + mov-branchy forms) AND the odd multiplier chain byte-for-byte incl. the 91x intermediate staged in EBX (lea ecx,[eax+eax*8] = 9x; lea edx,[ecx+ecx*4] = 45x; lea ebx,[eax+edx*2] = 91x; lea eax,[ebx*2+0] = 182x - the no-base disp32 form, 7 B) and the je-to-shared-epilog (53 prolog / 5b c3 at 0x35). TOs verified: rel @0x1 e8 -> 0x464c90 = $FA$_t_464c90 (nameless 48-B chunk rva 0x64c90, manifest stub group t00054 defines it, delta 0); 55 B code + census tail 8bff+8da42400000000 (9 B). MUST-HAVE alias 0=$FA$_t_464f60: merged CTDoWmBreak (rva 415648) maps _CTDoA_q=$FA$_t_464f60 and src/CTDoWmBreak.c calls it as extern unsigned short - this conversion DEFINES that anchor here (wave-34 class). PARENT NOTE: the call target $FA$_t_464c90 belongs to the UNCONVERTED-BY-ME chunk 0x64c90 - if another wave-35 batch converts 0x64c90 it must carry alias 0=$FA$_t_464c90; otherwise stub t00054 still defines it."
+ }
+]

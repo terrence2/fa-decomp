@@ -1,0 +1,158 @@
+[
+ {
+  "rva": 278480,
+  "name": "0x43fd0 (32 B, 0 params, unnamed) \u2014 vtable call: this[5]=0x30 (dword); call [*(void**)a] with (this)",
+  "verdict": "EXACT",
+  "obj": "w35G_43fd0_v1",
+  "src": "build/survey/probes/w35G_43fd0_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_443fd0"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "EXACT on first probe (w34g bba80 double-deref recipe): (*(long**)a)[5] = 0x30; then void-returning vtable call through *(void**)a with (void*)a \u2014 CL emits mov eax,[esp+4]/push ebx/push eax/mov ecx,[eax]/mov dword [ecx+0x14],0x30/mov ebx,[eax]/call [ebx]/add esp,4/pop ebx/ret; no maps (no FA dwords). FA bytes: 8b442404 5350 8b08 c74114 30000000 8b18 ff53 83c404 5bc3. alias 0=$FA$_t_443fd0: unnamed chunk -> define the anchor (convention; no known consumers grep'd in swap.json/probes). Tail = census 8d642400 x2 (8 B)."
+ },
+ {
+  "rva": 332064,
+  "name": "@SetThrottle@4 (96 B, 3 params, fpo) \u2014 fastcall void(long)",
+  "obj": "w35G_setthr_v1",
+  "src": "build/survey/probes/w35G_setthr_v1.c",
+  "maps": [
+   "_w35g_fl=_curThing+0x16f",
+   "_w35g_th=_curThing+0x1f2",
+   "_w35g_tt=_curThingType+0x153",
+   "_w35g_ct=_currentT",
+   "_w35g_tq=_curThing+0x274",
+   "_w35g_ltm@0=_LimitThrottle@0"
+  ],
+  "patch": [
+   "0x1c,1,2c",
+   "0x24,11,7423a100000000a808751a,3:6:_w35g_fl",
+   "0x49,10,a1000000005e83e0dfa300000000c3,1:6:_w35g_fl,0xa:6:_w35g_fl",
+   "0x58,15,"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x1c: toolchain-diff \u2014 FA's jle 7e 2c targets the merged clear-flag block at 0x49; CL's own 15-B copy sits at 0x53 (deleted below)",
+   "patch 0x24: toolchain-diff \u2014 FA interleaves je (74 23 -> 0x49) BEFORE the fl reload a1; CL put the je after the a1 and gave jne disp 0x29; span carries FA's je/a1/a8 08/jne 1a with the fl dword ZEROED (newsite site 3, DIR32; the CL fl reloc inside the span dropped)",
+   "patch 0x49: toolchain-diff \u2014 FA shares ONE clear block (a1 [fl]/pop esi/and eax,0xdf/a3 [fl]/ret, 15 B) for the je+jle+jne paths; CL's je-path block lacks the a1 reload (10 B, eax CSE); splice in FA's 15-B block with 2 fl newsites (sites 1 and 0xa, payload zero)",
+   "patch 0x58: toolchain-diff \u2014 delete CL's duplicate 15-B clear block (post-patch-1 coordinates: CL 98 B becomes FA's 88 B); the jle/jne were retargeted to 0x49 by patches 0x1c/0x24"
+  ],
+  "notes": "fastcall void(long n) [fastcall srcs emit @SetThrottle@4 with no _]: esi=n; if (!(fl & 0x10)) *(ushort*)(_curThing+0x1f2) = si (66 89 35, stale-upper si = ecx param full copy); LimitThrottle() (e8 _LimitThrottle@0 @0x13); if (n > 0x64 || *(ulong*)(_curThingType+0x153) == 0 || (fl & 0x08)) clear else set: flags &= 0xdf (via a1 [fl] reload at block 0x49) vs flags |= 0x20 then *(ushort*)(_curThing+0x274) = (ushort)(_currentT + 0x18) (66 a1/66 05 18 00/66 a3). Map TOs verified against FA imm bytes: 0x5088a7=_curThing+0x16f (4 sites); 0x50892a=+0x1f2; 0x508c73=_curThingType+0x153; 0x549e18=_currentT exact; 0x5089ac=+0x274. Patch offsets are post-earlier-patch coordinates (0x1c/0x24 same-len; 0x49 is +5-shifting; 0x58 delete in post-0x49 coords). Tail = census 8d642400 x2 (8 B).",
+  "verdict": "EXACT"
+ },
+ {
+  "rva": 335600,
+  "name": "?HARDUnloadFort@@YIDJJ@Z (112 B, 2 params) \u2014 fastcall char(long,long)",
+  "obj": "w35G_unloadfort_v1",
+  "src": "build/survey/probes/w35G_unloadfort_v1.c",
+  "maps": [
+   "_w35g_hpf@12=?HARDPtrsFort@@YGPAXJPAPAUHARDPOINT@@PAPAUHARDPOINT_TYPE@@@Z"
+  ],
+  "patch": [
+   "0x24,4,8b542408",
+   "0x28,4,668b4a04",
+   "0x2c,3,83c204",
+   "0x2f,3,668bf9",
+   "0x3a,44,750633ffb001eb1d81ffff7f00007504b001eb1183ff017c0a2bfe790233ffb001eb0232c06681e10080660bcf5f66890a5e83c404c3"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x24: toolchain-diff \u2014 FA's pv reload#2 is mov edx,[esp+8] (8b54 0c..); CL reloads into eax (8b44)",
+   "patch 0x28: toolchain-diff \u2014 FA reads w with 16-bit mov cx,[edx+4] (66 8b 4a 04); CL used dx off eax (66 8b 50 04)",
+   "patch 0x2c: toolchain-diff \u2014 FA's field ptr is add edx,4 (83c204 = pv+4); CL materialized pt=lea ecx,[eax+2] (8d4802, from the v1 C's ++pt spelling; FA's store target is pv+4)",
+   "patch 0x2f: toolchain-diff \u2014 FA mov di,cx (668bf9); CL mov di,dx (668bfa) \u2014 w register role (FA keeps w=lim's merge source in CX for and cx,0x8000/or cx,di/store)",
+   "patch 0x3a: toolchain-diff \u2014 FA's b!=0 branch is forward jne (75 06 -> 0x42) with all three r=1 tails un-CSE'd (fall b==0: xor edi/mov al,1/jmp 0x5f; je 0x7fff: mov al,1/jmp 0x5f; lim<1: xor al,0 fall-through 0x5f) and the merge band in CX (66 81 e1 0080/66 0b cf/pop edi/mov [edx],cx/pop esi); CL inverted the polarity (74 15 je -> 0x51) and CSE'd the r=1 stores into one mov al,1 at 0x53 with w carried in DX and store 66 89 11 off lea-ecx pt; splice = FA bytes 0x3a..0x6f verbatim (54 B over CL's 44 B; only imm 0x7fff/0x8000 constants inside \u2014 no dwords, no newsites)"
+  ],
+  "notes": "fastcall char(a,b) [FA mangling YI=fastcall; returns char in al]: pv local; HARDPtrsFort(a,&pv,0) \u2014 stdcall (YG), args pushed right-to-left 0/&pv/a with pv's address taken (lea eax,[esp]/push esi/push edi/mov esi,edx first); if (pv == 0) return 0 (test eax/jne/xor al,al/pop edi/pop esi/add esp,4/ret); w = *(ushort*)(pv+4); pt = (ushort*)(pv+4); lim = w & 0x7fff; if (b == 0) { lim = 0; r = 1; } else if (lim == 0x7fff) { r = 1; } else if (lim < 1) { r = 0; } else { lim -= b; if ((long)lim < 0) lim = 0; r = 1; } *pt = (w & 0x8000) | lim; return r. Twin of w31C_HardUnload (0x51e10) with swapped reg roles (w in CX, merge-store in CX/EDX vs AX+lea). e8 newsite already CL-native (map _w35g_hpf@12, TYPE 20, payload 0 \u2014 FA disp 0xfffffc8c masked; callee RVA 0x51e90 verified). v1 prologue 0x00-0x23 already matched FA exactly (incl. lea eax,[esp] + push order 0/&pv/a). Code fills the full 112-B chunk \u2014 no tail.",
+  "verdict": "EXACT"
+ },
+ {
+  "rva": 339488,
+  "name": "_HARDClearUnloadedHarpoints@0 (112 B, 0 params) \u2014 stdcall void(void)",
+  "obj": "w35G_clearhar_v2",
+  "src": "build/survey/probes/w35G_clearhar_v2.c",
+  "maps": [
+   "_w35g_no=_nextObjId",
+   "@GetCurObj_q@4=@GetCurObj@4",
+   "@PutCurObj_q@0=@PutCurObj@0",
+   "_HARDPtrs_q@12=_HARDPtrs@12"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "ZERO patches \u2014 v2 recipe fixes all of v1's 20 diff bytes by spelling: (1) decl order steers saved-reg/counter roles \u2014 declare the inner counter (long i) BEFORE the 16-bit outer (unsigned short j) so CL gives i=esi, j=edi (FA: 33 f6 body-ctr + mov di,1 outer written AFTER all three pushes; v1 got the assignment back-to-front: si outer/edi inner); (2) i = 0 hoisted BEFORE the (unsigned char)curThingType[0xb5] != 0 test (FA's xor esi sits between the curThing jne and the a0 load; v1 had it after the je); (3) inner loop tail compare SIGNED ((unsigned char)curThingType[0xb5] > i with i long) -> CL emits 3b c6 (cmp eax,esi) + 7f dc (jg); v1's (unsigned long) casts emitted 3b c7/77 (ja). Map FROM spellings: fastcall externs decorate WITHOUT underscore (@GetCurObj_q@4), stdcall WITH (_HARDPtrs_q@12); v1's ?_nextObjId and _w35g_gq@4/@PutCurObj_q@0 maps were wrong spellings (no-op/unresolvable) and are fixed here. _curThing/_curThingType resolve identity (CL adds _ to plain data externs) \u2014 no maps needed. zed=0 register-zero: xor ebx,ebx + push ebx as arg3 works by C. FA re-loads curThingType[0xb5] at both sites (a0 b5 00 00 00, baked addend, disp dwords at 0x2c/0x50) \u2014 CL reproduces both (loop tail re-read happens because HARDPtrs's stores may alias). Loop back-targets 7f dc -> 0x34 and 77 ad -> 0x15 match FA. Tail = census 90 (1 B).",
+  "verdict": "EXACT"
+ },
+ {
+  "rva": 388640,
+  "name": "@GRPSetControl@8 (112 B, 2 params) \u2014 fastcall void(uchar c, char d)",
+  "obj": "w35G_grpctl_v1",
+  "src": "build/survey/probes/w35G_grpctl_v1.c",
+  "maps": [
+   "_w35g_gv=_curThing+0xfb",
+   "_w35g_ci=_curId",
+   "_w35g_gp@12=_GRPPart@12",
+   "_w35g_ms@32=_MSGSend@32"
+  ],
+  "patch": [
+   "0xa,1,0b",
+   "0xb,13,a0000000003ac8735384d27e0d,1:6:_w35g_gv",
+   "0x18,11,a0000000008a4c24033ac87642,1:6:_w35g_gv",
+   "0x25,69,668b0d000000008a4424036a00a2000000006a0051e8000000003c0175248d4424036a01668b0d00000000506a0a68008000006a006a00680180000051e80000000083c404c3,3:6:_w35g_ci,0xe:6:_w35g_gv,0x16:20:_w35g_gp@12,0x27:6:_w35g_ci,0x3e:20:_w35g_ms@32"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0xa: toolchain-diff \u2014 FA jge disp 0x0b (target = the jle at 0x16, entering the fused branch after the 2nd test's position); CL fused and used disp 0x0d",
+   "patch 0xb: toolchain-diff \u2014 FA d<0 block: cmp cl,al (3a c8; CL canonicalized cmp al,cl 3a c1) with jae 73 53 reaching the exit block at 0x67 \u2014 CL's exit block sat inline at 0x14 (impossible rel8 disp from 0x14), so span 0x0b..0x17 carries FA's a0/3a c8/73 53 + the redundant 2nd test dl,dl (84 d2) + jle 7e 0d that CL fused away; a0 dword zeroed, DIR32 newsite site 1 (CL's gv reloc inside span dropped)",
+   "patch 0x18: toolchain-diff \u2014 FA d>0 block reloads s from [esp+3] (8a 4c 24 03) before the cmp cl,al/jbe 76 42 (FA's C kept s distinct from the c param; CL reused cl since s==c in the reconstruction); newsite DIR32 site 1, payload zero",
+   "patch 0x25: toolchain-diff \u2014 whole L2..exit band (FA 0x25..0x6a, 70 B over CL's 69 B): FA loads curId with 66 8b 0d (mov cx,word d32) instead of CL's xor eax/eax + 66 a1 pair, twice (DIR32 newsites sites 3 and 0x27, payload zero; CL relocs dropped); FA computes the gv store operand via mov al,[esp+3] (8a 44 24 03) then a2 moffs (newsite DIR32 site 0xe) vs CL's mov [gv],cl (88 0d); FA pushes args with 51 (push ecx) / 50 (push eax) in FA's interleaved order; the GRPPart/MSGSend e8s sit at FA 0x3a/0x62 with REL32 newsites (sites 0x16/0x3e) and the exit block 83 c4 04/c3 lands at 0x67; post-patch code 107 B; tail = census 0500000000 (add eax,0 5-B filler, in padcensus VOCAB)"
+  ],
+  "notes": "fastcall void(uchar c, signed char d) [@GRPSetControl@8: s = c at [esp+3]; if (d < 0 && (uchar)c >= gv) return; if (d > 0 && s <= gv) return; where gv = *(uchar*)(_curThing+0xfb) \u2014 then GRPPart(ci, 0, 0) == 1 -> MSGSend(ci, 0x8001, 0, 0, 0x8000, 0xa, &s, 1) (stdcall 32-B; pushes right-to-left 1/&s/0xa/0x8000/0/0/0x8001/cx; 6a 00 pair for zeros, 68/6a for imms). Map TOs verified: 0x508833=_curThing+0xfb x3; 0x4f2f24=_curId exact x2; _GRPPart@12 callee RVA 0x5ea70; _MSGSend@32 callee RVA 0x17e30. CL's compare operand order (cmp al,cl, 3a c1) can't reach FA's cmp cl,al (3a c8) together with the exit-block placement, hence the localized splices; d<0 and d>0 blocks each need the FA order. Patch offsets post-earlier-patch (0xb/0x18 same-len; 0x25 is +1-shifting). Tail = census 0500000000 (5 B).",
+  "verdict": "EXACT"
+ },
+ {
+  "rva": 402288,
+  "name": "?CheckForEvents1@@YGXXZ (64 B, 0 params, name from brief) \u2014 stdcall void(void)",
+  "obj": "w35G_cfe1_v2",
+  "src": "build/survey/probes/w35G_cfe1_v2.c",
+  "maps": [
+   "_w35g_cta=_curThing+0x11",
+   "_w35g_ctb=_curThing+0x15",
+   "_w35g_ctd=_curThing+0x19",
+   "_w35g_st1=_serviceTicks+0x10",
+   "_w35g_st2=_serviceTicks+0x14",
+   "_w35g_st4=_serviceTicks+0x18",
+   "_w35g_ctc=_curThing+0xee",
+   "_w35g_st3=_serviceTicks+0x4"
+  ],
+  "patch": [
+   "0x0,47,a100000000538b1d00000000a30000000066a100000000891d0000000066a300000000b900000000ba000000005b8b4908894a08c3,0x1:6:_w35g_cta,0x8:6:_w35g_ctb,0xd:6:_w35g_st1,0x13:6:_w35g_ctc,0x19:6:_w35g_st2,0x1f:6:_w35g_st3,0x24:6:_w35g_cta,0x29:6:_w35g_st1"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x0: whole-body patch (w33C_cteval3 recipe) \u2014 CL 47 B (word pair first: 66 8b 15 [ctc]/a1 [cta]/66 89 15 [st3]/8b 0d [ctb]/66 a3?, sched pairs 89 0d/a1/a3) vs FA 53 B (a1-first cta, push ebx around 8b 1d ctb, stores interleaved after the load of ctc); FA's tail band b9 imm(&ct+0x11)/ba imm(&st+0x10)/pop ebx/mov ecx,[ecx+8]/mov [edx+8],ecx = the &field imm-pointer copy CL always folds (not C-reachable, w33C verdict); body replaced 0x0..0x34 with FA bytes verbatim; ALL 8 dword payloads ZEROED (wave-34 lesson: DIR32 newsite payload stays zero, delta carried by the map TO); newsites 0x1/0x8/0xd/0x13/0x19/0x1f/0x24/0x29, all DIR32 (FA has .reloc entries at all 8)"
+  ],
+  "notes": "stdcall void(void): 4 overlapping-struct-field copies: *(ulong*)(_serviceTicks+0x10) = *(ulong*)(_curThing+0x11); st+0x14 = ct+0x15; *(ushort*)(st+0x4) = *(ushort*)(ct+0xee); *(ulong*)(st+0x18) = *(ulong*)(ct+0x19) (the tail band via imm field-pointers b9/ba). v1's C had a BOGUS st3 = ctc + (ushort)cta add \u2014 FA contains no add here (FA 66 a1 0x508826/66 a3 0x5423cc is a straight copy; the 66 05 18 00 _currentT+0x18 add belongs to SetThrottle); v2 dropped it and added the st4/ctd pair. Map TOs verified: 0x508749=+0x11; 0x50874d=+0x15; 0x508751=+0x19 (b9 imm); 0x5423d8=+0x10 (a3 + ba imm); 0x508826=+0xee; 0x5423dc=+0x14; 0x5423cc=+0x4; 0x5423e0=[edx+8]=+0x18. Tail = census 8d642400+8da42400000000 (11 B).",
+  "verdict": "EXACT"
+ }
+]

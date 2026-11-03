@@ -1,0 +1,112 @@
+[
+ {
+  "rva": 43520,
+  "obj": "w35F_hud_v2",
+  "src": "build/survey/probes/w35F_hud_v2.c",
+  "maps": [
+   "@w35f_absq@4=@Abs@4"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "EXACT round 2 (v1 was 96/90-B with wrong head). 96-B chunk 0xaa00: 90 B code + 6 B census pad 8d9b00000000, auto-proven, no tail key. int __fastcall w35f_hud(void): named short locals q/dv/r/a; q=*(short*)(curThing+0x1f) -> FA 66 a1 moffs at _curThing+0x1f=0x508757 (bare public, map-free, verified imm); dv=182 forces the divisor into si (66 be b6 00, push esi/pop esi) so q/dv emits idiv si + cwd + test ax,ax; r>0 test via short r (66 85 c0 + jle); abs extern declared 'int __fastcall w35f_absq(short)' so CL moves r with 8b c8 (no movsx) before call @Abs@4 (map verified, FA TO 0x4c29c4, rel site 0x19); /20 via idiv with mov ecx,0x14; dam+4/dam+2 halfword loads with bare dam (rel 0x2b/0x37 = 0x51dd7c/0x51dd7a verified) using cdq/sub/sar div-by-2 spell; curThing+0x20c byte compare (a0 rel 0x41 = 0x508944 verified); clamp a>4->4. v1->v2 key moves: post-div test must ride a SHORT staging local; divisor constant must be a named short decl so it homes in si."
+ },
+ {
+  "rva": 70384,
+  "obj": "w35F_getkey2_v1",
+  "src": "build/survey/probes/w35F_getkey2_v1.c",
+  "maps": [
+   "_w35f_kcnt=?kbCount@@3GA",
+   "_w35f_khead=?kbHeadPtr@@3GA",
+   "_w35f_kbuf=?kbBuffer@@3PAGA",
+   "_w35f_kcs=?keyboard_critical_section@@3U_RTL_CRITICAL_SECTION@@A",
+   "__imp__EnterCriticalSection@4=__imp__EnterCriticalSection",
+   "__imp__LeaveCriticalSection@4=__imp__LeaveCriticalSection"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "EXACT round 1. 96-B chunk 0x112f0: 87 B code + 8bff + 8da42400000000 pad, auto-proven, no tail key. ?GetKey2-body repro via ?mangled TOs: kbCount/kbHeadPtr/kbBuffer/keyboard_critical_section sites = FA rels 0x3/0x20/0x27/0x39/0x48 and kcs 0x12/0x3e, all verified against dis.py 0x112f0; imp TOs have NO @N (DLL imports, __imp__EnterCriticalSection/__imp__LeaveCriticalSection at FA IAT rels 0x1a/0x4e = 0x58a618/0x58a61c) while map FROMs keep @4 (__imp__EnterCriticalSection@4=__imp__EnterCriticalSection). Emitted symtab checked: obj relocs 0x3/0x12/0x1a/0x20/0x27/0x39/0x3e/0x48/0x4e match FA sites exactly; _w35f_* FROM spellings are cdecl (_name)."
+ },
+ {
+  "rva": 80304,
+  "obj": "w35F_chatfix_v2",
+  "src": "build/survey/probes/w35F_chatfix_v1.c",
+  "maps": [
+   "_w35f_chatEdit=?chatEditing@@3DA",
+   "_w35f_ka0=_keyarray+0x39",
+   "_w35f_ka1=_keyarray+0xf",
+   "_w35f_ka2=_keyarray+0x48",
+   "_w35f_ka3=_keyarray+0x50",
+   "_w35f_ka4=_keyarray+0x4b",
+   "_w35f_ka5=_keyarray+0x4d",
+   "_w35f_ka6=_keyarray+0xd",
+   "_w35f_ka7=_keyarray+0xc",
+   "_w35f_ka8=_keyarray+0x4e",
+   "_w35f_ka9=_keyarray+0x4a"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "EXACT round 2 as v2 config (reused v1 source; v1 verdict masked the ka8/ka9 mismatch). 80-B chunk 0x139b0: 70 B code + 2x 8d642400 pad (8 B), auto-proven, no tail key. void __stdcall w35f_chatfix(void): if (chatEditing) { char z=0; ten byte stores ka0..ka9 with zero }. CRITICAL merge note: v1's maps had ka8=+0x4a/ka9=+0x4e swapped; FA byte order (verified dis.py 0x139b0) is +0x4e at rel 0x3d BEFORE +0x4a at rel 0x43 - this final.json record carries the corrected order. Map FROMs = emitted declsyms _w35f_ka0.._ka9 (verified in obj symtab, offsets 0xd..0x43 match FA sites); ten distinct FROMs because CL would CSE same-symbol stores' ordering."
+ },
+ {
+  "rva": 90384,
+  "obj": "w35F_setap_v2",
+  "src": "build/survey/probes/w35F_setap_v2.c",
+  "maps": [
+   "_w35f_wpsetup@4=_WPSetupCurrent@4",
+   "_w35f_cancelq@0=_CancelCmdBuf@0",
+   "@w35f_t16@4=$FA$_t_416180"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "EXACT round 2 (v1 had 0x2000/0x1000 clr-guard polarity wrong). 112-B chunk 0x16110: 99 B code + 13 B pad 8d9b00000000+8da42400000000, auto-proven, no tail key. void __fastcall w35f_setap(unsigned char on, unsigned char x) via TWO-IF (not if/else) bit-test shape - CL emits FA's jne-forward layout natively, zero patches. Emitted @w35f_setap@8; FROMs: stdcall _w35f_wpsetup@4/_w35f_cancelq@0, fastcall @w35f_t16@4 (unsigned char param kills the 33 c9+8a cb zero-extension pair). TOs verified: CTf moffs = _curThing+0x16f = 0x5088a7 (bare public, map-free, rel sites 0x8/0x19/0x25/0x35/0x44/0x4e/0x5d), wpsetup rel 0x14 -> 0x4973f0, cancel rel 0x49 -> 0x463010, t16 rel 0x2a -> $FA$_t_416180. MERGE DEPENDENCY: the $FA$_t_416180 TO requires stub group t00012 (covers 0x4140e0..0x416240, defines $FA$_t_416180) to remain a stub at merge - if chunk 0x416180 is itself converted in the same wave, retarget this map TO to that chunk's real public instead."
+ },
+ {
+  "rva": 151146,
+  "obj": "w35F_swnat_v3n",
+  "src": "build/survey/probes/w35F_swnat_v3n.c",
+  "maps": [
+   "_w35f_swapmem=_Swapmem@12",
+   "_w35f_mcr=?MenuCreateRemaps@@YGXXZ"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "EXACT round 3 via the ONE-ALLOWED naked-asm escape (w30b precedent). C attempts v1 (locals) and v2 (decl-init) both emit 48 B (68-imm32 pushes for the repeated constant args 0x300/_curPalette - CL 4.2 const-prop) vs FA's 46 B register copies; chunk is 46 B so patches (1:1 length) cannot rescue an over-length obj. void __declspec(naked) __cdecl w35f_swnat(void) with __asm block replicating FA byte-for-byte: inline-asm calls must use the UNDECORATED C names (call w35f_swapmem, call w35f_mcr; '_w35f_*' in asm = C2094 undefined label); mov edi, offset curPalette (char array needs 'offset' for address-imm; bare name = C2443); dword ptr [nationSides+0x58] emits a1 with +0x58 baked in content. Emitted def _w35f_swnat; naked __cdecl = no prologue, matches FA FPO fpo/esp cbProlog=12. All 6 sites verified vs dis.py 0x24e6a: a1 0x531dc0=_nationSides+0x58 at rel 0x2/0x20, _curPalette 0x57af08 at rel 0xe, Swapmem rels 0x15/0x27 -> 0x4c2868, MenuCreateRemaps rel 0x1a -> 0x40bf70. FROM spellings are CDECL (no @N): _w35f_swapmem=_Swapmem@12 maps bare to the stdcall public (wave-34 bare=_name@N rule). MERGE NOTE: chunk 0x24e6a sits inside stub textgroup t0001e (0x424ae0..0x425777, 15 chunks) - group extent shrinks at merge; no alias needed: $FA$_t_424e6a is unreferenced (grep of swap.json + probe configs empty; FA-wide rel32 scan for VA 0x424e6a empty)."
+ },
+ {
+  "rva": 210960,
+  "obj": "w35F_soundoff_v2",
+  "src": "build/survey/probes/w35F_soundoff_v2.c",
+  "maps": [
+   "_w35f_nml=?noMixLeft@@3UMODSPEC@@A",
+   "_w35f_MOD=?MOD@@3PAUMODSPEC@@A",
+   "@w35f_sndrel@4=?SoundRelease@@YIXF@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "EXACT round 2. 96-B chunk 0x33810: 93 B code + 8da42400000000 + 8bff-ish pad, auto-proven, no tail key. void __fastcall w35f_soundoff(short id): staging byte 'on = soundOn' forces FA's a0-load (rel 0x2 = 0x4e75f4 bare public, map-free) + test al,al split; SIGNED short s (movsx eax,si + 66 83 fe/-1 + jge); MOD base *84 (lea eax,[eax*4+MOD] rel 0x2d, specials+0xb30 lea rel 0x36 with +0xb30 baked) s*84 inlined in both arms -> CL CSE-hoists between cmp and jge; self-recursion @w35f_soundoff@4 rel 0x45 (internal, map-free); staging short k = *(short*)(p+0x2e) reproduces 66 8b 4f 2e + 66 83 f9 ff; rec-call arg = k already in cx (no extra move). TOs verified: noMixLeft rel 0x15, MOD rel 0x2d, specials bare rel 0x36, SoundRelease rel 0x52 -> 0x434150; fastcall FROM @w35f_sndrel@4 and fastcall def @w35f_soundoff@4 verified in obj symtab."
+ }
+]
