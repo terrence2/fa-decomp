@@ -1,0 +1,133 @@
+[
+ {
+  "rva": 544800,
+  "obj": "w40E_85020_v1.obj",
+  "src": "build/survey/probes/w40E_85020_v1.c",
+  "maps": [
+   "_w40E_nts70=?noTimerSleep@@3JA+0x70",
+   "_w40E_nts6c=?noTimerSleep@@3JA+0x6c",
+   "_w40E_nts74=?noTimerSleep@@3JA+0x74"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "SetNoTimerSleep: 3-arg stdcall store of a,b into the noTimerSleep class statics at +0x70/+0x6c/+0x74 (delta maps on ?noTimerSleep@@3JA; FA dwords = base+delta, verified). CL emits 3 independent mov with moffs disp32 + DIR32 relocs; no patch needed. Declared as plain longs, not C++ class member.",
+  "provenance": []
+ },
+ {
+  "rva": 160297,
+  "obj": "w40E_27229_v2.obj",
+  "src": "build/survey/probes/w40E_27229_v2.c",
+  "maps": [],
+  "patch": [
+   "0x16,1,08",
+   "0x1e,35,0fafc685c07d0433c0eb0bb90060ea003bc17e028bc15ec20c00"
+  ],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Bound: pure-int clamp band, no externs (empty maps). C shape: d=0x3e800; t=base+mult*rate+0x1f400; t=t/d*d; clamp [0,0xea6000]; short return. Two patches: (1) sib byte 08 for the mult*rate operand (CL picks sib 44); (2) 34->26-byte band rewrite: CL lea-chain multiply + its own clamp/return shape replaced by FA's 0f af c6 mul + cmp/jb clamp band + cltq forms.",
+  "provenance": [
+   "patch 0x16: toolchain-diff CL sib-44 vs FA sib-08 for the mult*rate sib operand byte \u2014 rewritten to FA byte",
+   "patch 0x1e: toolchain-diff CL lea-chain multiply + own clamp tail vs FA 0f af c6 mul + cmp/jb clamp + ret band \u2014 34 B replaced with 26 B of FA forms"
+  ]
+ },
+ {
+  "rva": 450368,
+  "obj": "w40E_450368_v2.obj",
+  "src": "build/survey/probes/w40E_450368_v2.c",
+  "maps": [
+   "_w40E_nComp=_numComputers",
+   "_w40E_mps=?mpStatus@@3PAJA",
+   "_w40E_MP_Info=?MP_Info@@YAPAUMP_INFO@@XZ"
+  ],
+  "patch": [
+   "0x32,4,3bd87cd9"
+  ],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "ClrMps: loop over MP_Info() clearing mpStatus[i] for computers not carrying flag 1<<(i&0xff) (m[0x56], i.e. +0x158 in MP_INFO). m declared first to steer colors (m=esi, i=eax, d=edx); do-while on i<nComp. One patch: the loop-condition cmp/jcc operand form (CL re-derives it; FA latches cmp via registers), 4-B rewritten to FA's 3b d8 / 7c d9.",
+  "provenance": [
+   "patch 0x32: toolchain-diff CL loop-condition cmp+jcc operand encoding vs FA latched-register compare \u2014 4 B rewritten to FA bytes (cmp ebx,.. jl)"
+  ]
+ },
+ {
+  "rva": 723488,
+  "obj": "w40E_b0a20_v2.obj",
+  "src": "build/survey/probes/w40E_b0a20_v2.c",
+  "maps": [
+   "_w40E_strchr=_strchr",
+   "_w40E_Rand@0=@Rand@4",
+   "_w40E_Sprintf=_Sprintf",
+   "_w40E_pcr=?palColorRate@@3FA+0x7c"
+  ],
+  "patch": [
+   "0x0,4,",
+   "0x4,1,51",
+   "0x11,2,7432",
+   "0x13,30,0fbe77010fbe4f0283ee3083e930662bce81e6ffff00006641e8000000000fbfc003c650680000000057,26:20:_w40E_Rand@0,37:6:_w40E_pcr"
+  ],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "ColStr: strstr('@'), compute x[1]-0x30, Sprintf(x, &palColorRate[0x7+0x18], (short)Rand()+(c1&0xffff)). c1-declared-first to steer CL colors toward FA (c1=esi, x=edi); strchr extern typed (const char*,int). Patches: prolog reshape (delete 4-B CL lead-in, rewrite first push to 51), je disp recompute, and a 30->42-B band rewrite of the movsx/sub/and/inc/call band; band newsites 26:20 Rand rel32 + 37:6 pcr DIR32 reattach dropped relocs (FA dwords bf4efaff @0x2d and 08825000 @0x38 recovered by maps).",
+  "provenance": [
+   "patch 0x0: toolchain-diff CL prolog lead-in absent in FA \u2014 4 B deleted",
+   "patch 0x4: toolchain-diff CL first prolog push spelling (push edi) vs FA push ecx \u2014 1 B rewritten to 51",
+   "patch 0x11: toolchain-diff je disp to early-return shifted by prolog reshape \u2014 disp rewritten to 7432",
+   "patch 0x13: toolchain-diff CL CSE/idiom divergence in the movsx esi/esi-ecx band \u2014 30 B replaced with 42 B of FA forms (movsx pairs, 83 ee 30 / 83 e9 30, 66 2b ce, 81 e6 ffff, 66 41, call Rand, movsx, add, push x3); newsites 26:20 Rand + 37:6 pcr"
+  ]
+ },
+ {
+  "rva": 565184,
+  "obj": "w40E_89fc0_v4.obj",
+  "src": "build/survey/probes/w40E_89fc0_v4.c",
+  "maps": [
+   "_w40E_smpx=_shellMousePos",
+   "_w40E_smpy=_shellMousePos+0x2",
+   "_w40E_mpw=?mousePtrWidth@@3FA",
+   "_w40E_mph=?mousePtrHeight@@3FA",
+   "_w40E_ShellHideMouse=?ShellHideMouse@@YGXXZ"
+  ],
+  "patch": [
+   "0x0,4,668b44240c",
+   "0x28,4,668b442410",
+   "0xc,2,7f4c",
+   "0x26,2,7c32"
+  ],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "CheckMousePtr: 4 mouse-bounds tests, shared ret0 tail. C: globals short smpx/smpy (volatile \u2014 forces FA's 0f bf 05 reloads instead of CL's movsx eax,ax CSE), mpw/mph plain, goto-shared ret0 with char return, all 16-bit compares. Patches: two mov ax,[esp+arg] reads gain the 66 prefix (4->5 B: FA uses 16-bit 66 8b 44 24 0c/10), then the two jcc disps recomputed (+1 each; ret0 moves +2). volatile on smpx/smpy is the load-bearing spelling \u2014 without it CL CSEs both movsx reloads.",
+  "provenance": [
+   "patch 0x0: toolchain-diff CL drops 66 on mov ax,[esp+0xc] (32-bit load) \u2014 66 8b 44 24 0c restored (+1 B)",
+   "patch 0xc: toolchain-diff jg disp to shared ret0: ret0 shifts +2 after both 66 inserts, jcc only +1 \u2014 disp re-written to 4c",
+   "patch 0x28: toolchain-diff CL drops 66 on mov ax,[esp+0x10] \u2014 66 8b 44 24 10 restored (+1 B)",
+   "patch 0x26: toolchain-diff jl disp to shared ret0 recomputed after both 66 inserts (7c 32)"
+  ]
+ },
+ {
+  "rva": 768688,
+  "obj": "w40E_bbab0_v1.obj",
+  "src": "build/survey/probes/w40E_bbab0_v1.c",
+  "maps": [
+   "_w40E_fwrite=_fwrite"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4bbab0"
+  ],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Fbuf: fwrite(x[6],1,0x1000,x[5]); on short write load *o into v, store 0x24 at v+0x14, call (*v)(o) vtable slot 0; then *x = x[6]; x+4 = 0x1000; return 1 (char/al). maps only _w40E_fwrite=_fwrite (REL32 @0x19; FA dword 0x19d43 = symVA+content-(siteVA+4), content 0 verified). Reloads-from-[o] spelling (v = *(long*)o twice) reproduces FA's two g[disp] loads.",
+  "provenance": []
+ }
+]

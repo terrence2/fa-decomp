@@ -1,0 +1,135 @@
+[
+ {
+  "rva": 409456,
+  "obj": "w40D_63f70_v1",
+  "src": "build/survey/probes/w40D_63f70_v1.c",
+  "maps": [
+   "_svc46=_serviceTicks+0x46",
+   "_svc4e=_serviceTicks+0x4e",
+   "_svc4a=_serviceTicks+0x4a",
+   "_svcA2=_serviceTicks+0xa2",
+   "_curFlag=_curThing+0x215"
+  ],
+  "patch": [
+   "0x0,2,a1",
+   "0x10,2,a3"
+  ],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "fastcall 1-arg (char flag): t=svc46; svc4e=1; svc4a=t; if(flag){svcA2=0;curFlag=0}. CL picks 8b15/8915 EDX moffs (EDX busy) vs FA a1/a3 EAX moffs - 2 two-byte opcode patches. Deltas verified from FA imm bytes: _serviceTicks 0x5423c8 (+0x46/0x4e/0x4a/0xa2), _curThing 0x508738+0x215=0x50894d.",
+  "provenance": [
+   "patch 0x0: toolchain-diff CL 8b 15 (mov edx,[mem], EDX busy w/ staging) vs FA a1 moffs EAX form",
+   "patch 0x10: toolchain-diff CL 89 15 (mov [mem],edx) vs FA a3 moffs EAX store"
+  ]
+ },
+ {
+  "rva": 713216,
+  "obj": "w40D_ae200_v1",
+  "src": "build/survey/probes/w40D_ae200_v1.cpp",
+  "maps": [
+   "?pkt_set_header@@YAXHPAUNET_PKT@@H@Z=?pkt_set_header@@YAXHPAUNET_PKT@@H@Z",
+   "?pkt_send@@YADPAUNET_PKT@@H@Z=?pkt_send@@YADPAUNET_PKT@@H@Z"
+  ],
+  "patch": [
+   "0x3,1,5c",
+   "0x5,1,10",
+   "0xa,1,10",
+   "0xe,1,77",
+   "0x10,1,56",
+   "0x11,1,53",
+   "0x1b,1,07",
+   "0x1e,1,47",
+   "0x20,1,53",
+   "0x21,1,56",
+   "0x2f,1,07"
+  ],
+  "aliases": [
+   "0=$FA$_t_4ae200"
+  ],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "cdecl 2-arg pkt wrapper; .cpp source (C++-mangled externs). CRITICAL: declare 'struct NET_PKT' NOT union - FA publics are PAU (pointer-near-struct? actually FA spells PAUNET_PKT@@); union decl emits PAT and links fail to resolve. 11 one-byte reg-home sweep: CL esi=pkt,ebx=pkt+4,edi=x -> FA ebx=x,edi=pkt,esi=pkt+4 (arg-slot disps, push order x2, modrm reg fields). Relocs @0x13/@0x23 rel32 calls masked by fit - maps verified against layout.json publics.",
+  "provenance": [
+   "patch 0x3: toolchain-diff arg2 load disp [esp+0x10] vs FA [esp+0x14] (modrm sib disp byte)",
+   "patch 0x5: toolchain-diff reg-home sweep CL esi=pkt vs FA edi=pkt (arg1 load disp)",
+   "patch 0xa: toolchain-diff reg-home sweep CL ebx=pkt+4 load vs FA esi=pkt+4 (disp byte)",
+   "patch 0xe: toolchain-diff reg-home sweep CL 8d4e (lea [esi+4]) vs FA 8d77 (lea [edi+4])",
+   "patch 0x10: toolchain-diff set_header push order CL 53 57 vs FA 56 53 (reg-home)",
+   "patch 0x11: toolchain-diff set_header push order second byte (reg-home)",
+   "patch 0x1b: toolchain-diff reg-home sweep CL 8b06 (eax,[esi]) vs FA 8b07 (eax,[edi])",
+   "patch 0x1e: toolchain-diff reg-home sweep CL c746 (word [esi+6]) vs FA c747 (word [edi+6])",
+   "patch 0x20: toolchain-diff send push order CL 57 (push edi) vs FA 53 (push ebx)",
+   "patch 0x21: toolchain-diff send push order CL 53 (push ebx) vs FA 56 (push esi)",
+   "patch 0x2f: toolchain-diff reg-home sweep CL c706 (dword [esi]) vs FA c707 (dword [edi])"
+  ]
+ },
+ {
+  "rva": 155164,
+  "obj": "w40D_25e1c_v2",
+  "src": "build/survey/probes/w40D_25e1c_v2.c",
+  "maps": [
+   "_nextObjId=_nextObjId",
+   "_objPtrs=_objPtrs",
+   "@w40d_chk@4=$FA$_t_424cd6",
+   "@w40d_note@4=$FA$_t_425e63"
+  ],
+  "patch": [
+   "0xc,2,7637",
+   "0x17,2,7421",
+   "0x19,7,0fb7c6",
+   "0x3d,1,3b",
+   "0x43,2,72c9"
+  ],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "for-loop ushort objwalk over objPtrs[i], type byte 2/4 -> @w40d_note@4(*(int*)(o+0xe4)). Map TOs $FA$_t_424cd6/$FA$_t_425e63 = unnamed still-stub chunk starts (anchors named by VA). Loop-head jbe disp recomputed (0x3b->37); loop-exit je disp (25->21); CL mov+and 0xffff 7B -> FA movzx esi,si 3B; tail cmp operand order 39->3b (1-B patch at 0x3d only - 2-byte at 0x3c clobbers the 66 prefix); tail jcc polarity 77c5 ->72c9.",
+  "provenance": [
+   "patch 0xc: toolchain-diff loop-head jbe disp: body length differs (mov+and vs movzx) so displacements recompute",
+   "patch 0x17: toolchain-diff loop-exit je disp recompute (same body-length delta)",
+   "patch 0x19: toolchain-diff CL mov+and 0xffff (7B) vs FA movzx reg,reg16 (3B) - upper-bits-unknown steer class",
+   "patch 0x3d: toolchain-diff tail comparand order CL 39 (cmp [mem],reg) vs FA 3b (cmp reg,[mem])",
+   "patch 0x43: toolchain-diff tail jcc polarity CL 77 c5 (ja) vs FA 72 c9 (jb) after comparand swap"
+  ]
+ },
+ {
+  "rva": 543472,
+  "obj": "w40D_84af0_v2",
+  "src": "build/survey/probes/w40D_84af0_v2.c",
+  "maps": [
+   "_dTick4=_timerTicks+0x4",
+   "__imp__GetLocalTime@4=__imp__GetLocalTime"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "_TIMESystemTime@0: GetLocalTime dllimport -> CL ff 15 IAT call + push ebx reproduces FA; ms = ((Hour*60+Min)*60+Sec)*1000 + Milliseconds (FA reads [esp+0xc/0xe/0x10/0x12] after call; wDayOfWeek/wDay skipped as 2-B holes); (double)ms / dTick4 ((__ftol). Zero patches. Map: obj cites decorated __imp__GetLocalTime@4; FA public is the UNDECORATED __imp__GetLocalTime (.idata$5 slot) \u2014 without the map the linker synthesized an .rdata alias def (16-B insert at 0x4e63f0) shifting rdata/idata/reloc/patchwork.",
+  "provenance": []
+ },
+ {
+  "rva": 748976,
+  "obj": "w40D_b6db0_v2",
+  "src": "build/survey/probes/w40D_b6db0_v2.c",
+  "maps": [
+   "@w40d_chk6@0=$FA$_t_4b6ec0"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "__fastcall APTakeoffType@8: f = *(int*)(*(char**)(ctl+5) + 0xba) - MUST cast to (char*) else char** scaling adds +0x2e8. obj==0 or (*+0xe8 && !(f&0x40)) -> -1; f&0x08 -> 0xa; (*+0xe9 && f&0x02) -> 7; f&0x20: (*+0xeb)||@w40d_chk6@0()||Dist(&curThing+0x11, *(int*)&curThing+0x231+0xaa)>0x1db00 -> 0xd; m=*(uchar*)(obj+0xec); m==0?-1:0x11 (cmp al,1; sbb; and 0xffffffee; add 0x11). _curThing sites @0x72/+0x231 and @0x7d/+0x11 carried in obj addends, masked - verified vs FA imms 0x508969/0x508749. Zero patches.",
+  "provenance": []
+ },
+ {
+  "rva": 867199,
+  "verdict": "KEEP-ASM",
+  "reason": "defer - 17-B fragment immediately before _strchr: int3 + shared lea/pop/ret function tail + cs-nop alignment pads, no standalone decompilable body"
+ }
+]

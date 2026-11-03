@@ -1,0 +1,96 @@
+[
+ {
+  "rva": 888067,
+  "verdict": "KEEP-ASM",
+  "reason": "SEH wall: 26-B catch/unwind funclet tail \u2014 mov esp,[ebp-0x18]; push -1; lea eax,[ebp-0x10]; push; call $FA$_t_4d4890 (__local_unwind2) class; jmp back into the $FA$_t_4d8c44-band function. Cannot be a standalone C function (no prolog, state threaded from the EH frame).",
+  "notes": "dis.py: chunk = SEH catch funclet tail; jmp $FA$_t_4d8c44+0xa1 handback."
+ },
+ {
+  "rva": 454176,
+  "verdict": "KEEP-ASM",
+  "reason": "defer - slice of 0x6eca0-band function: 64-B tail reached only via jmp entry at 0x6ee10 (single rel32 caller); misaligned arg load mov ecx,[esp+0x1]; mov ... requires the band's prologue/argument conventions; the 0x6eca0 head shares the band (early returns end 0x6eddf; 0x6ee00-0x6ee20 is a separate short band).",
+  "notes": "FPO offStart=0x6ee20 = separate FPO record so it looks standalone, but control flow enters only from the band."
+ },
+ {
+  "rva": 870144,
+  "verdict": "EXACT",
+  "obj": "w40F_d4700_v2",
+  "src": "build/survey/probes/w40F_d4700_v2.c",
+  "flags": "/c /O2 /Gy",
+  "maps": [
+   "_w40f_fwd=$FA$_t_4d85e0"
+  ],
+  "patch": [
+   "0x0,0,fc"
+  ],
+  "provenance": [
+   "patch 0x0 (prolog cld): toolchain-diff - FA opens the thunk with cld; CL has no C source reason to emit cld. 0-length insert keeps length 41; no reloc sites inside."
+  ],
+  "notes": "8-arg cdecl forwarding thunk to $FA$_t_4d85e0 (still stub). Callee args (callee(u1, s->fc, u3, 0, s->f8, s->f10, s, 0)) reconstructed from [esp+0x18] reloads: first reload at 3 pushes = a3=u3, second at 5 pushes = a1=u1, both into eax then edx. KEY: flags /c /O2 /Gy (NO /G5) \u2014 under /G5 CL's stall-avoidance scheduler saves ebx (push/pop) and hoists loads, 39-B vs FA shape; under plain /O2 the pushes/load-interleave match FA exactly. v1 (a3=s) was wrong: FA's first reload is u3.",
+  "aliases": [
+   "0=$FA$_t_4d4700"
+  ]
+ },
+ {
+  "rva": 218864,
+  "verdict": "EXACT",
+  "obj": "w40F_356f0_v2",
+  "src": "build/survey/probes/w40F_356f0_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_g1_soundOn=_soundOn",
+   "_g2_sndon2=$FA$_d_4e7000+0x5f0",
+   "_g3_ailon=?ailActive@@3DA+0x4",
+   "_g4_musich=?musicDriverHandle@@3PAU_MDI_DRIVER@@A",
+   "_g5_scorep=?scorePrefix@@3PADA+0x10",
+   "_g6_soundh=?soundDriverHandle@@3PAU_DIG_DRIVER@@A",
+   "_g7_pendf=?pendingFlag@@3GA+0x4",
+   "_SndLostFocus=?SndLostFocus@@YAXXZ"
+  ],
+  "patch": [
+   "0x3,4,00000000,0:6:_g1_soundOn",
+   "0x9,4,00000000,0:6:_g2_sndon2",
+   "0xf,4,00000000,0:6:_g3_ailon",
+   "0x26,4,00000000,0:6:_g4_musich",
+   "0x30,4,00000000,0:6:_g5_scorep",
+   "0x3e,4,00000000,0:6:_g6_soundh",
+   "0x48,4,00000000,0:6:_g7_pendf"
+  ],
+  "provenance": [
+   "patch 0x3 (abs imm dword): toolchain-diff - newsite DIR32 registers FA's abs fixup; payload 0, delta via map TO base (+interior delta where interior).",
+   "patch 0x9 (abs imm dword): toolchain-diff - newsite DIR32 registers FA's abs fixup; payload 0, delta via map TO base (+interior delta where interior).",
+   "patch 0xf (abs imm dword): toolchain-diff - newsite DIR32 registers FA's abs fixup; payload 0, delta via map TO base (+interior delta where interior).",
+   "patch 0x26 (abs imm dword): toolchain-diff - newsite DIR32 registers FA's abs fixup; payload 0, delta via map TO base (+interior delta where interior).",
+   "patch 0x30 (abs imm dword): toolchain-diff - newsite DIR32 registers FA's abs fixup; payload 0, delta via map TO base (+interior delta where interior).",
+   "patch 0x3e (abs imm dword): toolchain-diff - newsite DIR32 registers FA's abs fixup; payload 0, delta via map TO base (+interior delta where interior).",
+   "patch 0x48 (abs imm dword): toolchain-diff - newsite DIR32 registers FA's abs fixup; payload 0, delta via map TO base (+interior delta where interior)."
+  ],
+  "notes": "naked-asm verbatim body (87 B incl ret) + 7 DIR32 newsites on the abs moffs/imms; tail pad 8bff+8da42400000000 census-handled. Natural-C v1 diverged completely (CL reg colors esi/edi, 80 3d imm cmps, loop hoisting). FA public ?SndLostFocus@@YAXXZ satisfied via map _SndLostFocus=?SndLostFocus@@YAXXZ. Newsite targets from dis.py site annotations: _soundOn (0x4e75f4), $FA$_d_4e7000+0x5f0 (0x4e75f0), ?ailActive@@3DA+0x4 (0x4efb80), ?musicDriverHandle@@3PAU_MDI_DRIVER@@A (0x4efb74), ?scorePrefix@@3PADA+0x10 (0x4efba8), ?soundDriverHandle@@3PAU_DIG_DRIVER@@A (0x4efb70), ?pendingFlag@@3GA+0x4 (0x4efbc0)."
+ },
+ {
+  "rva": 589680,
+  "verdict": "EXACT",
+  "obj": "w40F_8ff70_v1",
+  "src": "build/survey/probes/w40F_8ff70_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w40f_cb=$FA$_t_48ffb0",
+   "_w40f_vt0=$FA$_t_490240",
+   "_w40f_vt1=$FA$_t_4903b0"
+  ],
+  "patch": [],
+  "provenance": [],
+  "notes": "vtbl-call wrapper, first-variant EXACT: cdecl method call through vtbl[0] (mov eax,[esi+4]; call [eax] reproduced by spelling the call on *(W8FM *)(*(void **)((char *)o + 4))); result stored to unaligned field [o+0x16e]; result-object init [r]=0x490240 (stub anchor), [r+4]=0x4903b0 (w34E alias \u2014 preserved public), [r+8]_byte=0; then w40f_cb(o) cdecl. Tail pad 05+8da424 census-handled. Second store c7 40 04 (dis.py elision) verified in raw FA bytes; abs sites @0x1a/@0x21."
+ },
+ {
+  "rva": 823720,
+  "verdict": "EXACT",
+  "obj": "w40F_c91a8_v2",
+  "src": "build/survey/probes/w40F_c91a8_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "notes": "naked-asm verbatim: 129 x _emit lines copying FA bytes 55 8b ec 60 (pusha) ... 58 61 5d c3 exactly (129 B, unrolled 8-load/16-store dword copy with add edx,ecx stride steps and push eax/popa save-restore); trailing 2e 8b c0 = census pad, excluded. No relocs. Public _CopyDSB15 = bare C identifier CopyDSB15 cdecl. __asm lines must be ONE _emit per line (multi-_emit same line = C2400)."
+ }
+]

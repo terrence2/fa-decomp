@@ -1,0 +1,104 @@
+[
+ {
+  "rva": 891024,
+  "obj": "w40B_cfltcvt_v1",
+  "src": "build/survey/probes/w40B_cfltcvt_v1.c",
+  "maps": [
+   "_fltcvt0=__cfltcvt",
+   "___cftof=__cftof",
+   "___cftog=__cftog",
+   "___cftoe=__cftoe"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "Plain if/or/else-if chain. CL emits cmp [esp+8],imm 74/75 chain and pushes right-to-left; call targets verified: __cftoe 0x4d9540, __cftof 0x4d96b0, __cftog 0x4d97e0 (rel32 math matches FA). Local name cfltcvt0 mapped to FA's __cfltcvt (fitobj auto-adds the chunk public too).",
+  "provenance": []
+ },
+ {
+  "rva": 692192,
+  "obj": "w40B_bmask_v1",
+  "src": "build/survey/probes/w40B_bmask_v1.c",
+  "maps": [],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "Third band needs the unsigned-wrap spelling: (unsigned long)((p & 0x80000000) - 0x80000000) < 1 reproduces FA's 81 e1 / 81 e9 / 83 f9 01 sbb-eax sequence. No fixups (fx=0), no maps, no patch.",
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_4a8fe0"
+  ]
+ },
+ {
+  "rva": 155851,
+  "obj": "w40B_mscale_final",
+  "src": "build/survey/probes/w40B_mscale_v2.c",
+  "maps": [
+   "_w40b_rst=$FA$_span_022368"
+  ],
+  "patch": [
+   "0xf,43,740966893504000000eb1585ff7408893d18000000eb098b44240ca3100000005f5ec20400,0x5:6:_desiredMapScale,0x11:6:_desiredMapScale,0x1c:6:?worldCenter@@3UF24_POINT3@@A"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "__fastcall w40b_msc0(u,s,p): CL reg-class 66 8b f1 / 8b fa matches FA head 0x0..0xe byte-identically incl. the e8 rel32 to the w33g_rst decompile (map TO $FA$_span_022368; that public is defined by the committed build/pilot/w33g_rst_v1_fit.obj - NO parent-side alias edit needed; rel32 verified -0x3d6f). Patch band = CL[0xf..0x39] 43 B -> FA[0xf..0x33] 37 B: CL 4.2 duplicates per-branch epilogs (3x 5f 5e c2 04 00) where FA tail-merges one shared exit; FA jmps eb 15/eb 09 + fall-through spelled verbatim. Three abs store dwords carry newsite payloads (deltas): _desiredMapScale+0x4 (=0x531d30), _desiredMapScale+0x18 (=0x531d44), ?worldCenter@@3UF24_POINT3@@A+0x10 (=0x531d60), all verified vs FA imm bytes.",
+  "provenance": [
+   "patch 0xf: toolchain-diff epilog-tail-merge + per-branch store dwords re-targeted as DIR32 newsites",
+   "tail: none (patched CL code 52 B == chunk size 0x34, no filler)"
+  ]
+ },
+ {
+  "rva": 668016,
+  "obj": "w40B_socset_final",
+  "src": "build/survey/probes/w40B_socset_v2.c",
+  "maps": [],
+  "patch": [
+   "0x0,20,5333d256a10000000057be24040000553bc27e32,0x5:6:?socket_list@@3USOCKET_STATE_LIST@@A,0xb:6:?socket_list@@3USOCKET_STATE_LIST@@A",
+   "0x14,8,8b4424148b4c2418",
+   "0x1e,6,385e18",
+   "0x21,41,74178b3e83ffff74108b2d180000003bef740689461c894e104283c6323b15000000007cd85d5f5e5bc3,0xb:6:?player_list@@3UNET_PLAYER_LIST@@A,0x1f:6:?socket_list@@3USOCKET_STATE_LIST@@A"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "socset0(f,state,flags) cdecl. FA reg-class: socket_list in eax via a1 moffs, array ptr via be imm socket_list+0x424, f=ecx/state=edx, id in eax, player_list in ebp. 4 sequential patches - each off applies to the CURRENT buffer, so p4 off 0x21 = 0x24 minus p3's -3 shift (pads in the earlier round were from overwriting past the shrunk buffer). All 4 CL fixup sites (a1@2, bf@0xc, 8b 2d@0x2d, 39 35@0x42) die under patch spans; maps dropped entirely. Newsites (all verified vs FA imm bytes + layout.json syms): socket_list DIR32 delta 0 x2 (FA dword 0x5692a0), socket_list+0x424 (payload 0x424, FA imm 0x5696c4), player_list+0x18 (payload 0x18, FA dword 0x577e60), socket_list DIR32 delta 0 (FA dword 0x5692a0).",
+  "provenance": [
+   "patch 0x0: toolchain-diff reg-class head band (FA a1 moffs socket_list + be imm +0x424 vs CL a1* bf*) - same 20-B size",
+   "patch 0x14: toolchain-diff reg-class f/state loads (FA 8b 44/8b 4c vs CL 8b 4c/8b 54) - same 8-B size",
+   "patch 0x1e: toolchain-diff CL emits 8a 47 18 + 84 c0 (test) where FA has cmp [esi+0x18] 38 5e 18 (3 B); -3 deletion",
+   "patch 0x21: toolchain-diff main band reg-class (FA 8b 3e/83 ff ff/3b 15/89 46 1c/89 4e 10 vs CL 8b 07/83 f8 ff/39 35/89 4f 1c/89 57 10) + 2 DIR32 newsites (player_list +0x18, socket_list delta 0); 41->42 B",
+   "tail: toolchain-diff none - FA filler 05 00 00 00 00 (5 B) is padcensus VOCAB (add eax,0); patched CL code 75 B == FA code"
+  ]
+ },
+ {
+  "rva": 72032,
+  "obj": "w40B_clock16_final",
+  "src": "build/survey/probes/w40B_clock16_v4.c",
+  "maps": [
+   "_w40b_angles@16=_Angles@16"
+  ],
+  "patch": [
+   "0x6e,24,7e0b66c70000005f5e5bc2100066c700ffff5f5e5bc21000"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "_Clock@16(p,q,w,z4) stdcall. Roles (re-derived from [esp+disp]@N-push counts): A1=base(p, edi: lea+0x11, refs +0x1d/+0x15), A2=q (esi: Angles arg2 AND the [esi+4] d-src), A3=w (ebx: u-band WORD-div var), A4=z4 never cached - reloaded per-branch via [esp+0x1c]. Steer that reproduced FA's u-band: short-typed tt local + 65520 signed idiv (CL does NOT fold the div); Angles((char*)p+0x11, q, w, 0). CL v4 code = FA bytes 0x0..0x6d, 0x7?..0x85 except: CL jg 0b (store-0xffff inline first) vs FA jle 0b (store-0 first); patched band 0x6e..0x85 (24 B, both sizes) flips jcc to 7e and swaps the two immediate-store blocks (no fixups inside). Call rel32 kept in obj head: map TO _Angles@16 (rva 0x117d0) verified -0x1ac.",
+  "provenance": [
+   "patch 0x6e: toolchain-diff jcc polarity + two immediate-store block reorder (jg->jle; 66 c7 00 00 00/66 c7 00 ff ff band order); no fixups in band",
+   "tail: toolchain-diff none - FA filler 8d 49 00 + 8d a4 24 00 00 00 00 (10 B) is padcensus VOCAB; CL code 134 B == FA code"
+  ]
+ },
+ {
+  "rva": 479072,
+  "obj": "w40B_jcopy_final",
+  "src": "build/survey/probes/w40B_jcopy_v2.c",
+  "maps": [],
+  "patch": [
+   "0x0,35,8b442408538b542408568b5c241457558d14828b4424208b6c242485ed908d1c837e1f"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "jcopy_sample_rows(srcs,srcIdx,dsts,dstIdx,nrows,width) cdecl: CL head loads srcIdx first (8b 4c 24 08) and schedules 8d 14 88 / 8d 1c 88 (base ecx) where FA computes sp = lea edx,[edx+eax*4] with edx=srcs... plus eb bx=... roles differ; single same-size 35-B head-band patch 0x0..0x22 fixes args/push order (both jle targets = 0x42, 75 e5 loop-back = 0x27 in both). Loop body 0x23..0x46 byte-identical to FA (rep movsd dwords + rep movsb tail + dec ebp); nrel=0 (memcpy inlines) so no maps or newsites needed.",
+  "provenance": [
+   "patch 0x0: toolchain-diff head reg-class/arg-load order band, same-size 35 B (8d 14 82 vs 8d 14 88, 8d 1c 83 vs 8d 1c 88, FA 8b 54/8b 5c stack-slot order)",
+   "tail: toolchain-diff none - FA filler 8b ff + 8d a4 24 00 00 00 00 (9 B) is padcensus VOCAB; patched CL code 71 B == FA code"
+  ]
+ }
+]

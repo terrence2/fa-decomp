@@ -1,0 +1,97 @@
+[
+ {
+  "rva": 5760,
+  "obj": "Chunk_1680_v5",
+  "src": "build/survey/probes/w40G_1680_v4.c",
+  "maps": [],
+  "patch": [
+   "0,20,8b4c2408538b542408568b442414578bf0c1ee02",
+   "30,1,3a",
+   "32,1,c2",
+   "38,1,e0",
+   "46,1,1a",
+   "47,2,4248"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff - arg load order/reg plan: CL loads len(a3)->edx first, push ebx, dst(a1)->eax, push esi+edi, count=edx (8b f2), then loads src(a2)->ecx; FA loads src(a2)->ecx, push ebx, dst(a1)->edx, push esi, len(a3)->eax, push edi and takes the count from eax (8b f0). Prolog+count band re-spelled 20=20 B (shr esi,2, count=esi; no relocations in this chunk).",
+   "patch 30: toolchain-diff - dword-loop store modrm: FA [edx],edi (3a) vs CL [eax],edi (38) after the dst reg plan restore.",
+   "patch 32: toolchain-diff - dst advance add edx,4 (c2) vs CL's eax form (c0).",
+   "patch 38: toolchain-diff - byte-tail mask on eax (len kept live in eax; FA e0) vs CL's edx (e2).",
+   "patch 46: toolchain-diff - byte-loop store [edx],bl (1a) vs CL's [eax] (18).",
+   "patch 47: toolchain-diff - byte-tail advances: FA inc edx/dec eax (42 48) vs CL inc eax/dec edx (40 4a)."
+  ],
+  "aliases": [
+   "0=$FA$_t_401680"
+  ]
+ },
+ {
+  "rva": 498416,
+  "obj": "Chunk_79af0_v4",
+  "src": "build/survey/probes/w40G_79af0_v2.c",
+  "maps": [
+   "curThing2=_curThing",
+   "curThing3=_curThing"
+  ],
+  "patch": [
+   "16,41,66813d1f00000002e07c180fbf051f00000005fe1f0000b9fe1f0000c1e00899f7f9c333c0c3,3:6:curThing2,14:6:curThing3"
+  ],
+  "provenance": [
+   "patch 16: toolchain-diff \u2014 CL materialized cmp2 (movsx + cmp reg + jge pair with the xor/ret inline mid-body, CSEing the second and third reads through one eax load); FA compares memory 16-bit (66 81 3d), branches jl to the far xor/ret at the chunk end, and re-loads with movsx for the calc. Patch replaces CL 0x10..0x38 (41 B) with FA 0x10..0x35 (38 B): mem-cmp, jl disp 0x18 to the restored xor/ret block, movsx, add 0x1ffe / mov ecx,0x1ffe / shl 8 / cdq / idiv tail. DIR32 re-adds: cmp2 disp at site 3 (curThing2, opcode 66 81 3d), movsx disp at site 14 (curThing3) \u2014 alias externs mapped to _curThing (public) with the +0x1f offset carried in the baked addend."
+  ],
+  "aliases": [
+   "0=$FA$_t_479af0"
+  ]
+ },
+ {
+  "rva": 897520,
+  "obj": "Chunk_db1f0_v2",
+  "src": "build/survey/probes/w40G_db1f0_v1.c",
+  "maps": [
+   "_ctype204=__ctype+0x204"
+  ],
+  "patch": [
+   "0,9,833d000000000156,2:6:_ctype204",
+   "25,2,eb13",
+   "27,9,8b0d0000000033c08b742408,2:6:__pctype",
+   "42,1,71"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 CL materializes the __ctype+0204 MBCS gate (push esi + a1 moffs + cmp reg, 9 B) where FA folds it into a mem-immediate compare (83 3d + disp + imm + push esi, 8 B); head restored, DIR32 re-add at site 2 with zero payload (map bakes the +0x204 delta), jle keeps FA disp 0x11.",
+   "patch 25: toolchain-diff \u2014 FA's jmp to the joint test block is eb 13 (3-B later table path start), CL emitted eb 10.",
+   "patch 27: toolchain-diff \u2014 FA's table path prefixes the pctype walk with `mov ecx,[__pctype]` moffs-form (8b 0d) plus `xor eax,eax` zero-fill that CL omitted (CL a1 moffs into eax, no xor, base eax); restored FA's 12-B band, DIR32 re-add __pctype at site 2 (identity public, zero payload).",
+   "patch 42: toolchain-diff \u2014 table walk index sib: FA [ecx+esi*2] (71) vs CL's base-eax form (70) after the reg-plan restore."
+  ],
+  "aliases": [
+   "0=$FA$_t_4db1f0"
+  ]
+ },
+ {
+  "rva": 283792,
+  "obj": "SeqRect_v2",
+  "src": "build/survey/probes/w40G_SeqRect_v2.c",
+  "maps": [
+   "_SeqRect@16=?SeqRect@@YGXJJJJ@Z"
+  ],
+  "patch": [],
+  "provenance": []
+ },
+ {
+  "rva": 601856,
+  "obj": "Chunk_92f00_v2",
+  "src": "build/survey/probes/w40G_92f00_v2.c",
+  "maps": [
+   "_t492f50=$FA$_t_492f50",
+   "_t4930f0=$FA$_t_4930f0"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_492f00"
+  ]
+ },
+ {
+  "rva": 853688,
+  "verdict": "KEEP-ASM",
+  "reason": "defer - interior slice of the do_set_point_color vector_table VM-dispatch band; starts mid-flow (dec esi) and ends in jmp [esi*4+0x513c58] computed dispatch; also carries _effects and resbuf+0x7 / gouraudOn+0x1 abs fixups as a non-entry span"
+ }
+]

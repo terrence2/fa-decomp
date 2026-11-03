@@ -1,0 +1,185 @@
+[
+ {
+  "rva": 890096,
+  "obj": "w40A_fassign_v2",
+  "src": "build/survey/probes/w40A_fassign_v2.c",
+  "maps": [
+   "___atodbl=__atodbl"
+  ],
+  "patch": [
+   "0x00,0x10,8b44240c83ec0c837c241000507422",
+   "0x19,0x18,8b44240c8b4c24108b54241c83c4088902894a0483c40cc3",
+   "0x31,0x1c,8d4c240451e8000000008b4c24088b54241c83c408890a83c40cc3,6:20:__atoflt"
+  ],
+  "provenance": [
+   "patch 0x00: toolchain-diff \u2014 head band 16->15 B: FA schedules the str load FIRST (mov eax,[esp+0xc] pre-sub) then mem-compares the flag (83 7c 24 10 00); CL loads flag into eax (mov [esp+4]; test eax,eax) and re-loads str post-sub (mov [esp+0x18]) = 1 B longer",
+   "patch 0x19: toolchain-diff \u2014 copy band: FA loads lo/hi/pval as eax/ecx/edx then stores lo-first (89 02, 89 4a 04) after add esp,8; CL schedules pval=ecx first, hi=edx, lo=eax and stores hi-first (89 51 04, 89 01); same-span 18-B replace",
+   "patch 0x31: toolchain-diff \u2014 else band 1c->17 B: FA orders f-load (mov ecx,[esp+8]) then pval-load ([esp+0x1c]) then add esp,8 + direct store (89 0a); CL has pval first + a 90 nop pad + store via 89 11; atoflt call disp zeroed + site 6:20 newsite __atoflt (REL32, patch span drops the original CL reloc)"
+  ],
+  "aliases": [],
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "__fassign: cdecl(int flag, void* pval, char* str); two top-level locals f/d; flag? atodbl->d into pval : atoflt->f into pval; 3 same-span content bands (head, copy, else) + atoflt REL32 newsite site=6."
+ },
+ {
+  "rva": 146128,
+  "obj": "w40A_tlistfind_v2",
+  "src": "build/survey/probes/w40A_tlistfind_v2.c",
+  "maps": [
+   "__tlist=_tlist",
+   "__tlistSize=_tlistSize"
+  ],
+  "patch": [
+   "0x00,0x1c,5680e1fc8b350000000080e2fcb8000000008d34f500000000,6:6:__tlistSize,14:6:__tlist,21:6:__tlist",
+   "0x1b,0x2,7612",
+   "0x1d,0x24,663908750666395002740983c0083bc672ee33c05ec3"
+  ],
+  "provenance": [
+   "patch 0x00: toolchain-diff \u2014 head band 28->25 B: FA order push esi/and cl/mov esi,_tlistSize(moffs)/and dl/mov eax,_tlist/lea esi,[esi*1+_tlist] (scale-1 SIB fused add; CL cannot emit [reg+symbol] so add esi,imm32 becomes the lea); mask widths and cl 0xfc / and dl 0xfc (CL emits 66 81 e1 5-B forms); dwords zeroed + DIR32 newsite payloads (=delta 0): _tlistSize site 6, _tlist sites 14 (mov eax imm) and 21 (lea disp)",
+   "patch 0x1b: toolchain-diff \u2014 jcc polarity retarget: CL (end>start)->guard2 ja +04, FA jbe to ret0 +12",
+   "patch 0x1d: toolchain-diff \u2014 tail band 36->22 B: CL emits a redundant guard2 (cmp esi,_tlist; jbe) block + ret0 before the loop and keeps eax as the advancing pointer; FA is a plain guard (jbe ret0 at 0x1b) + do-while with head cmp [eax],cx, bottom cmp eax,esi/jb, shared ret0 tail (xor eax/eax; pop esi; ret); CL reloc __tlist@0x26 dropped with guard2 (FA band has no such reference)"
+  ],
+  "aliases": [
+   "0=$FA$_t_423ad0"
+  ],
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "tlistFind: fastcall(unsigned short k1,k2); _tlist array scan with stride 4 shorts, k1/k2 & 0xfffc; end = (char*)_tlist + _tlistSize; 3 bands: head (28->25, moffs+lea SIB fused add, DIR32 payload-zero newsites x3), jbe retarget, guard2-delete tail band (36->22). Alias 0=$FA$_t_423ad0."
+ },
+ {
+  "rva": 570304,
+  "obj": "w40A_refill_v1",
+  "src": "build/survey/probes/w40A_refill_v1.c",
+  "maps": [
+   "_sub8b340=$FA$_t_48b340"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_48b3c0"
+  ],
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "stream refill: packed struct {0x12 pad; void* st}; callee sub8b3xx loop while(b->lim < amount){amount -= b->lim; refill(a);} b->n +/-= amount; plain C, ZERO patches; map sub8b340=$FA$_t_48b340, alias 0=$FA$_t_48b3c0."
+ },
+ {
+  "rva": 57504,
+  "obj": "w40A_angmap_v1",
+  "src": "build/survey/probes/w40A_angmap_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_40e0a0"
+  ],
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "angle map: piecewise short->int, boundaries 0x3552 / (short)0xcaae, formulas (0x3ffc-arg)*256/0xaaa, (arg+0x3ffc)*256/0xaaa, default 0x100; plain C, ZERO patches, alias 0=$FA$_t_40e0a0."
+ },
+ {
+  "rva": 405856,
+  "obj": "w40A_ignore_v4",
+  "src": "build/survey/probes/w40A_ignore_v4.c",
+  "maps": [
+   "@Abs1@4=@Abs@4",
+   "__AnglesOffNose@16=_AnglesOffNose@16",
+   "__Dist@8=_Dist@8"
+  ],
+  "patch": [
+   "0x0a,6,506811000000,2:6:_curThing",
+   "0x1a,8,f6400e207410",
+   "0x27,1,6e",
+   "0x36,2,7c08",
+   "0x38,0,b0015f5e83c404c3",
+   "0x4b,4,11000000,0:6:_curThing",
+   "0x9e,8,8bff"
+  ],
+  "provenance": [
+   "patch 0x0a: toolchain-diff \u2014 Dist-arg push order: FA pushes lea'd eax (this+0x11) first then the 0x508749 literal; CL pushes the literal first (6-B same-span swap)",
+   "patch 0x1a: toolchain-diff \u2014 bitflag test: FA tests BYTE [eax+0xe],0x20 directly; CL materializes the byte (8a 48 0e + test cl,0x20) = 2 B longer; je disp unchanged",
+   "patch 0x27: toolchain-diff \u2014 gate1 jl disp 0x66->0x6e (FA shared return-0 tail sits 8 B further down after the gate2 ret1 insert); 7c already matches",
+   "patch 0x36: toolchain-diff \u2014 gate2 polarity: FA branches dist<0x26ac000 back INTO the Angles block via near jl 08 (ret1 inline at 0x38); CL emits complemented far jge to a duplicated return-1 tail at the end",
+   "patch 0x38: toolchain-diff \u2014 insert FA's inline return-1 tail (b0 01 5f 5e 83 c4 04 c3) between gate2 and the Angles block; drops CL's duplicate far return-1",
+   "patch 0x9e: toolchain-diff \u2014 CL trailing duplicate return-1 block (b0 01 5f 5e 83 c4 04 c3, 8 B) collapsed to FA 2-B 8bff chunk tail pad",
+   "patch 0x0a: [imm update] newsite rescue for literal-VA-drops-HIGHLOW \u2014 content imm = 0x11 (delta vs _curThing 0x508738) + 2:6:_curThing so the .reloc HIGHLOW (0x6316c) survives",
+   "patch 0x4b: toolchain-diff \u2014 literal-VA drops HIGHLOW: CL emits push 0x508749 with NO fixup; FA has DIR32 reloc at 0x631ab with imm disp 0x11 to _curThing; 4-B imm -> 0x11 + 0:6:_curThing newsite, delta via payload"
+  ],
+  "aliases": [],
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "verdict": "EXACT",
+  "notes": "@Ignore@4: fastcall char(thisp); dist=stdcall _Dist(thisp+0x11, (void*)0x508749); bitflag test *(UC*)(*(int*)(thisp+5)+0xe)&0x20; nested dist/angle gates with goto-shared fail tail; extern short __fastcall Abs1; 6 bands incl two gate polarity/disp fixes and a trim of CL's duplicate return-1."
+ },
+ {
+  "rva": 621024,
+  "obj": "w40A_wppos_v2",
+  "flags": "/c /O2 /Gy /G5",
+  "src": "build/survey/probes/w40A_wppos_v2.c",
+  "maps": [
+   "__objPtrs=_objPtrs"
+  ],
+  "aliases": [],
+  "patch": [
+   "0x8,1,42",
+   "0xc,1,4a",
+   "0x13,1,06",
+   "0x14,0,33c0",
+   "0x17,1,59",
+   "0x1a,1,5e",
+   "0x1d,1,49",
+   "0x20,1,4e",
+   "0x22,7,8a420383f8017411",
+   "0x2a,0x24,83f8027c6383f8037e265d5f5e5bc208006a006a006a00566a006a00e8000000008b4e045d03c85f894e045e5bc20800,29:20:_T_Info@24",
+   "0x99,0,8da42400000000"
+  ],
+  "provenance": [
+   "patch 0x8: toolchain-diff \u2014 CL loads a1->x into ecx (8b 4a 06) vs FA mov eax,[edx+6]; rm byte 4a->42",
+   "patch 0xc: toolchain-diff \u2014 CL materializes q in eax (8d 42 06) vs FA lea ecx,[edx+6]; rm byte 42->4a",
+   "patch 0x13: toolchain-diff \u2014 x-store 89 0e ([esi],ecx) vs FA 89 06 ([esi],eax)",
+   "patch 0x14: toolchain-diff \u2014 insert 33 c0; FA zeroes eax before the byte load (upper bits must be known for the full-eax switch compares)",
+   "patch 0x17: toolchain-diff \u2014 y-load 8b 78 04 (edi from q=eax) vs FA 8b 59 04 (ebx from q=ecx)",
+   "patch 0x1a: toolchain-diff \u2014 y-store 89 7e 04 (edi) vs FA 89 5e 04 (ebx)",
+   "patch 0x1d: toolchain-diff \u2014 z-load 8b 40 08 (eax chain) vs FA 8b 49 08 (ecx chain)",
+   "patch 0x20: toolchain-diff \u2014 z-store 89 46 08 (eax) vs FA 89 4e 08 (ecx)",
+   "patch 0x22: toolchain-diff \u2014 gate1: CL compares the byte directly (3c 01 + 75 1c jne) vs FA 8a42 03 + 33c0 + 83 f8 01 (cmp eax,1) + 74 11 je (polarity 75->74, disp 1c->11)",
+   "patch 0x2a: toolchain-diff \u2014 A-region: CL's scheduler hoisted the A-block before the mode 2/3 gates and put the ret-1 tail after the tail; FA order = cmp eax,2/jl, cmp eax,3/jle, ret-1 (5d5f5e5b c20800), pushes (6a00 x3 56 6a00 x2), call _T_Info@24 (e8, newsite site=29 disp, type 20), interleaved epilogue 8b4e04 5d 03c8 5f 894e04 5e 5b c2 08 00; also deletes CL's separate 3c02/72 3c03/77 gates band",
+   "patch 0x99: toolchain-diff \u2014 insert FA's 7-B 8d a4 24 00 00 00 00 tail pad"
+  ],
+  "verdict": "EXACT",
+  "notes": "_WPPos@8: stdcall(packed a1: uchar mode@3, ints@6/a/e; V3* out); copy xyz via q=&a1->x; mode==1 -> out->y += T_Info(0,0,out,0,0,0); mode 2/3 -> e=((TE**)_objPtrs)[WPObj(a1)&0xffff]; Rotate2(out,e->w1d); xyz += e->f11/f15/f19; 11 patches: reg-color 1-B swaps, 33c0 insert, gate1 cmp-eax+je, 36->48 A-region replace w/ T_Info newsite site=29, 7-B tail pad insert."
+ },
+ {
+  "rva": 902528,
+  "obj": "w40A_dc580_v1",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "___cflush=__cflush"
+  ],
+  "aliases": [
+   "0=$FA$_t_4dc580"
+  ],
+  "patch": [
+   "0x1,6,ff0500000000,2:6:__cflush",
+   "0x10,0xa,e800000000,1:20:_malloc",
+   "0x1d,5,740d",
+   "0x1f,0xf,834e0c08c7461800100000eb11",
+   "0x2c,0x13,834e0c048d4614894608c7461802000000",
+   "0x3d,0xc,8b46088906c7460400000000"
+  ],
+  "provenance": [
+   "patch 0x1: toolchain-diff \u2014 __cflush++: FA incs the dword in memory (ff 05); CL loads/incs/hoists the store out past the malloc push (a1/40/a3); a3 store span deleted with the malloc call band; newsite at inc disp, payload 0 (FA bakes plain VA)",
+   "patch 0x10: toolchain-diff \u2014 delete CL's hoisted a3 [__cflush] store and move malloc e8 up to FA slot 0x10; newsite REL32 at disp site 1, payload 0 (FA disp = symVA\u2212(site+4))",
+   "patch 0x1d: toolchain-diff \u2014 CL hoists mov eax,[esi+0xc] before the je; FA tests and ors the mem directly; je disp retargeted to FA's else slot",
+   "patch 0x1f: toolchain-diff \u2014 true-branch: FA ors [esi+0xc],8 in memory (83 4e 0c 08) then stores sz=0x1000 then jmp; CL computed or into eax and stored later",
+   "patch 0x2c: toolchain-diff \u2014 else-branch: FA ors [esi+0xc],4 in memory, lea eax,[esi+0x14], one buf store; CL kept flg in eax (or eax,4 + extra store)",
+   "patch 0x3d: toolchain-diff \u2014 shared tail order: FA stores buf then zeros [esi+4]; CL zeros [esi+4] then stores buf (scheduler swap, same 12 B)"
+  ],
+  "src": "build/survey/probes/w40A_dc580_v1.c",
+  "verdict": "EXACT",
+  "notes": "stream buffer allocator: __cflush++; malloc(0x1000) into s->buf; ok -> flg|=8, sz=0x1000; fail -> flg|=4, buf=(char*)s+0x14, sz=2; then p0=buf, p4=0; 6 content bands + 2 newsites (inc-mem DIR32 site=2, malloc REL32 site=1)."
+ }
+]

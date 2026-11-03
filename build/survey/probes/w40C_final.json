@@ -1,0 +1,151 @@
+[
+ {
+  "rva": 918000,
+  "obj": "w40C_e01f0_v3",
+  "src": "build/survey/probes/w40C_e01f0_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_t4dc580=$FA$_t_4dc580"
+  ],
+  "patch": [
+   "0xa,1,75",
+   "0x19,1,66",
+   "0x1d,113,62837e0800750956e80000000083c4048b063946087511837e04007408b8ffffffff5e5bc3408906f6460c408b06741248890638187410408906b8ffffffff5e5bc34889068818ff46048b460c83e0ef89460c83c80189460c8bc325ff0000005e5bc3b8ffffffff5e5bc3,9:20:_t4dc580"
+  ],
+  "provenance": [
+   "patch 0xa: toolchain-diff \u2014 jz disp recompute: identical fail-chain shape (83 fb ff 74 XX) but CL's fail block sits 6 B farther (142 vs 136 B); 1-B 7b->75",
+   "patch 0x19: toolchain-diff \u2014 jz disp recompute for the a8 80 test branch, CL 6c -> FA 66, same 6-B shrink accounting; 1-B",
+   "patch 0x1d: toolchain-diff \u2014 CL inlines 5 separate return-(-1) blocks and spells the flag&0x40 test as mov/movzx+a8 40; FA shares one fail exit (b8 ffffffff 5e 5b c3) reached by the jump-threads and load-folds-to-test (f6 46 0c 40); 113->107-B replace covering the call site \u2014 REL32 newsite 9:20:_t4dc580 (band kills the old reloc; FA target 0x4dc580 = stub t000e6 public $FA$_t_4dc580, verified from FA imm e8 66 c3 ff ff); cdecl push/83 c4 04 cleanup matches"
+  ],
+  "aliases": [],
+  "tail": "",
+  "span": null,
+  "notes": "EXACT R4/R3. __ungetc_lk (FILEX40 {_ptr,_cnt,_base,_flag,_file,_charbuf,_bufsiz}, 2 params, FPO esp, pushes ebx/esi): fail iff (!(flag&1) && (!(flag&0x80) || (flag&2))); base==0 -> $FA$_t_4dc580 (0x4dc580); _ptr/_base cmp spelled 39 46 08 vs 8b 06 3b c8 (cmp [esi+8],eax mem-op form, band-folded); _cnt++ ff 46 04 natural; flag &= ~0x10 then |= 1 as two read-modify-write streams 83 e0 ef/83 c8 01; return cb & 0xff via 25 ff 00 00 00 (mask-const, NOT movzx). Maps verified: FA imm -> 0x4dc580 = $FA$_t_4dc580."
+ },
+ {
+  "rva": 306608,
+  "obj": "w40C_4adb0_v4",
+  "src": "build/survey/probes/w40C_4adb0_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [
+   "0x3,19,8b54240c568b74240c575533ff3bd07e1a33db",
+   "0x17,1,4e",
+   "0x1a,1,cf",
+   "0x1e,1,6e",
+   "0x25,1,c6",
+   "0x27,1,f9",
+   "0x29,1,c6",
+   "0x2b,1,4a"
+  ],
+  "provenance": [
+   "patch 0x3: toolchain-diff \u2014 FA interleaves arg loads between pushes (53 33 c0; mov edx,[esp+0xc] i=edx; 56; mov esi,[esp+0xc] a1; 57 55) and reuses the zeroed eax (best=eax) as the compare operand in the do-while pre-test (cmp edx,eax, not test), while CL colors best=ebx/i=edi-arg/walker=esi and pre-tests with 85 ff; 19->19-B equal replace",
+   "patch 0x17: toolchain-diff \u2014 register recolor via modrm edit: walker in esi for FA (8b 4e 1c) vs CL walker in ecx (8b 71 1c); 1-B 71->4e",
+   "patch 0x1a: toolchain-diff \u2014 cmp operand recolor with FA's c=ecx/t=edi assignment (cmp ecx,edi vs CL cmp edx,esi); 1-B f2->cf",
+   "patch 0x1e: toolchain-diff \u2014 d recolor: mov ebp,[esi+0x18] (6e) vs CL mov ebp,[ecx+0x18] (69); 1-B",
+   "patch 0x25: toolchain-diff \u2014 cmp reg recolor (ecx vs CL ecx-holdover c1); 1-B",
+   "patch 0x27: toolchain-diff \u2014 jle-vs-jle short disp/opcode recolor within recolored operands (f9 vs d6); 1-B",
+   "patch 0x29: toolchain-diff \u2014 modrm recolor matching FA's walker=esi (c6 vs CL c1); 1-B",
+   "patch 0x2b: toolchain-diff \u2014 loop tail dec rem recolor (4a = dec edx = FA's i in edx) vs CL 4f (dec edi); 1-B"
+  ],
+  "aliases": [],
+  "tail": "",
+  "span": null,
+  "notes": "EXACT R4. Find-best-walker (64 B frameless body inside ebp frame, 5 pushes ebx/esi/edi/ebp): scan a2 records of stride 24, keep a1 whose (+0x1c) score beats best AND (+0x18) count > 0; FA colors best=eax, i=edx(arg, no init xor \u2014 33 c0 doubles as best init), walker=esi, c=ecx, t=edi, d=ebp, dead xor ebx,ebx inside loop head; do-while with single cmp edx,eax pre-test. No externs/fixups at all \u2014 pure reg recoloring. Round-3 false lead documented: 0x2a patch targeted the imm byte of 83 c1 20 instead of its modrm (0x29); R4 removed it."
+ },
+ {
+  "rva": 669184,
+  "obj": "w40C_a3600_v3",
+  "src": "build/survey/probes/w40C_a3600_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w40c_sockcnt=?socket_list@@3USOCKET_STATE_LIST@@A+0x314",
+   "_w40c_arrP=?socket_list@@3USOCKET_STATE_LIST@@A+0x318",
+   "_w40c_arrX=?socket_list@@3USOCKET_STATE_LIST@@A+0x318"
+  ],
+  "patch": [
+   "0x19,1,2e",
+   "0x24,1,77",
+   "0x35,1,12",
+   "0x3d,8,a10000000040a3000000005bc3,1:6:_w40c_sockcnt,7:6:_w40c_sockcnt"
+  ],
+  "provenance": [
+   "patch 0x19: toolchain-diff \u2014 je disp recompute for the dedup-hit return path (CL 29 vs FA 2e); 1-B",
+   "patch 0x24: toolchain-diff \u2014 jcc polarity: loop continue test on unsigned count is FA ja (77); CL signed jg (7f); unsigned-cast steered, 1-B",
+   "patch 0x35: toolchain-diff \u2014 jae disp recompute for the >=0x40 saturation-return branch (CL 0d vs FA 12); 1-B",
+   "patch 0x3d: toolchain-diff \u2014 FA RELOADS the count (a1 <socket_list+0x314>) between the arrX store and its increment (a1 imm; 40; a3 imm); CL CSEs the count read across the w40c_arrX store (distinct extern symbols, no-alias assumption); 5-B insert as 8-B replace with 2 DIR32 newsites at 1:6 and 7:6 (count read- and rmw-moffs imm starts; FA imm b4 95 56 00 = 0x5695b8/+0x314 verified in FA bytes)"
+  ],
+  "aliases": [],
+  "tail": "",
+  "span": null,
+  "notes": "EXACT R3. socket_set_doa(unsigned v) (80 B, 6-B census tail): if socket_list+0x314 count != 0, linear-walk &socket_list+0x318 .. +count*4 for v, return early on dup; else if count (< 0x40u) store v at [count*4 + 0x5695b8], reload count, store count+1. Walker=ecx/counter=eax/v=edx/scratch=ebx in both. 7 abs imm sites verified against FA: all resolve to socket_list+0x314 (0x5695b4) or +0x318 (0x5695b8) exactly. CL-side CSE of the count reload is the wave's only no-alias insert; newsite TYPE 6 at both moffs."
+ },
+ {
+  "rva": 81408,
+  "obj": "w40C_13e00_v3",
+  "src": "build/survey/probes/w40C_13e00_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w40c_snX=?selectNextMissile@@3JA+0x4",
+   "_w40c_lgbX=?lastGunButton@@3DA+0x8"
+  ],
+  "patch": [
+   "0xd,1,76"
+  ],
+  "provenance": [
+   "patch 0xd: toolchain-diff \u2014 jcc polarity signed-vs-unsigned: pointer compare lgbX > snX is FA jbe (76) on the guard's fall-through vs CL signed jle (7e); minimal 1-B disp patch preferred over the v2 unsigned-cast re-spelling, which pushed CL to a 50-B ja-reorder shape (worse)"
+  ],
+  "aliases": [
+   "0=$FA$_t_413e00"
+  ],
+  "tail": "",
+  "span": null,
+  "notes": "EXACT R3. Unnamed 0x13e00 (48 B): if *(int*)(lastGunButton+0x8) > *(int*)(selectNextMissile+0x4) treat as unsigned pointer bound \u2014 write v as u16 at selectNextMissile+0x4, advance that pointer by 2, return 1; else 0. 4 abs imm sites verified against FA bytes: 0x51e4d4 (sn, read/x2/u16-write) and 0x51e4cc (lgb, read) = ?selectNextMissile@@3JA+0x4 / ?lastGunButton@@3DA+0x8. a0-style u16 store through int pointer natural (66 89)."
+ },
+ {
+  "rva": 494112,
+  "obj": "w40C_78a20_v4",
+  "src": "build/survey/probes/w40C_78a20_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "__strnicmp=_strnicmp"
+  ],
+  "patch": [
+   "0xe,1,4e",
+   "0x14,1,48",
+   "0x4d,1,0a",
+   "0x56,26,eb0532c05f5ec38a0684c0750b8a0784c07505b0015f5ec332c05f5ec3"
+  ],
+  "provenance": [
+   "patch 0xe: toolchain-diff \u2014 je disp recompute (CL 57 vs FA 4e) before the tail restructure; 1-B",
+   "patch 0x14: toolchain-diff \u2014 je disp recompute (CL 41 vs FA 48) for the '*t == 0 break' branch; 1-B",
+   "patch 0x4d: toolchain-diff \u2014 jne disp recompute into FA's single shared ret0 block (CL 13 vs FA 0a; FA thread enters at the final-check labels 0x5d, not the block head); 1-B",
+   "patch 0x56: toolchain-diff \u2014 CL duplicates both ret0 blocks and emits a setne tail; FA shares one ret0 block at 0x58 and jump-threads the *p/*t final checks back through 8a 06/84 c0 75 0b/8a 07/84 c0 75 05 b0 01 fall-throughs; 26->29-B replace (0x56..0x72)",
+   "patch (map): call TO = public _strnicmp 0x4d63c0 (FA call imm 73 d9 05 00 / 59 d9 05 00); __strlwr+0x140 was 0x20 short at gate"
+  ],
+  "aliases": [],
+  "tail": "",
+  "span": null,
+  "notes": "EXACT R5 (with corrected call map; R3 was EXACT with masked rels). MatchPattern(p:char*, t:char*) 128 B, 13-B census tail: star/? wildcard matcher over _strnicmp(.., .., 1) 1-char case-folds; loop-head jne 75 b9 (both exits); FA calls BOTH _strnicmp sites to 0x4d63a0 = interior of the still-stub _strlwr chunk (public __strlwr 0x4d6260 + 0x140; 0x41-B fast-scan label 0x20 below public __strnicmp 0x4d63c0 has no chunk, no public \u2014 it is a private label inside _strlwr's span, 0x16 before that chunk's 342-B end). Stub t00066.obj stores this chunk with zero relocations (baked FA disps, VA-stable stub links) \u2014 the map TO _strlwr+0x140 resolves via the t000d5 stub public at link time. THE MASKING TRAP: fitobj EXACT with maps []/plain _strnicmp passed R1-R3 but would link 0x20 off \u2014 caught in the post-EXACT imm sweep (e8 73 d9 05 00 / e8 59 d9 05 00 both -> 0x4d63a0), fixed with map, re-judged EXACT R5."
+ },
+ {
+  "rva": 714128,
+  "obj": "w40C_ae590_v1",
+  "src": "build/survey/probes/w40C_ae590_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w40c_items88=?player_list@@3UNET_PLAYER_LIST@@A+0x1d",
+   "_w40c_plist1d=_items+0x88",
+   "_w40c_sfe8=?state_funcs_list@@3PAU__unnamed@@A+0xe8",
+   "_w40c_sfdc=?state_funcs_list@@3PAU__unnamed@@A+0xdc",
+   "__Sprintf=_Sprintf",
+   "__strncat=_strncat"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "tail": "",
+  "span": null,
+  "notes": "EXACT R1, no patches. net_mung_name(buf, unused) (96 B, cdecl 2-param but arg2 dead): _Sprintf(buf, state_funcs_list+0xe8 [fmt @0x5080e0], state_funcs_list+0xdc [arg @0x5080d4]); _strncat(buf, player_list+0x1d [str @0x577e65], 0x1e); inline strcat(buf, _items+0x88 [str @0x4eaa80]) \u2014 CL 4.2 folds strcat to intrinsic rep movsd + a4 remainder, matching FA byte-for-byte. Both call targets verified from FA imms: _Sprintf 0x4c2c1c, _strncat 0x4d4b60 = exact publics, no maps. push-imm args with DIR32 fixups verified in the FA imm sweep. Source comment names the strncat src loosely; the MAP is authoritative (0x577e65 = ?player_list@@3UNET_PLAYER_LIST@@A+0x1d)."
+ }
+]

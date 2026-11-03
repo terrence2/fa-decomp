@@ -1,0 +1,94 @@
+[
+ {
+  "rva": 131792,
+  "obj": "w40H_202d0_v2",
+  "src": "build/survey/probes/w40H_202d0_v2.c",
+  "maps": [
+   "_fortPlayersW40=_fortPlayers"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "SetFortPlayer: if (fortPlayers[idx] == -1) { fortPlayers[idx] = val; return 1; } return 0; unsigned char stdcall. v1 used an 8-B struct array index -> CL emitted SIB 8b 04 cd (scale *8) vs FA's 8b 04 8d: v2 spells fortPlayers as a plain long extern array and CL emits the FA SIB with both d8 58 52 00 disp dwords (map identity _fortPlayers 0x5258d8). mov al,1 (b0 01) / xor al,al (32 c0) + c2 08 00 rets natural. Tail = census (8d642400 + 8da42400000000). No patches.",
+  "provenance": []
+ },
+ {
+  "rva": 389760,
+  "obj": "w40H_5f280_v3",
+  "src": "build/survey/probes/w40H_5f280_v2.c",
+  "maps": [
+   "_curIdW=_curId",
+   "_groupIdsW=_groupIds",
+   "_groupSizesB=_groupSizes",
+   "_GRPPartW@12=_GRPPart@12",
+   "_OBJGetW=@OBJGet@4"
+  ],
+  "patch": [
+   "0x3b,1,47",
+   "0x40,0x42,008b4424108d0c808d144b668b0c5500000000e80000000085680174158a88e300000080f920750a6639b0ee000000750147438b4c241033c08a81000000003bc37fbe8bc75d5f5e5b83c404c3,15:6:_groupIdsW,20:20:_OBJGetW,59:6:_groupSizesB"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "@GRPAttackingObj@4: fastcall(ushort cx) -> GRPPart(_curId,&local,0); if !res return 0; loop i<groupSizes[grp] counting members whose OBJGet(word _groupIds load via sib [edx*2+_groupIds]) has flag[+1]&1 and class==0x20 and word[+0xee]==id. C reproduces prolog (incl. mov si,cx 66 8b f1 and the test [eax+1],ebp band) but CL folds groupIds to word[+4] (DSE of bit=1) and drops FA's dead lea pair; tail incs land ebx/edi swapped (43 47 vs 47 43) with cmp/return colors edi/ebx vs FA ebx/edi. Patch 0x3b (1 B, je disp 0x3c->0x47 = FA target after the 12-B insert) + patch 0x40 replaces CL[0x40..0x82) with FA[0x40..0x8d) (66 B -> 77 B, the 12-B lea/sib band restored); newsites 15:6:_groupIdsW (FA disp 0x5420e8), 20:20:_OBJGetW (call rel32 to 0x48f3a0), 59:6:_groupSizesB (FA disp 0x5421c0), payloads 0. Tail 8d4900 census-proven.",
+  "provenance": [
+   "patch 0x3b: toolchain-diff \u2014 je disp 0x3c -> 0x47 so the post-insert target lands on FA's mov eax,edi at FA 0x83 (equal length, no downstream shift)",
+   "patch 0x40: toolchain-diff \u2014 CL 4.2 DSE-folds the bit=1 groupIds index to word[_groupIds+4] and deletes FA's dead grp*5 / ebx+grp*10 leas (8b 44 24 10 / 8d 0c 80 / 8d 14 4b + 66 8b 0c 55 sib); band rebuilt FA-verbatim (12 B longer) with DIR32 newsite at site 15 (_groupIds), REL32 newsite at site 20 (@OBJGet@4 call), DIR32 newsite at site 59 (_groupSizes); tail reg colors (43 47 -> 47 43, 3b c7 -> 3b c3, 8b c3 -> 8b c7) ride the band copy"
+  ]
+ },
+ {
+  "rva": 547568,
+  "obj": "w40H_85af0_v3",
+  "src": "build/survey/probes/w40H_85af0_v2.c",
+  "maps": [],
+  "patch": [
+   "0x0,0x3a,56578b74240c8b7c241066c70602008d47368d56088b08890a668b4004668942048b5732895604668b473c5f668bc88ae98acc66894e025ec3"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "struct-copy + byteswap: word[dst]=2; 6-B W40hF copy src+0x4->dst+0x8 (dword then word tail); d4 = src+0x32 d32; word[dst+2] = byteswap(word[src+0x3c]) via CL-exact 66 8b c8/8a e9/8a cc dance. Two register-steering attempts failed: CL reserves 3 regs (push ebx,esi,edi; copy base via lea 8d 4e 08 + stray 90) vs FA esi,edi reserve with edi=src loaded pre-c7 and the 6-B copy via eax/edx (8d 47 36 / 8d 56 08 / 8b 08 / 89 0a / 66 8b 40 04 / 66 89 42 04), and FA pops edi mid-body before the dance. Whole-body patch: CL 0x3a (58 B) -> FA 57 B verbatim; chunk has 0 relocs. Tail 8da42400000000 census-proven.",
+  "provenance": [
+   "patch 0x0: toolchain-diff \u2014 CL 4.2 cannot reserve esi,edi in FA's order for the 2-param frameless callee (reserves 3 incl. ebx, interleaves the edi load after the second push, drives the 6-B struct copy through lea 8d 4e 08 with a stray 90); two struct-spelling variants reconverged. Whole-body replacement with FA's 57-B code (chunk has no relocs)."
+  ]
+ },
+ {
+  "rva": 604368,
+  "obj": "w40H_938d0_v3",
+  "src": "build/survey/probes/w40H_938d0_v2.c",
+  "maps": [
+   "_w40hA1=$FA$_t_493910",
+   "_w40hA2=$FA$_t_493a70"
+  ],
+  "patch": [
+   "0xf,0x2c,33d2898686010000c7000000000083c03683c40cb904000000c740ce00000000891083c00449908950ec75f4,10:6:_w40hA1,28:6:_w40hA2"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "__aullrem-style vtable reinit @0x938d0: vt call (obj,1,0x46) -> r; [obj+0x186]=r; [r]=0x493910; r+=0x36; then 4-iter edx-zero fill p+=4/p[-5]=0 interleave. C reproduces head+loop shape, but CL orders cleanup add esp,0xc early, uses lea edx,[eax+0x36], zero-stores via xor ecx (not edx), and swaps loop counter/base colors (eax/edx vs FA ecx/eax). Patch 0xf len 0x2c replaces the CL body with FA bytes verbatim; both c7 imm32 stores are newsites (site 10 = $FA$_t_493910 imm, site 28 = $FA$_t_493a70 imm, payload 0 = delta vs stub-VA base). Tail 8d4900 = census-proven. Same-length patch (44->44).",
+  "provenance": [
+   "patch 0xf: toolchain-diff \u2014 CL 4.2 hoists add esp,0xc to 0x0f, uses lea edx,[eax+0x36] for the +0x36, xor ecx for the zero source, and colors loop counter eax/base edx; FA interleaves add esp,0xc after the two imm stores (0x20) and adds 0x36 into eax (83 c0 36) with xor edx zero source and counter ecx/base eax. Patch replaces CL 0x0f..0x3b with FA bytes; the two c7 imm dwords re-attached as DIR32 newsites at patch sites 10/28 (payload 0, symVA = FA target)."
+  ]
+ },
+ {
+  "rva": 868272,
+  "obj": "w40H_d3fb0_v1",
+  "src": "build/survey/probes/w40H_d3fb0_v1.c",
+  "maps": [
+   "_w40hLockAq=$FA$_t_4d84f0",
+   "_w40hInAq=$FA$_t_4d82e0",
+   "_unlock_fileX=__unlock_file"
+  ],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Lock/in/unlock wrapper: h = $FA$_t_4d84f0() (lock); if !h return 0; r = $FA$_t_4d82e0(p1,p2,p3,h) (inner, 5 args); __unlock_file(h); return r. First-variant EXACT; cdecl wrapper, CL frames it like FA with esi saved. Map TOs byte-verified: FA rel32 targets 0x4d84f0 / 0x4d82e0 (stub anchors in t000d9) and __unlock_file 0x4d7270 (public, maps to itself). No patch, tail census-proven.",
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_4d3fb0"
+  ]
+ },
+ {
+  "rva": 903024,
+  "obj": "w40H_dc770_v3",
+  "src": "build/survey/probes/w40H_dc770_v3.c",
+  "maps": [],
+  "patch": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "__aullrem whole-body naked asm, byte-verbatim 128 B + int3 tail (census). Key: FA shares ONE exit at +0x71 (5b c2 10 00) \u2014 reached both by the trivial-path jmp and L5's sbb edx,0 fallthrough. Spelling the exit as two labels (L5:...; L2:pop/ret) made CL emit pop/ret twice (+4 B, v1/v2 FATAL); merging into a single trailing label reproduced FA. xchg eax,ecx in CL 4.2 inline asm emits the 66-prefix form \u2014 MASM's bare 91 comes from _emit. No relocs, no maps, no patches.",
+  "provenance": []
+ }
+]
