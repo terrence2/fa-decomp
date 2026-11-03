@@ -1,0 +1,122 @@
+[
+ {
+  "rva": 140621,
+  "verdict": "EXACT",
+  "name": "?MAPOnSpecial@@YIFPAUWORD_POINT@@@Z (100 B, fastcall ushort(WORD_POINT*); 0-B tail)",
+  "obj": "w36H_2254d_v4",
+  "src": "build/survey/probes/w36H_2254d_v4.c",
+  "maps": [
+   "@MapOnSpecial@4=?MAPOnSpecial@@YIFPAUWORD_POINT@@@Z",
+   "@MapWorldToScreen@8=?MAPWorldToScreen@@YIXPAUF24_POINT3@@PAUWORD_POINT@@@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "Scan of _specials[1..50] pointer entries: MapWorldToScreen(p+2, &t) then hit when |wp->x-t.x|<=11 and |wp->y-t.y|<=9 -> return index, else 0; result built in BX (mov ebx,1; inc ebx) because FA's loop re-uses eax for Abs. Naked-asm route won. CL-4.2-RA steering could not make plain C produce FA's reg plan (wp=EDI/pp=ESI) NOR its tail arrangement (hit-path mov ax,bx AFTER the shared pop edi/esi/ebx + add esp,4 + ret, jumping BACK with eb f4 into the pop edi) - plain C v2 hit 105 B (CL duplicated the epilogue instead of jumping back) and both naked-asm v3 and plain-C attempts re-emitted the tail with stray jmps (eb 07/eb 02/eb 07). Fix: the whole tail (xor ax,ax .. ret .. mov ax,bx .. eb f4) is emitted raw in the __asm block with _emit bytes, so CL's inline-asm re-emitter cannot re-arrange/re-encode it; jle LHit then computes FA's 7e 16 disp automatically. The _emit tail has no relocs (plain bytes). @MapOnSpecial@4 def-rename for callers still using FA mangled name; @MapWorldToScreen@8 map (converted-chunk public). @Abs@4 and _specials needed no map (CL names == FA publics)."
+ },
+ {
+  "rva": 414226,
+  "verdict": "EXACT",
+  "name": "_CTDo_yoyo (110 B, 0 params, void(void); 0-B tail)",
+  "obj": "w36H_65212_v4",
+  "src": "build/survey/probes/w36H_65212_v4.c",
+  "maps": [
+   "_w36h_ctda=$FA$_t_464e50",
+   "_w36h_ctdb=$FA$_t_464fc0",
+   "_w36h_ctdc=$FA$_t_464fa0"
+  ],
+  "patch": [
+   "0x2e,4,fc000000,0:6:_serviceTicks"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x2e: toolchain-diff \u2014 FA loads _serviceTicks+0xfc (0x5424c4) into CX via 66 8b 0d inside the dis.py-ELIDED gap (raw bytes c4 24 54 00); handback baked +0x100 into the naked-asm disp because the listing hid the instruction (wave-24 hidden-instr trap). Addend corrected to +0xfc; reloc site unchanged so .reloc + symVA+content resolve to 0x5424c4."
+  ],
+  "notes": "Naked-asm route (v4), EXACT. Body: three __cdecl word-return helpers (mapped to the still-stub text anchors $FA$_t_464e50/_464fc0/_464fa0 -> CL names _w36h_ctda/b/c; si/di live results), gates on serviceTicks+0x20 and +0xec byte, materializes the +0x100 word into CX (66 8b 0d) BEFORE the first push AND again into AX (66 a1) after it - key insight from raw hex: dis.py's listing ELIDED the 66 8b 0d (CL 1-B shorter otherwise); call _MVRYoyo@20 (fastcall-map from _MVRYoyo, no map needed - identity); word-zero stores to +0x100/+0xfc (66 c7 05) and mov eax,1 + a2 byte stores to +0xf0/+0xf8. _w36h_ctX anchors verified against build/stubs manifest (group t00 covering 0x464fa0/0x464fc0/0x464e50 defines both mangled publics and the $FA$_t anchors). No patches; no aliases."
+ },
+ {
+  "rva": 337312,
+  "verdict": "EXACT",
+  "name": "_HARDFindStore@12 (112 B, stdcall long(long*,uchar,uchar); 3-B census tail 8d 49 00)",
+  "obj": "w36H_525a0_v4",
+  "src": "build/survey/probes/w36H_525a0_v1.c",
+  "maps": [],
+  "patch": [
+   "0x43,1,d8",
+   "0x4b,1,c8"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x43: toolchain-diff - CL 4.2 canonicalizes == operand order (wave-28 CL-canonicalization wall): on the `b == k1` hit test FA compares b-first cmp bl,al (3a d8: b in BL vs k1 in AL); CL emits cmp al,bl (3a c3). Equal 1-B modrm swap, plain bytes, no reloc in span.",
+   "patch 0x4b: toolchain-diff - same canonicalization on the `k2 != b` arm: FA compares k2-first cmp cl,al (3a c8: k2 in CL); CL emits cmp al,cl (3a c1). cmp is symmetric so CL's operand order is semantically identical - plain 1-B modrm swap."
+  ],
+  "notes": "Plain C (v1) + two 1-B cmp-order patches, EXACT. CL reproduces everything else including the 3d/a0 u8-widen of the curThingType+0xb5 clamp cap (moffs a0 form with the xor-eax staging: 33 c0; signed-clamp jge/jl), the *store re-stores (-1 path after pop edi), and the 8d 49 00 census tail pad (auto-appended by fitobj). No maps needed: _HARDFindStore@12, _HARDPtrs@12, _curThingType all identity (CL names == FA publics per layout)."
+ },
+ {
+  "rva": 518608,
+  "verdict": "EXACT",
+  "name": "__CreateQuickMission@4 (112 B, stdcall int(int); census tail)",
+  "obj": "w36H_7e9d0_v1",
+  "src": "build/survey/probes/w36H_7e9d0_v1.c",
+  "maps": [],
+  "aliases": [],
+  "patch": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "Plain C, EXACT on first probe, zero patches, zero maps. Spelling facts: the function is FA's C ident CreateQuickMission -> CL stdcall decl must be spelled _CreateQuickMission to emit FA's double-underscore public __CreateQuickMission@4 (wave-26 FA underscore rule). #include <string.h> inlines strcpy as FA's repne scasb + rep movsd/movsb pair into _missionName; return (signed char)QuickMission(a1) gives FA's movsx return path; LibFileExists is FA's fastcall public @LibFileExists@4 (CL emits the call direct, no map); ErrorExit/_ErrorExit, _missionName, _pilotRanks, _doScreens, _QuickMission@4 all identity-named FA publics (verified in layout)."
+ },
+ {
+  "rva": 711456,
+  "verdict": "EXACT",
+  "name": "?net_write_output_q@@YAXH@Z (112 B, cdecl void(int); 9-B census tail 8b ff + 8d a4 24 00 00 00 00)",
+  "obj": "w36H_adb20_v3",
+  "src": "build/survey/probes/w36H_adb20_v3.c",
+  "maps": [
+   "_player_list=?player_list@@3UNET_PLAYER_LIST@@A",
+   "_w36h_nwoq=$FA$_t_4adb90",
+   "_w36h_sbwf=?socket_build_write_fds@@YAXXZ",
+   "_net_write_output_q=?net_write_output_q@@YAXH@Z"
+  ],
+  "patch": [
+   "0xe,1,8f",
+   "0x14,1,97",
+   "0x20,1,d1",
+   "0x24,1,46",
+   "0x27,1,c1",
+   "0x29,1,4e",
+   "0x2c,1,c8",
+   "0x2f,4,50568b07"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0xe: toolchain-diff - reg allocation: FA keeps the player_list[0x66+a1*4] entry load in ECX (8b 8f, modrm 8f); CL put it in EAX (8b 87). 1-B modrm swap; downstream FA plan re-loads from the same slot.",
+   "patch 0x14: toolchain-diff - reg allocation: FA stages the +0x2c86 q2 pointer in EDX (8b 97); CL in ECX (8b 8f). 1-B modrm swap.",
+   "patch 0x20: toolchain-diff - first *s>s[1] compare on FA's regs: FA cmp edx,ecx (3b d1, cmp q2,s); CL cmp ecx,eax (3b c8). 1-B modrm swap (cmp is symmetric).",
+   "patch 0x24: toolchain-diff - n = s[2]-s[1] load goes to EAX in FA (8b 46); CL loaded into ECX (8b 4e). 1-B modrm swap - FA's n lives in EAX for the arg push at 0x2f.",
+   "patch 0x27: toolchain-diff - companion sub swap: FA sub eax,ecx (2b c1, n in EAX); CL sub ecx,eax (2b c8). 1-B modrm swap riding the 0x24 reg move.",
+   "patch 0x29: toolchain-diff - s[3] load goes to ECX in FA (8b 4e); CL put it in EAX (8b 46). 1-B modrm swap.",
+   "patch 0x2c: toolchain-diff - s[3]>n compare on FA's regs: FA cmp ecx,eax (3b c8); CL cmp eax,ecx (3b c1). 1-B modrm swap.",
+   "patch 0x2f: toolchain-diff - arg push schedule for the $FA$_t_4adb90 call, equal 4-B band: CL pushes n FIRST from its own reg plan (51 push ecx; 8b 07 mov eax,[edi]; 56 push esi) while FA pushes n/pushes s (50 56) and loads the fd (mov eax,[edi]) BEFORE the last push (50 at 0x33); band rewritten verbatim to FA's bytes, no relocs in span (the e8 w36h_nwoq call is at 0x34, after the band, and its REL32 disp stays untouched)."
+  ],
+  "notes": "v2's goto spelling retained (it reproduces FA's je-to-call 74 18 into the second block); win = goto source + 8 equal-length reg-plan/schedule patches, EXACT. Maps: _player_list=?player_list@@3UNET_PLAYER_LIST@@A (mangled data sym, wave-25 fastcall-map spelling class); _w36h_nwoq=$FA$_t_4adb90 (STILL-STUB anchor VA 0x4adb90, verified in stubs manifest; __cdecl void(void*,void*,long)); _w36h_sbwf=?socket_build_write_fds@@YAXXZ; _net_write_output_q def-rename for callers. Tail = census-proven 9-B pad (mov edi,edi 8b ff + lea-pad 8d a4 24 00 00 00 00), auto-appended by fitobj."
+ },
+ {
+  "rva": 902912,
+  "verdict": "KEEP-ASM",
+  "reason": "RTL helper wall: __aulldiv is the standard VC++ 4.2 retail CRT helper (aulldiv.asm), hand-written MASM - not CL-emittable from any C spelling (CL only CALLS this helper, never inlines/inline-emits the div-vs-mul algorithm). FA raw bytes confirm: 53 56 (push ebx/esi); fast path or eax,eax/75 18 when high divisor word == 0 -> two f7 f1 divs with the high quotient staged through ebx; slow normalized path d1 e9/d1 db/d1 ea/d1 d8 shift+rcl bit loop with 0b c9/75 f4 back-edge; quotient correction f7 f3/f7 64 24 18/f7 e6/03 d1/72 0e plus the descending-compare chain 3b 54 24 10/77 08/72 07/3b 44 24 0c/76 01/4e, then 33 d2/8b c6/5e 5b/c2 10 00 (mov eax,esi; pop esi; pop ebx; ret 0x10) and 8x cc pad. 112 B, fx 0; keep FA bytes as-is (no C source in this repo, no C spelling converges)."
+ }
+]

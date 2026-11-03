@@ -1,0 +1,160 @@
+[
+ {
+  "rva": 779056,
+  "obj": "w36E_be330_v2",
+  "src": "build/survey/probes/w36E_be330_v2.c",
+  "maps": [
+   "_w36e_fl=_curThingType+0xa6",
+   "_w36e_fl2=_curThingType+0xa6",
+   "_w36e_ws=_curThing+0xe4",
+   "_w36e_t360=$FA$_t_4be360",
+   "_w36e_d9d0=$FA$_t_4bd9d0",
+   "_w36e_dac0=$FA$_t_4bdac0"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4be330"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "EXACT v2 (v1 failed: duplicated dac0 jmp blocks + inverted 75 jne). 43-B code + 5-B census tail '0500000000' (auto-proven, no tail key). void w36e_be330(void): branch dispatcher on two byte-field tests and one word compare - if (fl & 0x10) return t360(); if (!(fl2 & 1)) goto Ldac0; if (ws != 0) return d9d0(); Ldac0: return dac0(). The goto is load-bearing: it shares ONE e9 dac0 tail-jmp block at the end (FA 0x26) for both the bit-0x01 and word==0 false paths; the written-out if/return version made CL emit two separate e9-dac0 blocks and a 75-polarity flip. Two distinct extern idents w36e_fl/w36e_fl2 (same TO) defeat CL CSE of the double a1 load; ul & 0x10 cookbook gives a1 moffs + a8 al-test both times. Maps: _curThingType (0x508b20)+0xa6 -> FA imm 0x508bc6, _curThing (0x508738)+0xe4 -> FA imm 0x50881c (both verified vs FA bytes); tail-jmp TOs $FA$_t_4be360/4bd9d0/4bdac0 still defined by stub groups t000b0/t000af (verified in stub symtabs). alias 0=$FA$_t_4be330 per unnamed-chunk convention (no consumers found: scanned every build/stubs/*.obj fixup dword for 0x4be330 = 0 hits, swap.json = no entry). MERGE NOTE: when chunks 0x4be360/0x4bd9d0/0x4bdac0 get converted, parent must add retro-alias '0=$FA$_t_4be360'/'0=$FA$_t_4bd9d0'/'0=$FA$_t_4bdac0' to those entries."
+ },
+ {
+  "rva": 933120,
+  "obj": "w36E_e3d00_v2",
+  "src": "build/survey/probes/w36E_e3d00_v2.c",
+  "maps": [
+   "_w36e_tzf=__tzname+0x2c",
+   "_w36e_tzf2=__tzname+0x2c",
+   "_w36e_tzf3=__tzname+0x2c",
+   "_w36e_lock=__lock",
+   "_w36e_unlock=__unlock",
+   "_w36e_tzinner=$FA$_t_4e3d60"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4e3d00"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G4",
+  "provenance": [],
+  "notes": "EXACT v2 - /G4 flip LOAD-BEARING (wave-35 lesson): with /G5 CL folds the '==0' global compares to a1+85 c0 reg-cmp; with /G4 it keeps FA's 83 3d imm32 mem-cmp forms both times (and natively leaves the ff 05 inc mem). 50-B code, no tail. void w36e_e3d00(void): tzset-style lazy-init guard next to __tzset (0xe3d40, 26 B); if (tzflag == 0) { lock(11); if (tzflag == 0) { tzinner(); ++tzflag; } unlock(11); } - CRT _lock(11) is the stdio lock band. Three distinct idents w36e_tzf/tzf2/tzf3 (same TO) defeat CSE of the two cmp loads and the inc (inc mem ff 05 came out natively, no patch). Map TOs verified vs FA imm bytes: __tzname (0x51bf20)+0x2c = 0x51bf4c at all 3 sites (0x2/0x15/0x23). Call TOs spelled to layout publics: w36e_lock->__lock (0x4d7170, defined by still-stub t000d6), w36e_unlock->__unlock (0x4d71e0, t000d7); w36e_tzinner->$FA$_t_4e3d60 (big 735-B CRT chunk still-stub in t000f9; anchor verified in its symtab). alias 0=$FA$_t_4e3d00 convention (0 consumers in stub fixups/swap.json). MERGE NOTE: if 0x4e3d60 is converted later, parent must add retro-alias '0=$FA$_t_4e3d60' to that entry."
+ },
+ {
+  "rva": 937328,
+  "obj": "w36E_e4d70_v2",
+  "src": "build/survey/probes/w36E_e4d70_v2.c",
+  "maps": [],
+  "patch": [
+   "0x6,1,f1",
+   "0xc,1,d0",
+   "0x13,1,3e",
+   "0x18,1,c6",
+   "0x1a,1,4a",
+   "0x1e,1,d2",
+   "0x23,1,3e",
+   "0x20,1,0e",
+   "0x26,1,08",
+   "0x28,1,f1",
+   "0x29,2,c1fe01",
+   "0x2d,1,46"
+  ],
+  "aliases": [
+   "0=$FA$_t_4e4d70"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x6: toolchain-diff - reg-name swap: CL put the string pointer in edx (8b d1), FA in esi (8b f1); all pointer-side bytes patched to FA's regs (esi ptr / edx counter / eax n-return).",
+   "patch 0xc: toolchain-diff - counter load: CL 'mov esi,eax' -> FA 'mov edx,eax' (counter copy d=n; FA keeps eax = original n for the capped return).",
+   "patch 0x13: toolchain-diff - loop cmp [edx]->cmp [esi] (66 83 3a -> 3e).",
+   "patch 0x18: toolchain-diff - s+=2 on FA's pointer reg (83 c2 -> 83 c6).",
+   "patch 0x1a: toolchain-diff - --d on FA's counter reg (4e dec esi -> 4a dec edx).",
+   "patch 0x1e: toolchain-diff - post-loop d != 0 test on FA's reg (85 f6 -> 85 d2).",
+   "patch 0x23: toolchain-diff - second *s recheck cmp [edx]->[esi].",
+   "patch 0x20: toolchain-diff - jcc disp recompute (wave-24 rule): je to the shared pop/ret tail, +1 after the 0x29 sar grow below.",
+   "patch 0x26: toolchain-diff - jcc disp recompute for the same +1 grow (jne to pop/ret, 0x07 -> 0x08).",
+   "patch 0x28: toolchain-diff - final (s-p) on FA's pointer reg (sub edx,ecx -> sub esi,ecx).",
+   "patch 0x29: toolchain-diff - sar form: CL d1 fa (2 B) -> FA c1 fe 01 (3-B imm8-count form); grows text 48->49 B = FA chunk extent, so pop/ret shift +1 (dps fixed above).",
+   "patch 0x2d: toolchain-diff - idx+1 lea on FA's pointer reg post-grow (8d 42 01 -> 8d 46 01, +0x01 byte intact)."
+  ],
+  "notes": "EXACT with 12 patches (all reg-name/form, no symbol newsites; chunk has ZERO FA relocs). 49-B code, no tail. int w36e_e4d70(const unsigned short *p, int n): bounded wide-char scan whose return is the NUL index +1 capped at n (chars INCLUDING terminator, or n if none within n): const ushort *s = p; int d = n; if (n) { while (*s) { s++; if (--d == 0) break; } } if (d) { if (*s == 0) return (s - p) + 1; } return n; - eax holds original n on the not-found paths (FA's je-to-shared-ret), the counter d is FA's dec/jne 'new-value' flavor (d ends exactly 0 on exhaust). The redundant-looking *s recheck after the loop is FA-real and survives because the d-exhaust exit path genuinely needs it. No maps. alias 0=$FA$_t_4e4d70 convention (0 consumers found)."
+ },
+ {
+  "rva": 884368,
+  "obj": "w36E_d7e90_v4",
+  "src": "build/survey/probes/w36E_d7e90_v2.c",
+  "maps": [],
+  "patch": [
+   "0xe,5,8d50ff7410",
+   "0x1d,1,fa",
+   "0x1e,1,4a",
+   "0x20,1,ff",
+   "0x28,1,07",
+   "0x2b,2,c1fe01"
+  ],
+  "aliases": [
+   "0=$FA$_t_4d7e90"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0xe: toolchain-diff - CL scheduled test-eax/je/lea (74 13 8d 78 ff); FA schedules test-eax/lea-edx/je (8d 50 ff 74 10) - 5-B swap fixes order, the lea's counter reg (edi->edx) and the n==0 je displacement (13->10, same target 0x23).",
+   "patch 0x1d: toolchain-diff - reg-name swap in the d-- mechanism: CL keeps counter d in edi (8b d7); FA keeps d in edx and snapshots into edi (8b fa mov edi,edx).",
+   "patch 0x1e: toolchain-diff - dec edi -> dec edx (4f -> 4a).",
+   "patch 0x20: toolchain-diff - condition tests FA's snapshot reg (test edx,edx -> test edi,edi, 85 d2 -> 85 ff).",
+   "patch 0x28: toolchain-diff - jcc disp recompute (wave-24 rule): post-recheck jne to pop/pop/ret, +1 after the 0x2b sar grow below (0x06 -> 0x07).",
+   "patch 0x2b: toolchain-diff - sar form: CL d1 fe (2 B) -> FA c1 fe 01 (3-B imm8-count form); grows text 50->51 B = FA chunk extent, downstream pop/pop/ret shift +1."
+  ],
+  "notes": "EXACT with 6 patches (no relocs, no maps). 51-B code, no tail. unsigned long w36e_d7e90(const unsigned short *p, unsigned long n): wcsnlen shape - returns the NUL index, or n if none within n chars: const ushort *s = p; unsigned d; if (n) { d = n - 1; while (*s) { s++; if (d-- == 0) break; } } if (*s == 0) return (s - p); return n; - FA's decrementer is the 'old-value' flavor (d-- == 0: loop body still runs for the last in-bounds char; d ends -1 on exhaust, dead). Both the n==0 je and the loop-top NUL je reproduce (the latter jumps straight to the compute block past the redundant post-cmp, FA bytes as-is). BYTE-IDENTICAL TWIN of 0xe04c0 (same 51-B code) - note for merge: both entries compile from twin src files and carry identical patch lists. alias 0=$FA$_t_4d7e90 convention (0 consumers found)."
+ },
+ {
+  "rva": 918720,
+  "obj": "w36E_e04c0_v4",
+  "src": "build/survey/probes/w36E_e04c0_v2.c",
+  "maps": [],
+  "patch": [
+   "0xe,5,8d50ff7410",
+   "0x1d,1,fa",
+   "0x1e,1,4a",
+   "0x20,1,ff",
+   "0x28,1,07",
+   "0x2b,2,c1fe01"
+  ],
+  "aliases": [
+   "0=$FA$_t_4e04c0"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0xe: toolchain-diff - CL scheduled test-eax/je/lea (74 13 8d 78 ff); FA schedules test-eax/lea-edx/je (8d 50 ff 74 10) - 5-B swap fixes order, the lea's counter reg (edi->edx) and the n==0 je displacement (13->10, same target 0x23).",
+   "patch 0x1d: toolchain-diff - reg-name swap in the d-- mechanism: CL keeps counter d in edi (8b d7); FA keeps d in edx and snapshots into edi (8b fa mov edi,edx).",
+   "patch 0x1e: toolchain-diff - dec edi -> dec edx (4f -> 4a).",
+   "patch 0x20: toolchain-diff - condition tests FA's snapshot reg (test edx,edx -> test edi,edi, 85 d2 -> 85 ff).",
+   "patch 0x28: toolchain-diff - jcc disp recompute (wave-24 rule): post-recheck jne to pop/pop/ret, +1 after the 0x2b sar grow below (0x06 -> 0x07).",
+   "patch 0x2b: toolchain-diff - sar form: CL d1 fe (2 B) -> FA c1 fe 01 (3-B imm8-count form); grows text 50->51 B = FA chunk extent, downstream pop/pop/ret shift +1."
+  ],
+  "notes": "EXACT with 6 patches (no relocs, no maps). 51-B code, no tail. BYTE-IDENTICAL TWIN of 0xd7e90 (same 51-B wcsnlen code, same patch list; separate obj/src per chunk: w36E_e04c0_v4 / w36E_e04c0_v2.c). unsigned long w36e_e04c0(const unsigned short *p, unsigned long n): same wcsnlen semantics as 0xd7e90. alias 0=$FA$_t_4e04c0 convention (0 consumers found)."
+ },
+ {
+  "rva": 915504,
+  "obj": "w36E_df830_v1",
+  "src": "build/survey/probes/w36E_df830_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4df830"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "EXACT FIRST PROBE, pure C, no patches, no maps (zero FA relocs). 60-B code fills the chunk exactly (no tail). unsigned long w36e_df830(unsigned short f): sequential flag-bit remapper - unsigned long r = 0; if (f & 1) r = 0x10; if (f & 4) r |= 8; if (f & 8) r |= 4; if (f & 0x10) r |= 2; if (f & 0x20) r |= 1; if (f & 2) r |= 0x80000; return r. CL reproduced the word param load 66 8b 4c 24 04 (mov cx: keep the param as unsigned short and only byte/word-test it), the f6 c1 imm8 test chain, the b8 mov-eax-imm store for the first assignment and or-eax 83 c8 forms, and - the load-bearing form - the final 'or eax,imm32' came out as FA's 0d 00 00 08 00 accumulator encoding natively (not 81 c8), keeping the chunk length at 60 B. alias 0=$FA$_t_4df830 convention (0 consumers found; stub group t000ef has nfixups=0)."
+ }
+]

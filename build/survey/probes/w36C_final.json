@@ -1,0 +1,137 @@
+[
+  {
+    "rva": 119872,
+    "verdict": "EXACT",
+    "name": "",
+    "obj": "w36C_1d440_v2",
+    "src": "build/survey/probes/w36C_1d440_v2.c",
+    "maps": [],
+    "patch": [],
+    "aliases": [
+      "0=$FA$_t_41d440"
+    ],
+    "span": "",
+    "tail": "",
+    "flags": "/c /O2 /Gy /G5",
+    "provenance": [],
+    "notes": "Pure C (v2): byte clamp `long n = (long)numItems;` (FA cmp is SIGNED jg 7f 05; unsigned decl gave CL ja 77 at 0x8), decl `void *__fastcall MMReallocPtr(void *a, unsigned long n);` identity (FA call e8 @0x1c -> @MMReallocPtr@8 0x35c00; v1's void return got C2120 in the assignment). CL reproduces 8b?? - shl eax,4 / lea edx,[eax+eax*2] (n*48) naturally; items store via 8b 0d/a3 with identity maps (none). FA code 42 B + census pad 6 B (8d9b00000000). alias 0=$FA$_t_41d440 REQUIRED: replaces stub t00016's definition; check consumers of $FA$_t_41d440 before merging."
+  },
+  {
+    "rva": 138896,
+    "verdict": "EXACT",
+    "name": "",
+    "obj": "w36C_21e90_v1",
+    "src": "build/survey/probes/w36C_21e90_v1.c",
+    "maps": [
+      "_specialsC8X=_specials+0xc8",
+      "_desiredMapScale1cX=_desiredMapScale+0x1c"
+    ],
+    "patch": [],
+    "aliases": [
+      "0=$FA$_t_421e90"
+    ],
+    "span": "",
+    "tail": "",
+    "flags": "/c /O2 /Gy /G5",
+    "provenance": [],
+    "notes": "Pure C (v1): `extern short curScreen;` + merged `if (curScreen == 12 || curScreen == 3)` reproduces FA 66 a1/66 3d/66 3d word-moffs cmps exactly; interior-data delta maps _specialsC8X=_specials+0xc8 (FA c7 disp 0x531f50 = specials(0x531e88)+0xc8) and _desiredMapScale1cX=_desiredMapScale+0x1c (FA c6 disp 0x531d48 = desiredMapScale(0x531d2c)+0x1c). FA code 36 B + census pad 12 B (0500000000,8da42400000000). alias 0=$FA$_t_421e90 MUST be carried: $FA$_t_421e90 is NOT defined by any stub (t0001b ends AT 0x421e90) - this entry is its SOLE definition; consumer ?MAPMaybeSetControl@@YAXXZ has map '_mscTail=$FA$_t_421e90' (421e60) plus 4 jmp/rel sites at 0x6d244/0x6d6fc/0x6d827/0x6db0f in ?MPReceive@@YGDXZ."
+  },
+  {
+    "rva": 284560,
+    "verdict": "EXACT",
+    "name": "",
+    "obj": "w36C_45790_v1",
+    "src": "build/survey/probes/w36C_45790_v1.c",
+    "maps": [],
+    "patch": [],
+    "aliases": [
+      "0=$FA$_t_445790"
+    ],
+    "span": "",
+    "tail": "",
+    "flags": "/c /O2 /Gy /G5",
+    "provenance": [],
+    "notes": "Whole-body NAKED-ASM (v1, first try): FA keeps 4 dead loads (dx=[eax+0xe] 66 8b50 0e, di=[eax+0x10], the dead cmp word ptr [ecx+0eh],dx, si=[eax+0x12]) that pure C DCEs. asm walks mov ecx,[eax+28h], arg2 mov eax,[esp+10h], je/jne walk loop, xor eax,eax/pop edi/pop esi/ret. FA code 45 B + census pad 3 B (8d4900). maps [] - no data refs. alias 0=$FA$_t_445790 REQUIRED (replaces stub t00034's definition; check consumers)."
+  },
+  {
+    "rva": 306672,
+    "verdict": "EXACT",
+    "name": "",
+    "obj": "w36C_4adf0_v3",
+    "src": "build/survey/probes/w36C_4adf0_v3.c",
+    "maps": [],
+    "patch": [
+      "0x01,17,33d25733c08b4c240c8b7c24103bf87e11",
+      "0x15,2,3bd6",
+      "0x1b,2,8bd6",
+      "0x20,1,4f"
+    ],
+    "aliases": [
+      "0=$FA$_t_44adf0"
+    ],
+    "span": "",
+    "tail": "",
+    "flags": "/c /O2 /Gy /G5",
+    "provenance": [
+      "patch 0x01/0x15/0x1b/0x20 (prolog interleave 17 B: 33 d2 | push edi | 33 c0 | 8b4c240c | 8b7c2410 | 3b f8 | 7e 11; loop cmp 3b d6, m=v 8b d6, dec 4f): toolchain-diff - CL hoists the best-init (33 c0) ahead of the m-init and loads n before the second push (8b 54240c one-push frame); FA emits m-init (33 d2, edx) FIRST, push edi, best-init (33 c0, eax), both arg loads AFTER both pushes, then cmp edi,eax zero-reuse / 7e jle 0x23. In-loop reg colors: CL ran m=edi/v=esi/n=edx; FA m=edx/v=esi/n=edi (dec 4f). v1..v3 decl/init-order spellings did not steer these colors; patches are encoding-level, no addend semantics."
+    ],
+    "notes": "Pure C + 4 encoding patches (v3: v1-style inlined `if (m < ptr->v)` - the inline load gave CL the FA regs best=eax/ptr=ecx/v=esi and cmp m,x / 7d jges; v2's named v local stole esi/edi). Struct rest[] fixed 12->4 so CL emits add ecx,0x20 stride 0x20 (FA stride). FA code 38 B + census pad 10 B (8d4900,8da42400000000). alias 0=$FA$_t_44adf0 REQUIRED (replaces stub t00038's definition)."
+  },
+  {
+    "rva": 935296,
+    "verdict": "EXACT",
+    "name": "_iswctype",
+    "obj": "w36C_e4580_v3",
+    "src": "build/survey/probes/w36C_e4580_v3.c",
+    "maps": [
+      "_pwctypeT=__pwctype",
+      "_ctypeLkY=__ctype+0x388",
+      "_wLkTblY=$FA$_t_4dc7f0"
+    ],
+    "patch": [
+      "0x19,96,731a8b4424088b0d0000000025ffff0000668b04416689442402eb27833d0000000000742f8d4424026a008d4c240c6a00506a01516a01e80000000083c41885c07411668b44240c662344240283c4040fb7c0c333c083c404c3,8:6:_pwctypeT,0x1e:6:_ctypeLkY,0x38:20:_wLkTblY"
+    ],
+    "aliases": [],
+    "span": "",
+    "tail": "",
+    "flags": "/c /O2 /Gy /G5",
+    "provenance": [
+      "patch 0x19 (96 -> 90 B: everything 0x19..0x78 re-laid to FA's layout - jae 73 1a; table arm exits eb 27 jmp; locale block = cmp [mem],0/je 83 3d/74 2f; call e8 83c418 85c0 74 11; shared tail 66 8b44240c/66 23442402/83c404/0f b7c0/c3; single late ret0 33 c0/83 c404/c3): toolchain-diff - CL compiled the table arm with an in-place reload tail (mov ax,[esp+2]; add; and ax,[esp+8]; and eax,0ffffh; ret) and a success jne-back (75 c0) plus a duplicated inline locale ret0. v1/v2/v3 spellings (ulong-cast return, int return, mask-first `mask & tmpX` return) all produced the same 121-B layout. Newsites (payload-zero, deltas ride the maps): 8:6:_pwctypeT, 0x1e:6:_ctypeLkY, 0x38:20:_wLkTblY.",
+      "patch 0x1e (newsite DIR32 _ctypeLkY): toolchain-diff - CL a1/test/jne cannot emit FA's 83 3d <mem>,0 / 74 cmp-mem-0 form from C; delta +0x388 baked via map _ctypeLkY=__ctype+0x388."
+    ],
+    "notes": "Pure C (v3) + one 96->90 B layout patch. C carries: int return (ushort made CL emit 66 33 c0 ret0s), arm order `if (c < 0x100) table else locale` giving the FA 73 jae forward jump, call through _wLkTblY (REL32 newsite at patch site 0x38; 6 cdecl arg pushes match FA 50/6a01/51/6a01 sequence). FA is exactly 115 B with NO pad. DEPENDENCY: _wLkTblY -> $FA$_t_4dc7f0 = stub group t000e6 (0x4dc4f0..0x4dcad3) - that stub MUST stay until its own conversion. Maps also _pwctypeT=__pwctype (FA sym is double-underscore __pwctype) and _ctypeLkY=__ctype+0x388 (FA imm 0x51a4f8 = __ctype(0x51a170)+0x388)."
+  },
+  {
+    "rva": 601136,
+    "verdict": "EXACT",
+    "name": "@ASynchJoystick@0",
+    "obj": "w36C_92c30_v3",
+    "src": "build/survey/probes/w36C_92c30_v3.c",
+    "maps": [
+      "_joyInitX=?joysticksInitialized@@3DA",
+      "_capG=?joystickCaps@@3PAUtagJOYCAPSA@@A",
+      "_joystickXDevice=?joystickXDevice@@3KA"
+    ],
+    "patch": [
+      "0x0b,1,51",
+      "0x14,1,48",
+      "0x36,1,21",
+      "0x45,1,c2",
+      "0x49,1,f2",
+      "0x47,1,0b",
+      "0x4b,1,07",
+      "0x4c,20,ff048d00000000413bcf72e5a3000000005f5e5bc3,3:6:_buttonPresses,0xd:6:_joystickButtons"
+    ],
+    "aliases": [],
+    "span": "",
+    "tail": "",
+    "flags": "/c /O2 /Gy /G5",
+    "provenance": [
+      "patch 0x0b/0x14/0x36 (je rel8 50->51, 47->48, 20->21): toolchain-diff - the +1 B inc-region insert pushes the store/pops down one byte; all three je targets retarget.",
+      "patch 0x45/0x49 (85 d0 -> 85 c2, 85 d6 -> 85 f2): toolchain-diff - CL canonicalizes test eax,edx / test edx,esi operand order; FA tests edx,eax / esi,edx.",
+      "patch 0x47/0x4b (74 0a -> 74 0b, 75 06 -> 75 07): toolchain-diff - body early-exit je/jne targets shift +1 with the inc-region insert.",
+      "patch 0x4c (20 -> 21 B: ff 04 8d <disp> sib scale-4 no-base inc + carried 41/3b cf/72 e5/a3 <disp>/5f 5e 5b/c3; newsites 3:6:_buttonPresses, 0xd:6:_joystickButtons payload-zero identity FA names): toolchain-diff - CL inline asm emitted inc [ecx+disp] (ff 81, 6 B, scale 1); FA = sib-04 scale-4 (7 B). The +1 B makes CL code 97 B so the census tail is FA's pad 15 B (8d642400 x2, 8da42400000000, all in VOCAB)."
+    ],
+    "notes": "Whole-body NAKED-ASM (v3, 2nd asm try): FA prolog is interleaved (push ebx / a0 joyInitX / push esi / test / push edi / je) and keeps dead-ish scheduling no C shape reproduced (v1/v2 plain C byte-identical 101-B CL layout: chain in edx, old inside loop in ebx, mask in esi, 2 saved regs vs FA 3 and n=edi). asm details: a0/a1/a3 moffs loads/stores emit naturally; caps load `mov edi, dword ptr capG[esi+3Ch]` char-array spelling bakes +0x3c into the disp addend (fitted disp 0x54c45c = joystickCaps(0x54c420)+0x3c at FA); call @ReadJoystickButtons@0 rel32. Maps: _joyInitX=?joysticksInitialized@@3DA, _capG=?joystickCaps@@3PAUtagJOYCAPSA@@A, and _joystickXDevice=?joystickXDevice@@3KA (FA sym is C++ MANGLED - plain _joystickXDevice would not resolve). _buttonPresses/_joystickFunctions/_joystickButtons resolve identity."
+  }
+]

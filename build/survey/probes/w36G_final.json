@@ -1,0 +1,133 @@
+[
+ {
+  "rva": 218640,
+  "obj": "w36G_csnd_v1",
+  "src": "build/survey/probes/w36G_csnd_v1.c",
+  "maps": [
+   "_w36g_mods=?MOD@@3PAUMODSPEC@@A",
+   "_w36g_tmpl=_specials+0xb30",
+   "_CheckSndLink=?CheckSndLink@@YAXPAUMODSPEC@@@Z"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Pure C, no patches. 96 B chunk incl. census tail. Recipe: arg1 read via 1-arg loop; w36g_mods = chunk-local alias of the MODSPEC global (?MOD@@3PAUMODSPEC@@A), w36g_tmpl = _specials+0xb30. NOTE for parent: earlier probe configs carried map FROM '_checksndlink' which does NOT match the obj's emitted symbol (obj emits '_CheckSndLink'); the record above is the corrected FROM. Merge externals: ?MOD@@3PAUMODSPEC@@A (MOD global) and _specials+0xb30 (template table) must resolve at link."
+ },
+ {
+  "rva": 407664,
+  "obj": "w36G_dlgs_v3p",
+  "src": "build/survey/probes/w36G_dlgs_v3.c",
+  "maps": [
+   "_w36g_dhead=_serviceTicks+0x1c",
+   "_dlg_list_shutdown=?dlg_list_shutdown@@YAXPAX@Z",
+   "@MMFreePtr@4=@MMFreePtr@4"
+  ],
+  "patch": [
+   "0xe,12,8b7f3ce80000000085ff75f2,4:20:@MMFreePtr@4",
+   "0x20,1,c6",
+   "0x40,2,740a",
+   "0x46,4,"
+  ],
+  "provenance": [
+   "patch 0xe: toolchain-diff — child-walk scheduling: FA hoists the next-node load (mov edi,[edi+0x3c]) AHEAD of the call and reuses c's register for next (defensive copy mov edi,ecx first, both forms are 14 B); CL 4.2 keeps the load after the call (free-then-reload, aliasing-consistent) whichever spelling (single var c / explicit next temp) — block patch reorders the region to FA layout; the CL call reloc at 0xf moved with the replaced span so a newsite restores @MMFreePtr@4 REL32 at patch-site 4 (rel dword masked by verify)",
+   "patch 0x20: toolchain-diff — FA head-vs-p compare is eax-esi (3b c6, cmp head,p); our CL emits esi-eax (3b f0, cmp p,head) for 'if (w36g_dhead == p)' in both spellings; 1-byte modrm fix (wave-19 'a1-first cmp unsteerable' family)",
+   "patch 0x40: toolchain-diff — unlink-walk je disp 04->0a: FA's t==0 loop exit jumps straight to the shared free-call label (mov ecx,esi at 0x4c); after patch 0x46 deletes the guard re-test the following stream shifts -4 so disp 0x0a lands on that label",
+   "patch 0x46: toolchain-diff — FA's unlink store is guarded by the loop's own je (t==0 -> skip store, straight to call) and cmp fall-through (t==p -> store); CL emits a redundant cmp esi,eax / jne re-test of 'if (t == p)' after the while (and 'if (t != 0)' spells the same, v5) — empty-HEX patch deletes the 4 B so the store/call/pops align with FA exactly"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "C source converged except three known CL/FA toolchain deltas; 4 patches above (verdict EXACT, _fit.obj written). Recipe: child walk is a do{free(c); c=c->0x3c;}while(c) on the single c var (v4/v5 next-temp variants LOSE the edi coloring); else-branch is cur=head;t=head->0x20;while(t!=0&&t!=p);(empty body, back-edge targets the test, not the cmp) then the store. tail 10 B (8d 49 00 + 8d a4 24 00 00 00 00) accepted as census-proven filler. Merge externals: _w36g_dhead is the FA public '_serviceTicks' +0x1c (0x5423e4, identity-verified in FA bytes); @MMFreePtr@4 is an FA-internal stdcall (0x435510 per layout syms) — identity map added; if the parent's merge stage maps imp thunks instead, switch the third map accordingly."
+ },
+ {
+  "rva": 611344,
+  "obj": "w36G_hbtoa_v3",
+  "src": "build/survey/probes/w36G_hbtoa_v3.c",
+  "maps": [
+   "_w36g_hex=?spx_proto@@3UNET_PROTOCOL@@A+0x70",
+   "_hbtoa=?hbtoa@@YAPADPAEFPAD@Z"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Pure C, no patches, no tail (chunk length is 16-aligned). Recipe: do{n--;*dst++=hex[*src>>4];*dst++=hex[*src&0xf];src++;}while(n!=0) — the src++ as a SEPARATE trailing statement is what schedules FA's inc/inc/inc order (40 40 41); fold it into a combined *dst++=hex[...] expression and CL emits 40 41 40. Extern: _w36g_hex = ?spx_proto@@3UNET_PROTOCOL@@A+0x70 (FA disp 0x4fce70 verified, identity addend)."
+ },
+ {
+  "rva": 623536,
+  "obj": "w36G_iniq_v4",
+  "src": "build/survey/probes/w36G_iniq_v4.c",
+  "maps": [
+   "_InitializeQueue=?InitializeQueue@@YAXAAUSERIAL_QUEUE@@PAUSERIAL_PACKET_WRAPPER@@J@Z"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Pure C, no patches; tail 5 B (05 00 00 00 00) census-proven filler. Recipe: q->f14=w first, then f0/f4/fc/f10 zeroed, f8=n LAST (FA's store order); loop = do{memset(f14+ofs,0,48) (f3 ab rep stosd with ecx=0xc); the three -1 stores as wp[0],[1],[2] on the COMMON old-ofs base ((long*)((char*)q->f14+ofs))[0..2] — that spelling folds FA's disps -0x30/-0x2c/-0x28 relative to the hoisted esi=ofs+0x30 advance, which sits between the first f14 reload and the d0 store; ofs+=48 then n-- after the stores; dec edx scheduled between the d0-address reload and d1 store with a 90 nop. NOTE: probe rounds r1-r5 carried map FROM '_initializequeue' (wrong case); the record above emits and maps '_InitializeQueue', matching the obj. Chunk has no relocations."
+ },
+ {
+  "rva": 666784,
+  "obj": "w36G_wsnb_v3",
+  "src": "build/survey/probes/w36G_wsnb_v3.c",
+  "maps": [
+   "_w36g_ws=?ws@@3U_winsock_funcs@@A",
+   "_w36g_wstr2=?wsa_string2@@3PAPADA",
+   "_winsock_handle_error=?winsock_handle_error@@YAPADPADW4ERROR_SEVERITY@@0H@Z",
+   "_winsock_set_non_blocking=?winsock_set_non_blocking@@YADI@Z"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Pure C, no patches; tail 6 B (8d 9b 00 00 00 00) census-proven filler. Recipe: winsock_set_non_blocking is declared returning CHAR (FA's 32 c0 / b0 01 one-byte returns) but the ioctl fn-ptr MEMBER returns int (drives the 3-byte cmp eax,-1 / 83 f8 ff; char member gives the 2-byte cmp al,-1). The ws fn table via pack(1) struct with pad36[0x36]; the two error-string pushes are &wsa_string2[0x81] / &wsa_string2[0x83] (element addresses fold to push imm32 + DIR32, FA VA 0x4ff6cc/0x4ff6d4 verified); args right-to-left, 700 decimal; the ioctl call is ff 25 through the ws+0x36 slot (no @N map needed). Externals: ?ws@@3U_winsock_funcs@@A and error-call REL32 to ?winsock_handle_error@@YAPADPADW4ERROR_SEVERITY@@0H@Z."
+ },
+ {
+  "rva": 703712,
+  "obj": "w36G_vdo_v8",
+  "src": "build/survey/probes/w36G_vdo_v8.c",
+  "maps": [
+   "_VDOSetLineStats=?VDOSetLineStats@@YAXGGE@Z",
+   "_lineStats=_lineStats"
+  ],
+  "patch": [
+   "0xe,1,f6",
+   "0x19,1,76",
+   "0x1f,1,5c",
+   "0x23,1,e3",
+   "0x29,1,c6",
+   "0x2b,1,46",
+   "0x33,1,f7",
+   "0x36,1,43",
+   "0x3d,1,43",
+   "0x44,1,43"
+  ],
+  "provenance": [
+   "patch 0xe: toolchain-diff — register color: FA holds the loop counter i in si (xor si,si is the first 16-bit scheduled var); our CL always colors the first 16-bit local bx in this shape (v3 count hoisted -> bx, v5-v7 i first -> bx, decl-init variant identical); patch xor bx,bx -> xor si,si",
+   "patch 0x19: toolchain-diff — gate exit jcc: FA emits jbe (76 2c) after test $0xfffe,%di (jbe==je here, test clears CF, spelled by FA's compiler from the mask test); our CL emits je (74 2c); 1-byte opcode fix",
+   "patch 0x1f: toolchain-diff — register color: FA loads the (32-bit masked) base arg into ebx (8b 5c 24 10); our CL uses esi; 1-byte reg fix",
+   "patch 0x23: toolchain-diff — same base-color: and $0xffff,%ebx (81 e3) vs our and $0xffff,%esi (81 e6); 1-byte reg fix",
+   "patch 0x29: toolchain-diff — same counter-color: FA's staging copy mov eax,esi (8b c6, i in si); our CL mov eax,ebx (8b c3); 1-byte reg fix",
+   "patch 0x2b: toolchain-diff — same counter-color: inc si (66 46) vs our inc bx (66 43); 1-byte reg fix",
+   "patch 0x33: toolchain-diff — same counter-color + latch: FA's latch compare is cmp %si,%di == 66 3b f7 (si-half, jb); our CL emits cmp %bx,%di == 66 3b df (bx-half, ja); 1-byte modrm fix, latch jcc already jb",
+   "patch 0x36: toolchain-diff — FA's two loop stores index the base reg ebx (88 8c 43 ... disp = _lineStats); our CL uses esi (88 8c 46, disp masked); 1-byte modrm fix, store d0",
+   "patch 0x3d: toolchain-diff — same base-color in the d1 store (88 94 43 ... disp 0x50bb41 = _lineStats+1, content addend 1 already emitted by CL); 1-byte modrm fix, store d1",
+   "patch 0x44: toolchain-diff — same base-color in the dead lea (%ebx,%eax,2),%eax (8d 04 43) FA schedules after the stores; our CL lea with esi; 1-byte modrm fix"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "C source fully converged structurally (flag via (b<1)?-1:0 gives FA's cmp $1,%cl / sbb %dl,%dl — the 0-(b<1) spelling gives setb+neg instead; half declared BEFORE i gives the late count load mov di,[esp+0x14] — i-first decls hoist the count load to before the pushes; jb latch and 2-byte jcc come from the r/m=half/second-operand rule, decl-order variant v5 flips ja->jb); the 10 one-byte patches above fix the ONLY remaining deltas: CL colors i->bx and base->esi where FA used si and ebx (color steering exhausted: decl order, decl-inits, v3-v8). tail 5 B (05 00 00 00 00) census-proven filler. Extern: _lineStats identity (FA disp dwords 0x50bb40/0x50bb41 = _lineStats/_lineStats+1, CL content dwords 0/1 verified)."
+ }
+]

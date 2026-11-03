@@ -15374,5 +15374,771 @@
    "0=$FA$_t_47fe40"
   ],
   "provenance": []
+ },
+ {
+  "rva": 929008,
+  "obj": "w36A_e2cf0_v2",
+  "src": "build/survey/probes/w36A_e2cf0_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4e2cf0"
+  ],
+  "provenance": []
+ },
+ {
+  "rva": 884992,
+  "obj": "w36A_d8100_v5",
+  "src": "build/survey/probes/w36A_d8100_v5.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4d8100"
+  ],
+  "provenance": []
+ },
+ {
+  "rva": 919536,
+  "obj": "w36A_e07f0_v5",
+  "src": "build/survey/probes/w36A_e07f0_v5.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4e07f0"
+  ],
+  "provenance": []
+ },
+ {
+  "rva": 885408,
+  "obj": "w36A_d82a0_v2",
+  "src": "build/survey/probes/w36A_d82a0_v2.c",
+  "flags": "/c /O2 /Gy /G4",
+  "maps": [
+   "_free=_free"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4d82a0"
+  ],
+  "provenance": []
+ },
+ {
+  "rva": 624272,
+  "obj": "w36A_98690_v1",
+  "src": "build/survey/probes/w36A_98690_v1.cpp",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "?InQueue@@3UUSERIAL_QUEUE@@A=?InQueue@@3USERIAL_QUEUE@@A",
+   "?InQueuePackets@@3PAUUSERIAL_PACKET_WRAPPER@@A=?InQueuePackets@@3PAUSERIAL_PACKET_WRAPPER@@A",
+   "?OutQueue@@3UUSERIAL_QUEUE@@A=?OutQueue@@3USERIAL_QUEUE@@A",
+   "?OutQueuePackets@@3PAUUSERIAL_PACKET_WRAPPER@@A=?OutQueuePackets@@3PAUSERIAL_PACKET_WRAPPER@@A",
+   "?HistoryQueue@@3UUSERIAL_QUEUE@@A=?HistoryQueue@@3USERIAL_QUEUE@@A",
+   "?HistoryQueuePackets@@3PAUUSERIAL_PACKET_WRAPPER@@A=?HistoryQueuePackets@@3PAUSERIAL_PACKET_WRAPPER@@A",
+   "?InitializeQueue@@YAXAAUSERIAL_QUEUE@@PAUUSERIAL_PACKET_WRAPPER@@J@Z=?InitializeQueue@@YAXAAUSERIAL_QUEUE@@PAUSERIAL_PACKET_WRAPPER@@J@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "provenance": []
+ },
+ {
+  "rva": 711088,
+  "obj": "w36A_ad9b0_v4",
+  "src": "build/survey/probes/w36A_ad9b0_v4.cpp",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_netEvFail=$FA$_t_4adac0"
+  ],
+  "patch": [],
+  "aliases": [],
+  "provenance": []
+ },
+ {
+  "rva": 711376,
+  "obj": "w36B_g1ev_v2",
+  "src": "build/survey/probes/w36B_g1ev_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_gehc1=$FA$_t_4adc20",
+   "_nhfw=?net_handle_fd_write@@YAXPAUsocket_state@@@Z",
+   "_sockclose=?socket_close@@YAXI@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "provenance": []
+ },
+ {
+  "rva": 590816,
+  "obj": "w36B_slew_v3",
+  "src": "build/survey/probes/w36B_slew_v3.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_slewId=_slewId",
+   "_objPtrs=_objPtrs"
+  ],
+  "patch": [],
+  "aliases": [],
+  "provenance": []
+ },
+ {
+  "rva": 695472,
+  "obj": "w36B_gh16_v1",
+  "src": "build/survey/probes/w36B_gh16_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_openHandles=?openHandles@@3FA",
+   "_handles32=?handles32@@3PAPAXA"
+  ],
+  "patch": [],
+  "aliases": [],
+  "provenance": []
+ },
+ {
+  "rva": 796776,
+  "obj": "w36B_swapmem_v1",
+  "src": "build/survey/probes/w36B_swapmem_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "provenance": []
+ },
+ {
+  "rva": 807616,
+  "obj": "w36B_wrcp_final",
+  "src": "build/survey/probes/w36B_wrcp_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [
+   "0x23,2,7435",
+   "0x54,25,5f5b5dc21000881f887f0188570283c703e2f3ebeb"
+  ],
+  "aliases": [],
+  "provenance": [
+   "patch 0x23: toolchain-diff CL's je-case displacement needs the +4 shift onto FA's flat-block position (74 31 -> FA 74 35); no newsite",
+   "patch 0x54: toolchain-diff CL merge-tailed the two loop exits into one end-of-function pop block (eb 11 jump-around + flat block inline + doubled eb jmp + end pops); FA keeps pops+ret 10h inline right after the blend loop with flat block+loop+eb eb after; 21-B rewrite deleting CL's 4 tail-merge bytes, no newsites"
+  ]
+ },
+ {
+  "rva": 885040,
+  "obj": "w36B_free_v1",
+  "src": "build/survey/probes/w36B_free_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_lock=__lock",
+   "_unlock=__unlock",
+   "_wfq1=$FA$_t_4de2a0",
+   "_wfq2=$FA$_t_4de300",
+   "_crtheap=__crtheap",
+   "_impHeapFree=__imp__HeapFree"
+  ],
+  "patch": [],
+  "aliases": [],
+  "provenance": []
+ },
+ {
+  "rva": 119872,
+  "obj": "w36C_1d440_v2",
+  "src": "build/survey/probes/w36C_1d440_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_41d440"
+  ],
+  "provenance": []
+ },
+ {
+  "rva": 138896,
+  "obj": "w36C_21e90_v1",
+  "src": "build/survey/probes/w36C_21e90_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_specialsC8X=_specials+0xc8",
+   "_desiredMapScale1cX=_desiredMapScale+0x1c"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_421e90"
+  ],
+  "provenance": []
+ },
+ {
+  "rva": 284560,
+  "obj": "w36C_45790_v1",
+  "src": "build/survey/probes/w36C_45790_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_445790"
+  ],
+  "provenance": []
+ },
+ {
+  "rva": 306672,
+  "obj": "w36C_4adf0_v3",
+  "src": "build/survey/probes/w36C_4adf0_v3.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [
+   "0x01,17,33d25733c08b4c240c8b7c24103bf87e11",
+   "0x15,2,3bd6",
+   "0x1b,2,8bd6",
+   "0x20,1,4f"
+  ],
+  "aliases": [
+   "0=$FA$_t_44adf0"
+  ],
+  "provenance": [
+   "patch 0x01/0x15/0x1b/0x20 (prolog interleave 17 B: 33 d2 | push edi | 33 c0 | 8b4c240c | 8b7c2410 | 3b f8 | 7e 11; loop cmp 3b d6, m=v 8b d6, dec 4f): toolchain-diff - CL hoists the best-init (33 c0) ahead of the m-init and loads n before the second push (8b 54240c one-push frame); FA emits m-init (33 d2, edx) FIRST, push edi, best-init (33 c0, eax), both arg loads AFTER both pushes, then cmp edi,eax zero-reuse / 7e jle 0x23. In-loop reg colors: CL ran m=edi/v=esi/n=edx; FA m=edx/v=esi/n=edi (dec 4f). v1..v3 decl/init-order spellings did not steer these colors; patches are encoding-level, no addend semantics."
+  ]
+ },
+ {
+  "rva": 935296,
+  "obj": "w36C_e4580_v3",
+  "src": "build/survey/probes/w36C_e4580_v3.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_pwctypeT=__pwctype",
+   "_ctypeLkY=__ctype+0x388",
+   "_wLkTblY=$FA$_t_4dc7f0"
+  ],
+  "patch": [
+   "0x19,96,731a8b4424088b0d0000000025ffff0000668b04416689442402eb27833d0000000000742f8d4424026a008d4c240c6a00506a01516a01e80000000083c41885c07411668b44240c662344240283c4040fb7c0c333c083c404c3,8:6:_pwctypeT,0x1e:6:_ctypeLkY,0x38:20:_wLkTblY"
+  ],
+  "aliases": [],
+  "provenance": [
+   "patch 0x19 (96 -> 90 B: everything 0x19..0x78 re-laid to FA's layout - jae 73 1a; table arm exits eb 27 jmp; locale block = cmp [mem],0/je 83 3d/74 2f; call e8 83c418 85c0 74 11; shared tail 66 8b44240c/66 23442402/83c404/0f b7c0/c3; single late ret0 33 c0/83 c404/c3): toolchain-diff - CL compiled the table arm with an in-place reload tail (mov ax,[esp+2]; add; and ax,[esp+8]; and eax,0ffffh; ret) and a success jne-back (75 c0) plus a duplicated inline locale ret0. v1/v2/v3 spellings (ulong-cast return, int return, mask-first `mask & tmpX` return) all produced the same 121-B layout. Newsites (payload-zero, deltas ride the maps): 8:6:_pwctypeT, 0x1e:6:_ctypeLkY, 0x38:20:_wLkTblY.",
+   "patch 0x1e (newsite DIR32 _ctypeLkY): toolchain-diff - CL a1/test/jne cannot emit FA's 83 3d <mem>,0 / 74 cmp-mem-0 form from C; delta +0x388 baked via map _ctypeLkY=__ctype+0x388."
+  ]
+ },
+ {
+  "rva": 601136,
+  "obj": "w36C_92c30_v3",
+  "src": "build/survey/probes/w36C_92c30_v3.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_joyInitX=?joysticksInitialized@@3DA",
+   "_capG=?joystickCaps@@3PAUtagJOYCAPSA@@A",
+   "_joystickXDevice=?joystickXDevice@@3KA"
+  ],
+  "patch": [
+   "0x0b,1,51",
+   "0x14,1,48",
+   "0x36,1,21",
+   "0x45,1,c2",
+   "0x49,1,f2",
+   "0x47,1,0b",
+   "0x4b,1,07",
+   "0x4c,20,ff048d00000000413bcf72e5a3000000005f5e5bc3,3:6:_buttonPresses,0xd:6:_joystickButtons"
+  ],
+  "aliases": [],
+  "provenance": [
+   "patch 0x0b/0x14/0x36 (je rel8 50->51, 47->48, 20->21): toolchain-diff - the +1 B inc-region insert pushes the store/pops down one byte; all three je targets retarget.",
+   "patch 0x45/0x49 (85 d0 -> 85 c2, 85 d6 -> 85 f2): toolchain-diff - CL canonicalizes test eax,edx / test edx,esi operand order; FA tests edx,eax / esi,edx.",
+   "patch 0x47/0x4b (74 0a -> 74 0b, 75 06 -> 75 07): toolchain-diff - body early-exit je/jne targets shift +1 with the inc-region insert.",
+   "patch 0x4c (20 -> 21 B: ff 04 8d <disp> sib scale-4 no-base inc + carried 41/3b cf/72 e5/a3 <disp>/5f 5e 5b/c3; newsites 3:6:_buttonPresses, 0xd:6:_joystickButtons payload-zero identity FA names): toolchain-diff - CL inline asm emitted inc [ecx+disp] (ff 81, 6 B, scale 1); FA = sib-04 scale-4 (7 B). The +1 B makes CL code 97 B so the census tail is FA's pad 15 B (8d642400 x2, 8da42400000000, all in VOCAB)."
+  ]
+ },
+ {
+  "rva": 405744,
+  "obj": "w36D_630f0_v1",
+  "src": "build/survey/probes/w36D_630f0_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4630f0"
+  ],
+  "provenance": []
+ },
+ {
+  "rva": 416432,
+  "obj": "w36D_65ab0_v2",
+  "src": "build/survey/probes/w36D_65ab0_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w36d_ct110=_curThing+0x110",
+   "_w36d_stb=_serviceTicks+0x28",
+   "_w36d_stw=_serviceTicks+0x50"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_465ab0"
+  ],
+  "provenance": []
+ },
+ {
+  "rva": 462992,
+  "obj": "w36D_71090_v3",
+  "src": "build/survey/probes/w36D_71090_v3.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [
+   "0x11,1,d1",
+   "0x12,1,7d",
+   "0x1f,1,d1",
+   "0x21,1,9f"
+  ],
+  "aliases": [
+   "0=$FA$_t_471090"
+  ],
+  "provenance": [
+   "patch 0x11: toolchain-diff 1-B cmp operand swap: CL canonicalizes (x<y) to cmp ecx,edx (3b ca); FA compares reg-first x-vs-y cmp edx,ecx (3b d1) \u2014 w33g/w22 operand-order precedent; both jcc distances 0x07 unchanged.",
+   "patch 0x12: toolchain-diff 1-B jcc polarity rides the 0x11 swap: jle (7e) -> jge (7d), dist 0x07; v2's y-first spelling did NOT defeat the canonicalization (probe w36D_71090_v2 same 4-B divergence), so the patch is the only lever.",
+   "patch 0x1f: toolchain-diff 1-B second cmp operand swap (before setg): cmp ecx,edx -> cmp edx,ecx (31: 3b ca -> 3b d1); FA re-issues the compare, CL shared one sub.",
+   "patch 0x21: toolchain-diff 1-B setcc polarity riding 0x1f: setl al (0f 9c) -> setg al (0f 9f)."
+  ]
+ },
+ {
+  "rva": 559648,
+  "obj": "w36D_88a20_v1",
+  "src": "build/survey/probes/w36D_88a20_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w36d_lf=?listFont@@3PAUT_HANDLE@@A",
+   "_w36d_str=_checkRightButton+0x220"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_488a20"
+  ],
+  "provenance": []
+ },
+ {
+  "rva": 668976,
+  "obj": "w36D_a3530_v1",
+  "src": "build/survey/probes/w36D_a3530_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4a3530"
+  ],
+  "provenance": []
+ },
+ {
+  "rva": 725456,
+  "obj": "w36D_b11d0_v1",
+  "src": "build/survey/probes/w36D_b11d0_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4b11d0"
+  ],
+  "provenance": []
+ },
+ {
+  "rva": 779056,
+  "obj": "w36E_be330_v2",
+  "src": "build/survey/probes/w36E_be330_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w36e_fl=_curThingType+0xa6",
+   "_w36e_fl2=_curThingType+0xa6",
+   "_w36e_ws=_curThing+0xe4",
+   "_w36e_t360=$FA$_t_4be360",
+   "_w36e_d9d0=$FA$_t_4bd9d0",
+   "_w36e_dac0=$FA$_t_4bdac0"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4be330"
+  ],
+  "provenance": []
+ },
+ {
+  "rva": 933120,
+  "obj": "w36E_e3d00_v2",
+  "src": "build/survey/probes/w36E_e3d00_v2.c",
+  "flags": "/c /O2 /Gy /G4",
+  "maps": [
+   "_w36e_tzf=__tzname+0x2c",
+   "_w36e_tzf2=__tzname+0x2c",
+   "_w36e_tzf3=__tzname+0x2c",
+   "_w36e_lock=__lock",
+   "_w36e_unlock=__unlock",
+   "_w36e_tzinner=$FA$_t_4e3d60"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4e3d00"
+  ],
+  "provenance": []
+ },
+ {
+  "rva": 937328,
+  "obj": "w36E_e4d70_v2",
+  "src": "build/survey/probes/w36E_e4d70_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [
+   "0x6,1,f1",
+   "0xc,1,d0",
+   "0x13,1,3e",
+   "0x18,1,c6",
+   "0x1a,1,4a",
+   "0x1e,1,d2",
+   "0x23,1,3e",
+   "0x20,1,0e",
+   "0x26,1,08",
+   "0x28,1,f1",
+   "0x29,2,c1fe01",
+   "0x2d,1,46"
+  ],
+  "aliases": [
+   "0=$FA$_t_4e4d70"
+  ],
+  "provenance": [
+   "patch 0x6: toolchain-diff - reg-name swap: CL put the string pointer in edx (8b d1), FA in esi (8b f1); all pointer-side bytes patched to FA's regs (esi ptr / edx counter / eax n-return).",
+   "patch 0xc: toolchain-diff - counter load: CL 'mov esi,eax' -> FA 'mov edx,eax' (counter copy d=n; FA keeps eax = original n for the capped return).",
+   "patch 0x13: toolchain-diff - loop cmp [edx]->cmp [esi] (66 83 3a -> 3e).",
+   "patch 0x18: toolchain-diff - s+=2 on FA's pointer reg (83 c2 -> 83 c6).",
+   "patch 0x1a: toolchain-diff - --d on FA's counter reg (4e dec esi -> 4a dec edx).",
+   "patch 0x1e: toolchain-diff - post-loop d != 0 test on FA's reg (85 f6 -> 85 d2).",
+   "patch 0x23: toolchain-diff - second *s recheck cmp [edx]->[esi].",
+   "patch 0x20: toolchain-diff - jcc disp recompute (wave-24 rule): je to the shared pop/ret tail, +1 after the 0x29 sar grow below.",
+   "patch 0x26: toolchain-diff - jcc disp recompute for the same +1 grow (jne to pop/ret, 0x07 -> 0x08).",
+   "patch 0x28: toolchain-diff - final (s-p) on FA's pointer reg (sub edx,ecx -> sub esi,ecx).",
+   "patch 0x29: toolchain-diff - sar form: CL d1 fa (2 B) -> FA c1 fe 01 (3-B imm8-count form); grows text 48->49 B = FA chunk extent, so pop/ret shift +1 (dps fixed above).",
+   "patch 0x2d: toolchain-diff - idx+1 lea on FA's pointer reg post-grow (8d 42 01 -> 8d 46 01, +0x01 byte intact)."
+  ]
+ },
+ {
+  "rva": 884368,
+  "obj": "w36E_d7e90_v4",
+  "src": "build/survey/probes/w36E_d7e90_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [
+   "0xe,5,8d50ff7410",
+   "0x1d,1,fa",
+   "0x1e,1,4a",
+   "0x20,1,ff",
+   "0x28,1,07",
+   "0x2b,2,c1fe01"
+  ],
+  "aliases": [
+   "0=$FA$_t_4d7e90"
+  ],
+  "provenance": [
+   "patch 0xe: toolchain-diff - CL scheduled test-eax/je/lea (74 13 8d 78 ff); FA schedules test-eax/lea-edx/je (8d 50 ff 74 10) - 5-B swap fixes order, the lea's counter reg (edi->edx) and the n==0 je displacement (13->10, same target 0x23).",
+   "patch 0x1d: toolchain-diff - reg-name swap in the d-- mechanism: CL keeps counter d in edi (8b d7); FA keeps d in edx and snapshots into edi (8b fa mov edi,edx).",
+   "patch 0x1e: toolchain-diff - dec edi -> dec edx (4f -> 4a).",
+   "patch 0x20: toolchain-diff - condition tests FA's snapshot reg (test edx,edx -> test edi,edi, 85 d2 -> 85 ff).",
+   "patch 0x28: toolchain-diff - jcc disp recompute (wave-24 rule): post-recheck jne to pop/pop/ret, +1 after the 0x2b sar grow below (0x06 -> 0x07).",
+   "patch 0x2b: toolchain-diff - sar form: CL d1 fe (2 B) -> FA c1 fe 01 (3-B imm8-count form); grows text 50->51 B = FA chunk extent, downstream pop/pop/ret shift +1."
+  ]
+ },
+ {
+  "rva": 918720,
+  "obj": "w36E_e04c0_v4",
+  "src": "build/survey/probes/w36E_e04c0_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [
+   "0xe,5,8d50ff7410",
+   "0x1d,1,fa",
+   "0x1e,1,4a",
+   "0x20,1,ff",
+   "0x28,1,07",
+   "0x2b,2,c1fe01"
+  ],
+  "aliases": [
+   "0=$FA$_t_4e04c0"
+  ],
+  "provenance": [
+   "patch 0xe: toolchain-diff - CL scheduled test-eax/je/lea (74 13 8d 78 ff); FA schedules test-eax/lea-edx/je (8d 50 ff 74 10) - 5-B swap fixes order, the lea's counter reg (edi->edx) and the n==0 je displacement (13->10, same target 0x23).",
+   "patch 0x1d: toolchain-diff - reg-name swap in the d-- mechanism: CL keeps counter d in edi (8b d7); FA keeps d in edx and snapshots into edi (8b fa mov edi,edx).",
+   "patch 0x1e: toolchain-diff - dec edi -> dec edx (4f -> 4a).",
+   "patch 0x20: toolchain-diff - condition tests FA's snapshot reg (test edx,edx -> test edi,edi, 85 d2 -> 85 ff).",
+   "patch 0x28: toolchain-diff - jcc disp recompute (wave-24 rule): post-recheck jne to pop/pop/ret, +1 after the 0x2b sar grow below (0x06 -> 0x07).",
+   "patch 0x2b: toolchain-diff - sar form: CL d1 fe (2 B) -> FA c1 fe 01 (3-B imm8-count form); grows text 50->51 B = FA chunk extent, downstream pop/pop/ret shift +1."
+  ]
+ },
+ {
+  "rva": 915504,
+  "obj": "w36E_df830_v1",
+  "src": "build/survey/probes/w36E_df830_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4df830"
+  ],
+  "provenance": []
+ },
+ {
+  "rva": 929168,
+  "obj": "w36F_shl3_v4",
+  "src": "build/survey/probes/w36F_shl3_v4.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "provenance": []
+ },
+ {
+  "rva": 426176,
+  "obj": "w36F_initp_v1",
+  "src": "build/survey/probes/w36F_initp_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "provenance": []
+ },
+ {
+  "rva": 426240,
+  "obj": "w36F_gdfc_v7",
+  "src": "build/survey/probes/w36F_gdfc_v7.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w36f_dlg=_pilotsUpdated+0x20c"
+  ],
+  "patch": [],
+  "aliases": [],
+  "provenance": []
+ },
+ {
+  "rva": 449920,
+  "obj": "w36F_ralloc_v1",
+  "src": "build/survey/probes/w36F_ralloc_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w36f_mpr=?MP_Read@@3P6AJJPAEJ@ZA"
+  ],
+  "patch": [],
+  "aliases": [],
+  "provenance": []
+ },
+ {
+  "rva": 506672,
+  "obj": "w36F_envc_v2",
+  "src": "build/survey/probes/w36F_envc_v2.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w36f_ct1=_curThing+0x19b"
+  ],
+  "patch": [],
+  "aliases": [],
+  "provenance": []
+ },
+ {
+  "rva": 778928,
+  "obj": "w36F_objc_v1",
+  "src": "build/survey/probes/w36F_objc_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "provenance": []
+ },
+ {
+  "rva": 218640,
+  "obj": "w36G_csnd_v1",
+  "src": "build/survey/probes/w36G_csnd_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w36g_mods=?MOD@@3PAUMODSPEC@@A",
+   "_w36g_tmpl=_specials+0xb30",
+   "_CheckSndLink=?CheckSndLink@@YAXPAUMODSPEC@@@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "provenance": []
+ },
+ {
+  "rva": 407664,
+  "obj": "w36G_dlgs_v3p",
+  "src": "build/survey/probes/w36G_dlgs_v3.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w36g_dhead=_serviceTicks+0x1c",
+   "_dlg_list_shutdown=?dlg_list_shutdown@@YAXPAX@Z",
+   "@MMFreePtr@4=@MMFreePtr@4"
+  ],
+  "patch": [
+   "0xe,12,8b7f3ce80000000085ff75f2,4:20:@MMFreePtr@4",
+   "0x20,1,c6",
+   "0x40,2,740a",
+   "0x46,4,"
+  ],
+  "aliases": [],
+  "provenance": [
+   "patch 0xe: toolchain-diff \u2014 child-walk scheduling: FA hoists the next-node load (mov edi,[edi+0x3c]) AHEAD of the call and reuses c's register for next (defensive copy mov edi,ecx first, both forms are 14 B); CL 4.2 keeps the load after the call (free-then-reload, aliasing-consistent) whichever spelling (single var c / explicit next temp) \u2014 block patch reorders the region to FA layout; the CL call reloc at 0xf moved with the replaced span so a newsite restores @MMFreePtr@4 REL32 at patch-site 4 (rel dword masked by verify)",
+   "patch 0x20: toolchain-diff \u2014 FA head-vs-p compare is eax-esi (3b c6, cmp head,p); our CL emits esi-eax (3b f0, cmp p,head) for 'if (w36g_dhead == p)' in both spellings; 1-byte modrm fix (wave-19 'a1-first cmp unsteerable' family)",
+   "patch 0x40: toolchain-diff \u2014 unlink-walk je disp 04->0a: FA's t==0 loop exit jumps straight to the shared free-call label (mov ecx,esi at 0x4c); after patch 0x46 deletes the guard re-test the following stream shifts -4 so disp 0x0a lands on that label",
+   "patch 0x46: toolchain-diff \u2014 FA's unlink store is guarded by the loop's own je (t==0 -> skip store, straight to call) and cmp fall-through (t==p -> store); CL emits a redundant cmp esi,eax / jne re-test of 'if (t == p)' after the while (and 'if (t != 0)' spells the same, v5) \u2014 empty-HEX patch deletes the 4 B so the store/call/pops align with FA exactly"
+  ]
+ },
+ {
+  "rva": 611344,
+  "obj": "w36G_hbtoa_v3",
+  "src": "build/survey/probes/w36G_hbtoa_v3.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w36g_hex=?spx_proto@@3UNET_PROTOCOL@@A+0x70",
+   "_hbtoa=?hbtoa@@YAPADPAEFPAD@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "provenance": []
+ },
+ {
+  "rva": 623536,
+  "obj": "w36G_iniq_v4",
+  "src": "build/survey/probes/w36G_iniq_v4.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_InitializeQueue=?InitializeQueue@@YAXAAUSERIAL_QUEUE@@PAUSERIAL_PACKET_WRAPPER@@J@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "provenance": []
+ },
+ {
+  "rva": 666784,
+  "obj": "w36G_wsnb_v3",
+  "src": "build/survey/probes/w36G_wsnb_v3.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w36g_ws=?ws@@3U_winsock_funcs@@A",
+   "_w36g_wstr2=?wsa_string2@@3PAPADA",
+   "_winsock_handle_error=?winsock_handle_error@@YAPADPADW4ERROR_SEVERITY@@0H@Z",
+   "_winsock_set_non_blocking=?winsock_set_non_blocking@@YADI@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "provenance": []
+ },
+ {
+  "rva": 703712,
+  "obj": "w36G_vdo_v8",
+  "src": "build/survey/probes/w36G_vdo_v8.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_VDOSetLineStats=?VDOSetLineStats@@YAXGGE@Z",
+   "_lineStats=_lineStats"
+  ],
+  "patch": [
+   "0xe,1,f6",
+   "0x19,1,76",
+   "0x1f,1,5c",
+   "0x23,1,e3",
+   "0x29,1,c6",
+   "0x2b,1,46",
+   "0x33,1,f7",
+   "0x36,1,43",
+   "0x3d,1,43",
+   "0x44,1,43"
+  ],
+  "aliases": [],
+  "provenance": [
+   "patch 0xe: toolchain-diff \u2014 register color: FA holds the loop counter i in si (xor si,si is the first 16-bit scheduled var); our CL always colors the first 16-bit local bx in this shape (v3 count hoisted -> bx, v5-v7 i first -> bx, decl-init variant identical); patch xor bx,bx -> xor si,si",
+   "patch 0x19: toolchain-diff \u2014 gate exit jcc: FA emits jbe (76 2c) after test $0xfffe,%di (jbe==je here, test clears CF, spelled by FA's compiler from the mask test); our CL emits je (74 2c); 1-byte opcode fix",
+   "patch 0x1f: toolchain-diff \u2014 register color: FA loads the (32-bit masked) base arg into ebx (8b 5c 24 10); our CL uses esi; 1-byte reg fix",
+   "patch 0x23: toolchain-diff \u2014 same base-color: and $0xffff,%ebx (81 e3) vs our and $0xffff,%esi (81 e6); 1-byte reg fix",
+   "patch 0x29: toolchain-diff \u2014 same counter-color: FA's staging copy mov eax,esi (8b c6, i in si); our CL mov eax,ebx (8b c3); 1-byte reg fix",
+   "patch 0x2b: toolchain-diff \u2014 same counter-color: inc si (66 46) vs our inc bx (66 43); 1-byte reg fix",
+   "patch 0x33: toolchain-diff \u2014 same counter-color + latch: FA's latch compare is cmp %si,%di == 66 3b f7 (si-half, jb); our CL emits cmp %bx,%di == 66 3b df (bx-half, ja); 1-byte modrm fix, latch jcc already jb",
+   "patch 0x36: toolchain-diff \u2014 FA's two loop stores index the base reg ebx (88 8c 43 ... disp = _lineStats); our CL uses esi (88 8c 46, disp masked); 1-byte modrm fix, store d0",
+   "patch 0x3d: toolchain-diff \u2014 same base-color in the d1 store (88 94 43 ... disp 0x50bb41 = _lineStats+1, content addend 1 already emitted by CL); 1-byte modrm fix, store d1",
+   "patch 0x44: toolchain-diff \u2014 same base-color in the dead lea (%ebx,%eax,2),%eax (8d 04 43) FA schedules after the stores; our CL lea with esi; 1-byte modrm fix"
+  ]
+ },
+ {
+  "rva": 140621,
+  "obj": "w36H_2254d_v4",
+  "src": "build/survey/probes/w36H_2254d_v4.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "@MapOnSpecial@4=?MAPOnSpecial@@YIFPAUWORD_POINT@@@Z",
+   "@MapWorldToScreen@8=?MAPWorldToScreen@@YIXPAUF24_POINT3@@PAUWORD_POINT@@@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "provenance": []
+ },
+ {
+  "rva": 414226,
+  "obj": "w36H_65212_v4",
+  "src": "build/survey/probes/w36H_65212_v4.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_w36h_ctda=$FA$_t_464e50",
+   "_w36h_ctdb=$FA$_t_464fc0",
+   "_w36h_ctdc=$FA$_t_464fa0"
+  ],
+  "patch": [
+   "0x2e,4,fc000000,0:6:_serviceTicks"
+  ],
+  "aliases": [],
+  "provenance": [
+   "patch 0x2e: toolchain-diff \u2014 FA loads _serviceTicks+0xfc (0x5424c4) into CX via 66 8b 0d inside the dis.py-ELIDED gap (raw bytes c4 24 54 00); handback baked +0x100 into the naked-asm disp because the listing hid the instruction (wave-24 hidden-instr trap). Addend corrected to +0xfc; reloc site unchanged so .reloc + symVA+content resolve to 0x5424c4."
+  ]
+ },
+ {
+  "rva": 337312,
+  "obj": "w36H_525a0_v4",
+  "src": "build/survey/probes/w36H_525a0_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [
+   "0x43,1,d8",
+   "0x4b,1,c8"
+  ],
+  "aliases": [],
+  "provenance": [
+   "patch 0x43: toolchain-diff - CL 4.2 canonicalizes == operand order (wave-28 CL-canonicalization wall): on the `b == k1` hit test FA compares b-first cmp bl,al (3a d8: b in BL vs k1 in AL); CL emits cmp al,bl (3a c3). Equal 1-B modrm swap, plain bytes, no reloc in span.",
+   "patch 0x4b: toolchain-diff - same canonicalization on the `k2 != b` arm: FA compares k2-first cmp cl,al (3a c8: k2 in CL); CL emits cmp al,cl (3a c1). cmp is symmetric so CL's operand order is semantically identical - plain 1-B modrm swap."
+  ]
+ },
+ {
+  "rva": 518608,
+  "obj": "w36H_7e9d0_v1",
+  "src": "build/survey/probes/w36H_7e9d0_v1.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "provenance": []
+ },
+ {
+  "rva": 711456,
+  "obj": "w36H_adb20_v3",
+  "src": "build/survey/probes/w36H_adb20_v3.c",
+  "flags": "/c /O2 /Gy /G5",
+  "maps": [
+   "_player_list=?player_list@@3UNET_PLAYER_LIST@@A",
+   "_w36h_nwoq=$FA$_t_4adb90",
+   "_w36h_sbwf=?socket_build_write_fds@@YAXXZ",
+   "_net_write_output_q=?net_write_output_q@@YAXH@Z"
+  ],
+  "patch": [
+   "0xe,1,8f",
+   "0x14,1,97",
+   "0x20,1,d1",
+   "0x24,1,46",
+   "0x27,1,c1",
+   "0x29,1,4e",
+   "0x2c,1,c8",
+   "0x2f,4,50568b07"
+  ],
+  "aliases": [],
+  "provenance": [
+   "patch 0xe: toolchain-diff - reg allocation: FA keeps the player_list[0x66+a1*4] entry load in ECX (8b 8f, modrm 8f); CL put it in EAX (8b 87). 1-B modrm swap; downstream FA plan re-loads from the same slot.",
+   "patch 0x14: toolchain-diff - reg allocation: FA stages the +0x2c86 q2 pointer in EDX (8b 97); CL in ECX (8b 8f). 1-B modrm swap.",
+   "patch 0x20: toolchain-diff - first *s>s[1] compare on FA's regs: FA cmp edx,ecx (3b d1, cmp q2,s); CL cmp ecx,eax (3b c8). 1-B modrm swap (cmp is symmetric).",
+   "patch 0x24: toolchain-diff - n = s[2]-s[1] load goes to EAX in FA (8b 46); CL loaded into ECX (8b 4e). 1-B modrm swap - FA's n lives in EAX for the arg push at 0x2f.",
+   "patch 0x27: toolchain-diff - companion sub swap: FA sub eax,ecx (2b c1, n in EAX); CL sub ecx,eax (2b c8). 1-B modrm swap riding the 0x24 reg move.",
+   "patch 0x29: toolchain-diff - s[3] load goes to ECX in FA (8b 4e); CL put it in EAX (8b 46). 1-B modrm swap.",
+   "patch 0x2c: toolchain-diff - s[3]>n compare on FA's regs: FA cmp ecx,eax (3b c8); CL cmp eax,ecx (3b c1). 1-B modrm swap.",
+   "patch 0x2f: toolchain-diff - arg push schedule for the $FA$_t_4adb90 call, equal 4-B band: CL pushes n FIRST from its own reg plan (51 push ecx; 8b 07 mov eax,[edi]; 56 push esi) while FA pushes n/pushes s (50 56) and loads the fd (mov eax,[edi]) BEFORE the last push (50 at 0x33); band rewritten verbatim to FA's bytes, no relocs in span (the e8 w36h_nwoq call is at 0x34, after the band, and its REL32 disp stays untouched)."
+  ]
  }
 ]

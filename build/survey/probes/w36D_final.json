@@ -1,0 +1,121 @@
+[
+ {
+  "rva": 405744,
+  "verdict": "EXACT",
+  "obj": "w36D_630f0_v1",
+  "name": "0x630f0 (48 B, stdcall(2) dual-vtable disp; = CallUtilProc's group dispatcher)",
+  "src": "build/survey/probes/w36D_630f0_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4630f0"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "int __stdcall w36d_630f0(void *p, unsigned char b) \u2014 emits _w36d_630f0@8. Body: pf=*(PFN*)p+0x6c; if(pf) r=pf(b) (indirect cdecl, caller-clean add esp,4 INSIDE); if(!r) r=(*(PFN*)((char*)*(u**)((char*)p+5)+0x7d))(b); return r \u2014 FA's c2 08 00 = ret 8 exact. CL reproduced the byte-param staging (xor eax,eax / mov bl,[esp+0xc] whole-ebx push at both call sites), the [esi+0x6c]/[esi+5]/[eax+0x7d] field deref chain, and the pop esi/ebx ordering, byte-exact from plain C (typedefs int(__cdecl*)(unsigned char)). 0 relocs (both calls indirect-through-register; layout ext_fx 0). Tail = census-proven 8d642400. PARENT / ALIAS REQUIRED: $FA$_t_4630f0 is referenced by two CONVERTED entries' map TOs \u2014 405792 CallUtilProc ('_utilProcLookup@8=$FA$_t_4630f0') and 405632 w31E_CDP_v1 ('_grpDmgQQ@8=$FA$_t_4630f0'); alias '0=$FA$_t_4630f0' makes this obj DEFIN that public when stub group t0004d is SPLIT \u2014 PARENT: stub t0004d (0x463060-0x4638d0) SPLIT_AT must keep its other publics (the group's named FA publics @MaskEvents@4/@CallDamageProc@4/?dlg_list_init@@YAPAXG@Z etc)."
+ },
+ {
+  "rva": 416432,
+  "verdict": "EXACT",
+  "obj": "w36D_65ab0_v2",
+  "name": "0x65ab0 (48 B, 0-param global block copy-or-clear; = CTRespondToCancelCmdBuf helper)",
+  "src": "build/survey/probes/w36D_65ab0_v2.c",
+  "maps": [
+   "_w36d_ct110=_curThing+0x110",
+   "_w36d_stb=_serviceTicks+0x28",
+   "_w36d_stw=_serviceTicks+0x50"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_465ab0"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "Whole-body naked asm (the one allowed escape; plain-C v1 diverged structurally: CL pushed 56 57 up front, loaded s via 8b 35 modrm into esi and tested esi, dropped FA's 8b f0 (mov esi,eax) \u2014 FA seq is 56 / a1 [ct+0x110] / 57 / 85 c0 / bf [st+0x28] / je / 8b f0 / b9 20 / f3 a5 / pops ret; else-branch 33 c0 / b9 20 / f3 ab / 66 a3 [st+0x50] / pops ret). Semantics: s=*(UL**)((char*)_curThing+0x110); d=(UL*)(_serviceTicks+0x28); if(s) rep movsd 0x20 dwords else rep stosd + zero the ico word at _serviceTicks+0x50. MASM reproduced the moffs forms: mov eax,dword ptr [w36d_ct110] -> a1, mov edi,offset w36d_stb -> bf (DIR32), mov word ptr [w36d_stw],ax -> 66 a3. Maps (verify vs FA imm bytes \u2014 all three DIR32 dwords match FA chunk content): FA readd 0x508848==_curThing+0x110, bf imm 0x5423f0==_serviceTicks+0x28, 66 a3 imm 0x542418==_serviceTicks+0x50 (interior-anchor TOs on real layout publics '_curThing' 0x508738 / '_serviceTicks' 0x5423c8 \u2014 no $FA$_t data anchor invented). CL code 0x2e + census tail 8bff (2 B) = 0x30; 3 relocs (FA abs sites @0x1/@0xa/@0x27). PARENT: stub t00056 (0x465910-0x4664d0) SPLIT_AT must keep its other publics; CTRespondToCancelCmdBuf's map '_ctRspA=$FA$_t_465ab0' resolves here."
+ },
+ {
+  "rva": 462992,
+  "verdict": "EXACT",
+  "obj": "w36D_71090_v3",
+  "name": "0x71090 (48 B, 2-arg 3-way inline-(a1,a2+3)-dword sign compare)",
+  "src": "build/survey/probes/w36D_71090_v3.c",
+  "maps": [],
+  "patch": [
+   "0x11,1,d1",
+   "0x12,1,7d",
+   "0x1f,1,d1",
+   "0x21,1,9f"
+  ],
+  "aliases": [
+   "0=$FA$_t_471090"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x11: toolchain-diff 1-B cmp operand swap: CL canonicalizes (x<y) to cmp ecx,edx (3b ca); FA compares reg-first x-vs-y cmp edx,ecx (3b d1) \u2014 w33g/w22 operand-order precedent; both jcc distances 0x07 unchanged.",
+   "patch 0x12: toolchain-diff 1-B jcc polarity rides the 0x11 swap: jle (7e) -> jge (7d), dist 0x07; v2's y-first spelling did NOT defeat the canonicalization (probe w36D_71090_v2 same 4-B divergence), so the patch is the only lever.",
+   "patch 0x1f: toolchain-diff 1-B second cmp operand swap (before setg): cmp ecx,edx -> cmp edx,ecx (31: 3b ca -> 3b d1); FA re-issues the compare, CL shared one sub.",
+   "patch 0x21: toolchain-diff 1-B setcc polarity riding 0x1f: setl al (0f 9c) -> setg al (0f 9f)."
+  ],
+  "notes": "int w36d_71090(int a1, int a2): x=*(int*)((char*)a2+3); y=*(int*)((char*)a1+3); if(x<y) return -1; if(x>y) return 1; return 0 \u2014 plain C reproduced FA's whole arg-window shape exactly incl. the mid-body 90 nop, the push-ebx split saves (mov eax,[esp+8] BEFORE push ebx / mov ebx,[esp+8] AFTER), the b8 ffffffff ret -1 path, and the pop-ebx-before-second-cmp placement (5b at 0x1d). CL code 0x24 + census tail 0500000000+8da42400000000 (12 B) = 0x30; 0 relocs (fa ext_fx 0). Alias '0=$FA$_t_471090' per the nameless-chunk precedent (no existing converted map-TO refs found in swap.json; still-stub textgroups may rel32 the group public) \u2014 PARENT: stub t00060 (0x470880-0x4714b0) SPLIT_AT must keep its other publics."
+ },
+ {
+  "rva": 559648,
+  "verdict": "EXACT",
+  "obj": "w36D_88a20_v1",
+  "name": "0x88a20 (48 B, 0-param lazy-load listFont = G_LoadBitmap memoizer)",
+  "src": "build/survey/probes/w36D_88a20_v1.c",
+  "maps": [
+   "_w36d_lf=?listFont@@3PAUT_HANDLE@@A",
+   "_w36d_str=_checkRightButton+0x220"
+  ],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_488a20"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "void w36d_88a20(void): if(!listFont) listFont=G_LoadBitmap((char*)_checkRightButton+0x220, 0x8000, 0, 0, 0); \u2014 plain C stdcall 5-arg call, EXACT first probe. Maps: _w36d_lf=?listFont@@3PAUT_HANDLE@@A (FA data-public name VERBATIM from layout syms \u2014 the C ident w36d_lf emits _w36d_lf, wave-35 spelling rule; TO is the layout mangled name itself); _w36d_str=_checkRightButton+0x220 (interior-data anchor TO+delta on the hosting chunk \u2014 FA pushes imm 0x4f86a4 == _checkRightButton(0x4f8484)+0x220; no $FA$_t data anchor invented). G_LoadBitmap extern __stdcall emits _G_LoadBitmap@20 = the layout name verbatim (no map needed; FA rel32 e8 32 b6 02 00 -> 0x4b4070 _G_LoadBitmap@20, disp recomputes at link via the fitobj REL32 site). CL code 0x24 + census tail 0500000000+8da42400000000 (12 B) = 0x30; 4 relocs (3 DIR32 + 1 REL32 = fa abs @0x1/@0x15/@0x1f + rel @0x19). PARENT: stub t00077 (0x488420-0x489640) SPLIT_AT must keep its other publics."
+ },
+ {
+  "rva": 668976,
+  "verdict": "EXACT",
+  "obj": "w36D_a3530_v1",
+  "name": "0xa3530 (48 B, (dst,src) copy-first-dword gadget; = w35B socket_get_fds helper)",
+  "src": "build/survey/probes/w36D_a3530_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4a3530"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "void w36d_a3530(void *dst, void *src): *(UL*)dst=*(UL*)src; if(*(UL*)src) memcpy(dst+4, src+4, *(UL*)src*4); \u2014 plain C EXACT first probe. The store-blocked CSE explains FA's double 8b 06 (cannot CSE *src across *(dst) store), and CL baked memcpy intrinsic -> lea ecx,[eax*4+0] / add esi,4 / shr ecx,2 / add edi,4 / f3 a5 with FA's exact interleaving; ret + census tail 8da42400000000 (7 B); 0 relocs (CL code 0x29, no external call; FA ext_fx 0). Alias REQUIRED '0=$FA$_t_4a3530' (brief mandate): w35B entry 668912 w35B_a34f0_v1 maps '_sgf_h=$FA$_t_4a3530' \u2014 resolves here. PARENT: stub t00092 (0x4a3160-0x4a3700) SPLIT_AT must keep its other publics ($FA$_t_4a31e0/_4a32b0/_4a3440)."
+ },
+ {
+  "rva": 725456,
+  "verdict": "EXACT",
+  "obj": "w36D_b11d0_v1",
+  "name": "0xb11d0 (48 B, (t,v) setter + cdecl vfn[0] dispatcher, triple *(t) reload)",
+  "src": "build/survey/probes/w36D_b11d0_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [
+   "0=$FA$_t_4b11d0"
+  ],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "void w36d_b11d0(UL t, UL v): *(UL*)(*(UL*)t+0x14)=0x35; *(UL*)(*(UL*)t+0x18)=v; (*(PFN*)(*(UL*)t))(t); \u2014 plain C (typedef void(__cdecl*PFN)(UL)) EXACT first probe incl. FA's TRIPLE reload of *(t) (8b 02 / 8b 0a / 8b 02 \u2014 CL 4.2 didn't CSE the deref across the stores, so no volatile needed), the c7 40 14 imm 0x35 store via eax, the 89 59 18 store via ecx, the push edx staged BEFORE the 0x35 store (arg pushed early at the cdecl 1-arg indirect call ff 10 = call through p[0], caller-clean add esp,4 INSIDE), and prolog push ebx only. CL code 0x21 + census tail 8d642400+8d642400+8da42400000000 (15 B) = 0x30; 0 relocs (fa ext_fx 0). Alias '0=$FA$_t_4b11d0' per the nameless-chunk precedent; no existing converted map-TO refs found in swap.json. PARENT: stub t000a6 va starts EXACTLY at this chunk (0x4b11d0-0x4b1d00) \u2014 SPLIT_AT drops the group's member publics to this obj + keeps the remaining $FA$_t_4b1xxx publics (12 more)."
+ }
+]

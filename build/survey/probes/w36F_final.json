@@ -1,0 +1,80 @@
+[
+ {
+  "rva": 929168,
+  "obj": "w36F_shl3_v4",
+  "src": "build/survey/probes/w36F_shl3_v4.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "EXACT round 3 (v1-v3 plain C all hit the CL fold wall: (x & 0x80000000) >> 31 folds to bare shr reg,0x1f in every spelling - direct, division, bitfield-struct (bitfield also forced a wrong sub esp,8 frame) - across /O2 /Gy /G5). 62-B chunk 0xe2d90: 61 B code + 1 B cc census pad. 96-bit <<1 across three dwords, the and+shr carry form of the w35E twin at 0xe2dd0: FA keeps and edi,80000000h/shr edi,1fh and and esi,80000000h/shr esi,1f sign-bit carries (81-form and + c1-form shr) - so v4 is __declspec(naked) __asm body verbatim with _emit-free spellings: the c1 ef 1f / c1 ee 1f shr-by-0x1f forms are long-form (count != 1) so plain asm survives; the sib-form lea eax,[ecx*2+0] (8d 04 4d 00 00 00 00, no base) spells as lea eax, dword ptr [ecx*2+0]. Body: mov edx,[esp+4]; push esi/edi; loads, carries, stores as in FA; ret. fit-obj def name $FA$_span_0e2d90 (chunk unnamed in layout). Map-free: no data/imp/anchor references in the chunk."
+ },
+ {
+  "rva": 426176,
+  "obj": "w36F_initp_v1",
+  "src": "build/survey/probes/w36F_initp_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "EXACT round 1, no iterations needed. 64-B chunk 0x680c0: code + census pads (8d a4 24 00 00 00 00 form), auto-proven, tail ''. void __fastcall w36f_initpilot(char *thisp): memset(thisp, 0, 0x25e0) -> mov ecx,0x978/rep stosd intrinsic; thisp[0] = 0x0f; strcpy(thisp+0xa2, pilotRanks) -> #include <string.h> gets the repnz scasb + not ecx + shr ecx,2/rep movsd + and ecx,3/rep movsb strcpy expansion verbatim (wave-w35C lesson). Extern char *pilotRanks is the bare public _pilotRanks @ 0x4f7408 - map-free, CL prepends one _ and links to the layout public directly. Emitting def @w36f_initpilot@4 (fastcall @N)."
+ },
+ {
+  "rva": 426240,
+  "obj": "w36F_gdfc_v7",
+  "src": "build/survey/probes/w36F_gdfc_v7.c",
+  "maps": ["_w36f_dlg=_pilotsUpdated+0x20c"],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "EXACT round 4 via the ONE naked-asm escape hatch (precedent: this-entry scheduler wall, same class as w35E 0xe2dd0 twin and wave-34 naked-asm). 64-B chunk 0x68100: code + 8d 64 24 00 + 8d a4 24 00 00 00 00 census pads, auto-proven. SIX plain-C spellings tried first (v1 ternary 0x4000:0 -> setge+dec wrong shape; v2/v3 ternary -1:0 -> sbb ecx,ecx but mask placed after the call; v4 source reorder under /G4; v5 /O2; v6 dialog-inline polarity) - ALL hit the scheduler wall: CL insists on cmp thresh-first and emits the mask AFTER the call with the param copied to esi (sbb ecx,ecx), while FA's schedule is push esi / inc ecx / push 0 / cmp ecx,1 / sbb esi,esi / call _GetDiskFree / and esi,0x4000 / add esp,4 / add esi,0x65e0. v7 is __declspec(naked) __fastcall __asm verbatim: param rides ecx in place; map _w36f_dlg=_pilotsUpdated+0x20c on a 2-byte array staging local resolved via offset qualifier (FA imm 0x4f32a0 = _pilotsUpdated(0x4f3094)+0x20c verified in bytes); push offset w36f_dlg; undecorated call names (GetDiskFree, DoDialogInfoBox) per inline-asm rule. Externs: unsigned long __cdecl GetDiskFree(int), long __stdcall DoDialogInfoBox(char*,int) - both bare publics (_GetDiskFree, _DoDialogInfoBox@8)."
+ },
+ {
+  "rva": 449920,
+  "obj": "w36F_ralloc_v1",
+  "src": "build/survey/probes/w36F_ralloc_v1.c",
+  "maps": ["_w36f_mpr=?MP_Read@@3P6AJJPAEJ@ZA"],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "EXACT round 1, no iterations needed. 64-B chunk 0x6dd80: code + census pads, auto-proven, tail ''. char* __fastcall w36f_ralloc(long count): buf = MMAllocPtr(count, 0x8000); got = 0; if (count > 0) do { got += w36f_mpr(0, buf + got, count - got); } while (got < count); return buf. The do-while sits under an explicit count>0 guard so CL emits the jg-into-loop form with the body inline. w36f_mpr is a long(*) (long, char*, long) staging extern mapped to the C++ mangled function POINTER symbol ?MP_Read@@3P6AJJPAEJ@ZA (it is a data symbol, not the function - layout syms has it @ 0x54ddb0, verified against FA imm bytes); map FROM _w36f_mpr matches the emitted symbol exactly (underscore-spelled ident, single _ from CL). MMAllocPtr is called through its bare public directly: extern char* __fastcall MMAllocPtr(long,long) emits __imp__/direct reference to @MMAllocPtr@8 - map-free."
+ },
+ {
+  "rva": 506672,
+  "obj": "w36F_envc_v2",
+  "src": "build/survey/probes/w36F_envc_v2.c",
+  "maps": ["_w36f_ct1=_curThing+0x19b"],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "EXACT round 2 (v1 failed on branch polarity only). 64-B chunk 0x7bb30: code + census pads, auto-proven. char __cdecl w36f_envchk(void): mode = w36f_ct1 >> 8 with v1 fail kept; clamp mode<0 -> 0 / mode>2 -> 2 via else-if; then v2's key move: INVERTED polarity - if (CheckFlightEnvelope(mode, 0) != 1) return 0; return (char)(ThrustSupport() == 0); FA schedule is je +3 with the false exit INLINE (7f 08 jle + jb band + je +3 then push/call), and 'if (c == 1) return X; return 0;' puts the true-body inline - inverting to 'if (c != 1) return 0; return (ts == 0);' gives je+3, false-exit-inline. w36f_ct1 mapped to _curThing+0x19b (FA moffs imm 0x5088d3 = _curThing(0x508738)+0x19b verified); mode staged in the byte-dispatch register per the uchar-dispatcher lesson. Externs char __stdcall CheckFlightEnvelope(int,int) -> _CheckFlightEnvelope@8 and char __stdcall ThrustSupport(void) -> _ThrustSupport@0, both bare publics, map-free."
+ },
+ {
+  "rva": 778928,
+  "obj": "w36F_objc_v1",
+  "src": "build/survey/probes/w36F_objc_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "EXACT round 1, no iterations needed. 64-B chunk 0xbe2b0: code + census pads, auto-proven, tail ''. char __fastcall w36f_objchk(unsigned short i): the unsigned-short fastcall param makes CL stage the deferred extension itself (test cx,cx / cmp cx,0xffff / and ecx,0xffff after 0b 04 8d-style moves); guard if (i == 0 || i == 0xffff) return 0; p = objPtrs[i] via 8b 04 8d 98 ad 54 00 moffs-sib (the mov eax,[ecx*4+objPtrs] form that dis.py ELIDES - caught only by the raw-byte cross-check, load-bearing); t = p[0x10]; if (t & 0x80) return 0; q = *(char**)(p + 5); return !(q[0xe] & 0xc0). Extern char *objPtrs[4] is the bare public _objPtrs @ 0x54ad98 - map-free, direct-name emission. Emitting def @w36f_objchk@4."
+ }
+]

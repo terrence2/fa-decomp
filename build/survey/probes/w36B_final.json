@@ -1,0 +1,115 @@
+[
+ {
+  "rva": 711376,
+  "verdict": "EXACT",
+  "name": "?game_event_handler@@YADIJHPAUsocket_state@@@Z (80 B: cmp/je-case dispatch, every case returns 1)",
+  "obj": "w36B_g1ev_v2",
+  "src": "build/survey/probes/w36B_g1ev_v2.c",
+  "maps": [
+   "_gehc1=$FA$_t_4adc20",
+   "_nhfw=?net_handle_fd_write@@YAXPAUsocket_state@@@Z",
+   "_sockclose=?socket_close@@YAXI@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "Pure C. MUST be spelled as switch(ev) with case 1/2/0x20 + default: all four paths return 1. FA's cmp eax,N/je-per-case chain == CL 4.2's switch codegen; the natural if-chain compiles to jne-skip bodies and FITS WRONG (48 diffs). C signature unsigned int fd, long ev, char c, void *st. MAPS: _gehc1 -> $FA$_t_4adc20 (still-stub, t000a1.obj); _nhfw -> ?net_handle_fd_write@@YAXPAUsocket_state@@@Z (converted entry rva 712576, src/net_handle_fd_write.c); _sockclose -> ?socket_close@@YAXI@Z (still-stub chunk rva 0xa2e40 defines that mangled public). CALL sites: all 3 callees take the arg(s) exactly as written; verified FA imm/e8 targets against chunk dis asms. PARENT: this entry DEFINES public ?game_event_handler@@YADIJHPAUsocket_state@@@Z, consumed by entry rva 715168."
+ },
+ {
+  "rva": 590816,
+  "verdict": "EXACT",
+  "name": "?ShowSlewObj@@YAXXZ (96 B: slewId index -> objPtrs[s]+0x11 -> GRTo2d; if ok G_SetColor(15), G_Box(x-10,y-10,20,20))",
+  "obj": "w36B_slew_v3",
+  "src": "build/survey/probes/w36B_slew_v3.c",
+  "maps": [
+   "_slewId=_slewId",
+   "_objPtrs=_objPtrs"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "Pure C, __cdecl void(void). Decl externs exactly: extern unsigned int slewId; extern char *objPtrs[]; extern int __stdcall GRTo2d(void *a, short *b); extern void __fastcall G_SetColor(int c); extern void __stdcall G_Box(int a, int b, int c, int d); then s=(unsigned short)slewId; if(!s) return; if(GRTo2d(objPtrs[s]+0x11, loc)<0) return; G_SetColor(0xf); G_Box(loc[0]-10, loc[1]-10, 20, 20). TRAP: objPtrs must be char*[] (void*[] gives C2036 'void * : unknown size' on +0x11). G_SetColor is __fastcall. MAPS: _slewId=_slewId and _objPtrs=_objPtrs identity maps (gate-passed w31F precedent; both publics genuinely defined - _slewId by stubs_d/d0000_$4e7000.obj, _objPtrs by b0038_$54255c.obj). No reloc hazards: abs sites are the two data moffs loads, FA imm bytes match the publics' VAs."
+ },
+ {
+  "rva": 695472,
+  "verdict": "EXACT",
+  "name": "?GetHandle16@@YIFPAX@Z (96 B: 16-bit register-ABI handle allocator over handles32[16]/openHandles)",
+  "obj": "w36B_gh16_v1",
+  "src": "build/survey/probes/w36B_gh16_v1.c",
+  "maps": [
+   "_openHandles=?openHandles@@3FA",
+   "_handles32=?handles32@@3PAPAXA"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "WHOLE-BODY __declspec(naked) __asm (the one allowed escape): true 16-bit register ABI - handle value arrives in ECX and the count lives in DI/AX (-unsigned) 16-bit; no C spelling can force di/ax moffs storage. Signature kept as (short a1, void *a2) to match @@YIFPAX@Z mangling (C name is irrelevant; fitobj defines the public from the LAYOUT chunk name). Body: prolog pushes ebx/esi/edi; mov di, openHandles; cmp di,10h/jl find; else ret 0xffff. Find: si=i, ebx=handles32[esi*4]; zero slot -> take it: inc di, mov openHandles di, handles32[edx*4]=ecx, ret eax=i; exhausted -> ret 0xffff. MAPS: _openHandles=?openHandles@@3FA and _handles32=?handles32@@3PAPAXA, w33E_close_v2 gate-passed spellings (FA abs @0x6=0x577da4=openHandles, @0x2b=0x577dc4=handles32). SIBLING evidence: @Close@4 does movsx ecx,cx - confirms 16-bit register ABI. PARENT: defines public ?GetHandle16@@YIFPAX@Z, consumed by entry rva 695792."
+ },
+ {
+  "rva": 796776,
+  "verdict": "EXACT",
+  "name": "_Swapmem@12 (108 B: swap two memory blocks, 16-B-per-iter dword xchg loop + word-tail loop, jecxz early-out)",
+  "obj": "w36B_swapmem_v1",
+  "src": "build/survey/probes/w36B_swapmem_v1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "WHOLE-BODY __declspec(naked) __stdcall Swapmem(void *s1, void *s2, unsigned long n). Body: frame; push ebx/esi/edi; ecx=[ebp+10h]; jecxz done; esi=s1, edi=s2; shr ecx,1 -> byte loop on carry (mov al,[edi]/xchg [esi],al/mov [edi],al); save rem in ebp; shr ecx,3 -> 16-B-per-iter dword loop (4 xchg dwords, add esi/edi,10h, loop); mov ecx,ebp/and 7 -> word tail loop (mov ax/xchg/mov, add 2, loop); pops; ret 0Ch. No maps needed (no external refs). PARENT-CRITICAL: this entry DEFINES the public _Swapmem@12 (other linked entries map TO it; consumer entry rva 151146). fitobj names the public from the layout chunk name _Swapmem@12, so the probe's own C symbol is unused."
+ },
+ {
+  "rva": 807616,
+  "verdict": "EXACT",
+  "name": "_WRColorPalette@16 (108 B: palette recolor - negate 3 color bytes, blend loop px-(((px-base)*(mode>>1))<<1)>>8 vs flat (-c) loop)",
+  "obj": "w36B_wrcp_final",
+  "src": "build/survey/probes/w36B_wrcp_v2.c",
+  "maps": [],
+  "patch": [
+   "0x23,2,7435",
+   "0x54,25,5f5b5dc21000881f887f0188570283c703e2f3ebeb"
+  ],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 0x23: toolchain-diff CL's je-case displacement needs the +4 shift onto FA's flat-block position (74 31 -> FA 74 35); no newsite",
+   "patch 0x54: toolchain-diff CL merge-tailed the two loop exits into one end-of-function pop block (eb 11 jump-around + flat block inline + doubled eb jmp + end pops); FA keeps pops+ret 10h inline right after the blend loop with flat block+loop+eb eb after; 21-B rewrite deleting CL's 4 tail-merge bytes, no newsites"
+  ],
+  "notes": "WHOLE-BODY __declspec(naked) __stdcall WRColorPalette(unsigned char *dst, int n, unsigned char *col, int mode). Byte deltas vs CL output are ONLY (a) the cmp [ebp+14h],1 - MASM folds to 83 7d 14 01 but FA carries the 7-B 81 7d 14 00 01 00 00 -> _emit-spliced verbatim in the source, plus (b) the two patches above. CL 4.2's inline-asm optimizer tail-merges the duplicated pop/ret epilogues even across _emit splices - NOT fixable by spelling, hence patches. Blend math: imul dh (16-B signed product), shl ax,1, sub [edi+k],ah. No maps (no external refs), no newsites. Trailing pad 2e 8b c0 is census-proven tail (padcensus VOCAB)."
+ },
+ {
+  "rva": 885040,
+  "verdict": "EXACT",
+  "name": "_free (109 B: CRT free - lock(9), h1 query, h2 rebalance or HeapFree(__crtheap,0,p))",
+  "obj": "w36B_free_v1",
+  "src": "build/survey/probes/w36B_free_v1.c",
+  "maps": [
+   "_lock=__lock",
+   "_unlock=__unlock",
+   "_wfq1=$FA$_t_4de2a0",
+   "_wfq2=$FA$_t_4de300",
+   "_crtheap=__crtheap",
+   "_impHeapFree=__imp__HeapFree"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "tail": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [],
+  "notes": "WHOLE-BODY __declspec(naked) free(void *p) (w34H _msize pattern: CL's C route interleaves the lea/stack-clean differently; naked asm is the one allowed escape). Flow: sub esp,8; push esi; test p/p; je shared tail; push 9/call lock; lea the two stack slots; add esp,4; push slot2/slot1/p; call wfq1 (=$FA$_t_4de2a0, 3-arg query, same anchor w34H _msize gate-passed with); add esp,0Ch; test ret; nonzero -> call wfq2 (=$FA$_t_4de300) pushed slot2/ret/slot1 then unlock(9) + early tail; zero -> unlock(9) then mov eax,[crtheap], push p/0/eax, call dword ptr [impHeapFree], fall into shared pop esi/add esp,8/ret. MAPS: _lock=__lock, _unlock=__unlock, _crtheap=__crtheap, imp TO has NO @N: _impHeapFree=__imp__HeapFree (wave-33 rule); $FA$_t_4de2a0 and $FA$_t_4de300 both defined by still-stub t000ea.obj (covers 0x4de1c0-0x4dea00). PARENT: defines public _free, consumed by entries rvas 6016, 901408, 880896."
+ }
+]
