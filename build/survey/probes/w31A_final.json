@@ -1,0 +1,84 @@
+[
+ {
+  "rva": 916912,
+  "obj": "w31a_atodbl_v1",
+  "src": "build/survey/probes/w31a_atodbl_v1.c",
+  "maps": [
+   "_strgtold12=$FA$_t_4e2f00",
+   "_ld12tod=__ld12tod"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "CRT __atodbl(x, str): _LDBL12-parse triplet member \u2014 plain C EXACT first try (v1: locals void*pend + char ldbl[12] in decl order giving pend at S+0/ldbl at S+4; v2 decl order also EXACT, CL 4.2 lays both the same). void _atodbl(void *x, char *str){ char *pend; char ldbl[12]; strgtold12(ldbl,&pend,str,0,0,0,0); ld12tod(ldbl,x); } \u2014 call1 7-arg cdecl = FA's rel32 to stub $FA$_t_4e2f00 (stub t000f8 covers 0x4e2f00 and defines it; stub still defines it per build/stubs/manifest.json); call2 = FA's rel32 to layout public __ld12tod. FPO frame fpo/esp locals=4 cbProlog=7 reproduced: prologue mov eax,[esp+8] (str load before sub esp,0x10), arg-push order and mid-call add esp,0x1c all come out of plain C, no steering needed. REL32 TOs verified vs FA bytes: e8+0x3131 -> 0x4e2f00, e8-0x20 -> __ld12tod."
+ },
+ {
+  "rva": 916976,
+  "obj": "w31a_atoldbl_v1",
+  "src": "build/survey/probes/w31a_atoldbl_v1.c",
+  "maps": [
+   "_strgtold12=$FA$_t_4e2f00",
+   "_ld12told=__ld12told"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "CRT __atoldbl(x, str): identical recipe to __atodbl EXACT first try; the ONE divergence is strgtold12 arg4 = 1 (FA push 0x1; double-parse flag) and call2 target __ld12told. void _atoldbl(void *x, char *str){ char *pend; char ldbl[12]; strgtold12(ldbl,&pend,str,1,0,0,0); ld12told(ldbl,x); } \u2014 map TO stub $FA$_t_4e2f00 still-stub-defined (t000f8, manifest verify), __ld12told = layout public."
+ },
+ {
+  "rva": 917040,
+  "obj": "w31a_atoflt_v1",
+  "src": "build/survey/probes/w31a_atoflt_v1.c",
+  "maps": [
+   "_strgtold12=$FA$_t_4e2f00",
+   "_ld12tof=__ld12tof"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "CRT __atoflt(x, str): identical recipe to __atodbl EXACT first try; strgtold12 arg4 = 0 (FA push 0x0, same as atodbl) and call2 target __ld12tof. void _atoflt(void *x, char *str){ char *pend; char ldbl[12]; strgtold12(ldbl,&pend,str,0,0,0,0); ld12tof(ldbl,x); } \u2014 map TO stub $FA$_t_4e2f00 still-stub-defined (t000f8), __ld12tof = layout public."
+ },
+ {
+  "rva": 833056,
+  "obj": "w31a_codePnt_a1",
+  "src": "build/survey/probes/w31a_codePnt_a1.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "code_pnt: 16-bit fixed-point register-ABI wall (params arrive sign-extended IN bx/cx/bp; C cannot name the ABI) \u2014 naked-asm escape ONE try, EXACT first try: int __declspec(naked) __cdecl codePntZ(void) with the FA body byte-verbatim in one __asm block (push esi/movsx ebx,bx/movsx ecx,cx/movsx ebp,bp/dec ebp/lea eax,[ebp+0]/sar eax,0x1f/4x {lea esi or mov esi; sub; shld eax,esi,1}/inc ebp/pop esi/ret). 0 relocs/externs -> no maps. Trailing 8b c0 (mov eax,eax) left to fitobj = census-proven filler tail. CL inline asm emitted every instruction without _emit fallback (shld eax,esi,1 and lea [ecx+ebp*1] encodings all exact)."
+ },
+ {
+  "rva": 826287,
+  "obj": "w31a_atan2_a1",
+  "src": "build/survey/probes/w31a_atan2_a1.c",
+  "maps": [
+   "_asinZ=asin",
+   "_acosZ=acos"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "atan2: FA fixed-point 16-bit register-ABI (y in ax, x in cx; args crossed into asin/acos in registers) = C wall \u2014 naked-asm escape ONE try, EXACT first try: int __declspec(naked) __cdecl atan2Z(void), FA body byte-verbatim (cmp ax,0x5a82/jg/cmp ax,0xa57e/jl/push bx/call asin/pop ax/or ax,ax/jns/\u2026; cwd branch calls acos). Callees spelled asinZ/acosZ (map FROMs _asinZ/_acosZ) so the obj externals cannot collide with CRT lib _asin/_acos; map TOs = exact layout chunk publics 'asin' (0xc9b0f) and 'acos' (0xc9b64). CL inline asm got every byte right incl. short jg/jl/jns (7f/7c/79 rel8), 66 3d compares and cwd as 66 99 \u2014 no _emit needed."
+ },
+ {
+  "rva": 826127,
+  "obj": "w31a_asin_a2",
+  "src": "build/survey/probes/w31a_asin_a2.c",
+  "maps": [
+   "w31acosT1=cos_table+0x202",
+   "w31acosT2=cos_table+0x204"
+  ],
+  "patch": [
+   "0x19,0,,3:6:w31acosT1",
+   "0x20,0,,3:6:w31acosT2"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "asin: FA fixed-point 16-bit register-ABI (arg in ax, dx = sign save; result in cx) = C wall \u2014 naked-asm escape. v1 plain [ebx+cosT] memory operands FAILED: CL 4.2's inline assembler DROPS the register base of [reg + symbol] (emits baseless [disp32] 66 8b 2d / 66 a1 moffs). v2 EXACT: all non-disp32 instructions verbatim in __asm (cwd emits 66 99; shl bx=66 d1 e3; imul cx=66 f7 e9; pop dx=66 5a), and the two disp32 loads are _emit-raw 66 8b ab / 66 8b 83 with ZEROED addend dwords + 0-length patches attaching the DIR32 sites (see provenance). Map TOs cos_table (layout public, va 0x511380) with deltas +0x202/+0x204 = FA imm bytes 0x00511582/0x00511584 (dis.py 'abs @0x1c/@0x23'). Trailing 90 nop included in the asm (code 0x40 B, empty tail).",
+  "provenance": [
+   "patch 0x19: toolchain-diff \u2014 CL 4.2 inline assembler cannot encode [ebx + symbol] as [base+disp32] (drops the base: 66 8b 2d [abs disp32] instead of FA's 66 8b ab [ebx+d32]); _emit-raw instruction with zero addend dword, 0-length patch attaches the DIR32 site at 0x1c -> cos_table+0x202 (imm verified: 0x00511582 - cos_table 0x511380 = 0x202)",
+   "patch 0x20: toolchain-diff \u2014 same CL [reg+symbol] gap: FA's 7-byte 66 8b 83 [ebx+d32] (v1 inline-asm spelling collapsed to 6-byte 66 a1 moffs and lost the base); _emit-raw + 0-length patch attaches DIR32 at 0x23 -> cos_table+0x204 (imm verified: 0x00511584 - 0x511380 = 0x204)"
+  ]
+ }
+]

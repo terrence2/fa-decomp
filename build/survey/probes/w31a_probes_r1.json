@@ -1,0 +1,22 @@
+[
+ {"rva": 916912, "obj": "w31a_atodbl_v1", "src": "build/survey/probes/w31a_atodbl_v1.c",
+  "maps": ["_strgtold12=$FA$_t_4e2f00", "_ld12tod=__ld12tod"],
+  "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 916912, "obj": "w31a_atodbl_v2", "src": "build/survey/probes/w31a_atodbl_v2.c",
+  "maps": ["_strgtold12=$FA$_t_4e2f00", "_ld12tod=__ld12tod"],
+  "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 916976, "obj": "w31a_atoldbl_v1", "src": "build/survey/probes/w31a_atoldbl_v1.c",
+  "maps": ["_strgtold12=$FA$_t_4e2f00", "_ld12told=__ld12told"],
+  "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 917040, "obj": "w31a_atoflt_v1", "src": "build/survey/probes/w31a_atoflt_v1.c",
+  "maps": ["_strgtold12=$FA$_t_4e2f00", "_ld12tof=__ld12tof"],
+  "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 833056, "obj": "w31a_codePnt_a1", "src": "build/survey/probes/w31a_codePnt_a1.c",
+  "maps": [], "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 826287, "obj": "w31a_atan2_a1", "src": "build/survey/probes/w31a_atan2_a1.c",
+  "maps": ["_asinZ=asin", "_acosZ=acos"],
+  "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"},
+ {"rva": 826127, "obj": "w31a_asin_a1", "src": "build/survey/probes/w31a_asin_a1.c",
+  "maps": ["_cosT1=cos_table+0x202", "_cosT2=cos_table+0x204"],
+  "patch": [], "aliases": [], "flags": "/c /O2 /Gy /G5"}
+]

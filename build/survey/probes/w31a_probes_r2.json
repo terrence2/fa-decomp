@@ -1,0 +1,6 @@
+[
+ {"rva": 826127, "obj": "w31a_asin_a2", "src": "build/survey/probes/w31a_asin_a2.c",
+  "maps": ["w31acosT1=cos_table+0x202", "w31acosT2=cos_table+0x204"],
+  "patch": ["0x19,0,,3:6:w31acosT1", "0x20,0,,3:6:w31acosT2"],
+  "aliases": [], "flags": "/c /O2 /Gy /G5"}
+]

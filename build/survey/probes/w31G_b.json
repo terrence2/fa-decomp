@@ -1,0 +1,87 @@
+[
+ {
+  "rva": 623872,
+  "obj": "w31G_fqtail_v3",
+  "src": "build/survey/probes/w31G_fqtail_v3.c",
+  "maps": [
+   "_w31g_fqtail=?fetchFromQueueTail@@YAXAAUSERIAL_QUEUE@@AAUSERIAL_PACKET_WRAPPER@@@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 623872,
+  "obj": "w31G_fqtail_v4",
+  "src": "build/survey/probes/w31G_fqtail_v4.c",
+  "maps": [
+   "_w31g_fqtail=?fetchFromQueueTail@@YAXAAUSERIAL_QUEUE@@AAUSERIAL_PACKET_WRAPPER@@@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 666496,
+  "obj": "w31G_wsockerr_v2",
+  "src": "build/survey/probes/w31G_wsockerr_v2.c",
+  "maps": [
+   "_w31g_wsockerr=?winsock_handle_error@@YAPADPADW4ERROR_SEVERITY@@0H@Z",
+   "_w31g_wsf=?ws@@3U_winsock_funcs@@A+0xe",
+   "_w31g_wproc=?winsock_process_error@@YAPADHPADW4ERROR_SEVERITY@@0H@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": null,
+  "flags": "/c /O2 /Gy"
+ },
+ {
+  "rva": 666496,
+  "obj": "w31G_wsockerr_v3",
+  "src": "build/survey/probes/w31G_wsockerr_v3.c",
+  "maps": [
+   "_w31g_wsockerr=?winsock_handle_error@@YAPADPADW4ERROR_SEVERITY@@0H@Z",
+   "_w31g_wsf=?ws@@3U_winsock_funcs@@A+0xe",
+   "_w31g_wproc=?winsock_process_error@@YAPADHPADW4ERROR_SEVERITY@@0H@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5 /Ob0"
+ },
+ {
+  "rva": 666496,
+  "obj": "w31G_wsockerr_v5",
+  "src": "build/survey/probes/w31G_wsockerr_v5.c",
+  "maps": [
+   "_w31g_wsockerr=?winsock_handle_error@@YAPADPADW4ERROR_SEVERITY@@0H@Z",
+   "_w31g_wsf=?ws@@3U_winsock_funcs@@A+0xe",
+   "_w31g_wproc=?winsock_process_error@@YAPADHPADW4ERROR_SEVERITY@@0H@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 692368,
+  "obj": "w31G_sendhold_v2",
+  "src": "build/survey/probes/w31G_sendhold_v2.c",
+  "maps": [
+   "_w31g_sendhold=?SER_SendHoldingBuffer@@YAXXZ",
+   "_w31g_cb=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x12d",
+   "_w31g_b234=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x234",
+   "_w31g_d26=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x26",
+   "_w31g_p2a=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x2a",
+   "_w31g_mpi=?mpInfo@@3UMP_INFO@@C+0x14c",
+   "_w31g_rsput=_ser_rs232_putpacket@12",
+   "_w31g_sdl=?SER_ShutdownLowLevel@@YAXXZ"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": null,
+  "flags": "/c /O2 /Gy /G5"
+ }
+]

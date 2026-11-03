@@ -1,0 +1,20 @@
+[
+ { "rva": 547264, "obj": "w31H_859c0_v1", "src": "build/survey/probes/w31H_859c0_v1.c",
+   "maps": [], "patch": [], "aliases": ["0=$FA$_t_4859c0"], "span": "", "flags": "/c /O2 /Gy /G5",
+   "notes": "plain C EXACT v1: char __cdecl f(const char *p) 6-byte nonzero scan — int i=0 do{ if(*p) return 0; i++; p++; }while(i<6); return 1. do-while gives FA's load-top/cmp-6-jl-bottom shape, i++ BEFORE p++ (wave-19 latch order), char return gives mov al,1/xor al,al, cdecl (ret w/o imm). dis.py listing complete. anchor $FA$_t_4859c0 confirmed in stub t00093 (parent must drop it when replacing; alias defines it). tail 7 B 8da42400000000 census-proven" },
+ { "rva": 598880, "obj": "w31H_92360_v1", "src": "build/survey/probes/w31H_92360_v1.c",
+   "maps": [], "patch": [], "aliases": ["0=$FA$_t_492360"], "span": "", "flags": "/c /O2 /Gy /G5",
+   "notes": "plain C EXACT v1: void __cdecl f(void *p){ *(unsigned char*)((char*)p+0x185)=1; *(long*)p=0; } — byte store FIRST then dword zero (c6 80 85 01 00 00 01 / c7 00 00 00 00 00). TRAP: dis.py listing elided the 7-B byte store (showed only mov eax/[eax]=0/ret 10 B); cross-checked against raw FA (off 0x91760) which is the 18-B truth. anchor $FA$_t_492360 confirmed in stub t00080. tail 14 B = 2x 8da42400000000 census-proven" },
+ { "rva": 671872, "obj": "w31H_a4080_v1", "src": "build/survey/probes/w31H_a4080_v1.c",
+   "maps": [], "patch": [], "aliases": ["0=$FA$_t_4a4080"], "span": "", "flags": "/c /O2 /Gy /G5",
+   "notes": "plain C EXACT v1: void __stdcall f(void **pp){ if(*pp) *pp=(void*)RMAccess((long)*pp,0x8000); } with extern long __stdcall RMAccess(long,long) — CL spelling emits the exact FA public _RMAccess@8 (confirmed defined in stub t00093 at 0x4a3980) so NO map needed; rel32 verified: FA bytes e8 ea f8 ff ff -> 0x4a4096-0x716 = 0x4a3980 = _RMAccess@8. stdcall ret 4; push 0x8000/push eax right-to-left; push esi/mov esi,[esp+8] prolog per FA. anchor $FA$_t_4a4080 confirmed in stub t00094. tail 4 B 8d642400 census-proven" },
+ { "rva": 699312, "obj": "w31H_aabb0_v1", "src": "build/survey/probes/w31H_aabb0_v1.c",
+   "maps": [], "patch": [], "aliases": ["0=$FA$_t_4aabb0"], "span": "", "flags": "/c /O2 /Gy /G5",
+   "notes": "plain C EXACT v1: void __cdecl f(void *p){ char *c = *(char**)((char*)p+0x18e); c[0x22]=0; *(long*)(c+0x28) = *(long*)((char*)p+0x56); } — two-pointer split lets CL keep ecx=inner ptr and edx for the dword copy; no relocs. anchor $FA$_t_4aabb0 confirmed in stub t0009c. tail 11 B 8d642400+8da42400000000 census-proven" },
+ { "rva": 720640, "obj": "w31H_aff00_v1", "src": "build/survey/probes/w31H_aff00_v1.c",
+   "maps": [], "patch": [], "aliases": ["0=$FA$_t_4aff00"], "span": "", "flags": "/c /O2 /Gy /G5",
+   "notes": "plain C EXACT v1: void __fastcall f(long *p, long x, long y){ long t=*p; *(long*)p = t + (((x-t)*y)>>8); } — CL reproduces push esi/mov esi,[ecx]/sub edx,esi/imul edx,[esp+8]/sar edx,8/add edx,esi/pop esi/mov [ecx],edx/ret 4 verbatim (@12 fastcall: p=ecx, x=edx, y=stack). Named t local makes FA's esi spill natural. no relocs. anchor $FA$_t_4aff00 confirmed in stub t000a4. tail 11 B census-proven" },
+ { "rva": 736400, "obj": "w31H_b3c90_v1", "src": "build/survey/probes/w31H_b3c90_v1.c",
+   "maps": [], "patch": [], "aliases": ["0=$FA$_t_4b3c90"], "span": "", "flags": "/c /O2 /Gy /G5",
+   "notes": "plain C EXACT v1: typedef void *(__cdecl *W31H_FP)(void*,long,long); struct W31H_V{W31H_FP m0;}; struct W31H_O{char pad[4]; struct W31H_V *vt;}; void f(struct W31H_O *p){ void *q = p->vt->m0(p,0,0x82); ((unsigned char*)q)[0x80]=0; } — COM-style p->vt->m0 makes CL emit mov ebx,[eax+4]/call [ebx] (ff 13) and caller-cleans (add esp,0xc, cdecl target); binding q (not p back-store) to the return keeps eax live so the elided c6 80 80 00 00 00 00 store uses post-call eax — dis.py elided that 7-B store too, raw FA is ground truth. no relocs (indirect call). anchor $FA$_t_4b3c90 confirmed in stub t000a8. tail 2 B 8bff census-proven" }
+]

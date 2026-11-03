@@ -1,0 +1,13 @@
+/* rva 870000 (0xd4670) 29 B FPO/esp gap chunk
+ * mov ecx,[esp+4]; eax=[ecx+0x1c]; edx=[ecx+0x28]; push eax;
+ * ecx=[ecx+0x18]; push edx; push 0; push ecx; call $FA$_t_4d8abf+0x1;
+ * add esp,0x10; ret 4  (stdcall 1-param, cdecl-arg-clean callee)
+ * RTL push order -> args right-to-left: 0x1c first, then reload 0x18 */
+typedef struct W31B_S { char pad[0x18]; long f18; long f1c; long p20; long p24; long f28; } W31B_S;
+
+extern long __cdecl w31b_t4d8abf(long, long, long, long);
+
+int __stdcall w31b_d4670(W31B_S *p)
+{
+    return w31b_t4d8abf(p->f18, 0, p->f28, p->f1c);
+}

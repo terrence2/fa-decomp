@@ -1,0 +1,8 @@
+[
+{"rva": 587296, "obj": "w31F_objalias_v3", "src": "build/survey/probes/w31F_objalias_v3.c",
+ "maps": ["_nextObjId=_nextObjId", "_objPtrs=_objPtrs"], "patch": [], "aliases": [], "span": "", "flags": "/c /O2 /Gy /G5"},
+{"rva": 587904, "obj": "w31F_objaliaswp_v3", "src": "build/survey/probes/w31F_objaliaswp_v3.c",
+ "maps": ["_OBJAlias@8=@OBJAlias@8", "_OBJAliasPreferred@16=_OBJAliasPreferred@16"], "patch": [], "aliases": [], "span": "", "flags": "/c /O2 /Gy /G5"},
+{"rva": 674928, "obj": "w31F_tobjlist_v3", "src": "build/survey/probes/w31F_tobjlist_v3.c",
+ "maps": ["_nextObjId=_nextObjId", "_objPtrs=_objPtrs", "_InBounds@8=_InBounds@8"], "patch": [], "aliases": [], "span": "", "flags": "/c /O2 /Gy /G5"}
+]

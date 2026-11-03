@@ -1,0 +1,149 @@
+[
+ {
+  "rva": 587296,
+  "obj": "w31F_objalias_v2",
+  "src": "build/survey/probes/w31F_objalias_v2.c",
+  "maps": [
+   "_nextObjId=_nextObjId",
+   "_objPtrs=_objPtrs"
+  ],
+  "patch": [
+   "7,0x1,22",
+   "0xc,0x1,59",
+   "0x23,0x4,7441",
+   "0x2a,0xa,668bd06685d27d34b801000000",
+   "0x39,0x1,05",
+   "0x41,0x1,c8",
+   "0x51,0x1,53",
+   "0x54,0x1,11",
+   "0x55,0x1,40",
+   "0x60,0x1,c8",
+   "0x68,0x5,"
+  ],
+  "provenance": [
+   "patch 0x7: toolchain-diff - CL's flag-arm je disp 24 targets its else arm at 0x2c; FA's je disp 22 targets the else arm at 0x2a after the -2 jne-to-je rewrite below; je/jne polarity swap + disp so the shared-exit fall-through lands on FA's bytes.",
+   "patch 0xc: toolchain-diff - CL's flag-arm jl (id<0) disp 0x58 targets its later shared pop/ret; FA's disp 0x59 retargets to 0x66 after the else-arm/match-return patches shift the layout; semantics identical (jump to the epilogue).",
+   "patch 0x23: toolchain-diff - CL materializes the a==0 -> return id path as jne +2 / mov ecx,eax / mov ax,cx remat (4 B over 2); FA emits je +0x41 directly to the shared exit with ax already holding id. 2-byte replace 75 02 8b c8 -> 74 41 - CL code 108 -> 104 = FA.",
+   "patch 0x2a: toolchain-diff - FA stages id into dx (mov dx,ax) before the else-arm test dx,dx so the counter can own eax; CL tests ax,ax in place with the counter in edx. 10->13 byte replace of CL 66 85 c0 7d 34 ba 01000000 with FA's 66 8b d0 66 85 d2 7d 34 b8 01000000 (+3) re-anchors the else arm at FA's 0x2a; no relocs in span.",
+   "patch 0x39: toolchain-diff - FA's else-arm latch probe is cmp WORD[_nextObjId],ax (modrm 05, moffs32 with ax) while CL's is cmp WORD[_nextObjId],dx (modrm 15) because CL chose edx for the counter and ax for id. 1-byte modrm reg flip 15->05; compare semantics identical for the (unsigned short) domain.",
+   "patch 0x41: toolchain-diff - loop index: FA mov ecx,eax (8b c8), CL mov ecx,edx (8b ca) - same 1-byte reg mirror as 0x39.",
+   "patch 0x51: toolchain-diff - FA compares *(short*)(o+0x74) against the staged id copy in dx (66 39 53 74); CL against ax (66 39 43 74). 1-byte modrm reg 43->53.",
+   "patch 0x54: toolchain-diff - FA's match-je disp 0x11 targets the shared pop/ret at 0x66 (match returns i directly via eax, no copy); CL's 0x13 went to its own mov ax,edx block. Retarget after deleting that block (patch 0x68).",
+   "patch 0x55: toolchain-diff - FA increments the counter with inc eax (40); CL inc edx (42). 1-byte reg mirror; FA allocates the loop counter to eax because the match-return value is the counter (return-value reg reuse), which CL does not do.",
+   "patch 0x60: toolchain-diff - latch compare reg mirror: FA cmp ecx,eax (3b c8), CL cmp ecx,edx (3b ca). 1 byte.",
+   "patch 0x68: toolchain-diff - FA's match path jumps straight to the shared exit (patch 0x54); CL emitted a separate mov ax,edx / pop / ret tail (5 B) for return (short)i. Deleted; CL code 104 B now equals FA.",
+   "note: register/structure steering (v1 ushort counter, v2 long counter, v3 staged id local) never moved CL off (id=ax, counter=edx) or removed the zero-alias remat; FA's shape is (id staged to dx via mov dx,ax, counter in eax as return-value reg, match path with no copy). 11 surgical byte patches, all jcc-semantics-neutral or disp-retargets, reproduce FA's scheduler decisions exactly."
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "span": ""
+ },
+ {
+  "rva": 587632,
+  "obj": "w31F_objaliaspref_v1",
+  "src": "build/survey/probes/w31F_objaliaspref_v1.c",
+  "maps": [
+   "_OBJAlias@8=@OBJAlias@8"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT v1, plain C, no patches. unsigned long __stdcall OBJAliasPreferred(obj, a2, a3, a4) taking three unsigned longs + one long (the a2-as-long prototype keeps FA's cl=dl staging). Key spellings: (a) extern long __fastcall OBJAlias(long id, long flag) - the long-long fastcall prototype makes CL emit mov cx,[esi+4] without its xor-ecx zero-extend and call the 16-bit-arg callee through the register pair cleanly; (b) the 0x1fffffff mask/0xe0000000 OR fold written as separate if (key & 0x10000000) key |= 0xe0000000; (c) r = OBJAlias(...) & 0xffff; (d) final mix ((r ^ obj) & 0x1fffffff) ^ obj. Map TO @OBJAlias@8 is the layout chunk name of the OBJAlias chunk (converted same wave) - FA's call rel32 target 0x8f620 checks: delta = 0x8f620-0x8f738 = -0x118 == TO chunk delta 0.",
+  "span": ""
+ },
+ {
+  "rva": 587904,
+  "obj": "w31F_objaliaswp_v2",
+  "src": "build/survey/probes/w31F_objaliaswp_v2.c",
+  "maps": [
+   "_OBJAlias@8=@OBJAlias@8",
+   "_OBJAliasPreferred@16=_OBJAliasPreferred@16"
+  ],
+  "patch": [
+   "0xc,0x1,29",
+   "0x15,0x4,8bd3",
+   "0x1c,0x19,668b4c241866894604668b44241466394604751466894e04eb0e",
+   "0x38,0x1,44",
+   "0x45,0x1,56",
+   "0x48,0x1,d2",
+   "0x4c,0x3,505352"
+  ],
+  "provenance": [
+   "patch 0xc: toolchain-diff - the ==2 else-jne disp: FA targets its else arm at 0x36 after the -2 flag-staging and +1 compare-region patches; CL's 2a went to its own 0x37. 1 B.",
+   "patch 0x15: toolchain-diff - FA stages the char flag arg c1 for the OBJAlias call via mov edx,ebx (8b d3, 2 B) - a copy of the already-staged bl; CL reloads [esp+0x10] into edx (8b 54 24 10, 4 B). Replace 4->2; CL code 93 -> FA's 92 B.",
+   "patch 0x1c: toolchain-diff - post-OBJAlias block order: FA loads w2 into cx, stores r to [esi+4], THEN loads w1 into ax (reusing the result reg after the store) and cmp WORD[esi+4],ax (memory re-read of what it just stored); CL loads w2 then w1 BEFORE the store and cmp ax,dx (store-forwarded compare, no memory read). 25->26 byte replace with FA's scheduler order (66 8b 4c 24 18 / 66 89 46 04 / 66 8b 44 24 14 / 66 39 46 04 / 75 14 / 66 89 4e 04 / eb 0e); no relocs in span. volatile spelling (v3 probe) did NOT defeat CL's store-to-load forwarding here.",
+   "patch 0x38: toolchain-diff - else arm w1 load: FA into eax (66 8b 44 24 14), CL into edx (66 8b 54 24 14); 1-byte modrm reg 54->44. FA must hold w1 in eax because Preferred's arg3 is eax and the push slot is shared.",
+   "patch 0x45: toolchain-diff - d21 load: FA mov edx,[esi+0x21] (8b 56 21), CL mov eax (8b 46 21); 1-byte modrm reg 46->56. FA keeps d21 in edx = Preferred's arg1/last RTL push.",
+   "patch 0x48: toolchain-diff - test reg: FA 85 d2 (test edx,edx), CL 85 c0; 1 B.",
+   "patch 0x4c: toolchain-diff - Preferred arg push order: FA pushes ecx(w2), eax(w1), ebx(c1), edx(d21) - arg1 = edx = the LAST push; CL pushed ecx, edx, ebx, eax because its regs had w1 in edx and d21 in eax. After the 0x38/0x45 reg mirrors the needed byte order is 51 50 53 52: 3-byte replace 52 53 50 -> 50 53 52.",
+   "note: FA reuses the call-result register (ax) for w1's post-store load and cmp r against the freshly written [esi+4] memory; CL 4.2 store-forwards instead. Volatile did not defeat it; a byte patch was required."
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "span": ""
+ },
+ {
+  "rva": 648496,
+  "obj": "w31F_planefeetwet_v1",
+  "src": "build/survey/probes/w31F_planefeetwet_v1.c",
+  "maps": [
+   "_curId=_curId",
+   "_curThing=_curThing",
+   "_T_Info@24=_T_Info@24"
+  ],
+  "patch": [
+   "0x23,9,8a4c2403a16f010000,5:6:_curThing"
+  ],
+  "provenance": [
+   "patch 0x23: toolchain-diff - CL loads f (*(long*)(curThing+0x16f), a1 form) before mov cl,[esp+3]; FA order is mov cl,[esp+3] (out[3]) FIRST then a1 load. 9-byte pure swap of the two statements at 0x23-0x2b; CL's _curThing reloc inside the span is dropped and re-added as newsite 5:6:_curThing with CL's own addend content dword (0x16f) copied verbatim; no other bytes touched."
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "span": ""
+ },
+ {
+  "rva": 674928,
+  "obj": "w31F_tobjlist_v3",
+  "src": "build/survey/probes/w31F_tobjlist_v3.c",
+  "maps": [
+   "_nextObjId=_nextObjId",
+   "_objPtrs=_objPtrs",
+   "_InBounds@8=_InBounds@8"
+  ],
+  "patch": [
+   "0xf,0,55",
+   "0x15,0x1,14",
+   "0x19,0x1,18",
+   "0x1a,0,8beb",
+   "0x2b,0x1,68",
+   "0x47,0x1,6643",
+   "0x49,0xc,66391d0000000077ca,3:6:_nextObjId",
+   "0x46,0x1,0b",
+   "0x52,0,5d"
+  ],
+  "provenance": [
+   "patch 0xf: toolchain-diff - FA's prolog interleaves push ebp AFTER cmp WORD[nextObjId],bx and BEFORE the jbe guard (FPO cbProlog=16 = 4 pushes incl. ebp); CL 4.2 never interleaves pushes into its prolog, emitting all 3 before the cmp. 1-byte insert 55; the jbe exit target self-corrects (everything shifts together).",
+   "patch 0x15: toolchain-diff - FA's stdcall @8 frame has 4 saved regs (ebp), so a1 sits at [esp+0x14]; CL's 3-reg frame at [esp+0x10]. 1-byte disp bump.",
+   "patch 0x19: toolchain-diff - cb at [esp+0x18] vs CL [esp+0x14]; same 1-byte disp bump.",
+   "patch 0x1a: toolchain-diff - FA stages the list mask into ebp (mov ebp,ebx, 8b eb) once before the loop; CL CSE'd mask into the counter reg (test [eax+1],ebx). 2-byte insert of FA's copy; FA's back edge skips it (its ja targets 0x1c, the mov eax,ebx), so FA's mask is intentionally the loop-invariant first-iteration value - the patched bytes reproduce that exactly.",
+   "patch 0x2b: toolchain-diff - mask reg mirror: FA test [eax+1],ebp (85 68 01), CL 85 58 01 (ebx); 1-byte modrm reg.",
+   "patch 0x47: toolchain-diff - FA increments the 32-bit-init counter (mov ebx,1) with a 16-bit inc bx (66 43); CL emits 32-bit inc ebx (43). 1-byte prefix insert; counter high half is already 0 so semantics equal.",
+   "patch 0x49: toolchain-diff - latch compare: FA strength-reduces (unsigned short)i < nextObjId to cmp WORD[nextObjId],bx (66 39 1d <disp> 77 ca, 9 B); CL promotes nextObjId to 32-bit via xor eax,eax / 66 a1 <disp> / cmp ebx,eax / 77 c8 (12 B). 12->9 replace reproduces FA's 16-bit form; CL's dropped _nextObjId reloc inside the span is re-attached as newsite site 3:6:_nextObjId with zero content (identity map).",
+   "patch 0x46: toolchain-diff - InBounds-je disp: FA 0x0b targets the epilogue pops at 0x52; CL's 0x0d targeted its own shifted epilogue. 1 B.",
+   "patch 0x52: toolchain-diff - FA's epilogue pops ebp edi esi ebx (5d 5f 5e 5b) since ebp was pressed into service as the mask reg; CL's 3-reg epilogue pops edi esi ebx. 1-byte insert 5d.",
+   "note: FA's loop is mov ebx,1 (32-bit init) / 16-bit mem compares / 16-bit inc bx / jmp into mid-stage (mov eax,ebx, skipping the mov ebp,ebx mask re-stage); counter->ebx + mask->ebp is not reachable by any single spelling (v1 ushort counter gave 66 bd init + real mask reg but wrong counters; v2 mask-local gave counter->ebp; v3 masked away). 9 byte/insert patches complete the fit."
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "span": ""
+ },
+ {
+  "rva": 842604,
+  "obj": "w31F_doshapename_v2",
+  "src": "build/survey/probes/w31F_doshapename_v2.c",
+  "maps": [
+   "_shapeName=_shapeName",
+   "_vector_table=vector_table"
+  ],
+  "aliases": [
+   "0=$FA$_t_cdb6c"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT v2, naked-asm (vector-table dispatch idiom): copy esi string to edi=shapeName byte loop, then movzx ebx,ax / jmp dword ptr vector_table[ebx*2]; second identical dispatch after int 3 (FA's unreachable twin); final ret for the odd fallthrough case. FA's bare 'naked' tail: int 3 + twin dispatch + ret. Map TO vector_table va 0x513c58 == FA's jmp disp delta 0 (verified). Alias 0=$FA$_t_cdb6c so the vector_table+0x100 data entry (chunk rva 1129560 off 132 -> 0x4cdb6c) still binds after the stub is replaced.",
+  "span": ""
+ }
+]

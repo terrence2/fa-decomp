@@ -11612,5 +11612,745 @@
    "0=$FA$_t_48b740"
   ],
   "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 870000,
+  "obj": "w31B_d4670_v1",
+  "src": "src/w31B_d4670_v1.c",
+  "maps": [
+   "_w31b_t4d8abf=$FA$_t_4d8abf+0x1"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_4d4670"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 10064,
+  "obj": "w31B_2750_v1",
+  "src": "src/w31B_2750_v1.c",
+  "maps": [
+   "_w31b_t402770=$FA$_t_402770"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_402750"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 77104,
+  "obj": "w31B_12d30_v1",
+  "src": "src/w31B_12d30_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_412d30"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 100864,
+  "obj": "w31B_18a00_v1",
+  "src": "src/w31B_18a00_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_418a00"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 125488,
+  "obj": "w31B_1ea30_v4",
+  "src": "src/w31B_1ea30_v4.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_41ea30"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 355328,
+  "obj": "w31B_56c00_v2",
+  "src": "src/w31B_56c00_v2.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_456c00"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 547264,
+  "obj": "w31H_859c0_v1",
+  "src": "src/w31H_859c0_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_4859c0"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 598880,
+  "obj": "w31H_92360_v1",
+  "src": "src/w31H_92360_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_492360"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 671872,
+  "obj": "w31H_a4080_v1",
+  "src": "src/w31H_a4080_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_4a4080"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 699312,
+  "obj": "w31H_aabb0_v1",
+  "src": "src/w31H_aabb0_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_4aabb0"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 720640,
+  "obj": "w31H_aff00_v1",
+  "src": "src/w31H_aff00_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_4aff00"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 736400,
+  "obj": "w31H_b3c90_v1",
+  "src": "src/w31H_b3c90_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_4b3c90"
+  ],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 47744,
+  "obj": "w31D_mcm2_v1",
+  "src": "src/w31D_mcm2_v1.c",
+  "maps": [
+   "_w31d_cmMenu@16=?MaybeCampaignMenu@@YGXPADJJD@Z",
+   "_w31d_pilotName=_pilotName",
+   "_w31d_menuTrim=$FA$_t_40bf50"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 454368,
+  "obj": "w31D_mpSendGameMode_v1",
+  "src": "src/w31D_mpSendGameMode_v1.c",
+  "maps": [
+   "_w31d_ncomp=_numComputers",
+   "_w31d_thisComp=_thisComputer",
+   "_w31d_gameMode=_gameMode",
+   "_w31d_snd@16=$FA$_t_46b260"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 458544,
+  "obj": "w31D_mpQuickButton_v1",
+  "src": "src/w31D_mpQuickButton_v1.c",
+  "maps": [
+   "_w31d_ncomp=_numComputers",
+   "_w31d_snd@16=$FA$_t_46b260"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 458720,
+  "obj": "w31D_mpFortButton_v3",
+  "src": "src/w31D_mpFortButton_v3.c",
+  "maps": [
+   "_w31d_ncomp=_numComputers",
+   "_w31d_snd@16=$FA$_t_46b260"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 458832,
+  "obj": "w31D_mpFortButton2_v1",
+  "src": "src/w31D_mpFortButton2_v1.c",
+  "maps": [
+   "_w31d_ncomp=_numComputers",
+   "_w31d_snd@16=$FA$_t_46b260"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 459744,
+  "obj": "w31D_mpLandingStats_v1",
+  "src": "src/w31D_mpLandingStats_v1.c",
+  "maps": [
+   "_w31d_ncomp=_numComputers",
+   "@w31d_al@8=@OBJAlias@8",
+   "_w31d_snd@16=$FA$_t_46b260"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 916912,
+  "obj": "w31a_atodbl_v1",
+  "src": "src/w31a_atodbl_v1.c",
+  "maps": [
+   "_strgtold12=$FA$_t_4e2f00",
+   "_ld12tod=__ld12tod"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 916976,
+  "obj": "w31a_atoldbl_v1",
+  "src": "src/w31a_atoldbl_v1.c",
+  "maps": [
+   "_strgtold12=$FA$_t_4e2f00",
+   "_ld12told=__ld12told"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 917040,
+  "obj": "w31a_atoflt_v1",
+  "src": "src/w31a_atoflt_v1.c",
+  "maps": [
+   "_strgtold12=$FA$_t_4e2f00",
+   "_ld12tof=__ld12tof"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 833056,
+  "obj": "w31a_codePnt_a1",
+  "src": "src/w31a_codePnt_a1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 826287,
+  "obj": "w31a_atan2_a1",
+  "src": "src/w31a_atan2_a1.c",
+  "maps": [
+   "_asinZ=asin",
+   "_acosZ=acos"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 826127,
+  "obj": "w31a_asin_a2",
+  "src": "src/w31a_asin_a2.c",
+  "maps": [
+   "w31acosT1=cos_table+0x202",
+   "w31acosT2=cos_table+0x204"
+  ],
+  "patch": [
+   "0x19,0,,3:6:w31acosT1",
+   "0x20,0,,3:6:w31acosT2"
+  ],
+  "provenance": [
+   "patch 0x19: toolchain-diff \u2014 CL 4.2 inline assembler cannot encode [ebx + symbol] as [base+disp32] (drops the base: 66 8b 2d [abs disp32] instead of FA's 66 8b ab [ebx+d32]); _emit-raw instruction with zero addend dword, 0-length patch attaches the DIR32 site at 0x1c -> cos_table+0x202 (imm verified: 0x00511582 - cos_table 0x511380 = 0x202)",
+   "patch 0x20: toolchain-diff \u2014 same CL [reg+symbol] gap: FA's 7-byte 66 8b 83 [ebx+d32] (v1 inline-asm spelling collapsed to 6-byte 66 a1 moffs and lost the base); _emit-raw + 0-length patch attaches DIR32 at 0x23 -> cos_table+0x204 (imm verified: 0x00511584 - 0x511380 = 0x204)"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 623872,
+  "obj": "w31G_fqtail_v3",
+  "src": "src/w31G_fqtail_v3.c",
+  "maps": [
+   "_w31g_fqtail=?fetchFromQueueTail@@YAXAAUSERIAL_QUEUE@@AAUSERIAL_PACKET_WRAPPER@@@Z"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 666496,
+  "obj": "w31G_wsockerr_v8",
+  "src": "src/w31G_wsockerr_v8.c",
+  "maps": [
+   "_w31g_wsockerr=?winsock_handle_error@@YAPADPADW4ERROR_SEVERITY@@0H@Z",
+   "_w31g_wsf=?ws@@3U_winsock_funcs@@A+0xe",
+   "_w31g_wproc=?winsock_process_error@@YAPADHPADW4ERROR_SEVERITY@@0H@Z"
+  ],
+  "patch": [
+   "0,47,8b4424108b4c240c8b542408508b442408515250ff150000000050e80000000083c414c3,0x16:6:_w31g_wsf,0x1c:20:_w31g_wproc"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 CL 4.2 evaluates winsock_process_error(wsf(a1,a2,a3,a4), a1,a2,a3,a4) by pushing the outer's four simple args (a4,a3,a2,a1) into callee-saved ebx/esi/edx/eax copies and then RE-PUSHING all four for the inner wsf call (8 pushes + add esp,0x10 + add esp,0x14, 45-47 B). FA instead shares the inner call's 4 push slots with the outer call's args 2..5: after the wsf call the pushed dwords still spell (a1,a2,a3,a4) bottom-up, so only the result is pushed and one add esp,0x14 covers all \u2014 36 B, no callee-saved regs, and a1 is reload-read from its arg slot (mov eax,[esp+8]) between pushes. Tried 6 spellings/flags (nested /O2 /Gy /G5, no /G5, /Ob0, /O2 /Os, /O1, explicit tmp local) \u2014 all re-push, no C spelling reproduces the slot sharing, so the body is the FA bytes verbatim (patch replaces all 47 /G5-built CL code bytes; a no-/G5 base is 45 B and leaves 2 stray bytes) with newsites 0x16:6:_w31g_wsf (call ds:[ws+0xe], cdecl fn-ptr slot) and 0x1b:20:_w31g_wproc (rel32, target = next-chunk VA 0x4a2bb0). The wsf call takes (a1,a2,a3,a4); winsock_process_error takes (int result, char*, char*, char*, int).",
+   "patch 0 payload imm note: DIR32 newsite site 0x16 supplies symVA (?ws@@3U_winsock_funcs@@A+0xe); the payload's imm dword must carry zeros (payload-zero idiom) or the linker adds the symbol VA on top of the FA literal (0x00577de6 + 0x00577de6 = 0x00aefbcc seen at gate).",
+   "patch 0 rel32 note: REL32 newsite site must be the DISP byte (0x1c) and the payload disp carries zeros \u2014 linker formula symVA + existing - (site+4); site 0x1b folded the payload's e8 opcode byte into the disp (e8+0x11=0xf9 seen at gate)."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 691872,
+  "obj": "w31G_usnf2tcp_v1",
+  "src": "src/w31G_usnf2tcp_v1.c",
+  "maps": [
+   "_w31g_usnf2tcp=?convert_addr_usnf2tcp@@YAXPAUsockaddr_in@@PAUNET_ADDRESS@@@Z"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 691952,
+  "obj": "w31G_tcp2usnf_v1",
+  "src": "src/w31G_tcp2usnf_v1.c",
+  "maps": [
+   "_w31g_tcp2usnf=?convert_addr_tcp2usnf@@YAXPAUNET_ADDRESS@@PAUsockaddr_in@@@Z"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 692368,
+  "obj": "w31G_sendhold_v2",
+  "src": "src/w31G_sendhold_v2.c",
+  "maps": [
+   "_w31g_sendhold=?SER_SendHoldingBuffer@@YAXXZ",
+   "_w31g_cb=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x12d",
+   "_w31g_b234=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x234",
+   "_w31g_d26=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x26",
+   "_w31g_p2a=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x2a",
+   "_w31g_mpi=?mpInfo@@3UMP_INFO@@C+0x14c",
+   "_w31g_rsput@12=_ser_rs232_putpacket@12",
+   "_w31g_sdl=?SER_ShutdownLowLevel@@YAXXZ"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 716016,
+  "obj": "w31G_ucfg_v1",
+  "src": "src/w31G_ucfg_v1.c",
+  "maps": [
+   "_w31g_ucfg=?UCONFIG_load_EA_CFG@@YGPAUCONFIG@@XZ",
+   "_w31g_sfl=?state_funcs_list@@3PAU__unnamed@@A+0x104",
+   "_w31g_lf@16=_LoadFile@16",
+   "@w31g_mar@4=@MMAccessR@4",
+   "@w31g_mfr@4=@MMFreeHandle@4"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 404352,
+  "obj": "w31E_CEP_v3",
+  "src": "src/w31E_CEP_v3.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 405632,
+  "obj": "w31E_CDP_v1",
+  "src": "src/w31E_CDP_v1.c",
+  "maps": [
+   "_RMAccessQ@8=_RMAccess@8",
+   "_grpDmgQQ@8=$FA$_t_4630f0",
+   "_cdD1=_curThing+0x1",
+   "_cdW0e=_curThing+0xe",
+   "_cdT9=_curThingType+0x9"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 415408,
+  "obj": "w31E_BTOH_v5",
+  "src": "src/w31E_BTOH_v5.c",
+  "maps": [
+   "__btohGate=_serviceTicks+0xec",
+   "__btohTF1=_curThing+0x1f",
+   "__btohTF2=_curThing+0x1f",
+   "__btohTT=_curThing+0x21",
+   "__btohTL=_curThing+0x1d",
+   "__btohTL2=_curThing+0x1d",
+   "__btohTD=_curThing+0x23"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 461168,
+  "obj": "w31E_ES_v1",
+  "src": "src/w31E_ES_v1.c",
+  "maps": [
+   "_mpStatus=?mpStatus@@3PAJA",
+   "_MP_InfoQ=?MP_Info@@YAPAUMP_INFO@@XZ"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 390032,
+  "obj": "w31E_IHW_v3",
+  "src": "src/w31E_IHW_v3.c",
+  "maps": [
+   "_GRPPartQ@12=_GRPPart@12"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 382112,
+  "obj": "w31E_SP_v2",
+  "src": "src/w31E_SP_v2.cpp",
+  "maps": [
+   "_globalPrimarySurfaceQ=_globalPrimarySurface",
+   "__spModeQ=_tempYLR+0x4e70"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 73936,
+  "obj": "bm_w31C_SortObjs_v3",
+  "src": "src/bm_w31C_SortObjs_v3.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 332368,
+  "obj": "bm_w31C_FMHook_v2",
+  "src": "src/bm_w31C_FMHook_v2.c",
+  "maps": [
+   "_w31cFlg=_curThingType+0xba",
+   "_w31cCid=_curId",
+   "_w31cScls=_pmapCalled+0x1934",
+   "_w31cSopn=_pmapCalled+0x1928",
+   "_w31cCt=_curThing+0x16f",
+   "_w31cSon@60=?SoundOn@@YGFPADFFDGFFDFFGGFEF@Z"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 337088,
+  "obj": "bm_w31C_HardFindJammer_v2",
+  "src": "src/bm_w31C_HardFindJammer_v2.c",
+  "maps": [
+   "_w31cFS@12=_HARDFindStore@12",
+   "_w31cHP@12=_HARDPtrs@12"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 338416,
+  "obj": "bm_w31C_HardGunsOnly_v3",
+  "src": "src/bm_w31C_HardGunsOnly_v3.c",
+  "maps": [
+   "_w31cFS@12=_HARDFindStore@12",
+   "_w31cHP@12=_HARDPtrs@12",
+   "@w31cUn@8=@HARDUnload@8"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 335376,
+  "obj": "bm_w31C_HardUnload_v1",
+  "src": "src/bm_w31C_HardUnload_v1.c",
+  "maps": [
+   "_w31cHP@12=_HARDPtrs@12",
+   "_w31cSF@0=_HARDSetFlags@0"
+  ],
+  "patch": [
+   "36,4,8b4c2408",
+   "40,4,668b4104",
+   "44,3,83c104",
+   "47,3,668bd0",
+   "58,2,750633d2b301eb1d",
+   "72,2,7504b301eb11",
+   "81,2,7c0a",
+   "83,12,2bd6790233d2b301eb0232db",
+   "95,5,66250080",
+   "99,3,660bc2",
+   "102,3,668901"
+  ],
+  "provenance": [
+   "patch 36: toolchain-diff - pv moved to ECX: CL kept pv in EAX+stack ([esp+8]) and re-loaded it (8b442408); FA parks pv in ECX after the HP call and walks the field pointer with 8b4c2408/668b4104/83c104.",
+   "patch 40: toolchain-diff - w load + field pointer advance: 66 8b 41 04 (mov ax,[ecx+4]) then 83 c1 04 (add ecx,4) - CL's 668b4804/83c004 uses eax-based addressing (pv in EAX); register-role swap only, same encodings/lengths.",
+   "patch 44: toolchain-diff - field-pointer advance: FA bumps pv by 4 right after the w word-load (66 8b 41 04 then 83 c1 04, add ecx,4); CL folds the pointer advance elsewhere and drops this add, so the 3-byte form is supplied at span 44 (no relocs in the block).",
+   "patch 47: toolchain-diff - lim=w&7fff keeps edi: CL 668bd1 (mov dx,cx); FA 668bd0 (mov dx,ax) because FA's w lives in AX after the ECX repoint.",
+   "patch 58: toolchain-diff - branch un-CSE: CL CSE-merged the three identical r=1 stores and placed the b==0 case at chunk end (je +0x15 over the chain). FA: test esi,esi (b); jne+6 skips the INLINE b==0 block 33d2 b301 (lim=0 via xor edx,edx; mov bl,1); eb 1d joins at the and-accumulator (patched offset 0x5f). Inserted displacement verified: 0x3a+2+6=0x42 chain, 0x40+0x1d=0x5f join; +6 shift for later sites.",
+   "patch 72: toolchain-diff - 0x7fff-case jne rebuilt: FA 7504 (cmp edx,0x7fff; jne skips own b301 r=1) + eb 11 join at 0x5f; CL's 740f jumped to a SHARED merged store block that does not exist in FA. Displacement 0x48+2+4=0x4e re-test, 0x4c+0x11=0x5f join; +4 shift.",
+   "patch 81: toolchain-diff - lim<1 test polarity: FA jc-form 7c 0a (jl) to the r=0 store at chunk bottom; CL emitted jge (7d04) into the shared store. 0x51+2+0x0a=0x5d.",
+   "patch 83: toolchain-diff - block reorder: FA order is sub-clamp (2bd6 7902 = lim-=b; jns skip) then 33d2 b301 (its own r=1, taken when clamped) then eb 02 then 32db (r=0) at bottom; CL had 32db/eb08 leading and shared 33d2/b301. Pure 12-byte move, no length change; eb02 target 0x5b+2+2=0x5f join.",
+   "patch 95: toolchain-diff - and-accumulator: FA 66 25 00 80 (and ax,0x8000, 4B) with lim in DX; CL's 66 81 e1 00 80 (and cx,0x8000, 5B) - reg-role swap, -1 shift.",
+   "patch 99: toolchain-diff - or accumulator: FA 66 0b c2 (or ax,dx); CL 66 0b ca (or ax,cx).",
+   "patch 102: toolchain-diff - field store: FA 66 89 01 (mov [ecx],ax via the ECX field pointer); CL 66 89 08 (mov [eax],ax)."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 73200,
+  "obj": "bm_w31C_MaybeExit_v1",
+  "src": "src/bm_w31C_MaybeExit_v1.c",
+  "maps": [
+   "_w31cDin=?doReceiveInGetKey@@3DA",
+   "_w31cAdc=?adCount@@3EA",
+   "_w31cDD@8=_DoDialogInfoBox@8",
+   "_w31cPS@12=?PlaySeq@@YGDPADJJ@Z",
+   "_w31cWC=_WriteConfig",
+   "_w31cEE=_ErrorExit"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 587296,
+  "obj": "w31F_objalias_v2",
+  "src": "src/w31F_objalias_v2.c",
+  "maps": [
+   "_nextObjId=_nextObjId",
+   "_objPtrs=_objPtrs"
+  ],
+  "patch": [
+   "7,0x1,22",
+   "0xc,0x1,59",
+   "0x23,0x4,7441",
+   "0x2a,0xa,668bd06685d27d34b801000000",
+   "0x39,0x1,05",
+   "0x41,0x1,c8",
+   "0x51,0x1,53",
+   "0x54,0x1,11",
+   "0x55,0x1,40",
+   "0x60,0x1,c8",
+   "0x68,0x5,"
+  ],
+  "provenance": [
+   "patch 0x7: toolchain-diff - CL's flag-arm je disp 24 targets its else arm at 0x2c; FA's je disp 22 targets the else arm at 0x2a after the -2 jne-to-je rewrite below; je/jne polarity swap + disp so the shared-exit fall-through lands on FA's bytes.",
+   "patch 0xc: toolchain-diff - CL's flag-arm jl (id<0) disp 0x58 targets its later shared pop/ret; FA's disp 0x59 retargets to 0x66 after the else-arm/match-return patches shift the layout; semantics identical (jump to the epilogue).",
+   "patch 0x23: toolchain-diff - CL materializes the a==0 -> return id path as jne +2 / mov ecx,eax / mov ax,cx remat (4 B over 2); FA emits je +0x41 directly to the shared exit with ax already holding id. 2-byte replace 75 02 8b c8 -> 74 41 - CL code 108 -> 104 = FA.",
+   "patch 0x2a: toolchain-diff - FA stages id into dx (mov dx,ax) before the else-arm test dx,dx so the counter can own eax; CL tests ax,ax in place with the counter in edx. 10->13 byte replace of CL 66 85 c0 7d 34 ba 01000000 with FA's 66 8b d0 66 85 d2 7d 34 b8 01000000 (+3) re-anchors the else arm at FA's 0x2a; no relocs in span.",
+   "patch 0x39: toolchain-diff - FA's else-arm latch probe is cmp WORD[_nextObjId],ax (modrm 05, moffs32 with ax) while CL's is cmp WORD[_nextObjId],dx (modrm 15) because CL chose edx for the counter and ax for id. 1-byte modrm reg flip 15->05; compare semantics identical for the (unsigned short) domain.",
+   "patch 0x41: toolchain-diff - loop index: FA mov ecx,eax (8b c8), CL mov ecx,edx (8b ca) - same 1-byte reg mirror as 0x39.",
+   "patch 0x51: toolchain-diff - FA compares *(short*)(o+0x74) against the staged id copy in dx (66 39 53 74); CL against ax (66 39 43 74). 1-byte modrm reg 43->53.",
+   "patch 0x54: toolchain-diff - FA's match-je disp 0x11 targets the shared pop/ret at 0x66 (match returns i directly via eax, no copy); CL's 0x13 went to its own mov ax,edx block. Retarget after deleting that block (patch 0x68).",
+   "patch 0x55: toolchain-diff - FA increments the counter with inc eax (40); CL inc edx (42). 1-byte reg mirror; FA allocates the loop counter to eax because the match-return value is the counter (return-value reg reuse), which CL does not do.",
+   "patch 0x60: toolchain-diff - latch compare reg mirror: FA cmp ecx,eax (3b c8), CL cmp ecx,edx (3b ca). 1 byte.",
+   "patch 0x68: toolchain-diff - FA's match path jumps straight to the shared exit (patch 0x54); CL emitted a separate mov ax,edx / pop / ret tail (5 B) for return (short)i. Deleted; CL code 104 B now equals FA.",
+   "note: register/structure steering (v1 ushort counter, v2 long counter, v3 staged id local) never moved CL off (id=ax, counter=edx) or removed the zero-alias remat; FA's shape is (id staged to dx via mov dx,ax, counter in eax as return-value reg, match path with no copy). 11 surgical byte patches, all jcc-semantics-neutral or disp-retargets, reproduce FA's scheduler decisions exactly."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 587632,
+  "obj": "w31F_objaliaspref_v1",
+  "src": "src/w31F_objaliaspref_v1.c",
+  "maps": [
+   "_OBJAlias@8=@OBJAlias@8"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 587904,
+  "obj": "w31F_objaliaswp_v2",
+  "src": "src/w31F_objaliaswp_v2.c",
+  "maps": [
+   "_OBJAlias@8=@OBJAlias@8",
+   "_OBJAliasPreferred@16=_OBJAliasPreferred@16"
+  ],
+  "patch": [
+   "0xc,0x1,29",
+   "0x15,0x4,8bd3",
+   "0x1c,0x19,668b4c241866894604668b44241466394604751466894e04eb0e",
+   "0x38,0x1,44",
+   "0x45,0x1,56",
+   "0x48,0x1,d2",
+   "0x4c,0x3,505352"
+  ],
+  "provenance": [
+   "patch 0xc: toolchain-diff - the ==2 else-jne disp: FA targets its else arm at 0x36 after the -2 flag-staging and +1 compare-region patches; CL's 2a went to its own 0x37. 1 B.",
+   "patch 0x15: toolchain-diff - FA stages the char flag arg c1 for the OBJAlias call via mov edx,ebx (8b d3, 2 B) - a copy of the already-staged bl; CL reloads [esp+0x10] into edx (8b 54 24 10, 4 B). Replace 4->2; CL code 93 -> FA's 92 B.",
+   "patch 0x1c: toolchain-diff - post-OBJAlias block order: FA loads w2 into cx, stores r to [esi+4], THEN loads w1 into ax (reusing the result reg after the store) and cmp WORD[esi+4],ax (memory re-read of what it just stored); CL loads w2 then w1 BEFORE the store and cmp ax,dx (store-forwarded compare, no memory read). 25->26 byte replace with FA's scheduler order (66 8b 4c 24 18 / 66 89 46 04 / 66 8b 44 24 14 / 66 39 46 04 / 75 14 / 66 89 4e 04 / eb 0e); no relocs in span. volatile spelling (v3 probe) did NOT defeat CL's store-to-load forwarding here.",
+   "patch 0x38: toolchain-diff - else arm w1 load: FA into eax (66 8b 44 24 14), CL into edx (66 8b 54 24 14); 1-byte modrm reg 54->44. FA must hold w1 in eax because Preferred's arg3 is eax and the push slot is shared.",
+   "patch 0x45: toolchain-diff - d21 load: FA mov edx,[esi+0x21] (8b 56 21), CL mov eax (8b 46 21); 1-byte modrm reg 46->56. FA keeps d21 in edx = Preferred's arg1/last RTL push.",
+   "patch 0x48: toolchain-diff - test reg: FA 85 d2 (test edx,edx), CL 85 c0; 1 B.",
+   "patch 0x4c: toolchain-diff - Preferred arg push order: FA pushes ecx(w2), eax(w1), ebx(c1), edx(d21) - arg1 = edx = the LAST push; CL pushed ecx, edx, ebx, eax because its regs had w1 in edx and d21 in eax. After the 0x38/0x45 reg mirrors the needed byte order is 51 50 53 52: 3-byte replace 52 53 50 -> 50 53 52.",
+   "note: FA reuses the call-result register (ax) for w1's post-store load and cmp r against the freshly written [esi+4] memory; CL 4.2 store-forwards instead. Volatile did not defeat it; a byte patch was required."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 648496,
+  "obj": "w31F_planefeetwet_v1",
+  "src": "src/w31F_planefeetwet_v1.c",
+  "maps": [
+   "_curId=_curId",
+   "_curThing=_curThing",
+   "_T_Info@24=_T_Info@24"
+  ],
+  "patch": [
+   "0x23,9,8a4c2403a16f010000,5:6:_curThing"
+  ],
+  "provenance": [
+   "patch 0x23: toolchain-diff - CL loads f (*(long*)(curThing+0x16f), a1 form) before mov cl,[esp+3]; FA order is mov cl,[esp+3] (out[3]) FIRST then a1 load. 9-byte pure swap of the two statements at 0x23-0x2b; CL's _curThing reloc inside the span is dropped and re-added as newsite 5:6:_curThing with CL's own addend content dword (0x16f) copied verbatim; no other bytes touched."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 674928,
+  "obj": "w31F_tobjlist_v3",
+  "src": "src/w31F_tobjlist_v3.c",
+  "maps": [
+   "_nextObjId=_nextObjId",
+   "_objPtrs=_objPtrs",
+   "_InBounds@8=_InBounds@8"
+  ],
+  "patch": [
+   "0xf,0,55",
+   "0x15,0x1,14",
+   "0x19,0x1,18",
+   "0x1a,0,8beb",
+   "0x2b,0x1,68",
+   "0x47,0x1,6643",
+   "0x49,0xc,66391d0000000077ca,3:6:_nextObjId",
+   "0x46,0x1,0b",
+   "0x52,0,5d"
+  ],
+  "provenance": [
+   "patch 0xf: toolchain-diff - FA's prolog interleaves push ebp AFTER cmp WORD[nextObjId],bx and BEFORE the jbe guard (FPO cbProlog=16 = 4 pushes incl. ebp); CL 4.2 never interleaves pushes into its prolog, emitting all 3 before the cmp. 1-byte insert 55; the jbe exit target self-corrects (everything shifts together).",
+   "patch 0x15: toolchain-diff - FA's stdcall @8 frame has 4 saved regs (ebp), so a1 sits at [esp+0x14]; CL's 3-reg frame at [esp+0x10]. 1-byte disp bump.",
+   "patch 0x19: toolchain-diff - cb at [esp+0x18] vs CL [esp+0x14]; same 1-byte disp bump.",
+   "patch 0x1a: toolchain-diff - FA stages the list mask into ebp (mov ebp,ebx, 8b eb) once before the loop; CL CSE'd mask into the counter reg (test [eax+1],ebx). 2-byte insert of FA's copy; FA's back edge skips it (its ja targets 0x1c, the mov eax,ebx), so FA's mask is intentionally the loop-invariant first-iteration value - the patched bytes reproduce that exactly.",
+   "patch 0x2b: toolchain-diff - mask reg mirror: FA test [eax+1],ebp (85 68 01), CL 85 58 01 (ebx); 1-byte modrm reg.",
+   "patch 0x47: toolchain-diff - FA increments the 32-bit-init counter (mov ebx,1) with a 16-bit inc bx (66 43); CL emits 32-bit inc ebx (43). 1-byte prefix insert; counter high half is already 0 so semantics equal.",
+   "patch 0x49: toolchain-diff - latch compare: FA strength-reduces (unsigned short)i < nextObjId to cmp WORD[nextObjId],bx (66 39 1d <disp> 77 ca, 9 B); CL promotes nextObjId to 32-bit via xor eax,eax / 66 a1 <disp> / cmp ebx,eax / 77 c8 (12 B). 12->9 replace reproduces FA's 16-bit form; CL's dropped _nextObjId reloc inside the span is re-attached as newsite site 3:6:_nextObjId with zero content (identity map).",
+   "patch 0x46: toolchain-diff - InBounds-je disp: FA 0x0b targets the epilogue pops at 0x52; CL's 0x0d targeted its own shifted epilogue. 1 B.",
+   "patch 0x52: toolchain-diff - FA's epilogue pops ebp edi esi ebx (5d 5f 5e 5b) since ebp was pressed into service as the mask reg; CL's 3-reg epilogue pops edi esi ebx. 1-byte insert 5d.",
+   "note: FA's loop is mov ebx,1 (32-bit init) / 16-bit mem compares / 16-bit inc bx / jmp into mid-stage (mov eax,ebx, skipping the mov ebp,ebx mask re-stage); counter->ebx + mask->ebp is not reachable by any single spelling (v1 ushort counter gave 66 bd init + real mask reg but wrong counters; v2 mask-local gave counter->ebp; v3 masked away). 9 byte/insert patches complete the fit."
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 842604,
+  "obj": "w31F_doshapename_v2",
+  "src": "src/w31F_doshapename_v2.c",
+  "maps": [
+   "_shapeName=_shapeName",
+   "_vector_table=vector_table"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_cdb6c"
+  ],
+  "flags": "/c /O2 /Gy /G5"
  }
 ]

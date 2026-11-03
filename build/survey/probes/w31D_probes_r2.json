@@ -1,0 +1,8 @@
+[
+ {"rva": 458720, "obj": "w31D_mpFortButton_v2", "src": "build/survey/probes/w31D_mpFortButton_v2.c",
+  "maps": ["_w31d_ncomp=_numComputers",
+           "_w31d_snd@16=$FA$_t_46b260",
+           "@w31d_flush@4=?MPFlushAll@@YIXD@Z"],
+  "patch": [], "aliases": [],
+  "flags": "/c /O2 /Gy /G5"}
+]

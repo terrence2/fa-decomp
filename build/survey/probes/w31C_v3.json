@@ -1,0 +1,24 @@
+[
+ {
+  "rva": 73936,
+  "obj": "bm_w31C_SortObjs_v3",
+  "src": "build/survey/probes/w31C_SortObjs_v3.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 338416,
+  "obj": "bm_w31C_HardGunsOnly_v3",
+  "src": "build/survey/probes/w31C_HardGunsOnly_v3.c",
+  "maps": [
+   "_w31cFS@12=_HARDFindStore@12",
+   "_w31cHP@12=_HARDPtrs@12",
+   "@w31cUn@8=@HARDUnload@8"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ }
+]

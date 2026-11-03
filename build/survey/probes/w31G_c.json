@@ -1,0 +1,30 @@
+[
+ {
+  "rva": 666496,
+  "obj": "w31G_wsockerr_v9",
+  "src": "build/survey/probes/w31G_wsockerr_v7.c",
+  "maps": [
+   "_w31g_wsockerr=?winsock_handle_error@@YAPADPADW4ERROR_SEVERITY@@0H@Z",
+   "_w31g_wsf=?ws@@3U_winsock_funcs@@A+0xe",
+   "_w31g_wproc=?winsock_process_error@@YAPADHPADW4ERROR_SEVERITY@@0H@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": null,
+  "flags": "/c /O2 /Os /Gy /G5"
+ },
+ {
+  "rva": 666496,
+  "obj": "w31G_wsockerr_v10",
+  "src": "build/survey/probes/w31G_wsockerr_v7.c",
+  "maps": [
+   "_w31g_wsockerr=?winsock_handle_error@@YAPADPADW4ERROR_SEVERITY@@0H@Z",
+   "_w31g_wsf=?ws@@3U_winsock_funcs@@A+0xe",
+   "_w31g_wproc=?winsock_process_error@@YAPADHPADW4ERROR_SEVERITY@@0H@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": null,
+  "flags": "/c /O1 /Gy /G5"
+ }
+]

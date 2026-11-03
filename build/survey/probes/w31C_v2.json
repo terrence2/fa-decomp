@@ -1,0 +1,76 @@
+[
+ {
+  "rva": 73936,
+  "obj": "bm_w31C_SortObjs_v2",
+  "src": "build/survey/probes/w31C_SortObjs_v2.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 332368,
+  "obj": "bm_w31C_FMHook_v2",
+  "src": "build/survey/probes/w31C_FMHook_v2.c",
+  "maps": [
+   "_w31cFlg=_curThingType+0xba",
+   "_w31cCid=_curId",
+   "_w31cScls=_pmapCalled+0x1934",
+   "_w31cSopn=_pmapCalled+0x1928",
+   "_w31cCt=_curThing+0x16f",
+   "_w31cSon@60=?SoundOn@@YGFPADFFDGFFDFFGGFEF@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 337088,
+  "obj": "bm_w31C_HardFindJammer_v2",
+  "src": "build/survey/probes/w31C_HardFindJammer_v2.c",
+  "maps": [
+   "_w31cFS@12=_HARDFindStore@12",
+   "_w31cHP@12=_HARDPtrs@12"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 338416,
+  "obj": "bm_w31C_HardGunsOnly_v2",
+  "src": "build/survey/probes/w31C_HardGunsOnly_v2.c",
+  "maps": [
+   "_w31cFS@12=_HARDFindStore@12",
+   "_w31cHP@12=_HARDPtrs@12",
+   "@w31cUn@8=@HARDUnload@8"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 335376,
+  "obj": "bm_w31C_HardUnload_v2",
+  "src": "build/survey/probes/w31C_HardUnload_v2.c",
+  "maps": [
+   "_w31cHP@12=_HARDPtrs@12",
+   "_w31cSF@0=_HARDSetFlags@0"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 335376,
+  "obj": "bm_w31C_HardUnload_v3",
+  "src": "build/survey/probes/w31C_HardUnload_v3.c",
+  "maps": [
+   "_w31cHP@12=_HARDPtrs@12",
+   "_w31cSF@0=_HARDSetFlags@0"
+  ],
+  "patch": [],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ }
+]

@@ -1,0 +1,111 @@
+[
+ {
+  "rva": 623872,
+  "obj": "w31G_fqtail_v3",
+  "src": "build/survey/probes/w31G_fqtail_v3.c",
+  "maps": [
+   "_w31g_fqtail=?fetchFromQueueTail@@YAXAAUSERIAL_QUEUE@@AAUSERIAL_PACKET_WRAPPER@@@Z"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "void __cdecl fetchFromQueueTail(SERIAL_QUEUE *q, SERIAL_PACKET_WRAPPER *w) \u2014 queue pop: memcpy(w, q->pkts + q->tail, 48) INLINES to rep movsd ecx=0xc and memset(q->pkts + q->tail, 0, 48) INLINES to rep stosd (const 48 B, xor eax,eax first) \u2014 a struct-assign + fill-loop spelling (v1) fails (scaled 12*4 loop instead); levers: (1) SERIAL_QUEUE layout tail@4(long)/cap@8/count@0x10/pkts@0x14(wrappers, 12 dwords=48B each) and wrapper as long d[12]; (2) statement order copy/zero/tail-mod/count with q->tail = (q->tail+1) % q->cap BEFORE q->count++ \u2014 count++ first loads ecx first and FA has eax=tail first (v4 fails only at 0x38-0x3e); /G5 interleaves the count store before the idiv; (3) signed % emits cdq/idiv naturally. No maps beyond the def rename (no sites in chunk); EXACT on compile 3 (v1 struct assign + v2 wrong count/pkts offsets)."
+ },
+ {
+  "rva": 666496,
+  "obj": "w31G_wsockerr_v8",
+  "src": "build/survey/probes/w31G_wsockerr_v7.c",
+  "maps": [
+   "_w31g_wsockerr=?winsock_handle_error@@YAPADPADW4ERROR_SEVERITY@@0H@Z",
+   "_w31g_wsf=?ws@@3U_winsock_funcs@@A+0xe",
+   "_w31g_wproc=?winsock_process_error@@YAPADHPADW4ERROR_SEVERITY@@0H@Z"
+  ],
+  "patch": [
+   "0,47,8b4424108b4c240c8b542408508b442408515250ff150000000050e80000000083c414c3,0x16:6:_w31g_wsf,0x1c:20:_w31g_wproc"
+  ],
+  "provenance": [
+   "patch 0: toolchain-diff \u2014 CL 4.2 evaluates winsock_process_error(wsf(a1,a2,a3,a4), a1,a2,a3,a4) by pushing the outer's four simple args (a4,a3,a2,a1) into callee-saved ebx/esi/edx/eax copies and then RE-PUSHING all four for the inner wsf call (8 pushes + add esp,0x10 + add esp,0x14, 45-47 B). FA instead shares the inner call's 4 push slots with the outer call's args 2..5: after the wsf call the pushed dwords still spell (a1,a2,a3,a4) bottom-up, so only the result is pushed and one add esp,0x14 covers all \u2014 36 B, no callee-saved regs, and a1 is reload-read from its arg slot (mov eax,[esp+8]) between pushes. Tried 6 spellings/flags (nested /O2 /Gy /G5, no /G5, /Ob0, /O2 /Os, /O1, explicit tmp local) \u2014 all re-push, no C spelling reproduces the slot sharing, so the body is the FA bytes verbatim (patch replaces all 47 /G5-built CL code bytes; a no-/G5 base is 45 B and leaves 2 stray bytes) with newsites 0x16:6:_w31g_wsf (call ds:[ws+0xe], cdecl fn-ptr slot) and 0x1b:20:_w31g_wproc (rel32, target = next-chunk VA 0x4a2bb0). The wsf call takes (a1,a2,a3,a4); winsock_process_error takes (int result, char*, char*, char*, int).",
+   "patch 0 payload imm note: DIR32 newsite site 0x16 supplies symVA (?ws@@3U_winsock_funcs@@A+0xe); the payload's imm dword must carry zeros (payload-zero idiom) or the linker adds the symbol VA on top of the FA literal (0x00577de6 + 0x00577de6 = 0x00aefbcc seen at gate).",
+   "patch 0 rel32 note: REL32 newsite site must be the DISP byte (0x1c) and the payload disp carries zeros \u2014 linker formula symVA + existing - (site+4); site 0x1b folded the payload's e8 opcode byte into the disp (e8+0x11=0xf9 seen at gate)."
+  ],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "char *__cdecl winsock_handle_error(char *a1, int sev, char *a3, int a4) \u2014 arg-slot-sharing forwarder: return winsock_process_error(ws_fn(a1,a2,a3,a4), a1,a2,a3,a4). Semantics correct in the C even though CL re-pushes; ws_fn = the cdecl fn-ptr slot at ?ws@@3U_winsock_funcs@@A+0xe (0x577de6), winsock_process_error = rel32 next-chunk call. EXACT only via the whole-body patch (patch 0 provenance above); newsite SYMBOLs are CL-level names resolved by the two _w31g_ maps."
+ },
+ {
+  "rva": 691872,
+  "obj": "w31G_usnf2tcp_v1",
+  "src": "build/survey/probes/w31G_usnf2tcp_v1.c",
+  "maps": [
+   "_w31g_usnf2tcp=?convert_addr_usnf2tcp@@YAXPAUsockaddr_in@@PAUNET_ADDRESS@@@Z"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "void __cdecl convert_addr_usnf2tcp(sockaddr_in *dst, NET_ADDRESS *src) \u2014 writes dst (arg1), reads src (arg2); both structs need only fam@0(word)/port@2(word)/addr@4(dword). Recipe: (1) dword byteswap spelled exactly ((a&0xff00)|(a<<16))<<8 | (((a&0xff0000)|(a>>16))>>8) with a in an unsigned long \u2014 CL keeps a in ecx, copies esi/eax, computes (a>>16) by shifting ecx in place (last use), matches and/shl/or schedule verbatim; (2) word byteswap dst->port = ((p&0xff)<<8)|(p>>8) on an unsigned short p stays 16-bit (mov dx,cx / mov dh,dl / mov dl,ch) \u2014 the byte-move shuffle, not 32-bit movzx forms; (3) statement order: read p = src->port BEFORE dst->fam = 2 so the fam store (66 c7 word-imm) lands between the port copy and shuffle; (4) no sites/chunk-internal only \u2014 no maps beyond the def rename. Sibling twin with w31G_tcp2usnf (same recipe, fam=1 + order fam-first). EXACT first try."
+ },
+ {
+  "rva": 691952,
+  "obj": "w31G_tcp2usnf_v1",
+  "src": "build/survey/probes/w31G_tcp2usnf_v1.c",
+  "maps": [
+   "_w31g_tcp2usnf=?convert_addr_tcp2usnf@@YAXPAUNET_ADDRESS@@PAUsockaddr_in@@@Z"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "Sibling twin of usnf2tcp (same batch, shared recipe): void __cdecl convert_addr_tcp2usnf(NET_ADDRESS *dst, sockaddr_in *src); differences: dst->fam = 1 FIRST (before the addr read/swap), then addr swap+store, then port read+swap+store; fam value 1 vs 2 and the swap's register cast (ax/cx with mov ch,cl / mov cl,ah in place of dx/cx dh/dl) falls out of the surrounding pressure from the same C text. Same 8-byte-only struct typedef suffices. EXACT first try."
+ },
+ {
+  "rva": 692368,
+  "obj": "w31G_sendhold_v2",
+  "src": "build/survey/probes/w31G_sendhold_v2.c",
+  "maps": [
+   "_w31g_sendhold=?SER_SendHoldingBuffer@@YAXXZ",
+   "_w31g_cb=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x12d",
+   "_w31g_b234=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x234",
+   "_w31g_d26=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x26",
+   "_w31g_p2a=?Ctrl@@3USERIAL_CONTROL_STRUCTURE@@A+0x2a",
+   "_w31g_mpi=?mpInfo@@3UMP_INFO@@C+0x14c",
+   "_w31g_rsput=_ser_rs232_putpacket@12",
+   "_w31g_sdl=?SER_ShutdownLowLevel@@YAXXZ"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "void __cdecl SER_SendHoldingBuffer(void): if (!Ctrl.b@0x12d) return; if (ser_rs232_putpacket(Ctrl.dword@0x234, Ctrl.dword@0x26, &Ctrl.field@0x2a)) { mpInfo.dword@0x14c = 1; SER_ShutdownLowLevel(); }. Levers: (1) plain if (!extern_char) emits a0 (mov al,moffs8) + 84 c0 test al,al \u2014 no staging needed; (2) TRAP: dis.py HID the c7 05 store of 1 to mpInfo+0x14c between the je and the tail jmp \u2014 cross-checked raw FA bytes (0x4fbcdc = mpInfo+0x14c) before spelling; (3) putpacket's p1 must be the VALUE of Ctrl+0x234 (v1 passed & \u2014 emitted pushimm instead of FA's 8b0d load, 2 B short); p3 = address-of field \u2192 push offset (68 imm32, addend 0x2a); putpacket stdcall@12 (its 3 args self-clean); (4) plain w31g_sdl() as the if-arm's last statement emits the e9 tail jmp CL needs (no patch); CL's je targets the final ret like FA. Map deltas verified against FA imm dwords (dis.py site annotations, common Ctrl base 0x5680e8); EXACT on compile 2."
+ },
+ {
+  "rva": 716016,
+  "obj": "w31G_ucfg_v1",
+  "src": "build/survey/probes/w31G_ucfg_v1.c",
+  "maps": [
+   "_w31g_ucfg=?UCONFIG_load_EA_CFG@@YGPAUCONFIG@@XZ",
+   "_w31g_sfl=?state_funcs_list@@3PAU__unnamed@@A+0x104",
+   "_w31g_lf=_LoadFile@16",
+   "_w31g_mar=@MMAccessR@4",
+   "_w31g_mfr=@MMFreeHandle@4"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [],
+  "span": null,
+  "tail": null,
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "void *__stdcall UCONFIG_load_EA_CFG(void): void *buf; long h = LoadFile((char*)&state_funcs_list+0x104, &buf, 0, 0); if (h == 0) return 0; p = MMAccessR(h); if (p->f0 == 0x28 && buf == (void*)0x157) return p; MMFreeHandle(h); return 0. Levers: (1) address-taken local: sub esp,4 + lea eax,[esp] emitted BEFORE the esi push (the &buf is computed early) \u2014 plain FPO/esp frameless stdcall; (2) h held in esi; if (h == 0) return 0 compiles to test esi,esi / jne body with the xor eax return block inline (jcc inverted); (3) the (f0 == 0x28 && buf == 0x157) check spelled as `if (A && B) return p;` yields cmp [eax],0x28 / jne fail / mov ecx,[esp+4] / cmp ecx,0x157 / je shared-tail \u2014 the && form's true-branch jumps to the merged pop/add/ret epilogue and the fail block (MMFreeHandle + xor eax) falls into it; (4) AIL callees: __stdcall LoadFile -> _LoadFile@16, __fastcall MMAccessR/MMFreeHandle -> @MMAccessR@4/@MMFreeHandle@4 emitted directly; state_funcs_list+0x104 passed as (char*)&w31g_sfl with push-offset + addend 0x104. EXACT first try."
+ }
+]

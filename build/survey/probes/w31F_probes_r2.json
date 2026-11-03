@@ -1,0 +1,15 @@
+[
+{"rva": 587296, "obj": "w31F_objalias_v2", "src": "build/survey/probes/w31F_objalias_v2.c",
+ "maps": ["_nextObjId=_nextObjId", "_objPtrs=_objPtrs"], "patch": [], "aliases": [], "span": "", "flags": "/c /O2 /Gy /G5"},
+{"rva": 587904, "obj": "w31F_objaliaswp_v2", "src": "build/survey/probes/w31F_objaliaswp_v2.c",
+ "maps": ["_OBJAlias@8=@OBJAlias@8", "_OBJAliasPreferred@16=_OBJAliasPreferred@16"], "patch": [], "aliases": [], "span": "", "flags": "/c /O2 /Gy /G5"},
+{"rva": 674928, "obj": "w31F_tobjlist_v2", "src": "build/survey/probes/w31F_tobjlist_v2.c",
+ "maps": ["_nextObjId=_nextObjId", "_objPtrs=_objPtrs", "_InBounds@8=_InBounds@8"], "patch": [], "aliases": [], "span": "", "flags": "/c /O2 /Gy /G5"},
+{"rva": 648496, "obj": "w31F_planefeetwet_v1", "src": "build/survey/probes/w31F_planefeetwet_v1.c",
+ "maps": ["_curId=_curId", "_curThing=_curThing", "_T_Info@24=_T_Info@24"],
+ "patch": ["0x23,9,8a4c2403a16f010000,5:6:_curThing"],
+ "provenance": ["patch 0x23: toolchain-diff - CL loads f (*(long*)(curThing+0x16f), a1 form) before mov cl,[esp+3]; FA order is mov cl,[esp+3] (out[3]) FIRST then a1 load. 9-byte pure swap of the two statements at 0x23-0x2b; CL's _curThing reloc inside the span is dropped and re-added as newsite 5:6:_curThing with CL's own addend content dword (0x16f) copied verbatim; no other bytes touched."],
+ "aliases": [], "span": "", "flags": "/c /O2 /Gy /G5"},
+{"rva": 842604, "obj": "w31F_doshapename_v2", "src": "build/survey/probes/w31F_doshapename_v2.c",
+ "maps": ["_shapeName=_shapeName", "_vector_table=vector_table"], "patch": [], "aliases": ["0=$FA$_t_cdb6c"], "span": "", "flags": "/c /O2 /Gy /G5"}
+]

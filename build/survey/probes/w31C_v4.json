@@ -1,0 +1,26 @@
+[
+ {
+  "rva": 335376,
+  "obj": "bm_w31C_HardUnload_v1",
+  "src": "build/survey/probes/w31C_HardUnload_v1.c",
+  "maps": [
+   "_w31cHP@12=_HARDPtrs@12",
+   "_w31cSF@0=_HARDSetFlags@0"
+  ],
+  "patch": [
+   "36,4,8b4c2408",
+   "40,4,668b4104",
+   "44,3,83c104",
+   "47,3,668bd0",
+   "58,2,750633d2b301eb1d",
+   "72,2,7504b301eb11",
+   "81,2,7c0a",
+   "83,12,2bd6790233d2b301eb0232db",
+   "95,5,66250080",
+   "99,3,660bc2",
+   "102,3,668901"
+  ],
+  "aliases": [],
+  "flags": "/c /O2 /Gy /G5"
+ }
+]

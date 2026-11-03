@@ -1,0 +1,84 @@
+[
+ {
+  "rva": 870000,
+  "obj": "w31B_d4670_v1",
+  "src": "build/survey/probes/w31B_d4670_v1.c",
+  "maps": [
+   "_w31b_t4d8abf=$FA$_t_4d8abf+0x1"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_4d4670"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT v1, plain C, no patches. int __stdcall f(S* p) { return t4d8abf(p->f18, 0, p->f28, p->f1c); } where t4d8abf is extern long __cdecl (the callee cleans 4 dwords: FA ends add esp,0x10 / ret 4; caller pushes 4 args RTL so the rightmost (p+0x1c) push lands BEFORE the ecx reload for p->f18 - plain RTL arg evaluation reproduces FA's sequence exactly: mov ecx,[esp+4]; mov eax,[ecx+0x1c]; mov edx,[ecx+0x28]; push eax; mov ecx,[ecx+0x18]; push edx; push 0; push ecx; call; add esp,0x10; ret 4. Map TO is a STILL-STUB anchor with interior delta: $FA$_t_4d8abf lives at 0x4d8abf (dis.py site annotation verbatim, call target 0x4d8ac0 = anchor+1; delta +0x1 verified against FA rel32 e8 39440000 -> 0x4d8ac0; stub group t000da.obj covers 0x4d8abf). alias 0=$FA$_t_4d4670 defines this chunk's own anchor."
+ },
+ {
+  "rva": 10064,
+  "obj": "w31B_2750_v1",
+  "src": "build/survey/probes/w31B_2750_v1.c",
+  "maps": [
+   "_w31b_t402770=$FA$_t_402770"
+  ],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_402750"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT v1, plain C, no patches. void __cdecl f(void* p) { *(long*)((char*)p+0x76)=0; t402770(p); } -- dis.py HIDES the zero-imm32 store (c7 40 76 00000000, wave-24 hidden-byte rule: raw FA dump caught it 2 bytes after push eax, i.e. the store precedes the call); CL loads p to eax, zeroes p+0x76, push eax (5 B mov+push, NOT push-mem), call, add esp,4, ret. Map TO is a STILL-STUB anchor $FA$_t_402770 (no delta; FA disp 0x0f -> 0x402770 verified; stub group t00002.obj covers 0x402770). alias 0=$FA$_t_402750."
+ },
+ {
+  "rva": 77104,
+  "obj": "w31B_12d30_v1",
+  "src": "build/survey/probes/w31B_12d30_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_412d30"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT v1, plain C, no patches. void __cdecl f(long** p) { long* t; long z; t=*p; z=0; t[27]=z; t=*p; t[5]=z; } -- FA stages the zero ONCE in edx (xor edx,edx) then stores with reg moves (89 51 6c / 89 51 14); spelling both stores through a z local forces the stage-reuse instead of two c7 imm32 forms, and re-spelling t=*p a second time forces FA's double reload of [p] (mov ecx,[eax] twice) - CL does not CSE them across the reassignment. offsets in long units: 0x6c=27, 0x14=5. alias 0=$FA$_t_412d30."
+ },
+ {
+  "rva": 100864,
+  "obj": "w31B_18a00_v1",
+  "src": "build/survey/probes/w31B_18a00_v1.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_418a00"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT v1, plain C, no patches. void __cdecl f(char* p) { char* d = *(char**)(p+0x18e); *(long*)(d+0x5a)=*(long*)(p+0x102); *(long*)(d+0x5e)=*(long*)(p+0x56); } -- dst-load-then-two-stores shape: d is loaded FIRST (edx) and reused for both stores; the two source loads (p+0x102 into ecx, p+0x56 into eax) reproduce FA's register juggling. char* arithmetic keeps all byte-offset displacements unscaled. alias 0=$FA$_t_418a00."
+ },
+ {
+  "rva": 125488,
+  "obj": "w31B_1ea30_v4",
+  "src": "build/survey/probes/w31B_1ea30_v4.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_41ea30"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT v4, plain C, no patches. char __stdcall f(long p) { char* h = *(char**)(p+0x3c); return *(long*)(h+p)==0x4c50; } -- two steering tells: (a) param typed long (NOT char*) so CL loads it into eax FIRST and keeps p live in eax to the end (FA: eax=p survives into ret 4; sete al only touches al); (b) the loaded pointer typed char* (h) so h+p is an UNSCALED byte add -> sib 01 = [ecx+eax*1]. With h as long* CL emits sib 84 [ecx+eax*4] (v3, 1-byte miss); with p as char* + (long)p cast CL re-allocates (mov ecx,[esp+4] + push ebx pad, v2). Compare via cmp [reg+reg],imm32 (81 3c 01 504c0000) is plain-C reachable; dis.py HIDES this cmp - found only in raw FA dump. 1-byte char return keeps CL from emitting movsx/movzx after sete al. alias 0=$FA$_t_41ea30."
+ },
+ {
+  "rva": 355328,
+  "obj": "w31B_56c00_v2",
+  "src": "build/survey/probes/w31B_56c00_v2.c",
+  "maps": [],
+  "patch": [],
+  "provenance": [],
+  "aliases": [
+   "0=$FA$_t_456c00"
+  ],
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "EXACT v2, plain C, no patches. short __cdecl f(short s) { short t=s; short r; if (t<0) return 0; r=255; if (t>255) return r; r=t; return r; } -- the FA shape is staged-then-test, NOT the naive two-if return ladder: 255 must be STAGED INTO THE RESULT REG (r) BEFORE the >255 test (FA: mov ax,0xff; cmp cx,0xff; jg ret - the >255 arm returns the already-staged r), and the in-range path copies the full dword r=t (mov eax,ecx, no movsx). r declared AFTER t so t allocates a non-ax register (cx) - that is what makes the second compare the 5-B non-acc form 66 81 f9 ff 00 (CL's ax-resident compare spells the 4-B acc form 66 3d, v1 miss) and the first test 66 85 c9 test cx,cx. short t = s keeps the 16-bit load 66 8b 4c 24 04 and 16-bit test/jge; jge polarity comes free with t<0 first. v1 (returns 0/255/t straight from two ifs) had CL's reversed arm order; v3 (ternary) and v4 (int r) also missed the staging. alias 0=$FA$_t_456c00."
+ }
+]

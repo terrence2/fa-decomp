@@ -1,0 +1,117 @@
+[
+ {
+  "rva": 73936,
+  "obj": "bm_w31C_SortObjs_v3",
+  "src": "build/survey/probes/w31C_SortObjs_v3.c",
+  "maps": [],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "fastcall quicksort(PI *lo,PI *hi) with PI=pointer-to-int*-ish (obj ptrs; compares **i/**j/**lo via two-level deref; swap 3 word moves through t). KEY: partition must be an inner for(;;) { ... if (i<j){swap;continue;} break; } inside the outer do-while - CL's 'continue' in a do-while jumps to the BOTTOM LATCH, but FA's swap path jumps back to the '++i' head, so an inner for(;;) redirects it. Partition tests negated (**i >= **lo / **j <= **lo) so CL emits 7f/jg polarity matching FA; recursion test (long)(hi-j) <= (long)(j-lo), recurse j+1 first when true (smaller side last in FA order: FA recurses the J-SIDE?? see below) else recurse lo side and set lo=j+1, i=lo, j=hi+1. hi<=lo early-out. Self-recursive so maps=[] - FA's rel32 call lands on the chunk base itself (masked+verified). Tail census-proven, no patches."
+ },
+ {
+  "rva": 332368,
+  "obj": "bm_w31C_FMHook_v2",
+  "src": "build/survey/probes/w31C_FMHook_v2.c",
+  "maps": [
+   "_w31cFlg=_curThingType+0xba",
+   "_w31cCid=_curId",
+   "_w31cScls=_pmapCalled+0x1934",
+   "_w31cSopn=_pmapCalled+0x1928",
+   "_w31cCt=_curThing+0x16f",
+   "_w31cSon@60=?SoundOn@@YGFPADFFDGFFDFFGGFEF@Z"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "fastcall (unsigned char c). THE fix: the two flag RMWs are mem-form 81 0d (or [moffs],400h) / 81 25 (and [moffs],0xfffffbff) which plain C CANNOT produce (CL always emits a1/0d/a3 load-or-store for extern |=/&= - memtest proven); inline __asm or/and dword ptr [w31cCt], 400h/0fffffbffh emits 1:1 with DIR32 relocs. Branch placement: C spells c!=0 as the if-body (CL fall-through = if) so the c==0/opn block sits at the chunk end - FA's a1/je prologue reads _curThingType+0xba, test cl,cl, je -> opn-at-end. SoundOn is 15 args (w31cSon@60=?SoundOn@@YG... map, push stream 6a00 6a00 6a00 6a00 + 66 a1 [curId] + 6a00 6a50 6a00 6a32 68 9c4 50 6a00 6a4b 6a17 verified vs FA imm bytes). Map TOs verified vs FA imm bytes: 0x508bda=_curThingType+0xba, 0x4f2f24=_curId, 0x4f2890=_pmapCalled+0x1934 (scls, OR branch), 0x4f2884=_pmapCalled+0x1928 (opn, AND branch), 0x5088a7=_curThing+0x16f. Tail pad 05 00 00 00 00, no patches."
+ },
+ {
+  "rva": 337088,
+  "obj": "bm_w31C_HardFindJammer_v2",
+  "src": "build/survey/probes/w31C_HardFindJammer_v2.c",
+  "maps": [
+   "_w31cFS@12=_HARDFindStore@12",
+   "_w31cHP@12=_HARDPtrs@12"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "fastcall (idx): calls w31cFS(idx,7,255) then w31cHP(res,&scratch,0). KEY: pass a dedicated 'long scratch;' local (not &pv of the returned pointer) as the out-slot arg2 - CL then emits 6a00 imm-pushes for the two const-0 args, 53 56 prologue, idx in esi, no store-backs; v1's &pv made CL emit 894424?? store-back/self-assign noise. scratch is dead after - fits FA. Call TOs = plain rel32 to _HARDFindStore@12 0x4525a0 / _HARDPtrs@12 0x451d90 bases (rel32 masked; names = layout syms verbatim). No patches; tail census-proven."
+ },
+ {
+  "rva": 338416,
+  "obj": "bm_w31C_HardGunsOnly_v3",
+  "src": "build/survey/probes/w31C_HardGunsOnly_v3.c",
+  "maps": [
+   "_w31cFS@12=_HARDFindStore@12",
+   "_w31cHP@12=_HARDPtrs@12",
+   "@w31cUn@8=@HARDUnload@8"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "stdcall (), do/while(1) scan: loc=0x7fffffff; mask=0x80; idx=w31cFS(&loc,7,255); break on -1; pv=w31cHP(idx,0,0); skip if pv==0 or *(unsigned long*)((char*)pv+0xa6)&mask; else w31cUn(idx,0) then w31cHP(idx,&outv,0); *(long*)outv=0. KEY: SPLIT the two HP-result slots - pv (register-returned, NO addr taken) vs outv (addr taken, holds the field pointer to zero). With pv/outv separate and mask its own local, CL keeps mask in esi, emits 6a00 imm pushes for the const-0 args, and the final zero-store goes through outv reload (c7-style 7-byte mov [reg],0 like FA; v1/v2's unified &pv store slot produced 8930 2-byte store + 8944240c store-backs). Unload call map FROM '@w31cUn@8' (fastcall spelling, no underscore). No patches."
+ },
+ {
+  "rva": 335376,
+  "obj": "bm_w31C_HardUnload_v1",
+  "src": "build/survey/probes/w31C_HardUnload_v1.c",
+  "maps": [
+   "_w31cHP@12=_HARDPtrs@12",
+   "_w31cSF@0=_HARDSetFlags@0"
+  ],
+  "patch": [
+   "36,4,8b4c2408",
+   "40,4,668b4104",
+   "44,3,83c104",
+   "47,3,668bd0",
+   "58,2,750633d2b301eb1d",
+   "72,2,7504b301eb11",
+   "81,2,7c0a",
+   "83,12,2bd6790233d2b301eb0232db",
+   "95,5,66250080",
+   "99,3,660bc2",
+   "102,3,668901"
+  ],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "provenance": [
+   "patch 36: toolchain-diff - pv moved to ECX: CL kept pv in EAX+stack ([esp+8]) and re-loaded it (8b442408); FA parks pv in ECX after the HP call and walks the field pointer with 8b4c2408/668b4104/83c104.",
+   "patch 40: toolchain-diff - w load + field pointer advance: 66 8b 41 04 (mov ax,[ecx+4]) then 83 c1 04 (add ecx,4) - CL's 668b4804/83c004 uses eax-based addressing (pv in EAX); register-role swap only, same encodings/lengths.",
+   "patch 44: toolchain-diff - field-pointer advance: FA bumps pv by 4 right after the w word-load (66 8b 41 04 then 83 c1 04, add ecx,4); CL folds the pointer advance elsewhere and drops this add, so the 3-byte form is supplied at span 44 (no relocs in the block).",
+   "patch 47: toolchain-diff - lim=w&7fff keeps edi: CL 668bd1 (mov dx,cx); FA 668bd0 (mov dx,ax) because FA's w lives in AX after the ECX repoint.",
+   "patch 58: toolchain-diff - branch un-CSE: CL CSE-merged the three identical r=1 stores and placed the b==0 case at chunk end (je +0x15 over the chain). FA: test esi,esi (b); jne+6 skips the INLINE b==0 block 33d2 b301 (lim=0 via xor edx,edx; mov bl,1); eb 1d joins at the and-accumulator (patched offset 0x5f). Inserted displacement verified: 0x3a+2+6=0x42 chain, 0x40+0x1d=0x5f join; +6 shift for later sites.",
+   "patch 72: toolchain-diff - 0x7fff-case jne rebuilt: FA 7504 (cmp edx,0x7fff; jne skips own b301 r=1) + eb 11 join at 0x5f; CL's 740f jumped to a SHARED merged store block that does not exist in FA. Displacement 0x48+2+4=0x4e re-test, 0x4c+0x11=0x5f join; +4 shift.",
+   "patch 81: toolchain-diff - lim<1 test polarity: FA jc-form 7c 0a (jl) to the r=0 store at chunk bottom; CL emitted jge (7d04) into the shared store. 0x51+2+0x0a=0x5d.",
+   "patch 83: toolchain-diff - block reorder: FA order is sub-clamp (2bd6 7902 = lim-=b; jns skip) then 33d2 b301 (its own r=1, taken when clamped) then eb 02 then 32db (r=0) at bottom; CL had 32db/eb08 leading and shared 33d2/b301. Pure 12-byte move, no length change; eb02 target 0x5b+2+2=0x5f join.",
+   "patch 95: toolchain-diff - and-accumulator: FA 66 25 00 80 (and ax,0x8000, 4B) with lim in DX; CL's 66 81 e1 00 80 (and cx,0x8000, 5B) - reg-role swap, -1 shift.",
+   "patch 99: toolchain-diff - or accumulator: FA 66 0b c2 (or ax,dx); CL 66 0b ca (or ax,cx).",
+   "patch 102: toolchain-diff - field store: FA 66 89 01 (mov [ecx],ax via the ECX field pointer); CL 66 89 08 (mov [eax],ax)."
+  ],
+  "notes": "fastcall (a,b): pv via w31cHP(a,&pv,0); early return 0 if !pv; w=*(ushort*)(pv+4); lim=w&0x7fff; b==0 -> lim=0,r=1; lim==0x7fff -> r=1; (long)lim<1 -> r=0; else lim-=b, clamp to 0, r=1; store (w&0x8000)|lim back; w31cSF(); return r. ALL 3 C spellings (if/else-if chain, explicit p local, nested else) canonicalize to the SAME 109-B CL output, so the 6 residual diffs (register roles pv->ECX/w->AX, per-branch r=1 un-CSE, je/jl polarity + inline block order, and-accumulator a-form) are unfixable from C and closed with 11 patches above (CL base 109 B -> FA code 118 B; FA tail pad 8d4900 + 8da42400000000, both census patterns). Post-patch call sites: rel32 at 0x69 -> _HARDSetFlags@0 (FA imm 42 08 00 00 = 0x526c0 verified); 0x10 rel32 (unshifted) -> _HARDPtrs@12 (FA 6c ff ff ff = 0x51d90 verified). Every jcc/jmp displacement of inserted bytes re-verified in final layout."
+ },
+ {
+  "rva": 73200,
+  "obj": "bm_w31C_MaybeExit_v1",
+  "src": "build/survey/probes/w31C_MaybeExit_v1.c",
+  "maps": [
+   "_w31cDin=?doReceiveInGetKey@@3DA",
+   "_w31cAdc=?adCount@@3EA",
+   "_w31cDD=_DoDialogInfoBox@8",
+   "_w31cPS=?PlaySeq@@YGDPADJJ@Z",
+   "_w31cWC=_WriteConfig",
+   "_w31cEE=_ErrorExit"
+  ],
+  "patch": [],
+  "aliases": [],
+  "span": "",
+  "flags": "/c /O2 /Gy /G5",
+  "notes": "cdecl void(): r=w31cDD(&w31cDin[8],3); if(r==1){ c=w31cAdc; if(c<3){ w31cPS(&w31cDin[4],0x280,0x1e0); ++w31cAdc; } else { ++c; w31cAdc=c; if(c>100) w31cAdc=3; } w31cWC(); w31cEE(0);} - r as short so the ax compare (66 3d 0100) is a CMP-IMM16; c as register uchar (fa/a0/a2 byte ops with named global); c<3 uses jae (else-path) and c>100 jbe skip. All moffs verified vs FA imm bytes: push 0x4e8e14 = din+8, push 0x4e8e10 = din+4, a0/a2/fe05/c605 use 0x51df58 = ?adCount@@3EA. Call rel32s verified: 0x4a05b0=_DoDialogInfoBox@8, 0x4129a0=?PlaySeq@@YGDPADJJ@Z, 0x41e420=_WriteConfig, 0x449740=_ErrorExit. add esp,4 covers the cdecl EE(0) push; DD is stdcall (no esp fix). Tail pad 8da42400000000, no patches."
+ }
+]
