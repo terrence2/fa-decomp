@@ -29542,5 +29542,411 @@
   ],
   "notes": "176-B CP shutdown: 5x @MMFreeHandle@4 + @MMFreePtr@4 destructor chain over _hud+0x28f/-interior fields then 3x $FA$_t_40e1c0 teardown calls; natural-C attempt rejected: gap-anchor call wall ($FA$_t_40e1c0) - transplant",
   "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 472912,
+  "verdict": "EXACT",
+  "obj": "w56A_h73750",
+  "src": "build/survey/probes/w56A/husk_h73750.c",
+  "maps": [],
+  "patch": [
+   "0,1,83ec08a1f8764e008b0dfc764e00908944240053568a15c4714f00668b35489e540057894c24105566c705489e5400ff7f84d274046a07eb026a086a01b8050000008a0d34774e00d3e0508a0d30774e00b805000000d3e05068203e4f00e8fd82f9ffe8f89bf9ff833d08764e00000f9fc3a1bce45100ba0202000085c00f94c1e88a93f9ff8b0dbce45100ba0302000083f9010f94c1e87493f9ff8b0dbce45100ba0402000083f9020f94c1e85e93f9ff8b0dbce45100ba0502000083f9030f94c1e84893f9ff8b0dbce45100ba0602000083f9040f94c1e83293f9ff8b0dbce45100ba0702000083f9050f94c1e81c93f9ff8b0dbce45100ba0802000083f9060f94c1e80693f9ff8b0ddce45100ba0a02000083f9070f94c1e8f092f9ff8b0ddce45100ba0b02000083f9080f94c1e8da92f9ff8b0de8e45100ba0d02000083f9090f94c1bf00080000e8bf92f9ff8b0de8e45100ba0e02000083f90a0f94c1e8a992f9ffa1fc764e00ba1002000085c70f94c1e89592f9ff8b0dfc764e00ba1102000085cf0f95c1e88092f9ff6681feff7fba040300000f94c1e86e92f9ff6683feffba050300000f94c1e85d92f9ff6685f6ba060300000f94c1e84d92f9ff6683fe01ba070300000f94c1e83c92f9ff6683fe02ba080300000f94c1e82b92f9ff6683fe03ba090300000f94c1e81a92f9ff8b0df8764e00ba0a030000f7c1000040000f95c1e80192f9ff8b0df8764e00ba0b030000f6c5100f95c1e8eb91f9ff8b0df8764e00ba0e030000f6c5400f95c1e8d591f9ff8b0df8764e00ba0f03000085cf0f95c1e8c091f9ff8b0df8764e00ba10030000f7c1000080000f95c1e8a791f9ff8b0df8764e00ba11030000f6c5200f95c1e89191f9ff8b0df8764e00f6c5020f95c1ba12030000e87b91f9ff8b0df8764e00ba13030000f7c1000000020f95c1e86291f9ff8b0df8764e00ba14030000f7c1000010000f94c1e84991f9ff66813dba3555002003b90e0300007e11e8d491f9ffb90f030000e8ca91f9ffeb0fe8b391f9ffb90f030000e8a991f9ff66813dba3555008002b9100300007d07e8a491f9ffeb05e88d91f9ff66833d30764e0000751466a14c764e00b901000000663905ccc25100740233c9ba01040000e8d390f9ff66833d30764e0001751466a14c764e00b901000000663905ccc25100740233c9ba02040000e8a990f9ff66833d30764e0000751f66a14c764e00663905ccc25100751066813d34764e00fe1fb901000000740233c9ba03040000e87490f9ff66833d30764e0002751466a14c764e00b901000000663905ccc25100740233c9ba04040000e84a90f9ff66833d30764e000a751466a14c764e00b901000000663905ccc25100740233c9ba05040000e82090f9ff66833d30764e0009751466a14c764e00b901000000663905ccc25100740233c9ba06040000e8f68ff9ff66833d30764e0006751466a14c764e00b901000000663905ccc25100740233c9ba07040000e8cc8ff9ff66833d30764e0007751466a14c764e00b901000000663905ccc25100740233c9ba08040000e8a28ff9ff66833d30764e0005751466a14c764e00b901000000663905ccc25100740233c9ba09040000e8788ff9ff66833d30764e0003751466a14c764e00b901000000663905ccc25100740233c9ba0a040000e84e8ff9ff66833d30764e0006751b33c066a14c764e008b0c8598ad54008a11b90100000080fa06740233c9ba0b040000e81d8ff9ffa1f8764e00ba0e040000f6c4800f95c1e8088ff9ff8a0de0fe4e00ba0205000084c90f94c1e8f38ef9ff8a0de0fe4e00ba0305000080f9010f94c1e8dd8ef9ff8a0de0fe4e00ba0405000080f9020f94c1e8c78ef9ff8b0df8764e00ba0206000083e101e8b48ef9ff8b0df8764e00ba03060000f6c1020f95c1e89e8ef9ff8b0df8764e00ba04060000f6c1040f95c1e8888ef9ff8b0df8764e00ba05060000f6c1080f95c1e8728ef9ff8b0df8764e00ba06060000f7c1000002000f95c1e8598ef9ff8b0df8764e00ba07060000f6c1100f95c1e8438ef9ff8b0df8764e00ba08060000f6c1400f95c1e82d8ef9ff8b0df8764e00ba09060000f7c1000004000f95c1e8148ef9ff8b0df8764e00ba0a060000f7c1000000010f95c1e8fb8df9ff8b0df8764e00ba0b060000f6c1200f95c1e8e58df9ff8b0df8764e00ba0c060000f7c1000008000f95c1e8cc8df9ff8b0df8764e00ba0d060000f6c1800f94c1e8b68df9ff8b0df8764e00ba0e060000f6c5010f94c1e8a08df9ff8b0df8764e00ba0f060000f7c1000000080f94c1e8878df9ff8b0dfc764e00ba11060000f6c5100f95c1e8718df9ff8b0dfc764e00ba12060000f6c5200f95c1bf00040000e8568df9ff8b0dfc764e00ba13060000f6c5300f94c1e8408df9ffa1f8764e00ba1406000085c70f95c1e82c8df9ff8b0dfc764e00ba1506000085cf0f95c1e8178df9ff8b0df8764e00ba16060000f7c1000020000f95c1e8fe8cf9ffbf0100000083ff02750383c7038bd733c980ce0547e8e48cf9ff83ff0f7ce633ff33d28a97f871530085d2741583fa027c0383c20380ce05b901000000e8bc8cf9ff4783ff067cd9a1fc764e00ba02070000a8800f95c1e8a28cf9ff8b0dfc764e00ba0307000083e101e88f8cf9ff8b0dfc764e00ba04070000f6c1020f95c1e8798cf9ff8b0dfc764e00ba05070000f6c1040f95c1e8638cf9ff8b0dfc764e00ba06070000f6c1080f95c1e84d8cf9ff8b0dfc764e00ba07070000f6c1100f95c1e8378cf9ff8b0dfc764e00ba08070000f6c1200f95c1e8218cf9ff8b0dfc764e00ba09070000f6c5010f95c1e80b8cf9ff8b0dfc764e00ba0a070000f7c1000004000f94c1bf01000000e8ed8bf9ff8b0dfc764e00ba0b070000f6c1400f95c1e8d78bf9ffa0c4714f0084c0740a8bcf80cd08e8548cf9ff4783ff047ee7a0c4714f0084c00f85e1000000a1fc764e00ba01080000f6c4800f95c1e89c8bf9ff8b0dfc764e00ba02080000f6c5020f95c1e8868bf9fff6058d034f00c00f95c1ba04080000e8728bf9fff6058d034f00100f95c1ba05080000e85e8bf9fff6058d034f00080f95c1ba06080000e84a8bf9fff6058d034f00200f95c1ba07080000e8368bf9fff6058c034f00040f95c1ba08080000e8228bf9fff6058d034f00060f95c1ba09080000e80e8bf9ff66f7058c034f0040010f95c1ba0a080000e8f88af9fff6058c034f00100f95c1ba0b080000e8e48af9fff6058c034f00080f95c1ba0c080000e8d08af9ffbd010000008bfda104764e008bcf3bc5750a80cd07e8568bf9ffeb0880cd07e83c8bf9ff4783ff0b7edda104764e0083f8017e28b905030000e8328bf9ffb907030000e8288bf9ffb908030000e81e8bf9ffb909030000e8148bf9ff84db7439b90a030000bf01000000e8018bf9ff83ff0f740a8bcf80cd06e8f28af9ff4783ff157eebbf010000008bcf4780cd07e8dc8af9ff83ff097ef0e8c2e5f9ff83f81b0f840c0c0000e8047affffe82f81f9ff25ffff00003d020200008bc87f200f843901000081f9010100000f84c90b000081f9020100000f84e8000000ebba81f9010300007f180f84e200000081e90302000083f90e77a1ff248d9c4d470081f9010400007f180f84c703000081e90203000083f9127781ff248dd84d470081f9010500007f1c0f849704000081e90204000083f90c0f875dffffffff248d244e470081f9020600007f1c0f844805000081e90205000083f90b0f8739ffffffff248d584e470081f9020700007f1c0f84b408000081e90306000083f9130f8715ffffffff248d884e470081f9010800007f1c0f849c09000081e90307000083f9080f87f1feffffff248dd84e470081e90208000083f9090f87dbfeffffff248dfc4e4700e896dbf9ffe9cafeffffe87cbe0200e9c0feffffe8d2c00200e9b6feffff33c9e82666f9ffe9aafeffffb901000000e81766f9ffe99bfeffffc705bce45100000000006a00e84133faff83c404e91bf5ffffa110c45400a803740ac705bce4510001000000a1bce4510050e81b33faff83c404e9f5f4ffffa110c45400a803740ac705bce4510002000000a1bce4510050e8f532faff83c404e9cff4ffffa110c45400a803740ac705bce4510003000000a1bce4510050e8cf32faff83c404e9a9f4ffffa110c45400a803740ac705bce4510004000000a1bce4510050e8a932faff83c404e983f4ffffa110c45400a803740ac705bce4510005000000a1bce4510050e88332faff83c404e95df4ffffa110c45400a803740ac705bce4510006000000a1bce4510050e85d32faff83c404e937f4ffffc705dce45100070000006a07e84432faff83c404e91ef4ffffa110c45400a808740ac705dce4510008000000a1dce4510050e81e32faff83c404e9f8f3ffffc705e8e45100090000006a09e80532faff83c404e9dff3ffffa110c45400a804740ac705e8e451000a000000a1e8e4510050e8df31faff83c404e9b9f3ffffa1fc764e006a0025fff7ffff6a00a3fc764e00e81f5a0000e99cf3ffffa1fc764e000d00080000a3fc764e00e988f3ffff66beff7feb1b66beffffeb156633f6eb1066be0100eb0a66be0200eb0466be0300a104764e0083f8010f8e59f3ffff6681feff7f0f844ef3ffff6633f6e946f3ffff84db0f853ef3ffffa1f8764e003500004000a3f8764e00e92af3ffffa1f8764e003500100000a3f8764e00e916f3ffffa1f8764e003500400000a3f8764e00e902f3ffffa1f8764e003500080000a3f8764e00e9eef2ffffe8b747fcffa1f8764e003500008000a3f8764e00e8a341fcffe9d0f2ffffa1f8764e003500200000a3f8764e00e9bcf2ffffa1f8764e003500020000a3f8764e00e9a8f2ffffbf00000002a1f8764e0033c7b90b000000a3f8764e00e8ab3cfcff853df8764e000f8481f2ffffb90b000000e8953cfcffe972f2ffffa1f8764e003500001000a3f8764e00e95ef2ffffb930764e00ba003b0000e8bda3f9ffe94af2ffffb930764e00ba003c0000e8a9a3f9ffe936f2ffffb930764e00ba003d0000e895a3f9ffe922f2ffffb930764e00ba003e0000e881a3f9ffe90ef2ffffb930764e00ba003f0000e86da3f9ffe9faf1ffffb930764e00ba00400000e859a3f9ffe9e6f1ffffb930764e00ba00410000e845a3f9ffe9d2f1ffffb930764e00ba00420000e831a3f9ffe9bef1ffffb930764e00ba00430000e81da3f9ffe9aaf1ffffb930764e00ba00440000e809a3f9ffe996f1ffffb930764e00ba00580000e8f5a2f9ffe982f1ffffa1f8764e003500800000a3f8764e00e96ef1ffffb901000000e8823bfcffe95ff1ffffc605e0fe4e0000e953f1ffffc605e0fe4e0001e947f1ffffc605e0fe4e0002e93bf1ffffa1f8764e00a900000002740fb90b000000e8433bfcffe920f1ffffb902000000e8343bfcffe911f1ffffb903000000e8253bfcffe902f1ffffb904000000e8163bfcffe9f3f0ffffb905000000e8073bfcffe9e4f0ffffb906000000e8f83afcffe9d5f0ffffb907000000e8e93afcffe9c6f0ffffb908000000e8da3afcffe9b7f0ffffb909000000e8cb3afcffe9a8f0ffffb90a000000e8bc3afcffe999f0ffff84db0f8591f0ffff66833dccc25100000f8483f0ffff668b0dccc25100e825d3feffa01b88500084c07415a1f8764e0083e0f8a3f8764e0083c801a3f8764e00e8d2d3feffe94ff0ffff84db0f8547f0ffff66833dccc25100000f8439f0ffff668b0dccc25100e8dbd2feffa01b88500084c07415a1f8764e0083e0f8a3f8764e0083c802a3f8764e00e888d3feffe905f0ffff84db0f85fdefffff66833dccc25100000f84efefffff668b0dccc25100e891d2feffa01b88500084c07415a1f8764e0083e0f8a3f8764e0083c804a3f8764e00e83ed3feffe9bbefffff84db0f85b3efffffa1f8764e0083f008a3f8764e00e9a1efffff84db0f8599efffffa1f8764e003500000200a3f8764e00e985efffff84db0f857defffffa1f8764e0083f010a3f8764e00e96befffff84db0f8563efffff66833dccc25100000f8455efffff668b0dccc25100e8f7d1feffa01b88500084c074078335f8764e0040e8b2d2feffe92fefffff84db0f8527efffffa1f8764e003500000400a3f8764e00e913efffff84db0f850befffffa1f8764e003500000001a3f8764e00e9f7eeffff84db0f85efeeffffa1f8764e0083f020a3f8764e00e9ddeeffff84db0f85d5eeffffa1f8764e003500000800a3f8764e00e9c1eeffff84db0f85b9eeffffa1f8764e003580000000a3f8764e00e9a5eeffff84db0f859deeffffa1f8764e003500010000a3f8764e00e989eeffffa1f8764e003500000008a3f8764e00e975eeffffb8001000008b0dfc764e000bc8890dfc764e0081e1ffdfffff890dfc764e0085c80f844eeeffff6a0368803d4f00e830bc0200663d01007414a1fc764e0025ffefffffa3fc764e00e928eeffff6a00e86f8ffcff83c404e919eeffffb8002000008b0dfc764e000bc8890dfc764e0081e1ffefffff890dfc764e0085c80f84f2edffff6a0368e03c4f00e8d4bb0200663d01007414a1fc764e0025ffdfffffa3fc764e00e9ccedffff6a01e8138ffcff83c404e9bdedffffa1fc764e006a0125ffefffff68843c4f00a3fc764e0025ffdfffffa3fc764e00e886bb0200e993edffff84db0f858bedffffa1f8764e003500040000a3f8764e00e977edffffa1fc764e003500040000a3fc764e00e963edffff84db0f855bedffffb8000020008b0df8764e0033c8890df8764e0085c8742a6a0368f03b4f00e826bb0200663d01000f842eedffffa1f8764e0025ffffdfffa3f8764e00e91aedffff6a0168983b4f00e8fcba0200e909edffff84db0f8501edffffa1fc764e0083e0fea3fc764e003580000000a3fc764e00e9e5ecffff84db0f85ddecffffa1fc764e00257fffffffa3fc764e0083f001a3fc764e00e9c1ecffff84db0f85b9ecffffa1fc764e0083f002a3fc764e00e9a7ecffff84db0f859fecffffa1fc764e0083f004a3fc764e00e98decffff84db0f8585ecffffa1fc764e0083f008a3fc764e00e973ecffff84db0f856becffffa1fc764e0083f010a3fc764e00e959ecffff84db0f8551ecffffa1fc764e0083f020a3fc764e00e93fecffff84db0f8537ecffffa1fc764e003500010000a3fc764e00e923ecffffa1fc764e003500000400a3fc764e00e90fecffffa1fc764e0083f040a3fc764e00e9fdebffff8a0dc4714f0084c97577b8008000008b0dfc764e0033c88a1528764e00890dfc764e0084d20f84d2ebffff8b0d04764e0083f9010f85c3ebffff8b0dfc764e0085c8742f668b35f8c251006a00c60528764e0000e87205f9ff668935f8c2510083c404c60528764e000166beff7fe98aebffff33f6668935f8c25100e97cebffff2d0108000050e82f60040083c404e969ebffff8a0dc4714f0084c97514a1fc764e003500020000a3fc764e00e94bebffff2d0108000050e8fe5f040083c404e938ebffff8a0dc4714f0084c90f842aebffff2d0108000050e8dd5f040083c404e917ebffff8a0dc4714f0084c9750c80358d034f00c0e901ebffff2d0108000050e8b45f040083c404e9eeeaffff80358d034f0010e9e2eaffff80358d034f0008e9d6eaffff80358d034f0020e9caeaffff80358c034f0004e9beeaffff80358d034f0006e9b2eaffff6681358c034f004001e9a4eaffff80358c034f0010e998eaffffb902100000e85ccff9ffe867dafbffe87202fcffe82debfbffe8d81601006a01e84173f9ffe88cfe000066c7057a764e000000668935489e5400e8b796faff8b4424108b0df8764e003bc87405e8e4fb00008b4424148b0dfc764e003bc87405e8d1fb0000e88cb3ffff5d5f5e5b83c408c3a7424700cd424700f3424700194347003f43470065434700294147008b434700a443470029414700ca434700e343470029414700094447002644470069424700294147003a44470040444700464447004b44470051444700574447007c44470098444700734247007f424700ac444700c0444700d4444700f2444700064547001a45470050454700784547008c454700a0454700b4454700c8454700dc454700f045470004464700184647002c464700294147002941470040464700634647006f4647007b46470087464700b1464700c0464700cf464700de464700ed464700fc4647000b4747001a47470073474700bd47470007484700214847003d4847005748470093484700af484700cb484700e5484700014947001d49470039494700294147004d494700a9494700054a47002f4a47004b4a47005f4a4700dd4a4700014b47001b4b4700354b47004f4b4700694b4700834b47009f4b4700b34b4700594c47008a4c4700ab4c4700d44c4700e04c4700ec4c4700f84c4700044d4700104d47001e4d470005000000008da42400000000,4:6:_gamePrefs+0x0,10:6:_gameMultiPrefs+0x0,23:6:_freeFlightMission+0x0,30:6:_timeCompression+0x0,43:6:_timeCompression+0x0,68:6:_yscale+0x0,77:6:_xscale+0x0,90:6:?masterNextScreen@@3JA+0x600,106:6:_thisComputer+0x0,115:6:_stickDevice+0x0,136:6:_stickDevice+0x0,158:6:_stickDevice+0x0,180:6:_stickDevice+0x0,202:6:_stickDevice+0x0,224:6:_stickDevice+0x0,246:6:_stickDevice+0x0,268:6:_rudderDevice+0x0,290:6:_rudderDevice+0x0,312:6:_throttleDevice+0x0,339:6:_throttleDevice+0x0,360:6:_gameMultiPrefs+0x0,381:6:_gameMultiPrefs+0x0,504:6:_gamePrefs+0x0,529:6:_gamePrefs+0x0,551:6:_gamePrefs+0x0,573:6:_gamePrefs+0x0,594:6:_gamePrefs+0x0,619:6:_gamePrefs+0x0,641:6:_gamePrefs+0x0,663:6:_gamePrefs+0x0,688:6:_gamePrefs+0x0,714:6:_grMode+0xa,762:6:_grMode+0xa,790:6:_mainV+0x0,799:6:_mainV+0x1c,811:6:_playerId+0x0,832:6:_mainV+0x0,841:6:_mainV+0x1c,853:6:_playerId+0x0,874:6:_mainV+0x0,883:6:_mainV+0x1c,890:6:_playerId+0x0,899:6:_mainV+0x4,927:6:_mainV+0x0,936:6:_mainV+0x1c,948:6:_playerId+0x0,969:6:_mainV+0x0,978:6:_mainV+0x1c,990:6:_playerId+0x0,1011:6:_mainV+0x0,1020:6:_mainV+0x1c,1032:6:_playerId+0x0,1053:6:_mainV+0x0,1062:6:_mainV+0x1c,1074:6:_playerId+0x0,1095:6:_mainV+0x0,1104:6:_mainV+0x1c,1116:6:_playerId+0x0,1137:6:_mainV+0x0,1146:6:_mainV+0x1c,1158:6:_playerId+0x0,1179:6:_mainV+0x0,1188:6:_mainV+0x1c,1200:6:_playerId+0x0,1221:6:_mainV+0x0,1232:6:_mainV+0x1c,1239:6:_objPtrs+0x0,1268:6:_gamePrefs+0x0,1290:6:_envelopeType+0x0,1311:6:_envelopeType+0x0,1333:6:_envelopeType+0x0,1355:6:_gamePrefs+0x0,1374:6:_gamePrefs+0x0,1396:6:_gamePrefs+0x0,1418:6:_gamePrefs+0x0,1440:6:_gamePrefs+0x0,1465:6:_gamePrefs+0x0,1487:6:_gamePrefs+0x0,1509:6:_gamePrefs+0x0,1534:6:_gamePrefs+0x0,1559:6:_gamePrefs+0x0,1581:6:_gamePrefs+0x0,1606:6:_gamePrefs+0x0,1628:6:_gamePrefs+0x0,1650:6:_gamePrefs+0x0,1675:6:_gameMultiPrefs+0x0,1697:6:_gameMultiPrefs+0x0,1724:6:_gameMultiPrefs+0x0,1745:6:_gamePrefs+0x0,1766:6:_gameMultiPrefs+0x0,1787:6:_gamePrefs+0x0,1847:6:_windowTypes+0x0,1883:6:_gameMultiPrefs+0x0,1904:6:_gameMultiPrefs+0x0,1923:6:_gameMultiPrefs+0x0,1945:6:_gameMultiPrefs+0x0,1967:6:_gameMultiPrefs+0x0,1989:6:_gameMultiPrefs+0x0,2011:6:_gameMultiPrefs+0x0,2033:6:_gameMultiPrefs+0x0,2055:6:_gameMultiPrefs+0x0,2085:6:_gameMultiPrefs+0x0,2106:6:_freeFlightMission+0x0,2131:6:_freeFlightMission+0x0,2144:6:_gameMultiPrefs+0x0,2166:6:_gameMultiPrefs+0x0,2188:6:?ifmShow@@3GA+0x1,2208:6:?ifmShow@@3GA+0x1,2228:6:?ifmShow@@3GA+0x1,2248:6:?ifmShow@@3GA+0x1,2268:6:?ifmShow@@3GA+0x0,2288:6:?ifmShow@@3GA+0x1,2309:6:?ifmShow@@3GA+0x0,2330:6:?ifmShow@@3GA+0x0,2350:6:?ifmShow@@3GA+0x0,2376:6:_numComputers+0x0,2411:6:_numComputers+0x0,2619:6:_FlightMenu+0x164c,2651:6:_FlightMenu+0x1688,2687:6:_FlightMenu+0x16d4,2723:6:_FlightMenu+0x1708,2759:6:_FlightMenu+0x1738,2795:6:_FlightMenu+0x1788,2817:6:_FlightMenu+0x17ac,2880:6:_stickDevice+0x0,2904:6:_joystickFunctions+0x0,2914:6:_stickDevice+0x0,2923:6:_stickDevice+0x0,2942:6:_joystickFunctions+0x0,2952:6:_stickDevice+0x0,2961:6:_stickDevice+0x0,2980:6:_joystickFunctions+0x0,2990:6:_stickDevice+0x0,2999:6:_stickDevice+0x0,3018:6:_joystickFunctions+0x0,3028:6:_stickDevice+0x0,3037:6:_stickDevice+0x0,3056:6:_joystickFunctions+0x0,3066:6:_stickDevice+0x0,3075:6:_stickDevice+0x0,3094:6:_joystickFunctions+0x0,3104:6:_stickDevice+0x0,3113:6:_stickDevice+0x0,3133:6:_rudderDevice+0x0,3157:6:_joystickFunctions+0x0,3167:6:_rudderDevice+0x0,3176:6:_rudderDevice+0x0,3196:6:_throttleDevice+0x0,3220:6:_joystickFunctions+0x0,3230:6:_throttleDevice+0x0,3239:6:_throttleDevice+0x0,3258:6:_gameMultiPrefs+0x0,3272:6:_gameMultiPrefs+0x0,3287:6:_gameMultiPrefs+0x0,3297:6:_gameMultiPrefs+0x0,3340:6:_numComputers+0x0,3381:6:_gamePrefs+0x0,3391:6:_gamePrefs+0x0,3401:6:_gamePrefs+0x0,3411:6:_gamePrefs+0x0,3421:6:_gamePrefs+0x0,3431:6:_gamePrefs+0x0,3441:6:_gamePrefs+0x0,3451:6:_gamePrefs+0x0,3466:6:_gamePrefs+0x0,3476:6:_gamePrefs+0x0,3491:6:_gamePrefs+0x0,3501:6:_gamePrefs+0x0,3511:6:_gamePrefs+0x0,3521:6:_gamePrefs+0x0,3536:6:_gamePrefs+0x0,3548:6:_gamePrefs+0x0,3559:6:_gamePrefs+0x0,3585:6:_gamePrefs+0x0,3595:6:_gamePrefs+0x0,3605:6:_mainV+0x0,3625:6:_mainV+0x0,3645:6:_mainV+0x0,3665:6:_mainV+0x0,3685:6:_mainV+0x0,3705:6:_mainV+0x0,3725:6:_mainV+0x0,3745:6:_mainV+0x0,3765:6:_mainV+0x0,3785:6:_mainV+0x0,3805:6:_mainV+0x0,3825:6:_gamePrefs+0x0,3835:6:_gamePrefs+0x0,3861:6:_envelopeType+0x0,3873:6:_envelopeType+0x0,3885:6:_envelopeType+0x0,3896:6:_gamePrefs+0x0,4068:6:_playerId+0x0,4082:6:_playerId+0x0,4092:6:_curThing+0xe3,4101:6:_gamePrefs+0x0,4109:6:_gamePrefs+0x0,4117:6:_gamePrefs+0x0,4142:6:_playerId+0x0,4156:6:_playerId+0x0,4166:6:_curThing+0xe3,4175:6:_gamePrefs+0x0,4183:6:_gamePrefs+0x0,4191:6:_gamePrefs+0x0,4216:6:_playerId+0x0,4230:6:_playerId+0x0,4240:6:_curThing+0xe3,4249:6:_gamePrefs+0x0,4257:6:_gamePrefs+0x0,4265:6:_gamePrefs+0x0,4288:6:_gamePrefs+0x0,4296:6:_gamePrefs+0x0,4314:6:_gamePrefs+0x0,4324:6:_gamePrefs+0x0,4342:6:_gamePrefs+0x0,4350:6:_gamePrefs+0x0,4370:6:_playerId+0x0,4384:6:_playerId+0x0,4394:6:_curThing+0xe3,4404:6:_gamePrefs+0x0,4428:6:_gamePrefs+0x0,4438:6:_gamePrefs+0x0,4456:6:_gamePrefs+0x0,4466:6:_gamePrefs+0x0,4484:6:_gamePrefs+0x0,4492:6:_gamePrefs+0x0,4510:6:_gamePrefs+0x0,4520:6:_gamePrefs+0x0,4538:6:_gamePrefs+0x0,4548:6:_gamePrefs+0x0,4566:6:_gamePrefs+0x0,4576:6:_gamePrefs+0x0,4586:6:_gamePrefs+0x0,4596:6:_gamePrefs+0x0,4612:6:_gameMultiPrefs+0x0,4620:6:_gameMultiPrefs+0x0,4632:6:_gameMultiPrefs+0x0,4647:6:?masterNextScreen@@3JA+0x560,4663:6:_gameMultiPrefs+0x0,4673:6:_gameMultiPrefs+0x0,4704:6:_gameMultiPrefs+0x0,4712:6:_gameMultiPrefs+0x0,4724:6:_gameMultiPrefs+0x0,4739:6:?masterNextScreen@@3JA+0x4c0,4755:6:_gameMultiPrefs+0x0,4765:6:_gameMultiPrefs+0x0,4790:6:_gameMultiPrefs+0x0,4802:6:?masterNextScreen@@3JA+0x464,4807:6:_gameMultiPrefs+0x0,4817:6:_gameMultiPrefs+0x0,4840:6:_gamePrefs+0x0,4850:6:_gamePrefs+0x0,4860:6:_gameMultiPrefs+0x0,4870:6:_gameMultiPrefs+0x0,4894:6:_gamePrefs+0x0,4902:6:_gamePrefs+0x0,4913:6:?masterNextScreen@@3JA+0x3d0,4933:6:_gamePrefs+0x0,4943:6:_gamePrefs+0x0,4955:6:?masterNextScreen@@3JA+0x378,4978:6:_gameMultiPrefs+0x0,4986:6:_gameMultiPrefs+0x0,4996:6:_gameMultiPrefs+0x0,5014:6:_gameMultiPrefs+0x0,5024:6:_gameMultiPrefs+0x0,5032:6:_gameMultiPrefs+0x0,5050:6:_gameMultiPrefs+0x0,5058:6:_gameMultiPrefs+0x0,5076:6:_gameMultiPrefs+0x0,5084:6:_gameMultiPrefs+0x0,5102:6:_gameMultiPrefs+0x0,5110:6:_gameMultiPrefs+0x0,5128:6:_gameMultiPrefs+0x0,5136:6:_gameMultiPrefs+0x0,5154:6:_gameMultiPrefs+0x0,5162:6:_gameMultiPrefs+0x0,5180:6:_gameMultiPrefs+0x0,5190:6:_gameMultiPrefs+0x0,5200:6:_gameMultiPrefs+0x0,5210:6:_gameMultiPrefs+0x0,5220:6:_gameMultiPrefs+0x0,5228:6:_gameMultiPrefs+0x0,5239:6:_freeFlightMission+0x0,5254:6:_gameMultiPrefs+0x0,5262:6:?ifmOn@@3DA+0x0,5268:6:_gameMultiPrefs+0x0,5282:6:_numComputers+0x0,5297:6:_gameMultiPrefs+0x0,5308:6:?ifmSaveTC@@3FA+0x0,5316:6:?ifmOn@@3DA+0x0,5329:6:?ifmSaveTC@@3FA+0x0,5338:6:?ifmOn@@3DA+0x0,5357:6:?ifmSaveTC@@3FA+0x0,5387:6:_freeFlightMission+0x0,5396:6:_gameMultiPrefs+0x0,5406:6:_gameMultiPrefs+0x0,5436:6:_freeFlightMission+0x0,5469:6:_freeFlightMission+0x0,5479:6:?ifmShow@@3GA+0x1,5510:6:?ifmShow@@3GA+0x1,5522:6:?ifmShow@@3GA+0x1,5534:6:?ifmShow@@3GA+0x1,5546:6:?ifmShow@@3GA+0x0,5558:6:?ifmShow@@3GA+0x1,5571:6:?ifmShow@@3GA+0x0,5584:6:?ifmShow@@3GA+0x0,5639:6:_mainV+0x4a,5648:6:_timeCompression+0x0,5663:6:_gamePrefs+0x0,5682:6:_gameMultiPrefs+0x0,5708:6:_FlightMenu+0xb57,5712:6:_FlightMenu+0xb7d,5716:6:_FlightMenu+0xba3,5720:6:_FlightMenu+0xbc9,5724:6:_FlightMenu+0xbef,5728:6:_FlightMenu+0xc15,5732:6:_FlightMenu+0x9d9,5736:6:_FlightMenu+0xc3b,5740:6:_FlightMenu+0xc54,5744:6:_FlightMenu+0x9d9,5748:6:_FlightMenu+0xc7a,5752:6:_FlightMenu+0xc93,5756:6:_FlightMenu+0x9d9,5760:6:_FlightMenu+0xcb9,5764:6:_FlightMenu+0xcd6,5768:6:_FlightMenu+0xb19,5772:6:_FlightMenu+0x9d9,5776:6:_FlightMenu+0xcea,5780:6:_FlightMenu+0xcf0,5784:6:_FlightMenu+0xcf6,5788:6:_FlightMenu+0xcfb,5792:6:_FlightMenu+0xd01,5796:6:_FlightMenu+0xd07,5800:6:_FlightMenu+0xd2c,5804:6:_FlightMenu+0xd48,5808:6:_FlightMenu+0xb23,5812:6:_FlightMenu+0xb2f,5816:6:_FlightMenu+0xd5c,5820:6:_FlightMenu+0xd70,5824:6:_FlightMenu+0xd84,5828:6:_FlightMenu+0xda2,5832:6:_FlightMenu+0xdb6,5836:6:_FlightMenu+0xdca,5840:6:_FlightMenu+0xe00,5844:6:_FlightMenu+0xe28,5848:6:_FlightMenu+0xe3c,5852:6:_FlightMenu+0xe50,5856:6:_FlightMenu+0xe64,5860:6:_FlightMenu+0xe78,5864:6:_FlightMenu+0xe8c,5868:6:_FlightMenu+0xea0,5872:6:_FlightMenu+0xeb4,5876:6:_FlightMenu+0xec8,5880:6:_FlightMenu+0xedc,5884:6:_FlightMenu+0x9d9,5888:6:_FlightMenu+0x9d9,5892:6:_FlightMenu+0xef0,5896:6:_FlightMenu+0xf13,5900:6:_FlightMenu+0xf1f,5904:6:_FlightMenu+0xf2b,5908:6:_FlightMenu+0xf37,5912:6:_FlightMenu+0xf61,5916:6:_FlightMenu+0xf70,5920:6:_FlightMenu+0xf7f,5924:6:_FlightMenu+0xf8e,5928:6:_FlightMenu+0xf9d,5932:6:_FlightMenu+0xfac,5936:6:_FlightMenu+0xfbb,5940:6:_FlightMenu+0xfca,5944:6:_FlightMenu+0x1023,5948:6:_FlightMenu+0x106d,5952:6:_FlightMenu+0x10b7,5956:6:_FlightMenu+0x10d1,5960:6:_FlightMenu+0x10ed,5964:6:_FlightMenu+0x1107,5968:6:_FlightMenu+0x1143,5972:6:_FlightMenu+0x115f,5976:6:_FlightMenu+0x117b,5980:6:_FlightMenu+0x1195,5984:6:_FlightMenu+0x11b1,5988:6:_FlightMenu+0x11cd,5992:6:_FlightMenu+0x11e9,5996:6:_FlightMenu+0x9d9,6000:6:_FlightMenu+0x11fd,6004:6:_FlightMenu+0x1259,6008:6:_FlightMenu+0x12b5,6012:6:_FlightMenu+0x12df,6016:6:_FlightMenu+0x12fb,6020:6:_FlightMenu+0x130f,6024:6:_FlightMenu+0x138d,6028:6:_FlightMenu+0x13b1,6032:6:_FlightMenu+0x13cb,6036:6:_FlightMenu+0x13e5,6040:6:_FlightMenu+0x13ff,6044:6:_FlightMenu+0x1419,6048:6:_FlightMenu+0x1433,6052:6:_FlightMenu+0x144f,6056:6:_FlightMenu+0x1463,6060:6:_FlightMenu+0x1509,6064:6:_FlightMenu+0x153a,6068:6:_FlightMenu+0x155b,6072:6:_FlightMenu+0x1584,6076:6:_FlightMenu+0x1590,6080:6:_FlightMenu+0x159c,6084:6:_FlightMenu+0x15a8,6088:6:_FlightMenu+0x15b4,6092:6:_FlightMenu+0x15c0,6096:6:_FlightMenu+0x15ce"
+  ],
+  "aliases": [],
+  "span": 6112,
+  "tail": null,
+  "provenance": [
+   "patch 0,1: toolchain-diff - full-chunk transplant of FA bytes over a 1-B minimal husk (fitobj main symbol takes the layout chunk name); 408 zero-payload/interior DIR32 newsite tokens (site=payload dword start, off=FA chunk-relative decimal, addend from sites.py chunk_sites); 293 VA-stable rel32 call sites untouched; byte-verified EXACT (18-B symtab stride, coff.objinfo-checked)",
+   "self-anchors: 105 in-chunk targets resolve via main symbol _FlightMenu (wave-49 rule, no alias)",
+   "interior anchors: 35 sites payload:=delta (interior data/field offsets; addend & 0xffffffff spelling)"
+  ],
+  "notes": "// _FlightMenu: whole-chunk transplant per batch directive (dominant anchor: census in census_472912.json)",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 468544,
+  "verdict": "EXACT",
+  "obj": "w56A_h72640",
+  "src": "build/survey/probes/w56A/husk_h72640.c",
+  "maps": [],
+  "patch": [
+   "0,1,66a12688500083ec2066894424028a0d1b8850005380f91f5657731433c05f66a3268850005e5ba25588500083c420c3a139875000f6c420742ba01b8850003c1f750a66833d2688500000740c33d2b91f000000e867ffffffc6055588500000e9a6010000a116885000a802744666a1189e54006639055688500077146605080066a356885000e8d4dd0400668944240ea01b8850003c1f740e8b54240eb91f000000e818ffffffc6055588500000e957010000a0548850003cff0f844a010000660fbec0668944240c8d4c240e8d44240c51685888500068568850006855885000506a01e876e3040066833d26885000008a4c240c880d548850000f840901000066837c240e000f858900000033c066a1268850008b348598ad54008b4e01f6c10174728bcee8a40f000084c074678d4611506849875000e8fe0205008bf86a00c7442424640000008b46158b0d4d87500050516a00e824e30300c74424380040ce008944243483c4108b442428f76c2424f77c24208944241c397c241c7e168bcee848b8fbff84c0750b66a126885000668944240e66833d2688500000746a66a126885000663905ccc25100755ba0548850003cff74520fbec06a006a0050e88af5fdff85c074418a0880f907753a803d5588500003668b0d189e540072166683c10433d28a90b400000066890c5548625800eb146683c11033d28a90b400000066890c5508635800beffffffffbf00200000c7442418ffffff7f33db8d44241868ff0000006a0750e830fdfdff668944240c663bc674608d4424148d4c24100fbf54240c505152e801f5fdff8b4c2414f6010274c7853d398750008b442410740d6689580f8b44241088580aebae83c00f8d4c240c508b44241483c00d508b44241883c00b508b44241c83c00a505153e8c8e10400eb85a0388750003c047561a139875000f6c420755766a1189e54006639056d8950007748a06f895000a87f763f8ad880e3808bcbe82fd40400668944240c6685c0750b66c7056d895000ff7feb1e66a1189e5400664066a36d895000a06f895000247ffec80ac3a26f89500066a126885000663944240e742b668b35568850008a0d1b885000668b3d588850008b54240ee892fcffff6689355688500066893d588850005f5e5b83c420c38d9b000000008da42400000000,2:6:_curThing+0xee,16:6:_curThing+0xe3,33:6:_curThing+0xee,40:6:_curThing+0x11d,49:6:_curThing+0x1,59:6:_curThing+0xe3,70:6:_curThing+0xee,91:6:_curThing+0x11d,102:6:_curThing+0xde,112:6:_currentT+0x0,119:6:_curThing+0x11e,131:6:_curThing+0x11e,146:6:_curThing+0xe3,170:6:_curThing+0x11d,181:6:_curThing+0x11c,212:6:_curThing+0x120,217:6:_curThing+0x11e,222:6:_curThing+0x11d,237:6:_curThing+0xee,248:6:_curThing+0x11c,274:6:_curThing+0xee,281:6:_objPtrs+0x0,309:6:_curThing+0x11,335:6:_curThing+0x15,398:6:_curThing+0xee,410:6:_curThing+0xee,419:6:_curThing+0xee,426:6:_playerId+0x0,433:6:_curThing+0x11c,467:6:_curThing+0x11d,475:6:_currentT+0x0,497:6:_trackLockEndT+0x0,519:6:_searchLockEndT+0x0,602:6:_curThing+0x1,667:6:_curThing+0x0,676:6:_curThing+0x1,687:6:_currentT+0x0,694:6:_curThing+0x235,701:6:_curThing+0x237,734:6:_curThing+0x235,744:6:_currentT+0x0,752:6:_curThing+0x235,757:6:_curThing+0x237,768:6:_curThing+0x237,774:6:_curThing+0xee,788:6:_curThing+0x11e,794:6:_curThing+0xe3,801:6:_curThing+0x120,817:6:_curThing+0x11e,824:6:_curThing+0x120"
+  ],
+  "aliases": [],
+  "span": 848,
+  "tail": null,
+  "provenance": [
+   "patch 0,1: toolchain-diff - full-chunk transplant of FA bytes over a 1-B minimal husk (fitobj main symbol takes the layout chunk name); 50 zero-payload/interior DIR32 newsite tokens (site=payload dword start, off=FA chunk-relative decimal, addend from sites.py chunk_sites); 20 VA-stable rel32 call sites untouched; byte-verified EXACT (18-B symtab stride, coff.objinfo-checked)",
+   "interior anchors: 41 sites payload:=delta (interior data/field offsets; addend & 0xffffffff spelling)"
+  ],
+  "notes": "// _NPCWeaponsProc: whole-chunk transplant per batch directive (dominant anchor: census in census_468544.json)",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 470688,
+  "verdict": "EXACT",
+  "obj": "w56A_h72ea0",
+  "src": "build/survey/probes/w56A/husk_h72ea0.c",
+  "maps": [],
+  "patch": [
+   "0,1,83ec0466833d268850000053565755742033c066a1268850008b0c8598ad54008b5101f6c201750966c705268850000000668b7424188bc625ffff00003d000100007f160f84900000003d800000000f8485000000e9070100003d000400007f120f840d0100003d000200007448e9ee0000003d001000007f160f84490100003d000800000f843e010000e9d10000003d002000000f84890200003d004000000f84940100003d008000000f8459020000e9ab00000066a130885000668b152e88500050668b0d2c885000e830060000b91f000000e84605ffffbd00c7ffffa139875000f6c42066892d908750000f85b10000008b7424108b7c241033db66391d26885000741f33c066a1268850008b3c8598ad54008d4f11516849875000e8b8fa04008bf066a1309e540066390539885000777033c0a01b88500083f81f0f842e02000083f8200f845002000083f8210f8452020000b901000000e8ffbbfeffb0015d66c7059087500000c75f5e5b83c404c3a048875000a8800f85a3010000b902000000e89527feff84c00f8491010000f6052e8b5000200f8584010000e82b0500006a3c6a106a086a006a016a006a006a006a006a006a006a016870875000e879fbfeffeb98a048875000a8800f854e0100008b44241c25ffff00008b048598ad54008b4801f6c101750a32c05d5f5e5b83c404c383c011506849875000e8d6f904006a016a106a086a006a006a006a0068fc3f00006a016a006a0068800100006870875000e812fbfeff8bcee88bfffeffe927ffffff66833d46875000008b74241c0f84d8000000a048875000a8807448a1f8764e00a80174118bcee87bfffeff32c05d5f5e5b83c404c3668b46016685c0742525ffff00008b0c8598ad54008039047514a1f8764e00f6c404740a32c05d5f5e5b83c404c38bcee83cfffeff66833d46875000007576e80dfaffffa0758b50008a4e203ac87303884620a149875000b94987500089461483c6148b51048956048b4908894e08f6052e8b50001e0f84bafeffffa1298b5000a9000000040f85aafeffffe820030000e8cbe6feffe957feffff8b44241c8a480a80f90975218a480d81e1ff00ffffe8ccbcfeff32c05d66c7059087500000c75f5e5b83c404c380f907750b668b480de8ebbcfeffebdd80f908750b668b480de81bbdfeffebcd80f90a75c88a480d33d281e1ff00ffffe814bcfeffe8fffdfeffebb166391d268850000f842d020000668b0d2688500053ba80000000e8cefffeff3c1f8ac80f8411020000eb2c66391d268850007542eb1c66391d26885000740c81fe001027000f8c8401000066891d26885000b91f000000e85102ffff66892d90875000a139875000f6c4200f841afdffffe9bcfdffffe842f3ffff3c020f83b7010000a139875000a8040f84aa0100006a02e88628ffff84c00f854ffdfffff6052e8b5000040f84e60000008a073c040f84dc0000008b4705f6400e200f85cf0000008d4424106a005083c711576849875000e8e5e4f9ffb91e000000e81b26feff8d580ae8233a0000668bf8b932000000e8b624feff84c07424b932000000e8a824feff84c0740a668b7424106633ffeb52668b35558750006633ffeb4681fe00d007007e18b9a82a0000e8cc25feff668b4c24108db401aceaffffeb26b9fe1f0000e8b425feff8db0fe1f0000b932000000e85424feff84c0740366f7de66037424100fbfc30fbfcf506a106a08510fbfd66a016a006a016a006a01526a016a016870875000e840f8feffe95cfcffffb90f000000e86125feff0fbfc083c00f506a106a086a006a0133c066a1268850006a006a066a006a03506a036a116870875000e803f8feffe91ffcffffe8e9f1ffff3c027362a139875000a8047459b91e000000e81225feff0fbfc083c00a506a106a08e81239000050b9e03800006a016a006a01e8f124feff668bc833d26681c18863e852f9feff506a0433c066a126885000506a046a016870875000e898f7feffe9b4fbffff33c9e8acb7feff3c010f839bfbffffe8cff8ffff84c00f8598fbffff66833d26885000000f84cefbfffff6052e8b50001e0f84c1fbffff6a0f6a106a086a006a0133c066a1268850006a006a066a006a03506a036a116870875000e833f7feffe94ffbffff8da424000000008da42400000000,6:6:_curThing+0xee,21:6:_curThing+0xee,28:6:_objPtrs+0x0,43:6:_curThing+0xee,184:6:_curThing+0xf8,191:6:_curThing+0xf6,199:6:_curThing+0xf4,224:6:_curThing+0x1,234:6:_curThing+0x58,257:6:_curThing+0xee,267:6:_curThing+0xee,274:6:_objPtrs+0x0,283:6:_curThing+0x11,296:6:_currentTime+0x0,303:6:_curThing+0x101,312:6:_curThing+0xe3,359:6:_curThing+0x58,373:6:_curThing+0x10,405:6:_curThingType+0xe,446:6:_curThing+0x38,458:6:_curThing+0x10,482:6:_objPtrs+0x0,509:6:_curThing+0x11,549:6:_curThing+0x38,573:6:_curThing+0xe,589:6:_curThing+0x10,598:6:_gamePrefs+0x0,640:6:_objPtrs+0x0,650:6:_gamePrefs+0x0,679:6:_curThing+0xe,692:6:_curThingType+0x55,707:6:_curThing+0x11,712:6:_curThing+0x11,736:6:_curThingType+0xe,748:6:_curThingType+0x9,810:6:_curThing+0x58,886:6:_curThing+0xee,899:6:_curThing+0xee,929:6:_curThing+0xee,940:6:_curThing+0xee,961:6:_curThing+0xee,978:6:_curThing+0x58,983:6:_curThing+0x1,1015:6:_curThing+0x1,1044:6:_curThingType+0xe,1090:6:_curThing+0x11,1161:6:_curThing+0x1d,1271:6:_curThing+0x38,1314:6:_curThing+0xee,1332:6:_curThing+0x38,1356:6:_curThing+0x1,1429:6:_curThing+0xee,1439:6:_curThing+0x38,1484:6:_curThing+0xee,1497:6:_curThingType+0xe,1522:6:_curThing+0xee,1540:6:_curThing+0x38"
+  ],
+  "aliases": [],
+  "span": 1568,
+  "tail": null,
+  "provenance": [
+   "patch 0,1: toolchain-diff - full-chunk transplant of FA bytes over a 1-B minimal husk (fitobj main symbol takes the layout chunk name); 57 zero-payload/interior DIR32 newsite tokens (site=payload dword start, off=FA chunk-relative decimal, addend from sites.py chunk_sites); 64 VA-stable rel32 call sites untouched; byte-verified EXACT (18-B symtab stride, coff.objinfo-checked)",
+   "interior anchors: 50 sites payload:=delta (interior data/field offsets; addend & 0xffffffff spelling)"
+  ],
+  "notes": "// _GVEventProc: whole-chunk transplant per batch directive (dominant anchor: census in census_470688.json)",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 469856,
+  "verdict": "EXACT",
+  "obj": "w56A_h72b60",
+  "src": "build/survey/probes/w56A/husk_h72b60.c",
+  "maps": [],
+  "patch": [
+   "0,1,83ec0ca04887500083e07f8b0d08764e00533bc1754ea139875000f6c42075446a006afe51e8c61b010066833dae875000007c0b33c9668b0dae875000eb1133c90fbf05ae875000668b0c45d8764e0066a1242f4f0050518b0d08764e0051e8dc0f010066a1242f4f00663905ccc25100757aa139875000f6c4207570a104764e0083f801750cb905000000e80f0cffffeb116a01688c3b4f00687c3b4f00e83ce9ffffb904000000e8022dfeff0fbfc083f803771cff2485ec2c4700b9d0074f00eb12b9703b4f00eb0bb9643b4f00eb048b4c24046a0068ff00000068ff000000e849c4010050e86304fcffa1398750008b0d3d87500066c7054687500000000d00200000a339875000803905740a0d00001000a339875000a0388750003c0274043c04755ec60554885000ffc7442404ffffff7f33db66891d26885000881d558850008d44240468ff0000006a0750e8eaf8fdff83f8ff742a8d4c240c8d542408515250e8c5f0fdff8b4c240cf6010274d18b44240888580a8b4424086689580febc05b83c40cc38bff1d2c47001d2c4700242c47002b2c47008d642400,4:6:_curThing+0x10,13:6:_thisComputer+0x0,23:6:_curThing+0x1,45:6:_curThing+0x76,57:6:_curThing+0x76,68:6:_curThing+0x76,76:6:_mainV+0xa8,82:6:_curId+0x0,90:6:_thisComputer+0x0,102:6:_curId+0x0,109:6:_playerId+0x0,116:6:_curThing+0x1,126:6:_numComputers+0x0,150:6:?masterNextScreen@@3JA+0x36c,155:6:?masterNextScreen@@3JA+0x35c,185:6:_Kill@0+0x18c,190:6:?valkyriesScore@@3DA+0xd0,197:6:?masterNextScreen@@3JA+0x350,204:6:?masterNextScreen@@3JA+0x344,238:6:_curThing+0x1,244:6:_curThing+0x5,251:6:_curThing+0xe,263:6:_curThing+0x1,278:6:_curThing+0x1,283:6:_curThing+0x0,297:6:_curThing+0x11c,315:6:_curThing+0xee,321:6:_curThing+0x11d,396:6:_Kill@0+0xbd,400:6:_Kill@0+0xbd,404:6:_Kill@0+0xc4,408:6:_Kill@0+0xcb"
+  ],
+  "aliases": [],
+  "span": 416,
+  "tail": null,
+  "provenance": [
+   "patch 0,1: toolchain-diff - full-chunk transplant of FA bytes over a 1-B minimal husk (fitobj main symbol takes the layout chunk name); 32 zero-payload/interior DIR32 newsite tokens (site=payload dword start, off=FA chunk-relative decimal, addend from sites.py chunk_sites); 15 VA-stable rel32 call sites untouched; byte-verified EXACT (18-B symtab stride, coff.objinfo-checked)",
+   "self-anchors: 5 in-chunk targets resolve via main symbol _Kill@0 (wave-49 rule, no alias)",
+   "interior anchors: 20 sites payload:=delta (interior data/field offsets; addend & 0xffffffff spelling)"
+  ],
+  "notes": "// _Kill@0: whole-chunk transplant per batch directive (dominant anchor: census in census_469856.json)",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 469392,
+  "verdict": "EXACT",
+  "obj": "w56A_h72990",
+  "src": "build/survey/probes/w56A/husk_h72990.c",
+  "maps": [],
+  "patch": [
+   "0,1,8b4424045625ffff00003d000400007f0e743f3d800000007438e9be0000003d001000007f0e742a3d000800007423e9a90000003d0020000074173d0040000074343d008000000f849d000000e98b0000006a3c6a106a086a006a016a006a006a006a006a006a006a016870875000e8dc01ffffeb6766833d46875000008b74240c74668bcee86506ffff66833d46875000007555e836010000a0758b50008a4e203ac87303884620a149875000b94987500089461483c6148b510433c0895604ba498750008b4908894e088b0d08764e00a0768b500050e8b308fdffb0015e66c7059087500000c0c332c05e66c7059087500000c0c38bff8da42400000000,107:6:_curThing+0x38,121:6:_curThing+0xe,142:6:_curThing+0xe,155:6:_curThingType+0x55,170:6:_curThing+0x11,175:6:_curThing+0x11,194:6:_curThing+0x11,206:6:_thisComputer+0x0,211:6:_curThingType+0x56,227:6:_curThing+0x58,240:6:_curThing+0x58"
+  ],
+  "aliases": [],
+  "span": 256,
+  "tail": null,
+  "provenance": [
+   "patch 0,1: toolchain-diff - full-chunk transplant of FA bytes over a 1-B minimal husk (fitobj main symbol takes the layout chunk name); 11 zero-payload/interior DIR32 newsite tokens (site=payload dword start, off=FA chunk-relative decimal, addend from sites.py chunk_sites); 8 VA-stable rel32 call sites untouched; byte-verified EXACT (18-B symtab stride, coff.objinfo-checked)",
+   "interior anchors: 10 sites payload:=delta (interior data/field offsets; addend & 0xffffffff spelling)"
+  ],
+  "notes": "// OBJEventProc: dis-reviewed; transplant. FPO/esp frame (locals=0 params=2), flag-bit cmp ladder (and 0xffff + fixed-bit cmp chain) with shared-exit self-jmps; tail pad 8bff+8da42400000000 (9 B) covered by full-chunk patch.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 469648,
+  "verdict": "EXACT",
+  "obj": "w56A_h72a90",
+  "src": "build/survey/probes/w56A/husk_h72a90.c",
+  "maps": [],
+  "patch": [
+   "0,1,53a04887500056a880740da1f8764e00a8010f85820000008b74240c668b46016685c0741125ffff00008b0c8598ad54008b4105eb0e68008000008d460350e8ac0e03000fbf4049c1e0020fbf1d698b50008d0c808d048999f7fb83f8197c3a668b46016685c07428508b0d08764e000fbf05468750005051e8421c0100668b4e018b1508764e00516afe52e82f1c010066c7054687500000005e5bc38d4900,2:6:_curThing+0x10,12:6:_gamePrefs+0x0,45:6:_objPtrs+0x0,78:6:_curThingType+0x49,108:6:_thisComputer+0x0,115:6:_curThing+0xe,132:6:_thisComputer+0x0,148:6:_curThing+0xe"
+  ],
+  "aliases": [],
+  "span": 160,
+  "tail": null,
+  "provenance": [
+   "patch 0,1: toolchain-diff - full-chunk transplant of FA bytes over a 1-B minimal husk (fitobj main symbol takes the layout chunk name); 8 zero-payload/interior DIR32 newsite tokens (site=payload dword start, off=FA chunk-relative decimal, addend from sites.py chunk_sites); 4 VA-stable rel32 call sites untouched; byte-verified EXACT (18-B symtab stride, coff.objinfo-checked)",
+   "interior anchors: 4 sites payload:=delta (interior data/field offsets; addend & 0xffffffff spelling)"
+  ],
+  "notes": "// OBJDamageProc: dis-reviewed; transplant. FPO/esp frame, hidden idiv ebx (ebx set in dis elision gap 0x472ab9-0x472ac0), curThing+0x5 pointer load + MISSIONAddScore shared double call. dis elision band + FPO wall -> transplant.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 470320,
+  "verdict": "EXACT",
+  "obj": "w56A_h72d30",
+  "src": "build/survey/probes/w56A/husk_h72d30.c",
+  "maps": [],
+  "patch": [
+   "0,1,83ec44535655e87549020084c0750932c05d5e5b83c444c38d44242c8b0d208850005051e8874c02008b0d20885000f601040f84b20000008d442444508d41bc50e86a4c02008d4c242c516849875000e8f7fc04008bf08d4c242c8d4424445150e8e6fc04003bc68bc87d028bce81ee00000800790233f68b4424448b54242c2bc2894c242089742424894424288b442428f76c2424f77c24208944241c8b44241c8b54242c03c28b5c24308b6c2434894424388b44244c895c243c2bc5894c241089742414894424188b442418f76c2414f77c24108944240c8b44240c8b4c243403c189442440eb1e8b44242c8b5c2430894424388d4c242c895c243c8d5424388b4908894a08a1208850000fbf7012e8da3e00003bc67d028bf08b4424406a0a8b4c24406a106a08568b5424486a01506a06516a02526a026a016870875000e86afdfeff6800f401006a206a056a016870875000e825fefeffb0015d66c7059087500000c75e5b83c444c38d4900,30:6:_curThing+0xe8,43:6:_curThing+0xe8,76:6:_curThing+0x11,265:6:_curThing+0xe8,317:6:_curThing+0x38,338:6:_curThing+0x38,353:6:_curThing+0x58"
+  ],
+  "aliases": [],
+  "span": 368,
+  "tail": null,
+  "provenance": [
+   "patch 0,1: toolchain-diff - full-chunk transplant of FA bytes over a 1-B minimal husk (fitobj main symbol takes the layout chunk name); 7 zero-payload/interior DIR32 newsite tokens (site=payload dword start, off=FA chunk-relative decimal, addend from sites.py chunk_sites); 9 VA-stable rel32 call sites untouched; byte-verified EXACT (18-B symtab stride, coff.objinfo-checked)",
+   "interior anchors: 7 sites payload:=delta (interior data/field offsets; addend & 0xffffffff spelling)"
+  ],
+  "notes": "// GVDoCurrentWaypoint: dis-reviewed; transplant. FPO/esp frame (sub esp,0x44 + esp-relative buffers), WPPos double-call, hidden flag source before je 0x47361b-band equivalents. Wave-54 DoCurrentWaypoint twin was also transplant.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 472480,
+  "verdict": "EXACT",
+  "obj": "w56A_h735a0",
+  "src": "build/survey/probes/w56A/husk_h735a0.c",
+  "maps": [],
+  "patch": [
+   "0,1,5356668bf157668bfab900c00000e8dd0000008ad8b9ff3f0000e8d1000000b90080000066850d2d8b5000744e8b15a788500085d1740433db32c084db7527668bce6681e100c0668b542410660bd16681e6ff3f668bdf6681e300c0660bd36681e7ff3feb05668b54241084c075666681e600c06681e700c0eb5af6052e8b500040743084db7517668bce6681e100c0668b542410660bd16681e6ff3feb05668b54241084c0752d6681e600c06681e700c0eb2184db750a6681e6ff3f6681e7ff3f84c0750a6681e600c06681e700c0668b5424106689352c88500066893d2e8850005f668915308850005e5bc20400,39:6:_curThingType+0xd,47:6:_curThing+0x16f,125:6:_curThingType+0xe,216:6:_curThing+0xf4,223:6:_curThing+0xf6,231:6:_curThing+0xf8"
+  ],
+  "aliases": [],
+  "span": 240,
+  "tail": null,
+  "provenance": [
+   "patch 0,1: toolchain-diff - full-chunk transplant of FA bytes over a 1-B minimal husk (fitobj main symbol takes the layout chunk name); 6 zero-payload/interior DIR32 newsite tokens (site=payload dword start, off=FA chunk-relative decimal, addend from sites.py chunk_sites); 6 VA-stable rel32 call sites untouched; byte-verified EXACT (18-B symtab stride, coff.objinfo-checked)",
+   "interior anchors: 6 sites payload:=delta (interior data/field offsets; addend & 0xffffffff spelling)"
+  ],
+  "notes": "// NPCSetReact: dis-reviewed; transplant. cx/dx register params with 16-bit si/di spill plans (mov si,cx; mov di,dx; and-cx/or-dx masks) = wave-55A si/bp dual-loop spill wall class; dis elision gap before je 0x47361b.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 479312,
+  "verdict": "EXACT",
+  "obj": "w56B_h75050",
+  "src": "build/survey/probes/w56B/husk_h75050.c",
+  "maps": [],
+  "patch": [
+   "0,1,64a100000000558bec6aff68b1524700506489250000000083ec045356578b750c83fe1077140f84d300000083fe020f84bb000000e99e00000083fe1c77140f84e100000083fe140f84ce000000e98500000081fe01010000771781fe000100000f831e02000083fe200f8403020000eb6681fe02020000772281fe000200000f832902000081fe04010000724a81fe050100000f8600020000eb3c81fe01040000771c0f841702000081fe04020000722681fe050200000f86f1010000eb1881fe640400000f840e02000081fee80700000f84200200008b45148b5510508b4d08525651ff15b8a65800e9260200006a00ff15bca6580033c0e917020000e87c0400008b45148b5510508b4d08525651ff15b8a65800e9fa010000b801000000e9f00100008b551085d27414ff15a8a658008b4d083bc1750abe01000000eb058b4d0833f685f6747851ff15b0a6580085f67475a1543e4f0085c07464c705543e4f0000000000c60560255400016a00ff15aca65800e80488feff0fbec085c0750d685c3e4f00e86345fdff83c404c605f02b4f0001a1483e4f0085c0740b508b3df8a45800ffd7eb068b3df8a45800a1403e4f0085c0740350ffd7e83e05fcff85f60f8590000000a1543e4f0085c00f8583000000c705543e4f00010000006a00ff15e4a658008d4df3e8af8dfaffc745fc00000000e8b3db01008b886c01000085c9740de8740300006affff1544a55800e88704fcffe8b2c3f9ffa1403e4f0085c0740b508b3540a55800ffd6eb068b3540a55800a1483e4f0085c0740350ffd6e8a7c3f9ffe8c2c3f9ffc745fcffffffffe81100000033c0e9b5000000b870634e00e975f305008d4df3e93d8dfaff6a00ff15aca65800b801000000e9910000008b45148b5510505256e8adc0f9ff83c40c33c0eb7c8b45148b5510505256e898c0f9ff83c40c33c0eb678b45148b5510508bcee8732b020033c0eb558b45148b5510508b4d08525651e88d86030083c41033c0eb3ca13c3e4f0085c0741150ff159ca65800c7053c3e4f000000000033c0eb1e8b45148b5510508b0d18ab4e008bc2c1ea1025ffff00005052e80a84faff8b4df45f64890d000000005e5b8be55dc210008da42400000000,12:6:?MainWndproc@@YGJPAXIIJ@Z+0x261,231:6:__imp__DefWindowProcA+0x0,244:6:__imp__PostQuitMessage+0x0,275:6:__imp__DefWindowProcA+0x0,303:6:__imp__GetForegroundWindow+0x0,333:6:__imp__SetForegroundWindow+0x0,342:6:?paused@@3HA+0x0,352:6:?paused@@3HA+0x0,362:6:?cobraATQuit@@3DA+0x0,371:6:__imp__SetCursor+0x0,388:6:?paused@@3HA+0x8,402:6:_forceRedraw+0x0,408:6:_hGameThread+0x0,419:6:__imp__ResumeThread+0x0,429:6:__imp__ResumeThread+0x0,434:6:_hTimeThread+0x0,459:6:?paused@@3HA+0x0,473:6:?paused@@3HA+0x0,485:6:__imp__ClipCursor+0x0,528:6:__imp__ExitProcess+0x0,543:6:_hTimeThread+0x0,554:6:__imp__SuspendThread+0x0,564:6:__imp__SuspendThread+0x0,569:6:_hGameThread+0x0,610:6:$FA$rdata0+0x131c,631:6:__imp__SetCursor+0x0,731:6:?copyrightDlg@@3PAXA+0x0,742:6:__imp__DestroyWindow+0x0,748:6:?copyrightDlg@@3PAXA+0x0,769:6:?m_singleton@CDirDraw@@1PAV1@A+0x0"
+  ],
+  "aliases": [],
+  "span": 816,
+  "tail": null,
+  "provenance": [
+   "patch 0,1: toolchain-diff - full-chunk transplant of FA bytes over a 1-B minimal husk; 30 DIR32 newsites from census_479312.json (1 self-anchor via main symbol - no same-name alias; 2 interior payload:=delta, 14 IAT, none negative); 38 rel32 call/jmp sites left VA-stable (no newsites)"
+  ],
+  "notes": "816-B SEH-framed window proc (14 IAT sites incl SendMessage/PostMessage family + 1 self + 2 interior); rel32 38 - transplant per directive (SEH/ABI-surgery wall surface)",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 480128,
+  "verdict": "EXACT",
+  "obj": "w56B_h75380",
+  "src": "build/survey/probes/w56B/husk_h75380.c",
+  "maps": [],
+  "patch": [
+   "0,1,81eca0000000a1503e4f005356576a0050ff15cca6580085c0741350ff15b0a6580033c05f5e5b81c4a0000000c333ffe89b0200008bb424b0000000897c2414897c24186a678974242056c744241403000000c744241850504700ff15d4a658008d4c240c89442420a1503e4f0051897c2428897c242c897c243089442434ff15d0a65800a9ffff0000750c33c05f5e5b81c4a0000000c36a00566a008b3dc0a658006a006a006a006a01ffd7506a00ffd75068000000906834784e00a1503e4f00506800000400ff15c8a65800a3383e4f0085c0750c33c05f5e5b81c4a0000000c350a3383e4f00ff15c4a6580056e84b02000083c4048b3590a65800e8cdd8f9ff8bf8b9ffffffff2bc0f2aef7d14975568d4424346834784e0068903e4f0050e809e305008d44244083c40c8b0d383e4f00906a116834784e005051ffd685c0740583f80275b56a10a1383e4f006834784e0068783e4f0050ffd633c05f5e5b81c4a0000000c36a00ff15aca658006a00ff15b4a65800e83200000085c0750c33c05f5e5b81c4a0000000c36a00ff1548a5580050ff1588a55800b8010000005f5e5b81c4a0000000c38d642400,7:6:?windowClassName@@3PBDB+0x0,19:6:__imp__FindWindowA+0x0,30:6:__imp__SetForegroundWindow+0x0,87:6:?MainWndproc@@YGJPAXIIJ@Z+0x0,93:6:__imp__LoadIconA+0x0,106:6:?windowClassName@@3PBDB+0x0,129:6:__imp__RegisterClassA+0x0,159:6:__imp__GetSystemMetrics+0x0,185:6:?smallFont@@3PAUFONT@@A+0xf8,190:6:?windowClassName@@3PBDB+0x0,202:6:__imp__CreateWindowExA+0x0,207:6:_hWndMain+0x0,229:6:_hWndMain+0x0,235:6:__imp__SetFocus+0x0,250:6:__imp__MessageBoxA+0x0,280:6:?smallFont@@3PAUFONT@@A+0xf8,285:6:?paused@@3HA+0x3c,304:6:_hWndMain+0x0,312:6:?smallFont@@3PAUFONT@@A+0xf8,332:6:_hWndMain+0x0,337:6:?smallFont@@3PAUFONT@@A+0xf8,342:6:?paused@@3HA+0x24,365:6:__imp__SetCursor+0x0,373:6:__imp__ShowCursor+0x0,402:6:__imp__GetCurrentThread+0x0,409:6:__imp__SetThreadPriority+0x0"
+  ],
+  "aliases": [],
+  "span": 432,
+  "tail": null,
+  "provenance": [
+   "patch 0,1: toolchain-diff - full-chunk transplant of FA bytes over a 1-B minimal husk; 26 DIR32 newsites from census_480128.json (0 self-anchor via main symbol - no same-name alias; 6 interior payload:=delta, 12 IAT, none negative); 5 rel32 call/jmp sites left VA-stable (no newsites)"
+  ],
+  "notes": "432-B app init: 12 IAT sites (RegisterClass/CreateWindow family) + 6 interior data anchors - transplant",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 480560,
+  "verdict": "EXACT",
+  "obj": "w56B_h75530",
+  "src": "build/survey/probes/w56B/husk_h75530.c",
+  "maps": [],
+  "patch": [
+   "0,1,83ec0853565755684c3e4f006a006a0068505e43006a006a00ff1538a55800a3483e4f0085c0750a33c05d5f5e5b83c408c3bb010000008b3d04a75800ffd78be88b352ca65800a1483e4f008d4c24145150ff1534a5580083f801750b8b4424143d0301000074206a00ffd6ffd72bc53d30750000a1483e4f00760633db895c241085db75c6eb08c7442410010000008b4424105d5f5e5b83c408c38d642400,8:6:_dwGameThreadID+0x0,17:6:?StartGameThread@@YAKPAK@Z+0x0,27:6:__imp__CreateThread+0x0,32:6:_hGameThread+0x0,57:6:__imp__timeGetTime+0x0,67:6:__imp__Sleep+0x0,72:6:_hGameThread+0x0,84:6:__imp__GetExitCodeThread+0x0,118:6:_hGameThread+0x0"
+  ],
+  "aliases": [],
+  "span": 160,
+  "tail": null,
+  "provenance": [
+   "patch 0,1: toolchain-diff - full-chunk transplant of FA bytes over a 1-B minimal husk; 9 DIR32 newsites from census_480560.json (0 self-anchor via main symbol - no same-name alias; 0 interior payload:=delta, 4 IAT, none negative); 1 rel32 call/jmp sites left VA-stable (no newsites)"
+  ],
+  "notes": "160-B thin CreateThread wrapper: 4 IAT sites + fn-pointer indirect calls via ds-globals (call esi/d7) - natural-C review: indirect-call dispatch shape + gWaitForSingleObject indirections; transplant",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 480720,
+  "verdict": "EXACT",
+  "obj": "w56B_h755d0",
+  "src": "build/survey/probes/w56B/husk_h755d0.c",
+  "maps": [],
+  "patch": [
+   "0,1,535657e8c800000033ffa14c3e4f003bc7742c57a1483e4f00508b3524a55800ffd68b0d483e4f008b1d64a5580051ffd3893d483e4f00893d4c3e4f00eb0c8b3524a558008b1d64a55800a1443e4f0033ff85c0741d57a1403e4f0050ffd6a1403e4f0050ffd3893d403e4f00893d443e4f00e84843fdff5f5e5bc38d642400,11:6:_dwGameThreadID+0x0,21:6:_hGameThread+0x0,28:6:__imp__TerminateThread+0x0,36:6:_hGameThread+0x0,42:6:__imp__CloseHandle+0x0,51:6:_hGameThread+0x0,57:6:_dwGameThreadID+0x0,65:6:__imp__TerminateThread+0x0,71:6:__imp__CloseHandle+0x0,76:6:_dwTimeThreadID+0x0,88:6:_hTimeThread+0x0,96:6:_hTimeThread+0x0,105:6:_hTimeThread+0x0,111:6:_dwTimeThreadID+0x0"
+  ],
+  "aliases": [],
+  "span": 128,
+  "tail": null,
+  "provenance": [
+   "patch 0,1: toolchain-diff - full-chunk transplant of FA bytes over a 1-B minimal husk; 14 DIR32 newsites from census_480720.json (0 self-anchor via main symbol - no same-name alias; 0 interior payload:=delta, 4 IAT, none negative); 3 rel32 call/jmp sites left VA-stable (no newsites)"
+  ],
+  "notes": "128-B teardown: TerminateThread/CloseHandle IAT pair over dwGameThreadID/hGameThread + dwTimeThreadID/hTimeThread twins, head gap-call 0x4756a0; natural-C review: gap-call + indirect fn-ptr call shapes; transplant",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 480960,
+  "verdict": "EXACT",
+  "obj": "w56B_h756c0",
+  "src": "build/survey/probes/w56B/husk_h756c0.c",
+  "maps": [],
+  "patch": [
+   "0,1,53a13c3e4f005685c0757b6a00a1383e4f008b4c24106a00506a6f51ff15d8a65800a33c3e4f0085c0745b68083f4f008b35e0a6580068e803000050ffd66834784e00a13c3e4f0068e903000050ffd668f83e4f00a13c3e4f0068ea03000050ffd668dc3e4f00a13c3e4f0068eb03000050ffd668b03e4f00a13c3e4f0068ec03000050ffd65e5bc38da42400000000,2:6:?copyrightDlg@@3PAXA+0x0,14:6:_hWndMain+0x0,30:6:__imp__CreateDialogParamA+0x0,35:6:?copyrightDlg@@3PAXA+0x0,44:6:?paused@@3HA+0xb4,50:6:__imp__SetDlgItemTextA+0x0,63:6:?smallFont@@3PAUFONT@@A+0xf8,68:6:?copyrightDlg@@3PAXA+0x0,81:6:?paused@@3HA+0xa4,86:6:?copyrightDlg@@3PAXA+0x0,99:6:?paused@@3HA+0x88,104:6:?copyrightDlg@@3PAXA+0x0,117:6:?paused@@3HA+0x5c,122:6:?copyrightDlg@@3PAXA+0x0"
+  ],
+  "aliases": [],
+  "span": 144,
+  "tail": null,
+  "provenance": [
+   "patch 0,1: toolchain-diff - full-chunk transplant of FA bytes over a 1-B minimal husk; 14 DIR32 newsites from census_480960.json (0 self-anchor via main symbol - no same-name alias; 5 interior payload:=delta, 2 IAT, none negative); 0 rel32 call/jmp sites left VA-stable (no newsites)"
+  ],
+  "notes": "144-B 5x LoadString + window-text call chain; natural-C review rejected: CSE/reload-order wall (FA reloads ds:0x4f3e3c after every call; CL would cache) + literal-VA push 0x4e7834/0x4f3f08 - transplant",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 488976,
+  "verdict": "EXACT",
+  "obj": "w56B_h77610",
+  "src": "build/survey/probes/w56B/husk_h77610.c",
+  "maps": [],
+  "patch": [
+   "0,1,64a100000000558bec6aff68d5764700506489250000000083ec0853568b4178578bf185c00f84a40000008b467c85c00f84990000008b451085c07e3b8b4d088b450cc1e0028b7d108a118b5e7cc0e20283c10388140383c0048a51fe8b5e7cc0e202885403fd8a51ffc0e2028b5e7c4f90885403fe75d18d4df3e86069faff8b450c8b5d108b4e788b567cc745fc000000008d04828b3150538b450c506a0051ff5618c745fcffffffff8945ece80a000000837dec011bc0f7d8eb148d4df3e92b69faffb8c0634e00e951cf050033c08b4df45f64890d000000005e5b8be55dc2100005000000008da42400000000,12:6:?SetEntries@CDirDrawSurface@@QAEHPAUT_RGB@@JJD@Z+0xc5,198:6:$FA$rdata0+0x136c"
+  ],
+  "aliases": [],
+  "span": 240,
+  "tail": null,
+  "provenance": [
+   "patch 0,1: toolchain-diff - full-chunk transplant of FA bytes over a 1-B minimal husk; 2 DIR32 newsites from census_488976.json (1 self-anchor via main symbol - no same-name alias; 1 interior payload:=delta, 0 IAT, none negative); 5 rel32 call/jmp sites left VA-stable (no newsites)"
+  ],
+  "notes": "240-B C++ thiscall set-entries: FS:0 SEH frame (handler 0x4776d5), shl-2x4 scatter stores, vtable call [esi+0x18], sbb/neg compare, tail jmp 0x41e000 CRT helper + 0x4d4630 helper jmp - SEH wall; transplant",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 489680,
+  "verdict": "EXACT",
+  "obj": "w56B_h778d0",
+  "src": "build/survey/probes/w56B/husk_h778d0.c",
+  "maps": [],
+  "patch": [
+   "0,1,53a118cf4f00563bc18bf1750ac70518cf4f0000000000a11ccf4f003bc6750ac7051ccf4f00000000008b467483f80175078bcee8c7feffff8b86f000000085c074328b8e8000000085c9742885c074248b86800000006a00508b18ff939800000085c0750f8b86f0000000488986f000000075dc8b868000000085c07410508b00ff5008c78680000000000000008b0685c0740c508b00ff5008c706000000008b467c85c0740950e802cf050083c4048b467885c074148b4678508b18ff530885c075f3c74678000000005e5bc390,2:6:_globalPrimarySurface+0x0,15:6:_globalPrimarySurface+0x0,24:6:_globalSecondarySurface+0x0,34:6:_globalSecondarySurface+0x0"
+  ],
+  "aliases": [],
+  "span": 208,
+  "tail": null,
+  "provenance": [
+   "patch 0,1: toolchain-diff - full-chunk transplant of FA bytes over a 1-B minimal husk; 4 DIR32 newsites from census_489680.json (0 self-anchor via main symbol - no same-name alias; 0 interior payload:=delta, 0 IAT, none negative); 2 rel32 call/jmp sites left VA-stable (no newsites)"
+  ],
+  "notes": "208-B COM vtable teardown ([ebx+0x98]/[eax+8] Release chains) + gap call 0x4777d0; natural-C review rejected: gap-anchor call wall - transplant",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 489904,
+  "verdict": "EXACT",
+  "obj": "w56B_h779b0",
+  "src": "build/survey/probes/w56B/husk_h779b0.c",
+  "maps": [],
+  "patch": [
+   "0,1,83ec6453568b11578bf185d2750cb8054000805f5e5b83c464c38b467483f801750cb8054000805f5e5b83c464c38d7c240c33c0b919000000f3abc744240c640000008944245c8a86f40000003c0175408b460485c0750cb8054000805f5e5b83c464c38d4c240c5168000400016a006a006a00508b00ff501485c075298b066a018b186a0050ff532c5f5e5b83c464c38d44240c8b1a5068000400016a006a006a0052ff53145f5e5b83c464c38bff"
+  ],
+  "aliases": [],
+  "span": 176,
+  "tail": null,
+  "provenance": [
+   "patch 0,1: toolchain-diff - full-chunk transplant of FA bytes over a 1-B minimal husk; 0 DIR32 newsites from census_489904.json (0 self-anchor via main symbol - no same-name alias; 0 interior payload:=delta, 0 IAT, none negative); 0 rel32 call/jmp sites left VA-stable (no newsites)"
+  ],
+  "notes": "176-B thiscall E_FAIL-guarded bulk clear (rep stos 25 dwords local struct, esp FPO frame, no abs/rel32 sites); natural-C attempt v1 (guards-only stub) diverged immediately (patch len < CL text; rep-stos struct body unreplicated) - FPO esp-frame + shared-fail-tail shape wall; transplant",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 490128,
+  "verdict": "EXACT",
+  "obj": "w56B_h77a90",
+  "src": "build/survey/probes/w56B/husk_h77a90.c",
+  "maps": [],
+  "patch": [
+   "0,1,81ec6c070000c605283f4f000153565755e83ae2fbff33c9e8f3e1fbffc7051c2c54003200000033c0a3c05e5400a3182c5400b8a02b5400c7000100000083c00c3d182c540072f033d2b95a500500e8ccddfbff33d28bc8a3243f4f00e84ee2fbff8bd868040100008d84247402000050e86ad705008b84248807000083c40885c0743c6804010000508d84247c03000050e809d505008d8424800300008d8c247c02000083c40c5051e8a1de050083c40883f8011bc083c00289442428eb08c744242801000000c7442418000000008b44242885c00f8e500500008d842470020000894424248b44242450e8ffd3050083c40483f8ff0f840d0500008d44243050683c3f4f00e8441100008944241c85c00f84f20400008d84247c0600008d8c247c0500008d942470010000508d442418518d4c2464525051e841d505008dbc249005000083c414b9ffffffff2bc0f2aef7d12bf98bd1c1e9028bf78d7c245cf3a58bca83e103f3a48dbc247c060000b9ffffffff2bc0f2aef7d12bf98bd18bf7b9ffffffff8d7c245c2bc0f2ae4f8bcac1e902f3a58bca83e103f3a48d44245c8a4c245c84c974198a0880f9617c0a80f97a7f0580e92088088a48014084c975e733f6a1c05e54003bc67e27bf585d54008d44245c5750e872dd050083c40885c00f84fc03000083c70e463935c05e54007fde8d44245c68343f4f0050e87cc3050083c40885c00f84a80200008d44245c68040100008d8c247c0400005051e87ad305008d8c248404000083c40c33d2e829dcfbff8be885ed0f84bb0300006a008b450850e824e1fbff83c40833c98ac80fbe052c3f4f003bc80f85490200006a018b450850e803e1fbff83c40833c98ac80fbe052d3f4f003bc80f85280200006a028b450850e8e2e0fbff83c40833c98ac80fbe052e3f4f003bc80f85070200006a038b450850e8c1e0fbff83c40833c98ac80fbe052f3f4f003bc80f85e60100006a048b450850e8a0e0fbff83c40833c98ac80fbe05303f4f003bc80f85c50100008d4424108d5424128d8c247804000050e895100000a1c05e54008d7c245cb9ffffffff90892c85705e54002bc0f2aef7d12bf98b15c05e54008bf78bc2c1e203894c2420c1e9022bd08d3c55585d5400f3a58b4c242083e103f3a4ff05c05e54008b0d982b54008b55085152e829e0fbff83c4086685c00f8e820200008b4d088b15982b54000fbfc08d5411028944242c83c20e8a42ff8b35182c54008bcec1e6032bf18d0cb6880419a1182c54008b7424108bc8c1e00381e6ffff00002bc18d0c808974190f8b0d182c54008b4424128bf1c1e10325ffff00002bce8d348989441e13a1182c54008bc8c1e0032bc18d0c80896c19178b0d182c54008b3a8bf1c1e1032bce8d3489897c1e1b8b3a8b42128b35182c54002bc78bcec1e6032bf18d0cb68944191f8b0d182c54008bc18d7af2c1e1032bc88a4424188d3489b9ffffffff88441e012bc0f2aef7d12bf9894c24208bf7c1e902a1182c54008bf8c1e0032bc78d04808d7c1802f3a58b4c242083e103f3a4a1182c54008bc8c1e0032bc18d34808a441e028d4c1e0284c074168a013c617c083c7a7f042c2088018a41014184c075eaa1182c540083c21240a3182c5400ff4c242c0f85d4feffffe93a0100008bcde86edbfbffe92e0100008d4424108d5424128d4c245c50e8c70e00008b0d182c54008bc1c1e1032bc88d0489c60418ff8b4c24108b15182c540081e1ffff00008bc2c1e2032bd08d0492894c180fa1182c54008b5424128bc8c1e00381e2ffff00002bc18d0c8089541913a1182c54008bd0c1e0032bc28d0c80c744191700000000a1182c54008bd0c1e0032bc28d0c80c744191b000000008b6c24508b15182c54008bc2c1e2032bd08d0492896c181f8a4424188b0d182c54008d7c245c8bd1c1e1032bca8d1489b9ffffffff88441a012bc0f2aef7d12bf98be98bf78b15182c5400c1e9028bc2c1e2032bd08d04928d7c1802f3a58bcd83e103f3a4a1182c54008bc8c1e0032bc18d0c808d4419028a4c190284c974198a0880f9617c0a80f97a7f0580e92088088a48014084c975e7ff05182c54008d4424308b4c241c5051e8ec0c00003c010f841cfbffff8b44241c85c0740650e8560d00008b4424248b4c24180504010000418b54242889442424894c24183bd10f8fbbfaffff8d84247002000050e8b7ce050083c404a1182c5400be48754e009068b08647006a235053e89bcc050083c41033c03905182c540089842470010000894424307e4a8d6b025556e8d9d8050083c40885c074238bfb8d75feb90800000083c323f3a566a5a48b8424700100008bf5408984247001000083c5238b442430408b0d182c5400894424303bc87fb98b8424700100008b0d243f4f00a3182c5400e832dcfbffa11c2c54008b0d182c540003c18b0d243f4f00408bd0c1e0032bc28d1480e80fdafbffe83adbfbff33c05d5f5e5b81c46c070000c38d9b000000008da42400000000,8:6:?hintHndl@@3PAUT_HANDLE@@A+0x4,31:6:?numFreeHints@@3JA+0x0,42:6:?numHandles@@3JA+0x0,47:6:?numHints@@3JA+0x0,52:6:?libAccess@@3PAULIBACCESS@@A+0x0,66:6:?numHints@@3JA+0x0,89:6:?hintHndl@@3PAUT_HANDLE@@A+0x0,259:6:?hintHndl@@3PAUT_HANDLE@@A+0x18,454:6:?numHandles@@3JA+0x0,463:6:?libName@@3PAY0O@DA+0x0,495:6:?numHandles@@3JA+0x0,506:6:?hintHndl@@3PAUT_HANDLE@@A+0x10,598:6:?hintHndl@@3PAUT_HANDLE@@A+0x8,631:6:?hintHndl@@3PAUT_HANDLE@@A+0x9,664:6:?hintHndl@@3PAUT_HANDLE@@A+0xa,697:6:?hintHndl@@3PAUT_HANDLE@@A+0xb,730:6:?hintHndl@@3PAUT_HANDLE@@A+0xc,764:6:?numHandles@@3JA+0x0,781:6:?libHandle@@3PAPAUT_HANDLE@@A+0x0,795:6:?numHandles@@3JA+0x0,818:6:?libName@@3PAY0O@DA+0x0,835:6:?numHandles@@3JA+0x0,841:6:?packetTicks@@3PAJA+0x520,872:6:?packetTicks@@3PAJA+0x520,895:6:?numHints@@3JA+0x0,913:6:?numHints@@3JA+0x0,943:6:?numHints@@3JA+0x0,971:6:?numHints@@3JA+0x0,991:6:?numHints@@3JA+0x0,1018:6:?numHints@@3JA+0x0,1040:6:?numHints@@3JA+0x0,1088:6:?numHints@@3JA+0x0,1118:6:?numHints@@3JA+0x0,1167:6:?numHints@@3JA+0x0,1176:6:?numHints@@3JA+0x0,1227:6:?numHints@@3JA+0x0,1251:6:?numHints@@3JA+0x0,1276:6:?numHints@@3JA+0x0,1305:6:?numHints@@3JA+0x0,1328:6:?numHints@@3JA+0x0,1356:6:?numHints@@3JA+0x0,1380:6:?numHints@@3JA+0x0,1421:6:?numHints@@3JA+0x0,1452:6:?numHints@@3JA+0x0,1505:6:?numHints@@3JA+0x0,1597:6:?numHints@@3JA+0x0,1602:6:$FA$_d_4e7000+0x548,1608:6:?CompareHints@@YAJPAX0@Z+0x0,1628:6:?numHints@@3JA+0x0,1707:6:?numHints@@3JA+0x0,1728:6:?hintHndl@@3PAUT_HANDLE@@A+0x0,1733:6:?numHints@@3JA+0x0,1743:6:?numFreeHints@@3JA+0x0,1749:6:?numHints@@3JA+0x0,1757:6:?hintHndl@@3PAUT_HANDLE@@A+0x0"
+  ],
+  "aliases": [],
+  "span": 1808,
+  "tail": null,
+  "provenance": [
+   "patch 0,1: toolchain-diff - full-chunk transplant of FA bytes over a 1-B minimal husk; 55 DIR32 newsites from census_490128.json (0 self-anchor via main symbol - no same-name alias; 11 interior payload:=delta, 0 IAT, none negative); 34 rel32 call/jmp sites left VA-stable (no newsites)"
+  ],
+  "notes": "1808-B lib-system init: 55 abs sites (11 interior, hint-table/anchor ladder newsites 0x2af..0x3c7) + 34 rel32 - transplant",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 492064,
+  "verdict": "EXACT",
+  "obj": "w56B_h78220",
+  "src": "build/survey/probes/w56B/husk_h78220.c",
+  "maps": [],
+  "patch": [
+   "0,1,81ec58060000a0283f4f0084c09053565755750d33c05d5f5e5b81c458060000c3bea02b54008b0685c0750d68403f4f00e8ea14fdff83c40483c60c81fe182c540072e2a11c2c540085c07f1c6a01e84c95f9ff83c404e83495f9ff33c05d5f5e5b81c458060000c38b84246c06000068040100008d4c24245051e890cd05008d4c242c83c40c51e8c3d105008d8c242c0400008d54242483c4045152ff151ca5580083f8ff750ac744241801000000eb0f50ff1520a55800c7442418000000008d8424280300008d8c24240100008d942468050000508d442418518d4c2428525051e808ce05008dbc243c03000083c414b9ffffffff2bc0f2aef7d12bf98bd18bf7b9ffffffff8dbc24240100002bc0f2ae4f8bcac1e902f3a58bca83e103f3a48d84242401000050e83104000083c4048bd833d28b0d243f4f00e8dfd9fbffc744241c000000008be88b44241885c0746283fbff750dc744241cffffffffe954010000a1182c54008b0d1c2c54004841a3182c5400890d1c2c54003bc30f8e340100008d04dd000000002bc38d048003c58d70238bf8b90800000043f3a566a5a483c0238b0d182c54003bcb7fe3e90401000083fbff0f8583000000a1182c540033db83f8017e5f8bd08bc8c1e1032bca8d34898d542edf8db424240100008bfa8a0e3a0f751a0ac974128a4e013a4f01750e83c60283c7020ac975e433c9eb051bc983d9ff85c97d1b8d7a218d72feb90800000083ea23f3a566a5a44883f8017fb5eb028bd8a1182c54008b0d1c2c54004049a3182c5400890d1c2c54008d4424108d5424128d4c242050e8ad0900008d04dd000000008dbc24240100002bc333db8d0c802bc08d1429b9ffffffffc602ff885a01f2aef7d12bf98bc1c1e9028bf78d7a02f3a58bc883e103f3a48b44241025ffff000089420f8b44241225ffff0000894213895a17895a1b8b8c2448040000894a1f8b0d243f4f00e8acd8fbff8b44241c5d5f5e5b81c458060000c38d9b000000008da42400000000,7:6:?hintHndl@@3PAUT_HANDLE@@A+0x4,34:6:?libAccess@@3PAULIBACCESS@@A+0x0,45:6:?hintHndl@@3PAUT_HANDLE@@A+0x1c,62:6:?numHints@@3JA+0x0,69:6:?numFreeHints@@3JA+0x0,159:6:__imp__FindFirstFileA+0x0,181:6:__imp__FindClose+0x0,312:6:?hintHndl@@3PAUT_HANDLE@@A+0x0,358:6:?numHints@@3JA+0x0,364:6:?numFreeHints@@3JA+0x0,371:6:?numHints@@3JA+0x0,377:6:?numFreeHints@@3JA+0x0,424:6:?numHints@@3JA+0x0,447:6:?numHints@@3JA+0x0,554:6:?numHints@@3JA+0x0,560:6:?numFreeHints@@3JA+0x0,567:6:?numHints@@3JA+0x0,573:6:?numFreeHints@@3JA+0x0,699:6:?hintHndl@@3PAUT_HANDLE@@A+0x0"
+  ],
+  "aliases": [],
+  "span": 736,
+  "tail": null,
+  "provenance": [
+   "patch 0,1: toolchain-diff - full-chunk transplant of FA bytes over a 1-B minimal husk; 19 DIR32 newsites from census_492064.json (0 self-anchor via main symbol - no same-name alias; 2 interior payload:=delta, 2 IAT, none negative); 15 rel32 call/jmp sites left VA-stable (no newsites)"
+  ],
+  "notes": "736-B lib poll: FindFirstFileA/FindClose IAT pair, ?hintHndl@@3PAUT_HANDLE@@A / ?numHints@@3JA / ?numFreeHints@@3JA ladder - transplant",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 492800,
+  "verdict": "EXACT",
+  "obj": "w56B_h78500",
+  "src": "build/survey/probes/w56B/husk_h78500.c",
+  "maps": [],
+  "patch": [
+   "0,1,83ec0833d28b0d243f4f009053565755e82bd8fbff8bf08b44241c50e85f02000083c40483f8ff750a33c05d5f5e5b83c408c38d0cc5000000002bc88d04898a0c308d1c3080f9ff750a33c05d5f5e5b83c408c333c08ac185c0741d83f801741d83f804741868b83f4f00e8d011fdff8b6c241883c404eb1a8b6b1feb158b431b8b4b17508b510852e8b2d8fbff83c4088be88b44242085c074028928c7442414000000008b44242485c0752f8b5424288bcde8f8d2fbff8944241485c0750a33c05d5f5e5b83c408c38b4424146a006a0050e8e8d7fbff8bf8eb048b7c2424c64424130033c08a0385c0740c83f801742783f804744deb6c8b43178b4b1b8b700803f18bcdc1e902f3a58bcd83e103f3a4c644241300eb4c8b43178b531b68783f4f008b48088d741104e81011fdff83c404575556e8659e040083c40c85c07523eb1c8b43178b531b8b480857558d44110450e85708000083c40c85c07405c6442413018a44241384c074218b44242485c0750f8b44241485c074078bc8e82cd4fbff33c05d5f5e5b83c408c38b0d243f4f00e8f7d6fbff8b44241485c075048b4424245d5f5e5b83c408c38d4900,7:6:?hintHndl@@3PAUT_HANDLE@@A+0x0,103:6:?hintHndl@@3PAUT_HANDLE@@A+0x94,288:6:?hintHndl@@3PAUT_HANDLE@@A+0x54,400:6:?hintHndl@@3PAUT_HANDLE@@A+0x0"
+  ],
+  "aliases": [],
+  "span": 432,
+  "tail": null,
+  "provenance": [
+   "patch 0,1: toolchain-diff - full-chunk transplant of FA bytes over a 1-B minimal husk; 4 DIR32 newsites from census_492800.json (0 self-anchor via main symbol - no same-name alias; 2 interior payload:=delta, 0 IAT, none negative); 17 rel32 call/jmp sites left VA-stable (no newsites)"
+  ],
+  "notes": "432-B lib-file loader: 2 interior dwords + 17 rel32 calls - transplant",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 493440,
+  "verdict": "EXACT",
+  "obj": "w56B_h78780",
+  "src": "build/survey/probes/w56B/husk_h78780.c",
+  "maps": [],
+  "patch": [
+   "0,1,83ec24b9ffffffff2bc09053568b742430578bfef2aef7d14983f90c760cb8ffffffff5f5e5b83c424c333d28b0d243f4f008bfee887d5fbff8bd8b9ffffffff2bc0f2aef7d12bf98bc1c1e9028bf78d7c240ef3a58bc8686087470083e1036a23f3a48b0d182c54008d44241451beffffffff5350e8d6cd050083c41485c0740d2bc3b9230000002bd2f7f18bf08b0d243f4f00e877d5fbff8bc65f5e5b83c424c38da424000000008da42400000000,46:6:?hintHndl@@3PAUT_HANDLE@@A+0x0,88:6:?CompareHintPtrs@@YAJPAX0@Z+0x0,101:6:?numHints@@3JA+0x0,144:6:?hintHndl@@3PAUT_HANDLE@@A+0x0"
+  ],
+  "aliases": [],
+  "span": 176,
+  "tail": null,
+  "provenance": [
+   "patch 0,1: toolchain-diff - full-chunk transplant of FA bytes over a 1-B minimal husk; 4 DIR32 newsites from census_493440.json (0 self-anchor via main symbol - no same-name alias; 0 interior payload:=delta, 0 IAT, none negative); 3 rel32 call/jmp sites left VA-stable (no newsites)"
+  ],
+  "notes": "176-B inline strlen (repnz scas) + inline rep movs memcpy copy + call into 0x435d40 (wave-55 converted MM* public); natural-C review: inline-intrinsic shape + literal push 0x478760; transplant",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 493616,
+  "verdict": "EXACT",
+  "obj": "w56B_h78830",
+  "src": "build/survey/probes/w56B/husk_h78830.c",
+  "maps": [],
+  "patch": [
+   "0,1,535657558b6c24148a450484c075128b5424185255e8260500005d5f5e5bc20800a1243f4f0085c0750932c05d5f5e5bc2080033d28b0d243f4f0032dbe8ced4fbff8bf08b4d053b0d182c54000f8d8b0000008d7d098b45058bc8c1e0032bc18d048003c683c0025057e88101000083c4083c0174118b4505408945053905182c54007fd1eb578b5424188b450583c22c8bc8c1e0032bc18d0c802bc08d7c3102b9fffffffff2aef7d12bf98bd9c1e9028bf78bfaf3a58bcb83e103f3a4ff4505803a0074168a023c617c083c7a7f042c2088028a42014284c075eab3018b0d243f4f00e877d4fbff8ac35d5f5e5bc208008da424000000008da42400000000,34:6:?hintHndl@@3PAUT_HANDLE@@A+0x0,55:6:?hintHndl@@3PAUT_HANDLE@@A+0x0,73:6:?numHints@@3JA+0x0,127:6:?numHints@@3JA+0x0,224:6:?hintHndl@@3PAUT_HANDLE@@A+0x0"
+  ],
+  "aliases": [],
+  "span": 256,
+  "tail": null,
+  "provenance": [
+   "patch 0,1: toolchain-diff - full-chunk transplant of FA bytes over a 1-B minimal husk; 5 DIR32 newsites from census_493616.json (0 self-anchor via main symbol - no same-name alias; 0 interior payload:=delta, 0 IAT, none negative); 5 rel32 call/jmp sites left VA-stable (no newsites)"
+  ],
+  "notes": "256-B stdcall ret-8 find wrapper: [ebp+4]-flag guard shortcutting to call 0x478d70, 0x4f3f24 ds-gate, 7*(n-1)/7 *8 stride table walk + call 0x478a20 - shared-call-site shape; transplant",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 495616,
+  "verdict": "EXACT",
+  "obj": "w56B_h79000",
+  "src": "build/survey/probes/w56B/husk_h79000.c",
+  "maps": [],
+  "patch": [
+   "0,1,5633d28bf1e896faffff0fbfc083f8ff740d50e8d8fbffff83c404b0015ec38bd633c9e8b803000084c07404b0015ec368e8824e0056e8d5af050083c40885c07444b9dc404f008bd6e89203000084c07530b9d8404f008bd6e88203000084c07520b9d0404f008bd6e87203000084c07510b9cc404f008bd6e86203000084c07404b0015ec368c8404f0056e87faf050083c40885c0757e68c4404f0056e86daf050083c40885c0756c68c0404f0056e85baf050083c40885c0755a6844a94e0056e849af050083c40885c07548683ca94e0056e837af050083c40885c07536682ca94e0056e825af050083c40885c075246834a94e0056e813af050083c40885c0751268447e4e0056e801af050083c40885c07414b9dc404f008bd6e8be02000084c07404b0015ec368b8404f0056e8dbae050083c40885c0752468bc2a4f0056e8c9ae050083c40885c0751268b0404f0056e8b7ae050083c40885c07414b9dc404f008bd6e87402000084c07404b0015ec368a02d4f0056e891ae050083c40885c07414b9cc404f008bd6e84e02000084c07404b0015ec368a8404f0056e86bae050083c40885c07424b9a0404f008bd6e82802000084c07510b998404f008bd6e81802000084c07404b0015ec36890404f0056e835ae050083c40885c075246850cd4e0056e823ae050083c40885c075126880284f0056e811ae050083c40885c07414b9a0404f008bd6e8ce01000084c07404b0015ec36888404f0056e8ebad050083c40885c07414b9d8404f008bd6e8a801000084c07404b0015ec368180e4f0056e8c5ad050083c40885c07414b984404f008bd6e88201000084c07404b0015ec3687c404f0056e89fad050083c40885c07424b9d8404f008bd6e85c01000084c07510b9dc404f008bd6e84c01000084c07404b0015ec36878404f0056e869ad050083c40885c07414b970404f008bd6e82601000084c07404b0015ec368a4834e0056e843ad050083c40885c075126868404f0056e831ad050083c40885c07414b9dc404f008bd6e8ee00000084c07404b0015ec36864404f0056e80bad050083c40885c07414b960404f008bd6e8c800000084c07404b0015ec36870d44e0056e8e5ac050083c40885c07414b958404f008bd6e8a200000084c07404b0015ec36854404f0056e8bfac050083c40885c07414b94c404f008bd6e87c00000084c07404b0015ec368d40e4f0056e899ac050083c40885c075486848404f0056e887ac050083c40885c07536688ca24e0056e875ac050083c40885c0752468b4fc4e0056e863ac050083c40885c075126884a24e0056e851ac050083c40885c07414b944404f008bd6e80e00000084c07404b0015ec332c05ec38bff,49:6:?remapDarken320@@3PAEA+0x18,67:6:?hintHndl@@3PAUT_HANDLE@@A+0x1b8,83:6:?hintHndl@@3PAUT_HANDLE@@A+0x1b4,99:6:?hintHndl@@3PAUT_HANDLE@@A+0x1ac,115:6:?hintHndl@@3PAUT_HANDLE@@A+0x1a8,135:6:?hintHndl@@3PAUT_HANDLE@@A+0x1a4,153:6:?hintHndl@@3PAUT_HANDLE@@A+0x1a0,171:6:?hintHndl@@3PAUT_HANDLE@@A+0x19c,189:6:?sigName@@3PAPADA+0x17c,207:6:?sigName@@3PAPADA+0x174,225:6:?sigName@@3PAPADA+0x164,243:6:?sigName@@3PAPADA+0x16c,261:6:?hudslewLimitHdg@@3UWORD_POINT@@A+0x128,279:6:?hintHndl@@3PAUT_HANDLE@@A+0x1b8,299:6:?hintHndl@@3PAUT_HANDLE@@A+0x194,317:6:_campaignPlane+0x14c,335:6:?hintHndl@@3PAUT_HANDLE@@A+0x18c,353:6:?hintHndl@@3PAUT_HANDLE@@A+0x1b8,373:6:_fTypeOffsets+0x180,391:6:?hintHndl@@3PAUT_HANDLE@@A+0x1a8,411:6:?hintHndl@@3PAUT_HANDLE@@A+0x184,429:6:?hintHndl@@3PAUT_HANDLE@@A+0x17c,445:6:?hintHndl@@3PAUT_HANDLE@@A+0x174,465:6:?hintHndl@@3PAUT_HANDLE@@A+0x16c,483:6:?mcFlyAll@@3DA+0x854,501:6:_pmapCalled+0x1924,519:6:?hintHndl@@3PAUT_HANDLE@@A+0x17c,539:6:?hintHndl@@3PAUT_HANDLE@@A+0x164,557:6:?hintHndl@@3PAUT_HANDLE@@A+0x1b4,577:6:?valkyriesScore@@3DA+0x718,595:6:?hintHndl@@3PAUT_HANDLE@@A+0x160,615:6:?hintHndl@@3PAUT_HANDLE@@A+0x158,633:6:?hintHndl@@3PAUT_HANDLE@@A+0x1b4,649:6:?hintHndl@@3PAUT_HANDLE@@A+0x1b8,669:6:?hintHndl@@3PAUT_HANDLE@@A+0x154,687:6:?hintHndl@@3PAUT_HANDLE@@A+0x14c,707:6:?remapDarken320@@3PAEA+0xd4,725:6:?hintHndl@@3PAUT_HANDLE@@A+0x144,743:6:?hintHndl@@3PAUT_HANDLE@@A+0x1b8,763:6:?hintHndl@@3PAUT_HANDLE@@A+0x140,781:6:?hintHndl@@3PAUT_HANDLE@@A+0x13c,801:6:?mcFlyAll@@3DA+0xf74,819:6:?hintHndl@@3PAUT_HANDLE@@A+0x134,839:6:?hintHndl@@3PAUT_HANDLE@@A+0x130,857:6:?hintHndl@@3PAUT_HANDLE@@A+0x128,877:6:?valkyriesScore@@3DA+0x7d4,895:6:?hintHndl@@3PAUT_HANDLE@@A+0x124,913:6:_defaultChatSoundName+0x14,931:6:_stereoSwap+0x1c,949:6:_defaultChatSoundName+0xc,967:6:?hintHndl@@3PAUT_HANDLE@@A+0x120"
+  ],
+  "aliases": [],
+  "span": 992,
+  "tail": null,
+  "provenance": [
+   "patch 0,1: toolchain-diff - full-chunk transplant of FA bytes over a 1-B minimal husk; 51 DIR32 newsites from census_495616.json (0 self-anchor via main symbol - no same-name alias; 51 interior payload:=delta, 0 IAT, none negative); 54 rel32 call/jmp sites left VA-stable (no newsites)"
+  ],
+  "notes": "992-B lib-file path prober: 51 interior data anchors (hint-table strings 0x49xxxx/0x4Exxxx ladder, ?hintHndl/@ newsites 0x2af..0x3c7) + 54 rel32 (incl 0x4d... gap helpers) - transplant",
+  "flags": "/c /O2 /Gy /G5"
  }
 ]
