@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 2108,
- "chunks_done": 2108,
- "bytes_done": 186019,
+ "done": 2122,
+ "chunks_done": 2122,
+ "bytes_done": 210092,
  "bytes_total": 933612,
- "bytes_pct": 19.92,
+ "bytes_pct": 22.5,
  "waves": [
   {
    "date": "2026-11-01",
@@ -2409,6 +2409,26 @@
     "0xbaa40",
     "0xbac80",
     "0xbb000"
+   ]
+  },
+  {
+   "date": "2026-11-03",
+   "note": "Wave 50: carrier-arm/DLLconfig band, 14 entries (2106->2120, GATE 1 PASS)",
+   "rvas": [
+    "0x187d0",
+    "0x18f90",
+    "0x19550",
+    "0x1c5c0",
+    "0x1d550",
+    "0x1d770",
+    "0x1de30",
+    "0x1e010",
+    "0x1e260",
+    "0x1e6a0",
+    "0x1ea50",
+    "0x1ed80",
+    "0x1f410",
+    "0x1f6a0"
    ]
   }
  ],
