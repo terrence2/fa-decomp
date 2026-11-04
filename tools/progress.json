@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 2291,
- "chunks_done": 2291,
- "bytes_done": 383191,
+ "done": 2309,
+ "chunks_done": 2309,
+ "bytes_done": 392855,
  "bytes_total": 933612,
- "bytes_pct": 41.04,
+ "bytes_pct": 42.08,
  "waves": [
   {
    "date": "2026-11-01",
@@ -2670,6 +2670,30 @@
     "0x14420",
     "0xf4e0",
     "0xf6f0"
+   ]
+  },
+  {
+   "date": "2026-11-03",
+   "note": "wave 63: player/stick/MSG + helpers band, 18 entries",
+   "rvas": [
+    "0x11ad0",
+    "0x11f90",
+    "0x12350",
+    "0x12540",
+    "0x129a0",
+    "0x12a40",
+    "0x12d50",
+    "0x13f60",
+    "0x16240",
+    "0x174f0",
+    "0x17660",
+    "0x177a0",
+    "0x179b0",
+    "0x17b10",
+    "0x17c90",
+    "0x17e30",
+    "0x18320",
+    "0x18600"
    ]
   }
  ],
