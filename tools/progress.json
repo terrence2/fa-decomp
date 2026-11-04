@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 2347,
- "chunks_done": 2347,
- "bytes_done": 427543,
+ "done": 2351,
+ "chunks_done": 2351,
+ "bytes_done": 449266,
  "bytes_total": 933612,
- "bytes_pct": 45.79,
+ "bytes_pct": 48.12,
  "waves": [
   {
    "date": "2026-11-01",
@@ -2744,6 +2744,16 @@
     "0xa8310",
     "0xa8720",
     "0xa8ab0"
+   ]
+  },
+  {
+   "date": "2026-11-03",
+   "note": "66",
+   "rvas": [
+    "0x3a060",
+    "0x3f570",
+    "0x470c5",
+    "0xb5f30"
    ]
   }
  ],
