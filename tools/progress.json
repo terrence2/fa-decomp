@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 2269,
- "chunks_done": 2269,
- "bytes_done": 356730,
+ "done": 2280,
+ "chunks_done": 2280,
+ "bytes_done": 366919,
  "bytes_total": 933612,
- "bytes_pct": 38.21,
+ "bytes_pct": 39.3,
  "waves": [
   {
    "date": "2026-11-01",
@@ -2636,6 +2636,23 @@
     "0xcdba4",
     "0xcdc84",
     "0xcf788"
+   ]
+  },
+  {
+   "date": "2026-11-03",
+   "note": "wave 61: decoder band closeout, 11 entries",
+   "rvas": [
+    "0xcdf14",
+    "0xce530",
+    "0xce730",
+    "0xceb48",
+    "0xcf3bc",
+    "0xcf4e4",
+    "0xd051c",
+    "0xd078c",
+    "0xd0b68",
+    "0xd0c44",
+    "0xd0e1d"
    ]
   }
  ],
