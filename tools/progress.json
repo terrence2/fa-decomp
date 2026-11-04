@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 2280,
- "chunks_done": 2280,
- "bytes_done": 366919,
+ "done": 2291,
+ "chunks_done": 2291,
+ "bytes_done": 383191,
  "bytes_total": 933612,
- "bytes_pct": 39.3,
+ "bytes_pct": 41.04,
  "waves": [
   {
    "date": "2026-11-01",
@@ -2653,6 +2653,23 @@
     "0xd0b68",
     "0xd0c44",
     "0xd0e1d"
+   ]
+  },
+  {
+   "date": "2026-11-03",
+   "note": "wave 62: DAMAGE/FlightKey band, 11 entries",
+   "rvas": [
+    "0x10460",
+    "0x10640",
+    "0x110e0",
+    "0x11150",
+    "0x11390",
+    "0x13150",
+    "0x13aa0",
+    "0x142a0",
+    "0x14420",
+    "0xf4e0",
+    "0xf6f0"
    ]
   }
  ],
