@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 2133,
- "chunks_done": 2133,
- "bytes_done": 223068,
+ "done": 2144,
+ "chunks_done": 2144,
+ "bytes_done": 241692,
  "bytes_total": 933612,
- "bytes_pct": 23.89,
+ "bytes_pct": 25.89,
  "waves": [
   {
    "date": "2026-11-01",
@@ -2446,6 +2446,23 @@
     "0x773f0",
     "0x79b30",
     "0x79ef0"
+   ]
+  },
+  {
+   "date": "2026-11-03",
+   "note": "Wave 52: MISSION band, 11 entries (2131->2142, GATE 1 PASS)",
+   "rvas": [
+    "0x7c5c0",
+    "0x7d070",
+    "0x7e050",
+    "0x7e270",
+    "0x7e660",
+    "0x7eca0",
+    "0x7ef40",
+    "0x7f960",
+    "0x7ff90",
+    "0x80130",
+    "0x82320"
    ]
   }
  ],
