@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 2257,
- "chunks_done": 2257,
- "bytes_done": 337401,
+ "done": 2269,
+ "chunks_done": 2269,
+ "bytes_done": 356730,
  "bytes_total": 933612,
- "bytes_pct": 36.14,
+ "bytes_pct": 38.21,
  "waves": [
   {
    "date": "2026-11-01",
@@ -2618,6 +2618,24 @@
     "0xc9744",
     "0xc9976",
     "0xc9c60"
+   ]
+  },
+  {
+   "date": "2026-11-03",
+   "note": "wave 60: decoder band pt3 (render/ecode/icall cores), 12 entries",
+   "rvas": [
+    "0xca068",
+    "0xca864",
+    "0xcaba7",
+    "0xcad30",
+    "0xcadf0",
+    "0xcb654",
+    "0xcc844",
+    "0xcc92c",
+    "0xcd000",
+    "0xcdba4",
+    "0xcdc84",
+    "0xcf788"
    ]
   }
  ],
