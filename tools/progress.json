@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 2309,
- "chunks_done": 2309,
- "bytes_done": 392855,
+ "done": 2325,
+ "chunks_done": 2325,
+ "bytes_done": 409591,
  "bytes_total": 933612,
- "bytes_pct": 42.08,
+ "bytes_pct": 43.87,
  "waves": [
   {
    "date": "2026-11-01",
@@ -2694,6 +2694,28 @@
     "0x17e30",
     "0x18320",
     "0x18600"
+   ]
+  },
+  {
+   "date": "2026-11-03",
+   "note": "Wave 64: T_* terrain + AddStats/dialog band, 16 entries",
+   "rvas": [
+    "0x9f860",
+    "0x9fc40",
+    "0x9fd90",
+    "0xa00e0",
+    "0xa0340",
+    "0xa05b0",
+    "0xa0680",
+    "0xa08f0",
+    "0xa2410",
+    "0xa4250",
+    "0xa48d0",
+    "0xa4cd0",
+    "0xa5ba0",
+    "0xa64c0",
+    "0xa7bb0",
+    "0xa8970"
    ]
   }
  ],
