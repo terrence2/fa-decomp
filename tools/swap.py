@@ -164,6 +164,8 @@ def _fit(e):
         args += ["--span", str(e["span"])]
     if e.get("merge_text"):
         args += ["--merge-text"]
+    if e.get("merge_keep"):
+        args += ["--merge-text-keep", str(e["merge_keep"])]
     for a in e.get("aliases", []):
         args += ["--alias", a]
     if e.get("tail"):
@@ -191,13 +193,14 @@ def _off_in_key(key, off):
     per-TU entries share one patch list and rely on exact tokens."""
     body = key[len("patch"):].strip()
     m = re.match(r"^(?:0x[0-9a-fA-F]+|\d+)(?:\s*/\s*(?:0x[0-9a-fA-F]+|\d+))*"
+                 r"(?:\s*,\s*(?:0x[0-9a-fA-F]+|\d+))*"
                  r"\s*(?=[\(:]|$)", body)
     if not m:
         return off in body.split("(")[0]      # degenerate key: old behavior
     try:
         want = int(off, 0)
-        for tok in m.group(0).split("/"):
-            if int(tok.strip(), 0) == want:
+        for tok in re.findall(r"(?:0x[0-9a-fA-F]+|\d+)", m.group(0)):
+            if int(tok, 0) == want:
                 return True
     except ValueError:
         return off in key

@@ -128,7 +128,7 @@ def apply_patches(text, patches):
 def main():
     cl_obj, rva = sys.argv[1], int(sys.argv[2], 0)
     out, remap, tailaccept, patches = None, {}, False, []
-    aliases, span_size, merge_text = [], None, False
+    aliases, span_size, merge_text, merge_keep = [], None, False, None
     argv = sys.argv[3:]
     i = 0
     while i < len(argv):
@@ -154,6 +154,12 @@ def main():
             # per-function codegen must stay identical to today's build).
             merge_text = True
             i += 1
+        elif argv[i] == "--merge-text-keep":
+            # natural-prefix entries: keep only the first K .text sections
+            # (the rows adopted into this entry); later rows' sections are
+            # dropped from the contribution (they stay verbatim entries).
+            merge_keep = int(argv[i + 1], 0)
+            i += 2
         elif argv[i] == "--alias":
             ao, an = argv[i + 1].split("=", 1)
             aliases.append((int(ao, 0), an))
@@ -181,6 +187,13 @@ def main():
     if merge_text:
         tsec = [i for i, s in enumerate(secs) if s["name"] == ".text"]
         assert tsec, "no .text sections"
+        if merge_keep is not None:
+            assert merge_keep <= len(tsec), \
+                "merge-text-keep %d > %d .text sections" % (merge_keep,
+                                                            len(tsec))
+            print("merge-text: keeping %d of %d .text sections (prefix)"
+                  % (merge_keep, len(tsec)))
+            tsec = tsec[:merge_keep]
         base_map, base, rels, content = {}, 0, [], bytearray()
         for i in tsec:
             s = secs[i]
@@ -190,9 +203,7 @@ def main():
             base += len(s["content"])
         if len(tsec) > 1:
             print("merge-text: %d .text sections -> 0x%x B" % (len(tsec), base))
-        for nm, (val, sec, cls, typ) in list(defs.items()):
-            if sec in base_map:
-                defs[nm] = (val + base_map[sec], tsec[0] + 1, cls, typ)
+        mconcat, mtsec = base_map, tsec   # $L defs re-based AFTER patches
         secs[tsec[0]]["content"] = content
         secs[tsec[0]]["relocs"] = rels
     text_idx = secs.index(next(s for s in secs if s["name"] == ".text")) + 1
@@ -200,6 +211,29 @@ def main():
     text["content"] = bytearray(text["content"])
     if patches:
         apply_patches(text, patches)
+    if merge_text:
+        # Patches stretch/shrink segments AFTER the concat: row j's tile
+        # offset = concat offset + pad deltas of every preceding row
+        # (transplants lengthen 1-B husks to the tile extent). Replay the
+        # patch deltas over the concat starts so the link-resolved $L
+        # labels land at tile positions — the gate's STRIP/PROJ/setmbcp
+        # jump-table dwords drifted by exactly those pads.
+        cur = [mconcat[i + 1] for i in mtsec]
+        for spec in patches:
+            parts = spec.split(",")
+            off, oldlen = int(parts[0], 0), int(parts[1], 0)
+            newlen = len(bytes.fromhex(parts[2])) if parts[2] else 0
+            # a section's content start moves iff it sits at/after the
+            # patch span's end (replaces), or at the insert point itself
+            # (oldlen 0 — an insert at a section start shifts it; e.g.
+            # tu_1124's row-1 trailing pad at 0x282 = row-2's tile base)
+            for j in range(len(cur)):
+                if cur[j] >= off + oldlen:
+                    cur[j] += newlen - oldlen
+        tbase = {mtsec[j] + 1: cur[j] for j in range(len(mtsec))}
+        for nm, (val, sec, cls, typ) in list(defs.items()):
+            if sec in tbase:
+                defs[nm] = (val + tbase[sec], mtsec[0] + 1, cls, typ)
     L = json.load(open("build/layout.json"))
     exe = open("FA/FA.EXE", "rb").read()
     if span_size is not None:

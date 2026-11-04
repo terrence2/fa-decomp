@@ -98,7 +98,8 @@ FA/FA.EXE ──> peref.py ┴───────────────► b
 | `dis.py` | One-command "understand" step: annotated disassembly of a chunk (`python3 tools/dis.py <rva\|name> [--span 0xSIZE]`) — FPO decode, tail-pad census, per-line target annotations, site-table preview. |
 | `mapgen.py` | Suggested `maps:`/`aliases:` lines for a chunk's sites, each labelled `[identity]`/`[human confirm]`/`[human-coin]`/`[CL-internal]` — the FROM is always a C-side choice, the target VA is guaranteed. |
 | `rank.py` + `progress.json` | Easiest-first target selector (difficulty score calibrated on the 7 pilots; see docstring) + generated progress tracker (`--update [--wave note]`, idempotent). |
-| `swap.py` + `swap.json` | The driver: runs everything below for all entries in the version-controlled swap set. Steps run individually: `python3 tools/swap.py [compile\|link\|gate]`. `compile` batches all CL invocations into ONE container with `__OK__/__FAIL__` markers (obj timestamps provably cannot reach Gate 1). |
+| `swap.py` + `swap.json` | The driver: runs everything below for all entries in the version-controlled swap set. Steps run individually: `python3 tools/swap.py [compile|link|gate]`. `compile` batches all CL invocations into ONE container with `__OK__/__FAIL__` markers (obj timestamps provably cannot reach Gate 1). |
+| `regroup.py` + `build/tu/` | The census→TU regroup: `plan` (units + per-TU src generation), `bridge`/`verify` (FA-span objects + anchor registry), `parity` (per-row arbitration + `tools/swap.tu.json` emission), `tailsweep` (split_max_bytes sweep). Verdicts in `build/tu/verdicts.json`. |
 | `mkrsp.py` | Renders `build/m0/m0linkD.rsp` preserving FA's exact object order; `--replace VA=obj` swaps a fitted decompiled object in. |
 | `fixreloc.py` | Forces the `.reloc` VirtualSize to FA's 0x143d8 (wine-linker bookkeeping delta, proven inert). |
 | `gate.py` | Gate 1: sha256 identity, with symbol-localized diffs on failure. |
@@ -107,11 +108,41 @@ FA/FA.EXE ──> peref.py ┴───────────────► b
 
 ## 4. Workflow toward full decompilation
 
-State of play: milestone 0 (stub-only rebuild) passed Gate 1; seven pilot
-functions are swapped so far (`tools/swap.json`), each with its codegen
-findings recorded in `TODO.md` Phase 4. The per-function loop is now
-tool-assisted (dis.py/mapgen.py/rank.py below); decompilation waves run
-easiest-first from `python3 tools/rank.py`:
+State of play: milestone 0 (stub-only rebuild) passed Gate 1; the **`.text`
+census is 100% complete** — all 3,832 `.text` chunks have proven swap entries
+(sources under `src/` + `src/survey/probes/`, per-chunk baseline kept as
+`tools/swap.chunked.json`). The tree has been **regrouped into per-TU
+sources**: FA's original translation units (`build/survey/tu_map.json`,
+calibrated in `docs/` — see below) are now `src/tu/NNN__<landmark>.c(pp)`
+files, and `tools/swap.json` is the per-TU config (1,965 entries):
+
+- **natural** (266): the merged TU source compiles — with every row re-based
+  — to byte-identical code against each chunk's GATE-PASS-proven standalone
+  obj (adjudicated per-row by `regroup.py parity`: masked content compare +
+  local-`$L`-label target-rva identity);
+- **prefix** (140): natural prefix of rows + per-chunk verbatim entries for
+  the remainder;
+- **bridge** (238): per-TU span entries assembled directly from FA bytes
+  (`mkstub` singletons) — used when the merged compile diverges (jump-table
+  `$L` placements, compile failures, map conflicts);
+- **verbatim** (~1,320): single-row TUs kept verbatim from the chunked set.
+
+The pipeline is one command from the default config:
+`python3 tools/swap.py compile fit link gate` → GATE 1 PASS.
+
+The per-TU loop (decompilation *quality* work, not coverage — the gate is
+already byte-exact):
+
+1. **Pick**: a bridge/prefix/transplant unit from `build/tu/verdicts.json`
+   (largest = best payoff: its `.text` currently rides FA bytes).
+2. **Improve** the merged source `src/tu/NNN__<landmark>.c(pp)` so the rows
+   adopt naturally: `PARITY_KEEP=1 python3 tools/regroup.py parity` re-runs
+   per-row arbitration; every adoption decision cites the exact divergence.
+3. **Swap + gate**: `python3 tools/swap.py compile fit link gate` — unchanged.
+
+`tools/regroup.py plan` regenerates `build/tu/plan.json` + `src/tu/`
+byte-identically from its inputs (`tools/swap.chunked.json` (per-chunk rows),
+`build/survey/tu_map.json`, `build/layout.json`) + `build/tu/verdicts.json`.
 
 1. **Pick** the next target: un-swapped chunk, ideally small/leaf-ish with few
    fixups (Gate 2's JSON ranks them).
@@ -119,17 +150,18 @@ easiest-first from `python3 tools/rank.py`:
    calling conventions, FPO record, and which globals it touches.
 3. **Reconstruct** `src/<Name>.c` and iterate *offline* (compile + `fitobj`
    byte-compare only — no link) until it matches FA's chunk bytes.
-4. **Register** it in `tools/swap.json` (maps/patch/tail when needed).
-5. **Swap + gate**: `python3 tools/swap.py` → GATE 1 PASS.
+4. **Register** it: fix the corresponding merged TU src under `src/tu/` and
+   re-run `regroup.py parity`, so the row adopts naturally (its per-row
+   fit/patch directives are re-derived from the proven per-chunk directives).
+5. **Swap + gate**: `python3 tools/swap.py compile fit link gate` → GATE 1
+   PASS.
 6. **Commit** the source + entry, extending `TODO.md` with any new codegen
    tells. Pilot knowledge compounds: most functions reuse patterns already
    solved (fastcall, 16-bit params, switch tables, inlined memcpy, …).
 
-Expected composition of the remaining 3,823 functions: large clusters share
-idioms (CRT, fastcall arithmetic helpers, dialog/UI), so the per-function
-effort drops as the pilot set grows. Scaling beyond a few dozen entries needs
-batching of the stub-regen/link steps (Phase 5 in `TODO.md`), but the
-mechanism is already proven end-to-end.
+The per-chunk census is complete; the remaining work is decompilation
+*quality* inside the per-TU tree (verdicts above), so most future waves reuse
+the regroup loop instead of new per-chunk registrations.
 
 ### Worked example: decompiling your first function
 
@@ -158,12 +190,14 @@ python3 tools/fitobj.py build/pilot/<Name>.obj 0x<rva> \
 # the fitted code must equal FA's chunk outside the relocated dwords
 # (semantically-reordered objects fail here, not at Gate 1) — fix and repeat.
 
-# 6) Register the entry in tools/swap.json (or mapgen --maps output), then:
-python3 tools/swap.py                          # one batch → GATE 1 PASS
+# 6) Register: edit the owning merged TU src (src/tu/NNN__<landmark>.c), then
+#    re-run arbitration and swap over:
+PARITY_KEEP=1 python3 tools/regroup.py parity    # re-adopt rows / re-emit config
+python3 tools/swap.py compile fit link gate      # → GATE 1 PASS
 
-# 7) Commit source + swap.json entry (+ TODO.md tells):
-git add src/<Name>.c tools/swap.json TODO.md
-git commit -m "Phase 4 pilot N: <Name> ..."
+# 7) Commit source + regroup diffs (+ TODO.md tells):
+git add src/tu/NNN__<landmark>.c* tools/swap.tu.json build/tu/
+git commit -m "regroup: adopt <landmark> rows ..."
 ```
 
 Rules of the road: never link without a passing gate; never grow `swap.json`
