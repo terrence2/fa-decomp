@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 2210,
- "chunks_done": 2210,
- "bytes_done": 295660,
+ "done": 2223,
+ "chunks_done": 2223,
+ "bytes_done": 312892,
  "bytes_total": 933612,
- "bytes_pct": 31.67,
+ "bytes_pct": 33.51,
  "waves": [
   {
    "date": "2026-11-01",
@@ -2553,6 +2553,25 @@
     "0x78780",
     "0x78830",
     "0x79000"
+   ]
+  },
+  {
+   "date": "2026-11-03",
+   "note": "wave 57: usnfmain/HUD band, 13 entries",
+   "rvas": [
+    "0x3700",
+    "0x4aa0",
+    "0x5190",
+    "0x5350",
+    "0x5ad0",
+    "0x5c10",
+    "0x5d10",
+    "0x5e00",
+    "0x66d0",
+    "0x6780",
+    "0x7500",
+    "0x78b0",
+    "0x7c40"
    ]
   }
  ],
