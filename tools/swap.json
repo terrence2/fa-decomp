@@ -28713,5 +28713,307 @@
   ],
   "notes": "UkraineMedals: 592-B cdecl/fpo medal if-chain (9 blocks; _campaignPilot+0x572..0x57a byte RMW, thresholds from _stats+0x1fb0..0x2008 and _pilotRanks+0x9c8..0xbf8, folded missionSucceeded ecx reuse at 0x2f). Transplant \u2014 the folded-missionSucceeded read is the known load-folds-to-test wall. First of 7 homogeneous medal-family chunks; wave 53 recipe: transplant all 7 per-family.",
   "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 533872,
+  "verdict": "EXACT",
+  "obj": "w53A_h82570",
+  "src": "build/survey/probes/w53A/husk_h82570.c",
+  "maps": [],
+  "patch": [
+   "0,1,a0c0714f0084c07528a0b89c540084c0740333c0c3a14096540085c0740333c0c38b0d149d540085c90f8eb5010000eb068b0d149d5400a08a504f0084c07529a14896540083f8067c1fa08a504f006800804f00fec0a28a504f00e8003dfeff83c404b8c4804f00c3a08b504f0084c07532a10896540085c07e29a1e06a4f0083f8087c1fa08b504f0068c87f4f00fec0a28b504f00e8c53cfeff83c404b8bc804f00c3a08c504f0084c07542a1f89554008b15f095540003c285c07e31a1c86a4f008b15d06a4f0003c283f81e7c1fa08c504f0068847f4f00fec0a28c504f00e87a3cfeff83c404b8b4804f00c3a093504f0084c0752e8a25c7584f0080fc1c752385c97e1fa093504f006890804f00fec0a293504f00e8433cfeff83c404b888804f00c3a08d504f0084c07532a1f095540085c07e29a1c86a4f0083f80f7c1fa08d504f00683c7f4f00fec0a28d504f00e8083cfeff83c404b880804f00c3a08f504f0084c07543a1fc9554008b15f495540003c283f8037c31a1f89554008b15f095540003c283f8037c1fa08f504f0068b07e4f00fec0a28f504f00e8bc3bfeff83c404b878804f00c3a090504f0084c0752e8a25c7584f0080fc10752385c97e1fa090504f0068687e4f00fec0a290504f00e8853bfeff83c404b870804f00c3a094504f0084c0752ca0649d540084c07423a094504f00fec0a294504f003c01750d683c804f00e8503bfeff83c404b834804f00c3a092504f003c03732ca0a0dd510084c07423a092504f00fec0a292504f003c01750d68e07d4f00e81b3bfeff83c404b82c804f00c333c0c38d6424008d6424008da42400000000,1:6:_forceVictory+0x0,10:6:_playerCheating+0x0,22:6:_stats+0x2000,35:6:_missionSucceeded+0x0,51:6:_missionSucceeded+0x0,56:6:_campaignPilot+0x572,65:6:_stats+0x2008,75:6:_campaignPilot+0x572,80:6:_pilotRanks+0xbf8,87:6:_campaignPilot+0x572,100:6:_pilotRanks+0xcbc,106:6:_campaignPilot+0x573,115:6:_stats+0x1fc8,124:6:_campaignPilot+0x1fc8,134:6:_campaignPilot+0x573,139:6:_pilotRanks+0xbc0,146:6:_campaignPilot+0x573,159:6:_pilotRanks+0xcb4,165:6:_campaignPilot+0x574,174:6:_stats+0x1fb8,180:6:_stats+0x1fb0,191:6:_campaignPilot+0x1fb0,197:6:_campaignPilot+0x1fb8,209:6:_campaignPilot+0x574,214:6:_pilotRanks+0xb7c,221:6:_campaignPilot+0x574,234:6:_pilotRanks+0xcac,240:6:_campaignPilot+0x57b,250:6:_campaignPilot+0xdaf,264:6:_campaignPilot+0x57b,269:6:_pilotRanks+0xc88,276:6:_campaignPilot+0x57b,289:6:_pilotRanks+0xc80,295:6:_campaignPilot+0x575,304:6:_stats+0x1fb0,313:6:_campaignPilot+0x1fb0,323:6:_campaignPilot+0x575,328:6:_pilotRanks+0xb34,335:6:_campaignPilot+0x575,348:6:_pilotRanks+0xc78,354:6:_campaignPilot+0x577,363:6:_stats+0x1fbc,369:6:_stats+0x1fb4,381:6:_stats+0x1fb8,387:6:_stats+0x1fb0,399:6:_campaignPilot+0x577,404:6:_pilotRanks+0xaa8,411:6:_campaignPilot+0x577,424:6:_pilotRanks+0xc70,430:6:_campaignPilot+0x578,440:6:_campaignPilot+0xdaf,454:6:_campaignPilot+0x578,459:6:_pilotRanks+0xa60,466:6:_campaignPilot+0x578,479:6:_pilotRanks+0xc68,485:6:_campaignPilot+0x57c,494:6:?killedMonster@@3DA+0x0,503:6:_campaignPilot+0x57c,510:6:_campaignPilot+0x57c,519:6:_pilotRanks+0xc34,532:6:_pilotRanks+0xc2c,538:6:_campaignPilot+0x57a,547:6:_dam+0x28,556:6:_campaignPilot+0x57a,563:6:_campaignPilot+0x57a,572:6:_pilotRanks+0x9d8,585:6:_pilotRanks+0xc24"
+  ],
+  "span": 608,
+  "aliases": [],
+  "provenance": [
+   "patch 0,1: toolchain-diff \u2014 full-chunk transplant of FA bytes over a 1-B minimal husk (fitobj main symbol takes the layout chunk name '_KurileMedals'); 67 zero-payload DIR32 newsite tokens (site=payload dword start, hex=FA chunk-relative offset, addend from sites.py); 10 VA-stable rel32 call sites untouched; byte-verified EXACT via verify.py (18-B symtab fix)"
+  ],
+  "notes": "_KurileMedals: 608-B medal/awards-screen chunk (rva 0x82570) \u2014 whole-chunk transplant per directive; 67 abs anchors resolved by sites.py, 0 self-anchors, no negative addends; no alias needed (named chunk, main symbol = layout public). One of 8 homogeneous medal-family chunks.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 534480,
+  "verdict": "EXACT",
+  "obj": "w53A_h827d0",
+  "src": "build/survey/probes/w53A/husk_h827d0.c",
+  "maps": [],
+  "patch": [
+   "0,1,53a0b89c54005684c057740633c05f5e5bc3a14096540085c0740633c05f5e5bc3a1d46a4f008b0dc86a4f0003c18b15cc6a4f0003c28b1dd06a4f0003c3b9f6ffffff99f7f983c00b83f8067d05b8060000008b35149d540085f67e60668b0dc6584f0066c1f9080fbfd13bd07c4ea108744f005068ba4b4f00e89131050083c4088b35149d540085c075318b3d0c744f00b9ffffffff2bc0f2aef7d12bf98bc1c1e9028bf7bfba4b4f00f3a58bc883e103f3a4b8d4804f005f5e5bc3a1d46a4f008b0dc86a4f0003c18b15cc6a4f0003c28b1dd06a4f0003c3b9f6ffffff99f7f983c01683f8107d05b81000000085f67e5a668b0dc6584f0066c1f9080fbfd13bd07c48a10c744f005068ba4b4f00e8fb30050083c40885c075318b3d10744f00b9ffffffff2bc0f2aef7d12bf98bc1c1e9028bf7bfba4b4f00f3a58bc883e103f3a4b8cc804f005f5e5bc333c05f5e5bc38d9b000000008da42400000000,2:6:_playerCheating+0x0,19:6:_stats+0x2000,34:6:_campaignPilot+0x1fbc,40:6:_campaignPilot+0x1fb0,48:6:_campaignPilot+0x1fb4,56:6:_campaignPilot+0x1fb8,85:6:_missionSucceeded+0x0,96:6:_campaignPilot+0xdae,112:6:_pilotRanks+0x0,118:6:_campaignPilot+0xa2,132:6:_missionSucceeded+0x0,142:6:_pilotRanks+0x4,167:6:_campaignPilot+0xa2,181:6:_pilotRanks+0xccc,190:6:_campaignPilot+0x1fbc,196:6:_campaignPilot+0x1fb0,204:6:_campaignPilot+0x1fb4,212:6:_campaignPilot+0x1fb8,246:6:_campaignPilot+0xdae,262:6:_pilotRanks+0x4,268:6:_campaignPilot+0xa2,286:6:_pilotRanks+0x8,311:6:_campaignPilot+0xa2,325:6:_pilotRanks+0xcc4"
+  ],
+  "span": 352,
+  "aliases": [],
+  "provenance": [
+   "patch 0,1: toolchain-diff \u2014 full-chunk transplant of FA bytes over a 1-B minimal husk (fitobj main symbol takes the layout chunk name '_KurilePromotions'); 24 zero-payload DIR32 newsite tokens (site=payload dword start, hex=FA chunk-relative offset, addend from sites.py); 2 VA-stable rel32 call sites untouched; byte-verified EXACT via verify.py (18-B symtab fix)"
+  ],
+  "notes": "_KurilePromotions: 352-B medal/awards-screen chunk (rva 0x827d0) \u2014 whole-chunk transplant per directive; 24 abs anchors resolved by sites.py, 0 self-anchors, no negative addends; no alias needed (named chunk, main symbol = layout public). One of 8 homogeneous medal-family chunks.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 534864,
+  "verdict": "EXACT",
+  "obj": "w53A_h82950",
+  "src": "build/survey/probes/w53A/husk_h82950.c",
+  "maps": [],
+  "patch": [
+   "0,1,a0c0714f0084c07528a0b89c540084c0740333c0c3a14096540085c0740333c0c38b0d149d540085c90f8ee7010000eb068b0d149d5400a08a504f0084c07529a14896540083f80a7c1fa08a504f00688c824f00fec0a28a504f00e82039feff83c404b880824f00c3a08b504f0084c07532a13096540085c07e29a1086b4f0083f8647c1fa08b504f006858824f00fec0a28b504f00e8e538feff83c404b84c824f00c3a08c504f0084c07542a1f89554008b15f095540003c285c07e31a1c86a4f008b15d06a4f0003c283f81e7c1fa08c504f00680c824f00fec0a28c504f00e89a38feff83c404b800824f00c3a08d504f0084c07532a1f095540085c07e29a1c86a4f0083f80f7c1fa08d504f00683c7f4f00fec0a28d504f00e85f38feff83c404b8f4814f00c3a08e504f0084c07529a1c86a4f0083f82d7c1fa08e504f0068b8814f00fec0a28e504f00e82d38feff83c404b8ac814f00c3a08f504f0084c07543a1fc9554008b15f495540003c283f8057c31a1f89554008b15f095540003c283f8077c1fa08f504f006878814f00fec0a28f504f00e8e137feff83c404b86c814f00c3a090504f0084c0752e8a25c7584f0080fc26752385c97e1fa090504f006838814f00fec0a290504f00e8aa37feff83c404b82c814f00c3a091504f0084c0752e8a25c7584f0080fc27752385c97e1fa091504f0068f4804f00fec0a291504f00e87337feff83c404b8e8804f00c3a092504f003c037335a0a0dd510084c07509a0b2dd510084c07423a092504f00fec0a292504f003c01750d68e07d4f00e83537feff83c404b8dc804f00c333c0c38bff8da42400000000,1:6:_forceVictory+0x0,10:6:_playerCheating+0x0,22:6:_stats+0x2000,35:6:_missionSucceeded+0x0,51:6:_missionSucceeded+0x0,56:6:_campaignPilot+0x572,65:6:_stats+0x2008,75:6:_campaignPilot+0x572,80:6:_pilotRanks+0xe84,87:6:_campaignPilot+0x572,100:6:_pilotRanks+0xe78,106:6:_campaignPilot+0x573,115:6:_stats+0x1ff0,124:6:_campaignPilot+0x1ff0,134:6:_campaignPilot+0x573,139:6:_pilotRanks+0xe50,146:6:_campaignPilot+0x573,159:6:_pilotRanks+0xe44,165:6:_campaignPilot+0x574,174:6:_stats+0x1fb8,180:6:_stats+0x1fb0,191:6:_campaignPilot+0x1fb0,197:6:_campaignPilot+0x1fb8,209:6:_campaignPilot+0x574,214:6:_pilotRanks+0xe04,221:6:_campaignPilot+0x574,234:6:_pilotRanks+0xdf8,240:6:_campaignPilot+0x575,249:6:_stats+0x1fb0,258:6:_campaignPilot+0x1fb0,268:6:_campaignPilot+0x575,273:6:_pilotRanks+0xb34,280:6:_campaignPilot+0x575,293:6:_pilotRanks+0xdec,299:6:_campaignPilot+0x576,308:6:_campaignPilot+0x1fb0,318:6:_campaignPilot+0x576,323:6:_pilotRanks+0xdb0,330:6:_campaignPilot+0x576,343:6:_pilotRanks+0xda4,349:6:_campaignPilot+0x577,358:6:_stats+0x1fbc,364:6:_stats+0x1fb4,376:6:_stats+0x1fb8,382:6:_stats+0x1fb0,394:6:_campaignPilot+0x577,399:6:_pilotRanks+0xd70,406:6:_campaignPilot+0x577,419:6:_pilotRanks+0xd64,425:6:_campaignPilot+0x578,435:6:_campaignPilot+0xdaf,449:6:_campaignPilot+0x578,454:6:_pilotRanks+0xd30,461:6:_campaignPilot+0x578,474:6:_pilotRanks+0xd24,480:6:_campaignPilot+0x579,490:6:_campaignPilot+0xdaf,504:6:_campaignPilot+0x579,509:6:_pilotRanks+0xcec,516:6:_campaignPilot+0x579,529:6:_pilotRanks+0xce0,535:6:_campaignPilot+0x57a,544:6:_dam+0x28,553:6:_dam+0x3a,562:6:_campaignPilot+0x57a,569:6:_campaignPilot+0x57a,578:6:_pilotRanks+0x9d8,591:6:_pilotRanks+0xcd4"
+  ],
+  "span": 608,
+  "aliases": [],
+  "provenance": [
+   "patch 0,1: toolchain-diff \u2014 full-chunk transplant of FA bytes over a 1-B minimal husk (fitobj main symbol takes the layout chunk name '_ATFEgyptMedals'); 68 zero-payload DIR32 newsite tokens (site=payload dword start, hex=FA chunk-relative offset, addend from sites.py); 10 VA-stable rel32 call sites untouched; byte-verified EXACT via verify.py (18-B symtab fix)"
+  ],
+  "notes": "_ATFEgyptMedals: 608-B medal/awards-screen chunk (rva 0x82950) \u2014 whole-chunk transplant per directive; 68 abs anchors resolved by sites.py, 0 self-anchors, no negative addends; no alias needed (named chunk, main symbol = layout public). One of 8 homogeneous medal-family chunks.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 535472,
+  "verdict": "EXACT",
+  "obj": "w53A_h82bb0",
+  "src": "build/survey/probes/w53A/husk_h82bb0.c",
+  "maps": [],
+  "patch": [
+   "0,1,a0c0714f0084c07528a0b89c540084c0740333c0c3a14096540085c0740333c0c38b0d149d540085c90f8ee7010000eb068b0d149d5400a08a504f0084c07529a14896540083f80a7c1fa08a504f00688c824f00fec0a28a504f00e8c036feff83c404b880824f00c3a08b504f0084c07532a13096540085c07e29a1086b4f0083f8647c1fa08b504f006858824f00fec0a28b504f00e88536feff83c404b84c824f00c3a08c504f0084c07542a1f89554008b15f095540003c285c07e31a1c86a4f008b15d06a4f0003c283f81e7c1fa08c504f00680c824f00fec0a28c504f00e83a36feff83c404b800824f00c3a093504f0084c0752e8a25c7584f0080fc22752385c97e1fa093504f006890804f00fec0a293504f00e80336feff83c404b8bc824f00c3a08d504f0084c07532a1f095540085c07e29a1c86a4f0083f80f7c1fa08d504f00683c7f4f00fec0a28d504f00e8c835feff83c404b8f4814f00c3a08e504f0084c07529a1c86a4f0083f82d7c1fa08e504f0068b8814f00fec0a28e504f00e89635feff83c404b8ac814f00c3a08f504f0084c07543a1fc9554008b15f495540003c283f8057c31a1f89554008b15f095540003c283f8077c1fa08f504f006878814f00fec0a28f504f00e84a35feff83c404b86c814f00c3a091504f0084c0752e8a25c7584f0080fc27752385c97e1fa091504f0068f4804f00fec0a291504f00e81335feff83c404b8e8804f00c3a092504f003c037335a0a0dd510084c07509a0b2dd510084c07423a092504f00fec0a292504f003c01750d68e07d4f00e8d534feff83c404b8dc804f00c333c0c38bff8da42400000000,1:6:_forceVictory+0x0,10:6:_playerCheating+0x0,22:6:_stats+0x2000,35:6:_missionSucceeded+0x0,51:6:_missionSucceeded+0x0,56:6:_campaignPilot+0x572,65:6:_stats+0x2008,75:6:_campaignPilot+0x572,80:6:_pilotRanks+0xe84,87:6:_campaignPilot+0x572,100:6:_pilotRanks+0xe78,106:6:_campaignPilot+0x573,115:6:_stats+0x1ff0,124:6:_campaignPilot+0x1ff0,134:6:_campaignPilot+0x573,139:6:_pilotRanks+0xe50,146:6:_campaignPilot+0x573,159:6:_pilotRanks+0xe44,165:6:_campaignPilot+0x574,174:6:_stats+0x1fb8,180:6:_stats+0x1fb0,191:6:_campaignPilot+0x1fb0,197:6:_campaignPilot+0x1fb8,209:6:_campaignPilot+0x574,214:6:_pilotRanks+0xe04,221:6:_campaignPilot+0x574,234:6:_pilotRanks+0xdf8,240:6:_campaignPilot+0x57b,250:6:_campaignPilot+0xdaf,264:6:_campaignPilot+0x57b,269:6:_pilotRanks+0xc88,276:6:_campaignPilot+0x57b,289:6:_pilotRanks+0xeb4,295:6:_campaignPilot+0x575,304:6:_stats+0x1fb0,313:6:_campaignPilot+0x1fb0,323:6:_campaignPilot+0x575,328:6:_pilotRanks+0xb34,335:6:_campaignPilot+0x575,348:6:_pilotRanks+0xdec,354:6:_campaignPilot+0x576,363:6:_campaignPilot+0x1fb0,373:6:_campaignPilot+0x576,378:6:_pilotRanks+0xdb0,385:6:_campaignPilot+0x576,398:6:_pilotRanks+0xda4,404:6:_campaignPilot+0x577,413:6:_stats+0x1fbc,419:6:_stats+0x1fb4,431:6:_stats+0x1fb8,437:6:_stats+0x1fb0,449:6:_campaignPilot+0x577,454:6:_pilotRanks+0xd70,461:6:_campaignPilot+0x577,474:6:_pilotRanks+0xd64,480:6:_campaignPilot+0x579,490:6:_campaignPilot+0xdaf,504:6:_campaignPilot+0x579,509:6:_pilotRanks+0xcec,516:6:_campaignPilot+0x579,529:6:_pilotRanks+0xce0,535:6:_campaignPilot+0x57a,544:6:_dam+0x28,553:6:_dam+0x3a,562:6:_campaignPilot+0x57a,569:6:_campaignPilot+0x57a,578:6:_pilotRanks+0x9d8,591:6:_pilotRanks+0xcd4"
+  ],
+  "span": 608,
+  "aliases": [],
+  "provenance": [
+   "patch 0,1: toolchain-diff \u2014 full-chunk transplant of FA bytes over a 1-B minimal husk (fitobj main symbol takes the layout chunk name '_ATFVladMedals'); 68 zero-payload DIR32 newsite tokens (site=payload dword start, hex=FA chunk-relative offset, addend from sites.py); 10 VA-stable rel32 call sites untouched; byte-verified EXACT via verify.py (18-B symtab fix)"
+  ],
+  "notes": "_ATFVladMedals: 608-B medal/awards-screen chunk (rva 0x82bb0) \u2014 whole-chunk transplant per directive; 68 abs anchors resolved by sites.py, 0 self-anchors, no negative addends; no alias needed (named chunk, main symbol = layout public). One of 8 homogeneous medal-family chunks.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 536080,
+  "verdict": "EXACT",
+  "obj": "w53A_h82e10",
+  "src": "build/survey/probes/w53A/husk_h82e10.c",
+  "maps": [],
+  "patch": [
+   "0,1,53a0b89c54005684c057740633c05f5e5bc3a14096540085c0740633c05f5e5bc3a1d46a4f008b0dc86a4f0003c18b15cc6a4f0003c28b1dd06a4f0003c3b9f6ffffff99f7f983c00983f8057d05b8050000008b35149d540085f67e60668b0dc6584f0066c1f9080fbfd13bd07c4ea108744f005068ba4b4f00e8512b050083c4088b35149d540085c075318b3d0c744f00b9ffffffff2bc0f2aef7d12bf98bc1c1e9028bf7bfba4b4f00f3a58bc883e103f3a4b8e0824f005f5e5bc3a1d46a4f008b0dc86a4f0003c18b15cc6a4f0003c28b1dd06a4f0003c3b9f6ffffff99f7f983c01283f80c7d05b80c00000085f67e60668b0dc6584f0066c1f9080fbfd13bd07c4ea10c744f005068ba4b4f00e8bb2a050083c4088b35149d540085c075318b3d10744f00b9ffffffff2bc0f2aef7d12bf98bc1c1e9028bf7bfba4b4f00f3a58bc883e103f3a4b8d8824f005f5e5bc3a1d46a4f008b0dc86a4f0003c18b15cc6a4f0003c28b1dd06a4f0003c3b9f6ffffff99f7f983c01c83f8167d05b81600000085f67e60668b0dc6584f0066c1f9080fbfd13bd07c4ea110744f005068ba4b4f00e8252a050083c4088b35149d540085c075318b3d14744f00b9ffffffff2bc0f2aef7d12bf98bc1c1e9028bf7bfba4b4f00f3a58bc883e103f3a4b8d0824f005f5e5bc3a1d46a4f008b0dc86a4f0003c18b15cc6a4f0003c28b1dd06a4f0003c3b9f6ffffff99f7f983c02683f8207d05b82000000085f67e5a668b0dc6584f0066c1f9080fbfd13bd07c48a114744f005068ba4b4f00e88f29050083c40885c075318b3d18744f00b9ffffffff2bc0f2aef7d12bf98bc1c1e9028bf7bfba4b4f00f3a58bc883e103f3a4b8c8824f005f5e5bc333c05f5e5bc390,2:6:_playerCheating+0x0,19:6:_stats+0x2000,34:6:_campaignPilot+0x1fbc,40:6:_campaignPilot+0x1fb0,48:6:_campaignPilot+0x1fb4,56:6:_campaignPilot+0x1fb8,85:6:_missionSucceeded+0x0,96:6:_campaignPilot+0xdae,112:6:_pilotRanks+0x0,118:6:_campaignPilot+0xa2,132:6:_missionSucceeded+0x0,142:6:_pilotRanks+0x4,167:6:_campaignPilot+0xa2,181:6:_pilotRanks+0xed8,190:6:_campaignPilot+0x1fbc,196:6:_campaignPilot+0x1fb0,204:6:_campaignPilot+0x1fb4,212:6:_campaignPilot+0x1fb8,246:6:_campaignPilot+0xdae,262:6:_pilotRanks+0x4,268:6:_campaignPilot+0xa2,282:6:_missionSucceeded+0x0,292:6:_pilotRanks+0x8,317:6:_campaignPilot+0xa2,331:6:_pilotRanks+0xed0,340:6:_campaignPilot+0x1fbc,346:6:_campaignPilot+0x1fb0,354:6:_campaignPilot+0x1fb4,362:6:_campaignPilot+0x1fb8,396:6:_campaignPilot+0xdae,412:6:_pilotRanks+0x8,418:6:_campaignPilot+0xa2,432:6:_missionSucceeded+0x0,442:6:_pilotRanks+0xc,467:6:_campaignPilot+0xa2,481:6:_pilotRanks+0xec8,490:6:_campaignPilot+0x1fbc,496:6:_campaignPilot+0x1fb0,504:6:_campaignPilot+0x1fb4,512:6:_campaignPilot+0x1fb8,546:6:_campaignPilot+0xdae,562:6:_pilotRanks+0xc,568:6:_campaignPilot+0xa2,586:6:_pilotRanks+0x10,611:6:_campaignPilot+0xa2,625:6:_pilotRanks+0xec0"
+  ],
+  "span": 640,
+  "aliases": [],
+  "provenance": [
+   "patch 0,1: toolchain-diff \u2014 full-chunk transplant of FA bytes over a 1-B minimal husk (fitobj main symbol takes the layout chunk name '_ATFPromotions'); 46 zero-payload DIR32 newsite tokens (site=payload dword start, hex=FA chunk-relative offset, addend from sites.py); 4 VA-stable rel32 call sites untouched; byte-verified EXACT via verify.py (18-B symtab fix)"
+  ],
+  "notes": "_ATFPromotions: 640-B medal/awards-screen chunk (rva 0x82e10) \u2014 whole-chunk transplant per directive; 46 abs anchors resolved by sites.py, 0 self-anchors, no negative addends; no alias needed (named chunk, main symbol = layout public). One of 8 homogeneous medal-family chunks.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 536720,
+  "verdict": "EXACT",
+  "obj": "w53A_h83090",
+  "src": "build/survey/probes/w53A/husk_h83090.c",
+  "maps": [],
+  "patch": [
+   "0,1,a0c0714f0084c07528a0b89c540084c0740333c0c3a14096540085c0740333c0c38b0d149d540085c90f8eb0010000eb068b0d149d5400a08a504f0084c07529a14896540083f80a7c1fa08a504f00688c824f00fec0a28a504f00e8e031feff83c404b880824f00c3a08b504f0084c07532a13096540085c07e29a1086b4f0083f8647c1fa08b504f006858824f00fec0a28b504f00e8a531feff83c404b84c824f00c3a08c504f0084c07542a1f89554008b15f095540003c285c07e31a1c86a4f008b15d06a4f0003c283f81e7c1fa08c504f00680c824f00fec0a28c504f00e85a31feff83c404b800824f00c3a08d504f0084c07532a1f095540085c07e29a1c86a4f0083f80f7c1fa08d504f00683c7f4f00fec0a28d504f00e81f31feff83c404b8f4814f00c3a08e504f0084c07529a1c86a4f0083f82d7c1fa08e504f0068b8814f00fec0a28e504f00e8ed30feff83c404b8ac814f00c3a08f504f0084c07543a1fc9554008b15f495540003c283f8057c31a1f89554008b15f095540003c283f8077c1fa08f504f006878814f00fec0a28f504f00e8a130feff83c404b86c814f00c3a091504f0084c0752e8a25c7584f0080fc27752385c97e1fa091504f0068f4804f00fec0a291504f00e86a30feff83c404b8e8804f00c3a092504f003c037335a0a0dd510084c07509a0b2dd510084c07423a092504f00fec0a292504f003c01750d68e07d4f00e82c30feff83c404b8dc804f00c333c0c3,1:6:_forceVictory+0x0,10:6:_playerCheating+0x0,22:6:_stats+0x2000,35:6:_missionSucceeded+0x0,51:6:_missionSucceeded+0x0,56:6:_campaignPilot+0x572,65:6:_stats+0x2008,75:6:_campaignPilot+0x572,80:6:_pilotRanks+0xe84,87:6:_campaignPilot+0x572,100:6:_pilotRanks+0xe78,106:6:_campaignPilot+0x573,115:6:_stats+0x1ff0,124:6:_campaignPilot+0x1ff0,134:6:_campaignPilot+0x573,139:6:_pilotRanks+0xe50,146:6:_campaignPilot+0x573,159:6:_pilotRanks+0xe44,165:6:_campaignPilot+0x574,174:6:_stats+0x1fb8,180:6:_stats+0x1fb0,191:6:_campaignPilot+0x1fb0,197:6:_campaignPilot+0x1fb8,209:6:_campaignPilot+0x574,214:6:_pilotRanks+0xe04,221:6:_campaignPilot+0x574,234:6:_pilotRanks+0xdf8,240:6:_campaignPilot+0x575,249:6:_stats+0x1fb0,258:6:_campaignPilot+0x1fb0,268:6:_campaignPilot+0x575,273:6:_pilotRanks+0xb34,280:6:_campaignPilot+0x575,293:6:_pilotRanks+0xdec,299:6:_campaignPilot+0x576,308:6:_campaignPilot+0x1fb0,318:6:_campaignPilot+0x576,323:6:_pilotRanks+0xdb0,330:6:_campaignPilot+0x576,343:6:_pilotRanks+0xda4,349:6:_campaignPilot+0x577,358:6:_stats+0x1fbc,364:6:_stats+0x1fb4,376:6:_stats+0x1fb8,382:6:_stats+0x1fb0,394:6:_campaignPilot+0x577,399:6:_pilotRanks+0xd70,406:6:_campaignPilot+0x577,419:6:_pilotRanks+0xd64,425:6:_campaignPilot+0x579,435:6:_campaignPilot+0xdaf,449:6:_campaignPilot+0x579,454:6:_pilotRanks+0xcec,461:6:_campaignPilot+0x579,474:6:_pilotRanks+0xce0,480:6:_campaignPilot+0x57a,489:6:_dam+0x28,498:6:_dam+0x3a,507:6:_campaignPilot+0x57a,514:6:_campaignPilot+0x57a,523:6:_pilotRanks+0x9d8,536:6:_pilotRanks+0xcd4"
+  ],
+  "span": 544,
+  "aliases": [],
+  "provenance": [
+   "patch 0,1: toolchain-diff \u2014 full-chunk transplant of FA bytes over a 1-B minimal husk (fitobj main symbol takes the layout chunk name '_ATFBalticMedals'); 62 zero-payload DIR32 newsite tokens (site=payload dword start, hex=FA chunk-relative offset, addend from sites.py); 9 VA-stable rel32 call sites untouched; byte-verified EXACT via verify.py (18-B symtab fix)"
+  ],
+  "notes": "_ATFBalticMedals: 544-B medal/awards-screen chunk (rva 0x83090) \u2014 whole-chunk transplant per directive; 62 abs anchors resolved by sites.py, 0 self-anchors, no negative addends; no alias needed (named chunk, main symbol = layout public). One of 8 homogeneous medal-family chunks.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 537264,
+  "verdict": "EXACT",
+  "obj": "w53A_h832b0",
+  "src": "build/survey/probes/w53A/husk_h832b0.c",
+  "maps": [],
+  "patch": [
+   "0,1,56b80100000057a3c095540066833dc4c25100007405a3c4955400a0e89c540084c0756966833dccc2510000742033c066a1ccc251008b0c8598ad54008b5101f6c2017448e81604ffff84c0743f0fbf057add51002b0504de5100c1e0020fbf0d7cdd51008d14808d049299f7f9a3d895540085c07d0cc705d895540000000000eb14a1d895540083f8647e0ac705d89554006400000066833dc4c2510000747333c066a1c4c251008b3c8598ad54008b4f01f6c10174528bcfe8a103ffff84c074478b47058b4f01f7c1000004000fbf7049740203f60fbf470e8bce2bc8c1e1028d14898d049299f7fea3dc95540085c07d0cc705dc95540000000000eb14a1dc95540083f8647e0ac705dc9554006400000066be010033c066393588ad5400a3b49c5400a3e49c5400a3e0755400a3689d540076658bc625ffff00008b0c8598ad54008b4101a8207424ff05e49c54008b5101f6c2017437e80103ffff84c0742ea1b49c540040a3b49c5400eb21a880741dff05689d54008b5101f6c2017409e8d902ffff84c07506ff05e0755400664666393588ad5400779b66833dccc2510000745533c066a1ccc251008b348598ad54008b4e01f6c10174328bcee89c02ffff84c074278a063c047515a0e89c540084c0750cc705d075540001000000eb22c705d075540002000000eb16c705d075540003000000eb0ac705d07554000000000066833dc4c2510000744233c066a1c4c251008b348598ad54008b4e01f6c101741e8bcee83302ffff84c074138a065f2c045e3c011bc083c002a3449d5400c3c705449d5400030000005f5ec3c705449d5400000000005f5ec38bff,8:6:_stats+0x1f80,15:6:_playerWMId+0x0,23:6:_stats+0x1f84,28:6:_playerBailed+0x0,39:6:_playerId+0x0,50:6:_playerId+0x0,57:6:_objPtrs+0x0,81:6:_dam+0x2,87:6:_startingDamage+0x0,97:6:_dam+0x4,111:6:_stats+0x1f98,121:6:_stats+0x1f98,132:6:_stats+0x1f98,143:6:_stats+0x1f98,154:6:_playerWMId+0x0,165:6:_playerWMId+0x0,172:6:_objPtrs+0x0,236:6:_stats+0x1f9c,246:6:_stats+0x1f9c,257:6:_stats+0x1f9c,268:6:_stats+0x1f9c,285:6:_nextObjId+0x0,290:6:?stats_protectsAlive@@3JA+0x0,295:6:?stats_protects@@3JA+0x0,300:6:?stats_targetsDead@@3JA+0x0,305:6:?stats_targets@@3JA+0x0,321:6:_objPtrs+0x0,334:6:?stats_protects@@3JA+0x0,356:6:?stats_protectsAlive@@3JA+0x0,362:6:?stats_protectsAlive@@3JA+0x0,374:6:?stats_targets@@3JA+0x0,397:6:?stats_targetsDead@@3JA+0x0,406:6:_nextObjId+0x0,415:6:_playerId+0x0,426:6:_playerId+0x0,433:6:_objPtrs+0x0,463:6:_playerBailed+0x0,473:6:?stats_playerState@@3JA+0x0,485:6:?stats_playerState@@3JA+0x0,497:6:?stats_playerState@@3JA+0x0,509:6:?stats_playerState@@3JA+0x0,520:6:_playerWMId+0x0,531:6:_playerWMId+0x0,538:6:_objPtrs+0x0,575:6:?stats_wmState@@3JA+0x0,582:6:?stats_wmState@@3JA+0x0,595:6:?stats_wmState@@3JA+0x0"
+  ],
+  "span": 608,
+  "aliases": [],
+  "provenance": [
+   "patch 0,1: toolchain-diff \u2014 full-chunk transplant of FA bytes over a 1-B minimal husk (fitobj main symbol takes the layout chunk name '_EndOfMissionStats@0'); 47 zero-payload DIR32 newsite tokens (site=payload dword start, hex=FA chunk-relative offset, addend from sites.py); 12 VA-stable rel32 call sites untouched; byte-verified EXACT via verify.py (18-B symtab fix)"
+  ],
+  "notes": "_EndOfMissionStats@0: 608-B medal/awards-screen chunk (rva 0x832b0) \u2014 whole-chunk transplant per directive; 47 abs anchors resolved by sites.py, 0 self-anchors, no negative addends; no alias needed (named chunk, main symbol = layout public). One of 8 homogeneous medal-family chunks.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 537872,
+  "verdict": "EXACT",
+  "obj": "w53A_h83510",
+  "src": "build/survey/probes/w53A/husk_h83510.c",
+  "maps": [],
+  "patch": [
+   "0,1,5333c056b9080000005755bff09c5400f3abbf209d5400b908000000f3abbfc89d5400b908000000f3abbfa09d5400b908000000f3abbf509c5400b908000000f3abbf20765400b908000000f3abb8c04c5200b9209d5400ba06000000c701010000008b188b35f85852002bf38b2903ee83c0044a892975ea83c10481f9409d540072d466bf010066393d88ad54000f86e00000008bc733db25ffff000033ed8b348598ad54008b4601ba000000018acbd3e285d00f849e0000008a0e80f9040f849300000083fd107d3ba9000080000f8483000000ff85c89d54008b85a09d54008b4e050fbf514903c28985a09d54008b5601f6c201743f8bcee80001ffff84c0753aeb32a880744fff85c89d54008b85a09d54008b4e050fbf514903c28985a09d54008b5601f6c201740b8bcee8cc00ffff84c07506ff85509c54008b46050fbf4e0e0fbf40492bc18b8d2076540003c8898d2076540083c5044383fd200f8c41ffffff6647663b3d88ad54000f8220ffffff5d5f5e5bc38d9b00000000,12:6:?statsFortKills@@3PAJA+0x0,19:6:?statsFortAircraftUsed@@3PAJA+0x0,31:6:?statsFortSupp@@3PAJA+0x0,43:6:?statsFortSuppHitPoints@@3PAJA+0x0,55:6:?statsFortSuppDestroyed@@3PAJA+0x0,67:6:?statsFortSuppDestroyedHitPoints@@3PAJA+0x0,79:6:_fortSizes+0x0,84:6:?statsFortAircraftUsed@@3PAJA+0x0,103:6:_fortSizeIndex+0x0,126:6:_doBriefMap+0x0,139:6:_nextObjId+0x0,163:6:_objPtrs+0x0,216:6:?statsFortSupp@@3PAJA+0x0,222:6:?statsFortSuppHitPoints@@3PAJA+0x0,237:6:?statsFortSuppHitPoints@@3PAJA+0x0,268:6:?statsFortSupp@@3PAJA+0x0,274:6:?statsFortSuppHitPoints@@3PAJA+0x0,289:6:?statsFortSuppHitPoints@@3PAJA+0x0,314:6:?statsFortSuppDestroyed@@3PAJA+0x0,333:6:?statsFortSuppDestroyedHitPoints@@3PAJA+0x0,341:6:?statsFortSuppDestroyedHitPoints@@3PAJA+0x0,363:6:_nextObjId+0x0"
+  ],
+  "span": 384,
+  "aliases": [],
+  "provenance": [
+   "patch 0,1: toolchain-diff \u2014 full-chunk transplant of FA bytes over a 1-B minimal husk (fitobj main symbol takes the layout chunk name '_EndOfFortMissionStats@0'); 22 zero-payload DIR32 newsite tokens (site=payload dword start, hex=FA chunk-relative offset, addend from sites.py); 3 VA-stable rel32 call sites untouched; byte-verified EXACT via verify.py (18-B symtab fix)"
+  ],
+  "notes": "_EndOfFortMissionStats@0: 384-B medal/awards-screen chunk (rva 0x83510) \u2014 whole-chunk transplant per directive; 22 abs anchors resolved by sites.py, 0 self-anchors, no negative addends; no alias needed (named chunk, main symbol = layout public). One of 8 homogeneous medal-family chunks.",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 538704,
+  "verdict": "EXACT",
+  "obj": "w53B_h83850",
+  "src": "build/survey/probes/w53B/husk_h83850.c",
+  "maps": [],
+  "patch": [
+   "0,1,5356575533ffe855faffffa1cc9554008b0da46a4f0003c833f6890da46a4f008b86d89554008b8eb06a4f0003c88b96e09554008b86e8955400898eb06a4f008b9eb86a4f008bce03da899eb86a4f008baec06a4f0003e8b80d00000089aec06a4f008b91f09554008b99c86a4f0003da83c10848908999c06a4f0075e58d97f89654008d8fd06b4f00e8910000008d97209754008d8ff86b4f00e8800000008d97489754008d8f206c4f00e86f0000008d97709754008d8f486c4f00e85e0000008d97989754008d8f706c4f00e84d0000008d97c09754008d8f986c4f00e83c0000008d97e89754008d8fc06c4f0083c714e82800000083c604908d8fd46c4f008d97fc975400e81300000083fe080f8c0affffff5d5f5e5bc30500000000,12:6:_stats+0x1f8c,18:6:_campaignPilot+0x1f8c,28:6:_campaignPilot+0x1f8c,34:6:_stats+0x1f98,40:6:_campaignPilot+0x1f98,48:6:_stats+0x1fa0,54:6:_stats+0x1fa8,60:6:_campaignPilot+0x1f98,66:6:_campaignPilot+0x1fa0,76:6:_campaignPilot+0x1fa0,82:6:_campaignPilot+0x1fa8,95:6:_campaignPilot+0x1fa8,101:6:_stats+0x1fb0,107:6:_campaignPilot+0x1fb0,120:6:_campaignPilot+0x1fa8,128:6:_stats+0x20b8,134:6:_campaignPilot+0x20b8,145:6:_stats+0x20e0,151:6:_campaignPilot+0x20e0,162:6:_stats+0x2108,168:6:_campaignPilot+0x2108,179:6:_stats+0x2130,185:6:_campaignPilot+0x2130,196:6:_stats+0x2158,202:6:_campaignPilot+0x2158,213:6:_stats+0x2180,219:6:_campaignPilot+0x2180,230:6:_stats+0x21a8,236:6:_campaignPilot+0x21a8,254:6:_campaignPilot+0x21bc,260:6:_stats+0x21bc"
+  ],
+  "alias": [],
+  "aliases": [
+   "0=$FA$_t_483850"
+  ],
+  "span": 288,
+  "tail": "0500000000",
+  "provenance": [
+   "patch 0,1: toolchain-diff \u2014 full-chunk transplant of FA bytes over a 1-B minimal husk (fitobj main symbol takes the layout chunk name 'None'); 31 DIR32 newsites from census_538704.json (0 identity payload:=0x0, 31 interior data anchors payload:=delta); 9 rel32 call/jmp sites left VA-stable (no newsites)",
+   "aliases 0=$FA$_t_483850: root-caused \u2014 anon chunk; defining-alias for the replaced stub's public (wave-50 rule): 0=$FA$_t_483850",
+   "tail: (tail 0500000000: toolchain-diff \u2014 pad bytes end-of-chunk)"
+  ],
+  "notes": "288-B stats adder: calls _EndOfMissionStats@0 then unrolled +looped dword adds of _stats->\u2026_campaignPilot fields and 8-iteration lea/call block to stub $FA$_t_483970; unrolled add chain + 8x call block = transplant (call-site/unroll shapes) \u2014 transplant per dis review; 31 abs + 9 rel sites, natural-C steering judged poor (shape above); fit verified vs FA (masked dwords, reloc offsets, span)",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 539248,
+  "verdict": "EXACT",
+  "obj": "w53B_h83a70",
+  "src": "build/survey/probes/w53B/husk_h83a70.c",
+  "maps": [],
+  "patch": [
+   "0,1,6685d253550f840b010000663915ccc251000f84a2000000663915c4c251000f8495000000668b44240c6685c00f84e3000000663905ccc25100740d663905c4c251000f85cd00000033db663905ccc251008ba9a60000000f95c381e2ffff00008b049598ad54008038040f94c0f7c580000000742284c0740fc1e3025d8d849bc09754005bc20400c1e3025d8d849be89754005bc2040084c0740fc1e3025d8d849b989754005bc20400c1e3025d8d849b109854005bc2040033db8b81a6000000663915ccc251000f95c3a801742ca900000100740fc1e3025d8d849bf89654005bc20400a9000002007429c1e3025d8d849b209754005bc20400a810740fc1e3025d8d849b709754005bc20400a980000200750ab8087654005d5bc20400c1e3025d8d849b489754005bc2040090,14:6:_playerId+0x0,27:6:_playerWMId+0x0,54:6:_playerId+0x0,63:6:_playerWMId+0x0,78:6:_playerId+0x0,100:6:_objPtrs+0x0,129:6:_stats+0x2180,144:6:_stats+0x21a8,163:6:_stats+0x2158,178:6:_stats+0x21d0,197:6:_playerId+0x0,222:6:_stats+0x20b8,244:6:_stats+0x20e0,263:6:_stats+0x2130,279:6:?playerScores@@3PAJA+0x20,295:6:_stats+0x2108"
+  ],
+  "alias": [],
+  "aliases": [
+   "0=$FA$_t_483a70"
+  ],
+  "span": 304,
+  "tail": "90",
+  "provenance": [
+   "patch 0,1: toolchain-diff \u2014 full-chunk transplant of FA bytes over a 1-B minimal husk (fitobj main symbol takes the layout chunk name 'None'); 16 DIR32 newsites from census_539248.json (7 identity payload:=0x0, 9 interior data anchors payload:=delta); 0 rel32 call/jmp sites left VA-stable (no newsites)",
+   "aliases 0=$FA$_t_483a70: root-caused \u2014 anon chunk; defining-alias for the replaced stub's public (wave-50 rule): 0=$FA$_t_483a70",
+   "tail: (tail 90: toolchain-diff \u2014 pad bytes end-of-chunk)"
+  ],
+  "notes": "304-B stdcall(ret 0x4) word-param flag dispatcher (_playerId/_playerWMId/_objPtrs flags, stats selects, playerScores+0x20 fallback); jcc-chain ret-block shape, dis bands partially unreadable = transplant \u2014 transplant per dis review; 16 abs + 0 rel sites, natural-C steering judged poor (shape above); fit verified vs FA (masked dwords, reloc offsets, span)",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 539552,
+  "verdict": "EXACT",
+  "obj": "w53B_h83ba0",
+  "src": "build/survey/probes/w53B/husk_h83ba0.c",
+  "maps": [],
+  "patch": [
+   "0,1,66833dccc251000053560f84be010000668b7424106685f60f84b00100008b44240c8b0d08764e003bc8750b8b5424148bcee8b9c7feff663935ccc25100750433c9eb12663935c4c251000f857d010000b9010000008b44241481e6ffff000025ffff00008b148598ad54008b04b598ad54008a40098a5a0932c3a88075248b4201a880751da0d87554003c0274148b048d409654005e405b89048d40965400c20c008a023c0475228b42058b98ba000000f6c30874148b048d009654005e405b89048d00965400c20c008b4205668b400df6c4807427ff048df09554008b5a01f6c7800f85e40000008b048d489654005e405b89048d48965400c20c00f6c44074148b048df89554005e405b89048df8955400c20c00f6c420742aff048d089654008b520566817a49e8030f8c9c0000008b048d509654005e405b89048d50965400c20c00f6c41074148b048d109654005e405b89048d10965400c20c00f6c40874148b048d189654005e405b89048d18965400c20c00f6c40474148b048d209654005e405b89048d20965400c20c00f6c40274148b048d289654005e405b89048d28965400c20c00f6c40174148b048d309654005e405b89048d30965400c20c00a8407407ff048d389654005e5bc20c008d9b000000008da42400000000,3:6:_playerId+0x0,36:6:_thisComputer+0x0,58:6:_playerId+0x0,71:6:_playerWMId+0x0,104:6:_objPtrs+0x0,111:6:_objPtrs+0x0,135:6:_scoreGoal+0x0,146:6:_stats+0x2000,156:6:_stats+0x2000,186:6:_stats+0x1fc0,196:6:_stats+0x1fc0,218:6:_stats+0x1fb0,237:6:_stats+0x2008,247:6:_stats+0x2008,262:6:_stats+0x1fb8,272:6:_stats+0x1fb8,287:6:_stats+0x1fc8,309:6:_stats+0x2010,319:6:_stats+0x2010,334:6:_stats+0x1fd0,344:6:_stats+0x1fd0,359:6:_stats+0x1fd8,369:6:_stats+0x1fd8,384:6:_stats+0x1fe0,394:6:_stats+0x1fe0,409:6:_stats+0x1fe8,419:6:_stats+0x1fe8,434:6:_stats+0x1ff0,444:6:_stats+0x1ff0,458:6:_stats+0x1ff8"
+  ],
+  "alias": [],
+  "aliases": [],
+  "span": 480,
+  "tail": "8d9b00000000",
+  "provenance": [
+   "patch 0,1: toolchain-diff \u2014 full-chunk transplant of FA bytes over a 1-B minimal husk (fitobj main symbol takes the layout chunk name '_KillStats@12'); 30 DIR32 newsites from census_539552.json (7 identity payload:=0x0, 23 interior data anchors payload:=delta); 2 rel32 call/jmp sites left VA-stable (no newsites)",
+   "tail: (tail 8d9b00000000: toolchain-diff \u2014 pad bytes end-of-chunk)"
+  ],
+  "notes": "480-B FPO/esp frame MP kill-stat dispatcher (3 word/byte params, byte-ladder on [edx+9] flags, MPKillStats call, 30 stats-counter newsites incl. 16 paired _stats/_stats+0x2000-style reads); FPO param-reload+byte-ladder = transplant \u2014 transplant per dis review; 30 abs + 2 rel sites, natural-C steering judged poor (shape above); fit verified vs FA (masked dwords, reloc offsets, span)",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 540192,
+  "verdict": "EXACT",
+  "obj": "w53B_h83e20",
+  "src": "build/survey/probes/w53B/husk_h83e20.c",
+  "maps": [],
+  "patch": [
+   "0,1,b8e83c0000e8060705008d442414535657555068fcaa4e00e8a34effff8bd885db0f84db030000bdffffffff8d4c2450e82b620200894424103bc50f84a40300003de02500000f84990300003db415000074268d4424148d4c24505068e8824f0051e889f801008d5424148d4c2450e87c620200e96c0300008d84246401000068008000008d4c2414508d54245851526a00e8b96902008dbc241817000033c0b9780900008d942479170000f3ab8a8c24640100008db4246a0100008dbc2419170000888c2418170000b908000000f3a58db4248a0100008dbc2439170000b908000000f3a58db424aa0100008dbc2459170000b908000000f3a58b8424ca0100008bb424ce0100008d8c24ca0100008902897204908a410c8b7908897a0888420c8bbc24df0100008d9424861700008b8424d70100008bb424db0100008d8c24d701000089028a410c8d8c24e4010000897204897a08908b79088b710488420c8d9424931700008b0189028a410c897204897a0888420c8b8424f10100008bb424f50100008bbc24f9010000898424a01700008a8424fd01000089b424a417000089bc24a81700008d8c24f1010000888424ac1700008d9424a01700008b8424fe0100008bb424020200008bbc2406020000898424ad1700008a84240a02000089b424b11700008d8c24ad1700008d9424fe0100008db4240b020000908979088dbc24ba17000088410cb908000000f3a58db4242b0200008dbc24da170000b932000000f3a58a8c24f30200008a9424f40200008a8424f50200008dbc2420030000888c248a1c00008894248b1c00008a8c24f60200008a9424f70200008884248c1c0000888c248d1c00008a8424f80200008a8c24f90200008894248e1c00008884248f1c00008a9424fa0200008a8424fb020000888c24901c0000889424911c00008a8c24fc0200008b942410030000888424921c0000888c24931c00008b8424140300008b8c2418030000899424c8360000898424d03600008b94241c030000898c24e036000089942420370000898c24283700008bcd2bc08d942497240000f2aef7d12bf98bc1c1e9028bf78dbc24c71c000068e0250000f3a58bc883e103f3a48b8424180500008bb4241c0500008d8c241805000089028972048db424250500008b79088a410cb908000000897a088dbc24a824000088420cf3a5668b8c24460500008db4244a050000668b9424480500008dbc24cc24000066898c24c8240000b9ac03000066899424ca240000f3a58db424fa1300008dbc247c330000b9c80000008d94241c170000f3a50fbf84241a170000898424a436000052668b84244c05000066c1f8080fbfc88d442458898c24a036000050e89e5f020083c40c8d4424245053e8604bffff84c00f8534fcffff85db740653e8ce4bffff5d5f5e5b81c4e83c0000c38d4900,20:6:_items+0x104,93:6:_pilotRanks+0xee0"
+  ],
+  "alias": [],
+  "aliases": [],
+  "span": 1040,
+  "tail": "8d4900",
+  "provenance": [
+   "patch 0,1: toolchain-diff \u2014 full-chunk transplant of FA bytes over a 1-B minimal husk (fitobj main symbol takes the layout chunk name '_ConvertPilotFiles@0'); 2 DIR32 newsites from census_540192.json (0 identity payload:=0x0, 2 interior data anchors payload:=delta); 10 rel32 call/jmp sites left VA-stable (no newsites)",
+   "tail: (tail 8d4900: toolchain-diff \u2014 pad bytes end-of-chunk)"
+  ],
+  "notes": "1040-B converter: chkstk locals 0x3ce8, G_FindFirstFile/file loop, RMChangeType/Rename, rep movs/movsd struct copies, SaveFile; named natural-C candidate but 15.6K-B locals + exact rep-movs strides land on chkstk/copies steering wall = transplant \u2014 transplant per dis review; 2 abs + 10 rel sites, natural-C steering judged poor (shape above); fit verified vs FA (masked dwords, reloc offsets, span)",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 541232,
+  "verdict": "EXACT",
+  "obj": "w53B_h84230",
+  "src": "build/survey/probes/w53B/husk_h84230.c",
+  "maps": [],
+  "patch": [
+   "0,1,81ec180100005657e833f6faff6a00e85ceafaff83c404e804ebf8ff8bf8b9ffffffff2bc0f2aef7d12bf98bc1c1e9028bf78d7c2408f3a58bc883e103f3a48bbc2428010000b9ffffffff2bc0f2aef7d12bf98bd18bf7b9ffffffff8d7c24082bc0f2ae4f8bcac1e902f3a58bca83e103f3a48b8424240100008d4c24585068f0824f0051e862e903008d4c241483c40ce8ba5d020083f8ff74156a01e8cee9faff83c40433c05f5e81c418010000c333c9e8c91401000fbf05bc3555000fbf0dba35550050516a006a00e890190100e82ba30100e826a401008d4424586a0250e89ac201000fbff08d4c2408e85e5d020083f8ff750583fe0275dee80f5f02006a01e868e9faff83c40433c083fe020f94c05f5e81c418010000c38d642400,128:6:_pilotRanks+0xee8,186:6:_grMode+0xc,193:6:_grMode+0xa"
+  ],
+  "alias": [],
+  "aliases": [],
+  "span": 288,
+  "tail": "8d642400",
+  "provenance": [
+   "patch 0,1: toolchain-diff \u2014 full-chunk transplant of FA bytes over a 1-B minimal husk (fitobj main symbol takes the layout chunk name '_CheckCD'); 3 DIR32 newsites from census_541232.json (0 identity payload:=0x0, 3 interior data anchors payload:=delta); 14 rel32 call/jmp sites left VA-stable (no newsites)",
+   "tail: (tail 8d642400: toolchain-diff \u2014 pad bytes end-of-chunk)"
+  ],
+  "notes": "288-B CD-check dialog loop (SoundAllOff, ShellMusic, cdpath strlen/rep-movs strcat, Sprintf, UGetFileSize, DoDialogInfoBox retry); sprintf fmt-string literal lives at interior data anchor _pilotRanks+0xee8 (push imm32) \u2014 natural-C cannot place the literal at that VA = transplant \u2014 transplant per dis review; 3 abs + 14 rel sites, natural-C steering judged poor (shape above); fit verified vs FA (masked dwords, reloc offsets, span)",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 541856,
+  "verdict": "EXACT",
+  "obj": "w53B_h844a0",
+  "src": "build/survey/probes/w53B/husk_h844a0.c",
+  "maps": [],
+  "patch": [
+   "0,1,66a1309e540083ec0c53565732db6639057c9d540055770ab0015d5f5e5b83c40cc3a104764e0083f8017e1c33c08b0dcc75540066a1309e54003bc17c0ab0015d5f5e5b83c40cc3a00c9e540084c074306880000000e835ffffff84c0740bbb01000000881dc09d54006800008000e81cffffff84c07409c605c09d540002b30133f633d2a104764e00897424143bc27e4db910764e00bf789c540089442418885c2413668b018b2fc1fd0803f56685c0741c25ffff00008b048598ad54008a5809f6c380740403d5eb04016c241483c10283c704ff4c241875c98a5c2413a16c9d540083f8037758ff2485fc454800a1189d54003bf07c48eb448b4424148b0d189d54003bc17d363bd17c34eb30a104764e0085c07e29b9789c54008b118b2d189d5400c1fa083bd57c02b30183c1044875e9eb0ba1189d54003bd07c02b30184db740ab902000000e811f2fdff32c05d5f5e5b83c40cc38d4900904548009b454800af454800d64548008d642400,2:6:_currentTime+0x0,17:6:_endScenarioTime+0x0,35:6:_numComputers+0x0,48:6:_endScenarioSetTime+0x0,54:6:_currentTime+0x0,73:6:_fortMission+0x0,102:6:_fortWin+0x0,122:6:_fortWin+0x0,134:6:_numComputers+0x0,147:6:_objControlledBy+0x0,152:6:_playerKills+0x0,187:6:_objPtrs+0x0,224:6:_endScenarioKillsType+0x0,236:6:_MISSIONEndScenario@0+0x15c,241:6:_endScenarioKills+0x0,257:6:_endScenarioKills+0x0,272:6:_numComputers+0x0,281:6:_playerKills+0x0,289:6:_endScenarioKills+0x0,311:6:_endScenarioKills+0x0,348:6:_MISSIONEndScenario@0+0xf0,352:6:_MISSIONEndScenario@0+0xfb,356:6:_MISSIONEndScenario@0+0x10f,360:6:_MISSIONEndScenario@0+0x136"
+  ],
+  "alias": [],
+  "aliases": [],
+  "span": 368,
+  "tail": "8d642400",
+  "provenance": [
+   "patch 0,1: toolchain-diff \u2014 full-chunk transplant of FA bytes over a 1-B minimal husk (fitobj main symbol takes the layout chunk name '_MISSIONEndScenario@0'); 24 DIR32 newsites from census_541856.json (19 identity payload:=0x0, 5 interior data anchors payload:=delta); 7 rel32 call/jmp sites left VA-stable (no newsites)",
+   "tail: (tail 8d642400: toolchain-diff \u2014 pad bytes end-of-chunk)"
+  ],
+  "notes": "368-B end-of-scenario check: _endTime gate, MISSIONFortWin calls, per-computer kill accumulation loop over _objPtrs, _endScenarioKillsType switch ladder, SetScenarioEndTime; 24 abs incl. 5 tail-table fixups (0x15c..) = transplant \u2014 transplant per dis review; 24 abs + 7 rel sites, natural-C steering judged poor (shape above); fit verified vs FA (masked dwords, reloc offsets, span)",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 542544,
+  "verdict": "EXACT",
+  "obj": "w53B_h84750",
+  "src": "build/survey/probes/w53B/husk_h84750.c",
+  "maps": [],
+  "patch": [
+   "0,1,53a104764e005683f8015755750cb8ffffffff5d5f5e5bc20c00a0388750003c047415a048875000a880750cb8ffffffff5d5f5e5bc20c00a108764e008b4c24143bc875198a0d4887500083e17f3bc8740cb8ffffffff5d5f5e5bc20c00668b0d242f4f00e866010000668b74241c8bf86685f67530a108764e008b4c24143bc8752366833dae875000007f167d140fbf05ae875000668b3445d8764e006685f675036633f68bcee8230100008b4c241885c97c1e83f8ff0f8489000000c1e1088b1485c09c540003d1891485c09c5400eb748b0d08764e008b5424143bd175248b0d39875000f7c100004000740cb8ffffffff5d5f5e5bc20c00810d39875000000040008b4c24184183f901b90200000083d1ff83ffff74158bd18b1cbde89d5400c1e20803da891cbde89d540083f8ff7413c1e1088b1485789c540003d1891485789c540033db33ff391d04764e007e5033ed8b85789c540085c07508899d809d5400eb228b8de89d540085c9750cc785809d540000e70300eb0cc1e00899f7f98985809d54008bcf83c50447e8bcfdffff8985e4755400a104764e003bf87cb2e818fdffffa108764e008b4c24143bc8750b8b4424185650e810a6feff8bc65d25ffff00005f5e5bc20c008bff,2:6:_numComputers+0x0,27:6:_curThing+0x0,36:6:_curThing+0x10,57:6:_thisComputer+0x0,71:6:_curThing+0x10,97:6:_curId+0x0,119:6:_thisComputer+0x0,134:6:_curThing+0x76,146:6:_curThing+0x76,154:6:_mainV+0xa8,196:6:_playerDamage+0x0,205:6:_playerDamage+0x0,213:6:_thisComputer+0x0,227:6:_curThing+0x1,253:6:_curThing+0x1,287:6:_playerDeaths+0x0,299:6:_playerDeaths+0x0,314:6:_playerKills+0x0,323:6:_playerKills+0x0,333:6:_numComputers+0x0,343:6:_playerKills+0x0,353:6:_playerKillRatio+0x0,361:6:_playerDeaths+0x0,371:6:_playerKillRatio+0x0,389:6:_playerKillRatio+0x0,406:6:?stats_targetsDead@@3JA+0x4,411:6:_numComputers+0x0,425:6:_thisComputer+0x0"
+  ],
+  "alias": [],
+  "aliases": [],
+  "span": 464,
+  "tail": "8bff",
+  "provenance": [
+   "patch 0,1: toolchain-diff \u2014 full-chunk transplant of FA bytes over a 1-B minimal husk (fitobj main symbol takes the layout chunk name '_MISSIONAddScore@12'); 28 DIR32 newsites from census_542544.json (20 identity payload:=0x0, 8 interior data anchors payload:=delta); 8 rel32 call/jmp sites left VA-stable (no newsites)",
+   "tail: (tail 8bff: toolchain-diff \u2014 pad bytes end-of-chunk)"
+  ],
+  "notes": "464-B score adder: _curThing gates, 2 calls to stub $FA$_t_484920, MISSIONScore/MISSIONScoreSides/MPAddScore block, per-computer ratio stores; interleaved jcc self-jmp band = transplant \u2014 transplant per dis review; 28 abs + 8 rel sites, natural-C steering judged poor (shape above); fit verified vs FA (masked dwords, reloc offsets, span)",
+  "flags": "/c /O2 /Gy /G5"
+ },
+ {
+  "rva": 543728,
+  "verdict": "EXACT",
+  "obj": "w53B_h84bf0",
+  "src": "build/survey/probes/w53B/husk_h84bf0.c",
+  "maps": [],
+  "patch": [
+   "0,1,53565755e847010000a1909e54008b0d3c9e54003bc174ec8b353c9e54008bce662bc866890d7c9e540066890d389e54006683f9057d0466b9050066890d389e54006681f980007e0966c705389e54008000e8d9a3feff84c07571668b0d489e54006681f9ff7f74636685c97e0b66a17c9e540066d3e0eb157d0df6d966a17c9e540066d3f8eb0666a17c9e54008b0df8764e00f7c100004000740e0fbfc0c1e002b90300000099f7f966a37c9e5400663d05007d0466b8050066a37c9e5400663d80007e0966b88000eb036633c066a37c9e54008b0d789e540033d28b1d349e54000fbfc0668b15309e540003c803da891d849e540081fb805101007c25bf805101008bc32bd2f7f78d04808d14c08d2c528d44ad00c1e007f7d803d8891d849e54008bc1890d789e5400c1f8085d66a3309e54005fc1f9068935909e540066890d189e54005e5bc38d9b00000000,10:6:_lastTicks+0x0,16:6:_timerTicks+0x0,26:6:_timerTicks+0x0,38:6:_frameTicks+0x0,45:6:_systemFrameTicks+0x0,62:6:_systemFrameTicks+0x0,76:6:_systemFrameTicks+0x0,94:6:_timeCompression+0x0,112:6:_frameTicks+0x0,127:6:_frameTicks+0x0,138:6:_frameTicks+0x0,144:6:_gamePrefs+0x0,172:6:_frameTicks+0x0,188:6:_frameTicks+0x0,209:6:_frameTicks+0x0,215:6:_currentTicks+0x0,223:6:_startTimeOfDay+0x0,233:6:_currentTime+0x0,243:6:_currentTimeOfDay+0x0,288:6:_currentTimeOfDay+0x0,296:6:_currentTicks+0x0,306:6:_currentTime+0x0,316:6:_lastTicks+0x0,323:6:_currentT+0x0"
+  ],
+  "alias": [],
+  "aliases": [],
+  "span": 336,
+  "tail": "8d9b00000000",
+  "provenance": [
+   "patch 0,1: toolchain-diff \u2014 full-chunk transplant of FA bytes over a 1-B minimal husk (fitobj main symbol takes the layout chunk name '_TIMEUpdate@0'); 24 DIR32 newsites from census_543728.json (24 identity payload:=0x0, 0 interior data anchors payload:=delta); 5 rel32 call/jmp sites left VA-stable (no newsites)",
+   "tail: (tail 8d9b00000000: toolchain-diff \u2014 pad bytes end-of-chunk)"
+  ],
+  "notes": "336-B tick/time updater: call $FA$_t_484d40 then 24 abs over tick globals (_lastTicks/_timerTicks/_frameTicks/_currentTicks/_startTimeOfDay/_currentTimeOfDay/_currentTime/_timeCompression), 16-bit shl/sar + idiv math, 3 self jmps; 16-bit tick arithmetic + self-jmp re-merge = transplant \u2014 transplant per dis review; 24 abs + 5 rel sites, natural-C steering judged poor (shape above); fit verified vs FA (masked dwords, reloc offsets, span)",
+  "flags": "/c /O2 /Gy /G5"
  }
 ]

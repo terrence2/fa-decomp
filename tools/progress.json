@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 2144,
- "chunks_done": 2144,
- "bytes_done": 241692,
+ "done": 2160,
+ "chunks_done": 2160,
+ "bytes_done": 249612,
  "bytes_total": 933612,
- "bytes_pct": 25.89,
+ "bytes_pct": 26.74,
  "waves": [
   {
    "date": "2026-11-01",
@@ -2463,6 +2463,28 @@
     "0x7ff90",
     "0x80130",
     "0x82320"
+   ]
+  },
+  {
+   "date": "2026-11-03",
+   "note": "Wave 53: medal/stats end-of-mission band, 16 entries (2142->2158, GATE 1 PASS)",
+   "rvas": [
+    "0x82570",
+    "0x827d0",
+    "0x82950",
+    "0x82bb0",
+    "0x82e10",
+    "0x83090",
+    "0x832b0",
+    "0x83510",
+    "0x83850",
+    "0x83a70",
+    "0x83ba0",
+    "0x83e20",
+    "0x84230",
+    "0x844a0",
+    "0x84750",
+    "0x84bf0"
    ]
   }
  ],
