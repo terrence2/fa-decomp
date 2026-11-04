@@ -4298,6 +4298,11 @@
     "0xa7300",
     "0xa76a0"
    ]
+  },
+  {
+   "date": "2026-11-04",
+   "note": "regroup: TU tree 1,965 entries, GATE 1 PASS",
+   "rvas": []
   }
  ],
  "generated": "2026-11-01"

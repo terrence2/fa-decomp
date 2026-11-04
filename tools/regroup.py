@@ -52,7 +52,7 @@ import fitobj
 import mkstub
 from padcensus import composition as pad_composition
 
-SWAP = "tools/swap.json"
+SWAP = "tools/swap.chunked.json"   # per-chunk row universe (rows) — swap.json is the regrouped output
 OUT = "tools/swap.tu.json"
 PLAN = "build/tu/plan.json"
 ANCHORS_JSON = "build/tu/anchors.json"
