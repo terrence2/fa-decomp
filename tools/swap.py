@@ -19,6 +19,7 @@ Usage:
 Artifacts under build/pilot/ (CL + fit objs), build/stubs_d (stub set).
 """
 import json
+import re
 import os
 import subprocess
 import sys
@@ -60,13 +61,15 @@ def sh(cmd, desc, check=True, log=None):
 
 def entries():
     txt = [
-        ln for ln in open("tools/swap.json").read().splitlines()
+        ln for ln in open(CONFIG).read().splitlines()
         if not ln.lstrip().startswith("//")]
     es = json.loads("\n".join(txt))
     for e in es:
         if isinstance(e["rva"], str):
             e["rva"] = int(e["rva"], 0)
     return es
+
+CONFIG = "tools/swap.json"   # overridable via swap.py --config (regroup.py)
 
 def split_vas(es):
     # mkstub SPLIT_AT / SPLIT_SPAN compare against chunk["va"] (FULL VA,
@@ -79,6 +82,12 @@ def split_vas(es):
 
 def step_compile(es):
     os.makedirs("build/pilot", exist_ok=True)
+    # "bridge": true entries' fit objs were pre-built from FA bytes
+    # (tools/regroup.py bridge): CL + fitobj are skipped for them.
+    if any(e.get("bridge") for e in es):
+        n = sum(1 for e in es if e.get("bridge"))
+        es = [e for e in es if not e.get("bridge")]
+        print("compile: skipping %d bridge entries (fit objs pre-built)" % n)
     if not es:
         return
     # Chunked containers, serialized CL invocations with __OK__/__FAIL__
@@ -142,6 +151,9 @@ def step_compile(es):
 
 
 def _fit(e):
+    if e.get("bridge"):
+        print("fit: skipping bridge entry (obj pre-built)")
+        return
     args = [sys.executable, "tools/fitobj.py",
             "build/pilot/%s.obj" % e["obj"], "%#x" % e["rva"]]
     for m in e.get("maps", []):
@@ -150,6 +162,8 @@ def _fit(e):
         args += ["--patch", p]
     if e.get("span"):
         args += ["--span", str(e["span"])]
+    if e.get("merge_text"):
+        args += ["--merge-text"]
     for a in e.get("aliases", []):
         args += ["--alias", a]
     if e.get("tail"):
@@ -169,6 +183,27 @@ def _sites(e):
     return s
 
 
+def _off_in_key(key, off):
+    """Exact per-token match of the directive off against a provenance
+    patch key's '/'-grouped offset list (e.g. 'patch 0x39/0x4d (hint ...)'
+    or 'patch 11/13/19/23 ...'). Tokens are compared int-ified so prefix
+    collisions (0x1234 vs 0x12345) cannot false-match — the regrouped
+    per-TU entries share one patch list and rely on exact tokens."""
+    body = key[len("patch"):].strip()
+    m = re.match(r"^(?:0x[0-9a-fA-F]+|\d+)(?:\s*/\s*(?:0x[0-9a-fA-F]+|\d+))*"
+                 r"\s*(?=[\(:]|$)", body)
+    if not m:
+        return off in body.split("(")[0]      # degenerate key: old behavior
+    try:
+        want = int(off, 0)
+        for tok in m.group(0).split("/"):
+            if int(tok.strip(), 0) == want:
+                return True
+    except ValueError:
+        return off in key
+    return False
+
+
 def _classify(prov, kind, label, directive):
     """Pull the state word out of a provenance string for `label`.
     Provenance strings: 'patch <offs>: <root-caused|toolchain-diff|unexplained>
@@ -178,7 +213,8 @@ def _classify(prov, kind, label, directive):
     for p in prov:
         key = p.split(":")[0].strip().lower()
         hit = (key == "tail" if kind == "tail" else
-               off is not None and key.startswith("patch") and off in key)
+               off is not None and key.startswith("patch") and
+               _off_in_key(key, off))
         if not hit:
             continue
         low = p.lower()
@@ -391,6 +427,9 @@ def step_link(es):
     # :32 and preserves the pdb sig. Verified sha-identical 2/2 runs.
     for clock, log in (("1997-08-11 23:12:40", "logD_seed"),
                        ("1997-08-11 23:13:32", "logD_link")):
+        if os.environ.get("SEED_ONLY") and clock.endswith(":32"):
+            print("SEED_ONLY: skipping the real link (%s)" % log)
+            break
         # seed link: reset the pdb so its ts comes from THIS run's clock;
         # real link: keep the pdb (updates it, preserving ts, age -> 1)
         stale = "FA.pdb FA.exe FA.lib FA.exp FA.map" \
@@ -421,8 +460,17 @@ def step_gate(es=None):
 
 
 if __name__ == "__main__":
+    args = sys.argv[1:]
+    steps, i = [], 0
+    while i < len(args):
+        if args[i] == "--config":
+            CONFIG = args[i + 1]      # regroup.py staging swap set
+            i += 2
+        else:
+            steps.append(args[i])
+            i += 1
     es = entries()
-    steps = sys.argv[1:] or ["compile", "link", "gate"]
+    steps = steps or ["compile", "link", "gate"]
     for s in steps:
         rc = {"compile": lambda: step_compile(es) or 0,
               "fit": lambda: ([_fit(e) for e in es], 0)[1],  # list of _fit Nones is truthy!

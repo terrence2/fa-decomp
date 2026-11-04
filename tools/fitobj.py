@@ -128,7 +128,7 @@ def apply_patches(text, patches):
 def main():
     cl_obj, rva = sys.argv[1], int(sys.argv[2], 0)
     out, remap, tailaccept, patches = None, {}, False, []
-    aliases, span_size = [], None
+    aliases, span_size, merge_text = [], None, False
     argv = sys.argv[3:]
     i = 0
     while i < len(argv):
@@ -145,6 +145,15 @@ def main():
         elif argv[i] == "--span":
             span_size = int(argv[i + 1], 0)
             i += 2
+        elif argv[i] == "--merge-text":
+            # CL /Gy emits one COMDAT .text section per function: concat ALL
+            # .text sections in section order (order = source/row order),
+            # shifting each section's relocs by the cumulative base. Labels
+            # defined in any .text section are re-based onto the merged
+            # offsets (regroup.py per-TU entries do NOT drop /Gy — the
+            # per-function codegen must stay identical to today's build).
+            merge_text = True
+            i += 1
         elif argv[i] == "--alias":
             ao, an = argv[i + 1].split("=", 1)
             aliases.append((int(ao, 0), an))
@@ -169,6 +178,23 @@ def main():
             addend[k] = int(m.group(2), 16) if "x" in m.group(2) \
                 else int(m.group(2))
     secs, defs = read_obj(cl_obj)
+    if merge_text:
+        tsec = [i for i, s in enumerate(secs) if s["name"] == ".text"]
+        assert tsec, "no .text sections"
+        base_map, base, rels, content = {}, 0, [], bytearray()
+        for i in tsec:
+            s = secs[i]
+            base_map[i + 1] = base        # 1-based COFF secnum -> merged base
+            content += s["content"]
+            rels += [(o + base, n_, t) for o, n_, t in s["relocs"]]
+            base += len(s["content"])
+        if len(tsec) > 1:
+            print("merge-text: %d .text sections -> 0x%x B" % (len(tsec), base))
+        for nm, (val, sec, cls, typ) in list(defs.items()):
+            if sec in base_map:
+                defs[nm] = (val + base_map[sec], tsec[0] + 1, cls, typ)
+        secs[tsec[0]]["content"] = content
+        secs[tsec[0]]["relocs"] = rels
     text_idx = secs.index(next(s for s in secs if s["name"] == ".text")) + 1
     text = next(s for s in secs if s["name"] == ".text")
     text["content"] = bytearray(text["content"])
