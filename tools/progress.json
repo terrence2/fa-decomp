@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 2028,
- "chunks_done": 2028,
- "bytes_done": 118611,
+ "done": 2050,
+ "chunks_done": 2050,
+ "bytes_done": 145075,
  "bytes_total": 933612,
- "bytes_pct": 12.7,
+ "bytes_pct": 15.54,
  "waves": [
   {
    "date": "2026-11-01",
@@ -2311,6 +2311,34 @@
     "0xe0d90",
     "0xe2730",
     "0xf430"
+   ]
+  },
+  {
+   "date": "2026-11-03",
+   "note": "Wave 47: first area-major wave \u2014 SVGA/AVI decoder family, 22 entries (2026->2048, GATE 1 PASS)",
+   "rvas": [
+    "0x55920",
+    "0x560f0",
+    "0x564e0",
+    "0x56850",
+    "0x56c20",
+    "0x57070",
+    "0x57430",
+    "0x577f0",
+    "0x57ab0",
+    "0x57de0",
+    "0x58340",
+    "0x589e0",
+    "0x59170",
+    "0x59930",
+    "0x59b60",
+    "0x59e30",
+    "0x5a1c0",
+    "0x5a790",
+    "0x5ac40",
+    "0x5aff0",
+    "0x5b4a0",
+    "0x5bb40"
    ]
   }
  ],
