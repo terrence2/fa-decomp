@@ -109,12 +109,15 @@ FA/FA.EXE ──> peref.py ┴───────────────► b
 ## 4. Workflow toward full decompilation
 
 State of play: milestone 0 (stub-only rebuild) passed Gate 1; the **`.text`
-census is 100% complete** — all 3,832 `.text` chunks have proven swap entries
-(sources under `src/` + `src/survey/probes/`, per-chunk baseline kept as
-`tools/swap.chunked.json`). The tree has been **regrouped into per-TU
-sources**: FA's original translation units (`build/survey/tu_map.json`,
-calibrated in `docs/` — see below) are now `src/tu/NNN__<landmark>.c(pp)`
-files, and `tools/swap.json` is the per-TU config (1,965 entries):
+census is 100% complete** — all 3,832 `.text` chunks have proven swap entries.
+The tree has been **regrouped into per-TU sources**: FA's translation units
+(`build/survey/tu_map.json`, calibrated in `docs/`) are flat sources
+`src/<NNNN>_<landmark>.c(pp)` (NNNN = unit id, 1,408 units tile `.text`),
+with standalone row sources at `src/<NNNN>_<symbol>.c` / `src/<NNNN>_h<rva>.c`
+(single-row units and split-out rows). `tools/swap.json` is the per-TU config
+(1,965 entries); `tools/swap.chunked.json` preserves the per-chunk baseline as
+a registry (its `src` fields point at the pre-restructure tree — recover a
+lost per-chunk source with `git show a624679:<old-path>`):
 
 - **natural** (266): the merged TU source compiles — with every row re-based
   — to byte-identical code against each chunk's GATE-PASS-proven standalone
@@ -135,14 +138,19 @@ already byte-exact):
 
 1. **Pick**: a bridge/prefix/transplant unit from `build/tu/verdicts.json`
    (largest = best payoff: its `.text` currently rides FA bytes).
-2. **Improve** the merged source `src/tu/NNN__<landmark>.c(pp)` so the rows
+2. **Improve** the merged source `src/<NNNN>_<landmark>.c(pp)` so the rows
    adopt naturally: `PARITY_KEEP=1 python3 tools/regroup.py parity` re-runs
    per-row arbitration; every adoption decision cites the exact divergence.
+   Rows split back out keep their standalone sources at
+   `src/<NNNN>_<symbol>c` — when a row that is currently adopted would need
+   to split out again, regroup recovers it from the git-history baseline
+   (commit `a624679`, the pre-restructure tree).
 3. **Swap + gate**: `python3 tools/swap.py compile fit link gate` — unchanged.
 
-`tools/regroup.py plan` regenerates `build/tu/plan.json` + `src/tu/`
-byte-identically from its inputs (`tools/swap.chunked.json` (per-chunk rows),
-`build/survey/tu_map.json`, `build/layout.json`) + `build/tu/verdicts.json`.
+`tools/regroup.py plan` regenerates `build/tu/plan.json` and **fills gaps
+only** in the source tree (`src/` is the canonical tree; existing files win)
+from its inputs (`tools/swap.chunked.json` (per-chunk rows),
+`build/survey/tu_map.json`, `build/layout.json`).
 
 1. **Pick** the next target: un-swapped chunk, ideally small/leaf-ish with few
    fixups (Gate 2's JSON ranks them).
@@ -150,7 +158,7 @@ byte-identically from its inputs (`tools/swap.chunked.json` (per-chunk rows),
    calling conventions, FPO record, and which globals it touches.
 3. **Reconstruct** `src/<Name>.c` and iterate *offline* (compile + `fitobj`
    byte-compare only — no link) until it matches FA's chunk bytes.
-4. **Register** it: fix the corresponding merged TU src under `src/tu/` and
+4. **Register** it: fix the corresponding merged TU src under `src/` and
    re-run `regroup.py parity`, so the row adopts naturally (its per-row
    fit/patch directives are re-derived from the proven per-chunk directives).
 5. **Swap + gate**: `python3 tools/swap.py compile fit link gate` → GATE 1
@@ -190,13 +198,13 @@ python3 tools/fitobj.py build/pilot/<Name>.obj 0x<rva> \
 # the fitted code must equal FA's chunk outside the relocated dwords
 # (semantically-reordered objects fail here, not at Gate 1) — fix and repeat.
 
-# 6) Register: edit the owning merged TU src (src/tu/NNN__<landmark>.c), then
+# 6) Register: edit the owning merged TU src (src/<NNNN>_<landmark>.c), then
 #    re-run arbitration and swap over:
 PARITY_KEEP=1 python3 tools/regroup.py parity    # re-adopt rows / re-emit config
 python3 tools/swap.py compile fit link gate      # → GATE 1 PASS
 
 # 7) Commit source + regroup diffs (+ TODO.md tells):
-git add src/tu/NNN__<landmark>.c* tools/swap.tu.json build/tu/
+git add src/<NNNN>_<landmark>.c* tools/swap.tu.json build/tu/
 git commit -m "regroup: adopt <landmark> rows ..."
 ```
 

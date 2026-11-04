@@ -1,6 +1,0 @@
-// _AIL_set_sample_volume@8 @ rva 0xd35be (6 B) — AIL_set_sample_volume (Miles AIL) sound import pass-through thunk.
-extern void *impAIL_set_sample_volume[];
-unsigned long __declspec(naked) __stdcall AIL_set_sample_volume(void *a0, void *a1)
-{
-    __asm { jmp dword ptr [impAIL_set_sample_volume] }
-}

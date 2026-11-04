@@ -5,10 +5,12 @@ The .text census is complete (3,832 chunk entries, tools/swap.json); this
 tool regroups them into per-TU span entries driven by the calibrated TU map
 (build/survey/tu_map.json), in stages:
 
-  plan      Reads tools/swap.json + tu_map.json + layout.json, builds the
-            1,408 units (TUs coalesced across span-entry boundaries; inter-TU
-            pad chunks fall to the covering unit), emits src/tu/<tag>.c
-            concatenations and the staging config tools/swap.tu.json with
+  plan      Reads tools/swap.chunked.json + tu_map.json + layout.json, builds
+            the 1,408 units (TUs coalesced across span-entry boundaries;
+            inter-TU pad chunks fall to the covering unit), emits the merged
+            sources src/<NNNN>_<landmark>.c(pp) (NNNN = unit id; existing
+            files win — regroup only fills gaps; standalone rows live at
+            src/<NNNN>_<symbol>.c / src/<NNNN>_h<rva>.c) and the staging config tools/swap.tu.json with
             one "bridge": true entry per multi-row unit (single-row units
             keep their proven per-chunk entries verbatim).
   bridge    Builds each multi-row unit's fit obj DIRECTLY from FA/FA.EXE
@@ -29,7 +31,7 @@ tool regroups them into per-TU span entries driven by the calibrated TU map
             the rest out verbatim. (Implemented in a later stage.)
   finalize  Stage D: tools/swap.json <- final set; chunked config aside.
 
-Inputs (read-only): tools/swap.json, build/survey/tu_map.json,
+Inputs (read-only): tools/swap.chunked.json, build/survey/tu_map.json,
 build/layout.json, build/reloc_map.json, FA/FA.EXE.
 Scratch: build/tu/ (gitignored). Staging config: tools/swap.tu.json.
 """
@@ -56,8 +58,78 @@ SWAP = "tools/swap.chunked.json"   # per-chunk row universe (rows) — swap.json
 OUT = "tools/swap.tu.json"
 PLAN = "build/tu/plan.json"
 ANCHORS_JSON = "build/tu/anchors.json"
-SRC_DIR = "src/tu"
+SRC_DIR = "src"
 FLAGS_MERGED = "/c /O2 /Gy /G5 /Ob0"
+
+
+def row_src_stem(u, row, named, taken):
+    """File stem for a standalone (single-row unit / split-out) row source:
+    src/<%04d>_<chunk-symbol> or src/<%04d>_h<rva-hex> when the chunk is
+    unnamed (or the name is taken within the unit) — NNNN is the unit id."""
+    nm = named.get(row["rva"]) or ""
+    base = cand = None
+    if nm and "$" not in nm:
+        base = LANDMARK_RE.sub("_", nm.split("@@")[0].lstrip("_?")).strip("_")
+        if base:
+            cand = "%04d_%s" % (u["id"], base)
+    if cand is None or cand in taken:
+        cand = "%04d_h%x" % (u["id"], row["rva"])
+    if cand in taken:
+        cand = "%04d_%s_h%x" % (u["id"], base or "row", row["rva"])
+    assert cand not in taken, cand
+    taken.add(cand)
+    return cand
+
+
+class RowNamer:
+    """Assigns src/ stems to standalone rows; entries sharing one source file
+    (split-out rows of different units, e.g. the w45F transplant husk) all
+    repoint to the FIRST claimant's name (units in plan order, rows in rva
+    order)."""
+
+    def __init__(self, units, named, psrc=None):
+        self.named = named
+        self.claimed = {}                 # old src path -> stem
+        self.taken = {u["id"]: set() for u in units}
+        for u in units:
+            s = psrc.get(u.get("obj")) if psrc else None
+            if s:
+                self.taken[u["id"]].add(
+                    os.path.basename(s).rsplit(".", 1)[0])
+
+    def stem(self, u, row):
+        old = row.get("src")
+        if old and old in self.claimed:
+            return self.claimed[old]
+        s = row_src_stem(u, row, self.named, self.taken[u["id"]])
+        if old:
+            self.claimed[old] = s
+        return s
+
+
+# The pre-restructure baseline commit: the per-chunk sources
+# (src/<Name>.c, src/survey/probes/**, src/tu/) were deleted from the tree
+# there (adopted rows' bodies live inside the merged src/<NNNN>_<name>.c
+# files) — recover a lost standalone source with:
+#   git show <GIT_BASELINE>:<old-src-path> > <new-src-path>
+GIT_BASELINE = "a624679"
+
+
+def ensure_src(tgt, old):
+    """src/ is the canonical source tree; regroup only fills gaps. When a
+    referenced source is missing, copy it from its old per-chunk location;
+    once that is gone too, the recipe is the git-history one above."""
+    if os.path.exists(tgt):
+        return tgt
+    if old and os.path.exists(old):
+        with open(old, "rb") as f:
+            b = f.read()
+        open(tgt, "wb").write(b)
+    else:
+        raise SystemExit(
+            "missing source %s (old location %s is not in the tree):\n"
+            "  git show %s:%s > %s" % (tgt, old, GIT_BASELINE, old, tgt))
+    return tgt
 
 
 def fa_bytes():
@@ -201,6 +273,12 @@ def emit_src(u, tms):
         u["no_src"] = "row without src"
         return None
     ext = ".cpp" if "cpp" in langs else ".c"
+    fn = os.path.join(SRC_DIR, "%04d_%s%s" % (u["id"], u["landmark"], ext))
+    if os.path.exists(fn):
+        u["src_file"] = fn
+        return fn                # existing src/ files win: plan only fills
+                                 # gaps (per-chunk row srcs are not in the
+                                 # tree anymore — recovery is git history)
     seen_inc = set()
     inc_lines = []
     parts = ["/* TU rva %#x..%#x, %d rows — generated by tools/regroup.py"
@@ -235,7 +313,6 @@ def emit_src(u, tms):
         parts.append("")
     if inc_lines:
         parts = [parts[0]] + inc_lines + parts[1:]
-    fn = os.path.join(SRC_DIR, u["tag"] + ext)
     open(fn, "w").write("\n".join(parts) + "\n")
     return fn
 
@@ -251,16 +328,25 @@ def cmd_plan(args):
     os.makedirs(SRC_DIR, exist_ok=True)
     os.makedirs("build/tu", exist_ok=True)
     collisions = []
+    named = {c["rva"]: c["name"] for c in tcs}
     for u in units:
         u["src_file"] = emit_src(u, tms)
         if u.get("no_src"):
             collisions.append(dict(obj=u.get("obj"), reason=u["no_src"],
                                    rows=[hex(e["rva"]) for e in u["rows"]]))
+    rn = RowNamer(units, named, psrc={u["obj"]: u["src_file"]
+                                      for u in units
+                                      if u["src_file"] and u.get("obj")})
 
     out_entries = []
     for u in units:
         if len(u["rows"]) == 1:
-            out_entries.append(u["rows"][0])
+            e = u["rows"][0]
+            if e.get("src"):
+                e["src"] = ensure_src(os.path.join(
+                    SRC_DIR, rn.stem(u, e) + os.path.splitext(e["src"])[1]),
+                    e["src"])
+            out_entries.append(e)
             continue
         maps, mconf = [], None
         fr = {}
@@ -508,6 +594,13 @@ def _shift_prov(p, shift, rowrva):
     return out + m.group(5) + " (row %#x) " % rowrva + m.group(6)
 
 
+def _repoint_bridge(ent, psrc):
+    """Bridge entries copied from the staging config: their src must track
+    the plan's (possibly renamed) merged source."""
+    if psrc.get(ent["obj"]):
+        ent["src"] = psrc[ent["obj"]]
+
+
 def _emit_natural(u, msec, b, r, psrc, rm, tcs, exe):
     """Emit the natural (prefix) entry adopting the first r rows of unit u.
     Returns (entry, kind) or (None, reason). The emission is validated by
@@ -631,6 +724,8 @@ def cmd_parity(args):
     rm = json.load(open("build/reloc_map.json"))
     exe = fa_bytes()
     cur = {e["obj"]: e for e in json.load(open(OUT))}   # staging config
+    named = {c["rva"]: c["name"] for c in tcs}
+    rn = RowNamer(units, named, psrc)
     # ---- pass 0: candidates + pre-compile skips
     cand, keep = [], {}
     for u in units:
@@ -785,6 +880,10 @@ def cmd_parity(args):
     for u in units:
         rows = u["rows"]
         if len(rows) == 1:
+            if rows[0].get("src"):
+                rows[0]["src"] = ensure_src(os.path.join(
+                    SRC_DIR, rn.stem(u, rows[0])
+                    + os.path.splitext(rows[0]["src"])[1]), rows[0]["src"])
             out_entries.append(rows[0])
             continue
         if u["id"] in keep:
@@ -792,6 +891,7 @@ def cmd_parity(args):
             verdicts.append(dict(id=u["id"], obj=u["obj"],
                                  kind="bridge", reason=keep[u["id"]],
                                  rows=[hex(r["rva"]) for r in rows]))
+            _repoint_bridge(cur[u["obj"]], psrc)
             out_entries.append(cur[u["obj"]])
             continue
         msec = [s for s in fitobj.read_obj(
@@ -808,6 +908,7 @@ def cmd_parity(args):
             verdicts.append(dict(id=u["id"], obj=u["obj"], kind="bridge",
                                  reason="first row not adoptable",
                                  rows=[hex(x["rva"]) for x in rows]))
+            _repoint_bridge(cur[u["obj"]], psrc)
             out_entries.append(cur[u["obj"]])
             continue
         ent, info = _emit_natural(u, msec, b, r, psrc, rm, tcs, exe)
@@ -817,6 +918,7 @@ def cmd_parity(args):
             verdicts.append(dict(id=u["id"], obj=u["obj"], kind="bridge",
                                  reason=info,
                                  rows=[hex(x["rva"]) for x in rows]))
+            _repoint_bridge(cur[u["obj"]], psrc)
             out_entries.append(cur[u["obj"]])
             continue
         out_entries.append(ent)
@@ -826,6 +928,10 @@ def cmd_parity(args):
         stats["rows_nat"] += r
         stats["natural" if info["kind"] == "natural" else "prefix"] += 1
         for row in u["rows"][r:]:
+            if row.get("src"):
+                row["src"] = ensure_src(os.path.join(
+                    SRC_DIR, rn.stem(u, row) + os.path.splitext(row["src"])[1]),
+                    row["src"])
             out_entries.append(row)          # verbatim original entries
             verdicts[-1].setdefault("split_out", []).append(hex(row["rva"]))
             stats["rows_verb"] += 1
