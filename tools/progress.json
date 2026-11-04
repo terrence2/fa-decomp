@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 2122,
- "chunks_done": 2122,
- "bytes_done": 210092,
+ "done": 2133,
+ "chunks_done": 2133,
+ "bytes_done": 223068,
  "bytes_total": 933612,
- "bytes_pct": 22.5,
+ "bytes_pct": 23.89,
  "waves": [
   {
    "date": "2026-11-01",
@@ -2429,6 +2429,23 @@
     "0x1ed80",
     "0x1f410",
     "0x1f6a0"
+   ]
+  },
+  {
+   "date": "2026-11-03",
+   "note": "Wave 51: flight-model band, 11 entries (2120->2131, GATE 1 PASS)",
+   "rvas": [
+    "0x75820",
+    "0x759b0",
+    "0x75ee0",
+    "0x76010",
+    "0x76110",
+    "0x76460",
+    "0x76da0",
+    "0x770d0",
+    "0x773f0",
+    "0x79b30",
+    "0x79ef0"
    ]
   }
  ],
