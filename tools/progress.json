@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 2097,
- "chunks_done": 2097,
- "bytes_done": 171507,
+ "done": 2108,
+ "chunks_done": 2108,
+ "bytes_done": 186019,
  "bytes_total": 933612,
- "bytes_pct": 18.37,
+ "bytes_pct": 19.92,
  "waves": [
   {
    "date": "2026-11-01",
@@ -2392,6 +2392,23 @@
     "0x71600",
     "0x71a20",
     "0x72370"
+   ]
+  },
+  {
+   "date": "2026-11-03",
+   "note": "Wave 49: autopilot/flight-planner family, 11 entries (2095->2106, GATE 1 PASS)",
+   "rvas": [
+    "0xb6c80",
+    "0xb7010",
+    "0xb7150",
+    "0xb8610",
+    "0xb99c0",
+    "0xb9cf0",
+    "0xb9ed0",
+    "0xba640",
+    "0xbaa40",
+    "0xbac80",
+    "0xbb000"
    ]
   }
  ],
