@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 2160,
- "chunks_done": 2160,
- "bytes_done": 249612,
+ "done": 2174,
+ "chunks_done": 2174,
+ "bytes_done": 264716,
  "bytes_total": 933612,
- "bytes_pct": 26.74,
+ "bytes_pct": 28.35,
  "waves": [
   {
    "date": "2026-11-01",
@@ -2485,6 +2485,26 @@
     "0x844a0",
     "0x84750",
     "0x84bf0"
+   ]
+  },
+  {
+   "date": "2026-11-03",
+   "note": "wave 54: PLANE family + streamers/mission band, 14 entries",
+   "rvas": [
+    "0x9b2f0",
+    "0x9b5a0",
+    "0x9b750",
+    "0x9b8b0",
+    "0x9bf60",
+    "0x9d6d0",
+    "0x9d860",
+    "0x9db90",
+    "0x9ddb0",
+    "0x9e030",
+    "0x9e130",
+    "0x9e330",
+    "0x9e8c0",
+    "0x9f0a0"
    ]
   }
  ],
