@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 2223,
- "chunks_done": 2223,
- "bytes_done": 312892,
+ "done": 2239,
+ "chunks_done": 2239,
+ "bytes_done": 326972,
  "bytes_total": 933612,
- "bytes_pct": 33.51,
+ "bytes_pct": 35.02,
  "waves": [
   {
    "date": "2026-11-01",
@@ -2572,6 +2572,28 @@
     "0x7500",
     "0x78b0",
     "0x7c40"
+   ]
+  },
+  {
+   "date": "2026-11-03",
+   "note": "wave 58: texture-decoder band pt1 (polygon/horizon/span), 16 entries",
+   "rvas": [
+    "0xc3700",
+    "0xc3b80",
+    "0xc4eac",
+    "0xc5088",
+    "0xc5384",
+    "0xc55fc",
+    "0xc57dc",
+    "0xc59d4",
+    "0xc5b20",
+    "0xc5e38",
+    "0xc63d8",
+    "0xc6564",
+    "0xc67d6",
+    "0xc6a34",
+    "0xc6d04",
+    "0xc6f62"
    ]
   }
  ],
