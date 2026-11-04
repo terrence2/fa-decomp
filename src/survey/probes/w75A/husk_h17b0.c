@@ -1,0 +1,3 @@
+// wave 75A transplant husk for rva 6064 (0x17b0) (?NET_RequestPlayerList@@YADPAUNET_ADDRESS@@PAXP6AX1W4PLAYER_ACTION@@PAD0J@Z1P6AX1W4NET_CONNECTED_STATE@@@Z@Z)
+void w75A_h17b0(void) {
+}

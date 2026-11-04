@@ -1,0 +1,3 @@
+// wave 75C transplant husk for rva 43984 (0xabd0) (?NET_MasterInit@@YADPAUCN_INFO@@PAXP6AX1W4PLAYER_ACTION@@PADPAUNET_ADDRESS@@J@Z1P6AX1W4NET_CONNECTED_STATE@@@Z@Z)
+void w75C_habd0(void) {
+}

@@ -1,0 +1,37 @@
+/* w38C 0xd5e10 (150 B) __getenv_lk v2: full decls; while-loop with bottom
+ * ep++; scasb strlen intrinsics. */
+extern char **__environ;   /* map FROM ___environ */
+extern char **__wenviron;  /* map FROM ___wenviron */
+extern int w38c_envinit(void); /* $FA$_t_4db2f0 */
+extern int mbsnbicoll(unsigned char *a, unsigned char *b, unsigned int c); /* __mbsnbicoll */
+extern unsigned int strlen(const char *);
+
+char *__getenv_lk(const char *name)
+{
+    char *e = __environ;
+    char **ep;
+    unsigned int len, elen;
+
+    if (!e) {
+        if (__wenviron) {
+            if (w38c_envinit())
+                return 0;
+            e = __environ;
+        }
+    }
+    if (!e)
+        return 0;
+    if (!name)
+        return 0;
+    len = strlen(name);
+    ep = e;
+    while (*ep) {
+        elen = strlen(*ep);
+        if (elen > len && (*ep)[len] == '=') {
+            if (!mbsnbicoll(*ep, name, len))
+                return *ep + len + 1;
+        }
+        ep++;
+    }
+    return 0;
+}

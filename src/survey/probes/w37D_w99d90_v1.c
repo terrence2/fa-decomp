@@ -1,0 +1,19 @@
+/* wave37D WriteModemEntry 0x99d90 (96 B) v1 */
+#include <stdio.h>
+#include <string.h>
+
+extern char w37d_fmt0[];   /* _mouseButtons+0x4b4 (FA 0x4fd448) */
+extern char w37d_fmt1[];   /* _mouseButtons+0x4ac (FA 0x4fd440) */
+
+void WriteModemEntry(FILE* f, void* ms)
+{
+    int i;
+    char* p;
+    fprintf(f, w37d_fmt0, 34, ms, 34);
+    p = (char*)ms + 0x54;
+    for (i = 0; i < 9; i++) {
+        if (strlen(p))
+            fprintf(f, w37d_fmt1, 'a' + i, p);
+        p += 0x50;
+    }
+}

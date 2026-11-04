@@ -1,0 +1,49 @@
+// Wave 46 batch C entry 10: _sprintf @ rva 866224 (0xd37b0), 103 B, no pad.
+// CRT-style cdecl sprintf (char *buf, fmt, ...): builds the {char* out,
+// int limit=0x7fffffff} control block + 0x42 flag / va_list locals in a 32-B
+// frame, calls the 2466-B formatter stub (cdecl, &block, fmt, &varargs),
+// then decls the limit; js -> stub2(0,&buf) terminator path; else NULs
+// *buf and returns bytes written. Callees are unnamed stubs -> $FA$_t maps.
+extern void w46c_out(void);    /* $FA$_t_4d6610 formatter  */
+extern void w46c_term(void);   /* $FA$_t_4d64c0 terminator */
+
+void __declspec(naked) sprintf_q(void)
+{
+    __asm {
+        mov  eax, [esp+4]
+        sub  esp, 0x20
+        lea  ecx, [esp+0x2c]
+        push esi
+        mov  dword ptr [esp+0x10], 0x42
+        mov  [esp+0xc], eax
+        push ecx
+        mov  [esp+8], eax
+        lea  eax, [esp+8]
+        mov  dword ptr [esp+0xc], 0x7fffffff
+        mov  edx, [esp+0x30]
+        push edx
+        push eax
+        call w46c_out
+        add  esp, 0xc
+        mov  esi, eax
+        dec  dword ptr [esp+8]
+        js   L2
+        mov  eax, [esp+4]
+        mov  byte ptr [eax], 0
+        mov  eax, esi
+        inc  dword ptr [esp+4]
+        pop  esi
+        add  esp, 0x20
+        ret
+    L2:
+        lea  eax, [esp+4]
+        push eax
+        push 0
+        call w46c_term
+        add  esp, 8
+        mov  eax, esi
+        pop  esi
+        add  esp, 0x20
+        ret
+    }
+}
