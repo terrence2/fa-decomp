@@ -132,11 +132,23 @@ def main():
     idx = 0
 
     def write_group(idx, base, obj, kind, batch, nfixups):
-        # unique short name (rsp-ceiling mitigation #4): the kind letter plus
-        # a monotonically derived number -- idx is NOT monotonic across text
-        # groups, so derive from the manifest count (manifest order IS rsp
-        # order; filenames are opaque to the linker)
-        base = "%s%05x.obj" % (kind[0], len(manifest))
+        # unique short name (spawn-ceiling mitigation #5/#6): the kind letter
+        # plus a monotonically derived number -- idx is NOT monotonic across
+        # text groups, so derive from the manifest count (manifest order IS
+        # rsp order; filenames are opaque to the linker). #6 (wave 70, 2802
+        # entries): LINK 4.20's /EXPORT processing spawns `LINK /lib` with the
+        # parent's ENTIRE input list re-listed argv-style; the win32 command
+        # line is capped at ~32766 chars, so the child sees a truncated list.
+        # The child-critical inputs are only the two /EXPORT definers' fit
+        # objs; stub group names are the cheapest bytes to shave. Fixed-width
+        # %05x wastes ~4 B per stub line (~11 KB across 3200 lines); %x pulls
+        # the definers well inside the cap when combined with swap.py's
+        # d/g%x.obj fit names. Names must also be case-collision-free vs
+        # d/FA.obj: wine NT is case-insensitive, and a staged file can shadow
+        # the resource obj (the wave-6 name-collision trap; the %x spelling
+        # fa.obj == FA.obj hit exactly that in the wave-70 probes -- this
+        # list's prefixes stay t/d/b, and the fit prefix g is chosen apart).
+        base = "%s%x.obj" % (kind[0], len(manifest))
         fn = os.path.join(STUB_DIR, base)
         open(fn, "wb").write(obj)
         manifest.append(dict(idx=idx, file=base, kind=kind,

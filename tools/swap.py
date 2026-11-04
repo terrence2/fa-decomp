@@ -229,6 +229,116 @@ def step_audit(es):
     print("  ok: %d site(s) classified, 0 unexplained" % n)
 
 
+def fit_name(i):
+    # spawn-ceiling mitigation #7 (wave 70): fit staged names and the mkstub
+    # names are shrunken %x so the /EXPORT LINK /lib spawn's re-listed argv
+    # stays as short as possible (see step_link's SPAWN_CEILING block for the
+    # mechanism). The letter must differ from the stub kinds t/d/b, the idata
+    # objs (idr0..4, rdata.obj), and -- CRITICAL -- the resource object
+    # d/FA.obj, which NT resolves CASE-INSENSITIVELY: %x of entry 10 spells
+    # f...a -> fa.obj, LINK "specified more than once; extras ignored" drops
+    # d/FA.obj's copy and with it .rsrc (+0x98 of .reloc) (wave-6
+    # name-collision trap again). 'g' collides with none of those spellings.
+    return "d/g%x.obj" % i
+
+
+# ---- /EXPORT spawn ceiling (wave 70, root-caused) ----
+# LINK 4.20's /EXPORT handling spawns `LINK /lib` (Library Manager banner in
+# the link log) with the parent's ENTIRE input list re-listed argv-style:
+#   "<LINK.EXE>" /lib /def: /name:"FA.exe" /out:"Release/FA.lib"
+#   /export:T_HorizonProc /export:WRFogLayerUpdate /include:_WinMainCRTStartup
+#   "d/idr0.obj" "d/idr1.obj" ...   (each token quoted, single spaces)
+# The win32 command line is capped at 32766 chars (UNICODE_STRING incl. NUL;
+# CAPN below is the 1-indexed last surviving char), so the child inherits a
+# TRUNCATED list. Two failure classes, both fatal in the parent (LNK1141):
+#  - cut mid-token: the unterminated quote gobbles the tail, the last arg is
+#    a partial path -> LNK1104 "cannot open file "d/"" .
+#  - cut on the separating space: the list is truncated cleanly; the child
+#    then needs the two /EXPORT definers' fit objs inside the surviving
+#    prefix, else LNK2001 + LNK1120 ("unresolved external symbol
+#    WRFogLayerUpdate"). /include:_WinMainCRTStartup tolerates FA.obj being
+#    cut (verified: passing runs with FA.obj past the cut).
+# Every wave changes the geometry (new entries re-interleave the token
+# stream), so step_link computes the child cmdline from the generated rsp and
+# inserts ONE inert pad token (an empty-member .lib = no symbols, LNK-search
+# lazy) whose length aligns a token-boundary space exactly at the cut. The
+# model reproduces every observed signature exactly (w69 %05x pass, w70
+# %05x LNK2001 at child byte 33276, %x LNK1104 "d/").
+SPAWN_PRE = ('"Z:\\opt\\msvc420\\bin\\LINK.EXE" /lib /def: /name:"FA.exe" '
+             '/out:"Release/FA.lib" /export:T_HorizonProc '
+             '/export:WRFogLayerUpdate /include:_WinMainCRTStartup')
+SPAWN_CAPN = 32765
+
+
+def spawn_pad_fix(es):
+    """If the spawn's truncated cmdline would cut a token mid-word, insert an
+    inert .lib pad token after the rdata line whose length makes the cut land
+    exactly on the separating space of a later token (definers stay inside)."""
+    raw = open(RSP, newline="").read()
+    lines = raw.split("\r\n")
+    if lines and lines[-1] == "":
+        lines.pop()
+    rl_index = next(i for i, l in enumerate(lines) if l.split() == ["d/rdata.obj"])
+    toks = []
+    for l in lines:
+        if l.startswith("/"):
+            continue
+        toks += l.split()
+    pos, starts, ends = len(SPAWN_PRE), [], []
+    for t in toks:
+        starts.append(pos)
+        pos += len(t) + 3          # "tok" + separating space
+        ends.append(pos - 1)       # last char position of the quoted token
+    CAPN = SPAWN_CAPN
+    if not any(s <= CAPN < e for s, e in zip(starts, ends)):
+        return                      # cut already lands beyond a full token
+    # pad shift S must move a space to exactly CAPN: space_after_j = start_j
+    # + len(tok_j)+2; after inserting the pad token (length T) before those
+    # tokens, every later position shifts by T+3 = S. Requires
+    # S = CAPN - space_after_j for some j; pick the smallest j with
+    # 10 <= S <= 200 to keep the pad name sane.
+    best = None
+    for j, (s, e) in enumerate(zip(starts, ends)):
+        space = e            # ends[j] IS the separating-space position
+        if space >= CAPN:
+            break
+        S = CAPN - space
+        if 10 <= S <= 200:
+            best = (j, S)    # keep iterating then take the LAST qualifying
+                             # = largest space below CAPN = smallest S
+    if best is None:
+        raise SystemExit("spawn_pad_fix: no pad alignment found near the cut")
+    j, S = best
+    T = S - 3
+    assert T >= 7, (S, T)
+    padtok = "d/" + "p" * (T - 6) + ".lib"
+    assert len(padtok) == T, (len(padtok), T)
+    # an empty-member archive: no symbols, so the parent's lazy lib search
+    # resolves nothing and adds no bytes (verified: seed sha identical for
+    # WST.LIB-content and empty pads)
+    padfn = "atf95/%s" % padtok
+    open(padfn, "wb").write(b"!<arch>\n")
+    lines.insert(rl_index + 1, padtok)
+    open(RSP, "w", newline="").write("\r\n".join(lines) + "\r\n")
+    # re-verify the model on the padded rsp: the cut must now fall on a
+    # separating space (or beyond), never inside a quoted token
+    toks2 = []
+    for l in lines:
+        if l.startswith("/"):
+            continue
+        toks2 += l.split()
+    pos2, bad2 = len(SPAWN_PRE), False
+    for t in toks2:
+        nq = len(t) + 2
+        if pos2 <= CAPN < pos2 + nq:
+            bad2 = True
+            break
+        pos2 += nq + 1
+    assert not bad2, "spawn_pad_fix: cut still mid-token after padding"
+    print("spawn_pad_fix: %s aligns the spawn cut at char %d (%d tokens visible)"
+          % (padtok, SPAWN_CAPN, j + 1))
+
+
 def step_link(es):
     subprocess.run("rm -rf " + STUBS, shell=True, check=True)
     normal = [e for e in es if not e.get("span")]
@@ -264,14 +374,15 @@ def step_link(es):
     import shutil
     for i, e in enumerate(es):
         shutil.copyfile("build/pilot/%s_fit.obj" % e["obj"],
-                        "atf95/d/f%05x.obj" % i)
+                        "atf95/%s" % fit_name(i))
     repl = []
     for i, e in enumerate(es):
-        repl.append(["--replace", "%#x=d/f%05x.obj"
-                     % (e["rva"] + IMAGE_BASE, i)])
+        repl.append(["--replace", "%#x=%s"
+                     % (e["rva"] + IMAGE_BASE, fit_name(i))])
     r = subprocess.run([sys.executable, "tools/mkrsp.py", "--stubdir", STUBS,
                         "--out", RSP]
                        + [x for pair in repl for x in pair], check=True)
+    spawn_pad_fix(es)
     # CLOCKS MUST BE FROZEN (no "@" prefix): with FAKETIME="@..." libfaketime
     # ADVANCES from that moment, so the seed's pdb NB10 sig (0x33ef9c68) raced
     # :40/:41 depending on when LINK wrote the pdb (~50/50 across runs —
