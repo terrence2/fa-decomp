@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 2325,
- "chunks_done": 2325,
- "bytes_done": 409591,
+ "done": 2347,
+ "chunks_done": 2347,
+ "bytes_done": 427543,
  "bytes_total": 933612,
- "bytes_pct": 43.87,
+ "bytes_pct": 45.79,
  "waves": [
   {
    "date": "2026-11-01",
@@ -2716,6 +2716,34 @@
     "0xa64c0",
     "0xa7bb0",
     "0xa8970"
+   ]
+  },
+  {
+   "date": "2026-11-03",
+   "note": "Wave 65: ChosenSides/winsock/T-Forest + SelectRepairPlane/INFO2Screen band, 22 entries",
+   "rvas": [
+    "0x539e0",
+    "0x609f0",
+    "0xa24f0",
+    "0xa2600",
+    "0xa26b0",
+    "0xa2830",
+    "0xa2bb0",
+    "0xa2cf0",
+    "0xa3830",
+    "0xa3d50",
+    "0xa4de0",
+    "0xa5270",
+    "0xa53b0",
+    "0xa54e0",
+    "0xa55c0",
+    "0xa56f0",
+    "0xa5920",
+    "0xa5cb0",
+    "0xa74e0",
+    "0xa8310",
+    "0xa8720",
+    "0xa8ab0"
    ]
   }
  ],
