@@ -1,10 +1,10 @@
 {
  "functions_total": 3834,
- "done": 2239,
- "chunks_done": 2239,
- "bytes_done": 326972,
+ "done": 2257,
+ "chunks_done": 2257,
+ "bytes_done": 337401,
  "bytes_total": 933612,
- "bytes_pct": 35.02,
+ "bytes_pct": 36.14,
  "waves": [
   {
    "date": "2026-11-01",
@@ -2594,6 +2594,30 @@
     "0xc6a34",
     "0xc6d04",
     "0xc6f62"
+   ]
+  },
+  {
+   "date": "2026-11-03",
+   "note": "wave 59: texture-decoder band pt2 (perspective/scale/YUV), 18 entries",
+   "rvas": [
+    "0xc71e8",
+    "0xc7438",
+    "0xc794c",
+    "0xc7b34",
+    "0xc7d70",
+    "0xc80bb",
+    "0xc822c",
+    "0xc8755",
+    "0xc8864",
+    "0xc88c8",
+    "0xc8c60",
+    "0xc8f38",
+    "0xc922c",
+    "0xc93ac",
+    "0xc9570",
+    "0xc9744",
+    "0xc9976",
+    "0xc9c60"
    ]
   }
  ],
